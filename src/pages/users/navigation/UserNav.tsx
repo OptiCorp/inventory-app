@@ -1,6 +1,6 @@
 import { Typography } from '@equinor/eds-core-react'
 import { useState } from 'react'
-import CustomDialog from '../../../../../user-management-app/src/components/modal/useModalHook'
+import CustomDialog from '../../../../../inventory-app/src/components/modal/useModalHook'
 
 export const UserNav = () => {
     /* const [positiveOpen, setPositiveOpen] = useState(false) */
