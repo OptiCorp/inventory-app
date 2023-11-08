@@ -12,6 +12,7 @@
   "dependencies": {
     "@azure/msal-react": "^2.0.6",
     "@equinor/eds-core-react": "^0.33.1",
+    "@types/node": "^20.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
