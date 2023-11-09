@@ -75,7 +75,7 @@ const apiService = () => {
     //USER
 
     const getAllUsers = async () => {
-        const data = await getByFetch('GetAllUsersAdmin')
+        const data = await getByFetch('User')
         return data
     }
 

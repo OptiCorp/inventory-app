@@ -2,14 +2,18 @@ import { LogLevel, PublicClientApplication } from '@azure/msal-browser'
 
 export const msalConfig = {
     auth: {
-        clientId: '38891eca-cec0-4b67-943f-fcc22fdc43f9',
+        clientId: 'c282f2d3-d4d6-452c-9d3d-70c023bb92fc',
         authority: 'https://login.microsoftonline.com/1a3889b2-f76f-4dd8-831e-b2d5e716c986',
     },
     cache: {
         cacheLocation: 'sessionStorage', // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
-    scopes: ['api://3c926c2e-6b26-4c17-9087-5e2852f6309b/user_impersonation'],
+    scopes: [
+        'api://063f1617-3dd5-49a2-9323-69b1605fba48/user.read',
+        /* 'https://graph.microsoft.com/User.Read',
+        'https://graph.microsoft.com/.default', */
+    ],
     system: {
         loggerOptions: {
             loggerCallback: (level: any, message: any, containsPii: any) => {
