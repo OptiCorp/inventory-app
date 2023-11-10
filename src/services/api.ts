@@ -3,7 +3,7 @@ import { pca } from '../msalConfig'
 import { User, UserRole } from './apiTypes'
 
 const request = {
-    scopes: ['3c926c2e-6b26-4c17-9087-5e2852f6309b/user_impersonation'],
+    scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
     account: pca.getAllAccounts()[0],
 }
 

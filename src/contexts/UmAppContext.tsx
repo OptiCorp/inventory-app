@@ -39,7 +39,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
         if (inProgress === InteractionStatus.None) {
             instance.setActiveAccount(account)
             const accessTokenRequest = {
-                scopes: ['3c926c2e-6b26-4c17-9087-5e2852f6309b/user_impersonation'],
+                scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
                 account: accounts.at(0),
             }
             instance
