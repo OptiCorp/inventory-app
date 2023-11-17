@@ -17,6 +17,7 @@ const Search = () => {
     const [definition, setDefinition] = useState<string>("")
     const { width } = useWindowDimensions()
     const api = apiService();
+    const [showMore, setShowMore] = useState(10);
 
     const { data: data, isLoading } = useQuery({
         queryFn: () => api.getAssembliesBySearchString(encodeURIComponent(searchTerm)),
@@ -38,12 +39,13 @@ const Search = () => {
     //     return matches
     // }
 
+
     useEffect(() => {
         if (searchTerm.length >= 3) {
             (async () => {
                 const response = await api.getAssembliesBySearchString(encodeURIComponent(searchTerm));
                 setAssemblies(response);
-                console.log(response[1]);
+                console.log(assemblies[0])
             })()
         }
     }, [searchTerm])
@@ -55,10 +57,14 @@ const Search = () => {
     return (
         <SearchContainer>
             <SearchBar setSearchTerm={setSearchTerm} />
-            {assemblies?.map((part) => (
-                <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.WPId}`}>{width > 800 ? <SearchResultCard part={part} key={part.WPId} /> : <SearchResultCardCompact part={part} key={part.WPId} />}</Link>
+            {assemblies.slice(0, showMore)?.map((part) => (
+                <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`}>{width > 800 ? <SearchResultCard part={part} key={part.wpId} /> : <SearchResultCardCompact part={part} key={part.wpId} />}</Link>
             ))}
             {/* <h3>{definitionQuery.data}</h3> */}
+            {assemblies.length > 10 ?
+                <button onClick={() => setShowMore(showMore + 10)}>Show more</button>
+                : <></>
+            }
         </SearchContainer>
     )
 }

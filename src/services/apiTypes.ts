@@ -34,18 +34,18 @@ export type Part = {
 
 
 export type Assembly = {
-    Id: string
-    WPId: string
-    SerialNumber: string
-    ProductNumber: string
-    Location: string | null
-    Description: string
-    ParentUnitId: string | null
-    Vendor: string
-    AddedById: string | null
-    Comment: string | null
-    CreatedDate: string
-    UpdatedDate: string | null
+    id: string
+    wpId: string
+    serialNumber: string
+    productNumber: string
+    location: string | null
+    description: string
+    parentUnitId: string | null
+    vendor: string
+    addedById: string | null
+    comment: string | null
+    createdDate: string
+    updatedDate: string | null
 }
 
 export type Item = {
