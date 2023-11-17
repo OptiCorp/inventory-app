@@ -10,7 +10,7 @@ export const ResultCardContainer = styled.div`
     box-shadow: 2.5px 2.5px gray;
 `;
 
-export const StyledParagraph = styled.p`
+export const DescriptionParagraph = styled.p`
     width: 100%;
     display: -webkit-box;
     overflow: hidden;

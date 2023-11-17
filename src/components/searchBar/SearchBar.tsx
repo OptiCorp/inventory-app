@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react"
-import { StyledDiv, StyledInput } from "./styles"
+import { SearchBarContainer, StyledInput } from "./styles"
 import { useWindowDimensions } from "../../hooks"
 type Props = {
     setSearchTerm: Dispatch<SetStateAction<string>>
@@ -18,13 +18,13 @@ const SearchBar = ({ setSearchTerm }: Props) => {
 
 
     return (
-        <StyledDiv>
+        <SearchBarContainer>
             <StyledInput
                 onChange={debounce()}
                 type="text"
                 placeholder="Search for ID, description, PO number or S/N"
                 width={width} />
-        </StyledDiv>
+        </SearchBarContainer>
     )
 }
 
