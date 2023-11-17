@@ -21,3 +21,14 @@ export type UserRole = {
     id: string
     name: string
 }
+
+export type Part = {
+    WPID: string;
+    SN: string;
+    PN: string;
+    Description: string;
+    Location: string;
+    Vendor: string;
+    LastUpdated: string;
+}
+

@@ -8,9 +8,8 @@ import { pca } from './msalConfig.ts'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <MsalProvider instance={pca}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <App />
+
     </MsalProvider>
   </React.StrictMode>,
 )
