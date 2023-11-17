@@ -1,9 +1,9 @@
 import { useWindowDimensions } from "../../hooks";
-import { Part } from "../../services/apiTypes";
+import { Part, Assembly } from "../../services/apiTypes";
 import { ResultCardCompactContainer } from "./styles";
 
 type Props = {
-    part: Part;
+    part: Assembly;
 }
 
 const SearchResultCardCompact = ({ part }: Props) => {
@@ -13,7 +13,7 @@ const SearchResultCardCompact = ({ part }: Props) => {
             <div style={{ display: 'flex', justifyContent: 'start', flexBasis: '100%' }}>
                 <div style={{ paddingRight: width / 4 + 'px', paddingLeft: '20px' }}>
                     <p><b>ID:</b></p>
-                    <p>{part.WPID}</p>
+                    <p>{part.WPId}</p>
                 </div>
                 <div>
                     <p><b>Location</b></p>

@@ -11,9 +11,11 @@ import Search from './pages/search/Search'
 import PartDetails from './pages/partDetails/PartDetails'
 import AddPart from './pages/addPart/AddPart'
 import MakeList from './pages/list/MakeList'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
-    const isAuthenticated = useIsAuthenticated()
+    const isAuthenticated = useIsAuthenticated();
+    const queryClient = new QueryClient();
 
     const router = createBrowserRouter(
         createRoutesFromElements(
@@ -27,16 +29,18 @@ function App() {
     )
 
     return (
-        <div className="wrapper">
-            {isAuthenticated && (
-                <>
-                    <SnackbarComponent />
+        <QueryClientProvider client={queryClient}>
+            <div className="wrapper">
+                {isAuthenticated && (
+                    <>
+                        <SnackbarComponent />
 
-                    <RouterProvider router={router} />
-                </>
-            )}
-            {!isAuthenticated && <Login />}
-        </div>
+                        <RouterProvider router={router} />
+                    </>
+                )}
+                {!isAuthenticated && <Login />}
+            </div>
+        </QueryClientProvider>
     )
 }
 
