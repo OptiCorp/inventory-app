@@ -1,5 +1,5 @@
 import { useWindowDimensions } from "../../hooks"
-import { Part } from "../../types/types"
+import { Part } from "../../services/apiTypes"
 import { ResultCardContainer, StyledParagraph } from "./styles"
 
 type Props = {

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Part } from "../../types/types";
+import { Part } from "../../services/apiTypes";
 import { StyledContainerDiv, StyledInfoDiv } from "./styles";
 
 type Props = {
