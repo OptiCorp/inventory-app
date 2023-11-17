@@ -27,4 +27,5 @@ export const ResultCardCompactContainer = styled.div`
     padding: 4px;
     box-shadow: 2.5px 2.5px gray;
     flex-direction: column;
+    max-width: 500px;
 `;
