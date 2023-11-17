@@ -195,6 +195,18 @@ const apiService = () => {
         return await getByFetch(`Assembly/BySearchString/${searchString}`)
     }
 
+    const getSubassembliesBySearchString = async (searchString: string): Promise<Subassembly[]> => {
+        return await getByFetch(`Subassembly/BySearchString/${searchString}`)
+    }
+
+    const getItemsBySearchString = async (searchString: string): Promise<Item[]> => {
+        return await getByFetch(`Item/BySearchString/${searchString}`)
+    }
+
+    const getUnitsBySearchString = async (searchString: string): Promise<Unit[]> => {
+        return await getByFetch(`Unit/BySearchString/${searchString}`)
+    }
+
 
     return {
         getAllUsers,
@@ -210,7 +222,10 @@ const apiService = () => {
         updateUserRole,
         deleteUserRole,
         getUserImage,
-        getAssembliesBySearchString
+        getAssembliesBySearchString,
+        getSubassembliesBySearchString,
+        getItemsBySearchString,
+        getUnitsBySearchString
     }
 }
 

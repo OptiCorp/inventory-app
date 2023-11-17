@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import SearchBar from "../../components/searchBar/SearchBar"
 import SearchResultCard from "../../components/searchResultCard/SearchResultCard"
 import { SearchContainer } from "./styles"
-import { Part, Assembly } from "../../services/apiTypes"
+import { Part, Assembly, Subassembly, Item, Unit } from "../../services/apiTypes"
 import { Link } from "react-router-dom"
 import { useWindowDimensions } from "../../hooks"
 import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact"
@@ -14,6 +14,9 @@ const Search = () => {
     const [searchTerm, setSearchTerm] = useState("")
     // const [partList, setPartList] = useState<Part[]>([])
     const [assemblies, setAssemblies] = useState<Assembly[]>([])
+    const [subassemblies, setSubassemblies] = useState<Subassembly[]>([])
+    const [items, setItems] = useState<Item[]>([])
+    const [units, setUnits] = useState<Unit[]>([])
     const [definition, setDefinition] = useState<string>("")
     const { width } = useWindowDimensions()
     const api = apiService();
@@ -43,9 +46,14 @@ const Search = () => {
     useEffect(() => {
         if (searchTerm.length >= 3) {
             (async () => {
-                const response = await api.getAssembliesBySearchString(encodeURIComponent(searchTerm));
-                setAssemblies(response);
-                console.log(assemblies[0])
+                const responseA = await api.getAssembliesBySearchString(encodeURIComponent(searchTerm));
+                setAssemblies(responseA);
+                const responseS = await api.getSubassembliesBySearchString(encodeURIComponent(searchTerm));
+                setSubassemblies(responseS);
+                const responseI = await api.getItemsBySearchString(encodeURIComponent(searchTerm));
+                setItems(responseI);
+                const responseU = await api.getUnitsBySearchString(encodeURIComponent(searchTerm));
+                setUnits(responseU);
             })()
         }
     }, [searchTerm])
@@ -58,6 +66,15 @@ const Search = () => {
         <SearchContainer>
             <SearchBar setSearchTerm={setSearchTerm} />
             {assemblies.slice(0, showMore)?.map((part) => (
+                <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`}>{width > 800 ? <SearchResultCard part={part} key={part.wpId} /> : <SearchResultCardCompact part={part} key={part.wpId} />}</Link>
+            ))}
+            {subassemblies.slice(0, showMore)?.map((part) => (
+                <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`}>{width > 800 ? <SearchResultCard part={part} key={part.wpId} /> : <SearchResultCardCompact part={part} key={part.wpId} />}</Link>
+            ))}
+            {items.slice(0, showMore)?.map((part) => (
+                <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`}>{width > 800 ? <SearchResultCard part={part} key={part.wpId} /> : <SearchResultCardCompact part={part} key={part.wpId} />}</Link>
+            ))}
+            {units.slice(0, showMore)?.map((part) => (
                 <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`}>{width > 800 ? <SearchResultCard part={part} key={part.wpId} /> : <SearchResultCardCompact part={part} key={part.wpId} />}</Link>
             ))}
             {/* <h3>{definitionQuery.data}</h3> */}
