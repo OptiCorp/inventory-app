@@ -11,12 +11,12 @@ const SearchResultCardCompact = ({ part }: Props) => {
     return (
         <ResultCardCompactContainer>
             <div style={{ display: 'flex', justifyContent: 'start', flexBasis: '100%' }}>
-                <div style={{ paddingRight: width / 4 + 'px', paddingLeft: '20px' }}>
+                <div style={{ paddingRight: '150px', paddingLeft: '20px' }}>
                     <p><b>ID:</b></p>
                     <p>{part.WPID}</p>
                 </div>
                 <div>
-                    <p><b>Location</b></p>
+                    <p><b>Location:</b></p>
                     <p>{part.Location}</p>
                 </div>
             </div>

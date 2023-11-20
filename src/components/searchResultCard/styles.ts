@@ -10,7 +10,7 @@ export const ResultCardContainer = styled.div`
     box-shadow: 2.5px 2.5px gray;
 `;
 
-export const StyledParagraph = styled.p`
+export const DescriptionParagraph = styled.p`
     width: 100%;
     display: -webkit-box;
     overflow: hidden;
@@ -27,4 +27,5 @@ export const ResultCardCompactContainer = styled.div`
     padding: 4px;
     box-shadow: 2.5px 2.5px gray;
     flex-direction: column;
+    max-width: 500px;
 `;

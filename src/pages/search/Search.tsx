@@ -30,7 +30,7 @@ const Search = () => {
     }
 
     useEffect(() => {
-        if (searchTerm.length >= 3) {
+        if (searchTerm.length >= 1) {
             (async () => {
                 const parts = await searchParts(searchTerm.toLowerCase())
                 setPartList(parts)
@@ -44,7 +44,7 @@ const Search = () => {
         <SearchContainer>
             <SearchBar setSearchTerm={setSearchTerm} />
             {partList.map((part) => (
-                <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.WPID}`}>{width > 800 ? <SearchResultCard part={part} key={part.WPID} /> : <SearchResultCardCompact part={part} key={part.WPID} />}</Link>
+                <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.WPID}`}>{width > 850 ? <SearchResultCard part={part} key={part.WPID} /> : <SearchResultCardCompact part={part} key={part.WPID} />}</Link>
             ))}
             {/* <h3>{definitionQuery.data}</h3> */}
         </SearchContainer>

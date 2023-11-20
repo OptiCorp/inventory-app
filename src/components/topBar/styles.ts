@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 
-export const StyledDiv = styled.div`
+export const TopBarContainer = styled.div`
     display: flex;
     justify-content: start;
     padding: 8px;
