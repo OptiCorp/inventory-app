@@ -32,3 +32,63 @@ export type Part = {
     LastUpdated: string;
 }
 
+
+export type Assembly = {
+    id: string
+    wpId: string
+    serialNumber: string
+    productNumber: string
+    location: string | null
+    description: string
+    parentUnitId: string | null
+    vendor: string
+    addedById: string | null
+    comment: string | null
+    createdDate: string
+    updatedDate: string | null
+}
+
+export type Item = {
+    id: string
+    wpId: string
+    serialNumber: string
+    productNumber: string
+    location: string | null
+    description: string
+    parentSubassemblyId: string | null
+    vendor: string
+    addedById: string | null
+    comment: string | null
+    createdDate: string
+    updatedDate: string | null
+}
+
+export type Subassembly = {
+    id: string
+    wpId: string
+    serialNumber: string
+    productNumber: string
+    location: string | null
+    description: string
+    parentAssemblyId: string | null
+    parentSubassemblyId: string | null
+    vendor: string
+    addedById: string | null
+    comment: string | null
+    createdDate: string
+    updatedDate: string | null
+}
+
+export type Unit = {
+    id: string
+    wpId: string
+    serialNumber: string
+    productNumber: string
+    location: string | null
+    description: string
+    vendor: string
+    addedById: string | null
+    comment: string | null
+    createdDate: string
+    updatedDate: string | null
+}

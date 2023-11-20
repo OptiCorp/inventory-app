@@ -1,9 +1,9 @@
 import { useWindowDimensions } from "../../hooks";
-import { Part } from "../../services/apiTypes";
+import { Part, Assembly, Subassembly, Item, Unit } from "../../services/apiTypes";
 import { ResultCardCompactContainer } from "./styles";
 
 type Props = {
-    part: Part;
+    part: Assembly | Subassembly | Item | Unit;
 }
 
 const SearchResultCardCompact = ({ part }: Props) => {
@@ -13,14 +13,15 @@ const SearchResultCardCompact = ({ part }: Props) => {
             <div style={{ display: 'flex', justifyContent: 'start', flexBasis: '100%' }}>
                 <div style={{ paddingRight: '150px', paddingLeft: '20px' }}>
                     <p><b>ID:</b></p>
-                    <p>{part.WPID}</p>
+                    <p>{part.wpId}</p>
                 </div>
                 <div>
-                    <p><b>Location:</b></p>
-                    <p>{part.Location}</p>
+                    <p><b>Location</b></p>
+                    <p>{part.location}</p>
+
                 </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 20px' }}>{part.Description}</div>
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 20px' }}>{part.description}</div>
         </ResultCardCompactContainer>
     )
 }

@@ -1,6 +1,6 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
-import { User, UserRole } from './apiTypes'
+import { User, UserRole, Assembly, Item, Subassembly, Unit } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -190,6 +190,24 @@ const apiService = () => {
         await deleteByFetch(`DeleteUserRole?id=${id}`)
     }
 
+
+    const getAssembliesBySearchString = async (searchString: string): Promise<Assembly[]> => {
+        return await getByFetch(`Assembly/BySearchString/${searchString}`)
+    }
+
+    const getSubassembliesBySearchString = async (searchString: string): Promise<Subassembly[]> => {
+        return await getByFetch(`Subassembly/BySearchString/${searchString}`)
+    }
+
+    const getItemsBySearchString = async (searchString: string): Promise<Item[]> => {
+        return await getByFetch(`Item/BySearchString/${searchString}`)
+    }
+
+    const getUnitsBySearchString = async (searchString: string): Promise<Unit[]> => {
+        return await getByFetch(`Unit/BySearchString/${searchString}`)
+    }
+
+
     return {
         getAllUsers,
         getUser,
@@ -204,6 +222,10 @@ const apiService = () => {
         updateUserRole,
         deleteUserRole,
         getUserImage,
+        getAssembliesBySearchString,
+        getSubassembliesBySearchString,
+        getItemsBySearchString,
+        getUnitsBySearchString
     }
 }
 
