@@ -12,7 +12,7 @@ export const StyledInput = styled.input<InputProps>`
     outline: none;
 `;
 
-export const StyledDiv = styled.div`
+export const SearchBarContainer = styled.div`
     display: flex;
     flex-basis: 100%;
     padding: 16px;

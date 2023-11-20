@@ -44,7 +44,7 @@ const Search = () => {
 
 
     useEffect(() => {
-        if (searchTerm.length >= 3) {
+        if (searchTerm.length >= 1) {
             (async () => {
                 const responseA = await api.getAssembliesBySearchString(encodeURIComponent(searchTerm));
                 setAssemblies(responseA);
@@ -76,6 +76,7 @@ const Search = () => {
             ))}
             {units.slice(0, showMore)?.map((part) => (
                 <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`}>{width > 800 ? <SearchResultCard part={part} key={part.wpId} /> : <SearchResultCardCompact part={part} key={part.wpId} />}</Link>
+
             ))}
             {/* <h3>{definitionQuery.data}</h3> */}
             {assemblies.length > 10 ?

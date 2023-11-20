@@ -2,6 +2,7 @@ import { useWindowDimensions } from "../../hooks"
 import { Part, Assembly, Subassembly, Item, Unit } from "../../services/apiTypes"
 import { ResultCardContainer, StyledParagraph } from "./styles"
 
+
 type Props = {
     part: Assembly | Subassembly | Item | Unit
 }
@@ -16,7 +17,7 @@ const SearchResultCard = ({ part }: Props) => {
                     <b>P/N</b> {part.productNumber}</p>
             </div>
             <div style={{ flex: '2', padding: '8px', borderRight: '1px solid rgba(208, 208, 208)', lineHeight: '25px', minWidth: '400px' }}>
-                <StyledParagraph>{part.description}</StyledParagraph>
+                <DescriptionParagraph>{part.description}</DescriptionParagraph>
             </div>
             <div style={{ padding: '8px', lineHeight: '25px' }}>
                 <p style={{ margin: '8px 0px' }}><b>Location</b> {part.location}<br />
