@@ -1,6 +1,6 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
-import { User, UserRole, Assembly, Item, Subassembly, Unit } from './apiTypes'
+import { User, UserRole, Assembly, Item, Subassembly, Unit, Parts } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -207,6 +207,10 @@ const apiService = () => {
         return await getByFetch(`Unit/BySearchString/${searchString}`)
     }
 
+    const getPartsBySearchString = async (searchString: string): Promise<Parts> => {
+        return await getByFetch(`Part/BySearchString/${searchString}`)
+    }
+
 
     return {
         getAllUsers,
@@ -225,7 +229,8 @@ const apiService = () => {
         getAssembliesBySearchString,
         getSubassembliesBySearchString,
         getItemsBySearchString,
-        getUnitsBySearchString
+        getUnitsBySearchString,
+        getPartsBySearchString
     }
 }
 

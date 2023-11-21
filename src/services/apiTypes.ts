@@ -92,3 +92,5 @@ export type Unit = {
     createdDate: string
     updatedDate: string | null
 }
+
+export type Parts = [Unit[], Assembly[], Subassembly[], Item[]];
