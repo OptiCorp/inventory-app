@@ -1,9 +1,9 @@
 import { useWindowDimensions } from "../../hooks";
-import { Part, Assembly, Subassembly, Item, Unit } from "../../services/apiTypes";
+import { Item } from "../../services/apiTypes";
 import { ResultCardCompactContainer } from "./styles";
 
 type Props = {
-    part: Assembly | Subassembly | Item | Unit;
+    part: Item;
 }
 
 const SearchResultCardCompact = ({ part }: Props) => {

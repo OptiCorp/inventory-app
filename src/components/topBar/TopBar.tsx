@@ -6,9 +6,12 @@ const TopBar = () => {
     return (
         <div>
             <TopBarContainer>
-                <StyledNavLink to='search'><StyledLinkDiv><h3>Find parts</h3></StyledLinkDiv></StyledNavLink>
-                <StyledNavLink to='addpart'><StyledLinkDiv><h3>Add part</h3></StyledLinkDiv></StyledNavLink>
-                <StyledNavLink to='makelist'><StyledLinkDiv><h3>Make list</h3></StyledLinkDiv></StyledNavLink>
+                <div style={{ display: 'flex' }}>
+                    <StyledNavLink to='search'><StyledLinkDiv><h3>Find parts</h3></StyledLinkDiv></StyledNavLink>
+                    <StyledNavLink to='addpart'><StyledLinkDiv><h3>Add part</h3></StyledLinkDiv></StyledNavLink>
+                    <StyledNavLink to='makelist'><StyledLinkDiv><h3>Make list</h3></StyledLinkDiv></StyledNavLink>
+                </div>
+                <img style={{ paddingRight: '16px' }} src='../../../public/WP 1.svg' />
             </TopBarContainer>
             <Outlet />
         </div>

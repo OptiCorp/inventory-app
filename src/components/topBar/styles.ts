@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 export const TopBarContainer = styled.div`
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     padding: 8px;
 `;
 
