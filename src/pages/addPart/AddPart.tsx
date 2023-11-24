@@ -10,29 +10,7 @@ const AddPart = () => {
 
     return (
         <Outlet />
-        // <FormContainer>
-        //     <PartForm method="post" action="/addpart" autoComplete="off">
-
-        //         {data && data.error && <p>{data.error}</p>}
-        //         <ProgressBar />
-
-
-        //         <input list="types" name="type" placeholder="Item type" />
-        //         <datalist id="types">
-        //             <option value="Unit" />
-        //             <option value="Assembly" />
-        //             <option value="Sub-assembly" />
-        //             <option value="Item" />
-        //         </datalist>
-        //         <input type="text" name="desc" placeholder="Item description" />
-        //         <input type="text" name="serial" placeholder="Serial number" />
-        //         <input type="text" name="product" placeholder="Product number" />
-        //         <input type="text" name="vendor" placeholder="Vendor" />
-        //         <input type="text" name="comment" placeholder="Comment" />
-        //         <button>Submit</button>
-
-        //     </PartForm>
-        // </FormContainer>
+   
     )
 }
 
@@ -61,9 +39,7 @@ export const submitPart = async ({ request }: ActionFunctionArgs) => {
             CreatedDate: '2023-11-17T08:22:12.3333333'
         }
 
-        // const res = await api.addAssembly(
-        //     part)
-
+  
 
         return redirect('/search')
     }

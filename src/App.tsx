@@ -1,7 +1,7 @@
 import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import { useIsAuthenticated } from '@azure/msal-react'
 import { Login } from './pages/login'
-import SnackbarComponent from './utils/Snackbar'
+
 import TopBar from './components/topBar/TopBar'
 import Search from './pages/search/Search'
 import PartDetails from './pages/partDetails/PartDetails'
@@ -10,6 +10,7 @@ import MakeList from './pages/list/MakeList'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RecentlyAdded from './components/recentlyAdded/RecentlyAdded'
 import { UmAppContextProvider } from './contexts/UmAppContext'
+import GlobalStyles from './style/GlobalStyles'
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -49,7 +50,7 @@ function App() {
             <div className="wrapper">
                 {isAuthenticated && (
                     <UmAppContextProvider>
-                        <SnackbarComponent />
+                   <GlobalStyles/>
 
                         <RouterProvider router={router} />
                     </UmAppContextProvider>

@@ -1,4 +1,4 @@
-import { Button, Progress, Typography } from '@equinor/eds-core-react'
+
 import {
     BackgroundContainer,
     ButtonWrapper,
@@ -23,26 +23,19 @@ export const Login = () => {
             <LoginContainer>
                 <Header>
                     <TitleHeader>Sign in to your Account</TitleHeader>
-                    <Typography color="white" link href="#">
-                        Or get access here
-                    </Typography>
+                  
                 </Header>
                 <ButtonWrapper>
-                    <Button
+                    <button
                         type="submit"
                         aria-disabled={isSubmitting ? true : false}
                         aria-label={isSubmitting ? 'loading data' : ''}
                         onClick={onSubmit}
                     >
-                        {isSubmitting ? <Progress.Dots color={'primary'} /> : 'Log in'}
-                    </Button>
+                        {isSubmitting ? <>loading</> : 'Log in'}
+                    </button>
                 </ButtonWrapper>
-                <InfoText>
-                    Having Trouble with your account?
-                    <Typography color="white" link href="#">
-                        Contact Support
-                    </Typography>
-                </InfoText>
+              
             </LoginContainer>
         </BackgroundContainer>
     )

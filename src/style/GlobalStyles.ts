@@ -20,18 +20,18 @@ export const COLORS = {
 }
 
 const GlobalStyles = createGlobalStyle`
-    body {
+    body, :root, ¤ {
         margin: 0;
         width: 100%;
-        font-family: equinor;
-        height: 100%;
+        font-family: Archivo;
+        height: 100vh;
         font-size: 13px;
         background-color: ${COLORS.frostyGray};
     }
     .wrapper {
     display: grid;
     height: 100vh;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     overflow-x: hidden;
   }
