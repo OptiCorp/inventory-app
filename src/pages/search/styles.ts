@@ -14,3 +14,13 @@ export const LoadMoreButton = styled.button`
     border-radius: 8px;
     box-shadow: 2.5px 2.5px gray;
 `;
+
+
+export const Container = styled.div`
+display: flex;
+flex-direction: column;
+
+`;
+export const StyledLink = styled(Link)`text-decoration: none;
+color: black;
+`;

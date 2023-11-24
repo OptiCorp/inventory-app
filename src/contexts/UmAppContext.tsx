@@ -6,6 +6,7 @@ import apiService from '../services/api'
 import { ApiStatus, User } from '../services/apiTypes'
 import CheckRole from '../utils/CheckRole'
 
+
 export interface UmAppContextType {
     idToken: string
     accessToken: string
@@ -137,9 +138,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
             </UmAppContext.Provider>
         )
     }
-    /* if (inProgress === 'login') {
-        return <Typography as="span">Login is currently in progress</Typography>
-    } */
+
 }
 
 export default UmAppContext

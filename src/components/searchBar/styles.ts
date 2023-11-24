@@ -6,8 +6,9 @@ type InputProps = {
 
 export const StyledInput = styled.input<InputProps>`
     border-style: none none solid none;
-    flex-basis: 100%;
-    max-width: 1000px;
+    flex-basis: 90%;
+    padding: 1rem;
+    max-width: 2000px;
     font-size: ${({ width }) => width >= 600 ? '20px' : '16px'};
     outline: none;
 `;
