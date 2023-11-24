@@ -29,3 +29,4 @@ export const ResultCardCompactContainer = styled.div`
     flex-direction: column;
     max-width: 500px;
 `;
+

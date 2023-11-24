@@ -9,3 +9,8 @@ export const SearchContainer = styled.div<Props>`
     height: ${({ height }) => height};
 `;
 
+export const LoadMoreButton = styled.button`
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    box-shadow: 2.5px 2.5px gray;
+`;

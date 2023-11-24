@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import SearchResultCard from "../../components/searchResultCard/SearchResultCard";
 import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact";
@@ -16,6 +16,18 @@ const Dropdown = ({ items, title }: Props) => {
     const [showMore, setShowMore] = useState(10);
     const { width } = useWindowDimensions()
 
+    const handleScroll = async () => {
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
+            return
+        }
+        setShowMore(previous => previous + 10)
+    };
+
+    useEffect(() => {
+        window.addEventListener(`scroll`, handleScroll)
+        return () => { window.removeEventListener(`scroll`, handleScroll) }
+    }, [])
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -30,7 +42,7 @@ const Dropdown = ({ items, title }: Props) => {
             {isOpen && (
                 <div className="dropdown-content">
                     {items.slice(0, showMore)?.map((part: any) => (
-                        <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`}>{width > 800 ? <SearchResultCard part={part} key={part.wpId} /> : <SearchResultCardCompact part={part} key={part.wpId} />}</Link>
+                        <Link style={{ textDecoration: 'none', color: 'black', }} to={`/${part.wpId}`} key={part.wpId} >{width > 800 ? <SearchResultCard part={part} /> : <SearchResultCardCompact part={part} />}</Link>
                     ))}
                     {items.length > 10 ?
                         <CenterDiv>

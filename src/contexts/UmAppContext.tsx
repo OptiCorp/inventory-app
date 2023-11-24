@@ -4,8 +4,6 @@ import decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
 import apiService from '../services/api'
 import { ApiStatus, User } from '../services/apiTypes'
-import { Loading } from '../components/Loading'
-import NoAccessPage from '../pages/NoAccessPage'
 import CheckRole from '../utils/CheckRole'
 
 export interface UmAppContextType {
@@ -24,6 +22,7 @@ export interface UmAppContextType {
 type AzureUserInfo = {
     preferred_username: string
     name: string
+    oid: string
 }
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
@@ -51,55 +50,24 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
         setIsSnackbarOpen(false)
     }
 
-    async function createUser(userEmail: string, name: string) {
-        const nameSplit = name.split(' ')
-        const firstName = nameSplit[0]
-        const lastName = nameSplit[nameSplit.length - 1]
-        const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`
-        try {
-            const createUserResponse = await api.addUser({
-                azureAdUserId: userEmail,
-                firstName: firstName,
-                lastName: lastName,
-                username: username,
-                email: userEmail,
-            })
-            console.log('User creation response status:', createUserResponse.status)
-            if (createUserResponse.status === 200) {
-                await createUserResponse.json()
-            } else {
-                console.log('Error creating user:', createUserResponse.statusText)
-                return null
-            }
-        } catch (error) {
-            console.log('Error creating user:', error)
-            return null
-        }
-    }
-
     function getUserInfoFromIdToken(token: string): {
         preferredUserName: string
         name: string
+        oid: string
     } {
         const decodedToken: AzureUserInfo = decode(token)
 
         return {
             preferredUserName: decodedToken?.preferred_username || '',
             name: decodedToken.name || '',
+            oid: decodedToken.oid
         }
     }
-    async function fetchUserByEmail(userEmail: string, name: string) {
-        const response = await api.getUserByAzureAdUserId(userEmail)
+    async function fetchUserByEmail(azureAdId: string) {
+        const response = await api.getUserByAzureAdUserId(azureAdId)
         if (response) {
             const user = response
-
             setCurrentUser(user)
-        } else if (!response) {
-            const newUser = await createUser(userEmail, name)
-
-            if (newUser) {
-                setCurrentUser(newUser)
-            }
         } else {
             console.error('Error fetching user by email')
         }
@@ -109,7 +77,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
         setStatus(ApiStatus.LOADING)
         try {
             const userInfo = getUserInfoFromIdToken(token)
-            await fetchUserByEmail(userInfo.preferredUserName, userInfo.name)
+            await fetchUserByEmail(userInfo.oid)
             setStatus(ApiStatus.SUCCESS)
         } catch (error) {
             console.error('Error fetching and updating user:', error)
@@ -146,11 +114,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
     }, [account, inProgress, instance])
 
     if (status === ApiStatus.LOADING) {
-        return <Loading text="Loading .." />
-    }
-
-    if (role.isInspector()) {
-        return <NoAccessPage />
+        return <>Loading</>
     }
 
     if (accounts.length > 0) {

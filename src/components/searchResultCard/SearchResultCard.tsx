@@ -1,10 +1,10 @@
 import { useWindowDimensions } from "../../hooks"
-import { Part, Assembly, Subassembly, Item, Unit } from "../../services/apiTypes"
+import { Item } from "../../services/apiTypes"
 import { ResultCardContainer, DescriptionParagraph } from "./styles"
 
 
 type Props = {
-    part: Assembly | Subassembly | Item | Unit
+    part: Item
 }
 
 const SearchResultCard = ({ part }: Props) => {
@@ -16,7 +16,7 @@ const SearchResultCard = ({ part }: Props) => {
                     <b>S/N</b> {part.serialNumber}<br />
                     <b>P/N</b> {part.productNumber}</p>
             </div>
-            <div style={{ flex: '2', padding: '8px', borderRight: '1px solid rgba(208, 208, 208)', lineHeight: '25px', minWidth: '400px' }}>
+            <div style={{ padding: '8px', borderRight: '1px solid rgba(208, 208, 208)', lineHeight: '25px', minWidth: '400px' }}>
                 <DescriptionParagraph>{part.description}</DescriptionParagraph>
             </div>
             <div style={{ padding: '8px', lineHeight: '25px' }}>

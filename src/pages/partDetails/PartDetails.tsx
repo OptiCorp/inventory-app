@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import { Part } from "../../services/apiTypes";
 import { StyledContainerDiv, StyledInfoDiv } from "./styles";
+import { Item } from "../../services/apiTypes";
 
 type Props = {
-    part: Part;
+    part: Item;
 }
 
 const PartDetails = () => {
