@@ -4,7 +4,7 @@ import { Login } from './pages/login'
 
 import TopBar from './components/topBar/TopBar'
 import Search from './pages/search/Search'
-import PartDetails from './pages/partDetails/PartDetails'
+import PartDetails from './pages/partDetails/Index'
 import AddPart, { submitPart } from './pages/addPart/AddPart'
 import MakeList from './pages/list/MakeList'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -24,7 +24,7 @@ function App() {
                     element={<Search />}
                 />
                 <Route
-                    path=':id'
+                    path=':partId'
                     element={<PartDetails />}
                 />
                 <Route

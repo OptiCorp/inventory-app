@@ -1,7 +1,7 @@
 import {useState } from "react"
 import SearchBar from "../../components/searchBar/SearchBar"
 import SearchResultCard from "../../components/searchResultCard/SearchResultCard"
-import { Container,SearchContainer} from "./styles"
+import  { Spinner,Container,LoaderWrapper,SearchContainer} from "./styles"
 import { useWindowDimensions } from "../../hooks"
 import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact"
 import { useGetItems } from "../../services/hooks/useGetItems"
@@ -19,17 +19,15 @@ const Search = () => {
         <SearchContainer>
             <SearchBar setSearchTerm={setSearchTerm} />
 
-            {isFetching ? <div>Fetching...</div> :
-                <></>
-            }
+            {isFetching ? ( <LoaderWrapper><Spinner /><p>Loading</p> </LoaderWrapper> ) : (
             <Container>
              {items.slice(0, showMore)?.map((part: any) => (
 
                      
                             width > 800 ? <SearchResultCard part={part} /> : <SearchResultCardCompact part={part} />)
                     )}
-            </Container>
-          
+            </Container>) }
+            
         </SearchContainer>
     )
 }

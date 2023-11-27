@@ -1,6 +1,6 @@
 import { StyledLink } from "../../pages/search/styles"
 import { Item } from "../../services/apiTypes"
-import { DescriptionParagraph } from "./styles"
+import { CardInfoWrap, DescriptionParagraph, FirstInfoBox, InfoP, KeyWords, SecondInfoBox, ThirdInfoBox } from "./styles"
 
 type Props = {
     part: Item
@@ -11,23 +11,25 @@ type Props = {
 
 return (
     
-    <>  <StyledLink to={`/${part.wpId}`} key={part.wpId} ><div>
+    <StyledLink to={`/${part.wpId}`} key={part.wpId} ><CardInfoWrap> <FirstInfoBox>
        
-        <p style={{ margin: '8px 0px' }}><b>WP ID</b> {part.wpId}<br />
-            <b>S/N</b> {part.serialNumber}<br />
-            <b>P/N</b> {part.productNumber}</p>
-    </div>
+        <InfoP><KeyWords>WP ID</KeyWords>{part.wpId}</InfoP>
+        <InfoP> <KeyWords> S/N</KeyWords>{part.serialNumber}</InfoP>
+           <InfoP> <KeyWords> P/N</KeyWords>{part.productNumber}</InfoP>
+    </FirstInfoBox>
     
-    <div style={{ padding: '8px', borderRight: '1px solid rgba(208, 208, 208)', lineHeight: '25px', minWidth: '400px' }}>
-            <DescriptionParagraph>{part.description}</DescriptionParagraph>
-        </div>
-        
-        <div style={{ padding: '8px', lineHeight: '25px' }}>
-            <p style={{ margin: '8px 0px' }}><b>Location</b> {part.location}<br />
-                <b>Vendor</b> {part.vendor}<br />
-                <b>Last updated</b> {part.updatedDate}</p>
+    <SecondInfoBox>
 
-        </div></StyledLink></>
+            <DescriptionParagraph>{part.description}</DescriptionParagraph>
+  
+        </SecondInfoBox>
+        <ThirdInfoBox>
+     
+        <InfoP><KeyWords>Location</KeyWords> {part.location}</InfoP>
+        <InfoP> <KeyWords>Vendor</KeyWords>{part.vendor}</InfoP>
+                <InfoP> <KeyWords>Last updated</KeyWords> {part.updatedDate} </InfoP>
+                </ThirdInfoBox>
+      </CardInfoWrap></StyledLink>
 
 )
 
