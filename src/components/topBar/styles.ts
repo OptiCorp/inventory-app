@@ -18,3 +18,5 @@ export const StyledNavLink = styled(NavLink)`
         color: black;
     }
 `;
+
+export const HeaderWrap = styled.div`display:flex;`;

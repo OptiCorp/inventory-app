@@ -20,10 +20,10 @@ export const COLORS = {
 }
 
 const GlobalStyles = createGlobalStyle`
-    body, :root, ¤ {
+   body, :root, html {
         margin: 0;
         width: 100%;
-        font-family: Archivo;
+        font-family: 'Archivo', sans-serif;
         height: 100vh;
         font-size: 13px;
         background-color: ${COLORS.frostyGray};

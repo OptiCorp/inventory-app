@@ -62,6 +62,7 @@ line-height: 25px;
 border-radius: 5px;
 padding: 1rem;
 width: 100%;
+
 border-right: 1px solid rgba(208, 208, 208);
 background-color:${COLORS.white};
 `;
@@ -79,3 +80,55 @@ background-color:${COLORS.white};
 `;
 
 
+export const CardInfoWrap = styled.div`
+
+display: grid;
+
+grid-template-rows: 1fr;
+grid-template-columns: 1fr 400px 1fr;
+`;
+
+
+export const FirstInfoBox = styled.div`
+display: inline-block;
+margin: 1rem 0;
+
+line-height: 25px;
+
+
+`
+
+export const SecondInfoBox = styled.div`padding: 8px;
+line-height: 25px;
+border-Right: 1px solid rgba(208, 208, 208);
+padding: 8px;
+
+
+`
+
+export const ThirdInfoBox = styled.div`
+grid-column: 3/3;
+display: inline;
+    margin: 1rem 0;
+    padding: 8px;
+    line-height: 25px;
+
+
+
+`
+
+export const InfoP = styled.p`
+margin: 0;
+border-Right: 1px solid rgba(208, 208, 208);
+`;
+
+
+export const KeyWords = styled.p`
+margin: 0;
+font-weight: 600;
+display: inline-block;
+min-width: 100px;
+
+
+padding-right: 1rem;
+`;
