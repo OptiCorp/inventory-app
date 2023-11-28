@@ -9,7 +9,7 @@ import {
 
 type Props = {
     part: Item
-    searchTerm: string
+    searchTerm?: string
 }
 
 const SearchResultCardCompact = ({ part }: Props) => {

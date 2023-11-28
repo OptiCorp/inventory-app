@@ -14,7 +14,7 @@ import { useLocalStorage } from 'usehooks-ts'
 
 type Props = {
     part: Item
-    searchTerm: string
+    searchTerm?: string
 }
 
 export const Searchinfo = ({ part, searchTerm }: Props) => {
@@ -25,7 +25,7 @@ export const Searchinfo = ({ part, searchTerm }: Props) => {
     )
 
     const HandleClick = () => {
-        setRememberSearch((prev) => [...prev.slice(-4), searchTerm])
+        setRememberSearch((prev) => [...prev.slice(-4), searchTerm ?? ''])
         navigate(`/${part.wpId}`)
     }
     return (

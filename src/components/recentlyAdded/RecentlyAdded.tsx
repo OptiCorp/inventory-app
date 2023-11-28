@@ -7,11 +7,7 @@ import SearchResultCardCompact from '../searchResultCard/SearchResultCardCompact
 import UmAppContext from '../../contexts/UmAppContext'
 import { RecentlyAddedContainer } from './styles'
 
-type Props = {
-    searchTerm: string
-}
-
-const RecentlyAdded = ({ searchTerm }: Props) => {
+const RecentlyAdded = () => {
     const [myItems, setMyItems] = useState<Item[]>()
     const api = apiService()
     const { width } = useWindowDimensions()
@@ -31,12 +27,9 @@ const RecentlyAdded = ({ searchTerm }: Props) => {
             <h3>Recently added by you</h3>
             {myItems?.map((item: Item) =>
                 width > 800 ? (
-                    <SearchResultCard part={item} searchTerm={searchTerm} />
+                    <SearchResultCard part={item} />
                 ) : (
-                    <SearchResultCardCompact
-                        part={item}
-                        searchTerm={searchTerm}
-                    />
+                    <SearchResultCardCompact part={item} />
                 )
             )}
 
