@@ -14,7 +14,7 @@ export const Hierarchy = () => {
                 <Title>Hierarchy</Title>
                 <Lists>
                     <StyledList>
-                        <ListItem>Belongs to</ListItem>
+                         <ListItem>Belongs to</ListItem>
                         <ListItem>Links to parents</ListItem>
                         <ListItem>Consists of</ListItem>
                         <ListItem>If unit, links to assemblies </ListItem>{' '}

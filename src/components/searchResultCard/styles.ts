@@ -14,7 +14,7 @@ export const ResultCardContainer = styled.div`
 export const DescriptionParagraph = styled.p`
     width: 100%;
     display: -webkit-box;
-    background-color: aliceblue;
+    background-color: ${COLORS.aliceBlue};
     border-radius: 3px;
     width: 90%;
 
@@ -25,7 +25,7 @@ export const DescriptionParagraph = styled.p`
 `
 
 export const CompactDesriptionParagraph = styled.p`
-    background-color: aliceblue;
+    background-color: ${COLORS.aliceBlue};
     border-radius: 3px;
     width: 90%;
 

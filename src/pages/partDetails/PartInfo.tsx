@@ -7,6 +7,7 @@ import {
     SecondList,
     Lists,
     ThirdList,
+    Wrapper,
 } from './styles'
 
 export const PartInfo = () => {
@@ -14,20 +15,21 @@ export const PartInfo = () => {
 
     return (
         <>
-            <StyledList>
-                <ListItem>Description</ListItem>
-                <ListItem>P/N</ListItem>
-                <ListItem>S/N</ListItem>
-                <ListItem>Vendor</ListItem>{' '}
-            </StyledList>
-            <SecondList>
-                {' '}
-                <ListItem>Added by</ListItem>
-                <ListItem>Updated date</ListItem>
-                <ListItem>Type</ListItem>
-                <ListItem> Revision Number </ListItem>
-            </SecondList>
-
+            <Wrapper>
+                <StyledList>
+                    <ListItem>Description</ListItem>
+                    <ListItem>P/N</ListItem>
+                    <ListItem>S/N</ListItem>
+                    <ListItem>Vendor</ListItem>{' '}
+                </StyledList>
+                <SecondList>
+                    {' '}
+                    <ListItem>Added by</ListItem>
+                    <ListItem>Updated date</ListItem>
+                    <ListItem>Type</ListItem>
+                    <ListItem> Revision Number </ListItem>
+                </SecondList>
+            </Wrapper>
             <ThirdList>
                 Location (potential future feature)
                 <ListItem>
