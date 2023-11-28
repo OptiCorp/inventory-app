@@ -199,7 +199,6 @@ const apiService = () => {
         Type: string,
         Description: string,
         Vendor: string,
-        CreatedDate: string,
         AddedById: string
     }): Promise<Response> => {
         return await postByFetch(`Item`, item)
