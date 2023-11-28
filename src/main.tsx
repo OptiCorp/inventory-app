@@ -6,10 +6,10 @@ import { MsalProvider } from '@azure/msal-react'
 import { pca } from './msalConfig.ts'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  
     <MsalProvider instance={pca}>
       <App />
 
     </MsalProvider>
-  </React.StrictMode>,
+  ,
 )

@@ -1,10 +1,26 @@
-import { Container } from "./styles"
+import { useWindowDimensions } from "../../hooks"
+import {Container, ProgressCircle, ProgressLine, ProgressLink} from "./styles"
+import {Link, useLocation} from "react-router-dom";
 
-const ProgressBar = () => {
+type Props = {
+    progressLevel: number
+}
+
+const ProgressBar = ({ progressLevel }: Props) => {
+    const { width } = useWindowDimensions()
+    const location = useLocation()
+    
+    const paths = location.pathname.split('/').filter(name => name !== '');
+    
     return (
         <Container>
-            <div style={{ borderRadius: '20px', backgroundColor: 'black', width: '20px', padding: '8px', color: 'white', display: 'flex', justifyContent: 'center' }}>1</div>
-            <div style={{ width: '60px', backgroundColor: 'black', height: '3px', alignSelf: 'center', marginLeft: '4px' }}></div>
+            <ProgressLink to={progressLevel >= 1 ? '/add-part/batch' : '' }><ProgressCircle active={progressLevel >= 1} width={width}>1</ProgressCircle></ProgressLink>
+            <ProgressLine active={progressLevel >= 2} width={width} />
+            <ProgressLink to={progressLevel >= 2 ? '/add-part/checks' : '' }><ProgressCircle active={progressLevel >= 2} width={width}>2</ProgressCircle></ProgressLink>
+            <ProgressLine active={progressLevel >= 3} width={width} />
+            <ProgressLink to={progressLevel >= 3 ? '/add-part/upload' : '' }><ProgressCircle active={progressLevel >= 3} width={width}>3</ProgressCircle></ProgressLink>
+            <ProgressLine active={progressLevel >= 4} width={width} />
+            <ProgressCircle active={progressLevel >= 4} width={width}>4</ProgressCircle>
         </Container>
     )
 }

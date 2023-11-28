@@ -190,8 +190,8 @@ const apiService = () => {
         await deleteByFetch(`DeleteUserRole?id=${id}`)
     }
 
-    const getItemsBySearchString = async (searchString: string): Promise<Item[]> => {
-        return await getByFetch(`Item/BySearchString/${searchString}`)
+    const getItemsBySearchString = async (searchString: string, page: number): Promise<Item[]> => {
+        return await getByFetch(`Item/BySearchString/${searchString}?page=${page}`)
     }
 
     const getItemsByUserId = async (userId: string): Promise<Item[]> => {
@@ -205,7 +205,6 @@ const apiService = () => {
         Type: string,
         Description: string,
         Vendor: string,
-        CreatedDate: string,
         AddedById: string
     }): Promise<Response> => {
         return await postByFetch(`Item`, item)

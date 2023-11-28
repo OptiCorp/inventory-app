@@ -2,16 +2,23 @@ import { useContext, useEffect, useState } from "react"
 import apiService from "../../services/api"
 import { Item } from "../../services/apiTypes"
 import { useWindowDimensions } from "../../hooks"
-import SearchResultCard from "../searchResultCard/SearchResultCard"
-import SearchResultCardCompact from "../searchResultCard/SearchResultCardCompact"
 import UmAppContext from "../../contexts/UmAppContext"
-import { RecentlyAddedContainer } from "./styles"
+import {RecentlyAddedContainer, SubmitButton} from "./styles"
+import SearchResultCard from "../../components/searchResultCard/SearchResultCard.tsx";
+import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact.tsx";
+import {Link} from "react-router-dom";
+import {useNavigate} from "react-router";
 
 const RecentlyAdded = () => {
     const [myItems, setMyItems] = useState<Item[]>()
     const api = apiService()
     const { width } = useWindowDimensions()
     const { currentUser } = useContext(UmAppContext)
+    const navigate = useNavigate()
+    
+    const handleClick = () => {
+        navigate('batch')
+    }
 
 
     useEffect(() => {
@@ -30,7 +37,9 @@ const RecentlyAdded = () => {
                 width > 800 ? <SearchResultCard part={item} /> : <SearchResultCardCompact part={item} />
             ))}
 
-            <button>Add new item</button>
+            <div style={{display: "flex", justifyContent: "end"}}>
+                <SubmitButton onClick={handleClick}>Next</SubmitButton>
+            </div>
         </RecentlyAddedContainer>
     )
 }

@@ -12,24 +12,34 @@ export const PartForm = styled(Form)`
         border-radius: 4px;
         box-sizing: border-box;
     }
+`;
 
-    button {
-        width: 100%;
-        background-color: #4caf50;
-        color: white;
-        padding: 12px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #45a049;
-    }
+export const RecentlyAddedContainer = styled.div`
+    padding: 16px;
 `;
 
 export const FormContainer = styled.div`
     padding: 16px;
     max-width: 1000px;
-`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const FormRadio = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+  input, label {
+    padding: 8px 0;
+  }
+  input {
+    transform: scale(1.5);    
+  }
+`;
+
+export const SubmitButton = styled.button`
+  width: 150px;
+  background-color: black;
+  color: white;
+  height: 30px;
+`;

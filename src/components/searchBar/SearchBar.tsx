@@ -15,8 +15,7 @@ const SearchBar = ({ setSearchTerm }: Props) => {
             timer = setTimeout(() => { setSearchTerm(args[0].target.value) }, 500)
         }
     }
-
-
+    
     return (
         <SearchBarContainer>
             <StyledInput

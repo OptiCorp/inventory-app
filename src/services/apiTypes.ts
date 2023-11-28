@@ -31,11 +31,13 @@ export type Item = {
     type: string
     location: string | null
     description: string
-    parentSubassemblyId: string | null
+    parentId: string | null
     vendor: string
     addedById: string | null
     comment: string | null
     createdDate: string
     updatedDate: string | null
+    parent: Item | null
+    children: Item[] | null
 }
 
