@@ -1,4 +1,4 @@
-import { useWindowDimensions } from '../../hooks'
+
 import { Item } from '../../services/apiTypes'
 import {
     CompactCard,
@@ -9,11 +9,9 @@ import {
 
 type Props = {
     part: Item
-    searchTerm?: string
 }
 
 const SearchResultCardCompact = ({ part }: Props) => {
-    const { width } = useWindowDimensions()
     return (
         <ResultCardCompactContainer>
             <CompactCard>

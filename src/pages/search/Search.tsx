@@ -53,15 +53,9 @@ const Search = () => {
                         .slice(0)
                         ?.map((part: any) =>
                             width > 800 ? (
-                                <SearchResultCard
-                                    part={part}
-                                    searchTerm={searchTerm}
-                                />
+                                <SearchResultCard part={part} />
                             ) : (
-                                <SearchResultCardCompact
-                                    part={part}
-                                    searchTerm={searchTerm}
-                                />
+                                <SearchResultCardCompact part={part} />
                             )
                         )}
                 </Container>

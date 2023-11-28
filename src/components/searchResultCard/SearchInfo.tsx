@@ -11,18 +11,14 @@ import {
     ThirdInfoBox,
 } from './styles'
 
-
 type Props = {
     part: Item
-
 }
 
 export const Searchinfo = ({ part }: Props) => {
     const navigate = useNavigate()
 
-
     const HandleClick = () => {
-     
         navigate(`/${part.wpId}`)
     }
     return (

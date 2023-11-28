@@ -6,14 +6,13 @@ import { ResultCardContainer, DescriptionParagraph, Card } from './styles'
 
 type Props = {
     part: Item
-    searchTerm?: string
 }
 
-const SearchResultCard = ({ part, searchTerm }: Props) => {
+const SearchResultCard = ({ part }: Props) => {
     return (
         <ResultCardContainer>
             <Card>
-                <Searchinfo part={part} searchTerm={searchTerm} />
+                <Searchinfo part={part} />
             </Card>
         </ResultCardContainer>
     )
