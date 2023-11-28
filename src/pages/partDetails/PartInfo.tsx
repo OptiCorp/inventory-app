@@ -15,6 +15,8 @@ export const PartInfo = () => {
 
     return (
         <>
+            {' '}
+            <Title>Part info</Title>
             <Wrapper>
                 <StyledList>
                     <ListItem>Description</ListItem>
