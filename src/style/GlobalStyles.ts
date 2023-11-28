@@ -17,6 +17,7 @@ export const COLORS = {
     warningOrange: '#ED8936',
     dangerRed: '#EB0000',
     whiteSmoke: '#f5f5f5',
+    aliceBlue: '#F0F8FF',
 }
 
 const GlobalStyles = createGlobalStyle`

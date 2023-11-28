@@ -1,25 +1,42 @@
-import { useParams } from "react-router-dom";
-import { ListItem, StyledContainerDiv, StyledInfoDiv, StyledList, Title } from "./styles";
-import { Item } from "../../services/apiTypes";
-import { useGetItems } from "../../services/hooks/useGetItems";
-import {  PartInfo } from "./PartInfo";
+import { useParams } from 'react-router-dom'
+import {
+    CompactLists,
+    ListItem,
+    Lists,
+    StyledContainerDiv,
+    StyledInfoDiv,
+    StyledList,
+    Title,
+} from './styles'
+import { Item } from '../../services/apiTypes'
+import { useGetItems } from '../../services/hooks/useGetItems'
+import { PartInfo } from './PartInfo'
+import { useWindowDimensions } from '../../hooks'
 
 type Props = {
-    part: Item;
+    part: Item
 }
 
-// const {data: items = [], isFetching, isLoading, error} = useGetItems(id)
-
 const PartDetails = () => {
-    
-const { id } = useParams();
-   
+    const { id } = useParams()
+    const { width } = useWindowDimensions()
     return (
         <>
-        <StyledContainerDiv>
-            
-        <PartInfo/>
-        </StyledContainerDiv>
+            <StyledContainerDiv>
+                <StyledInfoDiv>
+                    <Title>Part info</Title>
+                    {width > 800 ? (
+                        <Lists>
+                            <PartInfo />{' '}
+                        </Lists>
+                    ) : (
+                        <CompactLists>
+                            {' '}
+                            <PartInfo />{' '}
+                        </CompactLists>
+                    )}
+                </StyledInfoDiv>
+            </StyledContainerDiv>
         </>
     )
 }

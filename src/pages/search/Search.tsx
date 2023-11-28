@@ -1,34 +1,82 @@
-import {useState } from "react"
-import SearchBar from "../../components/searchBar/SearchBar"
-import SearchResultCard from "../../components/searchResultCard/SearchResultCard"
-import  { Spinner,Container,LoaderWrapper,SearchContainer} from "./styles"
-import { useWindowDimensions } from "../../hooks"
-import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact"
-import { useGetItems } from "../../services/hooks/useGetItems"
-
-
+import { useEffect, useState } from 'react'
+import SearchBar from '../../components/searchBar/SearchBar'
+import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
+import {
+    Spinner,
+    Container,
+    SearchContainer,
+    RecentTitle,
+    GlobalSpinnerContainer,
+    RecentSearchContainer,
+    StyledSearchedLink,
+} from './styles'
+import { useWindowDimensions } from '../../hooks'
+import SearchResultCardCompact from '../../components/searchResultCard/SearchResultCardCompact'
+import { useGetItems } from '../../services/hooks/useGetItems'
+import { useDebounce, useLocalStorage, useReadLocalStorage } from 'usehooks-ts'
+import { useParams } from 'react-router-dom'
 
 const Search = () => {
-    const [searchTerm, setSearchTerm] = useState("")
-    const {data: items = [], isFetching, isLoading, error} = useGetItems(searchTerm)
+    const { searchParam } = useParams<{ searchParam: string }>()
+    const [searchTerm, setSearchTerm] = useState('')
+    const debouncedSearchTerm = useDebounce(searchTerm, 500)
+    const {
+        data: items = [],
+        isLoading,
+        isFetching,
+    } = useGetItems(debouncedSearchTerm)
+
+    useEffect(() => {
+        setSearchTerm((prev) => searchParam || prev)
+    }, [searchParam])
 
     const { width } = useWindowDimensions()
-    const [showMore, setShowMore] = useState(10);
-
+    const [searches] = useLocalStorage<string[]>('recent_searches', [])
+    console.log(searches)
     return (
-        <SearchContainer>
-            <SearchBar setSearchTerm={setSearchTerm} />
+        <>
+            {isLoading && (
+                <GlobalSpinnerContainer>
+                    <Spinner />
+                </GlobalSpinnerContainer>
+            )}
+            <SearchContainer>
+                <SearchBar
+                    setSearchTerm={setSearchTerm}
+                    searchTerm={searchTerm}
+                />
 
-            {isFetching ? ( <LoaderWrapper><Spinner /><p>Loading</p> </LoaderWrapper> ) : (
-            <Container>
-             {items.slice(0, showMore)?.map((part: any) => (
+                <Container>
+                    {items
+                        .slice(0)
+                        ?.map((part: any) =>
+                            width > 800 ? (
+                                <SearchResultCard
+                                    part={part}
+                                    searchTerm={searchTerm}
+                                />
+                            ) : (
+                                <SearchResultCardCompact
+                                    part={part}
+                                    searchTerm={searchTerm}
+                                />
+                            )
+                        )}
+                </Container>
 
-                     
-                            width > 800 ? <SearchResultCard part={part} /> : <SearchResultCardCompact part={part} />)
-                    )}
-            </Container>) }
-            
-        </SearchContainer>
+                {!searchTerm ? (
+                    <RecentSearchContainer>
+                        <RecentTitle>Recent Searches</RecentTitle>
+
+                        {searches.map((search) => (
+                            <StyledSearchedLink to={`/search/${search}`}>
+                                {search}
+                            </StyledSearchedLink>
+                        ))}
+                    </RecentSearchContainer>
+                ) : null}
+            </SearchContainer>
+        </>
     )
 }
 
