@@ -20,19 +20,21 @@ const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>()
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const {
-        data: items = [],
-        isLoading,
-        isFetching,
-    } = useGetItems(debouncedSearchTerm)
-
+    const { data: items = [], isLoading } = useGetItems(debouncedSearchTerm)
+    const { width } = useWindowDimensions()
+    const [searches, setSearches] = useLocalStorage<string[]>(
+        'recent_searches',
+        []
+    )
     useEffect(() => {
         setSearchTerm((prev) => searchParam || prev)
     }, [searchParam])
 
-    const { width } = useWindowDimensions()
-    const [searches] = useLocalStorage<string[]>('recent_searches', [])
-    console.log(searches)
+    useEffect(() => {
+        if (!debouncedSearchTerm) return
+        setSearches((prev) => [searchTerm, ...prev.slice(-4)])
+    }, [debouncedSearchTerm])
+
     return (
         <>
             {isLoading && (

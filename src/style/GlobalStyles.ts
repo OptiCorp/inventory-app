@@ -31,7 +31,7 @@ const GlobalStyles = createGlobalStyle`
     }
     .wrapper {
     display: grid;
-    height: 100vh;
+    padding-inline: 2rem;
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     overflow-x: hidden;
