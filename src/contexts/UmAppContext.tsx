@@ -3,8 +3,9 @@ import { useAccount, useMsal } from '@azure/msal-react'
 import decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
 import apiService from '../services/api'
-import { ApiStatus, User } from '../services/apiTypes'
+import { ApiStatus, Item, User } from '../services/apiTypes'
 import CheckRole from '../utils/CheckRole'
+import { useLocalStorage } from 'usehooks-ts'
 
 export interface UmAppContextType {
     idToken: string
@@ -13,10 +14,6 @@ export interface UmAppContextType {
     accounts: any
     instance: any
     currentUser: User | null
-    snackbarText: string
-    isSnackbarOpen: boolean
-    openSnackbar: (message: string) => void
-    closeSnackbar: () => void
 }
 
 type AzureUserInfo = {
@@ -27,7 +24,11 @@ type AzureUserInfo = {
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
 
-export function UmAppContextProvider({ children }: { children: React.ReactNode }) {
+export function UmAppContextProvider({
+    children,
+}: {
+    children: React.ReactNode
+}) {
     const { instance, inProgress, accounts } = useMsal()
     const account = useAccount(accounts[0] || {})
     const api = apiService()
@@ -37,18 +38,6 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
     const [status, setStatus] = useState<ApiStatus>(ApiStatus.LOADING)
     const [currentUser, setCurrentUser] = useState<User | null>(null)
     const role = CheckRole({ currentUser })
-
-    const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
-    const [snackbarText, setSnackbarText] = useState('')
-
-    const openSnackbar = (message: string) => {
-        setSnackbarText(message)
-        setIsSnackbarOpen(true)
-    }
-
-    const closeSnackbar = () => {
-        setIsSnackbarOpen(false)
-    }
 
     function getUserInfoFromIdToken(token: string): {
         preferredUserName: string
@@ -60,7 +49,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
         return {
             preferredUserName: decodedToken?.preferred_username || '',
             name: decodedToken.name || '',
-            oid: decodedToken.oid
+            oid: decodedToken.oid,
         }
     }
     async function fetchUserByEmail(azureAdId: string) {
@@ -127,19 +116,12 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
                     accounts,
                     instance,
                     currentUser,
-                    snackbarText,
-                    isSnackbarOpen,
-                    openSnackbar,
-                    closeSnackbar,
                 }}
             >
                 {children}
             </UmAppContext.Provider>
         )
     }
-    /* if (inProgress === 'login') {
-        return <Typography as="span">Login is currently in progress</Typography>
-    } */
 }
 
 export default UmAppContext

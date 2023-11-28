@@ -1,66 +1,78 @@
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react"
-import SearchBar from "../../components/searchBar/SearchBar"
-import SearchResultCard from "../../components/searchResultCard/SearchResultCard"
-import { LoadMoreButton, SearchContainer } from "./styles"
-import { Item } from "../../services/apiTypes"
-import { Link } from "react-router-dom"
-import { useWindowDimensions } from "../../hooks"
-import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact"
-import apiService, { ApiService } from "../../services/api"
-import Dropdown from "../../components/dropdown/Dropdown"
-
+import { useEffect, useState } from 'react'
+import SearchBar from '../../components/searchBar/SearchBar'
+import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
+import {
+    Spinner,
+    Container,
+    SearchContainer,
+    RecentTitle,
+    GlobalSpinnerContainer,
+    RecentSearchContainer,
+    StyledSearchedLink,
+} from './styles'
+import { useWindowDimensions } from '../../hooks'
+import SearchResultCardCompact from '../../components/searchResultCard/SearchResultCardCompact'
+import { useGetItems } from '../../services/hooks/useGetItems'
+import { useDebounce, useLocalStorage, useReadLocalStorage } from 'usehooks-ts'
+import { useParams } from 'react-router-dom'
 
 const Search = () => {
-    const [searchTerm, setSearchTerm] = useState("")
-    const [items, setItems] = useState<Item[]>([])
+    const { searchParam } = useParams<{ searchParam: string }>()
+    const [searchTerm, setSearchTerm] = useState('')
+    const debouncedSearchTerm = useDebounce(searchTerm, 500)
+    const { data: items = [], isLoading } = useGetItems(debouncedSearchTerm)
     const { width } = useWindowDimensions()
-    const api = apiService();
-    const [page, setPage] = useState(1);
-    const [isFetching, setIsFetching] = useState<Boolean>(false);
-    
-    const handleScroll = async () => {
-        if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight) {
-            setPage(page + 1)
-        }
-            return
-    };
-    
-    const getItems = async (search: string, page: number) => {
-        setIsFetching(true);
-        const response = await api.getItemsBySearchString(encodeURIComponent(search), page);
-        setItems([...items].concat(response))
-        setIsFetching(false)
-    }
+    const [searches, setSearches] = useLocalStorage<string[]>(
+        'recent_searches',
+        []
+    )
+    useEffect(() => {
+        setSearchTerm((prev) => searchParam || prev)
+    }, [searchParam])
 
     useEffect(() => {
-        // window.addEventListener(`scroll`, handleScroll)
-        // return () => { window.removeEventListener(`scroll`, handleScroll) }
-    }, [])
-
-    useEffect(() => {
-        if (searchTerm.length <= 1) {
-            setItems([]);
-            return;
-        }
-        (async () => {
-            await getItems(searchTerm, page )
-            window.addEventListener(`scroll`, handleScroll)
-        })()
-
-        return () => { window.removeEventListener(`scroll`, handleScroll) }
-    }, [searchTerm, page])
+        if (!debouncedSearchTerm) return
+        setSearches((prev) => [searchTerm, ...prev.slice(-4)])
+    }, [debouncedSearchTerm])
 
     return (
-        <SearchContainer>
-            <SearchBar setSearchTerm={setSearchTerm} />
+        <>
+            {isLoading && (
+                <GlobalSpinnerContainer>
+                    <Spinner />
+                </GlobalSpinnerContainer>
+            )}
+            <SearchContainer>
+                <SearchBar
+                    setSearchTerm={setSearchTerm}
+                    searchTerm={searchTerm}
+                />
 
-            {isFetching ? <div>Fetching...</div> :
-                <></>
-            }
-            {items?.map((part: Item) => (
-                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/${part.wpId}`} key={part.wpId} >{width > 800 ? <SearchResultCard part={part} /> : <SearchResultCardCompact part={part} />}</Link>
-            ))}
-        </SearchContainer>
+                <Container>
+                    {items
+                        .slice(0)
+                        ?.map((part: any) =>
+                            width > 800 ? (
+                                <SearchResultCard part={part} />
+                            ) : (
+                                <SearchResultCardCompact part={part} />
+                            )
+                        )}
+                </Container>
+
+                {!searchTerm ? (
+                    <RecentSearchContainer>
+                        <RecentTitle>Recent Searches</RecentTitle>
+
+                        {searches.map((search) => (
+                            <StyledSearchedLink to={`/search/${search}`}>
+                                {search}
+                            </StyledSearchedLink>
+                        ))}
+                    </RecentSearchContainer>
+                ) : null}
+            </SearchContainer>
+        </>
     )
 }
 

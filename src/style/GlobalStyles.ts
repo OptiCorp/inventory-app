@@ -17,21 +17,22 @@ export const COLORS = {
     warningOrange: '#ED8936',
     dangerRed: '#EB0000',
     whiteSmoke: '#f5f5f5',
+    aliceBlue: '#F0F8FF',
 }
 
 const GlobalStyles = createGlobalStyle`
-    body {
+   body, :root, html {
         margin: 0;
         width: 100%;
-        font-family: equinor;
-        height: 100%;
+        font-family: 'Archivo', sans-serif;
+        height: 100vh;
         font-size: 13px;
         background-color: ${COLORS.frostyGray};
     }
     .wrapper {
     display: grid;
-    height: 100vh;
-    grid-template-columns: 1fr;
+    padding-inline: 2rem;
+    grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     overflow-x: hidden;
   }

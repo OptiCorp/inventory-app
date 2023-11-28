@@ -1,23 +1,30 @@
-import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import {
+    Route,
+    RouterProvider,
+    Routes,
+    createBrowserRouter,
+    createRoutesFromElements,
+} from 'react-router-dom'
 import { useIsAuthenticated } from '@azure/msal-react'
 import { Login } from './pages/login'
-import SnackbarComponent from './utils/Snackbar'
+
 import TopBar from './components/topBar/TopBar'
 import Search from './pages/search/Search'
-import PartDetails from './pages/partDetails/PartDetails'
-import AddPart from './pages/addPart/AddPart'
+import PartDetails from './pages/partDetails/Index'
 import MakeList from './pages/list/MakeList'
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UmAppContextProvider } from './contexts/UmAppContext'
-import RecentlyAdded from "./pages/addPart/RecentlyAdded.tsx";
-import BatchForm from "./pages/addPart/BatchForm.tsx";
-import CheckForm from './pages/addPart/CheckForm.tsx'
-import Upload from "./pages/addPart/Upload.tsx";
-import AddPartForm, { submitPart } from "./pages/addPart/AddPartForm.tsx";
+import GlobalStyles from './style/GlobalStyles'
+import AddPart from './pages/addPart/AddPart'
+import RecentlyAdded from './pages/addPart/RecentlyAdded'
+import BatchForm from './pages/addPart/BatchForm'
+import CheckForm from './pages/addPart/CheckForm'
+import Upload from './pages/addPart/Upload'
+import AddPartForm, { submitPart } from './pages/addPart/AddPartForm'
 
 function App() {
-    const isAuthenticated = useIsAuthenticated();
-    const queryClient = new QueryClient();
+    const isAuthenticated = useIsAuthenticated()
+    const queryClient = new QueryClient()
 
     const router = createBrowserRouter(
         createRoutesFromElements(
@@ -43,8 +50,8 @@ function App() {
                         element={<BatchForm />}
                     />
                     <Route
-                            path='checks'
-                            element={<CheckForm />}
+                        path='checks'
+                        element={<CheckForm />}
                     />
                     <Route
                         path='upload'
@@ -56,10 +63,7 @@ function App() {
                         action={submitPart}
                     />
                 </Route>
-                <Route
-                    path='makelist'
-                    element={<MakeList />}
-                />
+                <Route path="makelist" element={<MakeList />} />
             </Route>
         )
     )
@@ -69,7 +73,7 @@ function App() {
             <div className="wrapper">
                 {isAuthenticated && (
                     <UmAppContextProvider>
-                        <SnackbarComponent />
+                        <GlobalStyles />
 
                         <RouterProvider router={router} />
                     </UmAppContextProvider>

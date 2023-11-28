@@ -50,13 +50,7 @@ const apiService = () => {
                 },
             }
             const res = await fetch(`${API_URL}/${url}`, getOperation)
-            if (res.ok) {
-                const jsonResult = await res.json()
-                const resultObj = jsonResult
-                return resultObj
-            } else {
-                console.error('Get by fetch failed. Url=' + url, res)
-            }
+            return res.json()
         })
     }
 
