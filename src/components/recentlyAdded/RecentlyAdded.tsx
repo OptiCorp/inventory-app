@@ -1,27 +1,14 @@
-import { useContext, useEffect, useState } from 'react'
-import UmAppContext from '../../contexts/UmAppContext'
 import { useWindowDimensions } from '../../hooks'
 
-import apiService from '../../services/api'
 import { Item } from '../../services/apiTypes'
-import { RecentlyAddedContainer } from './styles'
+import { useGetItemsByUser } from '../../services/hooks/useGetItemByUser'
 import SearchResultCardCompact from '../searchResultCard/SearchInfoCompact'
 import SearchResultCard from '../searchResultCard/SearchResultCard'
+import { RecentlyAddedContainer } from './styles'
 
 const RecentlyAdded = () => {
-    const [myItems, setMyItems] = useState<Item[]>()
-    const api = apiService()
     const { width } = useWindowDimensions()
-    const { currentUser } = useContext(UmAppContext)
-
-    useEffect(() => {
-        if (currentUser) {
-            ;(async () => {
-                const response = await api.getItemsByUserId(currentUser.id)
-                setMyItems(response)
-            })()
-        }
-    }, [])
+    const { data: myItems = [] } = useGetItemsByUser()
 
     return (
         <RecentlyAddedContainer>

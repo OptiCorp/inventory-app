@@ -1,6 +1,6 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
-import { User, UserRole, Item } from './apiTypes'
+import { Item, User, UserRole } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -17,25 +17,30 @@ const apiService = () => {
 
     // Microsoft Graph
     const getMsGraphImageByFetch = async (url: string): Promise<any> => {
-        return pca.acquireTokenSilent(microsoftGraphRequest).then(async (tokenResponse) => {
-            const getOperation = {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${tokenResponse.accessToken}`,
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                },
-            }
-            const res = await fetch(`${microsoftGraphUrl}/${url}`, getOperation)
-            if (res.ok) {
-                const blob = await res.blob()
-                const url = window.URL || window.webkitURL
-                const blobUrl = url.createObjectURL(blob)
-                return blobUrl
-            } else {
-                console.error('Get by fetch failed. Url=' + url, res)
-            }
-        })
+        return pca
+            .acquireTokenSilent(microsoftGraphRequest)
+            .then(async (tokenResponse) => {
+                const getOperation = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${tokenResponse.accessToken}`,
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }
+                const res = await fetch(
+                    `${microsoftGraphUrl}/${url}`,
+                    getOperation
+                )
+                if (res.ok) {
+                    const blob = await res.blob()
+                    const url = window.URL || window.webkitURL
+                    const blobUrl = url.createObjectURL(blob)
+                    return blobUrl
+                } else {
+                    console.error('Get by fetch failed. Url=' + url, res)
+                }
+            })
     }
 
     // User Management
@@ -121,7 +126,10 @@ const apiService = () => {
     }
 
     const addUser = async (
-        user: Omit<User, 'id' | 'status' | 'userRole' | 'createdDate' | 'updatedDate'>
+        user: Omit<
+            User,
+            'id' | 'status' | 'userRole' | 'createdDate' | 'updatedDate'
+        >
     ): Promise<Response> => {
         return await postByFetch('AddUser', {
             ...user,
@@ -168,12 +176,17 @@ const apiService = () => {
         return data
     }
 
-    const addUserRole = async (userRole: Pick<UserRole, 'name'>): Promise<void> => {
+    const addUserRole = async (
+        userRole: Pick<UserRole, 'name'>
+    ): Promise<void> => {
         await postByFetch('AddUserRole', {
             userRole,
         })
     }
-    const updateUserRole = async (id: string, name: string): Promise<Response> => {
+    const updateUserRole = async (
+        id: string,
+        name: string
+    ): Promise<Response> => {
         return await postByFetch('UpdateUserRole', {
             id: id,
             name: name,
@@ -184,26 +197,29 @@ const apiService = () => {
         await deleteByFetch(`DeleteUserRole?id=${id}`)
     }
 
-    const getItemsBySearchString = async (searchString: string): Promise<Item[]> => {
+    const getItemsBySearchString = async (
+        searchString: string
+    ): Promise<Item[]> => {
         return await getByFetch(`Item/BySearchString/${searchString}`)
     }
 
-    const getItemsByUserId = async (userId: string): Promise<Item[]> => {
+    const getItemsByUserId = async (
+        userId: string | undefined
+    ): Promise<Item[]> => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
     const addItem = async (item: {
-        WPId: string,
-        SerialNumber: string,
-        ProductNumber: string,
-        Type: string,
-        Description: string,
-        Vendor: string,
+        WPId: string
+        SerialNumber: string
+        ProductNumber: string
+        Type: string
+        Description: string
+        Vendor: string
         AddedById: string
     }): Promise<Response> => {
         return await postByFetch(`Item`, item)
     }
-
 
     return {
         getAllUsers,
@@ -221,7 +237,7 @@ const apiService = () => {
         getUserImage,
         getItemsBySearchString,
         getItemsByUserId,
-        addItem
+        addItem,
     }
 }
 
