@@ -1,9 +1,9 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useLocation } from 'react-router'
 
-import apiService from '../../../services/api'
-import UmAppContext from '../../../contexts/UmAppContext'
 import { useContext, useState } from 'react'
+import UmAppContext from '../../../contexts/UmAppContext'
+import apiService from '../../../services/api'
 import { Item } from '../../../services/apiTypes'
 
 type AddPartsForm = {
@@ -14,6 +14,8 @@ type AddPartsForm = {
     Description: string
     Vendor: string
     AddedById: string
+    Comment: string
+    User: string
 }
 
 enum Batch {
@@ -22,12 +24,12 @@ enum Batch {
     undefined,
 }
 
-export const useAddTaskForm = () => {
-      const [myItems, setMyItems] = useState<Item[]>()
-     const [batchType, setBatchType] = useState<Batch>(Batch.undefined)
-     const [error, setError] = useState<string>()
+export const usePartsForm = () => {
+    const [myItems, setMyItems] = useState<Item[]>()
+    const [batchType, setBatchType] = useState<Batch>(Batch.undefined)
+    const [error, setError] = useState<string>()
     const appLocation = useLocation()
-const { currentUser } = useContext(UmAppContext)
+    const { currentUser } = useContext(UmAppContext)
     const methods = useForm<AddPartsForm>({})
     const { handleSubmit, control, reset, resetField, watch } = methods
 
