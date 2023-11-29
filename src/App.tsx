@@ -40,7 +40,7 @@ function App() {
                     <Route path='add-form' element={<AddPartForm />} action={submitPart}
                     />
                 </Route>
-                <Route path="makelist" element={<MakeList />} />
+                <Route path="makelist/:searchParam?" element={<MakeList />} />
             </Route>
         )
     )

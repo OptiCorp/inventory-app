@@ -1,6 +1,6 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
-import { User, UserRole, Item } from './apiTypes'
+import { User, UserRole, Item, List } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -188,6 +188,10 @@ const apiService = () => {
         return await getByFetch(`Item/BySearchString/${searchString}`)
     }
 
+    const getListsBySearchString = async (searchString: string, userId: string | undefined): Promise<List[]> => {
+        return await getByFetch(`List/BySearchString/${searchString}?userId=${userId}`)
+    }
+
     const getItemsByUserId = async (userId: string): Promise<Item[]> => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
@@ -221,7 +225,8 @@ const apiService = () => {
         getUserImage,
         getItemsBySearchString,
         getItemsByUserId,
-        addItem
+        addItem,
+        getListsBySearchString
     }
 }
 
