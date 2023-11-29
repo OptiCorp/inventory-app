@@ -14,9 +14,10 @@ import PartDetails from './pages/partDetails/Index'
 import AddPart, { submitPart } from './pages/addPart/AddPart'
 import MakeList from './pages/list/MakeList'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import RecentlyAdded from './components/recentlyAdded/RecentlyAdded'
+
 import { UmAppContextProvider } from './contexts/UmAppContext'
 import GlobalStyles from './style/GlobalStyles'
+import RecentlyAdded from './components/recentlyAdded/RecentlyAdded'
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
