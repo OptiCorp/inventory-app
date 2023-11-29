@@ -5,7 +5,8 @@ import { useWindowDimensions } from "../../hooks"
 import UmAppContext from "../../contexts/UmAppContext"
 import { RecentlyAddedContainer, SubmitButton } from "./styles.ts"
 import SearchResultCard from "../../components/searchResultCard/SearchResultCard.tsx";
-import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact.tsx";
+
+import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
