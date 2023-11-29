@@ -1,11 +1,11 @@
-import { Item } from '../../../../services/apiTypes'
+import { Item } from '../../../services/apiTypes'
 import {
     DescriptionParagraph,
     FirstInfoBox,
     InfoP,
     KeyWords,
     SecondInfoBox,
-    ThirdInfoBox
+    ThirdInfoBox,
 } from '../styles'
 
 type Props = {

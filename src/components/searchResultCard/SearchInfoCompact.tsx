@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Item } from '../../../../services/apiTypes'
+
 import {
     CompactCard,
     CompactCardWrapper,
@@ -7,7 +7,8 @@ import {
     CompactInfoP,
     KeyWords,
     ResultCardCompactContainer,
-} from '../styles'
+} from './styles'
+import { Item } from '../../services/apiTypes'
 
 type Props = {
     part: Item

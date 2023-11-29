@@ -4,8 +4,9 @@ import { useDebounce, useLocalStorage } from 'usehooks-ts'
 import SearchBar from '../../components/searchBar/SearchBar'
 import { useWindowDimensions } from '../../hooks'
 import { useGetItems } from '../../services/hooks/useGetItems'
-import SearchResultCard from './searchResultCard/SearchResultCard'
-import SearchResultCardCompact from './searchResultCard/searchInfo/SearchInfoCompact'
+
+import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
+import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
 import {
     Container,
     GlobalSpinnerContainer,

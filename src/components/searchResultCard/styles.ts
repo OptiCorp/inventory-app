@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
-import { COLORS } from '../../../style/GlobalStyles'
+import { COLORS } from '../../style/GlobalStyles'
+
 
 export const ResultCardContainer = styled.div`
     margin: 16px;

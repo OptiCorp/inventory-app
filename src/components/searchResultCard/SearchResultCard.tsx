@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { useWindowDimensions } from '../../../hooks'
-import { Item } from '../../../services/apiTypes'
-import { Searchinfo } from './searchInfo/SearchInfo'
+
 import { ResultCardContainer, SearchCard } from './styles'
+import { useWindowDimensions } from '../../hooks'
+import { Item } from '../../services/apiTypes'
+import { Searchinfo } from './cardInfo/SearchInfo'
 
 type Props = {
     part: Item
