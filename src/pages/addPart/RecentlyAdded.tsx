@@ -37,8 +37,8 @@ const RecentlyAdded = () => {
                 width > 800 ? <SearchResultCard part={item} /> : <SearchResultCardCompact part={item} />
             ))}
 
-            <div style={{ display: "flex", justifyContent: "end" }}>
-                <SubmitButton onClick={handleClick}>Next</SubmitButton>
+            <div style={{ display: "flex", justifyContent: "end", maxWidth: '1000px', padding: '16px' }}>
+                <SubmitButton onClick={handleClick}>Add new item</SubmitButton>
             </div>
         </RecentlyAddedContainer>
     )

@@ -25,6 +25,7 @@ const BatchForm = () => {
     return (
         <FormContainer>
             <ProgressBar progressLevel={1} />
+            <h3>Add as a batch?</h3>
             <span style={{ color: 'red' }}>{error}</span>
             <FormRadio>
                 <label>
