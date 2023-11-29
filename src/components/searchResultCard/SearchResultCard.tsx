@@ -1,20 +1,31 @@
+import { useNavigate } from 'react-router-dom'
+
+import { ResultCardContainer, SearchCard } from './styles'
 import { useWindowDimensions } from '../../hooks'
-import { StyledLink } from '../../pages/search/styles'
 import { Item } from '../../services/apiTypes'
-import { Searchinfo } from './SearchInfo'
-import { ResultCardContainer, DescriptionParagraph, Card } from './styles'
+import { Searchinfo } from './cardInfo/SearchInfo'
 
 type Props = {
     part: Item
 }
 
 const SearchResultCard = ({ part }: Props) => {
+    const navigate = useNavigate()
+    const { width } = useWindowDimensions()
     return (
-        <ResultCardContainer>
-            <Card>
-                <Searchinfo part={part} />
-            </Card>
-        </ResultCardContainer>
+        <>
+            {' '}
+            <ResultCardContainer>
+                <SearchCard
+                    title=""
+                    onClick={() => {
+                        navigate(`/${part.wpId}`)
+                    }}
+                >
+                    <Searchinfo part={part} />
+                </SearchCard>
+            </ResultCardContainer>
+        </>
     )
 }
 

@@ -23,11 +23,13 @@ export const Container = styled.div`
 
 export const RecentSearchContainer = styled.div`
     display: flex;
+    margin: 16px;
     justify-content: space-between;
-    gap: 1rem;
-
     flex-direction: column;
-    padding-left: 3rem;
+    padding: 4px;
+    border-radius: 8px;
+    max-width: 1000px;
+    gap: 1rem;
 `
 
 export const StyledLink = styled(Link)`

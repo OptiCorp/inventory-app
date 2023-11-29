@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDebounce, useLocalStorage } from 'usehooks-ts'
 import SearchBar from '../../components/searchBar/SearchBar'
+import { useWindowDimensions } from '../../hooks'
+import { useGetItems } from '../../services/hooks/useGetItems'
+
+import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
 import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
 import {
-    Spinner,
     Container,
-    SearchContainer,
-    RecentTitle,
     GlobalSpinnerContainer,
     RecentSearchContainer,
+    RecentTitle,
+    SearchContainer,
+    Spinner,
     StyledSearchedLink,
 } from './styles'
-import { useWindowDimensions } from '../../hooks'
-import SearchResultCardCompact from '../../components/searchResultCard/SearchResultCardCompact'
-import { useGetItems } from '../../services/hooks/useGetItems'
-import { useDebounce, useLocalStorage, useReadLocalStorage } from 'usehooks-ts'
-import { useParams } from 'react-router-dom'
 
 const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>()

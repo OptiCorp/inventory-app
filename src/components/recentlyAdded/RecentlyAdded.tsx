@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
+import UmAppContext from '../../contexts/UmAppContext'
+import { useWindowDimensions } from '../../hooks'
+
 import apiService from '../../services/api'
 import { Item } from '../../services/apiTypes'
-import { useWindowDimensions } from '../../hooks'
-import SearchResultCard from '../searchResultCard/SearchResultCard'
-import SearchResultCardCompact from '../searchResultCard/SearchResultCardCompact'
-import UmAppContext from '../../contexts/UmAppContext'
 import { RecentlyAddedContainer } from './styles'
+import SearchResultCardCompact from '../searchResultCard/SearchInfoCompact'
+import SearchResultCard from '../searchResultCard/SearchResultCard'
 
 const RecentlyAdded = () => {
     const [myItems, setMyItems] = useState<Item[]>()

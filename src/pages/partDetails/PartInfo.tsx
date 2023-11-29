@@ -1,22 +1,8 @@
-import { useWindowDimensions } from '../../hooks'
-import {
-    StyledInfoDiv,
-    Title,
-    StyledList,
-    ListItem,
-    SecondList,
-    Lists,
-    ThirdList,
-    Wrapper,
-} from './styles'
+import { ListItem, SecondList, StyledList, ThirdList, Wrapper } from './styles'
 
 export const PartInfo = () => {
-    const { width } = useWindowDimensions()
-
     return (
         <>
-            {' '}
-            <Title>Part info</Title>
             <Wrapper>
                 <StyledList>
                     <ListItem>Description</ListItem>
