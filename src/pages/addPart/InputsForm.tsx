@@ -1,113 +1,55 @@
 import { useContext } from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import UmAppContext from '../../contexts/UmAppContext'
 
 export const InputsForm = () => {
-    const methods = useFormContext()
+    const { register } = useFormContext()
     const { currentUser } = useContext(UmAppContext)
     return (
         <>
-            <Controller
-                control={methods.control}
-                name={`Description`}
-                rules={{
-                    required: 'Required',
-                }}
-                render={({ field }) => {
-                    return (
-                        <input
-                            {...field}
-                            type="text"
-                            name="Desc"
-                            placeholder="Item description"
-                        />
-                    )
-                }}
+            <input
+                list="types"
+                placeholder="Item type"
+                {...register('type', {
+                    required: true,
+                })}
             />
-            <Controller
-                control={methods.control}
-                name={`SerialNumber`}
-                rules={{
-                    required: 'Required',
-                }}
-                render={({ field }) => {
-                    return (
-                        <input
-                            {...field}
-                            type="text"
-                            name="SerialNumber"
-                            placeholder="Serial number"
-                        />
-                    )
-                }}
+            <input
+                list="types"
+                placeholder="Item type"
+                {...register('Type', {
+                    required: true,
+                })}
             />
-            <Controller
-                control={methods.control}
-                name={`ProductNumber`}
-                rules={{
-                    required: 'Required',
-                }}
-                render={({ field }) => {
-                    return (
-                        <input
-                            {...field}
-                            type="text"
-                            name="Product"
-                            placeholder="ProductNumber"
-                        />
-                    )
-                }}
+            <datalist id="types">
+                <option value="Unit" />
+                <option value="Assembly" />
+                <option value="Sub-assembly" />
+                <option value="Part" />
+            </datalist>
+
+            <input
+                type="text"
+                placeholder="Item description"
+                {...register('Description', {
+                    required: true,
+                })}
             />
-            <Controller
-                control={methods.control}
-                name={`Vendor`}
-                rules={{
-                    required: 'Required',
-                }}
-                render={({ field }) => {
-                    return (
-                        <input
-                            {...field}
-                            type="text"
-                            name="Vendor"
-                            placeholder="Vendor"
-                        />
-                    )
-                }}
+            <input
+                type="text"
+                placeholder="Serial number"
+                {...register('SerialNumber', {
+                    valueAsNumber: true,
+                    required: true,
+                })}
             />
-            <Controller
-                control={methods.control}
-                name={`Comment`}
-                rules={{
-                    required: 'Required',
-                }}
-                render={({ field }) => {
-                    return (
-                        <input
-                            {...field}
-                            type="text"
-                            name="Comment"
-                            placeholder="Comment"
-                        />
-                    )
-                }}
-            />
-            <Controller
-                control={methods.control}
-                name={`User`}
-                rules={{
-                    required: 'Required',
-                }}
-                render={({ field }) => {
-                    return (
-                        <input
-                            {...field}
-                            type="text"
-                            name="User"
-                            value={currentUser?.id}
-                        />
-                    )
-                }}
+
+            <input
+                type="text"
+                value={currentUser?.id}
+                style={{ display: 'none' }}
+                {...(register('firstName', { value: currentUser?.id }),
+                { required: true })}
             />
         </>
     )

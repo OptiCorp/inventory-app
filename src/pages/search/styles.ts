@@ -26,9 +26,6 @@ export const RecentSearchContainer = styled.div`
     margin: 16px;
     justify-content: space-between;
     flex-direction: column;
-    padding: 4px;
-    border-radius: 8px;
-    max-width: 1000px;
     gap: 1rem;
 `
 
@@ -45,7 +42,6 @@ export const GlobalSpinnerContainer = styled.div`
     position: fixed;
     left: 0;
     padding-top: 6rem;
-
     padding-left: 2rem;
     padding-bottom: 4rem;
 `

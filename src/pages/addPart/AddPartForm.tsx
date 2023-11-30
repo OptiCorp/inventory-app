@@ -1,45 +1,38 @@
 import { useContext } from 'react'
-import { FormProvider } from 'react-hook-form'
 import { ActionFunctionArgs, redirect, useActionData } from 'react-router-dom'
 import ProgressBar from '../../components/progressBar/ProgressBar.tsx'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import apiService from '../../services/api.ts'
-import { InputsForm } from './InputsForm.tsx'
-import { usePartsForm } from './hooks/useAddPart.tsx'
+
 import { FormContainer, PartForm, SubmitButton } from './styles.ts'
 
 type response = {
     error: string
 }
 
-const AddPartFormm = () => {
-    const data = useActionData() as response
+// WIP
+// const AddPartFormm = () => {
+//     const data = useActionData() as response
 
-    const { methods, onSubmit } = usePartsForm()
-    const { handleSubmit } = methods
+//     const { methods, onSubmit } = usePartsForm()
+//     const { handleSubmit } = methods
 
-    return (
-        <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)} id="addPart">
-                <ProgressBar progressLevel={4} />
-                {data && data.error && <p>{data.error}</p>}
-                {/* input list
-                <datalist id="types">
-                    <option value="Unit" />
-                    <option value="Assembly" />
-                    <option value="Sub-assembly" />
-                    <option value="Part" />
-                </datalist> */}
-                <InputsForm />
-                <div style={{ display: 'flex', justifyContent: 'end' }}>
-                    <button id="addPart" type="submit" form="addPart">
-                        Finish
-                    </button>
-                </div>
-            </form>
-        </FormProvider>
-    )
-}
+//     return (
+//         <FormProvider {...methods}>
+//             <form onSubmit={handleSubmit(onSubmit)} id="addPart">
+//                 <ProgressBar progressLevel={4} />
+//                 {data && data.error && <p>{data.error}</p>}
+
+//                 <InputsForm />
+//                 <div style={{ display: 'flex', justifyContent: 'end' }}>
+//                     <button id="addPart" type="submit" form="addPart">
+//                         Finish
+//                     </button>
+//                 </div>
+//             </form>
+//         </FormProvider>
+//     )
+// }
 
 const AddPartForm = () => {
     const data = useActionData() as response
