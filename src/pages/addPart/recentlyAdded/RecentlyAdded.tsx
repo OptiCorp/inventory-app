@@ -15,7 +15,7 @@ const RecentlyAdded = () => {
 
     const handleClick = () => {
         navigate('batch')
-    
+    }
     const { data: myItems = [] } = useGetItemsByUser()
 
 
