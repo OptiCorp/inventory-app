@@ -3,7 +3,9 @@ import { useLocation } from 'react-router'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
+
 import { z } from 'zod'
 import { Item } from '../../../services/apiTypes'
 import { useAddItems } from '../../../services/hooks/useAddItem'
@@ -37,8 +39,11 @@ enum Batch {
 export const usePartsForm = () => {
     const [myItems, setMyItems] = useState<Item[]>()
     const [batchType, setBatchType] = useState<Batch>(Batch.undefined)
-    const { mutate, isSuccess } = useAddItems()
+
     const navigate = useNavigate()
+
+
+
     const appLocation = useLocation()
 
     const methods = useForm<PartSchema>({
@@ -53,9 +58,7 @@ export const usePartsForm = () => {
         setError,
         formState: { errors },
         register,
-    } = useForm<PartSchema>({
-        resolver: zodResolver(partSchema),
-    })
+    } = methods
 
     useEffect(() => {
         setError('description', {
@@ -66,6 +69,7 @@ export const usePartsForm = () => {
         })
     }, [setValue])
 
+
     const onSubmit = () =>
         handleSubmit((data) =>
             mutate(data, {
@@ -75,6 +79,7 @@ export const usePartsForm = () => {
                 },
             })
         )
+
 
     return {
         methods,

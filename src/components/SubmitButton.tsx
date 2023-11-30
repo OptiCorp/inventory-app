@@ -8,11 +8,13 @@ interface ButtonProps {
     id?: string
 }
 export const SubmitButton = styled.button`
+
     &:active {
         transform: scale(1.03);
     }
     &:hover {
     }
+
     width: 150px;
     background-color: black;
     color: white;
@@ -27,6 +29,15 @@ export const Wrapper = styled.div`
 
     max-width: 700px;
     padding: 1rem;
+
+`
+
+export const Wrapper = styled.button`
+    display: flex;
+    justify-content: end;
+    max-width: '1000px';
+    padding: '16px';
+
 `
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -37,6 +48,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
     form,
 }) => {
     return (
+
         <Wrapper>
             <SubmitButton onClick={onClick} id={id} type={type} form={form}>
                 {children}

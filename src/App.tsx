@@ -6,7 +6,6 @@ import {
     createRoutesFromElements,
 } from 'react-router-dom'
 import { Login } from './pages/login'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import TopBar from './components/topBar/TopBar'
 import { UmAppContextProvider } from './contexts/UmAppContext'
@@ -18,7 +17,6 @@ import Upload from './pages/addPart/documentation/Upload'
 import RecentlyAdded from './pages/addPart/recentlyAdded/RecentlyAdded'
 import MakeList from './pages/list/MakeList'
 import PartDetails from './pages/partDetails/Index'
-import Search from './pages/search/Search'
 
 import GlobalStyles from './style/GlobalStyles'
 
@@ -41,6 +39,7 @@ function App() {
                         path="add-form"
                         element={<AddPartFormm />}
                         // action={submitPart}
+
                     />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />

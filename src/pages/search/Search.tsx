@@ -33,7 +33,7 @@ const Search = () => {
 
     useEffect(() => {
         if (!debouncedSearchTerm) return
-        setSearches((prev) => [searchTerm, ...prev.slice(-4)])
+        setSearches((prev) => [searchTerm, ...prev.slice(0, 4)])
     }, [debouncedSearchTerm])
 
     return (

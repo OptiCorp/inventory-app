@@ -1,34 +1,23 @@
-import { useContext, useEffect, useState } from 'react'
-import SearchResultCard from '../../../components/searchResultCard/SearchResultCard.tsx'
-import UmAppContext from '../../../contexts/UmAppContext.tsx'
-import { useWindowDimensions } from '../../../hooks/index.ts'
-import apiService from '../../../services/api.ts'
-import { Item } from '../../../services/apiTypes.ts'
-import { RecentlyAddedContainer } from '../styles.ts'
 
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Button } from '../../../components/SubmitButton.tsx'
 import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact.tsx'
+import SearchResultCard from '../../../components/searchResultCard/SearchResultCard.tsx'
+import { useWindowDimensions } from '../../../hooks/index.ts'
+import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
+import { Button } from '../../../components/SubmitButton.tsx'
+import { RecentlyAddedContainer, RecentlyAddedWrapper } from './styles.ts'
 
 const RecentlyAdded = () => {
-    const [myItems, setMyItems] = useState<Item[]>()
-    const api = apiService()
     const { width } = useWindowDimensions()
-    const { currentUser } = useContext(UmAppContext)
+
     const navigate = useNavigate()
 
     const handleClick = () => {
         navigate('batch')
-    }
+    
+    const { data: myItems = [] } = useGetItemsByUser()
 
-    useEffect(() => {
-        if (currentUser) {
-            ;(async () => {
-                const response = await api.getItemsByUserId(currentUser.id)
-                setMyItems(response)
-            })()
-        }
-    }, [])
 
     return (
         <RecentlyAddedContainer>
@@ -41,7 +30,9 @@ const RecentlyAdded = () => {
                 )
             )}
 
+
             <Button onClick={handleClick}>Add new item</Button>
+          
         </RecentlyAddedContainer>
     )
 }

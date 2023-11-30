@@ -36,9 +36,11 @@ export const AddPartFormm = () => {
                     <TypesOptions />
                     <InputsForm />
 
+
                     <Button id="addPart" type="submit" form="addPart">
                         Finish
                     </Button>
+
                 </StyledForm>
             </FormContainer>
         </FormProvider>

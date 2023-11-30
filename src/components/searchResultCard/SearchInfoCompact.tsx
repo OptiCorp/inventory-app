@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 
+import { Item } from '../../services/apiTypes'
 import {
     CompactCard,
-    CompactCardWrapper,
     CompactDesriptionParagraph,
     CompactInfoP,
     KeyWords,
     ResultCardCompactContainer,
 } from './styles'
-import { Item } from '../../services/apiTypes'
 
 type Props = {
     part: Item
@@ -24,11 +23,9 @@ const SearchResultCardCompact = ({ part }: Props) => {
                 }}
             >
                 <CompactCard>
-                    <CompactCardWrapper>
-                        <CompactInfoP>
-                            <KeyWords>ID:</KeyWords> {part.wpId}
-                        </CompactInfoP>{' '}
-                    </CompactCardWrapper>
+                    <CompactInfoP>
+                        <KeyWords>ID:</KeyWords> {part.wpId}
+                    </CompactInfoP>{' '}
                     <CompactInfoP>
                         <KeyWords>Location</KeyWords> {part.location}
                     </CompactInfoP>{' '}

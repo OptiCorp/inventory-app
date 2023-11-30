@@ -2,8 +2,11 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/SubmitButton.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+
 import { FormContainer } from '../styles.ts'
 import { FormBatchRadio } from './styles.ts'
+
+
 
 enum Batch {
     yes,
@@ -29,7 +32,9 @@ const BatchForm = () => {
             <ProgressBar progressLevel={1} />
             <h3>Add as a batch?</h3>
             <span style={{ color: 'red' }}>{error}</span>
+
             <FormBatchRadio>
+
                 <label>
                     <input
                         type="radio"
@@ -47,9 +52,13 @@ const BatchForm = () => {
                     I want to add a batch of several identical parts, assigning
                     a unique WellPartner serial number to each of them
                 </label>
+
             </FormBatchRadio>
 
             <Button onClick={handleClick}>Next</Button>
+
+            </FormRadio>
+           
         </FormContainer>
     )
 }

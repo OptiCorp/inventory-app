@@ -22,7 +22,6 @@ export type UserRole = {
     name: string
 }
 
-
 export type Item = {
     id: string
     wpId: string
@@ -39,3 +38,15 @@ export type Item = {
     updatedDate: string | null
 }
 
+export type AddItem = {
+    wpId: string
+    serialNumber: string
+    productNumber: string
+    type: string
+    location?: string | null
+    description: string
+    parentId?: string | null
+    vendor: string
+    addedById: string | null
+    comment?: string | null
+}
