@@ -47,7 +47,7 @@ const CheckForm = () => {
                     cols={40}
                 ></StyledTextArea>{' '}
                 <Button onClick={handleClick}>Next</Button>
-          
+          </FormRadio>
         </FormContainer>
     )
 }
