@@ -1,6 +1,6 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
-import { Item, User, UserRole } from './apiTypes'
+import { AddItem, Item, User, UserRole } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -209,15 +209,7 @@ const apiService = () => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
-    const addItem = async (item: {
-        WPId: string
-        SerialNumber: string
-        ProductNumber: string
-        Type: string
-        Description: string
-        Vendor: string
-        AddedById: string
-    }): Promise<Response> => {
+    const addItem = async (item: AddItem): Promise<Response> => {
         return await postByFetch(`Item`, item)
     }
 

@@ -14,8 +14,6 @@ export const PartForm = styled(Form)`
     }
 `
 
-export const RecentlyAddedContainer = styled.div``
-
 export const FormContainer = styled.div`
     max-width: 1000px;
     display: flex;
@@ -34,10 +32,10 @@ export const FormRadio = styled.form`
         transform: scale(1.5);
     }
 `
+// export const SubmitButton = styled.button`
+//     width: 150px;
+//     background-color: black;
+//     color: white;
+//     height: 30px;
 
-export const SubmitButton = styled.button`
-    width: 150px;
-    background-color: black;
-    color: white;
-    height: 30px;
-`
+// `

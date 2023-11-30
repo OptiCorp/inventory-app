@@ -1,12 +1,15 @@
-// import { useQuery } from '@tanstack/react-query'
-// import apiService from '../api'
-// import { Item } from '../apiTypes'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import apiService from '../api'
+import { AddItem } from '../apiTypes'
 
-// export const useAddItems = (item: Item) => {
-//     const api = apiService()
-//     return useQuery({
-//         queryKey: ['items', item],
-//         queryFn: () => api.addItem(encodeURIComponent(item)),
-//         enabled: !!item,
-//     })
-// }
+export const useAddItems = () => {
+    const api = apiService()
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: (item: AddItem) => api.addItem(item),
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ['items'],
+            }),
+    })
+}

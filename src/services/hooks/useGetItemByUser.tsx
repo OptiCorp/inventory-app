@@ -8,7 +8,7 @@ export const useGetItemsByUser = () => {
     const api = apiService()
 
     return useQuery({
-        queryKey: ['user_items'],
+        queryKey: ['items', 'by_user'],
         queryFn: () => api.getItemsByUserId(currentUser?.id),
         enabled: !!currentUser?.id,
     })

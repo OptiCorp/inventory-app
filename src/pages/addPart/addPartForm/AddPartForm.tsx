@@ -1,43 +1,56 @@
 import { useContext } from 'react'
+import { FormProvider } from 'react-hook-form'
 import { ActionFunctionArgs, redirect, useActionData } from 'react-router-dom'
-import ProgressBar from '../../components/progressBar/ProgressBar.tsx'
-import UmAppContext from '../../contexts/UmAppContext.tsx'
-import apiService from '../../services/api.ts'
+import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import UmAppContext from '../../../contexts/UmAppContext.tsx'
+import apiService from '../../../services/api.ts'
+import { InputsForm } from './InputsForm.tsx'
 
-import { FormContainer, PartForm, SubmitButton } from './styles.ts'
+import { Button } from '../../../components/SubmitButton.tsx'
+import { usePartsForm } from '../hooks/useAddPart.tsx'
+import { FormContainer, PartForm } from '../styles.ts'
+import { TypesOptions } from './TypesOptions.tsx'
+import { StyledForm } from './styles.ts'
 
 type response = {
     error: string
 }
 
 // WIP
-// const AddPartFormm = () => {
-//     const data = useActionData() as response
+export const AddPartFormm = () => {
+    const data = useActionData() as response
 
-//     const { methods, onSubmit } = usePartsForm()
-//     const { handleSubmit } = methods
+    const {
+        methods,
+        onSubmit,
+        formState: { errors },
+    } = usePartsForm()
+    const { handleSubmit } = methods
 
-//     return (
-//         <FormProvider {...methods}>
-//             <form onSubmit={handleSubmit(onSubmit)} id="addPart">
-//                 <ProgressBar progressLevel={4} />
-//                 {data && data.error && <p>{data.error}</p>}
+    return (
+        <FormProvider {...methods}>
+            <FormContainer>
+                <StyledForm onSubmit={handleSubmit(onSubmit)} id="addPart">
+                    <ProgressBar progressLevel={4} />
 
-//                 <InputsForm />
-//                 <div style={{ display: 'flex', justifyContent: 'end' }}>
-//                     <button id="addPart" type="submit" form="addPart">
-//                         Finish
-//                     </button>
-//                 </div>
-//             </form>
-//         </FormProvider>
-//     )
-// }
+                    <TypesOptions />
+                    <InputsForm />
+                    <div style={{ display: 'flex', justifyContent: 'end' }}>
+                        <Button id="addPart" type="submit" form="addPart">
+                            Finish
+                        </Button>
+                    </div>
+                </StyledForm>
+            </FormContainer>
+        </FormProvider>
+    )
+}
 
 const AddPartForm = () => {
     const data = useActionData() as response
 
     const { currentUser } = useContext(UmAppContext)
+
     return (
         <FormContainer>
             <ProgressBar progressLevel={4} />
@@ -71,7 +84,7 @@ const AddPartForm = () => {
                     style={{ display: 'none' }}
                 />
                 <div style={{ display: 'flex', justifyContent: 'end' }}>
-                    <SubmitButton>Finish</SubmitButton>
+                    <Button>Finish</Button>
                 </div>
             </PartForm>
         </FormContainer>
@@ -111,7 +124,7 @@ export const submitPart = async ({ request }: ActionFunctionArgs) => {
             AddedById: user.toString(),
         }
 
-        await api.addItem(item)
+        // await api.addItem(item)
 
         return redirect('/add-part')
     }

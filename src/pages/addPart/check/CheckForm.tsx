@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import ProgressBar from '../../components/progressBar/ProgressBar'
-import { FormContainer, FormRadio, SubmitButton } from './styles'
+import { Button } from '../../../components/SubmitButton'
+import ProgressBar from '../../../components/progressBar/ProgressBar'
+import { FormContainer, FormRadio } from '../styles'
 const CheckForm = () => {
     const [checked, setChecked] = useState<boolean>(false)
     const [error, setError] = useState<string>()
@@ -41,7 +42,7 @@ const CheckForm = () => {
                 </label>
             </FormRadio>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
-                <SubmitButton onClick={handleClick}>Next</SubmitButton>
+                <Button onClick={handleClick}>Next</Button>
             </div>
         </FormContainer>
     )
