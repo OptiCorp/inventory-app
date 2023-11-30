@@ -32,13 +32,7 @@ export const Wrapper = styled.div`
 
 `
 
-export const Wrapper = styled.button`
-    display: flex;
-    justify-content: end;
-    max-width: '1000px';
-    padding: '16px';
 
-`
 
 export const Button: FunctionComponent<ButtonProps> = ({
     children,
