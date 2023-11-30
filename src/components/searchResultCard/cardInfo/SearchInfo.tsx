@@ -1,28 +1,20 @@
-import { useNavigate } from 'react-router-dom'
-
-import { Item } from '../../services/apiTypes'
+import { Item } from '../../../services/apiTypes'
 import {
-    CardInfoWrap,
     DescriptionParagraph,
     FirstInfoBox,
     InfoP,
     KeyWords,
     SecondInfoBox,
     ThirdInfoBox,
-} from './styles'
+} from '../styles'
 
 type Props = {
     part: Item
 }
 
 export const Searchinfo = ({ part }: Props) => {
-    const navigate = useNavigate()
-
-    const HandleClick = () => {
-        navigate(`/${part.wpId}`)
-    }
     return (
-        <CardInfoWrap onClick={HandleClick}>
+        <>
             {' '}
             <FirstInfoBox>
                 <InfoP>
@@ -30,12 +22,10 @@ export const Searchinfo = ({ part }: Props) => {
                     {part.wpId}
                 </InfoP>
                 <InfoP>
-                    {' '}
                     <KeyWords> S/N</KeyWords>
                     {part.serialNumber}
                 </InfoP>
                 <InfoP>
-                    {' '}
                     <KeyWords> P/N</KeyWords>
                     {part.productNumber}
                 </InfoP>
@@ -57,6 +47,6 @@ export const Searchinfo = ({ part }: Props) => {
                     <KeyWords>Last updated</KeyWords> {part.updatedDate}{' '}
                 </InfoP>
             </ThirdInfoBox>
-        </CardInfoWrap>
+        </>
     )
 }

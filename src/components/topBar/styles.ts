@@ -4,11 +4,11 @@ import { styled } from 'styled-components'
 export const TopBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    padding: 8px;
+
 `
 
 export const StyledLinkDiv = styled.div`
-    padding: 16px;
+    padding: 16px 16px 16px 0;
 `
 
 export const StyledNavLink = styled(NavLink)`

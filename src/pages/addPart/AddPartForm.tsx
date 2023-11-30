@@ -37,7 +37,7 @@ const AddPartForm = () => {
                 <input type="text" name="comment" placeholder="Comment" />
                 <input type="text" name="user" value={currentUser?.id} style={{ display: 'none' }} />
                 <div style={{ display: "flex", justifyContent: "end" }}>
-                    <SubmitButton>Submit</SubmitButton>
+                    <SubmitButton>Finish</SubmitButton>
                 </div>
 
             </PartForm>
@@ -75,7 +75,7 @@ export const submitPart = async ({ request }: ActionFunctionArgs) => {
             item)
 
 
-        return redirect('/search')
+        return redirect('/add-part')
     }
     return { error: 'All fields must be filled out' }
 

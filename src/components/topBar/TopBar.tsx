@@ -1,10 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { TopBarContainer, StyledLinkDiv, HeaderWrap } from './styles'
 import { StyledNavLink } from './styles'
-import { useWindowDimensions } from '../../hooks'
 
 const TopBar = () => {
-    const { width } = useWindowDimensions()
     return (
         <div>
             <TopBarContainer>
@@ -25,10 +23,10 @@ const TopBar = () => {
                         </StyledLinkDiv>
                     </StyledNavLink>
                 </HeaderWrap>
-                {(width > 450 ? (<img
-                    style={{ paddingRight: '16px' }}
-                    src={'../../../public/WP 1.svg'}
-                />) : null)}
+                <img
+                    alt='logo'
+                    src={'/WP 1.svg'}
+                />
 
             </TopBarContainer>
             <Outlet />

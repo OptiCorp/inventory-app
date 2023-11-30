@@ -15,11 +15,10 @@ export const PartForm = styled(Form)`
 `;
 
 export const RecentlyAddedContainer = styled.div`
-    padding: 16px;
+
 `;
 
 export const FormContainer = styled.div`
-    padding: 16px;
     max-width: 1000px;
     display: flex;
     flex-direction: column;

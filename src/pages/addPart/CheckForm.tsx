@@ -19,6 +19,7 @@ const CheckForm = () => {
     return (
         <FormContainer>
             <ProgressBar progressLevel={2} />
+            <h3>Pre-checks</h3>
             <span style={{ color: 'red' }}>{error}</span>
             <FormRadio>
                 <label><input type='radio' name='checks' onChange={() => setChecked(true)} /> I have performed all necessary checks before adding this item to the system</label>

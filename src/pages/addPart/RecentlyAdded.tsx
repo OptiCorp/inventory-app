@@ -5,7 +5,8 @@ import { useWindowDimensions } from "../../hooks"
 import UmAppContext from "../../contexts/UmAppContext"
 import { RecentlyAddedContainer, SubmitButton } from "./styles.ts"
 import SearchResultCard from "../../components/searchResultCard/SearchResultCard.tsx";
-import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact.tsx";
+
+import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
@@ -37,8 +38,8 @@ const RecentlyAdded = () => {
                 width > 800 ? <SearchResultCard part={item} /> : <SearchResultCardCompact part={item} />
             ))}
 
-            <div style={{ display: "flex", justifyContent: "end" }}>
-                <SubmitButton onClick={handleClick}>Next</SubmitButton>
+            <div style={{ display: "flex", justifyContent: "end", maxWidth: '1000px', padding: '16px' }}>
+                <SubmitButton onClick={handleClick}>Add new item</SubmitButton>
             </div>
         </RecentlyAddedContainer>
     )

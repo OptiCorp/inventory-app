@@ -1,13 +1,15 @@
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
 
+
 export const ResultCardContainer = styled.div`
-    display: flex;
     margin: 16px;
 
     padding: 4px;
     border-radius: 8px;
+    cursor: pointer;
     max-width: 1000px;
+    margin-inline: auto;
     box-shadow: 2.5px 2.5px gray;
 `
 
@@ -27,7 +29,6 @@ export const DescriptionParagraph = styled.p`
 export const CompactDesriptionParagraph = styled.p`
     background-color: ${COLORS.aliceBlue};
     border-radius: 3px;
-    width: 90%;
 
     overflow: hidden;
     display: flex;
@@ -40,23 +41,24 @@ export const ResultCardCompactContainer = styled.div`
     background-color: ${COLORS.white};
     border-radius: 8px;
     margin: 16px;
-    padding: 4px;
+
     box-shadow: 2.5px 2.5px gray;
     flex-direction: column;
     max-width: 500px;
 `
 
 export const CompactCardWrapper = styled.div`
-    padding-right: 150px;
-    padding-left: 20px;
+    padding-right: 2rem;
+    padding-left: 1rem;
 `
 
-export const Card = styled.div`
+export const SearchCard = styled.div`
     line-height: 25px;
     border-radius: 5px;
     padding: 1rem;
-    width: 100%;
 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     border-right: 1px solid rgba(208, 208, 208);
     background-color: ${COLORS.white};
 `
@@ -64,9 +66,9 @@ export const Card = styled.div`
 export const CompactCard = styled.div`
     border-radius: 5px;
     display: flex;
-    justify-content: start;
+    gap: 2rem;
     flex-basis: 100%;
-    width: 100%;
+    cursor: pointer;
     border-right: 1px solid rgba(208, 208, 208);
     background-color: ${COLORS.white};
 `
@@ -79,17 +81,17 @@ export const CardInfoWrap = styled.div`
 `
 
 export const FirstInfoBox = styled.div`
-    display: inline-block;
     margin: 1rem 0;
-
+    display: inline-block;
     line-height: 25px;
+    padding-right: 8px;
+    border-right: 1px solid rgba(208, 208, 208);
 `
 
 export const SecondInfoBox = styled.div`
     padding: 8px;
     line-height: 25px;
     border-right: 1px solid rgba(208, 208, 208);
-    padding: 8px;
 `
 
 export const ThirdInfoBox = styled.div`
@@ -100,10 +102,7 @@ export const ThirdInfoBox = styled.div`
     line-height: 25px;
 `
 
-export const InfoP = styled.p`
-    margin: 0;
-    border-right: 1px solid rgba(208, 208, 208);
-`
+export const InfoP = styled.p``
 
 export const KeyWords = styled.p`
     margin: 0;
@@ -112,4 +111,8 @@ export const KeyWords = styled.p`
     min-width: 100px;
 
     padding-right: 1rem;
+`
+export const CompactInfoP = styled.p`
+    max-width: 100px;
+    line-height: 1.5rem;
 `
