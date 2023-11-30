@@ -7,7 +7,7 @@ import { useWindowDimensions } from '../../../hooks/index.ts'
 import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
 import { Button } from '../../../components/SubmitButton.tsx'
 import { RecentlyAddedContainer, RecentlyAddedWrapper } from './styles.ts'
-
+import { Item } from '../../../services/apiTypes.ts'
 const RecentlyAdded = () => {
     const { width } = useWindowDimensions()
 
