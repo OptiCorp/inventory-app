@@ -24,21 +24,10 @@ export const FormContainer = styled.div`
     flex-direction: column;
 `;
 
-export const FormRadio = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 16px;
-  input, label {
-    padding: 8px 0;
-  }
-  input {
-    transform: scale(1.5);    
-  }
-`;
+// export const SubmitButton = styled.button`
+//     width: 150px;
+//     background-color: black;
+//     color: white;
+//     height: 30px;
 
-export const SubmitButton = styled.button`
-  width: 150px;
-  background-color: black;
-  color: white;
-  height: 30px;
-`;
+// `
