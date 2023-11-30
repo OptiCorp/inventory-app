@@ -4,6 +4,8 @@ import {useContext, useEffect, useState} from "react";
 import {useDebounce, useLocalStorage} from "usehooks-ts";
 import {useGetItems} from "../../services/hooks/useGetItems.tsx";
 import {useGetLists} from "../../services/hooks/useGetLists.tsx";
+import {useAddList} from "../../services/hooks/useAddList.tsx";
+import {useGetListsByUserId} from "../../services/hooks/useGetListsByUserId.tsx";
 import {useWindowDimensions} from "../../hooks";
 import {
     Container,
@@ -29,16 +31,25 @@ const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
     const { searchParam } = useParams<{ searchParam: string }>()
     const [searchTerm, setSearchTerm] = useState('')
+    const [title, setTitle] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const {
         data: lists = [],
         isLoading,
         isFetching,
-    } = useGetLists(debouncedSearchTerm, currentUser?.id)
+    } = useGetListsByUserId(currentUser?.id)
+
+    const { mutate, isSuccess } = useAddList()
 
     useEffect(() => {
         setSearchTerm((prev) => searchParam || prev)
     }, [searchParam])
+
+    const filteredData = lists.filter(
+        (list) =>
+            list.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            list.items?.some((item) => item.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
     const { width } = useWindowDimensions()
 
@@ -52,18 +63,19 @@ const MakeList = () => {
     const handleClose = () => {
         setOpen(false);
     };
+    
+    const handleSubmit = () => {
+        mutate({createdById: currentUser?.id, title: title})
+        handleClose()
+    }
 
     return (
         <>
-            {isLoading && (
-                <GlobalSpinnerContainer>
-                    <Spinner />
-                </GlobalSpinnerContainer>
-            )}
             <SearchContainer>
                 <SearchBar
                     setSearchTerm={setSearchTerm}
                     searchTerm={searchTerm}
+                    placeholder={'Search for title or items'}
                 />
                 
                 <SubmitButton onClick={handleClickOpen}>
@@ -73,18 +85,18 @@ const MakeList = () => {
                     <DialogTitle>New list</DialogTitle>
                     <DialogContent>
                         <TextField
+                            onChange={(e) => setTitle(e.target.value)}
                             autoFocus
                             margin="dense"
-                            id="name"
+                            id="title"
                             label="List title"
-                            type="email"
                             fullWidth
                             variant="standard"
                         />
                     </DialogContent>
                     <DialogActions>
                         <CancelButton onClick={handleClose}>Cancel</CancelButton>
-                        <SubmitButton onClick={handleClose}>Confirm</SubmitButton>
+                        <SubmitButton onClick={handleSubmit}>Confirm</SubmitButton>
                     </DialogActions>
                 </Dialog>
                 
@@ -95,8 +107,15 @@ const MakeList = () => {
                     <RecentTitle>Your saved lists</RecentTitle>
                 </RecentSearchContainer>
 
+
+                {isLoading && (
+                    <GlobalSpinnerContainer>
+                        <Spinner />
+                    </GlobalSpinnerContainer>
+                )}
+
                 <Container>
-                    {lists
+                    {filteredData
                         .slice(0)
                         ?.map((list: List) =>
                             <>

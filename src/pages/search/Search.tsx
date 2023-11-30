@@ -38,16 +38,18 @@ const Search = () => {
 
     return (
         <>
-            {isLoading && (
-                <GlobalSpinnerContainer>
-                    <Spinner />
-                </GlobalSpinnerContainer>
-            )}
             <SearchContainer>
                 <SearchBar
                     setSearchTerm={setSearchTerm}
                     searchTerm={searchTerm}
+                    placeholder={"Search for ID, description, PO number or S/N"}
                 />
+
+                {isLoading && (
+                    <GlobalSpinnerContainer>
+                        <Spinner />
+                    </GlobalSpinnerContainer>
+                )}
 
                 <Container>
                     {items

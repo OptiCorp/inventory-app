@@ -51,3 +51,8 @@ export type List = {
     items: string[] | null
 }
 
+export type AddList = {
+    createdById: string | undefined
+    title: string
+}
+
