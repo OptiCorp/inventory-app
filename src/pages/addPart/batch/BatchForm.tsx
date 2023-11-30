@@ -57,7 +57,7 @@ const BatchForm = () => {
 
             <Button onClick={handleClick}>Next</Button>
 
-            </FormRadio>
+           
            
         </FormContainer>
     )
