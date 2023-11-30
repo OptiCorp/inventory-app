@@ -192,7 +192,7 @@ const apiService = () => {
         return await getByFetch(`List/BySearchString/${searchString}?userId=${userId}`)
     }
 
-    const getListsByUserId = async (userId: string | undefined): Promise<List[]> => {
+    const getListsByUserId = async (userId: string): Promise<List[]> => {
         return await getByFetch(`List/ByUserId/${userId}`)
     }
 

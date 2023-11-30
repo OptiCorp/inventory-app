@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import apiService from '../api'
 
-export const useGetLists = (searchTerm: string, userId: string | undefined) => {
+export const useGetLists = (searchTerm: string, userId: string) => {
     const api = apiService()
-    console.log(searchTerm, 'useGetLists')
+
     return useQuery({
         queryKey: ['lists', searchTerm],
         queryFn: () =>

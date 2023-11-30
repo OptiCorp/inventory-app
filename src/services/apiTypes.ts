@@ -52,7 +52,7 @@ export type List = {
 }
 
 export type AddList = {
-    createdById: string | undefined
+    createdById: string
     title: string
 }
 

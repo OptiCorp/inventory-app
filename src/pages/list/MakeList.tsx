@@ -26,6 +26,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import ListCard from "../../components/listCard/listCard.tsx";
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
@@ -37,7 +38,7 @@ const MakeList = () => {
         data: lists = [],
         isLoading,
         isFetching,
-    } = useGetListsByUserId(currentUser?.id)
+    } = useGetListsByUserId(currentUser!.id)
 
     const { mutate, isSuccess } = useAddList()
 
@@ -52,7 +53,6 @@ const MakeList = () => {
     );
 
     const { width } = useWindowDimensions()
-
     
     const [open, setOpen] = useState(false);
     
@@ -65,7 +65,7 @@ const MakeList = () => {
     };
     
     const handleSubmit = () => {
-        mutate({createdById: currentUser?.id, title: title})
+        mutate({createdById: currentUser!.id, title: title})
         handleClose()
     }
 
@@ -101,8 +101,6 @@ const MakeList = () => {
                 </Dialog>
                 
                 
-                
-
                 <RecentSearchContainer>
                     <RecentTitle>Your saved lists</RecentTitle>
                 </RecentSearchContainer>
@@ -119,8 +117,7 @@ const MakeList = () => {
                         .slice(0)
                         ?.map((list: List) =>
                             <>
-                            <p>{list.title}</p>
-                            <p>{list.createdDate}</p>
+                           <ListCard part={list}/>
                             </>
                         )}
                 </Container>
