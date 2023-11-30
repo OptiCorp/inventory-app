@@ -26,11 +26,11 @@ export const Button: FunctionComponent<ButtonProps> = ({
     children,
     type,
     onClick,
-    id
+    id,
     form,
 }) => {
     return (
-        <SubmitButton onClick={onClick} id={ id}type={type} form={form}>
+        <SubmitButton onClick={onClick} id={id} type={type} form={form}>
             {children}
         </SubmitButton>
     )
