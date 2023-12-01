@@ -6,6 +6,7 @@ export const SubmitButton = styled.button`
   background-color: black;
   color: white;
   height: 30px;
+  cursor: pointer;
 `
 
 export const CancelButton = styled.button`
@@ -13,5 +14,6 @@ export const CancelButton = styled.button`
   background-color: whitesmoke;
   color: black;
   height: 30px;
+  cursor: pointer;
 `
 ;

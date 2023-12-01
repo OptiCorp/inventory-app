@@ -216,6 +216,10 @@ const apiService = () => {
         return await postByFetch(`List`, list)
     }
 
+    const deleteList = async (listId: string): Promise<Response> => {
+        return await deleteByFetch(`List/${listId}`)
+    }
+
 
     return {
         getAllUsers,
@@ -236,7 +240,8 @@ const apiService = () => {
         addItem,
         getListsBySearchString,
         getListsByUserId,
-        addList
+        addList,
+        deleteList
     }
 }
 

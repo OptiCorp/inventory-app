@@ -28,6 +28,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ListCard from "../../components/listCard/listCard.tsx";
 
+
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
     const { searchParam } = useParams<{ searchParam: string }>()
@@ -78,7 +79,7 @@ const MakeList = () => {
                     placeholder={'Search for title or items'}
                 />
                 
-                <SubmitButton onClick={handleClickOpen}>
+                <SubmitButton style={{marginLeft:"13px"}} onClick={handleClickOpen}>
                     New list
                 </SubmitButton>
                 <Dialog open={open} onClose={handleClose}>
@@ -100,10 +101,8 @@ const MakeList = () => {
                     </DialogActions>
                 </Dialog>
                 
-                
-                <RecentSearchContainer>
-                    <RecentTitle>Your saved lists</RecentTitle>
-                </RecentSearchContainer>
+            
+                    <RecentTitle style={{margin:"15px 0px 0px 15px"}}>Your saved lists</RecentTitle>
 
 
                 {isLoading && (
