@@ -45,7 +45,6 @@ export const usePartsForm = () => {
         register,
     } = methods
 
-
     const onSubmit = handleSubmit((data) => mutate(data))
 
     return {

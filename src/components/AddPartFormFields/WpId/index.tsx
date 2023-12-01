@@ -1,6 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
-import { ErrorP, InputWrap } from './styles'
+import { ErrorP, InputWrap, StyledInput } from './styles'
 
 export const WpId = () => {
     const {
@@ -10,15 +10,13 @@ export const WpId = () => {
     return (
         <>
             <InputWrap>
-                <label htmlFor="WellPartner Id">
-                    WellPartner Id{' '}
-                    <ErrorMessage
-                        name="wpId"
-                        render={({ message }) => <ErrorP>{message}</ErrorP>}
-                    />
-                </label>{' '}
+                <label htmlFor="WellPartner Id">WellPartner Id </label>{' '}
+                <ErrorMessage
+                    name="wpId"
+                    render={({ message }) => <ErrorP>{message}</ErrorP>}
+                />
             </InputWrap>
-            <input
+            <StyledInput
                 type="text"
                 placeholder="wpId"
                 {...register('wpId')}

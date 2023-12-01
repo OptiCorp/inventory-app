@@ -3,7 +3,8 @@ import { styled } from 'styled-components'
 export const StyledForm = styled.form`
     input,
     select {
-        width: 100%;
+        max-width: 500px;
+        width: 70%;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;

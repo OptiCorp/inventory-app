@@ -5,6 +5,7 @@ import { FormContent } from './FormContent.tsx'
 import { usePartsForm } from '../hooks/useAddPartForm.tsx'
 import { FormContainer } from '../styles.ts'
 
+import { Button } from '../../../components/SubmitButton.tsx'
 import { StyledForm } from './styles.ts'
 
 type response = {
@@ -23,9 +24,9 @@ export const AddPartFormm = () => {
 
                     <FormContent />
 
-                    <button id="addPart" type="submit">
+                    <Button id="addPart" type="submit">
                         Finish
-                    </button>
+                    </Button>
                 </StyledForm>
             </FormContainer>
         </FormProvider>

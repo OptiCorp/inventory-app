@@ -1,5 +1,5 @@
-import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
+import { InputWrap, StyledTextArea } from './styles'
 
 export const Comment = () => {
     const {
@@ -8,13 +8,14 @@ export const Comment = () => {
     } = useFormContext()
     return (
         <div>
-            <label htmlFor="Comment">Comment</label>
-            <input type="text" placeholder="Comment" {...register('comment')} />
-            <ErrorMessage
-                name="Comment"
-                render={({ message }) => (
-                    <p style={{ color: 'red' }}>{message}</p>
-                )}
+            <InputWrap>
+                <label htmlFor="Comment">Comment</label>{' '}
+            </InputWrap>
+            <StyledTextArea
+                placeholder="Comment"
+                {...register('comment')}
+                rows={5}
+                cols={40}
             />
         </div>
     )

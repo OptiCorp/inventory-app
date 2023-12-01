@@ -7,7 +7,9 @@ export const ButtonWrap = styled.div`
 `
 export const StyledTextArea = styled.textarea`
     background-color: ${COLORS.white};
-    margin: 0 16px;
+    margin: 16;
+    padding: 1rem;
+    display: block;
     max-width: 500px;
 `
 export const StyledInput = styled.input`
@@ -20,9 +22,7 @@ export const FormRadio = styled.form`
     flex-direction: column;
     gap: 1rem;
     padding-bottom: 16px;
-
-    label,
-    input {
+    label {
         padding: 8px;
         margin-right: 1rem;
         cursor: pointer;
@@ -31,5 +31,13 @@ export const FormRadio = styled.form`
     input {
         transform: scale(1.5);
         padding: 10rem;
+        margin-right: 1rem;
+        cursor: pointer;
     }
+`
+export const StyledLabelText = styled.p`
+    font-weight: 600;
+    display: inline;
+    margin: 0;
+    font-size: 0.8rem;
 `

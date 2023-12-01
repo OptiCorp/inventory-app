@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/SubmitButton'
 import ProgressBar from '../../../components/progressBar/ProgressBar'
-import { FormContainer, FormRadio } from '../styles'
-import { StyledTextArea } from './styles'
+import { FormContainer } from '../styles'
+import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
 const CheckForm = () => {
     const [checked, setChecked] = useState<boolean>(false)
     const [error, setError] = useState<string>()
@@ -32,14 +32,11 @@ const CheckForm = () => {
                     I have performed all necessary checks before adding this
                     item to the system
                 </label>
-                <label htmlFor="textArea">
-                    Describe what has been checked, and inform about deviations{' '}
-                </label>
-                <StyledTextArea
-                    id="textArea"
-                    rows={5}
-                    cols={40}
-                ></StyledTextArea>{' '}
+
+                <StyledLabelText>
+                    Describe what has been checked, and inform about deviations
+                </StyledLabelText>
+                <StyledTextArea id="textArea" rows={5} cols={40} />
             </FormRadio>
             <Button onClick={handleClick}>Next</Button>
         </FormContainer>

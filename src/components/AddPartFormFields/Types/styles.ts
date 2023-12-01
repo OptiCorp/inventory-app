@@ -2,13 +2,23 @@ import { styled } from 'styled-components'
 
 export const InputWrap = styled.div`
     display: flex;
-    flex-direction: row;
-    margin: 0 auto;
+    flex-direction: column;
 `
 
-export const ErrorP = styled.p`
+export const ErrorP = styled.span`
     color: red;
+
     font-weight: 600;
-    display: inline;
-    padding: 1rem;
+`
+export const StyledSelect = styled.select`
+    option {
+        cursor: pointer;
+    }
+
+    cursor: pointer;
+`
+export const IconContainer = styled.div`
+    display: flex;
+    gap: 4px;
+
 `

@@ -3,12 +3,16 @@ import { styled } from 'styled-components'
 export const InputWrap = styled.div`
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
+
+    justify-content: space-between;
+    align-items: center;
 `
 
-export const ErrorP = styled.p`
+export const ErrorP = styled.span`
     color: red;
+
     font-weight: 600;
-    display: inline;
-    padding: 1rem;
+`
+export const StyledInput = styled.input`
+   
 `

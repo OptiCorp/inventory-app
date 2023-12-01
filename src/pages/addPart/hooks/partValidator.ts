@@ -10,7 +10,7 @@ export const partSchema = z.object({
         z.literal('unit'),
         z.literal('assembly'),
         z.literal('sub-assembly'),
-        z.literal('sub-sart'),
+        z.literal('part'),
     ]),
     comment: z.string().nullish(),
     location: z.string().nullish(),

@@ -1,14 +1,17 @@
 import { styled } from 'styled-components'
+import { COLORS } from '../../../style/GlobalStyles'
 
 export const InputWrap = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin: 0 auto;
+    display: inline-block;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
 `
-
-export const ErrorP = styled.p`
-    color: red;
-    font-weight: 600;
-    display: inline;
+export const StyledTextArea = styled.textarea`
+    background-color: ${COLORS.white};
+    margin: 16;
     padding: 1rem;
+
+    width: 80%;
+
+    display: block;
 `

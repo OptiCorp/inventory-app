@@ -1,5 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
+import { ErrorP, InputWrap, StyledInput } from './styles'
 
 export const Description = () => {
     const {
@@ -7,20 +8,19 @@ export const Description = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <div>
-            <label htmlFor="description">Description</label>
-            <input
+        <>
+            <InputWrap>
+                <label htmlFor="description">Description </label>{' '}
+                <ErrorMessage
+                    name="description"
+                    render={({ message }) => <ErrorP>{message}</ErrorP>}
+                />
+            </InputWrap>
+            <StyledInput
                 type="text"
                 placeholder="Item description"
                 {...register('description')}
             />
-            <ErrorMessage
-                name="description"
-                render={({ message }) => (
-                    <p style={{ color: 'red' }}>{message}</p>
-                )}
-            />
-        </div>
+        </>
     )
 }
-

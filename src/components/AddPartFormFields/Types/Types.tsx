@@ -1,5 +1,8 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
+import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
+import { ToolTip } from '../../ToolTip'
+import { ErrorP, IconContainer, InputWrap, StyledSelect } from './styles'
 
 export const Types = () => {
     const {
@@ -7,26 +10,28 @@ export const Types = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <div>
-            <label htmlFor="types">Choose a type</label>
-            <input
-                list="types"
-                pattern="unit|assembly|sub-assembly|sart"
-                placeholder="Item type"
-                {...register('type')}
-            />
-            <datalist id="types">
-                <option value="unit" />
-                <option value="assembly" />
-                <option value="sub-assembly" />
-                <option value="sart" />
-            </datalist>
+        <InputWrap>
+            <IconContainer>
+                <label htmlFor="type">Choose a type</label>{' '}
+                <ToolTip content="Specify Unit,   or Item (lowest tier)">
+                    <FaRegQuestionCircleIcon />
+                </ToolTip>
+            </IconContainer>
+            <StyledSelect
+                style={{ maxWidth: '500px' }}
+                id="type"
+                defaultValue="Specify Unit,   or Item (lowest tier)"
+                {...register('type', { required: true })}
+            >
+                <option value="unit">unit</option>
+                <option value="assembly">assembly</option>
+                <option value="sub-assembly"> sub-assembly</option>
+                <option value="part">part</option>
+            </StyledSelect>
             <ErrorMessage
-                name="types"
-                render={({ message }) => (
-                    <p style={{ color: 'red' }}>{message}</p>
-                )}
+                name="type"
+                render={({ message }) => <ErrorP>{message}</ErrorP>}
             />
-        </div>
+        </InputWrap>
     )
 }
