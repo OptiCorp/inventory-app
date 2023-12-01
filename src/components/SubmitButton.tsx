@@ -8,18 +8,22 @@ interface ButtonProps {
     id?: string
 }
 export const SubmitButton = styled.button`
+    &:active {
+        transform: scale(1.03);
+    }
+    &:hover {
+    }
     width: 150px;
     background-color: black;
     color: white;
     height: 30px;
-    margin-inline: auto;
+    cursor: pointer;
 `
 
-export const Wrapper = styled.button`
+export const Wrapper = styled.div`
     display: flex;
     justify-content: end;
-    max-width: '1000px';
-    padding: '16px';
+    padding: 1rem;
 `
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -30,8 +34,10 @@ export const Button: FunctionComponent<ButtonProps> = ({
     form,
 }) => {
     return (
-        <SubmitButton onClick={onClick} id={id} type={type} form={form}>
-            {children}
-        </SubmitButton>
+        <Wrapper>
+            <SubmitButton onClick={onClick} id={id} type={type} form={form}>
+                {children}
+            </SubmitButton>
+        </Wrapper>
     )
 }

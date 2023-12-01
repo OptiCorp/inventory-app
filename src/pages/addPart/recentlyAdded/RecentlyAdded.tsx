@@ -8,7 +8,7 @@ import SearchResultCardCompact from '../../../components/searchResultCard/Search
 import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
 
 import { Button } from '../../../components/SubmitButton.tsx'
-import { RecentlyAddedContainer, RecentlyAddedWrapper } from './styles.ts'
+import { RecentlyAddedContainer } from './styles.ts'
 
 const RecentlyAdded = () => {
     const { width } = useWindowDimensions()
@@ -32,9 +32,7 @@ const RecentlyAdded = () => {
                 )
             )}
 
-            <RecentlyAddedWrapper>
-                <Button onClick={handleClick}>Add new item</Button>
-            </RecentlyAddedWrapper>
+            <Button onClick={handleClick}>Add new item</Button>
         </RecentlyAddedContainer>
     )
 }

@@ -42,7 +42,7 @@ function App() {
                     <Route
                         path="add-form"
                         element={<AddPartFormm />}
-                        action={submitPart}
+                        // action={submitPart}
                     />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />

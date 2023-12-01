@@ -35,11 +35,11 @@ export const AddPartFormm = () => {
 
                     <TypesOptions />
                     <InputsForm />
-                    <div style={{ display: 'flex', justifyContent: 'end' }}>
+                  
                         <Button id="addPart" type="submit" form="addPart">
                             Finish
                         </Button>
-                    </div>
+                  
                 </StyledForm>
             </FormContainer>
         </FormProvider>
