@@ -25,6 +25,8 @@ export const FormRadio = styled.form`
     input {
         padding: 8px;
         margin-right: 1rem;
+        cursor: pointer;
+        width: fit-content;
     }
     input {
         transform: scale(1.5);

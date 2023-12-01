@@ -23,7 +23,7 @@ const CheckForm = () => {
             <h3>Pre-checks</h3>
             <span style={{ color: 'red' }}>{error}</span>
             <FormRadio>
-                <label htmlFor="checks">
+                <label>
                     <input
                         type="radio"
                         name="checks"

@@ -3,9 +3,8 @@ import { useAccount, useMsal } from '@azure/msal-react'
 import decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
 import apiService from '../services/api'
-import { ApiStatus, Item, User } from '../services/apiTypes'
+import { ApiStatus, User } from '../services/apiTypes'
 import CheckRole from '../utils/CheckRole'
-import { useLocalStorage } from 'usehooks-ts'
 
 export interface UmAppContextType {
     idToken: string

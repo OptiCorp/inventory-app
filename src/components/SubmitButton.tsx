@@ -18,6 +18,7 @@ export const SubmitButton = styled.button`
     color: white;
     height: 30px;
     cursor: pointer;
+    margin-inline: auto;
 `
 
 export const Wrapper = styled.div`

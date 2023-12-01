@@ -210,6 +210,7 @@ const apiService = () => {
     }
 
     const addItem = async (item: AddItem): Promise<Response> => {
+        console.log('running')
         return await postByFetch(`Item`, item)
     }
 
