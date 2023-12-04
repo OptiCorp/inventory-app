@@ -5,13 +5,17 @@ export const FormBatchRadio = styled.form`
     flex-direction: column;
     gap: 1rem;
     padding-bottom: 16px;
-    input,
+
     label {
         padding: 8px;
         margin-right: 1rem;
+        cursor: pointer;
+        width: fit-content;
     }
     input {
         transform: scale(1.5);
         padding: 10rem;
+        margin-right: 1rem;
+        cursor: pointer;
     }
 `

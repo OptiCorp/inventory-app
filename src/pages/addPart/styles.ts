@@ -7,6 +7,7 @@ export const PartForm = styled(Form)`
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
+
         display: inline-block;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -19,23 +20,3 @@ export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
-
-export const FormRadio = styled.form`
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 16px;
-    input,
-    label {
-        padding: 8px 0;
-    }
-    input {
-        transform: scale(1.5);
-    }
-`
-// export const SubmitButton = styled.button`
-//     width: 150px;
-//     background-color: black;
-//     color: white;
-//     height: 30px;
-
-// `

@@ -11,10 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import TopBar from './components/topBar/TopBar'
 import { UmAppContextProvider } from './contexts/UmAppContext'
 import AddPart from './pages/addPart/Index'
-import {
-    AddPartFormm,
-    submitPart,
-} from './pages/addPart/addPartForm/AddPartForm'
+import { AddPartFormm } from './pages/addPart/addPartForm/AddPartForm'
 import BatchForm from './pages/addPart/batch/BatchForm'
 import CheckForm from './pages/addPart/check/CheckForm'
 import Upload from './pages/addPart/documentation/Upload'
