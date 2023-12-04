@@ -33,6 +33,8 @@ export type Item = {
     parentSubassemblyId: string | null
     vendor: string
     addedById: string | null
+    addedByFirstName: string
+    addedByLastName: string
     comment: string | null
     createdDate: string
     updatedDate: string | null
