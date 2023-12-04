@@ -1,30 +1,27 @@
 import { styled } from 'styled-components'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-export const ResultCard = styled.div`
+
+export const ListWrapper = styled.div`
   position: relative;
   padding: 8px;
-    background-color: white;
+  background-color: white;
   &:hover {
     background: whitesmoke;
   }
-    cursor: pointer;
-    max-width: 450px;
+  cursor: pointer;
   border-radius: 6px;
-    box-shadow: 2.5px 2.5px gray;
+  box-shadow: 2.5px 2.5px gray;
   width: 95%;
-
+  max-width: 450px;
 `
 
-export const Title = styled.h2`
-  margin: 0px;
-  padding: 0px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    `
+export const StyledTitle = styled.h2`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
 
-
-export const DeleteWrapper = styled(DeleteForeverIcon)`
+export const StyledDeleteIcon = styled(DeleteForeverIcon)`
   color: black;
   position: absolute;
   top: -12px;
@@ -32,6 +29,5 @@ export const DeleteWrapper = styled(DeleteForeverIcon)`
   &:hover {
     color: red;
   }
-
 `
 

@@ -1,40 +1,30 @@
 import SearchBar from '../../components/searchBar/SearchBar'
 import {useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import {useDebounce, useLocalStorage} from "usehooks-ts";
-import {useGetItems} from "../../services/hooks/useGetItems.tsx";
-import {useGetLists} from "../../services/hooks/useGetLists.tsx";
 import {useAddList} from "../../services/hooks/useAddList.tsx";
 import {useGetListsByUserId} from "../../services/hooks/useGetListsByUserId.tsx";
-import {useWindowDimensions} from "../../hooks";
 import {
-    Container,
     GlobalSpinnerContainer,
-    RecentSearchContainer,
-    RecentTitle,
     SearchContainer,
-    Spinner, StyledSearchedLink
+    Spinner
 } from "../search/styles.ts";
-import SearchResultCard from "../../components/searchResultCard/SearchResultCard.tsx";
-// import SearchResultCardCompact from "../../components/searchResultCard/SearchResultCardCompact.tsx";
 import UmAppContext from "../../contexts/UmAppContext.tsx";
 import {List} from "../../services/apiTypes.ts";
-import { SubmitButton, CancelButton } from "./styles.ts";
+import { SubmitButton, CancelButton, SavedListsTitle, FlexWrapper } from "./styles.ts";
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ListCard from "../../components/listCard/listCard.tsx";
-
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
     const { searchParam } = useParams<{ searchParam: string }>()
     const [searchTerm, setSearchTerm] = useState('')
     const [title, setTitle] = useState('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
+    const [open, setOpen] = useState(false);
+    
     const {
         data: lists = [],
         isLoading,
@@ -52,10 +42,6 @@ const MakeList = () => {
             list.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             list.items?.some((item) => item.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-
-    const { width } = useWindowDimensions()
-    
-    const [open, setOpen] = useState(false);
     
     const handleClickOpen = () => {
         setOpen(true);
@@ -82,6 +68,7 @@ const MakeList = () => {
                 <SubmitButton style={{marginLeft:"13px"}} onClick={handleClickOpen}>
                     New list
                 </SubmitButton>
+                
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>New list</DialogTitle>
                     <DialogContent>
@@ -101,9 +88,7 @@ const MakeList = () => {
                     </DialogActions>
                 </Dialog>
                 
-            
-                    <RecentTitle style={{margin:"15px 0px 0px 15px"}}>Your saved lists</RecentTitle>
-
+                <SavedListsTitle>Your saved lists</SavedListsTitle>
 
                 {isLoading && (
                     <GlobalSpinnerContainer>
@@ -111,15 +96,13 @@ const MakeList = () => {
                     </GlobalSpinnerContainer>
                 )}
 
-                <div style={{display: "flex", flexDirection:"column", gap: "16px", paddingBottom: "10px"}}>
-                    {filteredData
-                        .slice(0)
-                        ?.map((list: List) =>
+                <FlexWrapper>
+                    {filteredData.map((list: List) =>
                             <>
                            <ListCard part={list}/>
                             </>
                         )}
-                </div>
+                </FlexWrapper>
             </SearchContainer>
         </>
     )
