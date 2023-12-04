@@ -6,12 +6,7 @@ export const partSchema = z.object({
     serialNumber: z.string().min(1, 'Serial number is required'),
     productNumber: z.string().min(1, 'Product number is required'),
     vendor: z.string().min(1, 'Vendor is required'),
-    type: z.union([
-        z.literal('unit'),
-        z.literal('assembly'),
-        z.literal('sub-assembly'),
-        z.literal('part'),
-    ]),
+    type: z.string().min(1),
     comment: z.string().nullish(),
     location: z.string().nullish(),
     parentId: z.string().nullish(),

@@ -8,7 +8,7 @@ export const useAddItems = () => {
     const navigate = useNavigate()
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (item: AddItem) => api.addItem(item),
+        mutationFn: (item: AddItem[]) => api.addItem(item),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['items'],

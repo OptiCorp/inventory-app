@@ -1,6 +1,7 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
-import { User, UserRole, Item, List, AddList, AddItem } from './apiTypes'
+
+import { AddItem, AddList, Item, List, User, UserRole } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -203,8 +204,13 @@ const apiService = () => {
         return await getByFetch(`Item/BySearchString/${searchString}`)
     }
 
-    const getListsBySearchString = async (searchString: string, userId: string | undefined): Promise<List[]> => {
-        return await getByFetch(`List/BySearchString/${searchString}?userId=${userId}`)
+    const getListsBySearchString = async (
+        searchString: string,
+        userId: string | undefined
+    ): Promise<List[]> => {
+        return await getByFetch(
+            `List/BySearchString/${searchString}?userId=${userId}`
+        )
     }
 
     const getListsByUserId = async (userId: string): Promise<List[]> => {
@@ -229,8 +235,7 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`)
     }
 
-    const addItem = async (item: AddItem): Promise<Response> => {
-        console.log('running')
+    const addItem = async (item: AddItem[]): Promise<Response> => {
         return await postByFetch(`Item`, item)
     }
 
