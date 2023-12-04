@@ -209,6 +209,10 @@ const apiService = () => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
+    const getItemById = async (id: string) => {
+        return await getByFetch(`Item/${id}`)
+    }
+
     const addItem = async (item: AddItem): Promise<Response> => {
         return await postByFetch(`Item`, item)
     }
@@ -229,6 +233,7 @@ const apiService = () => {
         getUserImage,
         getItemsBySearchString,
         getItemsByUserId,
+        getItemById,
         addItem,
     }
 }
