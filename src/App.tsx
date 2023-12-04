@@ -33,7 +33,7 @@ function App() {
             <Route path="/" element={<TopBar />}>
                 <Route path="search/:searchParam?" element={<Search />} />
 
-                <Route path=":partId" element={<PartDetails />} />
+                <Route path=":id/:wpId" element={<PartDetails />} />
                 <Route path="add-part" element={<AddPart />}>
                     <Route index element={<RecentlyAdded />} />
                     <Route path="batch" element={<BatchForm />} />

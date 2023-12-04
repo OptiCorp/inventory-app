@@ -13,12 +13,11 @@ const SearchResultCard = ({ part }: Props) => {
 
     return (
         <>
-            {' '}
             <ResultCardContainer>
                 <SearchCard
                     title=""
                     onClick={() => {
-                        navigate(`/${part.wpId}`)
+                        navigate(`/${part.id}/${part.wpId}`)
                     }}
                 >
                     <Searchinfo part={part} />
