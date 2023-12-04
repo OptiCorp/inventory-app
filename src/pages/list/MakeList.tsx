@@ -111,7 +111,7 @@ const MakeList = () => {
                     </GlobalSpinnerContainer>
                 )}
 
-                <Container>
+                <div style={{display: "flex", flexDirection:"column", gap: "16px", paddingBottom: "10px"}}>
                     {filteredData
                         .slice(0)
                         ?.map((list: List) =>
@@ -119,7 +119,7 @@ const MakeList = () => {
                            <ListCard part={list}/>
                             </>
                         )}
-                </Container>
+                </div>
             </SearchContainer>
         </>
     )

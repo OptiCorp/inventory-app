@@ -1,19 +1,14 @@
 import { useNavigate } from 'react-router-dom'
-
-import { ResultCardContainer, Container, Title } from './styles'
+import {ResultCard, Title, DeleteWrapper} from './styles'
 import { useWindowDimensions } from '../../hooks'
 import { List } from '../../services/apiTypes'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {useDeleteList} from "../../services/hooks/useDeleteList.tsx";
 import {useContext, useState} from "react";
 import UmAppContext from "../../contexts/UmAppContext.tsx";
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import TextField from "@mui/material/TextField";
 import {CancelButton, SubmitButton} from "../../pages/list/styles.ts";
 
 
@@ -29,12 +24,13 @@ const ListCard = ({ part }: Props) => {
 
    const { mutate, isSuccess } = useDeleteList()
     const handleDelete = () => {
-        handleOpen()
+        setOpen(true);
         mutate(part.id)
         handleClose()
     }
 
-    const handleOpen = () => {
+    const handleOpen = (e: Pick<MouseEvent, "stopPropagation">) => {
+        e.stopPropagation()
         setOpen(true);
     };
 
@@ -45,21 +41,21 @@ const ListCard = ({ part }: Props) => {
     const [open, setOpen] = useState(false);
     
     
+    // @ts-ignore
     return (
         <>
-            <Container>
-    <ResultCardContainer>
-      <Title>{part.title}</Title>
-        <DeleteForeverIcon onClick={handleOpen} style={{color: "red", position: "absolute", top:"3px", right:"1px", fontSize:"30px"}}/>
-        <h4>Created: {part.createdDate}</h4>
-        {part.updatedDate ?
-            <h4>Updated: {part.updatedDate}</h4>
-            :
-            <></>
-        }
-        </ResultCardContainer>
-            </Container>
-
+            <ResultCard onClick={() =>navigate("/")}>
+                <div  onClick={(e) => handleOpen(e as Pick<MouseEvent, "stopPropagation">)}>
+                    <DeleteWrapper style={{fontSize: "30px"}}>
+                    </DeleteWrapper>
+                </div>
+                    <Title>{part.title}</Title>
+                    <h4>Created: {part.createdDate}</h4>
+                    {part.updatedDate ?
+                        <h4>Last updated: {part.updatedDate}</h4>
+                        : null
+                    }
+            </ResultCard>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Delete list?</DialogTitle>
                 <DialogContent>
