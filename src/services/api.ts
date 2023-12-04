@@ -199,9 +199,10 @@ const apiService = () => {
     }
 
     const getItemsBySearchString = async (
-        searchString: string
+        searchString: string,
+        pageNumber: number
     ): Promise<Item[]> => {
-        return await getByFetch(`Item/BySearchString/${searchString}`)
+        return await getByFetch(`Item/BySearchString/${searchString}?page=${pageNumber}`)
     }
 
     const getListsBySearchString = async (

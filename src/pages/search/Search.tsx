@@ -16,18 +16,42 @@ import {
     Spinner,
     StyledSearchedLink,
 } from './styles'
+import { useGetItemsInfinite } from '../../services/hooks/useGetItemsInfinite'
 
 const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>()
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data: items = [], isLoading } = useGetItems(debouncedSearchTerm)
+    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm)
     const { width } = useWindowDimensions()
     const [searches, setSearches] = useLocalStorage<string[]>(
         'recent_searches',
         []
     )
+
+    const handleScroll = (entries: IntersectionObserverEntry[]) => {
+        if (entries[0].isIntersecting) {
+            fetchNextPage()
+        }
+    }
+
+    const observer = new IntersectionObserver(handleScroll, { threshold: 0.9 })
+
     useEffect(() => {
+        const lastItem = document.getElementById('lastItem')
+        if (lastItem) {
+            observer.observe(lastItem)
+        }
+        return () => {
+            if (lastItem) {
+                observer.unobserve(lastItem)
+            }
+        }
+    }, [data])
+
+
+    useEffect(() => {
+        if (searchParam === undefined) return
         setSearchTerm((prev) => searchParam || prev)
     }, [searchParam])
 
@@ -35,6 +59,7 @@ const Search = () => {
         if (!debouncedSearchTerm) return
         setSearches((prev) => [searchTerm, ...prev.slice(0, 4)])
     }, [debouncedSearchTerm])
+
 
     return (
         <>
@@ -52,15 +77,17 @@ const Search = () => {
                 )}
 
                 <Container>
-                    {items
-                        .slice(0)
-                        ?.map((part: any) =>
+                    {data?.pages.map((page, i) => (
+                        page.map((item, index) =>
                             width > 800 ? (
-                                <SearchResultCard part={part} />
+                                <SearchResultCard part={item} />
                             ) : (
-                                <SearchResultCardCompact part={part} />
+                                <div id={i === data.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                    <SearchResultCardCompact part={item} />
+                                </div>
                             )
-                        )}
+                        )
+                    ))}
                 </Container>
 
                 {!searchTerm ? (
