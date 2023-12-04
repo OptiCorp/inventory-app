@@ -78,7 +78,9 @@ const Search = () => {
                     {data?.pages.map((page, i) => (
                         page.map((item, index) =>
                             width > 800 ? (
-                                <SearchResultCard part={item} />
+                                <div id={i === data.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                    <SearchResultCard part={item} />
+                                </div>
                             ) : (
                                 <div id={i === data.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
                                     <SearchResultCardCompact part={item} />
