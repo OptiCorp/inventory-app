@@ -21,11 +21,9 @@ export const FormContent = () => {
             <Types />
             <WpId />
             <SerialNumber />
-            <ProductNumber />
+            <ProductNumber /> <Vendor />
             <Description />
-            <Vendor />
             <Comment />
-
             <input
                 type="text"
                 defaultValue={currentUser?.id}

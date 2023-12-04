@@ -1,11 +1,11 @@
 import { FormProvider } from 'react-hook-form'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
-import { FormContent } from './FormContent.tsx'
 
-import { usePartsForm } from '../hooks/useAddPartForm.tsx'
 import { FormContainer } from '../styles.ts'
 
 import { Button } from '../../../components/SubmitButton.tsx'
+import { usePartsForm } from '../hooks/useAddPartForm.tsx'
+import { FormContent } from './FormContent.tsx'
 import { StyledForm } from './styles.ts'
 
 type response = {
@@ -21,7 +21,7 @@ export const AddPartFormm = () => {
             <FormContainer>
                 <StyledForm onSubmit={onSubmit} id="addPart">
                     <ProgressBar progressLevel={4} />
-
+                    <h4>Add details</h4>
                     <FormContent />
 
                     <Button id="addPart" type="submit">
