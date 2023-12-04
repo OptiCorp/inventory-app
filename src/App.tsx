@@ -20,6 +20,7 @@ import MakeList from './pages/list/MakeList'
 import PartDetails from './pages/partDetails/Index'
 import Search from './pages/search/Search'
 import GlobalStyles from './style/GlobalStyles'
+import ListDetails from "./pages/listDetails/ListDetails.tsx";
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
@@ -43,7 +44,7 @@ function App() {
                     />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />
-                <Route path="makelist/:listId" element={<MakeList />} />
+                <Route path="makelist/:listId?" element={<ListDetails />} />
             </Route>
         )
     )

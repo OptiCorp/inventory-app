@@ -17,10 +17,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import ListCard from "../../components/listCard/listCard.tsx";
+import {useGetListById} from "../../services/hooks/useGetListById.tsx";
 
-const MakeList = () => {
+const ListDetails = () => {
     const { currentUser } = useContext(UmAppContext)
-    const { searchParam } = useParams<{ searchParam: string }>()
+    const { listId } = useParams()
     const [searchTerm, setSearchTerm] = useState('')
     const [title, setTitle] = useState('')
     const [open, setOpen] = useState(false);
@@ -29,19 +30,9 @@ const MakeList = () => {
         data: lists = [],
         isLoading,
         isFetching,
-    } = useGetListsByUserId(currentUser!.id)
+    } = useGetListById(listId!)
 
     const { mutate, isSuccess } = useAddList()
-
-    useEffect(() => {
-        setSearchTerm((prev) => searchParam || prev)
-    }, [searchParam])
-
-    const filteredData = lists.filter(
-        (list) =>
-            list.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            list.items?.some((item) => item.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
     
     const handleClickOpen = () => {
         setOpen(true);
@@ -97,13 +88,12 @@ const MakeList = () => {
                 )}
 
                 <FlexWrapper>
-                    {filteredData.map((list: List) =>
-                           <ListCard key={list.id} part={list}/>
-                        )}
+                           <ListCard part={lists}/>
+                        
                 </FlexWrapper>
             </SearchContainer>
         </>
     )
 }
 
-export default MakeList
+export default ListDetails

@@ -34,7 +34,7 @@ const ListCard = ({ part }: Props) => {
     
     return (
         <>
-            <ListWrapper onClick={() =>navigate("/")}>
+            <ListWrapper onClick={() =>navigate(`${part.id}`)}>
                 <div onClick={(e) => handleOpen(e)}>
                     <StyledDeleteIcon style={{fontSize: "30px"}}>
                     </StyledDeleteIcon>
