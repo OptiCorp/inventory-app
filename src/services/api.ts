@@ -1,6 +1,6 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
-import { AddItem, Item, User, UserRole } from './apiTypes'
+import { User, UserRole, Item, List, AddList, AddItem } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -203,6 +203,14 @@ const apiService = () => {
         return await getByFetch(`Item/BySearchString/${searchString}`)
     }
 
+    const getListsBySearchString = async (searchString: string, userId: string | undefined): Promise<List[]> => {
+        return await getByFetch(`List/BySearchString/${searchString}?userId=${userId}`)
+    }
+
+    const getListsByUserId = async (userId: string): Promise<List[]> => {
+        return await getByFetch(`List/ByUserId/${userId}`)
+    }
+
     const getItemsByUserId = async (
         userId: string | undefined
     ): Promise<Item[]> => {
@@ -211,6 +219,14 @@ const apiService = () => {
 
     const getItemById = async (id: string) => {
         return await getByFetch(`Item/${id}`)
+    }
+
+    const addList = async (list: AddList): Promise<Response> => {
+        return await postByFetch(`List`, list)
+    }
+
+    const deleteList = async (listId: string): Promise<Response> => {
+        return await deleteByFetch(`List/${listId}`)
     }
 
     const addItem = async (item: AddItem): Promise<Response> => {
@@ -234,8 +250,12 @@ const apiService = () => {
         getUserImage,
         getItemsBySearchString,
         getItemsByUserId,
-        getItemById,
         addItem,
+        getListsBySearchString,
+        getListsByUserId,
+        addList,
+        deleteList,
+        getItemById,
     }
 }
 

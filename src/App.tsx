@@ -43,6 +43,7 @@ function App() {
                     />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />
+                <Route path="makelist/:listId" element={<MakeList />} />
             </Route>
         )
     )

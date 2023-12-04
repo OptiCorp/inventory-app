@@ -5,9 +5,10 @@ import { useWindowDimensions } from '../../hooks'
 type Props = {
     setSearchTerm: Dispatch<SetStateAction<string>>
     searchTerm: string
+    placeholder: string
 }
 
-const SearchBar = ({ setSearchTerm, searchTerm }: Props) => {
+const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
     const { width } = useWindowDimensions()
 
     return (
@@ -22,7 +23,7 @@ const SearchBar = ({ setSearchTerm, searchTerm }: Props) => {
                     }
                     type="text"
                     value={searchTerm}
-                    placeholder=" Search for ID, description, PO number or S/N"
+                    placeholder={placeholder}
                     width={width}
                 />
             </SearchBarContainer>
