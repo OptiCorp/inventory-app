@@ -254,7 +254,7 @@ const apiService = () => {
         getListsBySearchString,
         getListsByUserId,
         addList,
-        deleteList
+        deleteList,
         getItemById,
     }
 }
