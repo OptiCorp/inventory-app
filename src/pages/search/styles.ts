@@ -26,9 +26,6 @@ export const RecentSearchContainer = styled.div`
     margin: 16px;
     justify-content: space-between;
     flex-direction: column;
-    padding: 4px;
-    border-radius: 8px;
-    max-width: 1000px;
     gap: 1rem;
 `
 
@@ -43,7 +40,6 @@ export const StyledSearchedLink = styled(Link)`
 
 export const GlobalSpinnerContainer = styled.div`
     padding-top: 6rem;
-
     padding-left: 43%;
     padding-bottom: 4rem;
 `

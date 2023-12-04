@@ -10,8 +10,8 @@ export const StyledContainerDiv = styled.div`
 `
 
 export const Wrapper = styled.div`
-    display: flex;
-    grid-column: 1/1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     flex-direction: row;
     gap: 3rem;
     border-right: 1px solid rgba(208, 208, 208);
