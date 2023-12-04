@@ -18,7 +18,7 @@ export const ProductNumber = () => {
             </InputWrap>
             <StyledInput
                 type="text"
-                placeholder="Product number"
+                placeholder="E.g BV 113 EU"
                 {...register('productNumber')}
             />
         </>

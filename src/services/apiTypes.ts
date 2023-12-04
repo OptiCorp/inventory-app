@@ -22,7 +22,7 @@ export type UserRole = {
     name: string
 }
 
-export type Item = {
+export type Item = { 
     id: string
     wpId: string
     serialNumber: string

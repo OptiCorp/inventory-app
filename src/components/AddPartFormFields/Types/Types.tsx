@@ -20,8 +20,9 @@ export const Types = () => {
             <StyledSelect
                 style={{ maxWidth: '500px' }}
                 id="type"
-                defaultValue="Specify Unit,   or Item (lowest tier)"
-                {...register('type', { required: true })}
+                placeholder="sfsdf"
+                defaultValue="Specify Unit, or Item (lowest tier)"
+                {...register('type')}
             >
                 <option value="unit">unit</option>
                 <option value="assembly">assembly</option>

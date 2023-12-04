@@ -18,7 +18,7 @@ export const WpId = () => {
             </InputWrap>
             <StyledInput
                 type="text"
-                placeholder="wpId"
+                placeholder="E.g 5321-1"
                 {...register('wpId')}
                 autoComplete="off"
             />

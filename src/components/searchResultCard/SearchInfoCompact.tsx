@@ -19,7 +19,7 @@ const SearchResultCardCompact = ({ part }: Props) => {
         <>
             <ResultCardCompactContainer
                 onClick={() => {
-                    navigate(`/${part.wpId}`)
+                    navigate(`/${part.id}/${part.wpId}`)
                 }}
             >
                 <CompactCard>
@@ -27,7 +27,8 @@ const SearchResultCardCompact = ({ part }: Props) => {
                         <KeyWords>ID:</KeyWords> {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
-                        <KeyWords>Location</KeyWords> {part.location}
+                        <KeyWords>Location</KeyWords>{' '}
+                        {part.location || 'Location'}
                     </CompactInfoP>{' '}
                 </CompactCard>
                 <CompactDesriptionParagraph>
