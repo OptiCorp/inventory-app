@@ -9,20 +9,6 @@ export const StyledContainerDiv = styled.div`
     padding: 16px;
 `
 
-export const Wrapper = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    flex-direction: row;
-    gap: 3rem;
-    border-right: 1px solid rgba(208, 208, 208);
-    border-radius: 5px;
-`
-export const StyledList = styled.ul`
-    margin: 0;
-
-    padding: 1rem;
-    text-decoration: none;
-`
 export const SecondList = styled.ul`
     margin: 0;
     padding: 1rem;
@@ -34,8 +20,25 @@ export const ThirdList = styled.ul`
     padding-right: 3rem;
 `
 
+export const Wrapper = styled.div`
+    background-color: black;
+    border-right: 1px solid rgba(208, 208, 208);
+    border-radius: 5px;
+`
+export const StyledList = styled.ul`
+    margin: auto;
+
+    display: grid;
+
+    font-size: 1.2rem;
+    color: white;
+    list-style: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1rem;
+    text-decoration: none;
+`
 export const ListItem = styled.li`
     line-height: 2rem;
 
-    margin: 0;
+    margin: 0 auto;
 `
