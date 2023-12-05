@@ -29,7 +29,7 @@ const PartDetails = () => {
                 <Card title="Documents">
                     <Documents />
                 </Card>
-                <Card title="Comment">
+                <Card title="Comments">
                     <Comments item={item} />
                 </Card>
 
