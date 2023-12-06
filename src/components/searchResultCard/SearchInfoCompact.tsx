@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom'
-
+import {useNavigate, useParams} from 'react-router-dom'
 import {Item, MutateItemList} from '../../services/apiTypes'
 import {
     CompactCard,
@@ -8,11 +7,9 @@ import {
     KeyWords,
     ResultCardCompactContainer,
 } from './styles'
-import React, {ReactNode, useState} from "react";
+import React, {useState} from "react";
 import {
     StyledAddIcon,
-    StyledDeleteIconAbsolute,
-    StyledDeleteIconRelative,
     StyledRemoveIcon
 } from "../listCard/styles.ts";
 import {useAddItemsToList} from "../../services/hooks/useAddItemsToList.tsx";
@@ -25,30 +22,31 @@ import Dialog from "@mui/material/Dialog";
 type Props = {
     part: Item;
     icon?: string;
-    listId?: string
 }
 
 const SearchResultCardCompact = ({ part, icon }: Props) => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
-
+    const { listId } = useParams()
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
-
     const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } = useRemoveItemsFromList()
 
-    const handleAdd = (ids: MutateItemList) => {
+    const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
+        e.stopPropagation()
         mutateAddItemToList(ids)
+        handleClose(e)
     }
-
-    const handleDelete = (ids: MutateItemList) => {
+    const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
+        e.stopPropagation()
         mutateRemoveItemFromList(ids)
+        handleClose(e)
     }
-
-    const handleClickOpen = () => {
+    const handleClickOpen = (e: React.MouseEvent) => {
+        e.stopPropagation()
         setOpen(true);
     };
-
-    const handleClose = () => {
+    const handleClose = (e: React.MouseEvent) => {
+        e.stopPropagation()
         setOpen(false);
     };
     
@@ -56,15 +54,15 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
         <>
             <ResultCardCompactContainer
                 onClick={() => {
-                    navigate(`/${part.wpId}`)
+                    navigate(`/${part.id}`)
                 }}
             >
                 {icon ==="add" ?
-                    <StyledAddIcon style={{fontSize:"30px"}}></StyledAddIcon>
+                    <StyledAddIcon style={{fontSize:"28px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
                     : null }
 
                 {icon ==="remove" ?
-                    <StyledRemoveIcon style={{fontSize:"30px"}}></StyledRemoveIcon>
+                    <StyledRemoveIcon style={{fontSize:"28px"}} onClick={handleClickOpen}></StyledRemoveIcon>
                     : null }
                 
                 <CompactCard>
@@ -84,7 +82,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                 <DialogTitle>Remove item from list?</DialogTitle>
                 <DialogActions>
                     <CancelButton onClick={handleClose}>Cancel</CancelButton>
-                    <SubmitButton onClick={handleClose}>Confirm</SubmitButton>
+                    <SubmitButton onClick={(e) => handleDelete(e, {itemId: part.id, listId: listId!})}>Confirm</SubmitButton>
                 </DialogActions>
             </Dialog>
         </>

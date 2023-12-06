@@ -28,20 +28,21 @@ export const Searchinfo = ({ part, icon }: Props) => {
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
     const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } = useRemoveItemsFromList()
     
-    const handleAdd = (e: any, ids: MutateItemList) => {
+    const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
         mutateAddItemToList(ids)
         handleClose(e)
     }
-    const handleDelete = (e: any, ids: MutateItemList) => {
+    const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
         mutateRemoveItemFromList(ids)
+        handleClose(e)
     }
-    const handleClickOpen = (e: any) => {
+    const handleClickOpen = (e: React.MouseEvent) => {
         e.stopPropagation()
         setOpen(true);
     };
-    const handleClose = (e: any) => {
+    const handleClose = (e: React.MouseEvent) => {
         e.stopPropagation()
         setOpen(false);
     };
@@ -82,17 +83,17 @@ export const Searchinfo = ({ part, icon }: Props) => {
             </ThirdInfoBox>
             
             {icon ==="add" ?
-                <StyledAddIcon style={{fontSize:"30px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
+                <StyledAddIcon style={{fontSize:"28px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
                 : null }
 
             {icon ==="remove" ?
-                <StyledRemoveIcon style={{fontSize:"30px"}} onClick={handleClickOpen}></StyledRemoveIcon>
+                <StyledRemoveIcon style={{fontSize:"28px"}} onClick={handleClickOpen}></StyledRemoveIcon>
                 : null }
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Remove item from list?</DialogTitle>
                 <DialogActions>
-                    <CancelButton onClick={handleClose}>Cancel</CancelButton>
+                    <CancelButton onClick={() => handleClose}>Cancel</CancelButton>
                     <SubmitButton onClick={(e) => handleDelete(e, {itemId: part.id, listId: listId!})}>Confirm</SubmitButton>
                 </DialogActions>
             </Dialog>

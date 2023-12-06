@@ -27,9 +27,12 @@ const ListDetails = () => {
         isFetching,
     } = useGetListById(listId!)
 
-    const { data: items = [], isLoading } = useGetItems(debouncedSearchTerm)
+    const { 
+        data: items = [],
+        isLoading
+    } = useGetItems(debouncedSearchTerm)
 
-    const filteredItems: Item[] = items.filter(item => !list.items.some((list1Item: Item) => list1Item.id === item.id) && !item.listId);
+    const filteredItems = items.filter(item => !list.items.some((listItem: Item) => listItem.id === item.id) && !item.listId);
     
     return (
         <>
@@ -42,14 +45,13 @@ const ListDetails = () => {
                         <>
                         {list.items.map((item: Item) =>
                                 width > 800 ? (
-                                    <SearchResultCard part={item} icon={"remove"} listId={listId} />
+                                    <SearchResultCard part={item} icon={"remove"} />
                                 ) : (
-                                    <SearchResultCardCompact part={item} icon={"remove"} listId={listId} />
+                                    <SearchResultCardCompact part={item} icon={"remove"} />
                                 )
                             )}
                         </>: null
                     }
-                    
                 </FlexWrapper>
                     </> : null
                 }
@@ -63,14 +65,13 @@ const ListDetails = () => {
                 <Container>
                     {filteredItems.map((part: Item) =>
                             width > 800 ? (
-                                <SearchResultCard part={part} icon={"add"} listId={listId}/>
+                                <SearchResultCard part={part} icon={"add"} />
                             ) : (
-                                <SearchResultCardCompact part={part} icon={"add"} listId={listId}/>
+                                <SearchResultCardCompact part={part} icon={"add"} />
                             )
                         )}
                 </Container>
-            
-
+                
                 {(isLoading || isFetching) && (
                     <GlobalSpinnerContainer>
                         <Spinner />

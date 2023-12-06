@@ -9,7 +9,7 @@ import {
     Spinner
 } from "../search/styles.ts";
 import UmAppContext from "../../contexts/UmAppContext.tsx";
-import {List} from "../../services/apiTypes.ts";
+import {Item, List} from "../../services/apiTypes.ts";
 import { SubmitButton, CancelButton, SavedListsTitle, FlexWrapper } from "./styles.ts";
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -40,7 +40,12 @@ const MakeList = () => {
     const filteredData = lists.filter(
         (list) =>
             list.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            list.items?.some((item) => item.toLowerCase().includes(searchTerm.toLowerCase()))
+            list.items?.some((item: any) =>
+                item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.wpId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.description.toLowerCase().includes(searchTerm.toLowerCase())
+            )
     );
     
     const handleClickOpen = () => {

@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-
-import {Item, MutateItemList} from '../../services/apiTypes'
+import { Item } from '../../services/apiTypes'
 import { Searchinfo } from './cardInfo/SearchInfo'
 import { ResultCardContainer, SearchCard } from './styles'
 import React from "react";
@@ -8,7 +7,6 @@ import React from "react";
 type Props = {
     part: Item
     icon?: string
-    listId?: string
 }
 
 const SearchResultCard = ({ part, icon }: Props) => {
@@ -20,7 +18,7 @@ const SearchResultCard = ({ part, icon }: Props) => {
                 <SearchCard
                     title=""
                     onClick={() => {
-                        navigate(`/${part.id}/${part.wpId}`)
+                        navigate(`/${part.id}`)
                     }}
                 >
                     <Searchinfo part={part} icon={icon} />
