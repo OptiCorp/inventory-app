@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import {ListWrapper, StyledTitle, StyledDeleteIcon} from './styles'
+import {ListWrapper, StyledTitle, StyledDeleteIconAbsolute} from './styles'
 import { List } from '../../services/apiTypes'
 import {useDeleteList} from "../../services/hooks/useDeleteList.tsx";
 import {useState} from "react";
@@ -34,10 +34,10 @@ const ListCard = ({ part }: Props) => {
     
     return (
         <>
-            <ListWrapper onClick={() =>navigate("/")}>
+            <ListWrapper onClick={() =>navigate(`${part.id}`)}>
                 <div onClick={(e) => handleOpen(e)}>
-                    <StyledDeleteIcon style={{fontSize: "30px"}}>
-                    </StyledDeleteIcon>
+                    <StyledDeleteIconAbsolute style={{fontSize: "30px"}}>
+                    </StyledDeleteIconAbsolute>
                 </div>
                     <StyledTitle>{part.title}</StyledTitle>
                     <h4>Created: {part.createdDate}</h4>

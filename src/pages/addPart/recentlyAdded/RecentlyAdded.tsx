@@ -26,9 +26,9 @@ const RecentlyAdded = () => {
             <h3>Recently added by you</h3>
             {myItems?.map((item: Item) =>
                 width > 800 ? (
-                    <SearchResultCard part={item} />
+                    <SearchResultCard key={item.id} part={item} />
                 ) : (
-                    <SearchResultCardCompact part={item} />
+                    <SearchResultCardCompact key={item.id} part={item} />
                 )
             )}
 

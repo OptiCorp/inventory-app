@@ -20,6 +20,7 @@ import MakeList from './pages/list/MakeList'
 import PartDetails from './pages/partDetails/Index'
 import Search from './pages/search/Search'
 import GlobalStyles from './style/GlobalStyles'
+import ListDetails from "./pages/listDetails/ListDetails.tsx";
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
@@ -30,7 +31,7 @@ function App() {
             <Route path="/" element={<TopBar />}>
                 <Route path="search/:searchParam?" element={<Search />} />
 
-                <Route path=":id/:wpId" element={<PartDetails />} />
+                <Route path=":id" element={<PartDetails />} />
                 <Route path="add-part" element={<AddPart />}>
                     <Route index element={<RecentlyAdded />} />
                     <Route path="batch" element={<BatchForm />} />
@@ -43,7 +44,7 @@ function App() {
                     />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />
-                <Route path="makelist/:listId" element={<MakeList />} />
+                <Route path="makelist/:listId?" element={<ListDetails />} />
             </Route>
         )
     )

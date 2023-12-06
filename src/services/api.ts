@@ -218,6 +218,10 @@ const apiService = () => {
         return await getByFetch(`List/ByUserId/${userId}`)
     }
 
+    const getListById = async (id: string) => {
+        return await getByFetch(`List/${id}`)
+    }
+
     const getItemsByUserId = async (
         userId: string | undefined
     ): Promise<Item[]> => {
@@ -238,6 +242,14 @@ const apiService = () => {
 
     const addItem = async (item: AddItem[]): Promise<Response> => {
         return await postByFetch(`Item`, item)
+    }
+
+    const addItemsToList = async (listId: string, itemId: string): Promise<Response> => {
+        return await postByFetch(`List/AddItems/?listId=${listId}`, [itemId])
+    }
+
+    const removeItemsFromList = async (listId: string, itemId: string): Promise<Response> => {
+        return await postByFetch(`List/RemoveItems/?listId=${listId}`, [itemId])
     }
 
     return {
@@ -262,6 +274,9 @@ const apiService = () => {
         addList,
         deleteList,
         getItemById,
+        getListById,
+        addItemsToList,
+        removeItemsFromList
     }
 }
 
