@@ -1,6 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
-import { ErrorP, InputWrap, StyledInput } from './styles'
+import { StyledTextArea } from '../Comment/styles'
+import { ErrorP, InputWrap } from './styles'
 
 export const Description = () => {
     const {
@@ -16,9 +17,10 @@ export const Description = () => {
                     render={({ message }) => <ErrorP>{message}</ErrorP>}
                 />
             </InputWrap>
-            <StyledInput
-                type="text"
-                placeholder="Item description"
+            <StyledTextArea
+                placeholder="E.g. Hydraulic cylinders can be purchased in a range of ISO standard measurement bore"
+                rows={4}
+                cols={40}
                 {...register('description')}
             />
         </>

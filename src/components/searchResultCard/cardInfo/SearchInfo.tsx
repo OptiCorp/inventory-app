@@ -69,7 +69,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
             </SecondInfoBox>
             <ThirdInfoBox>
                 <InfoP>
-                    <KeyWords>Location</KeyWords> {part.location}
+                    <KeyWords>Location</KeyWords> {part.location || 'Location'}
                 </InfoP>
                 <InfoP>
                     {' '}
@@ -78,7 +78,8 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 </InfoP>
                 <InfoP>
                     {' '}
-                    <KeyWords>Last updated</KeyWords> {part.updatedDate}{' '}
+                    <KeyWords>Last updated</KeyWords>{' '}
+                    {part.updatedDate || '00/00/00'}{' '}
                 </InfoP>
             </ThirdInfoBox>
             

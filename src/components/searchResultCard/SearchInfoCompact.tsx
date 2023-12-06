@@ -70,7 +70,8 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         <KeyWords>ID:</KeyWords> {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
-                        <KeyWords>Location</KeyWords> {part.location}
+                        <KeyWords>Location</KeyWords>{' '}
+                        {part.location || 'Location'}
                     </CompactInfoP>{' '}
                 </CompactCard>
                 <CompactDesriptionParagraph>

@@ -28,9 +28,11 @@ export const DescriptionParagraph = styled.p`
 export const CompactDesriptionParagraph = styled.p`
     background-color: ${COLORS.aliceBlue};
     border-radius: 3px;
-
     overflow: hidden;
     display: flex;
+    line-height: 1.5rem;
+    word-wrap: break-word;
+    max-height: 50px;
     padding: 10px 20px;
     justify-content: start;
 `
@@ -40,7 +42,6 @@ export const ResultCardCompactContainer = styled.div`
     background-color: ${COLORS.white};
     border-radius: 8px;
     margin: 16px;
-
     box-shadow: 2.5px 2.5px gray;
     display: flex;
     flex-direction: column;
@@ -62,7 +63,6 @@ export const SearchCard = styled.div`
             200px,
             300px
         );
-
     border-right: 1px solid rgba(208, 208, 208);
     background-color: ${COLORS.white};
 `
@@ -74,7 +74,6 @@ export const CompactCard = styled.div`
     cursor: pointer;
     border-right: 1px solid rgba(208, 208, 208);
     background-color: ${COLORS.white};
-
     padding: 1rem;
 `
 
@@ -88,11 +87,10 @@ export const CardInfoWrap = styled.div`
 export const FirstInfoBox = styled.div`
     margin: 1rem 0;
     display: flex;
+    justify-content: space-evenly;
     flex-direction: column;
-
     line-height: 25px;
     padding-right: 8px;
-    grid-column: 1/1;
 
     border-right: 1px solid rgba(208, 208, 208);
 `
@@ -105,24 +103,25 @@ export const SecondInfoBox = styled.div`
 `
 
 export const ThirdInfoBox = styled.div`
-    grid-column: 3/3;
-    display: flex;
-    flex-direction: column;
     margin: 1rem 0;
-    padding: 8px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
     line-height: 25px;
+    padding-right: 8px;
+
+    border-right: 1px solid rgba(208, 208, 208);
 `
 
 export const InfoP = styled.p`
-    line-height: 1.5rem;
+    line-height: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
 `
 
 export const KeyWords = styled.span`
     font-weight: 600;
-    padding-left: 3rem;
-
-    display: inline;
-    padding-right: 3rem;
 `
 export const CompactInfoP = styled.div`
     padding-right: 2rem;
