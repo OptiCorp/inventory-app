@@ -16,15 +16,7 @@ import {
     SearchContainer,
     Spinner
 } from "../search/styles.ts";
-import UmAppContext from "../../contexts/UmAppContext.tsx";
-import {Item, List} from "../../services/apiTypes.ts";
 import { SubmitButton, CancelButton, SavedListsTitle, FlexWrapper } from "./styles.ts";
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import ListCard from "../../components/listCard/listCard.tsx";
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
