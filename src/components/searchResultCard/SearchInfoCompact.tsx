@@ -58,11 +58,11 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                 }}
             >
                 {icon ==="add" ?
-                    <StyledAddIcon style={{fontSize:"28px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
+                    <StyledAddIcon style={{fontSize:"25px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
                     : null }
 
                 {icon ==="remove" ?
-                    <StyledRemoveIcon style={{fontSize:"28px"}} onClick={handleClickOpen}></StyledRemoveIcon>
+                    <StyledRemoveIcon style={{fontSize:"25px"}} onClick={handleClickOpen}></StyledRemoveIcon>
                     : null }
                 
                 <CompactCard>

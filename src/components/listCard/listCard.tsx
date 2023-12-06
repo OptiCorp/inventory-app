@@ -7,6 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import {CancelButton, SubmitButton} from "../../pages/list/styles.ts";
+import {format} from "date-fns";
 
 type Props = {
     part: List
@@ -40,9 +41,9 @@ const ListCard = ({ part }: Props) => {
                     </StyledDeleteIconAbsolute>
                 </div>
                     <StyledTitle>{part.title}</StyledTitle>
-                    <h4>Created: {part.createdDate}</h4>
+                    <h4>Created: {format((new Date(part.createdDate)), "dd-MM-yyyy HH:mm:ss").toString()}</h4>
                     {part.updatedDate ?
-                        <h4>Last updated: {part.updatedDate}</h4>
+                        <h4>Last updated: {format((new Date(part.updatedDate)), "dd-MM-yyyy HH:mm:ss").toString()}</h4>
                         : null
                     }
             </ListWrapper>
