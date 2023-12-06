@@ -30,7 +30,7 @@ const ListDetails = () => {
     const { 
         data: items = [],
         isLoading
-    } = useGetItems(debouncedSearchTerm)
+    } = useGetItems(debouncedSearchTerm, 0)
 
     const filteredItems = items.filter(item => !list.items.some((listItem: Item) => listItem.id === item.id) && !item.listId);
     
