@@ -36,6 +36,7 @@ export const CompactDesriptionParagraph = styled.p`
 `
 
 export const ResultCardCompactContainer = styled.div`
+  position: relative;
     background-color: ${COLORS.white};
     border-radius: 8px;
     margin: 16px;
@@ -52,6 +53,7 @@ export const CompactCardWrapper = styled.div`
 `
 
 export const SearchCard = styled.div`
+    position: relative;
     line-height: 25px;
     border-radius: 5px;
     padding: 1rem;

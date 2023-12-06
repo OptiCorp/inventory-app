@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import SearchBar from "../../components/searchBar/SearchBar.tsx";
 
 export const SubmitButton = styled.button`
   width: 150px;
@@ -22,7 +23,7 @@ export const CancelButton = styled.button`
   }
 `
 
-export const SavedListsTitle = styled.h3`
+export const ListTitle = styled.h2`
   font-weight: 600;
   line-height: 2rem;
   margin: 15px 0 5px 15px;

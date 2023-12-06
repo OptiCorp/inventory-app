@@ -1,4 +1,4 @@
-import { Item } from '../../../services/apiTypes'
+import {Item, MutateItemList} from '../../../services/apiTypes'
 import {
     DescriptionParagraph,
     FirstInfoBox,
@@ -7,12 +7,45 @@ import {
     SecondInfoBox,
     ThirdInfoBox,
 } from '../styles'
+import React, {useState} from "react";
+import {StyledAddIcon, StyledRemoveIcon} from "../../listCard/styles.ts";
+import {useAddItemsToList} from "../../../services/hooks/useAddItemsToList.tsx";
+import {useRemoveItemsFromList} from "../../../services/hooks/useRemoveItemsFromList.tsx";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import {CancelButton, SubmitButton} from "../../../pages/listDetails/styles.ts";
+import Dialog from "@mui/material/Dialog";
+import {useParams} from "react-router-dom";
 
 type Props = {
     part: Item
+    icon?: string
 }
 
-export const Searchinfo = ({ part }: Props) => {
+export const Searchinfo = ({ part, icon }: Props) => {
+    const [open, setOpen] = useState(false)
+    const { listId } = useParams()
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
+    const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } = useRemoveItemsFromList()
+    
+    const handleAdd = (e: any, ids: MutateItemList) => {
+        e.stopPropagation()
+        mutateAddItemToList(ids)
+        handleClose(e)
+    }
+    const handleDelete = (e: any, ids: MutateItemList) => {
+        e.stopPropagation()
+        mutateRemoveItemFromList(ids)
+    }
+    const handleClickOpen = (e: any) => {
+        e.stopPropagation()
+        setOpen(true);
+    };
+    const handleClose = (e: any) => {
+        e.stopPropagation()
+        setOpen(false);
+    };
+    
     return (
         <>
             {' '}
@@ -47,6 +80,22 @@ export const Searchinfo = ({ part }: Props) => {
                     <KeyWords>Last updated</KeyWords> {part.updatedDate}{' '}
                 </InfoP>
             </ThirdInfoBox>
+            
+            {icon ==="add" ?
+                <StyledAddIcon style={{fontSize:"30px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
+                : null }
+
+            {icon ==="remove" ?
+                <StyledRemoveIcon style={{fontSize:"30px"}} onClick={handleClickOpen}></StyledRemoveIcon>
+                : null }
+
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Remove item from list?</DialogTitle>
+                <DialogActions>
+                    <CancelButton onClick={handleClose}>Cancel</CancelButton>
+                    <SubmitButton onClick={(e) => handleDelete(e, {itemId: part.id, listId: listId!})}>Confirm</SubmitButton>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }

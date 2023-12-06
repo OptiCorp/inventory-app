@@ -57,6 +57,11 @@ export type AddList = {
     title: string
 }
 
+export type MutateItemList = {
+    listId: string
+    itemId: string
+}
+
 export type AddItem = {
     wpId: string
     serialNumber: string

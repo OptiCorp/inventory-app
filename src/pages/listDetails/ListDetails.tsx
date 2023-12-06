@@ -1,96 +1,82 @@
 import SearchBar from '../../components/searchBar/SearchBar'
 import {useParams} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
-import {useAddList} from "../../services/hooks/useAddList.tsx";
-import {useGetListsByUserId} from "../../services/hooks/useGetListsByUserId.tsx";
+import React, {useState} from "react";
 import {
+    Container,
     GlobalSpinnerContainer,
     SearchContainer,
     Spinner
 } from "../search/styles.ts";
-import UmAppContext from "../../contexts/UmAppContext.tsx";
-import {List} from "../../services/apiTypes.ts";
-import { SubmitButton, CancelButton, SavedListsTitle, FlexWrapper } from "./styles.ts";
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import ListCard from "../../components/listCard/listCard.tsx";
+import {Item} from "../../services/apiTypes.ts";
+import { ListTitle, FlexWrapper } from "./styles.ts";
 import {useGetListById} from "../../services/hooks/useGetListById.tsx";
+import SearchResultCard from "../../components/searchResultCard/SearchResultCard.tsx";
+import SearchResultCardCompact from "../../components/searchResultCard/SearchInfoCompact.tsx";
+import {useWindowDimensions} from "../../hooks";
+import {useDebounce} from "usehooks-ts";
+import {useGetItems} from "../../services/hooks/useGetItems.tsx";
 
 const ListDetails = () => {
-    const { currentUser } = useContext(UmAppContext)
     const { listId } = useParams()
     const [searchTerm, setSearchTerm] = useState('')
-    const [title, setTitle] = useState('')
-    const [open, setOpen] = useState(false);
+    const debouncedSearchTerm = useDebounce(searchTerm, 500)
+    const { width } = useWindowDimensions()
     
     const {
-        data: lists = [],
-        isLoading,
+        data: list,
         isFetching,
     } = useGetListById(listId!)
 
-    const { mutate, isSuccess } = useAddList()
-    
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const { data: items = [], isLoading } = useGetItems(debouncedSearchTerm)
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const filteredItems: Item[] = items.filter(item => !list.items.some((list1Item: Item) => list1Item.id === item.id) && !item.listId);
     
-    const handleSubmit = () => {
-        mutate({createdById: currentUser!.id, title: title})
-        handleClose()
-    }
-
     return (
         <>
             <SearchContainer>
+                {list ? 
+                    <>
+                <ListTitle>{list.title}, {list.createdDate.split(" ")[0]}</ListTitle>
+                <FlexWrapper>
+                    {list.items ? 
+                        <>
+                        {list.items.map((item: Item) =>
+                                width > 800 ? (
+                                    <SearchResultCard part={item} icon={"remove"} listId={listId} />
+                                ) : (
+                                    <SearchResultCardCompact part={item} icon={"remove"} listId={listId} />
+                                )
+                            )}
+                        </>: null
+                    }
+                    
+                </FlexWrapper>
+                    </> : null
+                }
+                
                 <SearchBar
                     setSearchTerm={setSearchTerm}
                     searchTerm={searchTerm}
-                    placeholder={'Search for title or items'}
+                    placeholder={"Search for ID, description, PO number or S/N"}
                 />
                 
-                <SubmitButton style={{marginLeft:"13px"}} onClick={handleClickOpen}>
-                    New list
-                </SubmitButton>
-                
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>New list</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            onChange={(e) => setTitle(e.target.value)}
-                            autoFocus
-                            margin="dense"
-                            id="title"
-                            label="List title"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <CancelButton onClick={handleClose}>Cancel</CancelButton>
-                        <SubmitButton onClick={handleSubmit}>Confirm</SubmitButton>
-                    </DialogActions>
-                </Dialog>
-                
-                <SavedListsTitle>Your saved lists</SavedListsTitle>
+                <Container>
+                    {filteredItems.map((part: Item) =>
+                            width > 800 ? (
+                                <SearchResultCard part={part} icon={"add"} listId={listId}/>
+                            ) : (
+                                <SearchResultCardCompact part={part} icon={"add"} listId={listId}/>
+                            )
+                        )}
+                </Container>
+            
 
-                {isLoading && (
+                {(isLoading || isFetching) && (
                     <GlobalSpinnerContainer>
                         <Spinner />
                     </GlobalSpinnerContainer>
                 )}
 
-                <FlexWrapper>
-                           <ListCard part={lists}/>
-                        
-                </FlexWrapper>
             </SearchContainer>
         </>
     )
