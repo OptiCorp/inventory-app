@@ -81,8 +81,6 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     <KeyWords>Last updated</KeyWords>{' '}
                     {part.updatedDate || '00/00/00'}{' '}
                 </InfoP>
-            </ThirdInfoBox>
-            
             {icon ==="add" ?
                 <StyledAddIcon style={{fontSize:"25px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
                 : null }
@@ -90,6 +88,8 @@ export const Searchinfo = ({ part, icon }: Props) => {
             {icon ==="remove" ?
                 <StyledRemoveIcon style={{fontSize:"25px"}} onClick={handleClickOpen}></StyledRemoveIcon>
                 : null }
+            </ThirdInfoBox>
+            
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Remove item from list?</DialogTitle>

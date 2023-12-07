@@ -69,6 +69,8 @@ export const SearchCard = styled.div`
 export const CompactCard = styled.div`
     border-radius: 5px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-basis: 100%;
     cursor: pointer;
     border-right: 1px solid rgba(208, 208, 208);
