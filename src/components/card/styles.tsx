@@ -10,11 +10,8 @@ export const StyledInfoDiv = styled.div`
 `
 
 export const Lists = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    grid-auto-rows: auto;
-
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 `
 
 export const CompactLists = styled.div`

@@ -1,34 +1,70 @@
-import { ListItem, SecondList, StyledList, ThirdList, Wrapper } from './styles'
+import { styled } from 'styled-components'
+import { Item } from '../../services/apiTypes'
 
-export const PartInfo = () => {
+export const PartInfo = ({ item }: { item: Item }) => {
     return (
-        <>
-            <Wrapper>
-                <StyledList>
-                    <ListItem>Description</ListItem>
-                    <ListItem>P/N</ListItem>
-                    <ListItem>S/N</ListItem>
-                    <ListItem>Vendor</ListItem>{' '}
-                </StyledList>
-                <SecondList>
-                    {' '}
-                    <ListItem>Added by</ListItem>
-                    <ListItem>Updated date</ListItem>
-                    <ListItem>Type</ListItem>
-                    <ListItem> Revision Number </ListItem>
-                </SecondList>
-            </Wrapper>
-            <ThirdList>
-                Location (potential future feature)
-                <ListItem>
-                    Shows current location of unit. For example on a rig or a
-                    particular place in the workshop.
-                </ListItem>
-                <ListItem>
-                    This requires routines for tracking (checking in and out of
-                    workshop, integration to Kabal)
-                </ListItem>
-            </ThirdList>
-        </>
+        <Container>
+            <div>
+                <div>
+                    <p>
+                        <strong>Description</strong>
+                    </p>
+                    <p>{item.description}</p>
+                </div>
+                <div>
+                    <p>
+                        <strong>Product number</strong>
+                    </p>
+                    <p>{item.productNumber?.toUpperCase()}</p>
+                </div>
+                <div>
+                    <p>
+                        <strong>Serial number</strong>
+                    </p>
+                    <p>{item.serialNumber?.toUpperCase()}</p>
+                </div>
+                <div>
+                    <p>
+                        <strong>Serial number</strong>
+                    </p>
+                    <p>{item.vendor}</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <p>
+                        <strong>Added by</strong>
+                    </p>
+                    <p>
+                        {item.addedByFirstName} {item.addedByLastName}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <strong>Updated date</strong>
+                    </p>
+                    <p>{item.updatedDate || '00/00/00'}</p>
+                </div>
+                <div>
+                    <p>
+                        <strong>Type</strong>
+                    </p>
+                    <p>{item.type}</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <p>
+                        <strong>Location</strong>
+                    </p>
+                    <p>{item.location || 'Location'}</p>
+                </div>
+            </div>
+        </Container>
     )
 }
+
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+`
