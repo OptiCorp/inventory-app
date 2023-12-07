@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Button } from '../../../components/SubmitButton.tsx'
+import { Button } from '../../../components/Button/SubmitButton.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 import { FormContainer } from '../styles.ts'
 import { FormBatchRadio } from './styles.ts'
