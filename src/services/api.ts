@@ -1,7 +1,7 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
 
-import { AddItem, AddList, Item, List, User, UserRole } from './apiTypes'
+import { AddItem, AddList, Item, List, UpdateItem, User, UserRole } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -74,6 +74,28 @@ const apiService = () => {
                 body: JSON.stringify(bodyData),
             }
             const res = await fetch(`${API_URL}/${url}`, postOperation)
+            return res
+        } catch (error) {
+            console.error('An error occurred:', error)
+            throw error
+        }
+    }
+
+    // Generic function for put requests
+    const putByFetch = async (url: string, bodyData: any) => {
+        try {
+            const tokenResponse = await pca.acquireTokenSilent(request)
+            const putOperations = {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${tokenResponse.accessToken}`,
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                body: JSON.stringify(bodyData),
+            }
+            const res = await fetch(`${API_URL}/${url}`, putOperations)
+
             return res
         } catch (error) {
             console.error('An error occurred:', error)
@@ -231,6 +253,10 @@ const apiService = () => {
     const getItemById = async (id: string) => {
         return await getByFetch(`Item/${id}`)
     }
+    
+    const updateItemById = async (id: string, item: UpdateItem): Promise<Response> => {
+        return await putByFetch(`Item/${id}`, item)
+    }
 
     const addList = async (list: AddList): Promise<Response> => {
         return await postByFetch(`List`, list)
@@ -274,9 +300,11 @@ const apiService = () => {
         addList,
         deleteList,
         getItemById,
+        updateItemById,
         getListById,
         addItemsToList,
         removeItemsFromList
+
     }
 }
 

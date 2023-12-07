@@ -75,3 +75,18 @@ export type AddItem = {
     comment?: string | null
 }
 
+
+export type UpdateItem = {
+    id: string
+    wpId: string
+    serialNumber: string
+    productNumber: string
+    type: string
+    location?: string | null
+    description: string
+    parentId?: string | null
+    vendor: string
+    addedById: string | null
+    comment?: string | null
+}
+
