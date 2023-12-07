@@ -3,7 +3,7 @@ import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 
 import { FormContainer } from '../styles.ts'
 
-import { Button } from '../../../components/SubmitButton.tsx'
+import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { usePartsForm } from '../hooks/useAddPartForm.tsx'
 import { FormContent } from './FormContent.tsx'
 import { StyledForm } from './styles.ts'

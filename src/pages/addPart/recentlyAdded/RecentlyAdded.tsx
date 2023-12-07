@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router'
 import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact.tsx'
 import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
 
-import { Button } from '../../../components/SubmitButton.tsx'
+import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { RecentlyAddedContainer } from './styles.ts'
 
 const RecentlyAdded = () => {
@@ -26,9 +26,9 @@ const RecentlyAdded = () => {
             <h3>Recently added by you</h3>
             {myItems?.map((item: Item) =>
                 width > 800 ? (
-                    <SearchResultCard part={item} />
+                    <SearchResultCard key={item.id} part={item} />
                 ) : (
-                    <SearchResultCardCompact part={item} />
+                    <SearchResultCardCompact key={item.id} part={item} />
                 )
             )}
 

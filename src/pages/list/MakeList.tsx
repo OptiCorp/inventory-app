@@ -14,14 +14,9 @@ import { useGetListsByUserId } from '../../services/hooks/useGetListsByUserId.ts
 import {
     GlobalSpinnerContainer,
     SearchContainer,
-    Spinner,
-} from '../search/styles.ts'
-import {
-    CancelButton,
-    FlexWrapper,
-    SavedListsTitle,
-    SubmitButton,
-} from './styles.ts'
+    Spinner
+} from "../search/styles.ts";
+import { SubmitButton, CancelButton, SavedListsTitle, FlexWrapper } from "./styles.ts";
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
@@ -45,11 +40,14 @@ const MakeList = () => {
     const filteredData = lists.filter(
         (list) =>
             list.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            list.items?.some((item) =>
-                item.toLowerCase().includes(searchTerm.toLowerCase())
+            list.items?.some((item: any) =>
+                item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.wpId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.description.toLowerCase().includes(searchTerm.toLowerCase())
             )
-    )
-
+    );
+    
     const handleClickOpen = () => {
         setOpen(true)
     }
@@ -111,11 +109,11 @@ const MakeList = () => {
                 )}
 
                 <FlexWrapper>
-                    {filteredData.map((list: List) => (
-                        <>
-                            <ListCard part={list} />
-                        </>
-                    ))}
+
+                    {filteredData.map((list: List) =>
+                           <ListCard key={list.id} part={list}/>
+                        )}
+
                 </FlexWrapper>
             </SearchContainer>
         </>

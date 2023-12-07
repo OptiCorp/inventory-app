@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import {ListWrapper, StyledTitle, StyledDeleteIcon} from './styles'
+import {ListWrapper, StyledTitle, StyledDeleteIconAbsolute} from './styles'
 import { List } from '../../services/apiTypes'
 import {useDeleteList} from "../../services/hooks/useDeleteList.tsx";
 import {useState} from "react";
@@ -7,6 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import {CancelButton, SubmitButton} from "../../pages/list/styles.ts";
+import {format} from "date-fns";
 
 type Props = {
     part: List
@@ -34,15 +35,15 @@ const ListCard = ({ part }: Props) => {
     
     return (
         <>
-            <ListWrapper onClick={() =>navigate("/")}>
+            <ListWrapper onClick={() =>navigate(`${part.id}`)}>
                 <div onClick={(e) => handleOpen(e)}>
-                    <StyledDeleteIcon style={{fontSize: "30px"}}>
-                    </StyledDeleteIcon>
+                    <StyledDeleteIconAbsolute style={{fontSize: "30px"}}>
+                    </StyledDeleteIconAbsolute>
                 </div>
                     <StyledTitle>{part.title}</StyledTitle>
-                    <h4>Created: {part.createdDate}</h4>
+                    <h4>Created: {format((new Date(part.createdDate)), "dd-MM-yyyy HH:mm:ss").toString()}</h4>
                     {part.updatedDate ?
-                        <h4>Last updated: {part.updatedDate}</h4>
+                        <h4>Last updated: {format((new Date(part.updatedDate)), "dd-MM-yyyy HH:mm:ss").toString()}</h4>
                         : null
                     }
             </ListWrapper>

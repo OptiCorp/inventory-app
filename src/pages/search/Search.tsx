@@ -96,8 +96,8 @@ const Search = () => {
                     <RecentSearchContainer>
                         <RecentTitle>Recent Searches</RecentTitle>
 
-                        {searches.map((search) => (
-                            <StyledSearchedLink to={`/search/${search}`}>
+                        {searches.map((search, index) => (
+                            <StyledSearchedLink key={index} to={`/search/${search}`}>
                                 {search}
                             </StyledSearchedLink>
                         ))}
