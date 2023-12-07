@@ -1,6 +1,6 @@
 import SearchBar from '../../components/searchBar/SearchBar'
 import {useParams} from "react-router-dom";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Container,
     GlobalSpinnerContainer,
@@ -15,6 +15,7 @@ import SearchResultCardCompact from "../../components/searchResultCard/SearchInf
 import {useWindowDimensions} from "../../hooks";
 import {useDebounce} from "usehooks-ts";
 import {useGetItems} from "../../services/hooks/useGetItems.tsx";
+import {useGetItemsInfinite} from "../../services/hooks/useGetItemsInfinite.tsx";
 
 const ListDetails = () => {
     const { listId } = useParams()
@@ -27,13 +28,29 @@ const ListDetails = () => {
         isFetching,
     } = useGetListById(listId!)
 
-    const { 
-        data: items = [],
-        isLoading
-    } = useGetItems(debouncedSearchTerm, 0)
+    const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm)
 
-    const filteredItems = items.filter(item => !list.items.some((listItem: Item) => listItem.id === item.id) && !item.listId);
+    const handleScroll = (entries: IntersectionObserverEntry[]) => {
+        if (entries[0].isIntersecting) {
+            fetchNextPage()
+        }
+    }
+
+    const observer = new IntersectionObserver(handleScroll, { threshold: 0.9 })
+
+    useEffect(() => {
+        const lastItem = document.getElementById('lastItem')
+        if (lastItem) {
+            observer.observe(lastItem)
+        }
+        return () => {
+            if (lastItem) {
+                observer.unobserve(lastItem)
+            }
+        }
+    }, [items])
     
+
     return (
         <>
             <SearchContainer>
@@ -55,21 +72,32 @@ const ListDetails = () => {
                 </FlexWrapper>
                     </> : null
                 }
+
+                <ListTitle>Add items</ListTitle>
                 
                 <SearchBar
                     setSearchTerm={setSearchTerm}
                     searchTerm={searchTerm}
                     placeholder={"Search for ID, description, PO number or S/N"}
                 />
-                
+
                 <Container>
-                    {filteredItems.map((part: Item) =>
-                            width > 800 ? (
-                                <SearchResultCard part={part} icon={"add"} />
-                            ) : (
-                                <SearchResultCardCompact part={part} icon={"add"} />
+                    {items?.pages.map((page, i) => 
+                        page.map((item, index) => {
+                            const isInList = list?.items.some((listItem: Item) => listItem.id === item.id);
+                            return (
+                                !isInList && (
+                                    <div key={item.id} id={i === items.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                        {width > 800 ? (
+                                            <SearchResultCard part={item} icon={"add"} />
+                                        ) : (
+                                            <SearchResultCardCompact part={item} icon={"add"} />
+                                        )}
+                                    </div>
+                                )
                             )
-                        )}
+                        })
+                    )}
                 </Container>
                 
                 {(isLoading || isFetching) && (
