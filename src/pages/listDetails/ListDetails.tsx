@@ -36,7 +36,7 @@ const ListDetails = () => {
         }
     }
 
-    const observer = new IntersectionObserver(handleScroll, { threshold: 0.9 })
+    const observer = new IntersectionObserver(handleScroll, { threshold: 1, rootMargin: '100px' })
 
     useEffect(() => {
         const lastItem = document.getElementById('lastItem')
@@ -87,7 +87,7 @@ const ListDetails = () => {
                             const isInList = list?.items.some((listItem: Item) => listItem.id === item.id);
                             return (
                                 !isInList && (
-                                    <div key={item.id} id={i === items.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                    <div key={item.id} id={i === items.pages.length - 1 && index === page.length - 1 - list.items.length ? 'lastItem' : ''}>
                                         {width > 800 ? (
                                             <SearchResultCard part={item} icon={"add"} />
                                         ) : (
