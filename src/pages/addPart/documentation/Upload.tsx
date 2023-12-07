@@ -14,7 +14,7 @@ const Upload = () => {
             setError('Tick box before continuing')
             return
         }
-        navigate('/add-part/upload')
+        navigate('/add-part/add-form')
     }
 
     return (
