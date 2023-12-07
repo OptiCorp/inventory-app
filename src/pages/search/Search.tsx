@@ -35,7 +35,7 @@ const Search = () => {
         }
     }
 
-    const observer = new IntersectionObserver(handleScroll, { threshold: 0.9 })
+    const observer = new IntersectionObserver(handleScroll, { threshold: 1, rootMargin: '100px' })
 
     useEffect(() => {
         const lastItem = document.getElementById('lastItem')
@@ -51,12 +51,10 @@ const Search = () => {
 
 
     useEffect(() => {
-        if (searchParam === undefined) return
         setSearchTerm((prev) => searchParam || prev)
     }, [searchParam])
 
     useEffect(() => {
-        if (!debouncedSearchTerm) return
         setSearches((prev) => [searchTerm, ...prev.slice(0, 4)])
     }, [debouncedSearchTerm])
 
