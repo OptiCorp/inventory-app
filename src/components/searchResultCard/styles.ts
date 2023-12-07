@@ -45,6 +45,7 @@ export const ResultCardCompactContainer = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 500px;
+    position: relative;
 `
 
 export const CompactCardWrapper = styled.div`
