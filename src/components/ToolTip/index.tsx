@@ -1,21 +1,10 @@
 import { ReactNode, useState } from 'react'
-import styled from 'styled-components'
+import { ToolTipContent } from './styles'
+
 type Props = {
     content: string
     children: ReactNode
 }
-
-const ToolTipContent = styled.div`
-    position: absolute;
-    background-color: #565656;
-    left: 20px;
-    line-height: 20px;
-    top: -10px;
-    width: 190px;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-`
 
 export const ToolTip = ({ content, children }: Props) => {
     const [isVisble, setIsVisble] = useState(false)

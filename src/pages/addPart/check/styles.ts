@@ -6,7 +6,7 @@ export const ButtonWrap = styled.div`
     justify-content: end;
 `
 export const StyledTextArea = styled.textarea`
-    background-color: ${COLORS.white};
+    background-color: ${COLORS.secondary};
     margin: 16;
     padding: 1rem;
     display: block;

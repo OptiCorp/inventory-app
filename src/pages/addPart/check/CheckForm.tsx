@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton'
 import ProgressBar from '../../../components/progressBar/ProgressBar'
+import { COLORS } from '../../../style/GlobalStyles'
 import { FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
 const CheckForm = () => {
@@ -38,7 +39,13 @@ const CheckForm = () => {
                 </StyledLabelText>
                 <StyledTextArea id="textArea" rows={5} cols={40} />
             </FormRadio>
-            <Button onClick={handleClick}>Next</Button>
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                Next
+            </Button>
         </FormContainer>
     )
 }

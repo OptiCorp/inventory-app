@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import { COLORS } from '../../../style/GlobalStyles.ts'
 import { FormContainer } from '../styles.ts'
 import { FormBatchRadio } from './styles.ts'
 
@@ -50,7 +51,13 @@ const BatchForm = () => {
                 </label>
             </FormBatchRadio>
 
-            <Button onClick={handleClick}>Next</Button>
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                Next
+            </Button>
         </FormContainer>
     )
 }

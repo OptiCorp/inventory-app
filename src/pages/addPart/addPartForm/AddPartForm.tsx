@@ -4,6 +4,7 @@ import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 import { FormContainer } from '../styles.ts'
 
 import { Button } from '../../../components/Button/SubmitButton.tsx'
+import { COLORS } from '../../../style/GlobalStyles.ts'
 import { usePartsForm } from '../hooks/useAddPartForm.tsx'
 import { FormContent } from './FormContent.tsx'
 import { StyledForm } from './styles.ts'
@@ -24,7 +25,12 @@ export const AddPartFormm = () => {
                     <h4>Add details</h4>
                     <FormContent />
 
-                    <Button id="addPart" type="submit">
+                    <Button
+                        id="addPart"
+                        type="submit"
+                        backgroundColor={`${COLORS.primary}`}
+                        color={`${COLORS.secondary}`}
+                    >
                         Finish
                     </Button>
                 </StyledForm>
