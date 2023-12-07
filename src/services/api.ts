@@ -210,7 +210,7 @@ const apiService = () => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
-    const addItem = async (item: AddItem): Promise<Response> => {
+    const addItem = async (item: AddItem[]): Promise<Response> => {
         return await postByFetch(`Item`, item)
     }
 

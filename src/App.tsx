@@ -11,10 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import TopBar from './components/topBar/TopBar'
 import { UmAppContextProvider } from './contexts/UmAppContext'
 import AddPart from './pages/addPart/Index'
-import {
-    AddPartFormm,
-    submitPart,
-} from './pages/addPart/addPartForm/AddPartForm'
+
 import BatchForm from './pages/addPart/batch/BatchForm'
 import CheckForm from './pages/addPart/check/CheckForm'
 import Upload from './pages/addPart/documentation/Upload'
@@ -23,6 +20,7 @@ import MakeList from './pages/list/MakeList'
 import PartDetails from './pages/partDetails/Index'
 import Search from './pages/search/Search'
 import GlobalStyles from './style/GlobalStyles'
+import AddPartForm from './pages/addPart/addPartForm/AddPartForm'
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
@@ -41,8 +39,7 @@ function App() {
                     <Route path="upload" element={<Upload />} />
                     <Route
                         path="add-form"
-                        element={<AddPartFormm />}
-                        // action={submitPart}
+                        element={<AddPartForm />}
                     />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />

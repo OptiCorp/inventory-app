@@ -1,3 +1,4 @@
+
 import { Item } from '../../../services/apiTypes'
 import {
     DescriptionParagraph,
@@ -7,6 +8,8 @@ import {
     SecondInfoBox,
     ThirdInfoBox,
 } from '../styles'
+import { format, parse } from 'date-fns'
+
 
 type Props = {
     part: Item
@@ -44,7 +47,7 @@ export const Searchinfo = ({ part }: Props) => {
                 </InfoP>
                 <InfoP>
                     {' '}
-                    <KeyWords>Last updated</KeyWords> {part.updatedDate}{' '}
+                    <KeyWords>Created date</KeyWords> {format((new Date(part.createdDate)), "yyyy-MM-dd HH:mm:ss").toString()}{' '}
                 </InfoP>
             </ThirdInfoBox>
         </>

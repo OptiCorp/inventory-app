@@ -4,10 +4,10 @@ import { useLocation } from 'react-router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
-import { Item } from '../../../services/apiTypes'
+import { AddItem, Item } from '../../../services/apiTypes'
 import { useAddItems } from '../../../services/hooks/useAddItem'
 
-const partSchema = z.object({
+export const partSchema = z.object({
     wpId: z.string(),
     description: z.string(),
     serialNumber: z.string(),
@@ -16,14 +16,15 @@ const partSchema = z.object({
     type: z.union([
         z.literal('unit'),
         z.literal('assembly'),
-        z.literal('sub-assembly'),
-        z.literal('sub-sart'),
+        z.literal('subassembly'),
+        z.literal('part'),
     ]),
     comment: z.string().nullish(),
     location: z.string().nullish(),
     parentId: z.string().nullish(),
     addedById: z.string(),
 })
+
 
 type PartSchema = z.infer<typeof partSchema>
 
@@ -63,7 +64,9 @@ export const usePartsForm = () => {
         })
     }, [setValue])
 
-    const onSubmit = () => handleSubmit((data) => mutate(data))
+    const onSubmit = (data: PartSchema) => mutate([data])
+
+
 
     return {
         methods,

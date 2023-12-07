@@ -123,6 +123,6 @@ export const KeyWords = styled.span`
     padding-right: 3rem;
 `
 export const CompactInfoP = styled.div`
-    padding-right: 2rem;
+
     line-height: 1.5rem;
 `

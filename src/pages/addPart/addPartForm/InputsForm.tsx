@@ -20,6 +20,13 @@ export const InputsForm = () => {
             />
             <input
                 type="text"
+                placeholder="Wellpartner ID"
+                {...register('wpId', {
+                    required: true,
+                })}
+            />
+            <input
+                type="text"
                 placeholder="Serial number"
                 {...register('serialNumber', {
                     required: true,
@@ -50,8 +57,8 @@ export const InputsForm = () => {
                 type="text"
                 defaultValue={currentUser?.id}
                 style={{ display: 'none' }}
-                {...(register('firstName', { value: currentUser?.id }),
-                { required: true })}
+                {...(register('addedById', { value: currentUser?.id }),
+                    { required: true })}
             />
         </>
     )

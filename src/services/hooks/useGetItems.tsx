@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import apiService from '../api'
 
 export const useGetItems = (searchTerm: string, pageNumber: number) => {

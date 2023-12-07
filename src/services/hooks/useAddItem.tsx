@@ -6,7 +6,7 @@ export const useAddItems = () => {
     const api = apiService()
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (item: AddItem) => api.addItem(item),
+        mutationFn: (items: AddItem[]) => api.addItem(items),
         onSuccess: () =>
             queryClient.invalidateQueries({
                 queryKey: ['items'],
