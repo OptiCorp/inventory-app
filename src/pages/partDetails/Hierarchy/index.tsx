@@ -26,7 +26,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                 </PartList>
                 <h4>This assembly consists of:</h4>
                 <AssemblyList>
-                    {item?.children != null ? (
+                    {item?.children && !!item.children ? (
                         <>
                             {item?.children?.map((x) => (
                                 <ListItem
@@ -39,7 +39,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                             ))}
                         </>
                     ) : (
-                        <>sdfsdfds</>
+                        <>asdsadsad</>
                     )}
                     <FaPen />
                 </AssemblyList>
