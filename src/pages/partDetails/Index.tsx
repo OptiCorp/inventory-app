@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom'
 import { Card } from '../../components/card/Card'
 import { useWindowDimensions } from '../../hooks'
 import { useGetItemById } from '../../services/hooks/useGetItemById'
-import { Comments } from './Comments'
+import { Comments } from './Comments/Comments'
 import { Documents } from './Documents'
 
 import { Hierarchy } from './Hierarchy'
 import { Log } from './Log'
-import { PartInfo } from './PartInfo'
+import PartInfo from './PartInfo/PartInfo'
+
 
 const PartDetails = () => {
     const { width } = useWindowDimensions()
@@ -34,7 +35,7 @@ const PartDetails = () => {
                 </Card>
 
                 <Card title="Log">
-                    <Log />
+                    <Log item={item} />
                 </Card>
             </StyledContainerDiv>
         </>

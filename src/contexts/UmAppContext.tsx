@@ -5,21 +5,7 @@ import { createContext, useEffect, useState } from 'react'
 import apiService from '../services/api'
 import { ApiStatus, User } from '../services/apiTypes'
 import CheckRole from '../utils/CheckRole'
-
-export interface UmAppContextType {
-    idToken: string
-    accessToken: string
-    account: any
-    accounts: any
-    instance: any
-    currentUser: User | null
-}
-
-type AzureUserInfo = {
-    preferred_username: string
-    name: string
-    oid: string
-}
+import { AzureUserInfo, UmAppContextType } from './types'
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
 

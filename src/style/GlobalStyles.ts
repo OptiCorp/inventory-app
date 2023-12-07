@@ -3,16 +3,15 @@ import { createGlobalStyle } from 'styled-components'
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)'
 
 export const COLORS = {
-    white: '#FFF',
-    black: '#000',
-    gray: '#BEBEBE',
+    secondary: '#FFF',
+    primary: '#000',
+    gray: '#CACACA',
+
     lightGray: '#CCC',
     silverGray: '#DCDCDC',
     paleGray: '#EAEAEA',
     frostyGray: '#F0F3F3',
     lightSteelBlue: '#DEEDEE',
-    primary: '#007079',
-    secondary: '#243746',
     cautionaryYellow: '#FBCA36',
     warningOrange: '#ED8936',
     dangerRed: '#EB0000',

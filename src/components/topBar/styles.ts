@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components'
+import { COLORS } from '../../style/GlobalStyles'
 
 export const TopBarContainer = styled.div`
     display: flex;
@@ -13,9 +14,9 @@ export const StyledLinkDiv = styled.div`
 
 export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
-    color: gray;
+    color: ${COLORS.gray};
     &.active {
-        color: black;
+        color: ${COLORS.primary};
     }
 `
 

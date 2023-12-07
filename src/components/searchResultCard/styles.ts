@@ -9,7 +9,7 @@ export const ResultCardContainer = styled.div`
     cursor: pointer;
     max-width: 1000px;
     margin-inline: auto;
-    box-shadow: 2.5px 2.5px gray;
+    box-shadow: 2.5px 2.5px grey;
 `
 
 export const DescriptionParagraph = styled.p`
@@ -38,8 +38,7 @@ export const CompactDesriptionParagraph = styled.p`
 `
 
 export const ResultCardCompactContainer = styled.div`
-  position: relative;
-    background-color: ${COLORS.white};
+    background-color: ${COLORS.secondary};
     border-radius: 8px;
     margin: 16px;
     box-shadow: 2.5px 2.5px gray;
@@ -64,7 +63,7 @@ export const SearchCard = styled.div`
             300px
         );
     border-right: 1px solid rgba(208, 208, 208);
-    background-color: ${COLORS.white};
+    background-color: ${COLORS.secondary};
 `
 
 export const CompactCard = styled.div`
@@ -73,7 +72,7 @@ export const CompactCard = styled.div`
     flex-basis: 100%;
     cursor: pointer;
     border-right: 1px solid rgba(208, 208, 208);
-    background-color: ${COLORS.white};
+    background-color: ${COLORS.secondary};
     padding: 1rem;
 `
 

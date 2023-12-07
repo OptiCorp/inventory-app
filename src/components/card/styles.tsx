@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
 
 export const StyledInfoDiv = styled.div`
-    background-color: ${COLORS.white};
+    background-color: ${COLORS.secondary};
     border-radius: 8px;
 
     padding: 2rem;
@@ -25,7 +25,7 @@ export const CompactLists = styled.div`
 
 export const Title = styled.h1`
     font-weight: 600;
-    color: grey;
+    color: ${COLORS.gray};
     letter-spacing: 0.3rem;
     display: inline;
     font-size: 1.2rem;
