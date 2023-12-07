@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router'
 import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact.tsx'
 import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
 
-import { Button } from '../../../components/SubmitButton.tsx'
+import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { RecentlyAddedContainer } from './styles.ts'
 
 const RecentlyAdded = () => {
