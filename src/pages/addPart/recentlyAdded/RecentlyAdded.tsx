@@ -9,6 +9,7 @@ import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
 
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { RecentlyAddedContainer } from './styles.ts'
+import { COLORS } from '../../../style/GlobalStyles.ts'
 
 const RecentlyAdded = () => {
     const { width } = useWindowDimensions()
@@ -32,7 +33,13 @@ const RecentlyAdded = () => {
                 )
             )}
 
-            <Button onClick={handleClick}>Add new item</Button>
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                Add new item
+            </Button>
         </RecentlyAddedContainer>
     )
 }

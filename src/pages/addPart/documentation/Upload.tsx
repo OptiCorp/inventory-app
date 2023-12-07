@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
-import { FormContainer } from '../styles.ts'
 import { ExampleUpload } from '../../../components/Upload/Upload.tsx'
+import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import { COLORS } from '../../../style/GlobalStyles.ts'
+import { FormContainer } from '../styles.ts'
 
 const Upload = () => {
     const navigate = useNavigate()
@@ -46,7 +47,13 @@ const Upload = () => {
                 <li>Certificates.</li>
                 <li>Photos.</li>
             </ul>
-            <Button onClick={handleClick}>Next</Button>
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                Next
+            </Button>
         </FormContainer>
     )
 }

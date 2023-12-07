@@ -1,7 +1,6 @@
 import { TextField } from '@mui/material'
-import { Item } from '../../services/apiTypes'
 
-export const Log = ({ item }: { item: Item }) => {
+export const Log = () => {
     return (
         <>
             {' '}

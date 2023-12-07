@@ -11,7 +11,6 @@ import { Hierarchy } from './Hierarchy'
 import { Log } from './Log'
 import PartInfo from './PartInfo/PartInfo'
 
-
 const PartDetails = () => {
     const { width } = useWindowDimensions()
 
@@ -35,7 +34,7 @@ const PartDetails = () => {
                 </Card>
 
                 <Card title="Log">
-                    <Log item={item} />
+                    <Log />
                 </Card>
             </StyledContainerDiv>
         </>
