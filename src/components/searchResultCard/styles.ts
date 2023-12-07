@@ -58,11 +58,8 @@ export const SearchCard = styled.div`
     border-radius: 5px;
     padding: 1rem;
     display: grid;
-    grid-template-columns: minmax(200px, 300px) minmax(200px, 300px) minmax(
-            200px,
-            300px
-        );
-    border-right: 1px solid rgba(208, 208, 208);
+    grid-template-columns: minmax(200px, 300px) minmax(200px, 300px) 1fr;
+
     background-color: ${COLORS.secondary};
 `
 
@@ -110,8 +107,6 @@ export const ThirdInfoBox = styled.div`
     flex-direction: column;
     line-height: 25px;
     padding-right: 8px;
-
-    border-right: 1px solid rgba(208, 208, 208);
 `
 
 export const InfoP = styled.p`
