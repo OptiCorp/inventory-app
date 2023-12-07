@@ -14,9 +14,8 @@ export const ListWrapper = styled.div`
   border-radius: 6px;
   box-shadow: 2.5px 2.5px gray;
   max-width: 450px;
-  @media (max-width: 500px) {
-    width: 305px;
-  }
+  width: 82vw;
+  
 `
 
 export const StyledTitle = styled.h2`

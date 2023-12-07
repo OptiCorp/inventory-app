@@ -41,10 +41,9 @@ const ListCard = ({ part }: Props) => {
                     </StyledDeleteIconAbsolute>
                 </div>
                     <StyledTitle>{part.title}</StyledTitle>
-                    <h4>Created: {format((new Date(part.createdDate)), "dd-MM-yyyy HH:mm:ss").toString()}</h4>
                     {part.updatedDate ?
                         <h4>Last updated: {format((new Date(part.updatedDate)), "dd-MM-yyyy HH:mm:ss").toString()}</h4>
-                        : null
+                        :  <h4>Created: {format((new Date(part.createdDate)), "dd-MM-yyyy HH:mm:ss").toString()}</h4>
                     }
             </ListWrapper>
             
