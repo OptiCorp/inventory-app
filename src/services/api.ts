@@ -300,7 +300,7 @@ const apiService = () => {
         addList,
         deleteList,
         getItemById,
-        updateItemById
+        updateItemById,
         getListById,
         addItemsToList,
         removeItemsFromList
