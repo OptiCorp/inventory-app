@@ -3,10 +3,8 @@ import { useForm } from 'react-hook-form'
 // import { Item, UpdateItem } from '../../../services/apiTypes'
 // import { useUpdateItem } from '../../services/hooks/useUpdateItem'
 
-import { Button } from '../../../components/Button/SubmitButton'
 import { Item, UpdateItem } from '../../../services/apiTypes'
-import { COLORS } from '../../../style/GlobalStyles'
-import { ButtonContainer, Container, Edit, InfoContainer } from './styles'
+import { Container, Edit, InfoContainer } from './styles'
 
 const types = ['Unit', 'Assembly', 'Sub-Assembly', 'Part']
 
@@ -130,7 +128,11 @@ const PartInfo = ({ item }: { item: Item }) => {
                 </div>
 
                 <div>
-                    <label>
+                    <label
+                        style={{
+                            lineHeight: '3rem',
+                        }}
+                    >
                         <strong>P/N</strong>
                     </label>
                     <InfoContainer>
@@ -171,15 +173,6 @@ const PartInfo = ({ item }: { item: Item }) => {
                     </InfoContainer>
                 </div>
             </Container>
-            <ButtonContainer>
-                <Button
-                    backgroundColor={` ${COLORS.secondary}`}
-                    color={` ${COLORS.primary}`}
-                >
-                    {' '}
-                    Finish{' '}
-                </Button>
-            </ButtonContainer>
         </form>
     )
 }

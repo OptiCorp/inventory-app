@@ -24,32 +24,21 @@ export const StyledTitle = styled.h2`
     overflow: hidden;
 `
 
-export const StyledDeleteIconAbsolute = styled(DeleteForeverIcon)`
+export const StyledDeleteIcon = styled(DeleteForeverIcon)`
     color: ${COLORS.primary};
     position: absolute;
-    top: 0;
+    top: 2px;
     right: 0;
     &:hover {
         color: ${COLORS.dangerRed};
     }
-`
-
-export const StyledDeleteIconRelative = styled(DeleteForeverIcon)`
-    color: ${COLORS.primary};
-    position: relative;
-    top: 0;
-    right: 0;
-    &:hover {
-        color: ${COLORS.dangerRed};
-    }
-    margin-left: auto;
 `
 
 export const StyledAddIcon = styled(AddCircleIcon)`
     color: black;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 3px;
+    right: 3px;
     &:hover {
         color: green;
     }
@@ -59,19 +48,11 @@ export const StyledAddIcon = styled(AddCircleIcon)`
 export const StyledRemoveIcon = styled(RemoveCircleIcon)`
     color: black;
     position: absolute;
-    top: 0;
-    right: 0;
+
+    top: 3px;
+    right: 3px;
     &:hover {
         color: ${COLORS.dangerRed};
     }
     cursor: pointer;
-`
-export const StyledDeleteIcon = styled(DeleteForeverIcon)`
-    color: black;
-    position: absolute;
-    top: -12px;
-    right: -3px;
-    &:hover {
-        color: ${COLORS.dangerRed};
-    }
 `

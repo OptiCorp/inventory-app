@@ -1,5 +1,13 @@
-import {useNavigate, useParams} from 'react-router-dom'
-import {Item, MutateItemList} from '../../services/apiTypes'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogTitle from '@mui/material/DialogTitle'
+import React, { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { CancelButton, SubmitButton } from '../../pages/listDetails/styles.ts'
+import { Item, MutateItemList } from '../../services/apiTypes'
+import { useAddItemsToList } from '../../services/hooks/useAddItemsToList.tsx'
+import { useRemoveItemsFromList } from '../../services/hooks/useRemoveItemsFromList.tsx'
+import { StyledAddIcon, StyledRemoveIcon } from '../listCard/styles.ts'
 import {
     CompactCard,
     CompactDesriptionParagraph,
@@ -7,29 +15,20 @@ import {
     KeyWords,
     ResultCardCompactContainer,
 } from './styles'
-import React, {useState} from "react";
-import {
-    StyledAddIcon,
-    StyledRemoveIcon
-} from "../listCard/styles.ts";
-import {useAddItemsToList} from "../../services/hooks/useAddItemsToList.tsx";
-import {useRemoveItemsFromList} from "../../services/hooks/useRemoveItemsFromList.tsx";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogActions from "@mui/material/DialogActions";
-import {CancelButton, SubmitButton} from "../../pages/listDetails/styles.ts";
-import Dialog from "@mui/material/Dialog";
 
 type Props = {
-    part: Item;
-    icon?: string;
+    part: Item
+    icon?: string
 }
 
 const SearchResultCardCompact = ({ part, icon }: Props) => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
-    const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } = useRemoveItemsFromList()
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
+        useAddItemsToList()
+    const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } =
+        useRemoveItemsFromList()
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
@@ -43,13 +42,13 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
     }
     const handleClickOpen = (e: React.MouseEvent) => {
         e.stopPropagation()
-        setOpen(true);
-    };
+        setOpen(true)
+    }
     const handleClose = (e: React.MouseEvent) => {
         e.stopPropagation()
-        setOpen(false);
-    };
-    
+        setOpen(false)
+    }
+
     return (
         <>
             <ResultCardCompactContainer
@@ -57,14 +56,6 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                     navigate(`/${part.id}`)
                 }}
             >
-                {icon ==="add" ?
-                    <StyledAddIcon style={{fontSize:"25px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
-                    : null }
-
-                {icon ==="remove" ?
-                    <StyledRemoveIcon style={{fontSize:"25px"}} onClick={handleClickOpen}></StyledRemoveIcon>
-                    : null }
-                
                 <CompactCard>
                     <CompactInfoP>
                         <KeyWords>ID:</KeyWords> {part.wpId}
@@ -73,6 +64,23 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         <KeyWords>Location</KeyWords>{' '}
                         {part.location || 'Location'}
                     </CompactInfoP>{' '}
+                    {icon === 'add' ? (
+                        <StyledAddIcon
+                            style={{ fontSize: '25px' }}
+                            onClick={(e) =>
+                                handleAdd(e, {
+                                    itemId: part.id,
+                                    listId: listId!,
+                                })
+                            }
+                        ></StyledAddIcon>
+                    ) : null}
+                    {icon === 'remove' ? (
+                        <StyledRemoveIcon
+                            style={{ fontSize: '25px' }}
+                            onClick={handleClickOpen}
+                        ></StyledRemoveIcon>
+                    ) : null}
                 </CompactCard>
                 <CompactDesriptionParagraph>
                     {part.description}
@@ -83,7 +91,16 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                 <DialogTitle>Remove item from list?</DialogTitle>
                 <DialogActions>
                     <CancelButton onClick={handleClose}>Cancel</CancelButton>
-                    <SubmitButton onClick={(e) => handleDelete(e, {itemId: part.id, listId: listId!})}>Confirm</SubmitButton>
+                    <SubmitButton
+                        onClick={(e) =>
+                            handleDelete(e, {
+                                itemId: part.id,
+                                listId: listId!,
+                            })
+                        }
+                    >
+                        Confirm
+                    </SubmitButton>
                 </DialogActions>
             </Dialog>
         </>
