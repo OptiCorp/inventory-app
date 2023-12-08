@@ -29,6 +29,7 @@ export type Item = {
     productNumber: string
     type: string
     location: string | null
+    category: string 
     description: string
     parentId: string | null
     vendor: string
@@ -81,6 +82,7 @@ export type UpdateItem = {
     serialNumber: string
     productNumber: string
     type: string
+    category: string 
     location?: string | null
     description: string
     parentId?: string | null
