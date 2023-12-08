@@ -15,13 +15,14 @@ const PartDetails = () => {
     const { width } = useWindowDimensions()
 
     const { id } = useParams() as { id: string }
-    const { data: item = [] } = useGetItemById(id)
+    const { data: item = [], isLoading } = useGetItemById(id)
+    console.log('isLoading: ', isLoading)
 
     return (
         <>
             <StyledContainerDiv>
                 <Card title="Part info">
-                    <PartInfo item={item} />
+                    <PartInfo item={item} isLoading={isLoading} />
                 </Card>
                 <Card title="Hierarchy">
                     <Hierarchy item={item} />
