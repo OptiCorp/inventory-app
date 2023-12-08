@@ -16,7 +16,6 @@ const PartDetails = () => {
 
     const { id } = useParams() as { id: string }
     const { data: item = [], isLoading } = useGetItemById(id)
-    console.log('isLoading: ', isLoading)
 
     return (
         <>
