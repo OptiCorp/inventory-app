@@ -16,6 +16,7 @@ export const Comment = () => {
                 {...register('comment')}
                 rows={5}
                 cols={40}
+                maxLength={450}
             />
         </div>
     )

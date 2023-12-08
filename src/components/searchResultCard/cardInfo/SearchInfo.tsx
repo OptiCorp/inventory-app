@@ -1,4 +1,4 @@
-import {Item, MutateItemList} from '../../../services/apiTypes'
+import { Item, MutateItemList } from '../../../services/apiTypes'
 import {
     DescriptionParagraph,
     FirstInfoBox,
@@ -7,15 +7,16 @@ import {
     SecondInfoBox,
     ThirdInfoBox,
 } from '../styles'
-import React, {useState} from "react";
-import {StyledAddIcon, StyledRemoveIcon} from "../../listCard/styles.ts";
-import {useAddItemsToList} from "../../../services/hooks/useAddItemsToList.tsx";
-import {useRemoveItemsFromList} from "../../../services/hooks/useRemoveItemsFromList.tsx";
+import React, { useState } from "react";
+import { StyledAddIcon, StyledRemoveIcon } from "../../listCard/styles.ts";
+import { useAddItemsToList } from "../../../services/hooks/useAddItemsToList.tsx";
+import { useRemoveItemsFromList } from "../../../services/hooks/useRemoveItemsFromList.tsx";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
-import {CancelButton, SubmitButton} from "../../../pages/listDetails/styles.ts";
+import { CancelButton, SubmitButton } from "../../../pages/listDetails/styles.ts";
 import Dialog from "@mui/material/Dialog";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { format } from "date-fns"
 
 type Props = {
     part: Item
@@ -27,7 +28,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
     const { listId } = useParams()
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
     const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } = useRemoveItemsFromList()
-    
+
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
         mutateAddItemToList(ids)
@@ -46,7 +47,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
         e.stopPropagation()
         setOpen(false);
     };
-    
+
     return (
         <>
             {' '}
@@ -78,24 +79,24 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 </InfoP>
                 <InfoP>
                     {' '}
-                    <KeyWords>Last updated</KeyWords>{' '}
-                    {part.updatedDate || '00/00/00'}{' '}
+                    <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>{' '}
+                    {format(new Date(part.updatedDate || part.createdDate), "yyyy-MM-dd HH:mm:ss").toString()}{' '}
                 </InfoP>
             </ThirdInfoBox>
-            
-            {icon ==="add" ?
-                <StyledAddIcon style={{fontSize:"25px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
-                : null }
 
-            {icon ==="remove" ?
-                <StyledRemoveIcon style={{fontSize:"25px"}} onClick={handleClickOpen}></StyledRemoveIcon>
-                : null }
+            {icon === "add" ?
+                <StyledAddIcon style={{ fontSize: "25px" }} onClick={(e) => handleAdd(e, { itemId: part.id, listId: listId! })}></StyledAddIcon>
+                : null}
+
+            {icon === "remove" ?
+                <StyledRemoveIcon style={{ fontSize: "25px" }} onClick={handleClickOpen}></StyledRemoveIcon>
+                : null}
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Remove item from list?</DialogTitle>
                 <DialogActions>
                     <CancelButton onClick={() => handleClose}>Cancel</CancelButton>
-                    <SubmitButton onClick={(e) => handleDelete(e, {itemId: part.id, listId: listId!})}>Confirm</SubmitButton>
+                    <SubmitButton onClick={(e) => handleDelete(e, { itemId: part.id, listId: listId! })}>Confirm</SubmitButton>
                 </DialogActions>
             </Dialog>
         </>
