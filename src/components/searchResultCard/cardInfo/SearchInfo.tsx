@@ -1,40 +1,13 @@
-
-import { Item, MutateItemList } from '../../../services/apiTypes'
-
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogTitle from '@mui/material/DialogTitle'
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import {
-    CancelButton,
-    SubmitButton,
-} from '../../../pages/listDetails/styles.ts'
-import { Item, MutateItemList } from '../../../services/apiTypes'
-import { useAddItemsToList } from '../../../services/hooks/useAddItemsToList.tsx'
-import { useRemoveItemsFromList } from '../../../services/hooks/useRemoveItemsFromList.tsx'
-import { StyledAddIcon, StyledRemoveIcon } from '../../listCard/styles.ts'
-
-import {
-    DescriptionParagraph,
-    FirstInfoBox,
-    InfoP,
-    KeyWords,
-    SecondInfoBox,
-    ThirdInfoBox,
-} from '../styles'
-
-import React, { useState } from "react";
-import { StyledAddIcon, StyledRemoveIcon } from "../../listCard/styles.ts";
-import { useAddItemsToList } from "../../../services/hooks/useAddItemsToList.tsx";
-import { useRemoveItemsFromList } from "../../../services/hooks/useRemoveItemsFromList.tsx";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogActions from "@mui/material/DialogActions";
-import { CancelButton, SubmitButton } from "../../../pages/listDetails/styles.ts";
-import Dialog from "@mui/material/Dialog";
-import { useParams } from "react-router-dom";
+import { useState } from "react"
+import { Item, MutateItemList } from "../../../services/apiTypes"
+import { useParams } from "react-router-dom"
+import { useAddItemsToList } from "../../../services/hooks/useAddItemsToList"
+import { useRemoveItemsFromList } from "../../../services/hooks/useRemoveItemsFromList"
+import { DescriptionParagraph, FirstInfoBox, InfoP, KeyWords, SecondInfoBox, ThirdInfoBox } from "../styles"
+import { StyledAddIcon, StyledRemoveIcon } from "../../listCard/styles"
+import { Dialog, DialogActions, DialogTitle } from "@mui/material"
 import { format } from "date-fns"
-
+import { CancelButton, SubmitButton } from "../../../pages/listDetails/styles"
 
 type Props = {
     part: Item
