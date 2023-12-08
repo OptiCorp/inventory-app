@@ -21,6 +21,7 @@ export const Description = () => {
                 placeholder="E.g. Hydraulic cylinders can be purchased in a range of ISO standard measurement bore"
                 rows={4}
                 cols={40}
+                maxLength={450}
                 {...register('description')}
             />
         </>

@@ -6,8 +6,9 @@ export const ExampleUpload = () => {
     const [file, setFile] = useState('')
     const [fileName, setFileName] = useState('No selected file')
     const loadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
-            setFile(URL.createObjectURL(event.target.files[0]))
+        const file = event.target.files?.item(0)
+        if (file) {
+            setFile(URL.createObjectURL(file))
         }
     }
     return (

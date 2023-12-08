@@ -10,21 +10,17 @@ import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { RecentlyAddedContainer } from './styles.ts'
 import { COLORS } from '../../../style/GlobalStyles.ts'
+import SearchResultCardSkeleton from '../../../components/searchResultCard/SearchResultCardSkeleton.tsx'
 
 const RecentlyAdded = () => {
     const { width } = useWindowDimensions()
-
-    const navigate = useNavigate()
-
-    const handleClick = () => {
-        navigate('batch')
-    }
 
     const { data: myItems = [] } = useGetItemsByUser()
 
     return (
         <RecentlyAddedContainer>
             <h3>Recently added by you</h3>
+            <SearchResultCardSkeleton />
             {myItems?.map((item: Item) =>
                 width > 800 ? (
                     <SearchResultCard key={item.id} part={item} />
@@ -33,13 +29,6 @@ const RecentlyAdded = () => {
                 )
             )}
 
-            <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
-                onClick={handleClick}
-            >
-                Add new item
-            </Button>
         </RecentlyAddedContainer>
     )
 }
