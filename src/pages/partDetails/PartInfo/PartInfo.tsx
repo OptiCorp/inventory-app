@@ -63,10 +63,12 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     }
 
     const handleBlurVendor = () => {
-        mutate({
-            ...item,
-            vendor: updatedItem.vendor,
-        })
+        if (updatedItem.vendor !== undefined && item.vendor !== updatedItem.vendor) {
+            mutate({
+                ...item,
+                vendor: updatedItem.vendor,
+            })
+        }
     }
     const handleSelectChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setSelectedType(e.target.value)
