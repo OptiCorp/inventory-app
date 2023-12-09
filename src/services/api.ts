@@ -236,6 +236,14 @@ const apiService = () => {
         )
     }
 
+    const getItemsNotInListBySearchString = async (
+        searchString: string,
+        listId: string,
+        pageNumber: number
+    ): Promise<Item[]> => {
+        return await getByFetch(`Item/BySearchStringNotInList/${searchString}?listId=${listId}&page=${pageNumber}`)
+    }
+
     const getListsByUserId = async (userId: string): Promise<List[]> => {
         return await getByFetch(`List/ByUserId/${userId}`)
     }
@@ -293,6 +301,7 @@ const apiService = () => {
         deleteUserRole,
         getUserImage,
         getItemsBySearchString,
+        getItemsNotInListBySearchString,
         getItemsByUserId,
         addItem,
         getListsBySearchString,

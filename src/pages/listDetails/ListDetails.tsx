@@ -14,8 +14,7 @@ import SearchResultCard from "../../components/searchResultCard/SearchResultCard
 import SearchResultCardCompact from "../../components/searchResultCard/SearchInfoCompact.tsx";
 import {useWindowDimensions} from "../../hooks";
 import {useDebounce} from "usehooks-ts";
-import {useGetItems} from "../../services/hooks/useGetItems.tsx";
-import {useGetItemsInfinite} from "../../services/hooks/useGetItemsInfinite.tsx";
+import {useGetItemsNotInListInfinite} from "../../services/hooks/useGetItemsNotInListInfinite.tsx";
 
 const ListDetails = () => {
     const { listId } = useParams()
@@ -28,7 +27,7 @@ const ListDetails = () => {
         isFetching,
     } = useGetListById(listId!)
 
-    const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm)
+    const { data: items, isLoading, fetchNextPage } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
@@ -82,22 +81,19 @@ const ListDetails = () => {
                 />
 
                 <Container>
-                    {items?.pages.map((page, i) => 
-                        page.map((item, index) => {
-                            const isInList = list?.items.some((listItem: Item) => listItem.id === item.id);
-                            return (
-                                !isInList && (
-                                    <div key={item.id} id={i === items.pages.length - 1 && index === page.length - 1 - list.items.length ? 'lastItem' : ''}>
-                                        {width > 800 ? (
-                                            <SearchResultCard part={item} icon={"add"} />
-                                        ) : (
-                                            <SearchResultCardCompact part={item} icon={"add"} />
-                                        )}
-                                    </div>
-                                )
+                    {items?.pages.map((page, i) => (
+                        page.map((item, index) =>
+                            width > 800 ? (
+                                <div id={i === items.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                    <SearchResultCard part={item} icon={"add"} />
+                                </div>
+                            ) : (
+                                <div id={i === items.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                    <SearchResultCardCompact part={item} icon={"add"} />
+                                </div>
                             )
-                        })
-                    )}
+                        )
+                    ))}
                 </Container>
                 
                 {(isLoading || isFetching) && (

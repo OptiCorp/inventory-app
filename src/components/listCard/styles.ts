@@ -9,7 +9,7 @@ export const ListWrapper = styled.div`
     padding: 8px;
     background-color: ${COLORS.secondary};
     &:hover {
-        background: ${COLORS.secondary};
+        background: ${COLORS.whiteSmoke};
     }
     cursor: pointer;
     border-radius: 6px;
