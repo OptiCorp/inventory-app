@@ -13,44 +13,62 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     const [selectedType, setSelectedType] = useState(item.type || '')
     const [updatedItem, setUpdatedItem] = useState(item)
     const handleBlurType = () => {
-        mutate({
-            ...item,
-            type: selectedType,
-        })
+        if (selectedType.length) {
+            mutate({
+                ...item,
+                type: selectedType,
+            })
+        }
     }
 
     const handleBlurCategory = () => {
-        mutate({
-            ...item,
-            category: updatedItem.category,
-        })
+        if (updatedItem.category !== undefined && item.category !== updatedItem.category) {
+            mutate({
+                ...item,
+                category: updatedItem.category,
+            })
+        }
     }
     const handleBlurLocation = () => {
-        mutate({
-            ...item,
-            location: updatedItem.location,
-        })
+        if (updatedItem.location !== undefined && item.location !== updatedItem.location) {
+            mutate({
+                ...item,
+                location: updatedItem.location,
+            })
+        }
     }
 
     const handleBlurSerialNumber = () => {
-        mutate({
-            ...item,
-            serialNumber: updatedItem.serialNumber,
-        })
+        if (
+            updatedItem.serialNumber !== undefined &&
+            item.serialNumber !== updatedItem.serialNumber
+        ) {
+            mutate({
+                ...item,
+                serialNumber: updatedItem.serialNumber,
+            })
+        }
     }
 
     const handleBlurProductNumber = () => {
-        mutate({
-            ...item,
-            productNumber: updatedItem.productNumber,
-        })
+        if (
+            updatedItem.productNumber !== undefined &&
+            item.productNumber !== updatedItem.productNumber
+        ) {
+            mutate({
+                ...item,
+                productNumber: updatedItem.productNumber,
+            })
+        }
     }
 
     const handleBlurVendor = () => {
-        mutate({
-            ...item,
-            vendor: updatedItem.vendor,
-        })
+        if (updatedItem.vendor !== undefined && item.vendor !== updatedItem.vendor) {
+            mutate({
+                ...item,
+                vendor: updatedItem.vendor,
+            })
+        }
     }
     const handleSelectChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setSelectedType(e.target.value)
