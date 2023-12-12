@@ -10,19 +10,24 @@ import { Documents } from './Documents'
 import { Hierarchy } from './Hierarchy'
 import { Log } from './Log'
 import PartInfo from './PartInfo/PartInfo'
+import { FormProvider } from 'react-hook-form'
+import { useUpdatePartForm } from './useUpdatePartForm'
 
 const PartDetails = () => {
     const { width } = useWindowDimensions()
 
     const { id } = useParams() as { id: string }
-    const { data: item = [], isLoading } = useGetItemById(id)
-
+    const { data: item, isLoading } = useGetItemById(id)
+    const { onSubmit, methods } = useUpdatePartForm(id, item)
+    if (!item) return null
     return (
         <>
             <StyledContainerDiv>
-                <Card title="Part info">
-                    <PartInfo item={item} isLoading={isLoading} />
-                </Card>
+                <FormProvider {...methods}>
+                    <Card title="Part info">
+                        <PartInfo item={item} isLoading={isLoading} />
+                    </Card>
+                </FormProvider>
                 <Card title="Hierarchy">
                     <Hierarchy item={item} />
                 </Card>
