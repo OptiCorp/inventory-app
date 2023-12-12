@@ -82,7 +82,7 @@ export type UpdateItem = {
     serialNumber: string
     productNumber: string
     type: string
-    category: string 
+    category: string | null | undefined
     location?: string | null
     description: string
     parentId?: string | null
