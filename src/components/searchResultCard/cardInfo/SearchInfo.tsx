@@ -1,13 +1,20 @@
-import { useState } from "react"
-import { Item, MutateItemList } from "../../../services/apiTypes"
-import { useParams } from "react-router-dom"
-import { useAddItemsToList } from "../../../services/hooks/useAddItemsToList"
-import { useRemoveItemsFromList } from "../../../services/hooks/useRemoveItemsFromList"
-import { DescriptionParagraph, FirstInfoBox, InfoP, KeyWords, SecondInfoBox, ThirdInfoBox } from "../styles"
-import { StyledAddIcon, StyledRemoveIcon } from "../../listCard/styles"
-import { Dialog, DialogActions, DialogTitle } from "@mui/material"
-import { format } from "date-fns"
-import { CancelButton, SubmitButton } from "../../../pages/listDetails/styles"
+import { Dialog, DialogActions, DialogTitle } from '@mui/material'
+import { format } from 'date-fns'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { CancelButton, SubmitButton } from '../../../pages/listDetails/styles'
+import { Item, MutateItemList } from '../../../services/apiTypes'
+import { useAddItemsToList } from '../../../services/hooks/useAddItemsToList'
+import { useRemoveItemsFromList } from '../../../services/hooks/useRemoveItemsFromList'
+import { StyledAddIcon, StyledRemoveIcon } from '../../listCard/styles'
+import {
+    DescriptionParagraph,
+    FirstInfoBox,
+    InfoP,
+    KeyWords,
+    SecondInfoBox,
+    ThirdInfoBox,
+} from '../styles'
 
 type Props = {
     part: Item
@@ -22,7 +29,6 @@ export const Searchinfo = ({ part, icon }: Props) => {
         useAddItemsToList()
     const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } =
         useRemoveItemsFromList()
-
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
@@ -43,7 +49,6 @@ export const Searchinfo = ({ part, icon }: Props) => {
 
         setOpen(false)
     }
-
 
     return (
         <>
@@ -96,11 +101,15 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 </InfoP>
                 <InfoP>
                     {' '}
-                    <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>{' '}
-                    {format(new Date(part.updatedDate || part.createdDate), "yyyy-MM-dd HH:mm:ss").toString()}{' '}
+                    <KeyWords>
+                        {part.updatedDate ? 'Last updated' : 'Created on'}
+                    </KeyWords>{' '}
+                    {format(
+                        new Date(part.updatedDate || part.createdDate),
+                        'yyyy-MM-dd HH:mm:ss'
+                    ).toString()}{' '}
                 </InfoP>
             </ThirdInfoBox>
-
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Remove item from list?</DialogTitle>
                 <DialogActions>
@@ -117,7 +126,6 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     >
                         Confirm
                     </SubmitButton>
-
                 </DialogActions>
             </Dialog>
         </>
