@@ -1,17 +1,23 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { Item, UpdateItem } from '../../../services/apiTypes'
 import { Container } from './styles'
 import { useUpdateItem } from '../../../services/hooks/useUpdateItem'
 import EditableField from './EditableField'
 
+import { PartSchemaTest } from '../useUpdatePartForm'
+import useSnackBar from '../../../hooks/useSnackbar'
+
 export type ItemFields = 'Type' | 'Category' | 'Location' | 'P/N' | 'S/N' | 'Vendor'
 
 const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
-    const { mutate } = useUpdateItem(item.id)
+    const { mutate, status } = useUpdateItem(item.id)
 
+    const { snackbar, setSnackbarText } = useSnackBar()
     const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(null)
     const [selectedType, setSelectedType] = useState(item.type || '')
     const [updatedItem, setUpdatedItem] = useState(item)
+    const [changedField, setChangedField] = useState('')
+
     const handleBlurType = () => {
         if (selectedType.length) {
             mutate({
@@ -22,53 +28,41 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     }
 
     const handleBlurCategory = () => {
-        if (updatedItem.category !== undefined && item.category !== updatedItem.category) {
-            mutate({
-                ...item,
-                category: updatedItem.category,
-            })
-        }
+        if (!updatedItem.category || updatedItem.category === item.category) return
+        mutate({
+            ...item,
+            category: updatedItem.category,
+        })
     }
     const handleBlurLocation = () => {
-        if (updatedItem.location !== undefined && item.location !== updatedItem.location) {
-            mutate({
-                ...item,
-                location: updatedItem.location,
-            })
-        }
+        if (!updatedItem.location || updatedItem.location === item.location) return
+        mutate({
+            ...item,
+            location: updatedItem.location,
+        })
     }
 
     const handleBlurSerialNumber = () => {
-        if (
-            updatedItem.serialNumber !== undefined &&
-            item.serialNumber !== updatedItem.serialNumber
-        ) {
-            mutate({
-                ...item,
-                serialNumber: updatedItem.serialNumber,
-            })
-        }
+        if (!updatedItem.serialNumber || updatedItem.serialNumber === item.serialNumber) return
+        mutate({
+            ...item,
+            serialNumber: updatedItem.serialNumber,
+        })
     }
 
-    const handleBlurProductNumber = () => {
-        if (
-            updatedItem.productNumber !== undefined &&
-            item.productNumber !== updatedItem.productNumber
-        ) {
-            mutate({
-                ...item,
-                productNumber: updatedItem.productNumber,
-            })
-        }
+    const handleBlurProductNumber = (data: PartSchemaTest) => {
+        mutate({
+            ...item,
+            productNumber: data.productNumber,
+        })
     }
 
     const handleBlurVendor = () => {
-        if (updatedItem.vendor !== undefined && item.vendor !== updatedItem.vendor) {
-            mutate({
-                ...item,
-                vendor: updatedItem.vendor,
-            })
-        }
+        if (!updatedItem.vendor || updatedItem.vendor === item.vendor) return
+        mutate({
+            ...item,
+            vendor: updatedItem.vendor,
+        })
     }
     const handleSelectChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setSelectedType(e.target.value)
@@ -78,11 +72,26 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
             ...prev,
             [fieldName]: value,
         }))
+        setChangedField(fieldName)
     }
+    useEffect(() => {
+        if (status === 'success') {
+            setSnackbarText(
+                `${changedField
+                    .split(/(?=[A-Z])/)
+                    .join(' ')
+                    .toLowerCase()} changed`
+            )
+        }
+        if (status === 'error') {
+            setSnackbarText('error')
+        }
+    }, [changedField, setSnackbarText, status])
 
     if (isLoading) {
         return <p>Loading.. </p>
     }
+
     return (
         <form>
             <Container>
@@ -98,16 +107,14 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     selectedType={selectedType}
                 />
 
-                {
-                    <EditableField
-                        label="Category"
-                        defaultValue={item.category}
-                        onBlur={handleBlurCategory}
-                        activeEditMode={activeEditMode}
-                        setActiveEditMode={setActiveEditMode}
-                        handleInputChange={(value) => handleInputChange('category', value)}
-                    />
-                }
+                <EditableField
+                    label="Category"
+                    defaultValue={item.category}
+                    onBlur={handleBlurCategory}
+                    activeEditMode={activeEditMode}
+                    setActiveEditMode={setActiveEditMode}
+                    handleInputChange={(value) => handleInputChange('category', value)}
+                />
 
                 <EditableField
                     label="Location"
@@ -154,6 +161,7 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     handleInputChange={(value) => handleInputChange('vendor', value)}
                 />
             </Container>
+            {snackbar}
         </form>
     )
 }
