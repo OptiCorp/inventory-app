@@ -25,6 +25,15 @@ export const InfoContainer = styled.div`
     }
 `
 
+export const TypeContainer = styled.div`
+    display: flex;
+    align-items: center;
+
+    gap: 2rem;
+    p {
+        margin: 0;
+    }
+`
 export const Edit = styled(EditIcon)`
     cursor: pointer;
 
@@ -37,4 +46,7 @@ export const ButtonContainer = styled.div`
     padding-left: 10px;
     padding-top: 20px;
     justify-content: flex-end;
+`
+export const TextBoxWrap = styled.div`
+    margin: 0;
 `

@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { Edit, InfoContainer } from './styles'
+import { Edit, InfoContainer, TextBoxWrap } from './styles'
 import { EditableFieldProps } from './types'
 
 /* import { Controller, useFormContext } from 'react-hook-form' */
@@ -16,7 +16,7 @@ const EditableField = ({
     const { register } = useFormContext()
 
     return (
-        <div>
+        <TextBoxWrap>
             <label>
                 <strong>{label.toUpperCase()}</strong>
             </label>
@@ -43,7 +43,7 @@ const EditableField = ({
                     }
                 />
             </InfoContainer>
-        </div>
+        </TextBoxWrap>
     )
 }
 

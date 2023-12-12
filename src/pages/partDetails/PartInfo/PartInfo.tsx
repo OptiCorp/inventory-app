@@ -142,17 +142,6 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     }
                 />
 
-                <div>
-                    <label>
-                        <strong>ADDED BY</strong>
-                    </label>
-                    <p>
-                        {item.addedByFirstName === null &&
-                        item.addedByLastName === null
-                            ? 'Not specified'
-                            : `${item.addedByFirstName} ${item.addedByLastName}`}
-                    </p>
-                </div>
                 <EditableField
                     label="S/N"
                     defaultValue={item.serialNumber}
@@ -173,7 +162,7 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     handleInputChange={(value) =>
                         handleInputChange('productNumber', value)
                     }
-                />
+                    />
                 <EditableField
                     label="Vendor"
                     defaultValue={item.vendor}
@@ -183,7 +172,18 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     handleInputChange={(value) =>
                         handleInputChange('vendor', value)
                     }
-                />
+                    />
+                    <div>
+                        <label>
+                            <strong>ADDED BY</strong>
+                        </label>
+                        <p>
+                            {item.addedByFirstName === null &&
+                            item.addedByLastName === null
+                                ? 'Not specified'
+                                : `${item.addedByFirstName} ${item.addedByLastName}`}
+                        </p>
+                    </div>
             </Container>
             {snackbar}
         </form>
