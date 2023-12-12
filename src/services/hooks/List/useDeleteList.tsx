@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../api'
-import { AddList } from '../apiTypes'
-export const useAddList = () => {
+import apiService from '../../api'
+
+export const useDeleteList = () => {
     const api = apiService()
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (list: AddList) => api.addList(list),
+        mutationFn: (listId: string) => api.deleteList(listId),
         onSuccess: () =>
             queryClient.invalidateQueries({
                 queryKey: ['lists'],

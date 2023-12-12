@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router'
-import { useUpdateItem } from '../../services/hooks/useUpdateItem'
+import { useUpdateItem } from '../../services/hooks/Items/useUpdateItem'
 
 import { z } from 'zod'
 
@@ -21,21 +21,6 @@ const partSchemaTest = z.object({
 })
 export type PartSchemaTest = z.infer<typeof partSchemaTest>
 
-/* const defaultValues: PartSchemaTest = {
-    id: '',
-    wpId: '',
-    serialNumber: '',
-    productNumber: '',
-    type: 'Unit',
-    location: '',
-    description: '',
-    parentId: '',
-    vendor: '',
-    addedById: 'testing',
-    comment: '',
-    category: '',
-} */
-
 export const useUpdatePartForm = (id: string, item: any) => {
     const { mutate } = useUpdateItem(id)
     const appLocation = useLocation()
@@ -44,6 +29,7 @@ export const useUpdatePartForm = (id: string, item: any) => {
         resolver: zodResolver(partSchemaTest),
         values: item,
     })
+
     const {
         handleSubmit,
         control,

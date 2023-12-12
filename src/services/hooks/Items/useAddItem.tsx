@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import apiService from '../api'
-import { AddItem } from '../apiTypes'
+import apiService from '../../api'
+import { AddItem } from '../../apiTypes'
 
 export const useAddItems = () => {
     const api = apiService()

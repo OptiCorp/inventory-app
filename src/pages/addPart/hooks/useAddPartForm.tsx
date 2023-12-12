@@ -4,7 +4,7 @@ import { useLocation } from 'react-router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
 import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddItems } from '../../../services/hooks/useAddItem'
+import { useAddItems } from '../../../services/hooks/Items/useAddItem'
 import { PartSchema, partSchema } from './partValidator'
 
 const defaultValues: PartSchema = {

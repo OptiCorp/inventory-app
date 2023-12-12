@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { Item, UpdateItem } from '../../../services/apiTypes'
-import { useUpdateItem } from '../../../services/hooks/useUpdateItem'
+import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
 import EditableField from './EditableField'
 import { Container } from './styles'
 

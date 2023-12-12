@@ -5,8 +5,8 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CancelButton, SubmitButton } from '../../pages/listDetails/styles.ts'
 import { Item, MutateItemList } from '../../services/apiTypes'
-import { useAddItemsToList } from '../../services/hooks/useAddItemsToList.tsx'
-import { useRemoveItemsFromList } from '../../services/hooks/useRemoveItemsFromList.tsx'
+import { useAddItemsToList } from '../../services/hooks/Items/useAddItemsToList.tsx'
+import { useRemoveItemsFromList } from '../../services/hooks/Items/useRemoveItemsFromList.tsx'
 import { StyledAddIcon, StyledRemoveIcon } from '../listCard/styles.ts'
 import {
     CompactCard,
