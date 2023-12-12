@@ -18,7 +18,7 @@ const PartDetails = () => {
 
     const { id } = useParams() as { id: string }
     const { data: item, isLoading } = useGetItemById(id)
-    const { onSubmit, methods } = useUpdatePartForm(id, item)
+    const { methods } = useUpdatePartForm(id, item)
     if (!item) return null
     return (
         <>
@@ -27,7 +27,6 @@ const PartDetails = () => {
                     <Card title="Part info">
                         <PartInfo item={item} isLoading={isLoading} />
                     </Card>
-                </FormProvider>
                 <Card title="Hierarchy">
                     <Hierarchy item={item} />
                 </Card>
@@ -41,6 +40,7 @@ const PartDetails = () => {
                 <Card title="Log">
                     <Log />
                 </Card>
+                </FormProvider>
             </StyledContainerDiv>
         </>
     )

@@ -1,6 +1,6 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdateItem } from '../../services/hooks/useUpdateItem'
 
 import { z } from 'zod'
@@ -38,7 +38,6 @@ export type PartSchemaTest = z.infer<typeof partSchemaTest>
 
 export const useUpdatePartForm = (id: string, item: any) => {
     const { mutate } = useUpdateItem(id)
-    console.log(item, 'item')
     const appLocation = useLocation()
 
     const methods = useForm<PartSchemaTest>({
@@ -54,11 +53,8 @@ export const useUpdatePartForm = (id: string, item: any) => {
         register,
     } = methods
 
-    const onSubmit = handleSubmit((data) => mutate(data))
-
     return {
         methods,
-        onSubmit,
         control,
         handleSubmit,
         location: appLocation.pathname,
