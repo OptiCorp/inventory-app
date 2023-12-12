@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
-import UmAppContext from '../../contexts/UmAppContext'
-import apiService from '../api'
+import UmAppContext from '../../../contexts/UmAppContext'
+import apiService from '../../api'
 
 export const useGetItemsByUser = () => {
     const { currentUser } = useContext(UmAppContext)

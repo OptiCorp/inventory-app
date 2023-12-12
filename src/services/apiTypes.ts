@@ -29,7 +29,7 @@ export type Item = {
     productNumber: string
     type: string
     location: string | null
-    category: string 
+    category: string
     description: string
     parentId: string | null
     vendor: string
@@ -82,7 +82,7 @@ export type UpdateItem = {
     serialNumber: string
     productNumber: string
     type: string
-    category: string 
+    category: string | null | undefined
     location?: string | null
     description: string
     parentId?: string | null
@@ -92,14 +92,19 @@ export type UpdateItem = {
 }
 
 
+
+
 export type Vendor = {
     id: string
+
     name: string
     address: string
     email: string
     phoneNumber: string
     addedById: string
 }
+
+
 
 
 
@@ -122,3 +127,4 @@ export type UpdateCateory = {
     id: string
     name: string
 }
+

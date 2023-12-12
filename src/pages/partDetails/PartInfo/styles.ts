@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     display: grid;
+
     padding: 20px;
     gap: 15px;
     grid-template-columns: repeat(1, 1fr);
@@ -24,6 +25,15 @@ export const InfoContainer = styled.div`
     }
 `
 
+export const TypeContainer = styled.div`
+    display: flex;
+    align-items: center;
+
+    gap: 2rem;
+    p {
+        margin: 0;
+    }
+`
 export const Edit = styled(EditIcon)`
     cursor: pointer;
 
@@ -36,4 +46,7 @@ export const ButtonContainer = styled.div`
     padding-left: 10px;
     padding-top: 20px;
     justify-content: flex-end;
+`
+export const TextBoxWrap = styled.div`
+    margin: 0;
 `

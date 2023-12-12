@@ -2,15 +2,11 @@ import SearchResultCard from '../../../components/searchResultCard/SearchResultC
 import { useWindowDimensions } from '../../../hooks/index.ts'
 import { Item } from '../../../services/apiTypes.ts'
 
-import { useNavigate } from 'react-router'
-
 import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact.tsx'
-import { useGetItemsByUser } from '../../../services/hooks/useGetItemByUser.tsx'
+import { useGetItemsByUser } from '../../../services/hooks/Items/useGetItemByUser.tsx'
 
-import { Button } from '../../../components/Button/SubmitButton.tsx'
-import { RecentlyAddedContainer } from './styles.ts'
-import { COLORS } from '../../../style/GlobalStyles.ts'
 import SearchResultCardSkeleton from '../../../components/searchResultCard/SearchResultCardSkeleton.tsx'
+import { RecentlyAddedContainer } from './styles.ts'
 
 const RecentlyAdded = () => {
     const { width } = useWindowDimensions()
@@ -28,7 +24,6 @@ const RecentlyAdded = () => {
                     <SearchResultCardCompact key={item.id} part={item} />
                 )
             )}
-
         </RecentlyAddedContainer>
     )
 }

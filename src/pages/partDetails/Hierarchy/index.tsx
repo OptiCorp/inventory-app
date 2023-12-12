@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { AssemblyList, Container, ListItem, PartList } from './styles'
 export const Hierarchy = ({ item }: { item: Item }) => {
     const navigate = useNavigate()
-    console.log(item.children)
+
     return (
         <>
             <Container>

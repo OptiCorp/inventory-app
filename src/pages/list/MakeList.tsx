@@ -9,8 +9,8 @@ import ListCard from '../../components/listCard/listCard.tsx'
 import SearchBar from '../../components/searchBar/SearchBar'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { List } from '../../services/apiTypes.ts'
-import { useAddList } from '../../services/hooks/useAddList.tsx'
-import { useGetListsByUserId } from '../../services/hooks/useGetListsByUserId.tsx'
+import { useAddList } from '../../services/hooks/List/useAddList.tsx'
+import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx'
 import {
     GlobalSpinnerContainer,
     SearchContainer,
