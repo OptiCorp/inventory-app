@@ -1,7 +1,7 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
 
-import { AddItem, AddList, Item, List, UpdateItem, User, UserRole } from './apiTypes'
+import { AddCategory, AddItem, AddList, AddLocation, Item, List, UpdateCateory, UpdateItem, UpdateLocation, User, UserRole, Vendor } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -286,6 +286,88 @@ const apiService = () => {
         return await postByFetch(`List/RemoveItems/?listId=${listId}`, [itemId])
     }
 
+    // Location
+    const getLocation = async () => {
+        const data =  await getByFetch('Location')
+        return data
+    }
+
+    const getLocationById = async (id: string) => {
+        return await getByFetch(`Location/${id}`)
+    }
+
+    const getLocationBySearchString = async (searchString: string) => {
+        return await getByFetch(`Location/${searchString}`)
+    }
+
+    const addLocation = async (location: AddLocation): Promise<Response> => {
+        return await postByFetch('Location', location)
+    }
+
+    const updateLocationById = async (id: string, location: UpdateLocation): Promise<Response> => {
+        return await putByFetch(`Location/${id}`, location)
+    }
+
+    const deleteLocation = async (id: string) => {
+        return await deleteByFetch(`Location/${id}`)
+    }
+
+    // Vendor
+    const getVendor = async () => {
+        const data =  await getByFetch('Vendor')
+        return data
+    }
+
+    const getVendorById = async (id: string) => {
+        return await getByFetch(`Vendor/${id}`)
+    }
+
+    const getVendorBySearchString = async (searchString: string) => {
+        return await getByFetch(`Vendor/${searchString}`)
+    }
+
+    const addVendor = async (vendor: Omit<Vendor, 'id'>): Promise<Response> => {
+        return await postByFetch('Vendor', vendor)
+    }
+
+
+    const updateVendorById = async (id: string, vendor: Vendor): Promise<Response> => {
+        return await putByFetch(`Vendor/${id}`, vendor)
+    }
+
+    const deleteVendor = async (id: string) => {
+        return await deleteByFetch(`Vendor/${id}`)
+    }
+
+    // Category
+    const getCategory = async () => {
+        const data =  await getByFetch('Category')
+        return data
+    }
+
+    const getCategoryById = async (id: string) => {
+        return await getByFetch(`Category/${id}`)
+    }
+
+    const getCategoryBySearchString = async (searchString: string) => {
+        return await getByFetch(`Category/${searchString}`)
+    }
+
+    const addCategory = async (category: AddCategory): Promise<Response> => {
+        return await postByFetch('Category', category)
+    }
+
+    const updateCategoryById = async (id: string, category: UpdateCateory): Promise<Response> => {
+        return await putByFetch(`Category/${id}`, category)
+    }
+
+    const deleteCategory = async (id: string) => {
+        return await deleteByFetch(`Category/${id}`)
+    }
+
+
+
+
     return {
         getAllUsers,
         getUser,
@@ -312,8 +394,25 @@ const apiService = () => {
         updateItemById,
         getListById,
         addItemsToList,
-        removeItemsFromList
-
+        removeItemsFromList,
+        getVendor,
+        getVendorById,
+        getVendorBySearchString,
+        addVendor,
+        updateVendorById,
+        deleteVendor,
+        getLocation,
+        getLocationById,
+        getLocationBySearchString,
+        addLocation,
+        updateLocationById,
+        deleteLocation,
+        getCategory,
+        getCategoryById,
+        getCategoryBySearchString,
+        addCategory,
+        updateCategoryById,
+        deleteCategory,
     }
 }
 

@@ -90,3 +90,35 @@ export type UpdateItem = {
     addedById: string | null
     comment?: string | null
 }
+
+
+export type Vendor = {
+    id: string
+    name: string
+    address: string
+    email: string
+    phoneNumber: string
+    addedById: string
+}
+
+
+
+export type AddLocation = {
+    name: string
+    addedById: string
+}
+
+export type UpdateLocation = {
+    id: string
+    name: string
+}
+
+export type AddCategory = {
+    name: string
+    addedById: string
+}
+
+export type UpdateCateory = {
+    id: string
+    name: string
+}
