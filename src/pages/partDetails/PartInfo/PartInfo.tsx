@@ -67,16 +67,6 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
         })
     })
 
-    /* const handleBlurProductNumber = formContext.handleSubmit(async (data) => {
-        await formContext.trigger()
-        if (!data.productNumber) return
-
-        console.log('data: ', data)
-        mutate({
-            ...item,
-            productNumber: data.productNumber,
-        })
-    }, console.log) */
     const handleBlurProductNumber = formContext.handleSubmit(() => {
         if (!updatedItem.productNumber || updatedItem.productNumber === item.productNumber) return
         mutate({
