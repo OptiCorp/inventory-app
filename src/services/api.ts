@@ -262,8 +262,8 @@ const apiService = () => {
         return await getByFetch(`Item/${id}`)
     }
     
-    const updateItemById = async (id: string, item: UpdateItem): Promise<Response> => {
-        return await putByFetch(`Item/${id}`, item)
+    const updateItemById = async (id: string, item: UpdateItem, updatedById: string): Promise<Response> => {
+        return await putByFetch(`Item/${id}?updatedById=${updatedById}`, item)
     }
 
     const addList = async (list: AddList): Promise<Response> => {
@@ -313,7 +313,7 @@ const apiService = () => {
     }
 
     // Vendor
-    const getVendor = async () => {
+    const getVendor = async (): Promise<Vendor[]> => {
         const data =  await getByFetch('Vendor')
         return data
     }
