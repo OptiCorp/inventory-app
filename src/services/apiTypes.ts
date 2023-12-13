@@ -34,8 +34,6 @@ export type Item = {
     description: string
     parentId: string | null
     addedById: string | null
-    addedByFirstName: string
-    addedByLastName: string
     comment: string | null
     listId: string | null
     parent: Item | null
@@ -45,6 +43,7 @@ export type Item = {
     category: Category
     vendor: Vendor
     location: Location
+    user: User
 }
 
 export type Category = {
