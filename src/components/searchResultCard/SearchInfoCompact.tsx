@@ -60,7 +60,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         <KeyWords>ID:</KeyWords> {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
-                        <KeyWords>Location</KeyWords> {/* {part.location || 'Location'} */}
+                        <KeyWords>Location</KeyWords> {part.location.name || 'Location'}
                     </CompactInfoP>{' '}
                     {icon === 'add' ? (
                         <StyledAddIcon
