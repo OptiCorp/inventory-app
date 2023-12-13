@@ -18,7 +18,7 @@ const PartDetails = () => {
 
     const { id } = useParams() as { id: string }
     const { data: item, isLoading } = useGetItemById(id)
-    const { methods } = useUpdatePartForm(id, item)
+    const { methods } = useUpdatePartForm(item)
     if (!item) return null
     return (
         <>
