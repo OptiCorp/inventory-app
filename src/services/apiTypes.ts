@@ -28,11 +28,11 @@ export type Item = {
     serialNumber: string
     productNumber: string
     type: string
-    location: string | null
-    category: string
+    categoryId: string
+    vendorId: string
+    locationId: string
     description: string
     parentId: string | null
-    vendor: string
     addedById: string | null
     addedByFirstName: string
     addedByLastName: string
@@ -42,7 +42,24 @@ export type Item = {
     children: Item[] | null
     createdDate: string
     updatedDate: string | null
+    category: Category
+    vendor: Vendor
+    location: Location
 }
+
+export type Category = {
+    id: string
+    name: string
+    userId: string
+}
+
+export type Location = {
+    id: string,
+    name: string,
+    userId: string
+}
+
+
 
 export type List = {
     id: string
@@ -82,13 +99,14 @@ export type UpdateItem = {
     serialNumber: string
     productNumber: string
     type: string
-    category: string | null | undefined
-    location?: string | null
+    categoryId: string | null | undefined
+    locationId?: string | null
     description: string
     parentId?: string | null
-    vendor: string
+    vendorId: string
     addedById: string | null
     comment?: string | null
+    listId: string | null
 }
 
 
@@ -96,7 +114,6 @@ export type UpdateItem = {
 
 export type Vendor = {
     id: string
-
     name: string
     address: string
     email: string
