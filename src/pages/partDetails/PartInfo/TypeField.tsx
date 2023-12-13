@@ -23,15 +23,13 @@ export const TypeField = ({
             </label>
             <TypeContainer>
                 <TextField
-                    {...register('type')}
+                    {...register(label.toLowerCase())}
                     onBlur={onBlur}
                     select
                     onChange={handleSelectChange}
                     SelectProps={{
                         IconComponent: () =>
-                            activeEditMode !== label ? null : (
-                                <ArrowDropDownIcon />
-                            ),
+                            activeEditMode !== label ? null : <ArrowDropDownIcon />,
                     }}
                     variant="standard"
                     fullWidth
@@ -49,9 +47,7 @@ export const TypeField = ({
                 </TextField>
                 <Edit
                     onClick={() =>
-                        setActiveEditMode((prevMode) =>
-                            prevMode === label ? null : label
-                        )
+                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
                     }
                 />
             </TypeContainer>
