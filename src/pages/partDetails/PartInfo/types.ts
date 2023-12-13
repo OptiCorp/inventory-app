@@ -31,6 +31,6 @@ export type ItemFields =
     | 'Type'
     | 'Category'
     | 'Location'
-    | 'P/N'
-    | 'S/N'
+    | 'productNumber'
+    | 'serialNumber'
     | 'Vendor'
