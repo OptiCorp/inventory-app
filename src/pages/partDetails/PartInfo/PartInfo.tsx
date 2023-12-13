@@ -11,20 +11,17 @@ import { TypeField } from './TypeField'
 import { ItemFields } from './types'
 import UmAppContext from '../../../contexts/UmAppContext'
 import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import { VendorField } from './VendorField'
 
 const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     const { currentUser } = useContext(UmAppContext)
 
     const { mutate, status } = useUpdateItem(item.id, currentUser!.id)
     const { data = [] } = useGetVendors()
-    console.log(
-        'vendor',
-        data.map((vendor) => vendor.name)
-    )
-
     const { snackbar, setSnackbarText } = useSnackBar()
     const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(null)
     const [selectedType, setSelectedType] = useState(item.type || '')
+    const [selectedVendorId, setSelectedVendorId] = useState(item.vendorId)
     const [updatedItem, setUpdatedItem] = useState(item)
     const [changedField, setChangedField] = useState('')
     const formContext = useFormContext<PartSchemaTest>()
@@ -38,6 +35,14 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
             })
         }
     }
+
+    const handleBlurVendor = formContext.handleSubmit(() => {
+        if (selectedVendorId === item.vendorId) return
+        mutate({
+            ...item,
+            vendorId: selectedVendorId,
+        })
+    })
 
     /* const handleBlurCategory = () => {
         if (!updatedItem.category || updatedItem.category === item.category) return
@@ -80,20 +85,17 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
         })
     }, console.log)
 
-    const handleBlurVendor = () => {
-        if (!updatedItem.vendor.name || updatedItem.vendor.name === item.vendor.name) return
-        mutate({
-            ...item,
-            vendor: updatedItem.vendor,
-        })
-    }
     const handleSelectChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setSelectedType(e.target.value)
     }
+
+    const handleVendorChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const newVendorId = e.target.value
+        setSelectedVendorId(newVendorId)
+    }
+
     const handleInputChange = (fieldName: keyof UpdateItem, value: string | undefined) => {
         setUpdatedItem((prev) => {
-            console.log('Prev: ', prev)
-            console.log('value: ', value)
             return {
                 ...prev,
                 [fieldName]: value,
@@ -169,24 +171,40 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     handleInputChange={(value) => handleInputChange('productNumber', value)}
                 />
 
-                <TypeField
-                    label="Vendor"
-                    defaultValue={item.vendor.name}
+                <VendorField
+                    label="vendor"
+                    defaultValue={selectedVendorId ? selectedVendorId : item.vendor.name}
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handleBlurVendor}
-                    handleSelectChange={handleSelectChange}
-                    options={data.map((vendor) => vendor.name)}
-                    selectedType={selectedType}
+                    handleSelectChange={handleVendorChange}
+                    options={data}
+                    id={item.vendorId}
                 />
+
+                {/* <TextField
+                    onBlur={handleBlurVendor}
+                    select
+                    variant="standard"
+                    fullWidth
+                    defaultValue={selectedVendorId ? selectedVendorId : item.vendor.name}
+                    onChange={handleVendorChange}
+                >
+                    {data.map((vendor) => (
+                        <MenuItem key={vendor.id} value={vendor.id}>
+                            {vendor.name}
+                        </MenuItem>
+                    ))}
+                </TextField> */}
+
                 <div>
                     <label>
                         <strong>ADDED BY</strong>
                     </label>
                     <p>
-                        {item.addedByFirstName === null && item.addedByLastName === null
+                        {!item.user
                             ? 'Not specified'
-                            : `${item.addedByFirstName} ${item.addedByLastName}`}
+                            : `${item.user.firstName} ${item.user.lastName}`}
                     </p>
                 </div>
             </Container>
