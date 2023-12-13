@@ -15,8 +15,7 @@ const EditableField = ({
         register,
         formState: { errors },
     } = useFormContext()
-    console.log(label)
-    /* console.log(errors[label]?.message) */
+
     const fieldErrorMessage = errors[label]?.message
     return (
         <TextBoxWrap>
