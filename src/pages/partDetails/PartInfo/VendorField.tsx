@@ -2,9 +2,9 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { MenuItem, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
 import { Edit, TextBoxWrap, TypeContainer } from './styles'
-import { TypeProps } from './types'
+import { VendorProps } from './types'
 
-export const TypeField = ({
+export const VendorField = ({
     handleSelectChange,
     label,
     defaultValue,
@@ -12,7 +12,7 @@ export const TypeField = ({
     setActiveEditMode,
     activeEditMode,
     options,
-}: TypeProps) => {
+}: VendorProps) => {
     const { register } = useFormContext()
 
     return (
@@ -39,8 +39,8 @@ export const TypeField = ({
                     }}
                 >
                     {options?.map((option) => (
-                        <MenuItem key={option} value={option}>
-                            {option}
+                        <MenuItem key={option.name} value={option.id}>
+                            {option.name}
                         </MenuItem>
                     ))}
                 </TextField>

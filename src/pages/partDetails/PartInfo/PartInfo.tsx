@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { Item, UpdateItem } from '../../../services/apiTypes'
 import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
 import EditableField from './EditableField'
@@ -9,20 +9,25 @@ import useSnackBar from '../../../hooks/useSnackbar'
 import { PartSchemaTest } from '../useUpdatePartForm'
 import { TypeField } from './TypeField'
 import { ItemFields } from './types'
+import UmAppContext from '../../../contexts/UmAppContext'
+import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import { VendorField } from './VendorField'
 
 const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
-    const { mutate, status } = useUpdateItem(item.id)
+    const { currentUser } = useContext(UmAppContext)
 
+    const { mutate, status } = useUpdateItem(item.id, currentUser!.id)
+    const { data = [] } = useGetVendors()
     const { snackbar, setSnackbarText } = useSnackBar()
-    const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(
-        null
-    )
+    const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(null)
     const [selectedType, setSelectedType] = useState(item.type || '')
+    const [selectedVendorId, setSelectedVendorId] = useState(item.vendorId)
     const [updatedItem, setUpdatedItem] = useState(item)
     const [changedField, setChangedField] = useState('')
     const formContext = useFormContext<PartSchemaTest>()
 
     const handleBlurType = () => {
+        if (selectedType === item.type) return
         if (selectedType.length) {
             mutate({
                 ...item,
@@ -31,61 +36,61 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
         }
     }
 
-    const handleBlurCategory = () => {
-        if (!updatedItem.category || updatedItem.category === item.category)
-            return
+    const handleBlurVendor = formContext.handleSubmit(() => {
+        if (selectedVendorId === item.vendorId) return
+        mutate({
+            ...item,
+            vendorId: selectedVendorId,
+        })
+    })
+
+    /* const handleBlurCategory = () => {
+        if (!updatedItem.category || updatedItem.category === item.category) return
         mutate({
             ...item,
             category: updatedItem.category,
         })
-    }
-    const handleBlurLocation = () => {
-        if (!updatedItem.location || updatedItem.location === item.location)
-            return
+    } */
+    /* const handleBlurLocation = () => {
+        if (!updatedItem.location || updatedItem.location === item.location) return
         mutate({
             ...item,
             location: updatedItem.location,
         })
-    }
+    } */
 
-    const handleBlurSerialNumber = () => {
-        if (
-            !updatedItem.serialNumber ||
-            updatedItem.serialNumber === item.serialNumber
-        )
-            return
+    const handleBlurSerialNumber = formContext.handleSubmit(() => {
+        if (!updatedItem.serialNumber || updatedItem.serialNumber === item.serialNumber) return
         mutate({
             ...item,
             serialNumber: updatedItem.serialNumber,
         })
-    }
+    })
 
-    const handleBlurProductNumber = formContext.handleSubmit((data) => {
-        if (!data.productNumber) return
+    const handleBlurProductNumber = formContext.handleSubmit(() => {
+        if (!updatedItem.productNumber || updatedItem.productNumber === item.productNumber) return
         mutate({
             ...item,
-            productNumber: data.productNumber,
+            productNumber: updatedItem.productNumber,
         })
     }, console.log)
 
-    const handleBlurVendor = () => {
-        if (!updatedItem.vendor || updatedItem.vendor === item.vendor) return
-        mutate({
-            ...item,
-            vendor: updatedItem.vendor,
-        })
-    }
     const handleSelectChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setSelectedType(e.target.value)
     }
-    const handleInputChange = (
-        fieldName: keyof UpdateItem,
-        value: string | undefined
-    ) => {
-        setUpdatedItem((prev) => ({
-            ...prev,
-            [fieldName]: value,
-        }))
+
+    const handleVendorChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const newVendorId = e.target.value
+        setSelectedVendorId(newVendorId)
+    }
+
+    const handleInputChange = (fieldName: keyof UpdateItem, value: string | undefined) => {
+        setUpdatedItem((prev) => {
+            return {
+                ...prev,
+                [fieldName]: value,
+            }
+        })
         setChangedField(fieldName)
     }
     useEffect(() => {
@@ -120,70 +125,78 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     selectedType={selectedType}
                 />
 
-                <EditableField
+                {/* <EditableField
                     label="Category"
                     defaultValue={item.category}
                     onBlur={handleBlurCategory}
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
-                    handleInputChange={(value) =>
-                        handleInputChange('category', value)
-                    }
-                />
+                    handleInputChange={(value) => handleInputChange('category', value)}
+                /> */}
 
-                <EditableField
+                {/* <EditableField
                     label="Location"
                     defaultValue={item.location}
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handleBlurLocation}
-                    handleInputChange={(value) =>
-                        handleInputChange('location', value)
-                    }
-                />
+                    handleInputChange={(value) => handleInputChange('location', value)}
+                /> */}
 
                 <EditableField
-                    label="S/N"
+                    label="serialNumber"
                     defaultValue={item.serialNumber}
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handleBlurSerialNumber}
-                    handleInputChange={(value) =>
-                        handleInputChange('serialNumber', value)
-                    }
+                    handleInputChange={(value) => handleInputChange('serialNumber', value)}
                 />
 
                 <EditableField
-                    label="P/N"
+                    label="productNumber"
                     defaultValue={item.productNumber}
                     onBlur={handleBlurProductNumber}
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
-                    handleInputChange={(value) =>
-                        handleInputChange('productNumber', value)
-                    }
-                    />
-                <EditableField
-                    label="Vendor"
-                    defaultValue={item.vendor}
-                    onBlur={handleBlurVendor}
+                    handleInputChange={(value) => handleInputChange('productNumber', value)}
+                />
+
+                <VendorField
+                    label="vendor"
+                    defaultValue={selectedVendorId ? selectedVendorId : item.vendor.name}
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
-                    handleInputChange={(value) =>
-                        handleInputChange('vendor', value)
-                    }
-                    />
-                    <div>
-                        <label>
-                            <strong>ADDED BY</strong>
-                        </label>
-                        <p>
-                            {item.addedByFirstName === null &&
-                            item.addedByLastName === null
-                                ? 'Not specified'
-                                : `${item.addedByFirstName} ${item.addedByLastName}`}
-                        </p>
-                    </div>
+                    onBlur={handleBlurVendor}
+                    handleSelectChange={handleVendorChange}
+                    options={data}
+                    id={item.vendorId}
+                />
+
+                {/* <TextField
+                    onBlur={handleBlurVendor}
+                    select
+                    variant="standard"
+                    fullWidth
+                    defaultValue={selectedVendorId ? selectedVendorId : item.vendor.name}
+                    onChange={handleVendorChange}
+                >
+                    {data.map((vendor) => (
+                        <MenuItem key={vendor.id} value={vendor.id}>
+                            {vendor.name}
+                        </MenuItem>
+                    ))}
+                </TextField> */}
+
+                <div>
+                    <label>
+                        <strong>ADDED BY</strong>
+                    </label>
+                    <p>
+                        {!item.user
+                            ? 'Not specified'
+                            : `${item.user.firstName} ${item.user.lastName}`}
+                    </p>
+                </div>
             </Container>
             {snackbar}
         </form>

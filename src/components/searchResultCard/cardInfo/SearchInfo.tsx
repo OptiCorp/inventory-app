@@ -8,8 +8,6 @@ import { Item, MutateItemList } from '../../../services/apiTypes'
 import { useAddItemsToList } from '../../../services/hooks/Items/useAddItemsToList'
 import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList'
 
-
-
 import { StyledAddIcon, StyledRemoveIcon } from '../../listCard/styles'
 import {
     DescriptionParagraph,
@@ -29,8 +27,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
 
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
-        useAddItemsToList()
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
     const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } =
         useRemoveItemsFromList()
 
@@ -96,18 +93,16 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     ) : null}
                 </div>
                 <InfoP>
-                    <KeyWords>Location</KeyWords> {part.location || 'Location'}
+                    <KeyWords>Location</KeyWords> {part.location.name || 'Location'}
                 </InfoP>
                 <InfoP>
                     {' '}
                     <KeyWords>Vendor</KeyWords>
-                    {part.vendor}
+                    {part.vendor.name}
                 </InfoP>
                 <InfoP>
                     {' '}
-                    <KeyWords>
-                        {part.updatedDate ? 'Last updated' : 'Created on'}
-                    </KeyWords>{' '}
+                    <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>{' '}
                     {format(
                         new Date(part.updatedDate || part.createdDate),
                         'yyyy-MM-dd HH:mm:ss'
@@ -117,9 +112,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Remove item from list?</DialogTitle>
                 <DialogActions>
-                    <CancelButton onClick={() => handleClose}>
-                        Cancel
-                    </CancelButton>
+                    <CancelButton onClick={() => handleClose}>Cancel</CancelButton>
                     <SubmitButton
                         onClick={(e) =>
                             handleDelete(e, {

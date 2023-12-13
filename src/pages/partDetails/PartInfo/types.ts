@@ -1,3 +1,5 @@
+import { Vendor } from "../../../services/apiTypes"
+
 export type Types = 'Unit' | 'Assembly' | 'Sub-Assembly' | 'Part'
 
 export type EditableFieldProps = {
@@ -21,16 +23,29 @@ export type TypeProps = {
     label: ItemFields
     defaultValue: string | null
     onBlur: () => void
-
     options?: Types[]
     activeEditMode: ItemFields | null
     setActiveEditMode: React.Dispatch<React.SetStateAction<ItemFields | null>>
 }
 
+export type VendorProps = {
+    id: string
+    handleSelectChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    selectedType?: string
+    label: ItemFields
+    defaultValue: string | null
+    onBlur: () => void
+    options?: Vendor[]
+    activeEditMode: ItemFields | null
+    setActiveEditMode: React.Dispatch<React.SetStateAction<ItemFields | null>>
+}
+
+
+
 export type ItemFields =
     | 'Type'
     | 'Category'
     | 'Location'
-    | 'P/N'
-    | 'S/N'
-    | 'Vendor'
+    | 'productNumber'
+    | 'serialNumber'
+    | 'vendor'

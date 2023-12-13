@@ -3,8 +3,6 @@ import { useFormContext } from 'react-hook-form'
 import { Edit, InfoContainer, TextBoxWrap } from './styles'
 import { EditableFieldProps } from './types'
 
-/* import { Controller, useFormContext } from 'react-hook-form' */
-
 const EditableField = ({
     label,
     defaultValue,
@@ -13,14 +11,22 @@ const EditableField = ({
     setActiveEditMode,
     handleInputChange,
 }: EditableFieldProps) => {
-    const { register } = useFormContext()
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext()
 
+    const fieldErrorMessage = errors[label]?.message
     return (
         <TextBoxWrap>
             <label>
-                <strong>{label.toUpperCase()}</strong>
+                <strong>
+                    {label
+                        .split(/(?=[A-Z])/)
+                        .join(' ')
+                        .toUpperCase()}
+                </strong>
             </label>
-
             <InfoContainer>
                 <TextField
                     variant="standard"
@@ -31,18 +37,20 @@ const EditableField = ({
                     {...register(label, {
                         onBlur,
                     })}
-                    onChange={(e) => handleInputChange?.(e.target.value)}
+                    onChange={(e) => {
+                        handleInputChange?.(e.target.value)
+                    }}
                     defaultValue={defaultValue}
                 />
 
                 <Edit
                     onClick={() =>
-                        setActiveEditMode((prevMode) =>
-                            prevMode === label ? null : label
-                        )
+                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
                     }
                 />
             </InfoContainer>
+
+            {fieldErrorMessage && <p style={{ color: 'red' }}>{fieldErrorMessage as string}</p>}
         </TextBoxWrap>
     )
 }
