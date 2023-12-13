@@ -38,7 +38,6 @@ const EditableField = ({
                         onBlur,
                     })}
                     onChange={(e) => {
-                        console.log('target value: ', e.target.value)
                         handleInputChange?.(e.target.value)
                     }}
                     defaultValue={defaultValue}
