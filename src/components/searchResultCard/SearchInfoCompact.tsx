@@ -25,8 +25,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
-        useAddItemsToList()
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
     const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } =
         useRemoveItemsFromList()
 
@@ -61,8 +60,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         <KeyWords>ID:</KeyWords> {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
-                        <KeyWords>Location</KeyWords>{' '}
-                        {part.location || 'Location'}
+                        <KeyWords>Location</KeyWords> {/* {part.location || 'Location'} */}
                     </CompactInfoP>{' '}
                     {icon === 'add' ? (
                         <StyledAddIcon
@@ -82,9 +80,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         ></StyledRemoveIcon>
                     ) : null}
                 </CompactCard>
-                <CompactDesriptionParagraph>
-                    {part.description}
-                </CompactDesriptionParagraph>
+                <CompactDesriptionParagraph>{part.description}</CompactDesriptionParagraph>
             </ResultCardCompactContainer>
 
             <Dialog open={open} onClose={handleClose}>
