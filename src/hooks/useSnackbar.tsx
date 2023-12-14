@@ -1,4 +1,4 @@
-import { Snackbar } from '@mui/material'
+import { Alert, Snackbar } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 const useSnackBar = () => {
@@ -13,8 +13,9 @@ const useSnackBar = () => {
                 setSnackbarText('')
             }}
             open={showSnackbar}
-            message={snackbarText}
-        />
+        >
+            <Alert>{snackbarText}</Alert>
+        </Snackbar>
     )
     useEffect(() => {
         if (snackbarText.length < 1) return

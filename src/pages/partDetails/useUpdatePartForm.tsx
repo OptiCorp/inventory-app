@@ -13,13 +13,8 @@ const partSchemaTest = z.object({
         .min(1, 'Product number is required')
         .max(20, 'Product number must be at most 20 characters'),
     type: z.string().min(1),
-    location: z.string().nullish(),
     description: z.string(),
-    /* vendor: z.string().min(1, 'Vendor is required'), */
-    // addedById: z.string(),
-    // comment: z.string(),
     parentId: z.string().nullish(),
-    category: z.string().nullish(),
 })
 export type PartSchemaTest = z.infer<typeof partSchemaTest>
 

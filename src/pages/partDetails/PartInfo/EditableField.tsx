@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { Edit, InfoContainer, TextBoxWrap } from './styles'
+import { Edit, InfoContainer, LabelContainer, TextBoxWrap } from './styles'
 import { EditableFieldProps } from './types'
 
 const EditableField = ({
@@ -16,17 +16,24 @@ const EditableField = ({
         formState: { errors },
     } = useFormContext()
 
-    const fieldErrorMessage = errors[label]?.message
+    const fieldErrorMessage = errors[label]?.message as string
     return (
         <TextBoxWrap>
-            <label>
-                <strong>
-                    {label
-                        .split(/(?=[A-Z])/)
-                        .join(' ')
-                        .toUpperCase()}
-                </strong>
-            </label>
+            <LabelContainer>
+                <label>
+                    <strong>
+                        {label
+                            .split(/(?=[A-Z])/)
+                            .join(' ')
+                            .toUpperCase()}
+                    </strong>
+                </label>
+                <Edit
+                    onClick={() =>
+                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
+                    }
+                />
+            </LabelContainer>
             <InfoContainer>
                 <TextField
                     variant="standard"
@@ -42,15 +49,9 @@ const EditableField = ({
                     }}
                     defaultValue={defaultValue}
                 />
-
-                <Edit
-                    onClick={() =>
-                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
-                    }
-                />
             </InfoContainer>
 
-            {fieldErrorMessage && <p style={{ color: 'red' }}>{fieldErrorMessage as string}</p>}
+            {fieldErrorMessage && <p style={{ color: 'red' }}>{fieldErrorMessage}</p>}
         </TextBoxWrap>
     )
 }
