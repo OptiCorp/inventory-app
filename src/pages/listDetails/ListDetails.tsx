@@ -8,12 +8,7 @@ import { useWindowDimensions } from '../../hooks'
 import { Item } from '../../services/apiTypes.ts'
 import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
-import {
-    Container,
-    GlobalSpinnerContainer,
-    SearchContainer,
-    Spinner,
-} from '../search/styles.ts'
+import { Container, GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
 import { FlexWrapper, ListTitle } from './styles.ts'
 
 const ListDetails = () => {
@@ -66,15 +61,9 @@ const ListDetails = () => {
                                 <>
                                     {list.items.map((item: Item) =>
                                         width > 800 ? (
-                                            <SearchResultCard
-                                                part={item}
-                                                icon={'remove'}
-                                            />
+                                            <SearchResultCard part={item} icon={'remove'} />
                                         ) : (
-                                            <SearchResultCardCompact
-                                                part={item}
-                                                icon={'remove'}
-                                            />
+                                            <SearchResultCardCompact part={item} icon={'remove'} />
                                         )
                                     )}
                                 </>
@@ -97,30 +86,22 @@ const ListDetails = () => {
                             width > 800 ? (
                                 <div
                                     id={
-                                        i === items.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === items.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
                                 >
-                                    <SearchResultCard
-                                        part={item}
-                                        icon={'add'}
-                                    />
+                                    <SearchResultCard part={item} icon={'add'} />
                                 </div>
                             ) : (
                                 <div
                                     id={
-                                        i === items.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === items.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
                                 >
-                                    <SearchResultCardCompact
-                                        part={item}
-                                        icon={'add'}
-                                    />
+                                    <SearchResultCardCompact part={item} icon={'add'} />
                                 </div>
                             )
                         )

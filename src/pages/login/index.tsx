@@ -1,12 +1,6 @@
 import { useMsal } from '@azure/msal-react'
 import { useState } from 'react'
-import {
-    BackgroundContainer,
-    ButtonWrapper,
-    Header,
-    LoginContainer,
-    TitleHeader,
-} from './styles'
+import { BackgroundContainer, ButtonWrapper, Header, LoginContainer, TitleHeader } from './styles'
 
 export const Login = () => {
     const { instance } = useMsal()

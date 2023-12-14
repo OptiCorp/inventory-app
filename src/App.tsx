@@ -20,7 +20,7 @@ import MakeList from './pages/list/MakeList'
 import PartDetails from './pages/partDetails/Index'
 import Search from './pages/search/Search'
 import GlobalStyles from './style/GlobalStyles'
-import ListDetails from "./pages/listDetails/ListDetails.tsx";
+import ListDetails from './pages/listDetails/ListDetails.tsx'
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
@@ -37,10 +37,7 @@ function App() {
                     <Route path="batch" element={<BatchForm />} />
                     <Route path="checks" element={<CheckForm />} />
                     <Route path="upload" element={<Upload />} />
-                    <Route
-                        path="add-form"
-                        element={<AddPartFormm />}
-                    />
+                    <Route path="add-form" element={<AddPartFormm />} />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />
                 <Route path="makelist/:listId?" element={<ListDetails />} />

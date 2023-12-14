@@ -21,13 +21,9 @@ const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>()
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data, isLoading, fetchNextPage } =
-        useGetItemsInfinite(debouncedSearchTerm)
+    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm)
     const { width } = useWindowDimensions()
-    const [searches, setSearches] = useLocalStorage<string[]>(
-        'recent_searches',
-        []
-    )
+    const [searches, setSearches] = useLocalStorage<string[]>('recent_searches', [])
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
@@ -81,8 +77,7 @@ const Search = () => {
                             width > 800 ? (
                                 <div
                                     id={
-                                        i === data.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === data.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
@@ -92,8 +87,7 @@ const Search = () => {
                             ) : (
                                 <div
                                     id={
-                                        i === data.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === data.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
@@ -110,10 +104,7 @@ const Search = () => {
                         <RecentTitle>Recent Searches</RecentTitle>
 
                         {searches.map((search, index) => (
-                            <StyledSearchedLink
-                                key={index}
-                                to={`/search/${search}`}
-                            >
+                            <StyledSearchedLink key={index} to={`/search/${search}`}>
                                 {search}
                             </StyledSearchedLink>
                         ))}

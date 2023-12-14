@@ -9,11 +9,7 @@ import { AzureUserInfo, UmAppContextType } from './types'
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
 
-export function UmAppContextProvider({
-    children,
-}: {
-    children: React.ReactNode
-}) {
+export function UmAppContextProvider({ children }: { children: React.ReactNode }) {
     const { instance, inProgress, accounts } = useMsal()
     const account = useAccount(accounts[0] || {})
     const api = apiService()

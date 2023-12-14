@@ -1,7 +1,20 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
 
-import { AddCategory, AddItem, AddList, AddLocation, Item, List, UpdateCateory, UpdateItem, UpdateLocation, User, UserRole, Vendor } from './apiTypes'
+import {
+    AddCategory,
+    AddItem,
+    AddList,
+    AddLocation,
+    Item,
+    List,
+    UpdateCateory,
+    UpdateItem,
+    UpdateLocation,
+    User,
+    UserRole,
+    Vendor,
+} from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -18,30 +31,25 @@ const apiService = () => {
 
     // Microsoft Graph
     const getMsGraphImageByFetch = async (url: string): Promise<any> => {
-        return pca
-            .acquireTokenSilent(microsoftGraphRequest)
-            .then(async (tokenResponse) => {
-                const getOperation = {
-                    method: 'GET',
-                    headers: {
-                        Authorization: `Bearer ${tokenResponse.accessToken}`,
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }
-                const res = await fetch(
-                    `${microsoftGraphUrl}/${url}`,
-                    getOperation
-                )
-                if (res.ok) {
-                    const blob = await res.blob()
-                    const url = window.URL || window.webkitURL
-                    const blobUrl = url.createObjectURL(blob)
-                    return blobUrl
-                } else {
-                    console.error('Get by fetch failed. Url=' + url, res)
-                }
-            })
+        return pca.acquireTokenSilent(microsoftGraphRequest).then(async (tokenResponse) => {
+            const getOperation = {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${tokenResponse.accessToken}`,
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+            const res = await fetch(`${microsoftGraphUrl}/${url}`, getOperation)
+            if (res.ok) {
+                const blob = await res.blob()
+                const url = window.URL || window.webkitURL
+                const blobUrl = url.createObjectURL(blob)
+                return blobUrl
+            } else {
+                console.error('Get by fetch failed. Url=' + url, res)
+            }
+        })
     }
 
     // User Management
@@ -149,10 +157,7 @@ const apiService = () => {
     }
 
     const addUser = async (
-        user: Omit<
-            User,
-            'id' | 'status' | 'userRole' | 'createdDate' | 'updatedDate'
-        >
+        user: Omit<User, 'id' | 'status' | 'userRole' | 'createdDate' | 'updatedDate'>
     ): Promise<Response> => {
         return await postByFetch('AddUser', {
             ...user,
@@ -199,17 +204,12 @@ const apiService = () => {
         return data
     }
 
-    const addUserRole = async (
-        userRole: Pick<UserRole, 'name'>
-    ): Promise<void> => {
+    const addUserRole = async (userRole: Pick<UserRole, 'name'>): Promise<void> => {
         await postByFetch('AddUserRole', {
             userRole,
         })
     }
-    const updateUserRole = async (
-        id: string,
-        name: string
-    ): Promise<Response> => {
+    const updateUserRole = async (id: string, name: string): Promise<Response> => {
         return await postByFetch('UpdateUserRole', {
             id: id,
             name: name,
@@ -231,9 +231,7 @@ const apiService = () => {
         searchString: string,
         userId: string | undefined
     ): Promise<List[]> => {
-        return await getByFetch(
-            `List/BySearchString/${searchString}?userId=${userId}`
-        )
+        return await getByFetch(`List/BySearchString/${searchString}?userId=${userId}`)
     }
 
     const getItemsNotInListBySearchString = async (
@@ -241,7 +239,9 @@ const apiService = () => {
         listId: string,
         pageNumber: number
     ): Promise<Item[]> => {
-        return await getByFetch(`Item/BySearchStringNotInList/${searchString}?listId=${listId}&page=${pageNumber}`)
+        return await getByFetch(
+            `Item/BySearchStringNotInList/${searchString}?listId=${listId}&page=${pageNumber}`
+        )
     }
 
     const getListsByUserId = async (userId: string): Promise<List[]> => {
@@ -252,17 +252,19 @@ const apiService = () => {
         return await getByFetch(`List/${id}`)
     }
 
-    const getItemsByUserId = async (
-        userId: string | undefined
-    ): Promise<Item[]> => {
+    const getItemsByUserId = async (userId: string | undefined): Promise<Item[]> => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
     const getItemById = async (id: string) => {
         return await getByFetch(`Item/${id}`)
     }
-    
-    const updateItemById = async (id: string, item: UpdateItem, updatedById: string): Promise<Response> => {
+
+    const updateItemById = async (
+        id: string,
+        item: UpdateItem,
+        updatedById: string
+    ): Promise<Response> => {
         return await putByFetch(`Item/${id}?updatedById=${updatedById}`, item)
     }
 
@@ -288,7 +290,7 @@ const apiService = () => {
 
     // Location
     const getLocation = async () => {
-        const data =  await getByFetch('Location')
+        const data = await getByFetch('Location')
         return data
     }
 
@@ -314,7 +316,7 @@ const apiService = () => {
 
     // Vendor
     const getVendor = async (): Promise<Vendor[]> => {
-        const data =  await getByFetch('Vendor')
+        const data = await getByFetch('Vendor')
         return data
     }
 
@@ -330,7 +332,6 @@ const apiService = () => {
         return await postByFetch('Vendor', vendor)
     }
 
-
     const updateVendorById = async (id: string, vendor: Vendor): Promise<Response> => {
         return await putByFetch(`Vendor/${id}`, vendor)
     }
@@ -341,7 +342,7 @@ const apiService = () => {
 
     // Category
     const getCategory = async () => {
-        const data =  await getByFetch('Category')
+        const data = await getByFetch('Category')
         return data
     }
 
@@ -364,9 +365,6 @@ const apiService = () => {
     const deleteCategory = async (id: string) => {
         return await deleteByFetch(`Category/${id}`)
     }
-
-
-
 
     return {
         getAllUsers,

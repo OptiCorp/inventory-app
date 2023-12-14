@@ -7,8 +7,7 @@ export const useAddItemsToList = () => {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: (ids: MutateItemList) =>
-            api.addItemsToList(ids.listId, ids.itemId),
+        mutationFn: (ids: MutateItemList) => api.addItemsToList(ids.listId, ids.itemId),
         onSuccess: () =>
             queryClient.invalidateQueries({
                 queryKey: ['list'],

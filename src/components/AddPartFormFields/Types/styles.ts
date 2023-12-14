@@ -20,5 +20,4 @@ export const StyledSelect = styled.select`
 export const IconContainer = styled.div`
     display: flex;
     gap: 4px;
-
 `

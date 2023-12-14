@@ -33,12 +33,8 @@ const Upload = () => {
             <ExampleUpload />
             <span style={{ color: 'red' }}>{error}</span>
             <label>
-                <input
-                    type="radio"
-                    name="checks"
-                    onChange={() => setChecked(true)}
-                />{' '}
-                I have uploaded all necessary documentation for this item.{' '}
+                <input type="radio" name="checks" onChange={() => setChecked(true)} /> I have
+                uploaded all necessary documentation for this item.{' '}
             </label>
             <ul>
                 E.g:

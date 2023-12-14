@@ -53,12 +53,10 @@ export type Category = {
 }
 
 export type Location = {
-    id: string,
-    name: string,
+    id: string
+    name: string
     userId: string
 }
-
-
 
 export type List = {
     id: string
@@ -108,9 +106,6 @@ export type UpdateItem = {
     listId: string | null
 }
 
-
-
-
 export type Vendor = {
     id: string
     name: string
@@ -119,10 +114,6 @@ export type Vendor = {
     phoneNumber: string
     addedById: string
 }
-
-
-
-
 
 export type AddLocation = {
     name: string
@@ -143,4 +134,3 @@ export type UpdateCateory = {
     id: string
     name: string
 }
-

@@ -1,4 +1,4 @@
-import { Vendor } from "../../../services/apiTypes"
+import { Vendor } from '../../../services/apiTypes'
 
 export type Types = 'Unit' | 'Assembly' | 'Sub-Assembly' | 'Part'
 
@@ -39,8 +39,6 @@ export type VendorProps = {
     activeEditMode: ItemFields | null
     setActiveEditMode: React.Dispatch<React.SetStateAction<ItemFields | null>>
 }
-
-
 
 export type ItemFields =
     | 'Type'

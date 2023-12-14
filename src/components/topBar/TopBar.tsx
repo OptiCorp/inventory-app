@@ -23,11 +23,7 @@ const TopBar = () => {
                         </StyledLinkDiv>
                     </StyledNavLink>
                 </HeaderWrap>
-                <img
-                    alt='logo'
-                    src={'/WP 1.svg'}
-                />
-
+                <img alt="logo" src={'/WP 1.svg'} />
             </TopBarContainer>
             <Outlet />
         </div>

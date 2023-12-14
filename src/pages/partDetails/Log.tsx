@@ -20,8 +20,7 @@ export const Log = () => {
                             display: 'none',
                         },
                         '&:focus-within': {
-                            outline:
-                                '2px solid var(--Textarea-focusedHighlight)',
+                            outline: '2px solid var(--Textarea-focusedHighlight)',
                             outlineOffset: '2px',
                         },
                     }}

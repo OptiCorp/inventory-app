@@ -1,10 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import apiService from '../../api'
 
-export const useGetItemsNotInListInfinite = (
-    searchTerm: string,
-    listId: string
-) => {
+export const useGetItemsNotInListInfinite = (searchTerm: string, listId: string) => {
     return useInfiniteQuery({
         queryKey: ['list', searchTerm],
         queryFn: async ({ pageParam }) =>
