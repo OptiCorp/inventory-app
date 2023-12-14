@@ -23,6 +23,7 @@ export type UserRole = {
 }
 
 export type Item = {
+    /* [index: string]: string | null | Item | Item[] | Category | Location | Vendor | User */
     id: string
     wpId: string
     serialNumber: string
@@ -44,17 +45,28 @@ export type Item = {
     vendor: Vendor
     location: Location
     user: User
+    logEntries: LogEntry[]
+    [key: string]: any
+}
+
+export type LogEntry = {
+    id: string
+    itemId: string
+    userId: string
+    message: string
+    createdDate: string
+    user: User
 }
 
 export type Category = {
     id: string
-    name: string
+    name: string | null
     userId: string
 }
 
 export type Location = {
     id: string,
-    name: string,
+    name: string | null
     userId: string
 }
 
@@ -113,7 +125,7 @@ export type UpdateItem = {
 
 export type Vendor = {
     id: string
-    name: string
+    name: string | null
     address: string
     email: string
     phoneNumber: string
