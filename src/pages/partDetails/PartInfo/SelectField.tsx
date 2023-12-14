@@ -1,7 +1,7 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { MenuItem, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { Edit, TextBoxWrap, TypeContainer } from './styles'
+import { Edit, LabelContainer, TextBoxWrap, TypeContainer } from './styles'
 import { VendorProps } from './types'
 
 export const SelectField = ({
@@ -17,9 +17,16 @@ export const SelectField = ({
 
     return (
         <TextBoxWrap>
-            <label>
-                <strong>{label.toUpperCase()}</strong>
-            </label>
+            <LabelContainer>
+                <label>
+                    <strong>{label.toUpperCase()}</strong>
+                </label>
+                <Edit
+                    onClick={() =>
+                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
+                    }
+                />
+            </LabelContainer>
             <TypeContainer>
                 <TextField
                     {...register(label.toLowerCase())}
@@ -44,11 +51,6 @@ export const SelectField = ({
                         </MenuItem>
                     ))}
                 </TextField>
-                <Edit
-                    onClick={() =>
-                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
-                    }
-                />
             </TypeContainer>
         </TextBoxWrap>
     )
