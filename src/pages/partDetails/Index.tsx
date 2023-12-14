@@ -9,6 +9,7 @@ import { Hierarchy } from './Hierarchy'
 import { Log } from './Log'
 import PartInfo from './PartInfo/PartInfo'
 import { useUpdatePartForm } from './useUpdatePartForm'
+import { Item } from '../../services/apiTypes'
 
 const PartDetails = () => {
     const { id } = useParams() as { id: string }
@@ -19,7 +20,7 @@ const PartDetails = () => {
         <StyledContainerDiv>
             <FormProvider {...methods}>
                 <Card title="Part info">
-                    <PartInfo item={item} isLoading={isLoading} />
+                    <PartInfo item={item as Item} isLoading={isLoading} />
                 </Card>
                 <Card title="Hierarchy">
                     <Hierarchy item={item} />
