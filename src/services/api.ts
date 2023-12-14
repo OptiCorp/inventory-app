@@ -258,7 +258,7 @@ const apiService = () => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
-    const getItemById = async (id: string) => {
+    const getItemById = async (id: string): Promise<Item> => {
         return await getByFetch(`Item/${id}`)
     }
     
