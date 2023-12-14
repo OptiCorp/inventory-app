@@ -3,7 +3,6 @@ import { Item, UpdateItem } from '../../../services/apiTypes'
 import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
 import EditableField from './EditableField'
 import { Container } from './styles'
-
 import { useFormContext } from 'react-hook-form'
 import useSnackBar from '../../../hooks/useSnackbar'
 import { PartSchemaTest } from '../useUpdatePartForm'
