@@ -25,9 +25,8 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
-    const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } =
-        useRemoveItemsFromList()
+    const { mutate: mutateAddItemToList } = useAddItemsToList()
+    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList()
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
@@ -60,7 +59,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         <KeyWords>ID:</KeyWords> {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
-                        <KeyWords>Location</KeyWords> {part.location.name || 'Location'}
+                        <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
                     </CompactInfoP>{' '}
                     {icon === 'add' ? (
                         <StyledAddIcon
