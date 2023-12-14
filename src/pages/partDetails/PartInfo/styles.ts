@@ -47,6 +47,13 @@ export const ButtonContainer = styled.div`
     padding-top: 20px;
     justify-content: flex-end;
 `
+
+export const LabelContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+`
+
 export const TextBoxWrap = styled.div`
     margin: 0;
 `
