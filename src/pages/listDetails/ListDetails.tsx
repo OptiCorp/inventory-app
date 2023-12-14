@@ -10,6 +10,7 @@ import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetI
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
 import { Container, GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
 import { FlexWrapper, ListTitle } from './styles.ts'
+import {format} from "date-fns";
 
 const ListDetails = () => {
     const { listId } = useParams()
@@ -53,11 +54,9 @@ const ListDetails = () => {
             <SearchContainer>
                 {list ? (
                     <>
-                        <ListTitle>
-                            {list.title}, {list.createdDate.split(' ')[0]}
-                        </ListTitle>
+                        <ListTitle>{list.title}, {format((new Date(list.createdDate)), "dd-MM-yyyy").toString()}</ListTitle>
                         <FlexWrapper>
-                            {list.items ? (
+                            {list.items ?
                                 <>
                                     {list.items.map((item: Item) =>
                                         width > 800 ? (
@@ -66,11 +65,11 @@ const ListDetails = () => {
                                             <SearchResultCardCompact part={item} icon={'remove'} />
                                         )
                                     )}
-                                </>
-                            ) : null}
+                                </> : null
+                            }
                         </FlexWrapper>
-                    </>
-                ) : null}
+                    </> ) : null
+                }
 
                 <ListTitle>Add items</ListTitle>
 

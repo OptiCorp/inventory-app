@@ -41,9 +41,9 @@ export type VendorProps = {
 }
 
 export type ItemFields =
-    | 'Type'
-    | 'Category'
-    | 'Location'
+    | 'type'
+    | 'category'
+    | 'location'
     | 'productNumber'
     | 'serialNumber'
     | 'vendor'

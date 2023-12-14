@@ -93,12 +93,12 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     ) : null}
                 </div>
                 <InfoP>
-                    <KeyWords>Location</KeyWords> {part.location.name || 'Location'}
+                    <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
                 </InfoP>
                 <InfoP>
                     {' '}
                     <KeyWords>Vendor</KeyWords>
-                    {part.vendor.name}
+                    {part.vendor?.name || ''}
                 </InfoP>
                 <InfoP>
                     {' '}

@@ -4,7 +4,6 @@ import decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
 import apiService from '../services/api'
 import { ApiStatus, User } from '../services/apiTypes'
-import CheckRole from '../utils/CheckRole'
 import { AzureUserInfo, UmAppContextType } from './types'
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
@@ -18,7 +17,6 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
     const [idToken, setIdToken] = useState('')
     const [status, setStatus] = useState<ApiStatus>(ApiStatus.LOADING)
     const [currentUser, setCurrentUser] = useState<User | null>(null)
-    const role = CheckRole({ currentUser })
 
     function getUserInfoFromIdToken(token: string): {
         preferredUserName: string
