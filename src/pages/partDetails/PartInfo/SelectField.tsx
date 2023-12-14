@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { Edit, TextBoxWrap, TypeContainer } from './styles'
 import { VendorProps } from './types'
 
-export const VendorField = ({
+export const SelectField = ({
     handleSelectChange,
     label,
     defaultValue,
