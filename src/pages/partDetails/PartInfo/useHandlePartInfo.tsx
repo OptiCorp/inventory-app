@@ -6,14 +6,15 @@ import { Item, UpdateItem } from '../../../services/apiTypes'
 import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
 import useSnackBar from '../../../hooks/useSnackbar'
 
+type FieldId = 'type' | 'categoryId' | 'locationId' | 'vendorId'
+
 const useHandlePartInfo = (obj: Item) => {
     const { currentUser } = useContext(UmAppContext)
     const formContext = useFormContext<PartInfoSchema>()
     const { mutate, status } = useUpdateItem(obj.id, currentUser!.id)
     const { snackbar, setSnackbarText } = useSnackBar()
     const [changedField, setChangedField] = useState('')
-
-    const handleBlurSelectField = (selected: string, field: string, obj: Item) =>
+    const handleBlurSelectField = (selected: string, field: FieldId, obj: Item) =>
         formContext.handleSubmit(() => {
             const fieldValue = obj[field]
 
@@ -47,7 +48,6 @@ const useHandlePartInfo = (obj: Item) => {
         fieldName: keyof UpdateItem,
         value: string | undefined,
         setUpdated: React.Dispatch<React.SetStateAction<Item>>
-        /* setChangedField: (value: React.SetStateAction<string>) => void */
     ) => {
         setUpdated((prev) => {
             return {
@@ -78,7 +78,6 @@ const useHandlePartInfo = (obj: Item) => {
         handleBlurInputField,
         handleInputChange,
         handleSelectChange,
-        status,
         snackbar,
     }
 }
