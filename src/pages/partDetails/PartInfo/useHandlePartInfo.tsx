@@ -10,7 +10,7 @@ const useHandlePartInfo = (obj: Item) => {
     const { currentUser } = useContext(UmAppContext)
     const formContext = useFormContext<PartInfoSchema>()
     const { mutate, status } = useUpdateItem(obj.id, currentUser!.id)
-    const { snackbar, setSnackbarText, setSnackbarSeverity, setSnackbarPosition } = useSnackBar()
+    const { snackbar, setSnackbarText } = useSnackBar()
     const [changedField, setChangedField] = useState('')
 
     const handleBlurSelectField = (selected: string, field: string, obj: Item) =>
@@ -59,7 +59,6 @@ const useHandlePartInfo = (obj: Item) => {
     }
 
     useEffect(() => {
-        setSnackbarPosition({ horizontal: 'center', vertical: 'bottom' })
         if (status === 'success') {
             setSnackbarText(
                 `${changedField
@@ -70,10 +69,9 @@ const useHandlePartInfo = (obj: Item) => {
         }
 
         if (status === 'error') {
-            setSnackbarSeverity('error')
             setSnackbarText('error')
         }
-    }, [changedField, setSnackbarText, setSnackbarSeverity, setSnackbarPosition, status])
+    }, [changedField, setSnackbarText, status])
 
     return {
         handleBlurSelectField,
