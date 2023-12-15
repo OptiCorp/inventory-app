@@ -47,7 +47,17 @@ const Locations = () => {
             />
             <SearchResultContainer>
                 {fakeData?.pages.map((page, i) =>
-                    page.map((location, index) => <AdminSearchCard data={location} />)
+                    page.map((location, index) => (
+                        <div
+                            id={
+                                i === fakeData.pages.length - 1 && index === page.length - 1
+                                    ? 'lastItem'
+                                    : ''
+                            }
+                        >
+                            <AdminSearchCard data={location} />
+                        </div>
+                    ))
                 )}
             </SearchResultContainer>
             <ButtonContainer>

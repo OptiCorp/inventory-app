@@ -48,7 +48,17 @@ const Categories = () => {
             />
             <SearchResultContainer>
                 {fakeData?.pages.map((page, i) =>
-                    page.map((category, index) => <AdminSearchCard data={category} />)
+                    page.map((category, index) => (
+                        <div
+                            id={
+                                i === fakeData.pages.length - 1 && index === page.length - 1
+                                    ? 'lastItem'
+                                    : ''
+                            }
+                        >
+                            <AdminSearchCard data={category} />
+                        </div>
+                    ))
                 )}
             </SearchResultContainer>
             <ButtonContainer>

@@ -4,8 +4,7 @@ import apiService from '../../api'
 export const useGetVendorsInfinite = (searchTerm: string) => {
     return useInfiniteQuery({
         queryKey: ['vendors', searchTerm],
-        queryFn: async ({ pageParam }) =>
-            apiService().getVendorBySearchString(encodeURIComponent(searchTerm)),
+        queryFn: async () => apiService().getVendorBySearchString(encodeURIComponent(searchTerm)),
         initialPageParam: 1,
         getNextPageParam: (lastPage, _pages, lastPageParam) => {
             if (lastPage.length === 0) {

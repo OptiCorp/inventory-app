@@ -4,8 +4,7 @@ import apiService from '../../api'
 export const useGetCategoriesInfinite = (searchTerm: string) => {
     return useInfiniteQuery({
         queryKey: ['categories', searchTerm],
-        queryFn: async ({ pageParam }) =>
-            apiService().getCategoryBySearchString(encodeURIComponent(searchTerm)),
+        queryFn: async () => apiService().getCategoryBySearchString(encodeURIComponent(searchTerm)),
         initialPageParam: 1,
         getNextPageParam: (lastPage, _pages, lastPageParam) => {
             if (lastPage.length === 0) {

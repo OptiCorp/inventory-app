@@ -48,7 +48,17 @@ const Vendors = () => {
 
             <SearchResultContainer>
                 {fakeData?.pages.map((page, i) =>
-                    page.map((vendor, index) => <AdminSearchCard data={vendor} />)
+                    page.map((vendor, index) => (
+                        <div
+                            id={
+                                i === fakeData.pages.length - 1 && index === page.length - 1
+                                    ? 'lastItem'
+                                    : ''
+                            }
+                        >
+                            <AdminSearchCard data={vendor} />
+                        </div>
+                    ))
                 )}
             </SearchResultContainer>
 
