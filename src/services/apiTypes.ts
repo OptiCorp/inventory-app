@@ -65,7 +65,7 @@ export type Category = {
 }
 
 export type Location = {
-    id: string,
+    id: string
     name: string | null
     userId: string
 }
