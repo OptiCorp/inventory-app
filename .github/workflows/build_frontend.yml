@@ -44,6 +44,12 @@ jobs:
                   node-version: ${{ env.NODE_VERSION }}
                   cache: 'npm'
 
+            - name: Install dependencies and run Prettier and ESLint
+              run: |
+                  npm install
+                  npm run prettier -- --write .
+                  npm run eslint -- .
+
             - name: npm install, build, and test
               run: |
                   npm install
