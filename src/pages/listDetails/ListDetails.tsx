@@ -8,14 +8,9 @@ import { useWindowDimensions } from '../../hooks'
 import { Item } from '../../services/apiTypes.ts'
 import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
-import {
-    Container,
-    GlobalSpinnerContainer,
-    SearchContainer,
-    Spinner,
-} from '../search/styles.ts'
+import { Container, GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
 import { FlexWrapper, ListTitle } from './styles.ts'
-import {format} from "date-fns";
+import { format } from 'date-fns'
 
 const ListDetails = () => {
     const { listId } = useParams()
@@ -59,22 +54,25 @@ const ListDetails = () => {
             <SearchContainer>
                 {list ? (
                     <>
-                        <ListTitle>{list.title}, {format((new Date(list.createdDate)), "dd-MM-yyyy").toString()}</ListTitle>
+                        <ListTitle>
+                            {list.title},{' '}
+                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
+                        </ListTitle>
                         <FlexWrapper>
-                            {list.items ?
+                            {list.items ? (
                                 <>
                                     {list.items.map((item: Item) =>
                                         width > 800 ? (
-                                            <SearchResultCard part={item} icon={"remove"} />
+                                            <SearchResultCard part={item} icon={'remove'} />
                                         ) : (
-                                            <SearchResultCardCompact part={item} icon={"remove"} />
+                                            <SearchResultCardCompact part={item} icon={'remove'} />
                                         )
                                     )}
-                                </> : null
-                            }
+                                </>
+                            ) : null}
                         </FlexWrapper>
-                    </> ) : null
-                }
+                    </>
+                ) : null}
 
                 <ListTitle>Add items</ListTitle>
 
@@ -90,30 +88,22 @@ const ListDetails = () => {
                             width > 800 ? (
                                 <div
                                     id={
-                                        i === items.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === items.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
                                 >
-                                    <SearchResultCard
-                                        part={item}
-                                        icon={'add'}
-                                    />
+                                    <SearchResultCard part={item} icon={'add'} />
                                 </div>
                             ) : (
                                 <div
                                     id={
-                                        i === items.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === items.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
                                 >
-                                    <SearchResultCardCompact
-                                        part={item}
-                                        icon={'add'}
-                                    />
+                                    <SearchResultCardCompact part={item} icon={'add'} />
                                 </div>
                             )
                         )

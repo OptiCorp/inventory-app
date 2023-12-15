@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { useWindowDimensions } from "../../hooks"
-import { CompactCard, ResultCardCompactContainer, ResultCardContainer, SearchCard } from "./styles"
-import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom'
+import { useWindowDimensions } from '../../hooks'
+import { CompactCard, ResultCardCompactContainer, ResultCardContainer, SearchCard } from './styles'
+import AddIcon from '@mui/icons-material/Add'
 
 const SearchResultCardSkeleton = () => {
     const { width } = useWindowDimensions()
@@ -32,7 +32,6 @@ const SearchResultCardSkeleton = () => {
                     </CompactCard>
                 </ResultCardCompactContainer>
             )}
-
         </>
     )
 }

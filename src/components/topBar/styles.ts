@@ -5,7 +5,6 @@ import { COLORS } from '../../style/GlobalStyles'
 export const TopBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
-
 `
 
 export const StyledLinkDiv = styled.div`

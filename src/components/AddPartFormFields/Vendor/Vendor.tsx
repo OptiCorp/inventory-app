@@ -20,16 +20,9 @@ export const Vendor = () => {
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
                 </IconContainer>
-                <ErrorMessage
-                    name="vendor"
-                    render={({ message }) => <ErrorP>{message}</ErrorP>}
-                />
+                <ErrorMessage name="vendor" render={({ message }) => <ErrorP>{message}</ErrorP>} />
             </InputWrap>
-            <StyledInput
-                type="text"
-                placeholder="E.g. ABB"
-                {...register('vendor')}
-            />
+            <StyledInput type="text" placeholder="E.g. ABB" {...register('vendor')} />
         </>
     )
 }

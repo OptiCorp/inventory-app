@@ -28,18 +28,14 @@ export const Comments = ({ item }: { item: Item }) => {
                                 display: 'none',
                             },
                             '&:focus-within': {
-                                outline:
-                                    '2px solid var(--Textarea-focusedHighlight)',
+                                outline: '2px solid var(--Textarea-focusedHighlight)',
                                 outlineOffset: '2px',
                             },
                         }}
                     />
                 </div>
                 <Wrapper>
-                    <Button
-                        backgroundColor={`${COLORS.secondary}`}
-                        color={`${COLORS.primary}`}
-                    >
+                    <Button backgroundColor={`${COLORS.secondary}`} color={`${COLORS.primary}`}>
                         Sumbit
                     </Button>
                 </Wrapper>

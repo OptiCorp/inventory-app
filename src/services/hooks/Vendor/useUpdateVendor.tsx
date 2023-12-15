@@ -2,7 +2,6 @@
 // import apiService from '../../api'
 // import { Vendor } from '../../apiTypes'
 
-
 // export const useUpdateVendor = (id: string) => {
 //     const api = apiService()
 //     const queryClient = useQueryClient()
