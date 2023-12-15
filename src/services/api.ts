@@ -6,6 +6,7 @@ import {
     AddItem,
     AddList,
     AddLocation,
+    Category,
     Item,
     List,
     UpdateCateory,
@@ -350,7 +351,7 @@ const apiService = () => {
         return await getByFetch(`Category/${id}`)
     }
 
-    const getCategoryBySearchString = async (searchString: string) => {
+    const getCategoryBySearchString = async (searchString: string): Promise<Category[]> => {
         return await getByFetch(`Category/${searchString}`)
     }
 

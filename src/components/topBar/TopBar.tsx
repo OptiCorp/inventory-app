@@ -113,7 +113,7 @@ const TopBar = () => {
                                         <DropdownItem>
                                             <ListItemButton
                                                 onClick={() => {
-                                                    hamburgerLink('makelist') // TODO: map to correct pages
+                                                    hamburgerLink('admin/categories')
                                                     setHamburgerIsOpen(false)
                                                     setAdminDropdownIsOpen(false)
                                                 }}
@@ -128,7 +128,7 @@ const TopBar = () => {
                                         <DropdownItem>
                                             <ListItemButton
                                                 onClick={() => {
-                                                    hamburgerLink('makelist') // TODO: map to correct pages
+                                                    hamburgerLink('admin/vendors')
                                                     setHamburgerIsOpen(false)
                                                     setAdminDropdownIsOpen(false)
                                                 }}
@@ -143,7 +143,7 @@ const TopBar = () => {
                                         <DropdownItem>
                                             <ListItemButton
                                                 onClick={() => {
-                                                    hamburgerLink('makelist') // TODO: map to correct pages
+                                                    hamburgerLink('admin/locations')
                                                     setHamburgerIsOpen(false)
                                                     setAdminDropdownIsOpen(false)
                                                 }}
