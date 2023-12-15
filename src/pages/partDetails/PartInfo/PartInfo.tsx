@@ -11,11 +11,9 @@ import { useGetCategories } from '../../../services/hooks/Category/useGetCategor
 import useHandlePartInfo from './useHandlePartInfo'
 
 const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
-    /* const { currentUser } = useContext(UmAppContext)
-    const { status } = useUpdateItem(item.id, currentUser!.id) */
-    const { data: vendorsData = [] } = useGetVendors()
-    const { data: locationsData = [] } = useGetLocations()
-    const { data: categoriesData = [] } = useGetCategories()
+    const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors()
+    const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations()
+    const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories()
     const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(null)
     const [selectedType, setSelectedType] = useState(item.type || '')
     const [selectedVendorId, setSelectedVendorId] = useState(item.vendorId)
@@ -36,34 +34,49 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     label="type"
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
-                    defaultValue={selectedType ? selectedType : item.type}
+                    defaultValue={selectedType || item.type || ''}
                     onBlur={handler.handleBlurSelectField(selectedType, 'type', item)}
                     handleSelectChange={(e) => handler.handleSelectChange(e, setSelectedType)}
                     options={['Unit', 'Assembly', 'Sub-Assembly', 'Part']}
                     selectedType={selectedType}
                 />
+                {!isLoadingCategories && (
+                    <SelectField
+                        label="category"
+                        defaultValue={selectedCategoryId || item.category?.name || ''}
+                        activeEditMode={activeEditMode}
+                        setActiveEditMode={setActiveEditMode}
+                        onBlur={handler.handleBlurSelectField(
+                            selectedCategoryId,
+                            'categoryId',
+                            item
+                        )}
+                        handleSelectChange={(e) =>
+                            handler.handleSelectChange(e, setSelectedCategoryId)
+                        }
+                        options={categories}
+                        id={item.categoryId}
+                    />
+                )}
 
-                <SelectField
-                    label="category"
-                    defaultValue={selectedCategoryId ? selectedCategoryId : item.category?.name}
-                    activeEditMode={activeEditMode}
-                    setActiveEditMode={setActiveEditMode}
-                    onBlur={handler.handleBlurSelectField(selectedCategoryId, 'categoryId', item)}
-                    handleSelectChange={(e) => handler.handleSelectChange(e, setSelectedCategoryId)}
-                    options={categoriesData}
-                    id={item.categoryId}
-                />
-
-                <SelectField
-                    label="location"
-                    defaultValue={selectedLocationId ? selectedLocationId : item.location?.name}
-                    activeEditMode={activeEditMode}
-                    setActiveEditMode={setActiveEditMode}
-                    onBlur={handler.handleBlurSelectField(selectedLocationId, 'locationId', item)}
-                    handleSelectChange={(e) => handler.handleSelectChange(e, setSelectedLocationId)}
-                    options={locationsData}
-                    id={item.locationId}
-                />
+                {!isLoadingLocations && (
+                    <SelectField
+                        label="location"
+                        defaultValue={selectedLocationId || item.location?.name || ''}
+                        activeEditMode={activeEditMode}
+                        setActiveEditMode={setActiveEditMode}
+                        onBlur={handler.handleBlurSelectField(
+                            selectedLocationId,
+                            'locationId',
+                            item
+                        )}
+                        handleSelectChange={(e) =>
+                            handler.handleSelectChange(e, setSelectedLocationId)
+                        }
+                        options={locations}
+                        id={item.locationId}
+                    />
+                )}
 
                 <div>
                     <label>
@@ -83,12 +96,7 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     handleInputChange={(value) =>
-                        handler.handleInputChange(
-                            'productNumber',
-                            value,
-                            setUpdatedItem
-                            /* setChangedField */
-                        )
+                        handler.handleInputChange('productNumber', value, setUpdatedItem)
                     }
                 />
 
@@ -99,29 +107,28 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handler.handleBlurInputField('serialNumber', updatedItem)}
                     handleInputChange={(value) => {
-                        handler.handleInputChange(
-                            'serialNumber',
-                            value,
-                            setUpdatedItem
-                            /* setChangedField */
-                        )
+                        handler.handleInputChange('serialNumber', value, setUpdatedItem)
                     }}
                 />
 
-                <SelectField
-                    label="vendor"
-                    defaultValue={selectedVendorId ? selectedVendorId : item.vendor?.name}
-                    activeEditMode={activeEditMode}
-                    setActiveEditMode={setActiveEditMode}
-                    onBlur={handler.handleBlurSelectField(
-                        selectedVendorId,
-                        'vendorId',
-                        updatedItem
-                    )}
-                    handleSelectChange={(e) => handler.handleSelectChange(e, setSelectedVendorId)}
-                    options={vendorsData}
-                    id={item.vendorId}
-                />
+                {!isLoadingVendors && (
+                    <SelectField
+                        label="vendor"
+                        defaultValue={selectedVendorId || item.vendor?.name || ''}
+                        activeEditMode={activeEditMode}
+                        setActiveEditMode={setActiveEditMode}
+                        onBlur={handler.handleBlurSelectField(
+                            selectedVendorId,
+                            'vendorId',
+                            updatedItem
+                        )}
+                        handleSelectChange={(e) =>
+                            handler.handleSelectChange(e, setSelectedVendorId)
+                        }
+                        options={vendors}
+                        id={item.vendorId}
+                    />
+                )}
             </Container>
             {handler.snackbar}
         </form>
