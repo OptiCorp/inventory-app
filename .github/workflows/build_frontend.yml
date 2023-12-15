@@ -44,10 +44,8 @@ jobs:
                   node-version: ${{ env.NODE_VERSION }}
                   cache: 'npm'
 
-            - name: Install dependencies and run Prettier
-              run: |
-                  npm install
-                  npm run prettier -- --write .
+            - name: Prettify code
+              uses: creyD/prettier_action@v4.3
 
             - name: npm install, build, and test
               run: |
