@@ -9,7 +9,7 @@
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "prettier": "prettier --config .prettierrc --ignore-path .gitignore",
-        "eslint": "eslint . --ext .js --ext .jsx"
+        "eslint": "eslint 'src/**/*.js' 'src/**/*.jsx'"
     },
     "dependencies": {
         "@azure/msal-react": "^2.0.6",
