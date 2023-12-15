@@ -8,7 +8,7 @@
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
-        "prettier": "prettier --config .prettierrc.js --ignore-path .gitignore",
+        "prettier": "prettier --config .prettierrc --ignore-path .gitignore",
         "eslint": "eslint . --ext .js --ext .jsx"
     },
     "dependencies": {
