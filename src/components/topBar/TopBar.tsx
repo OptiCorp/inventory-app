@@ -40,7 +40,7 @@ const TopBar = () => {
     return (
         <div>
             <TopBarContainer>
-                <img alt="logo" src={'/WP 1.svg'} />
+                <img alt="logo" src={'/WP 1.svg'} onClick={() => navigate('search')} />
                 <HeaderWrap>
                     <Button style={{ color: 'black' }} onClick={() => setHamburgerIsOpen(true)}>
                         <MenuIcon sx={{ fontSize: 40 }} />

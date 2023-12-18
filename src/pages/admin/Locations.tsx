@@ -3,40 +3,13 @@ import { useGetLocationsInfinite } from '../../services/hooks/Locations/useGetLo
 import { AdminContainer, ButtonContainer, SearchResultContainer } from './styles'
 import { useState } from 'react'
 import SearchBar from '../../components/searchBar/SearchBar'
-import AdminSearchCard, { AdminType } from '../../components/admin/AdminSearchCard'
+import AdminSearchCard, { SearchType } from '../../components/admin/AdminSearchCard'
 import { Button } from '../../components/Button/SubmitButton'
 
 const Locations = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { data, isLoading, fetchNextPage } = useGetLocationsInfinite(debouncedSearchTerm)
-
-    // const fakeData = {
-    //     pages: [
-    //         [
-    //             {
-    //                 id: 'ksdh357gf',
-    //                 name: 'Location 1',
-    //                 userId: 'Henrik Laland',
-    //             },
-    //             {
-    //                 id: 'dsfh54',
-    //                 name: 'Location 2',
-    //                 userId: 'Henrik Laland',
-    //             },
-    //             {
-    //                 id: 'dshf54',
-    //                 name: 'Location 3',
-    //                 userId: 'Henrik Laland',
-    //             },
-    //             {
-    //                 id: 'ksdh35dhet43t7gf',
-    //                 name: 'Location 4',
-    //                 userId: 'Henrik Laland',
-    //             },
-    //         ],
-    //     ],
-    // }
 
     return (
         <AdminContainer>
@@ -55,7 +28,7 @@ const Locations = () => {
                                     : ''
                             }
                         >
-                            <AdminSearchCard adminType={AdminType.Location} data={location} />
+                            <AdminSearchCard searchType={SearchType.Location} data={location} />
                         </div>
                     ))
                 )}
