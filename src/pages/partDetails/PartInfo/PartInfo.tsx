@@ -1,3 +1,4 @@
+import { MenuItem } from '@mui/base'
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import UmAppContext from '../../../contexts/UmAppContext'
@@ -13,7 +14,6 @@ import { SelectField } from './SelectField'
 import { TypeField } from './Types/TypeField'
 import { Container } from './styles'
 import { ItemFields } from './types'
-import { MenuItem } from '@mui/base'
 
 const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     const { currentUser } = useContext(UmAppContext)
@@ -79,7 +79,7 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     const handleVendorChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newVendorId = e.target.value
         setSelectedVendorId(newVendorId)
-        /* setUpdatedItem((prev) => ({ ...prev, vendorId: newVendorId })) */
+        setUpdatedItem((prev) => ({ ...prev, vendorId: newVendorId }))
     }
     const handleLocationChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newLocationId = e.target.value
@@ -162,7 +162,7 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     handleSelectChange={handleLocationChange}
                     options={locationsData}
                     id={item.locationId}
-                > 
+                >
                     {locationsData?.map((option) => (
                         <MenuItem key={option.name} value={option.id}>
                             {option.name}
