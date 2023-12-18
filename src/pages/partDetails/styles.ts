@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { COLORS } from '../../style/GlobalStyles'
 
 export const StyledContainerDiv = styled.div`
     display: flex;
@@ -21,7 +22,7 @@ export const ThirdList = styled.ul`
 `
 
 export const Wrapper = styled.div`
-    background-color: black;
+    background-color: ${COLORS.primary};
     border-right: 1px solid rgba(208, 208, 208);
     border-radius: 5px;
 `
@@ -31,7 +32,7 @@ export const StyledList = styled.ul`
     display: grid;
 
     font-size: 1.2rem;
-    color: white;
+    color: ${COLORS.secondary};
     list-style: none;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 1rem;

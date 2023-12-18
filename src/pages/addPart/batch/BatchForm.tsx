@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import { COLORS } from '../../../style/GlobalStyles.ts'
 import { FormContainer } from '../styles.ts'
 import { FormBatchRadio } from './styles.ts'
 
@@ -32,11 +33,7 @@ const BatchForm = () => {
 
             <FormBatchRadio>
                 <label>
-                    <input
-                        type="radio"
-                        name="batchCheck"
-                        onChange={() => setBatchType(Batch.no)}
-                    />{' '}
+                    <input type="radio" name="batchCheck" onChange={() => setBatchType(Batch.no)} />{' '}
                     I want to add one unique part
                 </label>
                 <label>
@@ -45,12 +42,18 @@ const BatchForm = () => {
                         name="batchCheck"
                         onChange={() => setBatchType(Batch.yes)}
                     />{' '}
-                    I want to add a batch of several identical parts, assigning
-                    a unique WellPartner serial number to each of them
+                    I want to add a batch of several identical parts, assigning a unique WellPartner
+                    serial number to each of them
                 </label>
             </FormBatchRadio>
 
-            <Button onClick={handleClick}>Next</Button>
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                Next
+            </Button>
         </FormContainer>
     )
 }

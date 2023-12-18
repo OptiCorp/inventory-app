@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { COLORS } from '../../../style/GlobalStyles'
 
 export const InputWrap = styled.div`
     display: flex;
@@ -10,7 +11,7 @@ export const InputWrap = styled.div`
 `
 
 export const ErrorP = styled.span`
-    color: red;
+    color: ${COLORS.dangerRed};
 
     font-weight: 600;
 `

@@ -11,10 +11,7 @@ export const WpId = () => {
         <>
             <InputWrap>
                 <label htmlFor="WellPartner Id">WellPartner Id </label>{' '}
-                <ErrorMessage
-                    name="wpId"
-                    render={({ message }) => <ErrorP>{message}</ErrorP>}
-                />
+                <ErrorMessage name="wpId" render={({ message }) => <ErrorP>{message}</ErrorP>} />
             </InputWrap>
             <StyledInput
                 type="text"

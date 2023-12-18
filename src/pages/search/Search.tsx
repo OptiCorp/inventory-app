@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import { useDebounce, useLocalStorage } from 'usehooks-ts'
 import SearchBar from '../../components/searchBar/SearchBar'
 import { useWindowDimensions } from '../../hooks'
-import { useGetItems } from '../../services/hooks/useGetItems'
 
 import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
 import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
+import { useGetItemsInfinite } from '../../services/hooks/Items/useGetItemsInfinite'
 import {
     Container,
     GlobalSpinnerContainer,
@@ -16,7 +16,6 @@ import {
     Spinner,
     StyledSearchedLink,
 } from './styles'
-import { useGetItemsInfinite } from '../../services/hooks/useGetItemsInfinite'
 
 const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>()
@@ -24,10 +23,7 @@ const Search = () => {
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { data, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm)
     const { width } = useWindowDimensions()
-    const [searches, setSearches] = useLocalStorage<string[]>(
-        'recent_searches',
-        []
-    )
+    const [searches, setSearches] = useLocalStorage<string[]>('recent_searches', [])
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
@@ -35,7 +31,10 @@ const Search = () => {
         }
     }
 
-    const observer = new IntersectionObserver(handleScroll, { threshold: 1, rootMargin: '100px' })
+    const observer = new IntersectionObserver(handleScroll, {
+        threshold: 1,
+        rootMargin: '100px',
+    })
 
     useEffect(() => {
         const lastItem = document.getElementById('lastItem')
@@ -49,7 +48,6 @@ const Search = () => {
         }
     }, [data])
 
-
     useEffect(() => {
         setSearchTerm((prev) => searchParam || prev)
     }, [searchParam])
@@ -58,14 +56,13 @@ const Search = () => {
         setSearches((prev) => [searchTerm, ...prev.slice(0, 4)])
     }, [debouncedSearchTerm])
 
-
     return (
         <>
             <SearchContainer>
                 <SearchBar
                     setSearchTerm={setSearchTerm}
                     searchTerm={searchTerm}
-                    placeholder={"Search for ID, description, PO number or S/N"}
+                    placeholder={'Search for ID, description, PO number or S/N'}
                 />
 
                 {isLoading && (
@@ -75,19 +72,31 @@ const Search = () => {
                 )}
 
                 <Container>
-                    {data?.pages.map((page, i) => (
+                    {data?.pages.map((page, i) =>
                         page.map((item, index) =>
                             width > 800 ? (
-                                <div id={i === data.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                <div
+                                    id={
+                                        i === data.pages.length - 1 && index === page.length - 1
+                                            ? 'lastItem'
+                                            : ''
+                                    }
+                                >
                                     <SearchResultCard part={item} />
                                 </div>
                             ) : (
-                                <div id={i === data.pages.length - 1 && index === page.length - 1 ? 'lastItem' : ''}>
+                                <div
+                                    id={
+                                        i === data.pages.length - 1 && index === page.length - 1
+                                            ? 'lastItem'
+                                            : ''
+                                    }
+                                >
                                     <SearchResultCardCompact part={item} />
                                 </div>
                             )
                         )
-                    ))}
+                    )}
                 </Container>
 
                 {!searchTerm ? (

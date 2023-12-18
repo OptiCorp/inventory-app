@@ -1,14 +1,6 @@
-
-import {
-    BackgroundContainer,
-    ButtonWrapper,
-    Header,
-    InfoText,
-    LoginContainer,
-    TitleHeader,
-} from './styles'
 import { useMsal } from '@azure/msal-react'
 import { useState } from 'react'
+import { BackgroundContainer, ButtonWrapper, Header, LoginContainer, TitleHeader } from './styles'
 
 export const Login = () => {
     const { instance } = useMsal()
@@ -23,7 +15,6 @@ export const Login = () => {
             <LoginContainer>
                 <Header>
                     <TitleHeader>Sign in to your Account</TitleHeader>
-                  
                 </Header>
                 <ButtonWrapper>
                     <button
@@ -35,7 +26,6 @@ export const Login = () => {
                         {isSubmitting ? <>loading</> : 'Log in'}
                     </button>
                 </ButtonWrapper>
-              
             </LoginContainer>
         </BackgroundContainer>
     )

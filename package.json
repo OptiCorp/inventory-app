@@ -7,7 +7,8 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "prettier": "prettier --write ."
     },
     "dependencies": {
         "@azure/msal-react": "^2.0.6",
@@ -16,7 +17,7 @@
         "@hookform/error-message": "^2.0.1",
         "@hookform/resolvers": "^3.3.2",
         "@mui/icons-material": "^5.14.19",
-        "@mui/material": "^5.14.19",
+        "@mui/material": "^5.14.20",
         "@mui/x-tree-view": "^6.17.0",
         "@tanstack/react-query": "^5.8.4",
         "@tanstack/react-query-devtools": "^5.8.6",
@@ -37,10 +38,11 @@
         "@tanstack/eslint-plugin-query": "^5.8.4",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",
-        "@typescript-eslint/eslint-plugin": "^6.0.0",
-        "@typescript-eslint/parser": "^6.0.0",
+        "@typescript-eslint/eslint-plugin": "^6.14.0",
+        "@typescript-eslint/parser": "^6.14.0",
         "@vitejs/plugin-react": "^4.0.3",
         "eslint": "^8.45.0",
+        "eslint-plugin-react": "^7.33.2",
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-refresh": "^0.4.3",
         "prettier": "^3.0.2",

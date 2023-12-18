@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
+import { COLORS } from '../../style/GlobalStyles'
 type Props = {
     height?: string
 }
@@ -11,7 +12,7 @@ export const SearchContainer = styled.div<Props>`
 `
 
 export const LoadMoreButton = styled.button`
-    background-color: #f5f5f5;
+    background-color: ${COLORS.secondary};
     border-radius: 8px;
     box-shadow: 2.5px 2.5px gray;
 `
@@ -31,11 +32,11 @@ export const RecentSearchContainer = styled.div`
 
 export const StyledLink = styled(Link)`
     text-decoration: none;
-    color: black;
+    color: ${COLORS.primary};
 `
 
 export const StyledSearchedLink = styled(Link)`
-    color: black;
+    color: ${COLORS.primary};
 `
 
 export const GlobalSpinnerContainer = styled.div`

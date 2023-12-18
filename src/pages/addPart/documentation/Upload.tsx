@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
-import { FormContainer } from '../styles.ts'
 import { ExampleUpload } from '../../../components/Upload/Upload.tsx'
+import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import { COLORS } from '../../../style/GlobalStyles.ts'
+import { FormContainer } from '../styles.ts'
 
 const Upload = () => {
     const navigate = useNavigate()
@@ -32,12 +33,8 @@ const Upload = () => {
             <ExampleUpload />
             <span style={{ color: 'red' }}>{error}</span>
             <label>
-                <input
-                    type="radio"
-                    name="checks"
-                    onChange={() => setChecked(true)}
-                />{' '}
-                I have uploaded all necessary documentation for this item.{' '}
+                <input type="radio" name="checks" onChange={() => setChecked(true)} /> I have
+                uploaded all necessary documentation for this item.{' '}
             </label>
             <ul>
                 E.g:
@@ -46,7 +43,13 @@ const Upload = () => {
                 <li>Certificates.</li>
                 <li>Photos.</li>
             </ul>
-            <Button onClick={handleClick}>Next</Button>
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                Next
+            </Button>
         </FormContainer>
     )
 }

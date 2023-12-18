@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { COLORS } from '../../style/GlobalStyles'
 
 export const LoginContainer = styled.div`
     display: grid;
@@ -37,7 +38,7 @@ export const BackgroundContainer = styled.div`
 
 export const TitleHeader = styled.h1`
     font-style: italic;
-    color: white;
+    color: ${COLORS.secondary};
     text-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5);
     font-weight: 500;
     margin: 0 auto;
@@ -60,6 +61,6 @@ export const InfoText = styled.p`
     gap: 30px;
     text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.5);
     font-weight: 600;
-    color: white;
+    color: ${COLORS.secondary};
     margin: 0 auto;
 `

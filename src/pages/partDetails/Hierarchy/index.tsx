@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { AssemblyList, Container, ListItem, PartList } from './styles'
 export const Hierarchy = ({ item }: { item: Item }) => {
     const navigate = useNavigate()
+
     return (
         <>
             <Container>
@@ -12,9 +13,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                 <PartList>
                     <ListItem
                         onClick={() => {
-                            navigate(
-                                `/${item?.parent?.id}/${item?.parent?.wpId} `
-                            )
+                            navigate(`/${item?.parent?.id}/${item?.parent?.wpId} `)
                         }}
                     >
                         {' '}
@@ -25,15 +24,21 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                 </PartList>
                 <h4>This assembly consists of:</h4>
                 <AssemblyList>
-                    {item?.children?.map((x) => (
-                        <ListItem
-                            onClick={() => {
-                                navigate(`/${x.id}/${x.wpId}`)
-                            }}
-                        >
-                            {x.id}
-                        </ListItem>
-                    ))}{' '}
+                    {item?.children && !!item.children ? (
+                        <>
+                            {item?.children?.map((x) => (
+                                <ListItem
+                                    onClick={() => {
+                                        navigate(`/${x.id}/${x.wpId}`)
+                                    }}
+                                >
+                                    {x?.id ?? ''}
+                                </ListItem>
+                            ))}
+                        </>
+                    ) : (
+                        <>asdsadsad</>
+                    )}
                     <FaPen />
                 </AssemblyList>
             </Container>

@@ -9,11 +9,7 @@ interface CardProps {
     onClick?: () => void
 }
 
-export const Card: FunctionComponent<CardProps> = ({
-    children,
-    title,
-    onClick,
-}) => {
+export const Card: FunctionComponent<CardProps> = ({ children, title, onClick }) => {
     const { width } = useWindowDimensions()
     return (
         <>

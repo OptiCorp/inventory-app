@@ -1,5 +1,5 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import apiService from '../api'
+import { useQuery } from '@tanstack/react-query'
+import apiService from '../../api'
 
 export const useGetItems = (searchTerm: string, pageNumber: number) => {
     return useQuery({
@@ -9,5 +9,3 @@ export const useGetItems = (searchTerm: string, pageNumber: number) => {
         enabled: !!searchTerm,
     })
 }
-
-

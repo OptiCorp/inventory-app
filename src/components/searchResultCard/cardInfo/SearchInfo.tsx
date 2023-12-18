@@ -1,4 +1,14 @@
-import {Item, MutateItemList} from '../../../services/apiTypes'
+import { Dialog, DialogActions, DialogTitle } from '@mui/material'
+import { format } from 'date-fns'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { CancelButton, SubmitButton } from '../../../pages/listDetails/styles'
+import { Item, MutateItemList } from '../../../services/apiTypes'
+
+import { useAddItemsToList } from '../../../services/hooks/Items/useAddItemsToList'
+import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList'
+
+import { StyledAddIcon, StyledRemoveIcon } from '../../listCard/styles'
 import {
     DescriptionParagraph,
     FirstInfoBox,
@@ -7,15 +17,6 @@ import {
     SecondInfoBox,
     ThirdInfoBox,
 } from '../styles'
-import React, {useState} from "react";
-import {StyledAddIcon, StyledRemoveIcon} from "../../listCard/styles.ts";
-import {useAddItemsToList} from "../../../services/hooks/useAddItemsToList.tsx";
-import {useRemoveItemsFromList} from "../../../services/hooks/useRemoveItemsFromList.tsx";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogActions from "@mui/material/DialogActions";
-import {CancelButton, SubmitButton} from "../../../pages/listDetails/styles.ts";
-import Dialog from "@mui/material/Dialog";
-import {useParams} from "react-router-dom";
 
 type Props = {
     part: Item
@@ -25,9 +26,11 @@ type Props = {
 export const Searchinfo = ({ part, icon }: Props) => {
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
+
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
-    const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } = useRemoveItemsFromList()
-    
+    const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } =
+        useRemoveItemsFromList()
+
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
         mutateAddItemToList(ids)
@@ -40,13 +43,14 @@ export const Searchinfo = ({ part, icon }: Props) => {
     }
     const handleClickOpen = (e: React.MouseEvent) => {
         e.stopPropagation()
-        setOpen(true);
-    };
+        setOpen(true)
+    }
     const handleClose = (e: React.MouseEvent) => {
         e.stopPropagation()
-        setOpen(false);
-    };
-    
+
+        setOpen(false)
+    }
+
     return (
         <>
             {' '}
@@ -68,34 +72,57 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 <DescriptionParagraph>{part.description}</DescriptionParagraph>
             </SecondInfoBox>
             <ThirdInfoBox>
+                <div style={{ alignSelf: 'flex-end' }}>
+                    {icon === 'add' ? (
+                        <StyledAddIcon
+                            style={{ fontSize: '25px' }}
+                            onClick={(e) =>
+                                handleAdd(e, {
+                                    itemId: part.id,
+                                    listId: listId!,
+                                })
+                            }
+                        ></StyledAddIcon>
+                    ) : null}
+
+                    {icon === 'remove' ? (
+                        <StyledRemoveIcon
+                            style={{ fontSize: '25px' }}
+                            onClick={handleClickOpen}
+                        ></StyledRemoveIcon>
+                    ) : null}
+                </div>
                 <InfoP>
-                    <KeyWords>Location</KeyWords> {part.location || 'Location'}
+                    <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
                 </InfoP>
                 <InfoP>
                     {' '}
                     <KeyWords>Vendor</KeyWords>
-                    {part.vendor}
+                    {part.vendor?.name || ''}
                 </InfoP>
                 <InfoP>
                     {' '}
-                    <KeyWords>Last updated</KeyWords>{' '}
-                    {part.updatedDate || '00/00/00'}{' '}
+                    <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>{' '}
+                    {format(
+                        new Date(part.updatedDate || part.createdDate),
+                        'yyyy-MM-dd HH:mm:ss'
+                    ).toString()}{' '}
                 </InfoP>
             </ThirdInfoBox>
-            
-            {icon ==="add" ?
-                <StyledAddIcon style={{fontSize:"25px"}} onClick={(e) => handleAdd(e, {itemId: part.id, listId: listId!})}></StyledAddIcon>
-                : null }
-
-            {icon ==="remove" ?
-                <StyledRemoveIcon style={{fontSize:"25px"}} onClick={handleClickOpen}></StyledRemoveIcon>
-                : null }
-
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Remove item from list?</DialogTitle>
                 <DialogActions>
                     <CancelButton onClick={() => handleClose}>Cancel</CancelButton>
-                    <SubmitButton onClick={(e) => handleDelete(e, {itemId: part.id, listId: listId!})}>Confirm</SubmitButton>
+                    <SubmitButton
+                        onClick={(e) =>
+                            handleDelete(e, {
+                                itemId: part.id,
+                                listId: listId!,
+                            })
+                        }
+                    >
+                        Confirm
+                    </SubmitButton>
                 </DialogActions>
             </Dialog>
         </>

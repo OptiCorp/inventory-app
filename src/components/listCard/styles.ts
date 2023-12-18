@@ -1,68 +1,58 @@
+import AddCircleIcon from '@mui/icons-material/AddCircle'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import { styled } from 'styled-components'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { COLORS } from '../../style/GlobalStyles'
 
 export const ListWrapper = styled.div`
-  position: relative;
-  padding: 8px;
-  background-color: white;
-  &:hover {
-    background: whitesmoke;
-  }
-  cursor: pointer;
-  border-radius: 6px;
-  box-shadow: 2.5px 2.5px gray;
-  max-width: 450px;
-  width: 82vw;
-  
+    position: relative;
+    padding: 8px;
+    background-color: ${COLORS.secondary};
+    &:hover {
+        background: ${COLORS.whiteSmoke};
+    }
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 2.5px 2.5px ${COLORS.gray};
+    width: 95%;
+    max-width: 450px;
 `
 
 export const StyledTitle = styled.h2`
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `
 
-export const StyledDeleteIconAbsolute = styled(DeleteForeverIcon)`
-  color: black;
-  position: absolute;
-  top: 0;
-  right: 0;
-  &:hover {
-    color: red;
-  }
-`
-
-export const StyledDeleteIconRelative = styled(DeleteForeverIcon)`
-  color: black;
-  position: relative;
-  top: 0;
-  right: 0;
-  &:hover {
-    color: red;
-  }
-  margin-left: auto;
+export const StyledDeleteIcon = styled(DeleteForeverIcon)`
+    color: ${COLORS.primary};
+    position: absolute;
+    top: 2px;
+    right: 0;
+    &:hover {
+        color: ${COLORS.dangerRed};
+    }
 `
 
 export const StyledAddIcon = styled(AddCircleIcon)`
-  color: black;
-  position: absolute;
-  top: 0;
-  right: 0;
-  &:hover {
-    color: green;
-  }
-  cursor: pointer;
+    color: black;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    &:hover {
+        color: green;
+    }
+    cursor: pointer;
 `
 
 export const StyledRemoveIcon = styled(RemoveCircleIcon)`
-  color: black;
-  position: absolute;
-  top: 0;
-  right: 0;
-  &:hover {
-    color: red;
-  }
-  cursor: pointer;
+    color: black;
+    position: absolute;
+
+    top: 3px;
+    right: 3px;
+    &:hover {
+        color: ${COLORS.dangerRed};
+    }
+    cursor: pointer;
 `

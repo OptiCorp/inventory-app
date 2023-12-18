@@ -1,27 +1,25 @@
 import { StyledContainerDiv } from './styles'
-
 import { useParams } from 'react-router-dom'
 import { Card } from '../../components/card/Card'
-import { useWindowDimensions } from '../../hooks'
-import { useGetItemById } from '../../services/hooks/useGetItemById'
-import { Comments } from './Comments'
+import { useGetItemById } from '../../services/hooks/Items/useGetItemById'
+import { Comments } from './Comments/Comments'
 import { Documents } from './Documents'
-
+import { FormProvider } from 'react-hook-form'
 import { Hierarchy } from './Hierarchy'
 import { Log } from './Log'
-import { PartInfo } from './PartInfo'
+import PartInfo from './PartInfo/PartInfo'
+import { useUpdatePartForm } from './useUpdatePartForm'
 
 const PartDetails = () => {
-    const { width } = useWindowDimensions()
-
     const { id } = useParams() as { id: string }
-    const { data: item = [] } = useGetItemById(id)
-
+    const { data: item, isLoading } = useGetItemById(id)
+    const { methods } = useUpdatePartForm(item)
+    if (!item) return null
     return (
-        <>
-            <StyledContainerDiv>
+        <StyledContainerDiv>
+            <FormProvider {...methods}>
                 <Card title="Part info">
-                    <PartInfo item={item} />
+                    <PartInfo item={item} isLoading={isLoading} />
                 </Card>
                 <Card title="Hierarchy">
                     <Hierarchy item={item} />
@@ -34,10 +32,10 @@ const PartDetails = () => {
                 </Card>
 
                 <Card title="Log">
-                    <Log />
+                    <Log item={item} />
                 </Card>
-            </StyledContainerDiv>
-        </>
+            </FormProvider>
+        </StyledContainerDiv>
     )
 }
 
