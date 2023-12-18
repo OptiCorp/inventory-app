@@ -344,7 +344,7 @@ const apiService = () => {
     }
 
     // Category
-    const getCategory = async (): Promise<Category[]> => {
+    const getCategory = async () => {
         const data = await getByFetch('Category')
         return data
     }
