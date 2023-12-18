@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Archivo', sans-serif;
         height: 100vh;
         font-size: 13px;
-        background-color: ${COLORS.frostyGray};
+        background-color: ${COLORS.secondary};
     }
     .wrapper {
     display: grid;

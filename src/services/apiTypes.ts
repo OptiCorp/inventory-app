@@ -60,13 +60,13 @@ export type LogEntry = {
 
 export type Category = {
     id: string
-    name: string | null
+    name: string
     userId: string
 }
 
 export type Location = {
     id: string
-    name: string | null
+    name: string
     userId: string
 }
 
@@ -120,11 +120,16 @@ export type UpdateItem = {
 
 export type Vendor = {
     id: string
-    name: string | null
+    name: string
     address: string
     email: string
     phoneNumber: string
     addedById: string
+}
+
+export type UpdateVendor = {
+    id: string
+    name: string
 }
 
 export type AddLocation = {
@@ -142,7 +147,7 @@ export type AddCategory = {
     addedById: string
 }
 
-export type UpdateCateory = {
+export type UpdateCategory = {
     id: string
     name: string
 }

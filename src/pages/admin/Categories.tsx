@@ -3,8 +3,7 @@ import SearchBar from '../../components/searchBar/SearchBar'
 import { AdminContainer, ButtonContainer, SearchResultContainer } from './styles'
 import { useDebounce } from 'usehooks-ts'
 import { useGetCategoriesInfinite } from '../../services/hooks/Category/useGetCategoriesInfinite'
-import { Category } from '../../services/apiTypes'
-import AdminSearchCard from '../../components/admin/AdminSearchCard'
+import AdminSearchCard, { AdminType } from '../../components/admin/AdminSearchCard'
 import { Button } from '../../components/Button/SubmitButton'
 
 const Categories = () => {
@@ -55,8 +54,9 @@ const Categories = () => {
                                     ? 'lastItem'
                                     : ''
                             }
+                            key={category.id}
                         >
-                            <AdminSearchCard data={category} />
+                            <AdminSearchCard adminType={AdminType.Category} data={category} />
                         </div>
                     ))
                 )}

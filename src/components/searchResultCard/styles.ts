@@ -9,7 +9,6 @@ export const ResultCardContainer = styled.div`
     cursor: pointer;
     max-width: 700px;
     margin-inline: auto;
-    box-shadow: 2.5px 2.5px grey;
 `
 
 export const DescriptionParagraph = styled.p`
@@ -59,8 +58,8 @@ export const SearchCard = styled.div`
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-
-    background-color: ${COLORS.secondary};
+    background: #fbfbfb;
+    box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.2);
 `
 
 export const CompactCard = styled.div`
@@ -87,7 +86,6 @@ export const ThirdInfoBox = styled.div`
     line-height: 25px;
     padding-left: 30px;
     padding-right: 30px;
-    border-right: 1px solid rgba(208, 208, 208);
 `
 
 export const FirstInfoBox = styled.div`

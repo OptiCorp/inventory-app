@@ -3,7 +3,7 @@ import { useGetLocationsInfinite } from '../../services/hooks/Locations/useGetLo
 import { AdminContainer, ButtonContainer, SearchResultContainer } from './styles'
 import { useState } from 'react'
 import SearchBar from '../../components/searchBar/SearchBar'
-import AdminSearchCard from '../../components/admin/AdminSearchCard'
+import AdminSearchCard, { AdminType } from '../../components/admin/AdminSearchCard'
 import { Button } from '../../components/Button/SubmitButton'
 
 const Locations = () => {
@@ -11,32 +11,32 @@ const Locations = () => {
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { data, isLoading, fetchNextPage } = useGetLocationsInfinite(debouncedSearchTerm)
 
-    const fakeData = {
-        pages: [
-            [
-                {
-                    id: 'ksdh357gf',
-                    name: 'Location 1',
-                    userId: 'Henrik Laland',
-                },
-                {
-                    id: 'dsfh54',
-                    name: 'Location 2',
-                    userId: 'Henrik Laland',
-                },
-                {
-                    id: 'dshf54',
-                    name: 'Location 3',
-                    userId: 'Henrik Laland',
-                },
-                {
-                    id: 'ksdh35dhet43t7gf',
-                    name: 'Location 4',
-                    userId: 'Henrik Laland',
-                },
-            ],
-        ],
-    }
+    // const fakeData = {
+    //     pages: [
+    //         [
+    //             {
+    //                 id: 'ksdh357gf',
+    //                 name: 'Location 1',
+    //                 userId: 'Henrik Laland',
+    //             },
+    //             {
+    //                 id: 'dsfh54',
+    //                 name: 'Location 2',
+    //                 userId: 'Henrik Laland',
+    //             },
+    //             {
+    //                 id: 'dshf54',
+    //                 name: 'Location 3',
+    //                 userId: 'Henrik Laland',
+    //             },
+    //             {
+    //                 id: 'ksdh35dhet43t7gf',
+    //                 name: 'Location 4',
+    //                 userId: 'Henrik Laland',
+    //             },
+    //         ],
+    //     ],
+    // }
 
     return (
         <AdminContainer>
@@ -46,16 +46,16 @@ const Locations = () => {
                 placeholder="Search for location"
             />
             <SearchResultContainer>
-                {fakeData?.pages.map((page, i) =>
+                {data?.pages.map((page, i) =>
                     page.map((location, index) => (
                         <div
                             id={
-                                i === fakeData.pages.length - 1 && index === page.length - 1
+                                i === data.pages.length - 1 && index === page.length - 1
                                     ? 'lastItem'
                                     : ''
                             }
                         >
-                            <AdminSearchCard data={location} />
+                            <AdminSearchCard adminType={AdminType.Location} data={location} />
                         </div>
                     ))
                 )}
