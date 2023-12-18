@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import apiService from '../../api'
-import { UpdateVendor, Vendor } from '../../apiTypes'
+import { UpdateLocation } from '../../apiTypes'
 
-export const useUpdateVendor = (id: string) => {
+export const useUpdateLocation = (id: string) => {
     const api = apiService()
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (vendor: UpdateVendor) => api.updateVendorById(id, vendor),
+        mutationFn: (location: UpdateLocation) => api.updateLocationById(id, location),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['vendor', id],
+                queryKey: ['locations', id],
             })
         },
     })

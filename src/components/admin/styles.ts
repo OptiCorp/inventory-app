@@ -2,9 +2,9 @@ import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
 
 export const AdminSearchCardContainer = styled.div`
-    box-shadow: 2.5px 2.5px grey;
+    background: #fbfbfb;
+    box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.2);
     display: flex;
-    background-color: ${COLORS.secondary};
     max-width: 700px;
     margin: 16px;
     padding: 8px;
