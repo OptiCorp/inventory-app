@@ -30,7 +30,9 @@ const EditableField = ({
                 </label>
                 <Edit
                     onClick={() =>
-                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
+                        setActiveEditMode((prevMode) =>
+                            prevMode === label ? null : label
+                        )
                     }
                 />
             </LabelContainer>
@@ -51,7 +53,9 @@ const EditableField = ({
                 />
             </InfoContainer>
 
-            {fieldErrorMessage && <p style={{ color: 'red' }}>{fieldErrorMessage}</p>}
+            {fieldErrorMessage && (
+                <p style={{ color: 'red' }}>{fieldErrorMessage}</p>
+            )}
         </TextBoxWrap>
     )
 }

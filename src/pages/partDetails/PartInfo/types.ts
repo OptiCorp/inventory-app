@@ -36,6 +36,7 @@ export type VendorProps = {
     defaultValue: string | null
     onBlur: () => void
     options?: Vendor[]
+    children?: React.ReactNode
     activeEditMode: ItemFields | null
     setActiveEditMode: React.Dispatch<React.SetStateAction<ItemFields | null>>
 }

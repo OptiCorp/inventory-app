@@ -1,21 +1,7 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
 
-import {
-    AddCategory,
-    AddItem,
-    AddList,
-    AddLocation,
-    Category,
-    Item,
-    List,
-    UpdateCateory,
-    UpdateItem,
-    UpdateLocation,
-    User,
-    UserRole,
-    Vendor,
-} from './apiTypes'
+import { AddCategory, AddItem, AddList, AddLocation, Item, List, UpdateCateory, UpdateItem, UpdateLocation, User, UserRole, Vendor } from './apiTypes'
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -225,7 +211,9 @@ const apiService = () => {
         searchString: string,
         pageNumber: number
     ): Promise<Item[]> => {
-        return await getByFetch(`Item/BySearchString/${searchString}?page=${pageNumber}`)
+        return await getByFetch(
+            `Item/BySearchString/${searchString}?page=${pageNumber}`
+        )
     }
 
     const getListsBySearchString = async (
@@ -281,11 +269,17 @@ const apiService = () => {
         return await postByFetch(`Item`, item)
     }
 
-    const addItemsToList = async (listId: string, itemId: string): Promise<Response> => {
+    const addItemsToList = async (
+        listId: string,
+        itemId: string
+    ): Promise<Response> => {
         return await postByFetch(`List/AddItems/?listId=${listId}`, [itemId])
     }
 
-    const removeItemsFromList = async (listId: string, itemId: string): Promise<Response> => {
+    const removeItemsFromList = async (
+        listId: string,
+        itemId: string
+    ): Promise<Response> => {
         return await postByFetch(`List/RemoveItems/?listId=${listId}`, [itemId])
     }
 
@@ -307,7 +301,10 @@ const apiService = () => {
         return await postByFetch('Location', location)
     }
 
-    const updateLocationById = async (id: string, location: UpdateLocation): Promise<Response> => {
+    const updateLocationById = async (
+        id: string,
+        location: UpdateLocation
+    ): Promise<Response> => {
         return await putByFetch(`Location/${id}`, location)
     }
 
@@ -332,6 +329,7 @@ const apiService = () => {
     const addVendor = async (vendor: Omit<Vendor, 'id'>): Promise<Response> => {
         return await postByFetch('Vendor', vendor)
     }
+
 
     const updateVendorById = async (id: string, vendor: Vendor): Promise<Response> => {
         return await putByFetch(`Vendor/${id}`, vendor)
@@ -359,7 +357,10 @@ const apiService = () => {
         return await postByFetch('Category', category)
     }
 
-    const updateCategoryById = async (id: string, category: UpdateCateory): Promise<Response> => {
+    const updateCategoryById = async (
+        id: string,
+        category: UpdateCateory
+    ): Promise<Response> => {
         return await putByFetch(`Category/${id}`, category)
     }
 

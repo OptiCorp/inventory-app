@@ -1,5 +1,4 @@
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import { MenuItem, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
 import { Edit, LabelContainer, TextBoxWrap, TypeContainer } from './styles'
 import { VendorProps } from './types'
@@ -12,6 +11,7 @@ export const SelectField = ({
     setActiveEditMode,
     activeEditMode,
     options,
+    children,
 }: VendorProps) => {
     const { register } = useFormContext()
 
@@ -23,7 +23,9 @@ export const SelectField = ({
                 </label>
                 <Edit
                     onClick={() =>
-                        setActiveEditMode((prevMode) => (prevMode === label ? null : label))
+                        setActiveEditMode((prevMode) =>
+                            prevMode === label ? null : label
+                        )
                     }
                 />
             </LabelContainer>
@@ -33,10 +35,6 @@ export const SelectField = ({
                     onBlur={onBlur}
                     select
                     onChange={handleSelectChange}
-                    SelectProps={{
-                        IconComponent: () =>
-                            activeEditMode !== label ? null : <ArrowDropDownIcon />,
-                    }}
                     variant="standard"
                     fullWidth
                     value={defaultValue}
@@ -45,11 +43,7 @@ export const SelectField = ({
                         readOnly: activeEditMode !== label,
                     }}
                 >
-                    {options?.map((option) => (
-                        <MenuItem key={option.name} value={option.id}>
-                            {option.name}
-                        </MenuItem>
-                    ))}
+                    {children} 
                 </TextField>
             </TypeContainer>
         </TextBoxWrap>

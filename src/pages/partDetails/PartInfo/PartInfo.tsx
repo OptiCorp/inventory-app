@@ -1,18 +1,19 @@
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
-import { Item, UpdateItem } from '../../../services/apiTypes'
-import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
-import EditableField from './EditableField'
-import { Container } from './styles'
 import { useFormContext } from 'react-hook-form'
-import useSnackBar from '../../../hooks/useSnackbar'
-import { PartSchemaTest } from '../useUpdatePartForm'
-import { TypeField } from './TypeField'
-import { ItemFields } from './types'
 import UmAppContext from '../../../contexts/UmAppContext'
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
-import { SelectField } from './SelectField'
-import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
+import useSnackBar from '../../../hooks/useSnackbar'
+import { Item, UpdateItem } from '../../../services/apiTypes'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
+import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
+import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
+import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import { PartSchemaTest } from '../useUpdatePartForm'
+import EditableField from './EditableField'
+import { SelectField } from './SelectField'
+import { TypeField } from './Types/TypeField'
+import { Container } from './styles'
+import { ItemFields } from './types'
+import { MenuItem } from '@mui/base'
 
 const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     const { currentUser } = useContext(UmAppContext)
@@ -21,11 +22,17 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     const { data: locationsData = [] } = useGetLocations()
     const { data: categoryData = [] } = useGetCategories()
     const { snackbar, setSnackbarText } = useSnackBar()
-    const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(null)
+    const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(
+        null
+    )
     const [selectedType, setSelectedType] = useState(item.type || '')
     const [selectedVendorId, setSelectedVendorId] = useState(item.vendorId)
-    const [selectedLocationId, setSelectedLocationId] = useState(item.locationId)
-    const [selectedCategoryId, setSelectedCategoryId] = useState(item.categoryId)
+    const [selectedLocationId, setSelectedLocationId] = useState(
+        item.locationId
+    )
+    const [selectedCategoryId, setSelectedCategoryId] = useState(
+        item.categoryId
+    )
     const [updatedItem, setUpdatedItem] = useState(item)
     const [changedField, setChangedField] = useState('')
     const formContext = useFormContext<PartSchemaTest>()
@@ -42,7 +49,11 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
         })
 
     const handleBlurSerialNumber = formContext.handleSubmit(() => {
-        if (!updatedItem.serialNumber || updatedItem.serialNumber === item.serialNumber) return
+        if (
+            !updatedItem.serialNumber ||
+            updatedItem.serialNumber === item.serialNumber
+        )
+            return
         mutate({
             ...item,
             serialNumber: updatedItem.serialNumber,
@@ -50,7 +61,11 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
     })
 
     const handleBlurProductNumber = formContext.handleSubmit(() => {
-        if (!updatedItem.productNumber || updatedItem.productNumber === item.productNumber) return
+        if (
+            !updatedItem.productNumber ||
+            updatedItem.productNumber === item.productNumber
+        )
+            return
         mutate({
             ...item,
             productNumber: updatedItem.productNumber,
@@ -75,7 +90,10 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
         setSelectedCategoryId(newCategoryId)
     }
 
-    const handleInputChange = (fieldName: keyof UpdateItem, value: string | undefined) => {
+    const handleInputChange = (
+        fieldName: keyof UpdateItem,
+        value: string | undefined
+    ) => {
         setUpdatedItem((prev) => {
             return {
                 ...prev,
@@ -118,7 +136,11 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
 
                 <SelectField
                     label="category"
-                    defaultValue={selectedCategoryId ? selectedCategoryId : item.category?.name}
+                    defaultValue={
+                        selectedCategoryId
+                            ? selectedCategoryId
+                            : item.category?.name
+                    }
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handleBlur(selectedCategoryId, 'categoryId', item)}
@@ -129,14 +151,24 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
 
                 <SelectField
                     label="location"
-                    defaultValue={selectedLocationId ? selectedLocationId : item.location?.name}
+                    defaultValue={
+                        selectedLocationId
+                            ? selectedLocationId
+                            : item.location?.name
+                    }
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handleBlur(selectedLocationId, 'locationId', item)}
                     handleSelectChange={handleLocationChange}
                     options={locationsData}
                     id={item.locationId}
-                />
+                > 
+                    {locationsData?.map((option) => (
+                        <MenuItem key={option.name} value={option.id}>
+                            {option.name}
+                        </MenuItem>
+                    ))}
+                </SelectField>
 
                 <div>
                     <label>
@@ -155,7 +187,9 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     onBlur={handleBlurProductNumber}
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
-                    handleInputChange={(value) => handleInputChange('productNumber', value)}
+                    handleInputChange={(value) =>
+                        handleInputChange('productNumber', value)
+                    }
                 />
 
                 <EditableField
@@ -164,12 +198,16 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handleBlurSerialNumber}
-                    handleInputChange={(value) => handleInputChange('serialNumber', value)}
+                    handleInputChange={(value) =>
+                        handleInputChange('serialNumber', value)
+                    }
                 />
 
                 <SelectField
                     label="vendor"
-                    defaultValue={selectedVendorId ? selectedVendorId : item.vendor?.name}
+                    defaultValue={
+                        selectedVendorId ? selectedVendorId : item.vendor?.name
+                    }
                     activeEditMode={activeEditMode}
                     setActiveEditMode={setActiveEditMode}
                     onBlur={handleBlur(selectedVendorId, 'vendorId', item)}
