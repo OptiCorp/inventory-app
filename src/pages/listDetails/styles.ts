@@ -9,8 +9,10 @@ export const ListTitle = styled.h2`
 `
 
 export const FlexWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: max-content;
+    grid-template-rows: auto 1fr auto;
     gap: 16px;
     height: 85%;
     padding-bottom: 20px;

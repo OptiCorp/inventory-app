@@ -83,6 +83,11 @@ export type AddList = {
     title: string
 }
 
+export type UpdateList = {
+    id: string
+    title: string
+}
+
 export type MutateItemList = {
     listId: string
     itemId: string
