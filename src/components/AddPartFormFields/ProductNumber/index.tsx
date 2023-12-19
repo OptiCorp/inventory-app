@@ -10,7 +10,7 @@ export const ProductNumber = () => {
     return (
         <>
             <InputWrap>
-                <label htmlFor="productNumber">Product number (P/N) </label>{' '}
+                <label htmlFor="productNumber">Product number</label>{' '}
                 <ErrorMessage
                     name="productNumber"
                     render={({ message }) => <ErrorP>{message}</ErrorP>}

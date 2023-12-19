@@ -20,7 +20,7 @@ export const WpId = () => {
     return (
         <>
             <InputWrap>
-                <label htmlFor="WellPartner Id">WellPartner Id </label>{' '}
+                <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
                 <ErrorMessage name="wpId" render={({ message }) => <ErrorP>{message}</ErrorP>} />
             </InputWrap>
             <StyledInput
@@ -35,11 +35,11 @@ export const WpId = () => {
             {wpId && (
                 <>
                     {isUnique === true && (
-                        <p style={{ color: 'green' }}>WellPartner Id is unique!</p>
+                        <p style={{ color: 'green' }}>WellPartner ID is unique!</p>
                     )}
                     {isUnique === false && (
                         <p style={{ color: 'red' }}>
-                            WellPartner Id is not unique. Please choose a different one.
+                            WellPartner ID is not unique. Please choose a different one.
                         </p>
                     )}
                 </>

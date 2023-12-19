@@ -21,7 +21,8 @@ export const FormContent = () => {
             <Types />
             <WpId />
             <SerialNumber />
-            <ProductNumber /> <Vendor />
+            <ProductNumber />
+            <Vendor />
             <Description />
             <Comment />
             <input

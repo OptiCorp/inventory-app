@@ -12,7 +12,7 @@ export const Types = () => {
     return (
         <InputWrap>
             <IconContainer>
-                <label htmlFor="type">Choose a type</label>{' '}
+                <label htmlFor="type">Choose an item type</label>{' '}
                 <ToolTip content="Specify Unit,   or Item (lowest tier)">
                     <FaRegQuestionCircleIcon />
                 </ToolTip>
@@ -24,10 +24,10 @@ export const Types = () => {
                 defaultValue="Specify Unit, or Item (lowest tier)"
                 {...register('type')}
             >
-                <option value="unit">unit</option>
-                <option value="assembly">assembly</option>
-                <option value="sub-assembly"> sub-assembly</option>
-                <option value="part">part</option>
+                <option value="unit">Unit</option>
+                <option value="assembly">Assembly</option>
+                <option value="sub-assembly"> Subassembly</option>
+                <option value="part">Part</option>
             </StyledSelect>
             <ErrorMessage name="type" render={({ message }) => <ErrorP>{message}</ErrorP>} />
         </InputWrap>

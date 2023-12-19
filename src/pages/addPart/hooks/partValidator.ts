@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const partSchema = z.object({
-    wpId: z.string().min(1, 'id is required'),
+    wpId: z.string().min(1, 'WellPartner ID is required'),
     description: z.string().min(1, 'Description is required'),
     serialNumber: z.string().min(1, 'Serial number is required'),
     productNumber: z.string().min(1, 'Product number is required'),
