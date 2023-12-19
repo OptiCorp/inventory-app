@@ -16,11 +16,7 @@ export const ProductNumber = () => {
                     render={({ message }) => <ErrorP>{message}</ErrorP>}
                 />
             </InputWrap>
-            <StyledInput
-                type="text"
-                placeholder="E.g BV 113 EU"
-                {...register('productNumber')}
-            />
+            <StyledInput type="text" placeholder="E.g BV 113 EU" {...register('productNumber')} />
         </>
     )
 }

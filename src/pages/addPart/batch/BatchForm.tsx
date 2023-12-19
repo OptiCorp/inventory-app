@@ -33,11 +33,7 @@ const BatchForm = () => {
 
             <FormBatchRadio>
                 <label>
-                    <input
-                        type="radio"
-                        name="batchCheck"
-                        onChange={() => setBatchType(Batch.no)}
-                    />{' '}
+                    <input type="radio" name="batchCheck" onChange={() => setBatchType(Batch.no)} />{' '}
                     I want to add one unique part
                 </label>
                 <label>
@@ -46,8 +42,8 @@ const BatchForm = () => {
                         name="batchCheck"
                         onChange={() => setBatchType(Batch.yes)}
                     />{' '}
-                    I want to add a batch of several identical parts, assigning
-                    a unique WellPartner serial number to each of them
+                    I want to add a batch of several identical parts, assigning a unique WellPartner
+                    serial number to each of them
                 </label>
             </FormBatchRadio>
 

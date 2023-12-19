@@ -29,10 +29,7 @@ export const Types = () => {
                 <option value="sub-assembly"> sub-assembly</option>
                 <option value="part">part</option>
             </StyledSelect>
-            <ErrorMessage
-                name="type"
-                render={({ message }) => <ErrorP>{message}</ErrorP>}
-            />
+            <ErrorMessage name="type" render={({ message }) => <ErrorP>{message}</ErrorP>} />
         </InputWrap>
     )
 }

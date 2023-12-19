@@ -1,6 +1,7 @@
 import type { ChangeEvent, Dispatch, SetStateAction } from "react"
 import { Category, Location, Vendor } from "../../../services/apiTypes"
 
+
 export type Types = 'Unit' | 'Assembly' | 'Sub-Assembly' | 'Part'
 
 export type SetState<T> = Dispatch<SetStateAction<T>>
@@ -34,8 +35,6 @@ export type SelectProps = {
     onBlur: () => void
     handleSelectChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
-
-
 
 export type ItemFields =
     | 'type'
