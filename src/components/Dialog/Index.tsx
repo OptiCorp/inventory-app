@@ -1,4 +1,9 @@
-import { Dialog, DialogActions, DialogTitle } from '@mui/material'
+import {
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+} from '@mui/material'
 import { CancelButton, SubmitButton } from './styles'
 
 interface DialogProps {
@@ -24,7 +29,7 @@ const CustomDialog: React.FC<DialogProps> = ({
     SubmitButtonOnClick,
     CancelButtonOnClick,
     open,
-
+    children,
     onClose,
 
     type,
@@ -35,6 +40,7 @@ const CustomDialog: React.FC<DialogProps> = ({
         <>
             <Dialog open={open} onClose={onClose}>
                 <DialogTitle>{title}</DialogTitle>
+                {children ? <DialogContent>{children}</DialogContent> : null}
                 <DialogActions>
                     <CancelButton
                         onClick={CancelButtonOnClick}

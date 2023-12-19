@@ -7,14 +7,13 @@ import CustomDialog from '../../../components/Dialog/Index.tsx'
 import { KeyWord, RemoveIcon, Wrapper } from './styles.ts'
 type Props = {
     part: Item
-    icon?: string
 }
 
-export const SideList = ({ part, icon }: Props) => {
+export const SideList = ({ part }: Props) => {
     const { listId } = useParams()
-    const [searchTerm, setSearchTerm] = useState('')
+
     const [open, setOpen] = useState(false)
-    const { mutate: mutateRemoveItemFromList, isSuccess: removeItemSuccess } =
+    const { mutate: mutateRemoveItemFromList, isSuccess } =
         useRemoveItemsFromList()
 
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
