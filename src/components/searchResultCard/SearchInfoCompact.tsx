@@ -1,12 +1,9 @@
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogTitle from '@mui/material/DialogTitle'
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { CancelButton, SubmitButton } from '../../pages/listDetails/styles.ts'
 import { Item, MutateItemList } from '../../services/apiTypes'
 import { useAddItemsToList } from '../../services/hooks/Items/useAddItemsToList.tsx'
 import { useRemoveItemsFromList } from '../../services/hooks/Items/useRemoveItemsFromList.tsx'
+import CustomDialog from '../Dialog/Index.tsx'
 import { StyledAddIcon, StyledRemoveIcon } from '../listCard/styles.ts'
 import {
     CompactCard,
@@ -59,7 +56,8 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         <KeyWords>ID:</KeyWords> {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
-                        <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
+                        <KeyWords>Location</KeyWords>{' '}
+                        {part.location?.name || 'Location'}
                     </CompactInfoP>{' '}
                     {icon === 'add' ? (
                         <StyledAddIcon
@@ -79,25 +77,23 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         ></StyledRemoveIcon>
                     ) : null}
                 </CompactCard>
-                <CompactDesriptionParagraph>{part.description}</CompactDesriptionParagraph>
+                <CompactDesriptionParagraph>
+                    {part.description}
+                </CompactDesriptionParagraph>
             </ResultCardCompactContainer>
 
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Remove item from list?</DialogTitle>
-                <DialogActions>
-                    <CancelButton onClick={handleClose}>Cancel</CancelButton>
-                    <SubmitButton
-                        onClick={(e) =>
-                            handleDelete(e, {
-                                itemId: part.id,
-                                listId: listId!,
-                            })
-                        }
-                    >
-                        Confirm
-                    </SubmitButton>
-                </DialogActions>
-            </Dialog>
+            <CustomDialog
+                title="Remove item from list?"
+                open={open}
+                onClose={handleClose}
+                CancelButtonOnClick={() => handleClose}
+                SubmitButtonOnClick={(e) =>
+                    handleDelete(e, {
+                        itemId: part.id,
+                        listId: listId!,
+                    })
+                }
+            />
         </>
     )
 }
