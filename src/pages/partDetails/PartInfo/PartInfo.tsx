@@ -1,29 +1,42 @@
 import { useState } from 'react'
-import { Item } from '../../../services/apiTypes'
+import type { Item } from '../../../services/apiTypes'
 import EditableField from './EditableField'
 import { Container } from './styles'
 import { TypeField } from './TypeField'
-import { ItemFields } from './types'
 import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
 import { SelectField } from './SelectField'
 import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
-import useHandlePartInfo from './useHandlePartInfo'
+import useFormBlurSelectHandler from './hooks/useFormBlurSelectHandler'
+import useFormBlurInputHandler from './hooks/useFormBlurInputHandler'
+import useFormSelectChangeHandler from './hooks/useFormSelectChangeHandler'
+import useFormInputChangeHandler from './hooks/useFormInputChangeHandler'
 
-const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
+type Props = {
+    item: Item
+    isLoading: boolean
+}
+
+const PartInfo = ({ item, isLoading }: Props) => {
+    const internalItem = { ...item }
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors()
     const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations()
     const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories()
-    const [activeEditMode, setActiveEditMode] = useState<ItemFields | null>(null)
-    const [selectedType, setSelectedType] = useState(item.type || '')
-    const [selectedVendorId, setSelectedVendorId] = useState(item.vendorId)
-    const [selectedLocationId, setSelectedLocationId] = useState(item.locationId)
-    const [selectedCategoryId, setSelectedCategoryId] = useState(item.categoryId)
-    const [updatedItem, setUpdatedItem] = useState(item)
+    const [selectedType, setSelectedType] = useState<typeof item.type>(item.type)
+    const [selectedVendorId, setSelectedVendorId] = useState<typeof item.vendorId>(item.vendorId)
+    const [selectedLocationId, setSelectedLocationId] = useState<typeof item.locationId>(
+        item.locationId
+    )
+    const [selectedCategoryId, setSelectedCategoryId] = useState<typeof item.categoryId>(
+        item.categoryId
+    )
+    const [updatedItem, setUpdatedItem] = useState({ ...item })
+    const blurSelectField = useFormBlurSelectHandler(internalItem)
+    const blurInputField = useFormBlurInputHandler(internalItem)
+    const selectChange = useFormSelectChangeHandler()
+    const inputChange = useFormInputChangeHandler()
 
-    const handler = useHandlePartInfo(item)
-
-    if (isLoading) {
+    if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
         return <p>Loading.. </p>
     }
 
@@ -32,51 +45,30 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
             <Container>
                 <TypeField
                     label="type"
-                    activeEditMode={activeEditMode}
-                    setActiveEditMode={setActiveEditMode}
-                    defaultValue={selectedType || item.type || ''}
-                    onBlur={handler.handleBlurSelectField(selectedType, 'type', item)}
-                    handleSelectChange={(e) => handler.handleSelectChange(e, setSelectedType)}
+                    defaultValue={selectedType || item.type}
+                    onBlur={() => blurSelectField(selectedType!, 'type')}
+                    handleSelectChange={(e) => selectChange(e, setSelectedType)}
                     options={['Unit', 'Assembly', 'Sub-Assembly', 'Part']}
                     selectedType={selectedType}
                 />
-                {!isLoadingCategories && (
-                    <SelectField
-                        label="category"
-                        defaultValue={selectedCategoryId || item.category?.name || ''}
-                        activeEditMode={activeEditMode}
-                        setActiveEditMode={setActiveEditMode}
-                        onBlur={handler.handleBlurSelectField(
-                            selectedCategoryId,
-                            'categoryId',
-                            item
-                        )}
-                        handleSelectChange={(e) =>
-                            handler.handleSelectChange(e, setSelectedCategoryId)
-                        }
-                        options={categories}
-                        id={item.categoryId}
-                    />
-                )}
 
-                {!isLoadingLocations && (
-                    <SelectField
-                        label="location"
-                        defaultValue={selectedLocationId || item.location?.name || ''}
-                        activeEditMode={activeEditMode}
-                        setActiveEditMode={setActiveEditMode}
-                        onBlur={handler.handleBlurSelectField(
-                            selectedLocationId,
-                            'locationId',
-                            item
-                        )}
-                        handleSelectChange={(e) =>
-                            handler.handleSelectChange(e, setSelectedLocationId)
-                        }
-                        options={locations}
-                        id={item.locationId}
-                    />
-                )}
+                <SelectField
+                    label="category"
+                    defaultValue={selectedCategoryId || item.category?.name}
+                    onBlur={() => blurSelectField(selectedCategoryId, 'categoryId')}
+                    handleSelectChange={(e) => selectChange(e, setSelectedCategoryId)}
+                    options={categories}
+                    id={item.categoryId}
+                />
+
+                <SelectField
+                    label="location"
+                    defaultValue={selectedLocationId || item.location?.name}
+                    onBlur={() => blurSelectField(selectedLocationId, 'locationId')}
+                    handleSelectChange={(e) => selectChange(e, setSelectedLocationId)}
+                    options={locations}
+                    id={item.locationId}
+                />
 
                 <div>
                     <label>
@@ -92,45 +84,30 @@ const PartInfo = ({ item, isLoading }: { item: Item; isLoading: boolean }) => {
                 <EditableField
                     label="productNumber"
                     defaultValue={item.productNumber}
-                    onBlur={handler.handleBlurInputField('productNumber', updatedItem)}
-                    activeEditMode={activeEditMode}
-                    setActiveEditMode={setActiveEditMode}
+                    onBlur={() => blurInputField('productNumber', updatedItem)}
                     handleInputChange={(value) =>
-                        handler.handleInputChange('productNumber', value, setUpdatedItem)
+                        inputChange('productNumber', value, setUpdatedItem)
                     }
                 />
 
                 <EditableField
                     label="serialNumber"
                     defaultValue={item.serialNumber}
-                    activeEditMode={activeEditMode}
-                    setActiveEditMode={setActiveEditMode}
-                    onBlur={handler.handleBlurInputField('serialNumber', updatedItem)}
-                    handleInputChange={(value) => {
-                        handler.handleInputChange('serialNumber', value, setUpdatedItem)
-                    }}
+                    onBlur={() => blurInputField('serialNumber', updatedItem)}
+                    handleInputChange={(value) =>
+                        inputChange('serialNumber', value, setUpdatedItem)
+                    }
                 />
 
-                {!isLoadingVendors && (
-                    <SelectField
-                        label="vendor"
-                        defaultValue={selectedVendorId || item.vendor?.name || ''}
-                        activeEditMode={activeEditMode}
-                        setActiveEditMode={setActiveEditMode}
-                        onBlur={handler.handleBlurSelectField(
-                            selectedVendorId,
-                            'vendorId',
-                            updatedItem
-                        )}
-                        handleSelectChange={(e) =>
-                            handler.handleSelectChange(e, setSelectedVendorId)
-                        }
-                        options={vendors}
-                        id={item.vendorId}
-                    />
-                )}
+                <SelectField
+                    label="vendor"
+                    defaultValue={selectedVendorId || item.vendor?.name}
+                    onBlur={() => blurSelectField(selectedVendorId, 'vendorId')}
+                    handleSelectChange={(e) => selectChange(e, setSelectedVendorId)}
+                    options={vendors}
+                    id={item.vendorId}
+                />
             </Container>
-            {handler.snackbar}
         </form>
     )
 }
