@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { Item, MutateItemList } from '../../../services/apiTypes.ts'
 import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList.tsx'
-import { COLORS } from '../../../style/GlobalStyles.ts'
 
 import CustomDialog from '../../../components/Dialog/Index.tsx'
-import { ButtonWrap, KeyWord, RemoveIcon, Wrapper } from './styles.ts'
+import { KeyWord, RemoveIcon, Wrapper } from './styles.ts'
 type Props = {
     part: Item
     icon?: string
@@ -55,20 +53,6 @@ export const SideList = ({ part, icon }: Props) => {
 
                     <RemoveIcon onClick={handleClickOpen} />
                 </Wrapper>
-                <ButtonWrap>
-                    <Button
-                        backgroundColor={`${COLORS.secondary}`}
-                        color={`${COLORS.primary}`}
-                    >
-                        Save list
-                    </Button>
-                    <Button
-                        backgroundColor={`${COLORS.secondary}`}
-                        color={`${COLORS.primary}`}
-                    >
-                        Export
-                    </Button>
-                </ButtonWrap>
             </>
 
             <CustomDialog

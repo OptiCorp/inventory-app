@@ -1,7 +1,7 @@
+import { Box, ListItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
-import { Box, Button, ListItem } from '@mui/material'
 
 export const TopBarContainer = styled.div`
     display: flex;

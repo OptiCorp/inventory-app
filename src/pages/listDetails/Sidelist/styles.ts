@@ -1,5 +1,5 @@
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import { styled } from 'styled-components'
@@ -22,13 +22,13 @@ export const EditIcon = styled(CreateOutlinedIcon)`
     cursor: pointer;
 `
 
-export const DeleteIcon = styled(DeleteOutlineOutlinedIcon)`
-    color: black;
+export const DeleteIcon = styled(DeleteForeverIcon)`
+    color: ${COLORS.primary};
     margin-inline: 30px;
+
     &:hover {
         color: ${COLORS.dangerRed};
     }
-    cursor: pointer;
 `
 
 export const Wrapper = styled.div`
@@ -42,17 +42,6 @@ export const Wrapper = styled.div`
     padding: 5px;
     justify-content: space-evenly;
     background-color: ${COLORS.whiteSmoke};
-`
-
-export const ButtonWrap = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
-    bottom: 20px;
-    right: 250px;
-    padding-top: 40px;
-    position: fixed;
-    margin-inline: auto;
 `
 
 export const RemoveIcon = styled(RemoveCircleIcon)`
@@ -70,25 +59,4 @@ export const KeyWord = styled.div`
     gap: 10px;
     flex-wrap: wrap;
     width: 100%;
-`
-export const SubmitButton = styled.button`
-    width: 150px;
-    background-color: ${COLORS.primary};
-    color: ${COLORS.secondary};
-    height: 30px;
-    cursor: pointer;
-    &:hover {
-        background-color: ${COLORS.gray};
-    }
-`
-
-export const CancelButton = styled.button`
-    width: 150px;
-    background-color: ${COLORS.secondary};
-    color: ${COLORS.primary};
-    height: 30px;
-    cursor: pointer;
-    &:hover {
-        background-color: whitesmoke;
-    }
 `
