@@ -3,7 +3,7 @@ import { pca } from '../msalConfig'
 
 
 
-import { AddCategory, AddItem, AddList, AddLocation, Category, Item, List, Location, UpdateCateory, UpdateItem, UpdateLocation, User, UserRole, Vendor } from './apiTypes'
+import { AddCategory, AddItem, AddList, AddLocation, Category, Item, List, Location, UpdateCategory, UpdateItem, UpdateLocation, UpdateVendor, User, UserRole, Vendor } from './apiTypes'
 
 
 
