@@ -79,6 +79,7 @@ export const SecondInfoBox = styled.div`
     line-height: 25px;
     grid-column: 2/2;
     border-right: 1px solid rgba(208, 208, 208);
+    border-left: 1px solid rgba(208, 208, 208);
 `
 
 export const ThirdInfoBox = styled.div`
@@ -93,7 +94,6 @@ export const FirstInfoBox = styled.div`
     line-height: 25px;
     padding-left: 30px;
     padding-right: 30px;
-    border-right: 1px solid rgba(208, 208, 208);
 `
 
 export const InfoP = styled.div`

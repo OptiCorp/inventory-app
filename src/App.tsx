@@ -21,9 +21,12 @@ import PartDetails from './pages/partDetails/Index'
 import Search from './pages/search/Search'
 import GlobalStyles from './style/GlobalStyles'
 import ListDetails from './pages/listDetails/ListDetails.tsx'
-import Categories from './pages/admin/Categories.tsx'
-import Vendors from './pages/admin/Vendors.tsx'
-import Locations from './pages/admin/Locations.tsx'
+import Categories from './pages/admin/category/Categories.tsx'
+import Vendors from './pages/admin/vendor/Vendors.tsx'
+import Locations from './pages/admin/location/Locations.tsx'
+import AddCategory from './pages/admin/category/AddCategory.tsx'
+import AddVendor from './pages/admin/vendor/AddVendor.tsx'
+import AddLocation from './pages/admin/location/AddLocation.tsx'
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
@@ -46,8 +49,11 @@ function App() {
                 <Route path="makelist/:listId?" element={<ListDetails />} />
                 <Route path="admin">
                     <Route path="categories" element={<Categories />} />
+                    <Route path="add-category" element={<AddCategory />} />
                     <Route path="vendors" element={<Vendors />} />
+                    <Route path="add-vendor" element={<AddVendor />} />
                     <Route path="locations" element={<Locations />} />
+                    <Route path="add-location" element={<AddLocation />} />
                 </Route>
             </Route>
         )

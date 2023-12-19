@@ -1,15 +1,17 @@
 import { useDebounce } from 'usehooks-ts'
-import { useGetLocationsInfinite } from '../../services/hooks/Locations/useGetLocationsInfinite'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from './styles'
+import { useGetLocationsInfinite } from '../../../services/hooks/Locations/useGetLocationsInfinite'
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 import { useState } from 'react'
-import SearchBar from '../../components/searchBar/SearchBar'
-import AdminSearchCard, { SearchType } from '../../components/admin/AdminSearchCard'
-import { Button } from '../../components/Button/SubmitButton'
+import SearchBar from '../../../components/searchBar/SearchBar'
+import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
+import { Button } from '../../../components/Button/SubmitButton'
+import { useNavigate } from 'react-router-dom'
 
 const Locations = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { data, isLoading, fetchNextPage } = useGetLocationsInfinite(debouncedSearchTerm)
+    const navigate = useNavigate()
 
     return (
         <AdminContainer>
@@ -34,7 +36,12 @@ const Locations = () => {
                 )}
             </SearchResultContainer>
             <ButtonContainer>
-                <Button children={'Add new location'} backgroundColor={'black'} color={'white'} />
+                <Button
+                    onClick={() => navigate('/admin/add-location')}
+                    children={'Add new location'}
+                    backgroundColor={'black'}
+                    color={'white'}
+                />
             </ButtonContainer>
         </AdminContainer>
     )

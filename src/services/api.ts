@@ -6,6 +6,7 @@ import {
     AddItem,
     AddList,
     AddLocation,
+    AddVendor,
     Category,
     Item,
     List,
@@ -331,7 +332,7 @@ const apiService = () => {
         return await getByFetch(`Vendor/BySearchString/${searchString}`)
     }
 
-    const addVendor = async (vendor: Omit<Vendor, 'id'>): Promise<Response> => {
+    const addVendor = async (vendor: AddVendor): Promise<Response> => {
         return await postByFetch('Vendor', vendor)
     }
 

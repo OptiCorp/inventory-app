@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from './styles'
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 import { useDebounce } from 'usehooks-ts'
-import { useGetVendorsInfinite } from '../../services/hooks/Vendor/useGetVendorInfinite'
-import SearchBar from '../../components/searchBar/SearchBar'
-import AdminSearchCard, { SearchType } from '../../components/admin/AdminSearchCard'
-import { Button } from '../../components/Button/SubmitButton'
+import { useGetVendorsInfinite } from '../../../services/hooks/Vendor/useGetVendorInfinite'
+import SearchBar from '../../../components/searchBar/SearchBar'
+import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
+import { Button } from '../../../components/Button/SubmitButton'
+import { useNavigate } from 'react-router-dom'
 
 const Vendors = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { data, isLoading, fetchNextPage } = useGetVendorsInfinite(debouncedSearchTerm)
+    const navigate = useNavigate()
 
     return (
         <AdminContainer>
@@ -37,7 +39,12 @@ const Vendors = () => {
             </SearchResultContainer>
 
             <ButtonContainer>
-                <Button children={'Add new vendor'} backgroundColor={'black'} color={'white'} />
+                <Button
+                    onClick={() => navigate('/admin/add-vendor')}
+                    children={'Add new vendor'}
+                    backgroundColor={'black'}
+                    color={'white'}
+                />
             </ButtonContainer>
         </AdminContainer>
     )

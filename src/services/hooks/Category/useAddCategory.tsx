@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import apiService from '../../api'
-import { AddVendor } from '../../apiTypes'
+import { AddCategory } from '../../apiTypes'
 
-export const useAddVendor = () => {
+export const useAddCategory = () => {
     const api = apiService()
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (vendor: AddVendor) => api.addVendor(vendor),
+        mutationFn: (category: AddCategory) => api.addCategory(category),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['vendors'],
+                queryKey: ['categories'],
             })
         },
     })
