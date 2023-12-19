@@ -15,51 +15,57 @@ import DoneIcon from '@mui/icons-material/Done'
 import { useUpdateCategory } from '../../services/hooks/Category/useUpdateCategory'
 import { useUpdateVendor } from '../../services/hooks/Vendor/useUpdateVendor'
 import { useUpdateLocation } from '../../services/hooks/Locations/useUpdateLocation'
+import { useDeleteCategory } from '../../services/hooks/Category/useDeleteCategory'
+import { useDeleteVendor } from '../../services/hooks/Vendor/useDeleteVendor'
+import { useDeleteLocation } from '../../services/hooks/Locations/useDeleteLocation'
 
 type Props = {
     data: Category | Vendor | Location
-    adminType: string
+    searchType: SearchType
 }
 
-export enum AdminType {
+export enum SearchType {
     Category = 'category',
     Vendor = 'vendor',
     Location = 'location',
 }
 
-const AdminSearchCard = ({ data, adminType }: Props) => {
+const AdminSearchCard = ({ data, searchType }: Props) => {
     const [isEditing, setIsEditing] = useState(false)
-    const { mutate: mutateCategory, status: categoryStatus } = useUpdateCategory(data.id)
-    const { mutate: mutateVendor, status: vendorStatus } = useUpdateVendor(data.id)
-    const { mutate: mutateLocation, status: locationStatus } = useUpdateLocation(data.id)
+    const { mutate: updateCategory, status: categoryUpdateStatus } = useUpdateCategory(data.id)
+    const { mutate: updateVendor, status: vendorUpdateStatus } = useUpdateVendor(data.id)
+    const { mutate: updateLocation, status: locationUpdateStatus } = useUpdateLocation(data.id)
+    const { mutate: deleteCategory, status: categoryDeleteStatus } = useDeleteCategory(data.id)
+    const { mutate: deleteVendor, status: categoryVendorStatus } = useDeleteVendor(data.id)
+    const { mutate: deleteLocation, status: categoryLocationStatus } = useDeleteLocation(data.id)
 
     const handleEdit = (isEditing: boolean, event?: FormEvent<HTMLInputElement>) => {
         if (isEditing) {
             if (event) {
-                switch (adminType) {
-                    case AdminType.Category:
+                switch (searchType) {
+                    case SearchType.Category:
                         data.name = event?.currentTarget.value
                         var newCategory: UpdateCategory = {
                             id: data.id,
                             name: event?.currentTarget.value,
                         }
-                        mutateCategory(newCategory)
+                        updateCategory(newCategory)
                         break
-                    case AdminType.Vendor:
+                    case SearchType.Vendor:
                         data.name = event?.currentTarget.value
                         var newVendor: UpdateVendor = {
                             id: data.id,
                             name: event?.currentTarget.value,
                         }
-                        mutateVendor(newVendor)
+                        updateVendor(newVendor)
                         break
-                    case AdminType.Location:
+                    case SearchType.Location:
                         data.name = event?.currentTarget.value
                         var newLocation: UpdateLocation = {
                             id: data.id,
                             name: event?.currentTarget.value,
                         }
-                        mutateLocation(newLocation)
+                        updateLocation(newLocation)
                         break
                 }
             }
@@ -69,7 +75,19 @@ const AdminSearchCard = ({ data, adminType }: Props) => {
         }
     }
 
-    const handleDelete = () => {}
+    const handleDelete = () => {
+        switch (searchType) {
+            case SearchType.Category:
+                deleteCategory()
+                break
+            case SearchType.Vendor:
+                deleteVendor()
+                break
+            case SearchType.Location:
+                deleteLocation()
+                break
+        }
+    }
 
     return (
         <AdminSearchCardContainer>
@@ -98,7 +116,12 @@ const AdminSearchCard = ({ data, adminType }: Props) => {
                         <EditIcon sx={{ fontSize: 36 }} />
                     )}
                 </Button>
-                <Button variant="outlined" color="error" sx={{ color: 'black', margin: '0 4px' }}>
+                <Button
+                    onClick={() => handleDelete()}
+                    variant="outlined"
+                    color="error"
+                    sx={{ color: 'black', margin: '0 4px' }}
+                >
                     <DeleteIcon sx={{ fontSize: 36 }} />
                 </Button>
             </AdminActions>

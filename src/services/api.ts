@@ -302,7 +302,7 @@ const apiService = () => {
     }
 
     const getLocationBySearchString = async (searchString: string): Promise<Location[]> => {
-        return await getByFetch(`Location/${searchString}`)
+        return await getByFetch(`Location/BySearchString/${searchString}`)
     }
 
     const addLocation = async (location: AddLocation): Promise<Response> => {
@@ -349,12 +349,12 @@ const apiService = () => {
         return data
     }
 
-    const getCategoryById = async (id: string) => {
+    const getCategoryById = async (id: string): Promise<Category> => {
         return await getByFetch(`Category/${id}`)
     }
 
     const getCategoryBySearchString = async (searchString: string): Promise<Category[]> => {
-        return await getByFetch(`Category/${searchString}`)
+        return await getByFetch(`Category/BySearchString/${searchString}`)
     }
 
     const addCategory = async (category: AddCategory): Promise<Response> => {

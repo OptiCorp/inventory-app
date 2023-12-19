@@ -36,7 +36,7 @@ export const CompactDesriptionParagraph = styled.p`
 `
 
 export const ResultCardCompactContainer = styled.div`
-    background-color: ${COLORS.secondary};
+    background-color: #fbfbfb;
     border-radius: 8px;
     margin: 16px;
     box-shadow: 2.5px 2.5px gray;
@@ -70,7 +70,7 @@ export const CompactCard = styled.div`
     flex-basis: 100%;
     cursor: pointer;
     border-right: 1px solid rgba(208, 208, 208);
-    background-color: ${COLORS.secondary};
+    background-color: #fbfbfb;
     padding: 1rem;
 `
 
