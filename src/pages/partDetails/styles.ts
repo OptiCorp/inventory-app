@@ -8,6 +8,7 @@ export const StyledContainerDiv = styled.div`
     max-width: 1000px;
     margin-inline: auto;
     padding: 16px;
+    background: #fff;
 `
 
 export const SecondList = styled.ul`

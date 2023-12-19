@@ -34,7 +34,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
     async function fetchUserByEmail(azureAdId: string) {
         const response = await api.getUserByAzureAdUserId(azureAdId)
         if (response) {
-            const user = response
+            const user = response as User
             setCurrentUser(user)
         } else {
             console.error('Error fetching user by email')

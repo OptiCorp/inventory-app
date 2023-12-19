@@ -46,7 +46,6 @@ export type Item = {
     location: Location
     user: User
     logEntries: LogEntry[]
-    [key: string]: any
 }
 
 export type LogEntry = {
@@ -78,7 +77,7 @@ export type List = {
     createdById: string
     createdDate: string
     updatedDate: string | null
-    items: string[] | null
+    items: Item[]
 }
 
 export type AddList = {
