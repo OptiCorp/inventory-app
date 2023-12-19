@@ -1,23 +1,11 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
 
-import {
-    AddCategory,
-    AddItem,
-    AddList,
-    AddLocation,
-    Category,
-    Item,
-    List,
-    Location,
-    UpdateCategory,
-    UpdateItem,
-    UpdateLocation,
-    UpdateVendor,
-    User,
-    UserRole,
-    Vendor,
-} from './apiTypes'
+
+
+import { AddCategory, AddItem, AddList, AddLocation, Category, Item, List, Location, UpdateCategory, UpdateItem, UpdateLocation, UpdateVendor, User, UserRole, Vendor } from './apiTypes'
+
+
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -33,30 +21,38 @@ const apiService = () => {
     // Generic function for get requests
 
     // Microsoft Graph
-    const getMsGraphImageByFetch = async (url: string): Promise<any> => {
-        return pca.acquireTokenSilent(microsoftGraphRequest).then(async (tokenResponse) => {
-            const getOperation = {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${tokenResponse.accessToken}`,
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                },
-            }
-            const res = await fetch(`${microsoftGraphUrl}/${url}`, getOperation)
-            if (res.ok) {
-                const blob = await res.blob()
-                const url = window.URL || window.webkitURL
-                const blobUrl = url.createObjectURL(blob)
-                return blobUrl
-            } else {
-                console.error('Get by fetch failed. Url=' + url, res)
-            }
-        })
+
+    const getMsGraphImageByFetch = async (url: string): Promise<string | undefined> => {
+        return pca
+            .acquireTokenSilent(microsoftGraphRequest)
+            .then(async (tokenResponse) => {
+                const getOperation = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${tokenResponse.accessToken}`,
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }
+                const res = await fetch(
+                    `${microsoftGraphUrl}/${url}`,
+                    getOperation
+                )
+                if (res.ok) {
+                    const blob = await res.blob()
+                    const url = window.URL || window.webkitURL
+                    const blobUrl = url.createObjectURL(blob)
+                    return blobUrl
+                } else {
+                    console.error('Get by fetch failed. Url=' + url, res)
+                }
+            })
+
+
     }
 
     // User Management
-    const getByFetch = async (url: string): Promise<any> => {
+    const getByFetch = async <T>(url: string): Promise<T> => {
         return pca.acquireTokenSilent(request).then(async (tokenResponse) => {
             const getOperation = {
                 method: 'GET',
@@ -72,7 +68,7 @@ const apiService = () => {
     }
 
     // Generic function for post requests
-    const postByFetch = async (url: string, bodyData?: any) => {
+    const postByFetch = async <T>(url: string, bodyData: T) => {
         try {
             const tokenResponse = await pca.acquireTokenSilent(request)
             const postOperation = {
@@ -93,7 +89,7 @@ const apiService = () => {
     }
 
     // Generic function for put requests
-    const putByFetch = async (url: string, bodyData: any) => {
+    const putByFetch = async <T>(url: string, bodyData: T) => {
         try {
             const tokenResponse = await pca.acquireTokenSilent(request)
             const putOperations = {
@@ -198,12 +194,12 @@ const apiService = () => {
     // USER ROLE
 
     const getAllUserRoles = async (): Promise<UserRole[]> => {
-        const data = await getByFetch('GetAllUserRoles')
+        const data = await getByFetch<UserRole[]>('GetAllUserRoles')
         return data
     }
 
     const getUserRole = async (id: string): Promise<UserRole> => {
-        const data = await getByFetch(`GetUserRole?id=${id}`)
+        const data = await getByFetch<UserRole>(`GetUserRole?id=${id}`)
         return data
     }
 
@@ -251,7 +247,7 @@ const apiService = () => {
         return await getByFetch(`List/ByUserId/${userId}`)
     }
 
-    const getListById = async (id: string) => {
+    const getListById = async (id: string): Promise<List> => {
         return await getByFetch(`List/${id}`)
     }
 
@@ -259,7 +255,7 @@ const apiService = () => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
-    const getItemById = async (id: string) => {
+    const getItemById = async (id: string): Promise<Item> => {
         return await getByFetch(`Item/${id}`)
     }
 
@@ -297,8 +293,10 @@ const apiService = () => {
     }
 
     // Location
-    const getLocation = async () => {
-        const data = await getByFetch('Location')
+
+    const getLocation = async (): Promise<Location[]> => {
+        const data: Location[] =  await getByFetch('Location')
+
         return data
     }
 
@@ -324,7 +322,10 @@ const apiService = () => {
 
     // Vendor
     const getVendor = async (): Promise<Vendor[]> => {
-        const data = await getByFetch('Vendor')
+
+        const data =  await getByFetch<Vendor[]>('Vendor')
+
+
         return data
     }
 
@@ -349,8 +350,11 @@ const apiService = () => {
     }
 
     // Category
-    const getCategory = async () => {
-        const data = await getByFetch('Category')
+
+    
+    const getCategory = async (): Promise<Category[]> => {
+        const data: Category[] =  await getByFetch('Category')
+
         return data
     }
 
