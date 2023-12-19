@@ -12,7 +12,6 @@ const partInfoSchema = z.object({
         .string()
         .min(1, 'Product number is required')
         .max(20, 'Product number must be at most 20 characters'),
-    type: z.string().min(1),
     description: z.string(),
     parentId: z.string().nullish(),
 })
