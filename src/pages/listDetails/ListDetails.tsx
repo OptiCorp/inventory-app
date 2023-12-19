@@ -76,9 +76,9 @@ const ListDetails = () => {
 
     const handleDelete = () => {
         setOpen(true)
-        mutate(list.id)
+        mutate(list!.id)
         handleClose()
-        console.log('fdsf' + list.id)
+        console.log('fdsf' + list!.id)
     }
 
     return (
@@ -90,9 +90,7 @@ const ListDetails = () => {
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        placeholder={
-                            'Search for ID, description, PO number or S/N'
-                        }
+                        placeholder={'Search for ID, description, PO number or S/N'}
                     />
                     <Container>
                         {items?.pages.map((page, i) =>
@@ -106,10 +104,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCard
-                                            part={item}
-                                            icon={'add'}
-                                        />
+                                        <SearchResultCard part={item} icon={'add'} />
                                     </div>
                                 ) : (
                                     <div
@@ -120,10 +115,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCardCompact
-                                            part={item}
-                                            icon={'add'}
-                                        />
+                                        <SearchResultCardCompact part={item} icon={'add'} />
                                     </div>
                                 )
                             )
@@ -136,10 +128,7 @@ const ListDetails = () => {
                             <Header>
                                 <ListTitle>
                                     {list.title},{' '}
-                                    {format(
-                                        new Date(list.createdDate),
-                                        'dd-MM-yyyy'
-                                    ).toString()}
+                                    {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
                                 </ListTitle>
                                 <FlexContainer>
                                     <InfoIcon />
