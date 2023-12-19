@@ -36,7 +36,7 @@ export const StyledLink = styled(Link)`
 `
 
 export const StyledSearchedLink = styled(Link)`
-    color:  ${COLORS.primary};
+    color: ${COLORS.primary};
 `
 
 export const GlobalSpinnerContainer = styled.div`

@@ -2,7 +2,9 @@ import { API_URL } from '../config'
 import { pca } from '../msalConfig'
 
 
+
 import { AddCategory, AddItem, AddList, AddLocation, Category, Item, List, Location, UpdateCateory, UpdateItem, UpdateLocation, User, UserRole, Vendor } from './apiTypes'
+
 
 
 const request = {
@@ -19,6 +21,7 @@ const apiService = () => {
     // Generic function for get requests
 
     // Microsoft Graph
+
     const getMsGraphImageByFetch = async (url: string): Promise<string | undefined> => {
         return pca
             .acquireTokenSilent(microsoftGraphRequest)
@@ -44,6 +47,7 @@ const apiService = () => {
                     console.error('Get by fetch failed. Url=' + url, res)
                 }
             })
+
 
     }
 
@@ -152,10 +156,7 @@ const apiService = () => {
     }
 
     const addUser = async (
-        user: Omit<
-            User,
-            'id' | 'status' | 'userRole' | 'createdDate' | 'updatedDate'
-        >
+        user: Omit<User, 'id' | 'status' | 'userRole' | 'createdDate' | 'updatedDate'>
     ): Promise<Response> => {
         return await postByFetch('AddUser', {
             ...user,
@@ -202,17 +203,12 @@ const apiService = () => {
         return data
     }
 
-    const addUserRole = async (
-        userRole: Pick<UserRole, 'name'>
-    ): Promise<void> => {
+    const addUserRole = async (userRole: Pick<UserRole, 'name'>): Promise<void> => {
         await postByFetch('AddUserRole', {
             userRole,
         })
     }
-    const updateUserRole = async (
-        id: string,
-        name: string
-    ): Promise<Response> => {
+    const updateUserRole = async (id: string, name: string): Promise<Response> => {
         return await postByFetch('UpdateUserRole', {
             id: id,
             name: name,
@@ -234,9 +230,7 @@ const apiService = () => {
         searchString: string,
         userId: string | undefined
     ): Promise<List[]> => {
-        return await getByFetch(
-            `List/BySearchString/${searchString}?userId=${userId}`
-        )
+        return await getByFetch(`List/BySearchString/${searchString}?userId=${userId}`)
     }
 
     const getItemsNotInListBySearchString = async (
@@ -244,7 +238,9 @@ const apiService = () => {
         listId: string,
         pageNumber: number
     ): Promise<Item[]> => {
-        return await getByFetch(`Item/BySearchStringNotInList/${searchString}?listId=${listId}&page=${pageNumber}`)
+        return await getByFetch(
+            `Item/BySearchStringNotInList/${searchString}?listId=${listId}&page=${pageNumber}`
+        )
     }
 
     const getListsByUserId = async (userId: string): Promise<List[]> => {
@@ -255,17 +251,19 @@ const apiService = () => {
         return await getByFetch(`List/${id}`)
     }
 
-    const getItemsByUserId = async (
-        userId: string | undefined
-    ): Promise<Item[]> => {
+    const getItemsByUserId = async (userId: string | undefined): Promise<Item[]> => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
     const getItemById = async (id: string): Promise<Item> => {
         return await getByFetch(`Item/${id}`)
     }
-    
-    const updateItemById = async (id: string, item: UpdateItem, updatedById: string): Promise<Response> => {
+
+    const updateItemById = async (
+        id: string,
+        item: UpdateItem,
+        updatedById: string
+    ): Promise<Response> => {
         return await putByFetch(`Item/${id}?updatedById=${updatedById}`, item)
     }
 
@@ -290,8 +288,10 @@ const apiService = () => {
     }
 
     // Location
+
     const getLocation = async (): Promise<Location[]> => {
         const data: Location[] =  await getByFetch('Location')
+
         return data
     }
 
@@ -299,8 +299,8 @@ const apiService = () => {
         return await getByFetch(`Location/${id}`)
     }
 
-    const getLocationBySearchString = async (searchString: string) => {
-        return await getByFetch(`Location/${searchString}`)
+    const getLocationBySearchString = async (searchString: string): Promise<Location[]> => {
+        return await getByFetch(`Location/BySearchString/${searchString}`)
     }
 
     const addLocation = async (location: AddLocation): Promise<Response> => {
@@ -317,7 +317,9 @@ const apiService = () => {
 
     // Vendor
     const getVendor = async (): Promise<Vendor[]> => {
+
         const data =  await getByFetch<Vendor[]>('Vendor')
+
 
         return data
     }
@@ -326,16 +328,15 @@ const apiService = () => {
         return await getByFetch(`Vendor/${id}`)
     }
 
-    const getVendorBySearchString = async (searchString: string) => {
-        return await getByFetch(`Vendor/${searchString}`)
+    const getVendorBySearchString = async (searchString: string): Promise<Vendor[]> => {
+        return await getByFetch(`Vendor/BySearchString/${searchString}`)
     }
 
     const addVendor = async (vendor: Omit<Vendor, 'id'>): Promise<Response> => {
         return await postByFetch('Vendor', vendor)
     }
 
-
-    const updateVendorById = async (id: string, vendor: Vendor): Promise<Response> => {
+    const updateVendorById = async (id: string, vendor: UpdateVendor): Promise<Response> => {
         return await putByFetch(`Vendor/${id}`, vendor)
     }
 
@@ -344,34 +345,33 @@ const apiService = () => {
     }
 
     // Category
+
     
     const getCategory = async (): Promise<Category[]> => {
         const data: Category[] =  await getByFetch('Category')
+
         return data
     }
 
-    const getCategoryById = async (id: string) => {
+    const getCategoryById = async (id: string): Promise<Category> => {
         return await getByFetch(`Category/${id}`)
     }
 
-    const getCategoryBySearchString = async (searchString: string) => {
-        return await getByFetch(`Category/${searchString}`)
+    const getCategoryBySearchString = async (searchString: string): Promise<Category[]> => {
+        return await getByFetch(`Category/BySearchString/${searchString}`)
     }
 
     const addCategory = async (category: AddCategory): Promise<Response> => {
         return await postByFetch('Category', category)
     }
 
-    const updateCategoryById = async (id: string, category: UpdateCateory): Promise<Response> => {
+    const updateCategoryById = async (id: string, category: UpdateCategory): Promise<Response> => {
         return await putByFetch(`Category/${id}`, category)
     }
 
     const deleteCategory = async (id: string) => {
         return await deleteByFetch(`Category/${id}`)
     }
-
-
-
 
     return {
         getAllUsers,

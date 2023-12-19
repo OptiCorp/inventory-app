@@ -18,9 +18,7 @@ const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
                     <img src={'/search.png'} style={{ paddingLeft: '1rem' }} />
                 </Icon>
                 <StyledInput
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        setSearchTerm(e.target.value)
-                    }
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                     type="text"
                     value={searchTerm}
                     placeholder={placeholder}

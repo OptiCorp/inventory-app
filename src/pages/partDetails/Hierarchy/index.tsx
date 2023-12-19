@@ -13,9 +13,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                 <PartList>
                     <ListItem
                         onClick={() => {
-                            navigate(
-                                `/${item?.parent?.id}/${item?.parent?.wpId} `
-                            )
+                            navigate(`/${item?.parent?.id}/${item?.parent?.wpId} `)
                         }}
                     >
                         {' '}

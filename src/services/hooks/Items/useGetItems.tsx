@@ -5,10 +5,7 @@ export const useGetItems = (searchTerm: string, pageNumber: number) => {
     return useQuery({
         queryKey: ['items', searchTerm, pageNumber],
         queryFn: () =>
-            apiService().getItemsBySearchString(
-                encodeURIComponent(searchTerm),
-                pageNumber
-            ),
+            apiService().getItemsBySearchString(encodeURIComponent(searchTerm), pageNumber),
         enabled: !!searchTerm,
     })
 }
