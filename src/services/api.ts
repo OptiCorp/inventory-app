@@ -271,6 +271,11 @@ const apiService = () => {
         return await putByFetch(`Item/${id}?updatedById=${updatedById}`, item)
     }
 
+    const isWpIdUnique = async (id: string) => {
+        if (!id) return
+        return await getByFetch(`Item/IsWpIdUnique/${id}`)
+    }
+
     const addList = async (list: AddList): Promise<Response> => {
         return await postByFetch(`List`, list)
     }
@@ -414,6 +419,7 @@ const apiService = () => {
         addCategory,
         updateCategoryById,
         deleteCategory,
+        isWpIdUnique,
     }
 }
 
