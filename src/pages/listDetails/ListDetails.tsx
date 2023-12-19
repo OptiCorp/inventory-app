@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
-import { Button } from '../../components/Button/SubmitButton.tsx'
 import SearchBar from '../../components/searchBar/SearchBar'
 import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact.tsx'
 import SearchResultCard from '../../components/searchResultCard/SearchResultCard.tsx'
@@ -10,11 +9,10 @@ import { useWindowDimensions } from '../../hooks'
 import { Item } from '../../services/apiTypes.ts'
 import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
-import { COLORS } from '../../style/GlobalStyles.ts'
 import { Container, GlobalSpinnerContainer, Spinner } from '../search/styles.ts'
-import { SideList } from './SideList.tsx'
+import { SideList } from './Sidelist/SideList.tsx'
+import { DeleteIcon, EditIcon, InfoIcon } from './Sidelist/styles.ts'
 import {
-    ButtonWrap,
     FlexWrapper,
     Header,
     ListContainer,
@@ -120,6 +118,9 @@ const ListDetails = () => {
                                         'dd-MM-yyyy'
                                     ).toString()}
                                 </ListTitle>
+                                <InfoIcon />
+                                <EditIcon />
+                                <DeleteIcon />
                             </Header>{' '}
                             {list.items ? (
                                 <ListContainer>
@@ -128,20 +129,6 @@ const ListDetails = () => {
                                     ))}
                                 </ListContainer>
                             ) : null}
-                            <ButtonWrap>
-                                <Button
-                                    backgroundColor={`${COLORS.secondary}`}
-                                    color={`${COLORS.primary}`}
-                                >
-                                    Save list
-                                </Button>
-                                <Button
-                                    backgroundColor={`${COLORS.secondary}`}
-                                    color={`${COLORS.primary}`}
-                                >
-                                    Export
-                                </Button>
-                            </ButtonWrap>
                         </FlexWrapper>
                     </>
                 ) : null}

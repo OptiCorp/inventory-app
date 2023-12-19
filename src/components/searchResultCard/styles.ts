@@ -63,6 +63,33 @@ export const SearchCard = styled.div`
     background-color: ${COLORS.secondary};
 `
 
+export const SearchCardSkeleton = styled.div`
+    position: relative;
+    line-height: 25px;
+    border-radius: 5px;
+    padding: 1rem;
+  display: flex;
+justify-content: center;
+    background-color: ${COLORS.secondary};
+`
+
+export const FlexContainer = styled.div`
+display: flex;
+`
+
+export const CompactCardSkeleton = styled.div`
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    cursor: pointer;
+    border-right: 1px solid rgba(208, 208, 208);
+    background-color: ${COLORS.secondary};
+    padding: 1rem;
+`
+
+
 export const CompactCard = styled.div`
     border-radius: 5px;
     display: flex;

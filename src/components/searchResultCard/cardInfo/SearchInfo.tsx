@@ -1,13 +1,13 @@
-import { Dialog, DialogActions, DialogTitle } from '@mui/material'
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { CancelButton, SubmitButton } from '../../../pages/listDetails/styles'
+
 import { Item, MutateItemList } from '../../../services/apiTypes'
 
 import { useAddItemsToList } from '../../../services/hooks/Items/useAddItemsToList'
 import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList'
 
+import CustomDialog from '../../Dialog/Index'
 import { StyledAddIcon, StyledRemoveIcon } from '../../listCard/styles'
 import {
     DescriptionParagraph,
@@ -113,24 +113,18 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     ).toString()}{' '}
                 </InfoP>
             </ThirdInfoBox>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Remove item from list?</DialogTitle>
-                <DialogActions>
-                    <CancelButton onClick={() => handleClose}>
-                        Cancel
-                    </CancelButton>
-                    <SubmitButton
-                        onClick={(e) =>
-                            handleDelete(e, {
-                                itemId: part.id,
-                                listId: listId!,
-                            })
-                        }
-                    >
-                        Confirm
-                    </SubmitButton>
-                </DialogActions>
-            </Dialog>
+            <CustomDialog
+                title="Remove item from list?"
+                open={open}
+                onClose={handleClose}
+                CancelButtonOnClick={() => handleClose}
+                SubmitButtonOnClick={(e) =>
+                    handleDelete(e, {
+                        itemId: part.id,
+                        listId: listId!,
+                    })
+                }
+            />
         </>
     )
 }

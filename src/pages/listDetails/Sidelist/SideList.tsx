@@ -1,15 +1,12 @@
-import { Dialog, DialogActions, DialogTitle } from '@mui/material'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Item, MutateItemList } from '../../services/apiTypes.ts'
-import { useRemoveItemsFromList } from '../../services/hooks/Items/useRemoveItemsFromList.tsx'
-import {
-    CancelButton,
-    KeyWord,
-    RemoveIcon,
-    SubmitButton,
-    Wrapper,
-} from './styles.ts'
+import { Button } from '../../../components/Button/SubmitButton.tsx'
+import { Item, MutateItemList } from '../../../services/apiTypes.ts'
+import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList.tsx'
+import { COLORS } from '../../../style/GlobalStyles.ts'
+
+import CustomDialog from '../../../components/Dialog/Index.tsx'
+import { ButtonWrap, KeyWord, RemoveIcon, Wrapper } from './styles.ts'
 type Props = {
     part: Item
     icon?: string
@@ -58,25 +55,34 @@ export const SideList = ({ part, icon }: Props) => {
 
                     <RemoveIcon onClick={handleClickOpen} />
                 </Wrapper>
-            </>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Remove item from list?</DialogTitle>
-                <DialogActions>
-                    <CancelButton onClick={() => handleClose}>
-                        Cancel
-                    </CancelButton>
-                    <SubmitButton
-                        onClick={(e) =>
-                            handleDelete(e, {
-                                itemId: part.id,
-                                listId: listId!,
-                            })
-                        }
+                <ButtonWrap>
+                    <Button
+                        backgroundColor={`${COLORS.secondary}`}
+                        color={`${COLORS.primary}`}
                     >
-                        Confirm
-                    </SubmitButton>
-                </DialogActions>
-            </Dialog>
+                        Save list
+                    </Button>
+                    <Button
+                        backgroundColor={`${COLORS.secondary}`}
+                        color={`${COLORS.primary}`}
+                    >
+                        Export
+                    </Button>
+                </ButtonWrap>
+            </>
+
+            <CustomDialog
+                title="Remove item from list?"
+                open={open}
+                onClose={handleClose}
+                CancelButtonOnClick={() => handleClose}
+                SubmitButtonOnClick={(e) =>
+                    handleDelete(e, {
+                        itemId: part.id,
+                        listId: listId!,
+                    })
+                }
+            />
         </>
     )
 }
