@@ -7,7 +7,7 @@ export const Comment = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <div>
+        <div style={{ marginBottom: '15px' }}>
             <InputWrap>
                 <label htmlFor="Comment">Comment</label>{' '}
             </InputWrap>

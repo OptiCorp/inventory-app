@@ -1,10 +1,12 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
-import { ErrorP, InputWrap, StyledInput } from './styles'
-import { useState } from 'react'
+import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles'
+import { useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 import { useIsWpIdUnique } from '../../../services/hooks/Items/useIsWpIdUnique.tsx'
 import { useDebounce } from 'usehooks-ts'
+import { ToolTip } from '../../ToolTip'
+import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
 
 export const WpId = () => {
     const {
@@ -17,10 +19,19 @@ export const WpId = () => {
     const debouncedWpId = useDebounce(wpId, 500)
     const { data: isUnique, isLoading } = useIsWpIdUnique(debouncedWpId)
 
+    useEffect(() => {
+        setValue('wpId', wpId)
+    }, [setValue, wpId])
+
     return (
         <>
             <InputWrap>
-                <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
+                <IconContainer>
+                    <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
+                    <ToolTip content="Specify a unique WellPartner ID">
+                        <FaRegQuestionCircleIcon />
+                    </ToolTip>
+                </IconContainer>
                 <ErrorMessage name="wpId" render={({ message }) => <ErrorP>{message}</ErrorP>} />
             </InputWrap>
             <StyledInput
@@ -35,10 +46,12 @@ export const WpId = () => {
             {wpId && (
                 <>
                     {isUnique === true && (
-                        <p style={{ color: 'green' }}>WellPartner ID is unique!</p>
+                        <p style={{ color: 'green', marginTop: '0px' }}>
+                            WellPartner ID is unique!
+                        </p>
                     )}
                     {isUnique === false && (
-                        <p style={{ color: 'red' }}>
+                        <p style={{ color: 'red', marginTop: '0px' }}>
                             WellPartner ID is not unique. Please choose a different one.
                         </p>
                     )}

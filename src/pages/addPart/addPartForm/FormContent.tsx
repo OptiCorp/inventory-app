@@ -1,12 +1,14 @@
 import { useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Comment } from '../../../components/AddPartFormFields/Comment/Comment'
+import { Comment } from '../../../components/AddPartFormFields/Comment'
 import { Description } from '../../../components/AddPartFormFields/Description'
 import { ProductNumber } from '../../../components/AddPartFormFields/ProductNumber'
 import { SerialNumber } from '../../../components/AddPartFormFields/SerialNumber'
-import { Types } from '../../../components/AddPartFormFields/Types/Types'
-import { Vendor } from '../../../components/AddPartFormFields/Vendor/Vendor'
+import { Type } from '../../../components/AddPartFormFields/Type'
+import { Vendor } from '../../../components/AddPartFormFields/Vendor'
 import { WpId } from '../../../components/AddPartFormFields/WpId'
+import { Category } from '../../../components/AddPartFormFields/Category'
+import { Location } from '../../../components/AddPartFormFields/Location'
 import UmAppContext from '../../../contexts/UmAppContext'
 
 export const FormContent = () => {
@@ -18,11 +20,13 @@ export const FormContent = () => {
 
     return (
         <>
-            <Types />
+            <Type />
+            <Category />
             <WpId />
             <SerialNumber />
             <ProductNumber />
             <Vendor />
+            <Location />
             <Description />
             <Comment />
             <input
