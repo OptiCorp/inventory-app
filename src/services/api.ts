@@ -1,10 +1,24 @@
 import { API_URL } from '../config'
 import { pca } from '../msalConfig'
 
-
-
-import { AddCategory, AddItem, AddList, AddLocation, Category, Item, List, Location, UpdateCategory, UpdateItem, UpdateLocation, UpdateVendor, User, UserRole, Vendor } from './apiTypes'
-
+import {
+    AddCategory,
+    AddItem,
+    AddList,
+    AddLocation,
+    AddVendor,
+    Category,
+    Item,
+    List,
+    Location,
+    UpdateCategory,
+    UpdateItem,
+    UpdateLocation,
+    UpdateVendor,
+    User,
+    UserRole,
+    Vendor,
+} from './apiTypes'
 
 
 const request = {
@@ -337,7 +351,7 @@ const apiService = () => {
         return await getByFetch(`Vendor/BySearchString/${searchString}`)
     }
 
-    const addVendor = async (vendor: Omit<Vendor, 'id'>): Promise<Response> => {
+    const addVendor = async (vendor: AddVendor): Promise<Response> => {
         return await postByFetch('Vendor', vendor)
     }
 

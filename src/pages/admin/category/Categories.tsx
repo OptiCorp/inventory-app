@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import SearchBar from '../../components/searchBar/SearchBar'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from './styles'
+import SearchBar from '../../../components/searchBar/SearchBar'
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 import { useDebounce } from 'usehooks-ts'
-import { useGetCategoriesInfinite } from '../../services/hooks/Category/useGetCategoriesInfinite'
-import AdminSearchCard, { SearchType } from '../../components/admin/AdminSearchCard'
-import { Button } from '../../components/Button/SubmitButton'
+import { useGetCategoriesInfinite } from '../../../services/hooks/Category/useGetCategoriesInfinite'
+import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
+import { Button } from '../../../components/Button/SubmitButton'
+import { useNavigate } from 'react-router-dom'
 
 const Categories = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { data, isLoading, fetchNextPage } = useGetCategoriesInfinite(debouncedSearchTerm)
+    const navigate = useNavigate()
 
     return (
         <AdminContainer>
@@ -35,7 +37,12 @@ const Categories = () => {
                 )}
             </SearchResultContainer>
             <ButtonContainer>
-                <Button children={'Add new category'} backgroundColor={'black'} color={'white'} />{' '}
+                <Button
+                    onClick={() => navigate('/admin/add-category')}
+                    children={'Add new category'}
+                    backgroundColor={'black'}
+                    color={'white'}
+                />{' '}
             </ButtonContainer>
         </AdminContainer>
     )

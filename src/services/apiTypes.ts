@@ -126,6 +126,11 @@ export type Vendor = {
     addedById: string
 }
 
+export type AddVendor = {
+    name: string
+    addedById: string
+}
+
 export type UpdateVendor = {
     id: string
     name: string

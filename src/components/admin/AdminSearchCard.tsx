@@ -85,7 +85,6 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
                 break
             case SearchType.Location:
                 deleteLocation()
-                break
         }
     }
 
