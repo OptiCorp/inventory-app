@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { PartInfoSchema } from '../../useUpdatePartForm'
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { useUpdateItem } from '../../../../services/hooks/Items/useUpdateItem'
+import { SetState } from '../types'
 
 const useFormBlurInputHandler = (obj: Item) => {
     const formContext = useFormContext<PartInfoSchema>()
@@ -11,7 +12,11 @@ const useFormBlurInputHandler = (obj: Item) => {
     const { mutate } = useUpdateItem(obj.id, currentUser!.id)
 
     const handleBlurInputField = useCallback(
-        <T extends keyof UpdateItem>(field: T, updatedObject: Item) => {
+        <T extends keyof UpdateItem>(
+            field: T,
+            updatedObject: Item,
+            setSnackbarText: SetState<string>
+        ) => {
             formContext.trigger()
             const fieldValue = updatedObject[field]
             if (!fieldValue || fieldValue === obj[field]) return
@@ -20,6 +25,7 @@ const useFormBlurInputHandler = (obj: Item) => {
                 ...obj,
                 [field]: fieldValue,
             })
+            setSnackbarText(`${field.toUpperCase()} was changed to ${fieldValue}`)
         },
         [formContext, mutate, obj]
     )
