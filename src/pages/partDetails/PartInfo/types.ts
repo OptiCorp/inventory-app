@@ -4,6 +4,7 @@ import { Category, Location, Vendor } from "../../../services/apiTypes"
 
 
 
+
 export type Types = 'Unit' | 'Assembly' | 'Sub-Assembly' | 'Part'
 
 export type SetState<T> = Dispatch<SetStateAction<T>>
@@ -35,7 +36,7 @@ export type SelectProps = {
     defaultValue: string | null
     options: Vendor[] | Category[] | Location[]
     onBlur: () => void
-    handleSelectChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    handleSelectChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export type ItemFields =

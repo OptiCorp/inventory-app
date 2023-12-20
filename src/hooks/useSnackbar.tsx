@@ -1,9 +1,16 @@
-import { Alert, Snackbar } from '@mui/material'
+import { Alert, AlertColor, Snackbar, SnackbarOrigin } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 const useSnackBar = () => {
     const [showSnackbar, setShowSnackBar] = useState(false)
     const [snackbarText, setSnackbarText] = useState('')
+    const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('success')
+    const [snackbarPosition, setSnackbarPosition] = useState<SnackbarOrigin>({
+        vertical: 'bottom',
+        horizontal: 'left',
+    })
+
+    const { horizontal, vertical } = snackbarPosition
 
     const snackbar = (
         <Snackbar
@@ -13,8 +20,9 @@ const useSnackBar = () => {
                 setSnackbarText('')
             }}
             open={showSnackbar}
+            anchorOrigin={{ vertical, horizontal }}
         >
-            <Alert>{snackbarText}</Alert>
+            <Alert severity={snackbarSeverity}>{snackbarText}</Alert>
         </Snackbar>
     )
     useEffect(() => {
@@ -25,6 +33,8 @@ const useSnackBar = () => {
     return {
         setSnackbarText,
         snackbar,
+        setSnackbarSeverity,
+        setSnackbarPosition,
     }
 }
 
