@@ -1,6 +1,13 @@
 import { FormProvider } from 'react-hook-form'
 import { useAddLocationForm } from '../hooks/useAddLocationForm'
-import { AdminInput, ErrorP, FormContainer, InputWrap, StyledForm } from '../styles'
+import {
+    AdminInput,
+    ButtonContainer,
+    ErrorP,
+    FormContainer,
+    InputWrap,
+    StyledForm,
+} from '../styles'
 import { ErrorMessage } from '@hookform/error-message'
 import { Button } from '../../../components/Button/SubmitButton'
 import { COLORS } from '../../../style/GlobalStyles'
@@ -18,14 +25,16 @@ const AddLocation = () => {
                             name="name"
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
-                        <Button
-                            id="addLocation"
-                            type="submit"
-                            backgroundColor={COLORS.primary}
-                            color={COLORS.secondary}
-                        >
-                            Add location
-                        </Button>
+                        <ButtonContainer>
+                            <Button
+                                id="addLocation"
+                                type="submit"
+                                backgroundColor={COLORS.primary}
+                                color={COLORS.secondary}
+                            >
+                                Add location
+                            </Button>
+                        </ButtonContainer>
                     </InputWrap>
                 </StyledForm>
             </FormContainer>
