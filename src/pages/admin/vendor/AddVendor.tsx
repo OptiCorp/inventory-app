@@ -1,5 +1,12 @@
 import { FormProvider } from 'react-hook-form'
-import { AdminInput, ErrorP, FormContainer, InputWrap, StyledForm } from '../styles'
+import {
+    AdminInput,
+    ButtonContainer,
+    ErrorP,
+    FormContainer,
+    InputWrap,
+    StyledForm,
+} from '../styles'
 import { ErrorMessage } from '@hookform/error-message'
 import { Button } from '../../../components/Button/SubmitButton'
 import { COLORS } from '../../../style/GlobalStyles'
@@ -18,14 +25,16 @@ const AddVendor = () => {
                             name="name"
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
-                        <Button
-                            id="addVendor"
-                            type="submit"
-                            backgroundColor={COLORS.primary}
-                            color={COLORS.secondary}
-                        >
-                            Add vendor
-                        </Button>
+                        <ButtonContainer>
+                            <Button
+                                id="addVendor"
+                                type="submit"
+                                backgroundColor={COLORS.primary}
+                                color={COLORS.secondary}
+                            >
+                                Add vendor
+                            </Button>
+                        </ButtonContainer>
                     </InputWrap>
                 </StyledForm>
             </FormContainer>

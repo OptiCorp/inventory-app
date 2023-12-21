@@ -11,12 +11,12 @@ export const SearchResultContainer = styled.div`
     flex-direction: column;
 `
 
-export const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: end;
-    max-width: 700px;
-    margin: 16px;
-`
+// export const ButtonContainer = styled.div`
+//     display: flex;
+//     justify-content: end;
+//     max-width: 700px;
+//     margin: 16px;
+// `
 
 export const AdminInput = styled.input`
     width: 100%;
@@ -52,7 +52,7 @@ export const StyledForm = styled.form`
     input,
     select {
         max-width: 500px;
-        width: 70%;
+
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
@@ -60,4 +60,10 @@ export const StyledForm = styled.form`
         border-radius: 4px;
         box-sizing: border-box;
     }
+`
+
+export const ButtonContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: end;
 `
