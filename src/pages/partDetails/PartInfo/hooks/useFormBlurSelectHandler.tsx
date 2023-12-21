@@ -5,6 +5,7 @@ import { PartInfoSchema } from '../../useUpdatePartForm'
 import { useUpdateItem } from '../../../../services/hooks/Items/useUpdateItem'
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { SetState } from '../types'
+import { AlertColor } from '@mui/material'
 
 type FieldId = 'type' | 'categoryId' | 'locationId' | 'vendorId'
 
@@ -16,25 +17,45 @@ export const useFormBlurSelectHandler = (
     const { currentUser } = useContext(UmAppContext)
     const { mutate } = useUpdateItem(obj.id, currentUser!.id)
     const handleBlurSelectField = useCallback(
-        (selected: string, field: FieldId, setSnackbarText: SetState<string>): void => {
+        (
+            selected: string,
+            field: FieldId,
+            setSnackbarText: SetState<string>,
+            setSnackbarSeverity: SetState<AlertColor>
+        ): void => {
             const fieldValue = obj[field]
 
             if (selected === fieldValue || !selected) return
             formContext.trigger().then(() => {
-                mutate({
-                    ...obj,
-                    [field]: selected,
-                })
-                if (options) {
-                    const selectedOption = options!.find((option) => option.id === selected)
-                    setSnackbarText(
-                        `${field.replace('Id', '').toUpperCase()} was changed to ${
-                            selectedOption!.name
-                        }`
-                    )
-                } else {
-                    setSnackbarText(`${field.toUpperCase()} was changed to ${selected}`)
-                }
+                mutate(
+                    {
+                        ...obj,
+                        [field]: selected,
+                    },
+                    {
+                        onSuccess: (data) => {
+                            if (data.status >= 400) {
+                                setSnackbarSeverity('error')
+                                setSnackbarText(`${data.statusText}, please try again.`)
+                            } else {
+                                if (options) {
+                                    const selectedOption = options.find(
+                                        (option) => option.id === selected
+                                    )
+                                    setSnackbarText(
+                                        `${field.replace('Id', '').toUpperCase()} was changed to ${
+                                            selectedOption!.name
+                                        }`
+                                    )
+                                } else {
+                                    setSnackbarText(
+                                        `${field.toUpperCase()} was changed to ${selected}`
+                                    )
+                                }
+                            }
+                        },
+                    }
+                )
             })
         },
         [formContext, mutate, obj, options]
