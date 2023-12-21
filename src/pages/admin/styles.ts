@@ -19,14 +19,17 @@ export const SearchResultContainer = styled.div`
 // `
 
 export const AdminInput = styled.input`
-    width: 100%;
-    height: 40px;
-    flex-shrink: 0;
-    border-bottom: 1px solid #000;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background: #f2f2f2;
+    &&& {
+        width: 100%;
+        height: 40px;
+        flex-shrink: 0;
+        border-radius: 0;
+        border-bottom: 1px solid #000;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        background: #f2f2f2;
+    }
 `
 
 export const ErrorP = styled.span`
@@ -43,7 +46,7 @@ export const InputWrap = styled.div`
 `
 
 export const FormContainer = styled.div`
-    max-width: 1000px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
 `
