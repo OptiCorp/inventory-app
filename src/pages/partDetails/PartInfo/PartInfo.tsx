@@ -7,11 +7,13 @@ import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
 import { SelectField } from './SelectField'
 import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
-import useFormBlurSelectHandler from './hooks/useFormBlurSelectHandler'
-import useFormBlurInputHandler from './hooks/useFormBlurInputHandler'
-import useFormSelectChangeHandler from './hooks/useFormSelectChangeHandler'
-import useFormInputChangeHandler from './hooks/useFormInputChangeHandler'
-import useSnackBar from '../../../hooks/useSnackbar'
+import {
+    useFormBlurInputHandler,
+    useFormInputChangeHandler,
+    useFormSelectChangeHandler,
+    useFormBlurSelectHandler,
+} from './hooks'
+import { useSnackBar } from '../../../hooks'
 
 type Props = {
     item: Item

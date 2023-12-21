@@ -8,7 +8,10 @@ import { SetState } from '../types'
 
 type FieldId = 'type' | 'categoryId' | 'locationId' | 'vendorId'
 
-const useFormBlurSelectHandler = (obj: Item, options?: Category[] | Location[] | Vendor[]) => {
+export const useFormBlurSelectHandler = (
+    obj: Item,
+    options?: Category[] | Location[] | Vendor[]
+) => {
     const formContext = useFormContext<PartInfoSchema>()
     const { currentUser } = useContext(UmAppContext)
     const { mutate } = useUpdateItem(obj.id, currentUser!.id)
@@ -39,5 +42,3 @@ const useFormBlurSelectHandler = (obj: Item, options?: Category[] | Location[] |
 
     return handleBlurSelectField
 }
-
-export default useFormBlurSelectHandler

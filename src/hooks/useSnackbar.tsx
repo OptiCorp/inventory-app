@@ -1,7 +1,7 @@
 import { Alert, AlertColor, Snackbar, SnackbarOrigin } from '@mui/material'
 import { useEffect, useState } from 'react'
 
-const useSnackBar = () => {
+export const useSnackBar = () => {
     const [showSnackbar, setShowSnackBar] = useState(false)
     const [snackbarText, setSnackbarText] = useState('')
     const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('success')
@@ -16,8 +16,10 @@ const useSnackBar = () => {
         <Snackbar
             autoHideDuration={3000}
             onClose={() => {
-                setShowSnackBar(false)
-                setSnackbarText('')
+                setTimeout(() => {
+                    setShowSnackBar(false)
+                    setSnackbarText('')
+                }, 2000)
             }}
             open={showSnackbar}
             anchorOrigin={{ vertical, horizontal }}
@@ -37,5 +39,3 @@ const useSnackBar = () => {
         setSnackbarPosition,
     }
 }
-
-export default useSnackBar
