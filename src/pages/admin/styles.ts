@@ -46,7 +46,7 @@ export const InputWrap = styled.div`
 `
 
 export const FormContainer = styled.div`
-    max-width: 100%;
+    padding: 16px;
     display: flex;
     flex-direction: column;
 `
@@ -54,8 +54,6 @@ export const FormContainer = styled.div`
 export const StyledForm = styled.form`
     input,
     select {
-        max-width: 500px;
-
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
@@ -66,7 +64,14 @@ export const StyledForm = styled.form`
 `
 
 export const ButtonContainer = styled.div`
-    width: 100%;
     display: flex;
     justify-content: end;
+    padding: 8px 16px;
+`
+
+export const SubmitButtonContainer = styled.div`
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin: 8px 0;
 `

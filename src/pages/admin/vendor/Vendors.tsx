@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 import { useDebounce } from 'usehooks-ts'
 import { useGetVendorsInfinite } from '../../../services/hooks/Vendor/useGetVendorInfinite'
@@ -7,13 +7,24 @@ import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSear
 import { Button } from '../../../components/Button/SubmitButton'
 import { useNavigate } from 'react-router-dom'
 import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import { Vendor } from '../../../services/apiTypes'
 
 const Vendors = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data, isLoading, fetchNextPage } = useGetVendorsInfinite(debouncedSearchTerm)
     const { data: initialData } = useGetVendors()
+    const [filteredData, setFilteredData] = useState<Vendor[]>([])
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (initialData) {
+            setFilteredData(
+                initialData.filter((vendor) =>
+                    vendor.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+                )
+            )
+        }
+    }, [initialData, debouncedSearchTerm])
 
     return (
         <AdminContainer>
@@ -22,33 +33,13 @@ const Vendors = () => {
                 setSearchTerm={setSearchTerm}
                 placeholder="Search for vendor"
             />
-            {data ? (
-                <SearchResultContainer>
-                    {data?.pages.map((page, i) =>
-                        page.map((vendor, index) => (
-                            <div
-                                id={
-                                    i === data.pages.length - 1 && index === page.length - 1
-                                        ? 'lastItem'
-                                        : ''
-                                }
-                                key={vendor.id}
-                            >
-                                <AdminSearchCard searchType={SearchType.Vendor} data={vendor} />
-                            </div>
-                        ))
-                    )}
-                </SearchResultContainer>
-            ) : (
-                <SearchResultContainer>
-                    {initialData?.map((vendor, i) => (
-                        <div id={i === initialData.length - 1 ? 'lastItem' : ''} key={vendor.id}>
-                            <AdminSearchCard searchType={SearchType.Vendor} data={vendor} />
-                        </div>
-                    ))}
-                </SearchResultContainer>
-            )}
-
+            <SearchResultContainer>
+                {filteredData?.map((vendor, i) => (
+                    <div id={i === filteredData.length - 1 ? 'lastItem' : ''} key={vendor.id}>
+                        <AdminSearchCard searchType={SearchType.Vendor} data={vendor} />
+                    </div>
+                ))}
+            </SearchResultContainer>
             <ButtonContainer>
                 <Button
                     onClick={() => navigate('/admin/add-vendor')}
