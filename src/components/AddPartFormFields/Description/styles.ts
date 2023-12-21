@@ -11,8 +11,8 @@ export const InputWrap = styled.div`
 `
 
 export const ErrorP = styled.span`
-    color: ${COLORS.dangerRed};
-
+    color: red;
+    width: 70%;
     font-weight: 600;
 `
 export const StyledInput = styled.input``

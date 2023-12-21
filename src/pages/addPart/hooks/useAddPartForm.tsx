@@ -9,11 +9,14 @@ import { PartSchema, partSchema } from './partValidator'
 
 const defaultValues: PartSchema = {
     wpId: '',
-    description: '',
+    type: '',
+    categoryId: '',
     serialNumber: '',
     productNumber: '',
-    vendor: '',
-    type: 'unit',
+    vendorId: '',
+    locationId: '',
+    description: '',
+    comment: '',
     addedById: '',
 }
 
