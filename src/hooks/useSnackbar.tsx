@@ -16,10 +16,9 @@ export const useSnackBar = () => {
         <Snackbar
             autoHideDuration={3000}
             onClose={() => {
-                setTimeout(() => {
-                    setShowSnackBar(false)
-                    setSnackbarText('')
-                }, 2000)
+                setShowSnackBar(false)
+                setSnackbarText('')
+                setSnackbarSeverity('success')
             }}
             open={showSnackbar}
             anchorOrigin={{ vertical, horizontal }}
