@@ -6,7 +6,7 @@ import UmAppContext from '../../../../contexts/UmAppContext'
 import { useUpdateItem } from '../../../../services/hooks/Items/useUpdateItem'
 import { SetState } from '../types'
 
-const useFormBlurInputHandler = (obj: Item) => {
+export const useFormBlurInputHandler = (obj: Item) => {
     const formContext = useFormContext<PartInfoSchema>()
     const { currentUser } = useContext(UmAppContext)
     const { mutate } = useUpdateItem(obj.id, currentUser!.id)
@@ -31,5 +31,3 @@ const useFormBlurInputHandler = (obj: Item) => {
     )
     return handleBlurInputField
 }
-
-export default useFormBlurInputHandler
