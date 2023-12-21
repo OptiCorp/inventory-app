@@ -40,9 +40,12 @@ const TopBar = () => {
     return (
         <div>
             <TopBarContainer>
-                <img alt="logo" src={'/WP 1.svg'} onClick={() => navigate('search')} />
+                <img alt="logo" src={'/WP 1.svg'} onClick={() => navigate('search')} width="40" />
                 <HeaderWrap>
-                    <Button style={{ color: 'black' }} onClick={() => setHamburgerIsOpen(true)}>
+                    <Button
+                        style={{ color: 'black', padding: 0, minWidth: 0 }}
+                        onClick={() => setHamburgerIsOpen(true)}
+                    >
                         <MenuIcon sx={{ fontSize: 40 }} />
                     </Button>
 
