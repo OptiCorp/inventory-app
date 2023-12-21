@@ -9,7 +9,8 @@ export const InputWrap = styled.div`
 export const StyledTextArea = styled.textarea`
     margin: 0;
     padding: 1rem;
-    width: 60%;
+    width: 90%;
+    max-width: 475px;
     display: block;
     background-color: #f2f2f2;
     border: none;

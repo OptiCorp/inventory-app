@@ -31,7 +31,7 @@ export const AddPartFormm = () => {
                         backgroundColor={`${COLORS.primary}`}
                         color={`${COLORS.secondary}`}
                     >
-                        Finish
+                        FINISH
                     </Button>
                 </StyledForm>
             </FormContainer>

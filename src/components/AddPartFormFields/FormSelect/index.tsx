@@ -11,7 +11,7 @@ export const FormSelect = ({ options, setState, state }: Props) => {
     const customStyles = {
         control: (provided: any) => ({
             ...provided,
-            width: '70%', // Set the desired width here
+            width: '95%', // Set the desired width here
             maxWidth: '500px',
             height: '41px',
             backgroundColor: '#F2F2F2',
