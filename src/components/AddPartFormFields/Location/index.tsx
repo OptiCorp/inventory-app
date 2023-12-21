@@ -34,7 +34,7 @@ export const Location = () => {
                     </ToolTip>
                 </IconContainer>
                 <ErrorMessage
-                    name="location"
+                    name="locationId"
                     render={({ message }) => <ErrorP>{message}</ErrorP>}
                 />
             </InputWrap>

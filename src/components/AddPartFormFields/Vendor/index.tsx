@@ -33,7 +33,10 @@ export const Vendor = () => {
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
                 </IconContainer>
-                <ErrorMessage name="vendor" render={({ message }) => <ErrorP>{message}</ErrorP>} />
+                <ErrorMessage
+                    name="vendorId"
+                    render={({ message }) => <ErrorP>{message}</ErrorP>}
+                />
             </InputWrap>
             <FormSelect
                 options={vendorOptions}

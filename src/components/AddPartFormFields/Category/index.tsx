@@ -34,7 +34,7 @@ export const Category = () => {
                     </ToolTip>
                 </IconContainer>
                 <ErrorMessage
-                    name="category"
+                    name="categoryId"
                     render={({ message }) => <ErrorP>{message}</ErrorP>}
                 />
             </InputWrap>
