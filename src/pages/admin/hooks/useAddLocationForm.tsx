@@ -4,6 +4,7 @@ import UmAppContext from '../../../contexts/UmAppContext'
 import { useAddLocation } from '../../../services/hooks/Locations/useAddLocation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
 
 const defaultValues: LocationSchema = {
     name: '',
@@ -13,6 +14,7 @@ const defaultValues: LocationSchema = {
 export const useAddLocationForm = () => {
     const { currentUser } = useContext(UmAppContext)
     const { mutate } = useAddLocation()
+    const navigate = useNavigate()
 
     const methods = useForm<LocationSchema>({
         resolver: zodResolver(locationSchema),
@@ -30,7 +32,10 @@ export const useAddLocationForm = () => {
         register,
     } = methods
 
-    const onSubmit = handleSubmit((data) => mutate(data))
+    const onSubmit = handleSubmit((data) => {
+        mutate(data)
+        navigate('/admin/locations')
+    })
 
     return {
         methods,

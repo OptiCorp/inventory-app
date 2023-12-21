@@ -4,6 +4,7 @@ import UmAppContext from '../../../contexts/UmAppContext'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAddCategory } from '../../../services/hooks/Category/useAddCategory'
+import { useNavigate } from 'react-router-dom'
 
 const defaultValues: CategorySchema = {
     name: '',
@@ -11,6 +12,7 @@ const defaultValues: CategorySchema = {
 }
 
 export const useAddCategoryForm = () => {
+    const navigate = useNavigate()
     const { currentUser } = useContext(UmAppContext)
     const { mutate } = useAddCategory()
 
@@ -30,7 +32,10 @@ export const useAddCategoryForm = () => {
         register,
     } = methods
 
-    const onSubmit = handleSubmit((data) => mutate(data))
+    const onSubmit = handleSubmit((data) => {
+        mutate(data)
+        navigate('/admin/categories')
+    })
 
     return {
         methods,
