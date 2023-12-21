@@ -41,7 +41,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
     const blurInputField = useFormBlurInputHandler(internalItem)
     const selectChange = useFormSelectChangeHandler()
     const inputChange = useFormInputChangeHandler()
-    const { snackbar, setSnackbarText } = useSnackBar()
+    const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
 
     if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
         return <p>Loading.. </p>
@@ -53,9 +53,11 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <TypeField
                     label="type"
                     defaultValue={selectedType || item.type}
-                    onBlur={() => blurSelectField(selectedType!, 'type', setSnackbarText)}
+                    onBlur={() =>
+                        blurSelectField(selectedType!, 'type', setSnackbarText, setSnackbarSeverity)
+                    }
                     handleSelectChange={(e) => selectChange(e, setSelectedType)}
-                    options={['Unit', 'Assembly', 'Sub-Assembly', 'Part']}
+                    options={['Unit', 'Assembly', 'Subassembly', 'Part']}
                     selectedType={selectedType}
                 />
 
@@ -63,7 +65,12 @@ const PartInfo = ({ item, isLoading }: Props) => {
                     label="category"
                     defaultValue={selectedCategoryId || item.category?.name}
                     onBlur={() =>
-                        blurCategorySelectField(selectedCategoryId, 'categoryId', setSnackbarText)
+                        blurCategorySelectField(
+                            selectedCategoryId,
+                            'categoryId',
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
                     }
                     handleSelectChange={(e) => selectChange(e, setSelectedCategoryId)}
                     options={categories}
@@ -74,7 +81,12 @@ const PartInfo = ({ item, isLoading }: Props) => {
                     label="location"
                     defaultValue={selectedLocationId || item.location?.name}
                     onBlur={() =>
-                        blurLocationsSelectField(selectedLocationId, 'locationId', setSnackbarText)
+                        blurLocationsSelectField(
+                            selectedLocationId,
+                            'locationId',
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
                     }
                     handleSelectChange={(e) => selectChange(e, setSelectedLocationId)}
                     options={locations}
@@ -95,7 +107,14 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <EditableField
                     label="productNumber"
                     defaultValue={item.productNumber}
-                    onBlur={() => blurInputField('productNumber', updatedItem, setSnackbarText)}
+                    onBlur={() =>
+                        blurInputField(
+                            'productNumber',
+                            updatedItem,
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
+                    }
                     handleInputChange={(value) =>
                         inputChange('productNumber', value, setUpdatedItem)
                     }
@@ -104,7 +123,14 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <EditableField
                     label="serialNumber"
                     defaultValue={item.serialNumber}
-                    onBlur={() => blurInputField('serialNumber', updatedItem, setSnackbarText)}
+                    onBlur={() =>
+                        blurInputField(
+                            'serialNumber',
+                            updatedItem,
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
+                    }
                     handleInputChange={(value) =>
                         inputChange('serialNumber', value, setUpdatedItem)
                     }
@@ -114,7 +140,12 @@ const PartInfo = ({ item, isLoading }: Props) => {
                     label="vendor"
                     defaultValue={selectedVendorId || item.vendor?.name}
                     onBlur={() =>
-                        blurVendorsSelectField(selectedVendorId, 'vendorId', setSnackbarText)
+                        blurVendorsSelectField(
+                            selectedVendorId,
+                            'vendorId',
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
                     }
                     handleSelectChange={(e) => selectChange(e, setSelectedVendorId)}
                     options={vendors}
