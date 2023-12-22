@@ -1,11 +1,19 @@
 import EditIcon from '@mui/icons-material/Edit'
 import styled from 'styled-components'
+import { COLORS } from '../../../style/GlobalStyles'
+import { StyledTextFieldProps } from './types'
+import { TextField } from '@mui/material'
+
+
+export const PartInfoForm = styled.form`    
+    display: flex; 
+    flex-direction: column; 
+    gap: 42px 
+`
 
 export const Container = styled.div`
     display: grid;
-
-    padding: 20px;
-    gap: 15px;
+    gap: 42px;
     grid-template-columns: repeat(1, 1fr);
 
     @media only screen and (min-width: 550px) {
@@ -56,4 +64,16 @@ export const LabelContainer = styled.div`
 
 export const TextBoxWrap = styled.div`
     margin: 0;
+`
+export const ErrorP = styled.span`
+    color: ${COLORS.dangerRed};
+    width: 70%;
+    font-weight: 600;
+`
+
+
+export const StyledTextField = styled(TextField)<StyledTextFieldProps>`
+    & .MuiSvgIcon-root {
+        display: ${(props) => (!props.isOpen && 'none')};
+    }
 `
