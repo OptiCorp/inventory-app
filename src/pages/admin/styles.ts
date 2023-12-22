@@ -4,6 +4,7 @@ import { COLORS } from '../../style/GlobalStyles'
 export const AdminContainer = styled.div`
     display: flex;
     flex-direction: column;
+    padding: 16px;
 `
 
 export const SearchResultContainer = styled.div`
@@ -66,7 +67,7 @@ export const StyledForm = styled.form`
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: end;
-    padding: 8px 16px;
+    padding: 8px;
 `
 
 export const SubmitButtonContainer = styled.div`

@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 
-import { FormContainer } from '../styles.ts'
+import { ButtonContainer, FormContainer } from '../styles.ts'
 
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { COLORS } from '../../../style/GlobalStyles.ts'
@@ -24,15 +24,16 @@ export const AddPartFormm = () => {
                     <ProgressBar progressLevel={4} />
                     <h4>Add details</h4>
                     <FormContent />
-
-                    <Button
-                        id="addPart"
-                        type="submit"
-                        backgroundColor={`${COLORS.primary}`}
-                        color={`${COLORS.secondary}`}
-                    >
-                        Finish
-                    </Button>
+                    <ButtonContainer>
+                        <Button
+                            id="addPart"
+                            type="submit"
+                            backgroundColor={`${COLORS.primary}`}
+                            color={`${COLORS.secondary}`}
+                        >
+                            Finish
+                        </Button>
+                    </ButtonContainer>
                 </StyledForm>
             </FormContainer>
         </FormProvider>

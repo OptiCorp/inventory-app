@@ -7,6 +7,7 @@ type Props = {
 export const SearchContainer = styled.div<Props>`
     display: flex;
     flex-direction: column;
+    padding: 16px;
 
     height: ${({ height }) => height};
 `

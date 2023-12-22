@@ -5,7 +5,7 @@ export const AdminSearchCardContainer = styled.div`
     background: #fbfbfb;
     box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.2);
     display: flex;
-    margin: 8px 16px;
+    margin: 8px;
     padding: 8px;
     justify-content: space-between;
 `

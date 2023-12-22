@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton'
 import ProgressBar from '../../../components/progressBar/ProgressBar'
 import { COLORS } from '../../../style/GlobalStyles'
-import { FormContainer } from '../styles'
+import { ButtonContainer, FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
 const CheckForm = () => {
     const [checked, setChecked] = useState<boolean>(false)
@@ -34,13 +34,15 @@ const CheckForm = () => {
                 </StyledLabelText>
                 <StyledTextArea id="textArea" rows={5} cols={40} />
             </FormRadio>
-            <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
-                onClick={handleClick}
-            >
-                Next
-            </Button>
+            <ButtonContainer>
+                <Button
+                    backgroundColor={` ${COLORS.primary}`}
+                    color={` ${COLORS.secondary}`}
+                    onClick={handleClick}
+                >
+                    Next
+                </Button>
+            </ButtonContainer>
         </FormContainer>
     )
 }
