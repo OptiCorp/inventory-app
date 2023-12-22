@@ -9,7 +9,11 @@ import { useSnackBar } from '../../hooks/useSnackbar.tsx'
 import { List } from '../../services/apiTypes.ts'
 import { useAddList } from '../../services/hooks/List/useAddList.tsx'
 import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx'
-import { GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
+import {
+    GlobalSpinnerContainer,
+    SearchContainer,
+    Spinner,
+} from '../search/styles.ts'
 import { FlexWrapper, SavedListsTitle, SubmitButton } from './styles.ts'
 import { Button } from '../../components/Button/SubmitButton.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'
@@ -20,11 +24,11 @@ const MakeList = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [title, setTitle] = useState('')
     const [open, setOpen] = useState(false)
-    const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
+
     const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id)
 
     const { mutate, isSuccess } = useAddList()
-
+    const { snackbar } = useSnackBar()
     useEffect(() => {
         setSearchTerm((prev) => searchParam || prev)
     }, [searchParam])
@@ -35,9 +39,15 @@ const MakeList = () => {
             list.items?.some(
                 (item: any) =>
                     item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    item.wpId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    item.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    item.description.toLowerCase().includes(searchTerm.toLowerCase())
+                    item.wpId
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()) ||
+                    item.serialNumber
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()) ||
+                    item.description
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
             )
     )
 
@@ -62,6 +72,7 @@ const MakeList = () => {
                     searchTerm={searchTerm}
                     placeholder={'Search for title or items'}
                 />
+
                 <Button
                     backgroundColor={` ${COLORS.primary}`}
                     color={` ${COLORS.secondary}`}
@@ -69,6 +80,7 @@ const MakeList = () => {
                 >
                     NEW LIST
                 </Button>
+
                 <CustomDialog
                     title="New list"
                     open={open}

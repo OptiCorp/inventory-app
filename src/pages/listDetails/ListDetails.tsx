@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
 import { Button } from '../../components/Button/SubmitButton.tsx'
 import SearchBar from '../../components/searchBar/SearchBar'
 import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact.tsx'
 import SearchResultCard from '../../components/searchResultCard/SearchResultCard.tsx'
+import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { useSnackBar, useWindowDimensions } from '../../hooks'
 import { Item, UpdateList } from '../../services/apiTypes.ts'
 import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
+import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'
 import { Container, GlobalSpinnerContainer, Spinner } from '../search/styles.ts'
 import { ListHeader } from './ListHeader.tsx'
@@ -21,16 +23,16 @@ import {
     SearchContainerList,
     SearchResultsContainer,
 } from './styles.ts'
-import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx'
 
 const ListDetails = () => {
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
     const { listId } = useParams()
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { width } = useWindowDimensions()
-const navigate = useNavigate()
+    const navigate = useNavigate()
     const { data: list, isFetching } = useGetListById(listId!)
- const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
+    const { snackbar } = useSnackBar()
     const {
         data: items,
         isLoading,
@@ -42,7 +44,11 @@ const navigate = useNavigate()
             fetchNextPage()
         }
     }
- const { mutate: updateList, status: listUpdateStatus } = useUpdateList(listId!)
+    const {
+        mutate: updateList,
+        status: listUpdateStatus,
+        data,
+    } = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
@@ -60,12 +66,19 @@ const navigate = useNavigate()
         }
     }, [items])
 
-     const handleSave = () => {
-       
-         var save: UpdateList = { id: list!.id, title: list!.title }
-         updateList(save)
-         navigate('/makelist')
-     }
+    const handleSave = () => {
+        var save: UpdateList = { id: list!.id, title: list!.title }
+        updateList(save, {
+            onSuccess: (data) => {
+                setSnackbarText(`${list!.title} was saved`)
+                navigate('/makelist')
+                if (data.status >= 400) {
+                    setSnackbarSeverity('error')
+                    setSnackbarText(`${data.statusText}, please try again.`)
+                }
+            },
+        })
+    }
 
     return (
         <>
@@ -132,6 +145,7 @@ const navigate = useNavigate()
                                 <Button
                                     backgroundColor={`${COLORS.secondary}`}
                                     color={`${COLORS.primary}`}
+                                    onClick={handleSave}
                                 >
                                     Save list
                                 </Button>
