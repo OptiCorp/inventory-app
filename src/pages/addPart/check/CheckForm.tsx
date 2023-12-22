@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton'
 import ProgressBar from '../../../components/progressBar/ProgressBar'
 import { COLORS } from '../../../style/GlobalStyles'
-import { ButtonContainer, FormContainer } from '../styles'
+import { FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
+import { RadioWrapper, StyledInput } from '../batch/styles.ts'
 const CheckForm = () => {
     const [checked, setChecked] = useState<boolean>(false)
     const [error, setError] = useState<string>()
@@ -25,8 +26,14 @@ const CheckForm = () => {
             <span style={{ color: 'red' }}>{error}</span>
             <FormRadio>
                 <label>
-                    <input type="radio" name="checks" onChange={() => setChecked(true)} /> I have
-                    performed all necessary checks before adding this item to the system
+                    <RadioWrapper>
+                        <StyledInput
+                            type="checkbox"
+                            name="checks"
+                            onChange={() => setChecked(!checked)}
+                        />{' '}
+                        I have performed all necessary checks before adding this item to the system
+                    </RadioWrapper>
                 </label>
 
                 <StyledLabelText>
@@ -34,15 +41,13 @@ const CheckForm = () => {
                 </StyledLabelText>
                 <StyledTextArea id="textArea" rows={5} cols={40} />
             </FormRadio>
-            <ButtonContainer>
-                <Button
-                    backgroundColor={` ${COLORS.primary}`}
-                    color={` ${COLORS.secondary}`}
-                    onClick={handleClick}
-                >
-                    Next
-                </Button>
-            </ButtonContainer>
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                NEXT
+            </Button>
         </FormContainer>
     )
 }

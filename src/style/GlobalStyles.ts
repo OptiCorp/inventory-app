@@ -7,6 +7,7 @@ export const COLORS = {
     secondary: '#FFF',
     primary: '#000',
     gray: '#CACACA',
+    card: '#FBFBFB',
 
     lightGray: '#CCC',
     silverGray: '#DCDCDC',

@@ -9,7 +9,7 @@ export const Description = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <>
+        <div style={{ marginBottom: '8px' }}>
             <InputWrap>
                 <label htmlFor="description">Description </label>{' '}
                 <ErrorMessage
@@ -24,6 +24,6 @@ export const Description = () => {
                 maxLength={450}
                 {...register('description')}
             />
-        </>
+        </div>
     )
 }

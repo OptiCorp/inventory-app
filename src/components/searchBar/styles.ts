@@ -5,8 +5,9 @@ type InputProps = {
 }
 
 export const StyledInput = styled.input<InputProps>`
-    border-style: none none solid none;
-    flex-basis: 100%;
+    border-style: none;
+    border-bottom: 1px solid #000;
+    flex-basis: 90%;
     padding: 1rem;
     text-indent: 50px;
 
@@ -18,6 +19,7 @@ export const StyledInput = styled.input<InputProps>`
 export const SearchBarContainer = styled.div`
     display: flex;
     flex-basis: 100%;
+    padding: 16px;
 `
 
 export const Icon = styled.span`

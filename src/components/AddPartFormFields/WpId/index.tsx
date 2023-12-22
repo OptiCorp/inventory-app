@@ -24,7 +24,7 @@ export const WpId = () => {
     }, [setValue, wpId])
 
     return (
-        <>
+        <div style={{ marginTop: '24px' }}>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
@@ -41,6 +41,7 @@ export const WpId = () => {
                 autoComplete="off"
                 value={wpId}
                 onChange={(e) => setWpId(e.target.value)}
+                isUnique={isUnique?.toString()}
             />
             {isLoading && <p>Checking...</p>}
             {wpId && (
@@ -57,6 +58,6 @@ export const WpId = () => {
                     )}
                 </>
             )}
-        </>
+        </div>
     )
 }

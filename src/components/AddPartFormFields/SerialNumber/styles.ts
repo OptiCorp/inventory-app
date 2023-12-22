@@ -33,5 +33,6 @@ export const StyledInput = styled.input`
         border: none;
         border-radius: 0;
         border-bottom: 1px solid #000;
+        margin-bottom: 0;
     }
 `

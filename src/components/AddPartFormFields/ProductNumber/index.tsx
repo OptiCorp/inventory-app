@@ -10,7 +10,7 @@ export const ProductNumber = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <>
+        <div style={{ marginTop: '24px' }}>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="productNumber">Product number</label>{' '}
@@ -24,6 +24,6 @@ export const ProductNumber = () => {
                 />
             </InputWrap>
             <StyledInput type="text" placeholder="E.g BV 113 EU" {...register('productNumber')} />
-        </>
+        </div>
     )
 }

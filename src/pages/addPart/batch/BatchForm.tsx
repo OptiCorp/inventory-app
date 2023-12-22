@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 import { COLORS } from '../../../style/GlobalStyles.ts'
-import { ButtonContainer, FormContainer } from '../styles.ts'
-import { FormBatchRadio } from './styles.ts'
+import { FormContainer } from '../styles.ts'
+import { FormBatchRadio, RadioWrapper, StyledInput } from './styles.ts'
 
 enum Batch {
     yes,
@@ -33,28 +33,37 @@ const BatchForm = () => {
 
             <FormBatchRadio>
                 <label>
-                    <input type="radio" name="batchCheck" onChange={() => setBatchType(Batch.no)} />{' '}
-                    I want to add one unique part
+                    <RadioWrapper>
+                        <StyledInput
+                            type="radio"
+                            name="batchCheck"
+                            onChange={() => setBatchType(Batch.no)}
+                        />{' '}
+                        I want to add one unique part
+                    </RadioWrapper>
                 </label>
                 <label>
-                    <input
-                        type="radio"
-                        name="batchCheck"
-                        onChange={() => setBatchType(Batch.yes)}
-                    />{' '}
-                    I want to add a batch of several identical parts, assigning a unique WellPartner
-                    serial number to each of them
+                    <RadioWrapper>
+                        <StyledInput
+                            type="radio"
+                            name="batchCheck"
+                            onChange={() => setBatchType(Batch.yes)}
+                        />{' '}
+                        <div>
+                            I want to add a batch of several identical parts, assigning a unique
+                            WellPartner serial number to each of them
+                        </div>
+                    </RadioWrapper>
                 </label>
             </FormBatchRadio>
-            <ButtonContainer>
-                <Button
-                    backgroundColor={` ${COLORS.primary}`}
-                    color={` ${COLORS.secondary}`}
-                    onClick={handleClick}
-                >
-                    Next
-                </Button>
-            </ButtonContainer>
+
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                NEXT
+            </Button>
         </FormContainer>
     )
 }

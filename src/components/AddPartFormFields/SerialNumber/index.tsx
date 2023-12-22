@@ -10,7 +10,7 @@ export const SerialNumber = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <>
+        <div style={{ marginTop: '24px' }}>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="Serial number">Serial number </label>{' '}
@@ -28,6 +28,6 @@ export const SerialNumber = () => {
                 placeholder="E.g 1-12-2023.1.2"
                 {...register('serialNumber')}
             />
-        </>
+        </div>
     )
 }
