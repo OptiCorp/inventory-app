@@ -1,9 +1,10 @@
 import { format } from 'date-fns'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import CustomDialog from '../../components/Dialog/Index'
+import UmAppContext from '../../contexts/UmAppContext'
 import { useSnackBar } from '../../hooks'
 import { List, UpdateList } from '../../services/apiTypes'
 import { useDeleteList } from '../../services/hooks/List/useDeleteList'
@@ -16,6 +17,7 @@ type Props = {
 }
 
 export const ListHeader = ({ list }: Props) => {
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
     const [title, setTitle] = useState(list.title)
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
@@ -24,11 +26,9 @@ export const ListHeader = ({ list }: Props) => {
         mutate: updateList,
         status: listUpdateStatus,
         isSuccess: listSuccess,
-        error,
-        isError,
-        data,
     } = useUpdateList(list.id)
-    const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
+    const { snackbar } = useSnackBar()
+
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
         setOpen(true)

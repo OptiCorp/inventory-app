@@ -8,7 +8,7 @@ export const SearchContainer = styled.div<Props>`
     display: flex;
     flex-direction: column;
     padding: 16px;
-
+    gap: 30px;
     height: ${({ height }) => height};
 `
 
