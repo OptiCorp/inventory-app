@@ -4,7 +4,6 @@ import { COLORS } from '../../style/GlobalStyles'
 export const StyledContainerDiv = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 3rem;
     max-width: 1000px;
     margin-inline: auto;
     padding: 16px;
@@ -29,9 +28,7 @@ export const Wrapper = styled.div`
 `
 export const StyledList = styled.ul`
     margin: auto;
-
     display: grid;
-
     font-size: 1.2rem;
     color: ${COLORS.secondary};
     list-style: none;
