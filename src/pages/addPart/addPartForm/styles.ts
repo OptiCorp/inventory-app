@@ -4,7 +4,7 @@ export const StyledForm = styled.form`
     input,
     select {
         max-width: 500px;
-        width: 95%;
+        width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;

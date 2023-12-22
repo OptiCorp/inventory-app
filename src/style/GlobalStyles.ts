@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { useWindowDimensions } from '../hooks'
 
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)'
 
@@ -30,8 +31,8 @@ const GlobalStyles = createGlobalStyle`
         background-color: ${COLORS.secondary};
     }
     .wrapper {
+    max-width: 1000px;
     display: grid;
-    padding-inline: 2rem;
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     overflow-x: hidden;

@@ -25,7 +25,7 @@ export const Category = () => {
 
     console.log(selectedOption)
     return (
-        <div>
+        <div style={{ marginTop: '24px' }}>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="category">Choose a category</label>{' '}

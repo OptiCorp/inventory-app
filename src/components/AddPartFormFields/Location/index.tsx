@@ -25,7 +25,7 @@ export const Location = () => {
     }, [selectedOption, setValue])
 
     return (
-        <div>
+        <div style={{ marginTop: '24px' }}>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="location">Choose a location</label>{' '}

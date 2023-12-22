@@ -24,7 +24,7 @@ export const WpId = () => {
     }, [setValue, wpId])
 
     return (
-        <>
+        <div style={{ marginTop: '24px' }}>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
@@ -57,6 +57,6 @@ export const WpId = () => {
                     )}
                 </>
             )}
-        </>
+        </div>
     )
 }

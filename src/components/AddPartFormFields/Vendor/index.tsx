@@ -25,7 +25,7 @@ export const Vendor = () => {
     }, [selectedOption, setValue])
 
     return (
-        <div>
+        <div style={{ marginTop: '24px' }}>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="vendor">Choose a vendor</label>{' '}

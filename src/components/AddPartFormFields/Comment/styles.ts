@@ -9,11 +9,12 @@ export const InputWrap = styled.div`
 export const StyledTextArea = styled.textarea`
     margin: 0;
     padding: 1rem;
-    width: 90%;
-    max-width: 475px;
+    width: 100%;
+    max-width: 500px;
     display: block;
     background-color: #f2f2f2;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid #000;
+    box-sizing: border-box;
 `

@@ -7,13 +7,24 @@ import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSear
 import { Button } from '../../../components/Button/SubmitButton'
 import { useNavigate } from 'react-router-dom'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
+import { Category } from '../../../services/apiTypes'
 
 const Categories = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data, isLoading, fetchNextPage } = useGetCategoriesInfinite(debouncedSearchTerm)
     const { data: initialData } = useGetCategories()
     const navigate = useNavigate()
+    const [filteredData, setFilteredData] = useState<Category[]>([])
+
+    useEffect(() => {
+        if (initialData) {
+            setFilteredData(
+                initialData.filter((category) =>
+                    category.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+                )
+            )
+        }
+    }, [initialData, debouncedSearchTerm])
 
     return (
         <AdminContainer>
@@ -22,32 +33,13 @@ const Categories = () => {
                 setSearchTerm={setSearchTerm}
                 placeholder="Search for category"
             />
-            {data ? (
-                <SearchResultContainer>
-                    {data?.pages.map((page, i) =>
-                        page.map((category, index) => (
-                            <div
-                                id={
-                                    i === data.pages.length - 1 && index === page.length - 1
-                                        ? 'lastItem'
-                                        : ''
-                                }
-                                key={category.id}
-                            >
-                                <AdminSearchCard searchType={SearchType.Category} data={category} />
-                            </div>
-                        ))
-                    )}
-                </SearchResultContainer>
-            ) : (
-                <SearchResultContainer>
-                    {initialData?.map((category, i) => (
-                        <div id={i === initialData.length - 1 ? 'lastItem' : ''} key={category.id}>
-                            <AdminSearchCard searchType={SearchType.Category} data={category} />
-                        </div>
-                    ))}
-                </SearchResultContainer>
-            )}
+            <SearchResultContainer>
+                {filteredData?.map((category, i) => (
+                    <div id={i === filteredData.length - 1 ? 'lastItem' : ''} key={category.id}>
+                        <AdminSearchCard searchType={SearchType.Category} data={category} />
+                    </div>
+                ))}
+            </SearchResultContainer>
             <ButtonContainer>
                 <Button
                     onClick={() => navigate('/admin/add-category')}

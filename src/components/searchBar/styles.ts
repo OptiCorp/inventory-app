@@ -5,9 +5,8 @@ type InputProps = {
 }
 
 export const StyledInput = styled.input<InputProps>`
-    border-style: none none solid none;
-    border-color: #000;
-    border-radius: 1px;
+    border-style: none;
+    border-bottom: 1px solid #000;
     flex-basis: 90%;
     padding: 1rem;
     text-indent: 50px;
