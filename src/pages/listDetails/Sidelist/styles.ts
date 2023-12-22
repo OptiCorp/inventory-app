@@ -25,7 +25,7 @@ export const EditIcon = styled(CreateOutlinedIcon)`
 export const DeleteIcon = styled(DeleteForeverIcon)`
     color: ${COLORS.primary};
     margin-inline: 30px;
-
+    cursor: pointer;
     &:hover {
         color: ${COLORS.dangerRed};
     }

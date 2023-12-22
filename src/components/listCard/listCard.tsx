@@ -64,8 +64,6 @@ const ListCard = ({ part }: Props) => {
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={handleDelete}
             />
-
-           
         </>
     )
 }
