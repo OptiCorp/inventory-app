@@ -18,6 +18,11 @@ export type EditableFieldProps = {
         value: string | undefined
     ) => void /* (fieldName: keyof UpdateItem, value: string | undefined) => void */
     selectedType?: string
+    multiline?: boolean
+}
+
+export type StyledTextFieldProps = {
+    isOpen: boolean
 }
 
 export type TypeProps = {
@@ -46,3 +51,4 @@ export type ItemFields =
     | 'productNumber'
     | 'serialNumber'
     | 'vendor'
+    | 'description'

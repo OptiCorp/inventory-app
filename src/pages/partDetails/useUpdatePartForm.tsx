@@ -12,7 +12,7 @@ const partInfoSchema = z.object({
         .string()
         .min(1, 'Product number is required')
         .max(20, 'Product number must be at most 20 characters'),
-    description: z.string(),
+    description: z.string().max(450, 'Description must be at most 450 characters'),
     parentId: z.string().nullish(),
 })
 export type PartInfoSchema = z.infer<typeof partInfoSchema>
