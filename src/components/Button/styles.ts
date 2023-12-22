@@ -17,6 +17,7 @@ export const SubmitButton = styled('button')<{
     border: 1px solid ${COLORS.primary};
     cursor: pointer;
     margin-right: 0;
+    text-transform: uppercase;
 `
 
 export const Wrapper = styled.div`
