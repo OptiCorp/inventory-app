@@ -16,9 +16,10 @@ export const useFormBlurInputHandler = (obj: Item) => {
             field: T,
             updatedObject: Item,
             setSnackbarText: SetState<string>,
-            setSnackbarSeverity: SetState<AlertColor>
+            setSnackbarSeverity: SetState<AlertColor>,
+            shortSnackbarText?: boolean
         ) => {
-            formContext.trigger().then(() => {
+            formContext.handleSubmit(() => {
                 const fieldValue = updatedObject[field]
                 if (!fieldValue || fieldValue === obj[field]) return
 
@@ -33,6 +34,13 @@ export const useFormBlurInputHandler = (obj: Item) => {
                                 if (data.status >= 400) {
                                     setSnackbarSeverity('error')
                                     setSnackbarText(`${data.statusText}, please try again.`)
+                                } else if (data.status >= 500) {
+                                    setSnackbarSeverity('error')
+                                    setSnackbarText(
+                                        `Something went wrong on our end, please try again later.`
+                                    )
+                                } else if (shortSnackbarText) {
+                                    setSnackbarText(`${field.toUpperCase()} was updated`)
                                 } else {
                                     setSnackbarText(
                                         `${field.toUpperCase()} was changed to ${fieldValue}`
@@ -42,7 +50,7 @@ export const useFormBlurInputHandler = (obj: Item) => {
                         },
                     }
                 )
-            })
+            })()
         },
         [formContext, mutate, obj]
     )
