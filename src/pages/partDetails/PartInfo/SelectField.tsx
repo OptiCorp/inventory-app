@@ -1,7 +1,6 @@
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import { Box, ClickAwayListener, MenuItem, TextField } from '@mui/material'
+import { Box, ClickAwayListener, MenuItem } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { Edit, LabelContainer } from './styles'
+import { Edit, LabelContainer, StyledTextField } from './styles'
 import { SelectProps } from './types'
 import { useState } from 'react'
 
@@ -10,17 +9,17 @@ export const SelectField = ({
     label,
     defaultValue,
     onBlur,
-
     options,
 }: SelectProps) => {
     const { register } = useFormContext()
-    const [open, setOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     const handleClickAway = () => {
-        setOpen(false)
+        setIsOpen(false)
     }
+
     const handleEditClick = () => {
-        setOpen(true)
+        setIsOpen(true)
     }
 
     return (
@@ -38,19 +37,18 @@ export const SelectField = ({
                         />
                     </LabelContainer>
 
-                    <TextField
+                    <StyledTextField
                         {...register(label.toLowerCase())}
                         onBlur={onBlur}
                         select
                         onChange={handleSelectChange}
-                        SelectProps={{
-                            IconComponent: () => (!open ? null : <ArrowDropDownIcon />),
-                        }}
+                        fullWidth
+                        isOpen={isOpen}
                         variant="standard"
                         value={defaultValue}
                         InputProps={{
-                            disableUnderline: !open,
-                            readOnly: !open,
+                            disableUnderline: !isOpen,
+                            readOnly: !isOpen,
                         }}
                     >
                         {options?.map((option) => (
@@ -58,7 +56,7 @@ export const SelectField = ({
                                 {option.name}
                             </MenuItem>
                         ))}
-                    </TextField>
+                    </StyledTextField>
                 </Box>
             </ClickAwayListener>
         </div>
