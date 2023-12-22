@@ -8,7 +8,6 @@ export const ButtonWrap = styled.div`
 export const StyledTextArea = styled.textarea`
     background-color: ${COLORS.secondary};
     margin: 16;
-    padding: 1rem;
     display: block;
     max-width: 500px;
 `

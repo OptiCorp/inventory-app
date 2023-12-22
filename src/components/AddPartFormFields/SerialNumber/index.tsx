@@ -13,7 +13,7 @@ export const SerialNumber = () => {
         <>
             <InputWrap>
                 <IconContainer>
-                    <label htmlFor="Serial number">Serial Number </label>{' '}
+                    <label htmlFor="Serial number">Serial number </label>{' '}
                     <ToolTip content="If left empty, a unique WP S/N will be generated">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>

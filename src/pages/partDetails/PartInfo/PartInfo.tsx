@@ -7,10 +7,13 @@ import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
 import { SelectField } from './SelectField'
 import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
-import useFormBlurSelectHandler from './hooks/useFormBlurSelectHandler'
-import useFormBlurInputHandler from './hooks/useFormBlurInputHandler'
-import useFormSelectChangeHandler from './hooks/useFormSelectChangeHandler'
-import useFormInputChangeHandler from './hooks/useFormInputChangeHandler'
+import {
+    useFormBlurInputHandler,
+    useFormInputChangeHandler,
+    useFormSelectChangeHandler,
+    useFormBlurSelectHandler,
+} from './hooks'
+import { useSnackBar } from '../../../hooks'
 
 type Props = {
     item: Item
@@ -31,10 +34,14 @@ const PartInfo = ({ item, isLoading }: Props) => {
         item.categoryId
     )
     const [updatedItem, setUpdatedItem] = useState({ ...item })
+    const blurCategorySelectField = useFormBlurSelectHandler(internalItem, categories)
+    const blurLocationsSelectField = useFormBlurSelectHandler(internalItem, locations)
+    const blurVendorsSelectField = useFormBlurSelectHandler(internalItem, vendors)
     const blurSelectField = useFormBlurSelectHandler(internalItem)
     const blurInputField = useFormBlurInputHandler(internalItem)
     const selectChange = useFormSelectChangeHandler()
     const inputChange = useFormInputChangeHandler()
+    const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
 
     if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
         return <p>Loading.. </p>
@@ -46,16 +53,25 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <TypeField
                     label="type"
                     defaultValue={selectedType || item.type}
-                    onBlur={() => blurSelectField(selectedType!, 'type')}
+                    onBlur={() =>
+                        blurSelectField(selectedType!, 'type', setSnackbarText, setSnackbarSeverity)
+                    }
                     handleSelectChange={(e) => selectChange(e, setSelectedType)}
-                    options={['Unit', 'Assembly', 'Sub-Assembly', 'Part']}
+                    options={['Unit', 'Assembly', 'Subassembly', 'Part']}
                     selectedType={selectedType}
                 />
 
                 <SelectField
                     label="category"
                     defaultValue={selectedCategoryId || item.category?.name}
-                    onBlur={() => blurSelectField(selectedCategoryId, 'categoryId')}
+                    onBlur={() =>
+                        blurCategorySelectField(
+                            selectedCategoryId,
+                            'categoryId',
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
+                    }
                     handleSelectChange={(e) => selectChange(e, setSelectedCategoryId)}
                     options={categories}
                     id={item.categoryId}
@@ -64,7 +80,14 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <SelectField
                     label="location"
                     defaultValue={selectedLocationId || item.location?.name}
-                    onBlur={() => blurSelectField(selectedLocationId, 'locationId')}
+                    onBlur={() =>
+                        blurLocationsSelectField(
+                            selectedLocationId,
+                            'locationId',
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
+                    }
                     handleSelectChange={(e) => selectChange(e, setSelectedLocationId)}
                     options={locations}
                     id={item.locationId}
@@ -84,7 +107,14 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <EditableField
                     label="productNumber"
                     defaultValue={item.productNumber}
-                    onBlur={() => blurInputField('productNumber', updatedItem)}
+                    onBlur={() =>
+                        blurInputField(
+                            'productNumber',
+                            updatedItem,
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
+                    }
                     handleInputChange={(value) =>
                         inputChange('productNumber', value, setUpdatedItem)
                     }
@@ -93,7 +123,14 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <EditableField
                     label="serialNumber"
                     defaultValue={item.serialNumber}
-                    onBlur={() => blurInputField('serialNumber', updatedItem)}
+                    onBlur={() =>
+                        blurInputField(
+                            'serialNumber',
+                            updatedItem,
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
+                    }
                     handleInputChange={(value) =>
                         inputChange('serialNumber', value, setUpdatedItem)
                     }
@@ -102,12 +139,20 @@ const PartInfo = ({ item, isLoading }: Props) => {
                 <SelectField
                     label="vendor"
                     defaultValue={selectedVendorId || item.vendor?.name}
-                    onBlur={() => blurSelectField(selectedVendorId, 'vendorId')}
+                    onBlur={() =>
+                        blurVendorsSelectField(
+                            selectedVendorId,
+                            'vendorId',
+                            setSnackbarText,
+                            setSnackbarSeverity
+                        )
+                    }
                     handleSelectChange={(e) => selectChange(e, setSelectedVendorId)}
                     options={vendors}
                     id={item.vendorId}
                 />
             </Container>
+            {snackbar}
         </form>
     )
 }

@@ -59,6 +59,9 @@ const ListDetails = () => {
         }
     }, [items])
 
+  
+
+
     return (
         <>
             <SearchContainerList>
@@ -68,9 +71,7 @@ const ListDetails = () => {
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        placeholder={
-                            'Search for ID, description, PO number or S/N'
-                        }
+                        placeholder={'Search for ID, description, PO number or S/N'}
                     />
                     <Container>
                         {items?.pages.map((page, i) =>
@@ -84,10 +85,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCard
-                                            part={item}
-                                            icon={'add'}
-                                        />
+                                        <SearchResultCard part={item} icon={'add'} />
                                     </div>
                                 ) : (
                                     <div
@@ -98,10 +96,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCardCompact
-                                            part={item}
-                                            icon={'add'}
-                                        />
+                                        <SearchResultCardCompact part={item} icon={'add'} />
                                     </div>
                                 )
                             )
@@ -111,7 +106,11 @@ const ListDetails = () => {
                 {list ? (
                     <>
                         <FlexWrapper>
+
                             <ListHeader list={list} />
+
+
+                        
 
                             {list.items ? (
                                 <ListContainer>

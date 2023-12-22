@@ -6,19 +6,21 @@ import {
     AddItem,
     AddList,
     AddLocation,
+    AddVendor,
     Category,
     Item,
     List,
     Location,
     UpdateCategory,
     UpdateItem,
-    UpdateList,
     UpdateLocation,
     UpdateVendor,
     User,
+    UpdateList,
     UserRole,
     Vendor,
 } from './apiTypes'
+
 
 const request = {
     scopes: ['063f1617-3dd5-49a2-9323-69b1605fba48/user.read'],
@@ -382,7 +384,7 @@ const apiService = () => {
         return await getByFetch(`Vendor/BySearchString/${searchString}`)
     }
 
-    const addVendor = async (vendor: Omit<Vendor, 'id'>): Promise<Response> => {
+    const addVendor = async (vendor: AddVendor): Promise<Response> => {
         return await postByFetch('Vendor', vendor)
     }
 

@@ -27,4 +27,11 @@ export const IconContainer = styled.div`
     gap: 4px;
 `
 
-export const StyledInput = styled.input``
+export const StyledInput = styled.input`
+    &&& {
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #000;
+    }
+`

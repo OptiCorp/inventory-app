@@ -95,13 +95,14 @@ export type MutateItemList = {
 
 export type AddItem = {
     wpId: string
+    categoryId: string
     serialNumber: string
     productNumber: string
     type: string
-    location?: string | null
+    locationId?: string | null
     description: string
     parentId?: string | null
-    vendor: string
+    vendorId: string
     addedById: string | null
     comment?: string | null
 }
@@ -131,6 +132,11 @@ export type Vendor = {
     addedById: string
 }
 
+export type AddVendor = {
+    name: string
+    addedById: string
+}
+
 export type UpdateVendor = {
     id: string
     name: string
@@ -154,4 +160,9 @@ export type AddCategory = {
 export type UpdateCategory = {
     id: string
     name: string
+}
+
+export type FormOption = {
+    value: string
+    label: string
 }

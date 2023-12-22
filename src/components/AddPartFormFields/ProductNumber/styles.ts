@@ -14,4 +14,15 @@ export const ErrorP = styled.span`
     width: 70%;
     font-weight: 600;
 `
-export const StyledInput = styled.input``
+export const StyledInput = styled.input`
+    &&& {
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #000;
+    }
+`
+export const IconContainer = styled.div`
+    display: flex;
+    gap: 4px;
+`
