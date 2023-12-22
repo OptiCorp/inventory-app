@@ -18,7 +18,6 @@ export const StyledInput = styled.input<InputProps>`
 export const SearchBarContainer = styled.div`
     display: flex;
     flex-basis: 100%;
-    padding: 16px;
 `
 
 export const Icon = styled.span`

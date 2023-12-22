@@ -4,7 +4,7 @@ import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { ExampleUpload } from '../../../components/Upload/Upload.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 import { COLORS } from '../../../style/GlobalStyles.ts'
-import { FormContainer } from '../styles.ts'
+import { ButtonContainer, FormContainer } from '../styles.ts'
 
 const Upload = () => {
     const navigate = useNavigate()
@@ -43,13 +43,15 @@ const Upload = () => {
                 <li>Certificates.</li>
                 <li>Photos.</li>
             </ul>
-            <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
-                onClick={handleClick}
-            >
-                Next
-            </Button>
+            <ButtonContainer>
+                <Button
+                    backgroundColor={` ${COLORS.primary}`}
+                    color={` ${COLORS.secondary}`}
+                    onClick={handleClick}
+                >
+                    Next
+                </Button>
+            </ButtonContainer>
         </FormContainer>
     )
 }

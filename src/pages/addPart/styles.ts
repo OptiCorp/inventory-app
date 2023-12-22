@@ -16,7 +16,14 @@ export const PartForm = styled(Form)`
 `
 
 export const FormContainer = styled.div`
-    max-width: 1000px;
     display: flex;
     flex-direction: column;
+    padding: 16px;
+`
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin: 8px 0;
 `
