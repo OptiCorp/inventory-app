@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 interface StyledInputProps {
-    isUnique: string | undefined
+    isUnique?: string | undefined
 }
 export const InputWrap = styled.div`
     display: flex;

@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles'
 import { ToolTip } from '../../ToolTip'
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
+import { StyledDiv } from '../Category/styles.ts'
 
 export const ProductNumber = () => {
     const {
@@ -10,7 +11,7 @@ export const ProductNumber = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <div style={{ marginTop: '24px' }}>
+        <StyledDiv>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="productNumber">Product number</label>{' '}
@@ -24,6 +25,6 @@ export const ProductNumber = () => {
                 />
             </InputWrap>
             <StyledInput type="text" placeholder="E.g BV 113 EU" {...register('productNumber')} />
-        </div>
+        </StyledDiv>
     )
 }

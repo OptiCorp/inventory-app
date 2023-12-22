@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
 import { ToolTip } from '../../ToolTip'
 import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles'
+import { StyledDiv } from '../Category/styles.ts'
 
 export const SerialNumber = () => {
     const {
@@ -10,7 +11,7 @@ export const SerialNumber = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <div style={{ marginTop: '24px' }}>
+        <StyledDiv>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="Serial number">Serial number </label>{' '}
@@ -28,6 +29,6 @@ export const SerialNumber = () => {
                 placeholder="E.g 1-12-2023.1.2"
                 {...register('serialNumber')}
             />
-        </div>
+        </StyledDiv>
     )
 }

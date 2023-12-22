@@ -1,7 +1,8 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
 import { StyledTextArea } from '../Comment/styles'
-import { ErrorP, InputWrap } from './styles'
+import { ErrorP, InputWrap, StyledDiv } from './styles'
+import React from 'react'
 
 export const Description = () => {
     const {
@@ -9,7 +10,7 @@ export const Description = () => {
         formState: { errors },
     } = useFormContext()
     return (
-        <div style={{ marginBottom: '8px' }}>
+        <StyledDiv>
             <InputWrap>
                 <label htmlFor="description">Description </label>{' '}
                 <ErrorMessage
@@ -24,6 +25,6 @@ export const Description = () => {
                 maxLength={450}
                 {...register('description')}
             />
-        </div>
+        </StyledDiv>
     )
 }

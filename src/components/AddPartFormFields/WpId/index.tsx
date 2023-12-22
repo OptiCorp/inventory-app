@@ -7,6 +7,7 @@ import { useIsWpIdUnique } from '../../../services/hooks/Items/useIsWpIdUnique.t
 import { useDebounce } from 'usehooks-ts'
 import { ToolTip } from '../../ToolTip'
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
+import { StyledDiv } from '../Category/styles.ts'
 
 export const WpId = () => {
     const {
@@ -24,7 +25,7 @@ export const WpId = () => {
     }, [setValue, wpId])
 
     return (
-        <div style={{ marginTop: '24px' }}>
+        <StyledDiv>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
@@ -58,6 +59,6 @@ export const WpId = () => {
                     )}
                 </>
             )}
-        </div>
+        </StyledDiv>
     )
 }
