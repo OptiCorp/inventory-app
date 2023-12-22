@@ -2,7 +2,6 @@ import { useContext, useState } from 'react'
 import UmAppContext from '../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../hooks'
 import type { Item } from '../../../services/apiTypes'
-import EditableField from './EditableField'
 import { Container, PartInfoForm } from './styles'
 import { TypeField } from './TypeField'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
@@ -10,14 +9,12 @@ import { useGetLocations } from '../../../services/hooks/Locations/useGetLocatio
 import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
 import EditableField from './EditableField'
 import { SelectField } from './SelectField'
-import { TypeField } from './TypeField'
 import {
     useFormBlurInputHandler,
     useFormBlurSelectHandler,
     useFormInputChangeHandler,
     useFormSelectChangeHandler,
 } from './hooks'
-import { Container } from './styles'
 
 type Props = {
     item: Item
@@ -27,47 +24,27 @@ type Props = {
 const PartInfo = ({ item, isLoading }: Props) => {
     const internalItem = { ...item }
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors()
-    const { data: locations = [], isLoading: isLoadingLocations } =
-        useGetLocations()
-    const { data: categories = [], isLoading: isLoadingCategories } =
-        useGetCategories()
-    const [selectedType, setSelectedType] = useState<typeof item.type>(
-        item.type
+    const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations()
+    const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories()
+    const [selectedType, setSelectedType] = useState<typeof item.type>(item.type)
+    const [selectedVendorId, setSelectedVendorId] = useState<typeof item.vendorId>(item.vendorId)
+    const [selectedLocationId, setSelectedLocationId] = useState<typeof item.locationId>(
+        item.locationId
     )
-    const [selectedVendorId, setSelectedVendorId] = useState<
-        typeof item.vendorId
-    >(item.vendorId)
-    const [selectedLocationId, setSelectedLocationId] = useState<
-        typeof item.locationId
-    >(item.locationId)
-    const [selectedCategoryId, setSelectedCategoryId] = useState<
-        typeof item.categoryId
-    >(item.categoryId)
+    const [selectedCategoryId, setSelectedCategoryId] = useState<typeof item.categoryId>(
+        item.categoryId
+    )
     const [updatedItem, setUpdatedItem] = useState({ ...item })
-    const blurCategorySelectField = useFormBlurSelectHandler(
-        internalItem,
-        categories
-    )
-    const blurLocationsSelectField = useFormBlurSelectHandler(
-        internalItem,
-        locations
-    )
-    const blurVendorsSelectField = useFormBlurSelectHandler(
-        internalItem,
-        vendors
-    )
+    const blurCategorySelectField = useFormBlurSelectHandler(internalItem, categories)
+    const blurLocationsSelectField = useFormBlurSelectHandler(internalItem, locations)
+    const blurVendorsSelectField = useFormBlurSelectHandler(internalItem, vendors)
     const blurSelectField = useFormBlurSelectHandler(internalItem)
     const blurInputField = useFormBlurInputHandler(internalItem)
     const selectChange = useFormSelectChangeHandler()
     const inputChange = useFormInputChangeHandler()
     const { snackbar } = useSnackBar()
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    if (
-        isLoading ||
-        isLoadingCategories ||
-        isLoadingLocations ||
-        isLoadingVendors
-    ) {
+    if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
         return <p>Loading.. </p>
     }
 
@@ -78,12 +55,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
                     label="type"
                     defaultValue={selectedType || item.type}
                     onBlur={() =>
-                        blurSelectField(
-                            selectedType!,
-                            'type',
-                            setSnackbarText,
-                            setSnackbarSeverity
-                        )
+                        blurSelectField(selectedType!, 'type', setSnackbarText, setSnackbarSeverity)
                     }
                     handleSelectChange={(e) => selectChange(e, setSelectedType)}
                     options={['Unit', 'Assembly', 'Subassembly', 'Part']}
@@ -101,9 +73,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
                             setSnackbarSeverity
                         )
                     }
-                    handleSelectChange={(e) =>
-                        selectChange(e, setSelectedCategoryId)
-                    }
+                    handleSelectChange={(e) => selectChange(e, setSelectedCategoryId)}
                     options={categories}
                     id={item.categoryId}
                 />
@@ -119,9 +89,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
                             setSnackbarSeverity
                         )
                     }
-                    handleSelectChange={(e) =>
-                        selectChange(e, setSelectedLocationId)
-                    }
+                    handleSelectChange={(e) => selectChange(e, setSelectedLocationId)}
                     options={locations}
                     id={item.locationId}
                 />
@@ -180,9 +148,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
                             setSnackbarSeverity
                         )
                     }
-                    handleSelectChange={(e) =>
-                        selectChange(e, setSelectedVendorId)
-                    }
+                    handleSelectChange={(e) => selectChange(e, setSelectedVendorId)}
                     options={vendors}
                     id={item.vendorId}
                 />
