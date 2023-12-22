@@ -10,7 +10,7 @@ export const StyledInput = styled.input<InputProps>`
     padding: 1rem;
     text-indent: 50px;
 
-    max-width: 2000px;
+    max-width: 1000px;
     font-size: ${({ width }) => (width >= 600 ? '20px' : '16px')};
     outline: none;
 `
