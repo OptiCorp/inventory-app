@@ -16,3 +16,7 @@ export const ErrorP = styled.span`
     font-weight: 600;
 `
 export const StyledInput = styled.input``
+
+export const StyledDiv = styled.div`
+    margin-bottom: 8px;
+`

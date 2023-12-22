@@ -18,3 +18,7 @@ export const StyledTextArea = styled.textarea`
     border-bottom: 1px solid #000;
     box-sizing: border-box;
 `
+
+export const StyledDiv = styled.div`
+    margin-bottom: 15px;
+`

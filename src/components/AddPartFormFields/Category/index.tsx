@@ -2,7 +2,7 @@ import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
 import { ToolTip } from '../../ToolTip'
-import { ErrorP, IconContainer, InputWrap } from './styles'
+import { ErrorP, IconContainer, InputWrap, StyledDiv } from './styles'
 import { useEffect, useState } from 'react'
 import { FormSelect } from '../FormSelect'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories.tsx'
@@ -25,7 +25,7 @@ export const Category = () => {
 
     console.log(selectedOption)
     return (
-        <div style={{ marginTop: '24px' }}>
+        <StyledDiv>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="category">Choose a category</label>{' '}
@@ -43,6 +43,6 @@ export const Category = () => {
                 setState={setSelectedOption}
                 state={selectedOption}
             ></FormSelect>
-        </div>
+        </StyledDiv>
     )
 }
