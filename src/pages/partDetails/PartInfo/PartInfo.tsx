@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Item } from '../../../services/apiTypes'
 import EditableField from './EditableField'
-import { Container } from './styles'
+import { Container, PartInfoForm } from './styles'
 import { TypeField } from './TypeField'
 import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
 import { SelectField } from './SelectField'
@@ -48,7 +48,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
     }
 
     return (
-        <form>
+        <PartInfoForm>
             <Container>
                 <TypeField
                     label="type"
@@ -63,7 +63,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
                 <SelectField
                     label="category"
-                    defaultValue={selectedCategoryId || item.category?.name}
+                    defaultValue={selectedCategoryId || item.category.name}
                     onBlur={() =>
                         blurCategorySelectField(
                             selectedCategoryId,
@@ -79,7 +79,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
                 <SelectField
                     label="location"
-                    defaultValue={selectedLocationId || item.location?.name}
+                    defaultValue={selectedLocationId || item.location.name}
                     onBlur={() =>
                         blurLocationsSelectField(
                             selectedLocationId,
@@ -138,7 +138,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
                 <SelectField
                     label="vendor"
-                    defaultValue={selectedVendorId || item.vendor?.name}
+                    defaultValue={selectedVendorId || item.vendor.name}
                     onBlur={() =>
                         blurVendorsSelectField(
                             selectedVendorId,
@@ -152,8 +152,24 @@ const PartInfo = ({ item, isLoading }: Props) => {
                     id={item.vendorId}
                 />
             </Container>
+            <EditableField
+                label="description"
+                defaultValue={item.description}
+                handleInputChange={(value) => inputChange('description', value, setUpdatedItem)}
+                multiline
+                onBlur={() =>
+                    blurInputField(
+                        'description',
+                        updatedItem,
+                        setSnackbarText,
+                        setSnackbarSeverity,
+                        true
+                    )
+                }
+            />
+
             {snackbar}
-        </form>
+        </PartInfoForm>
     )
 }
 
