@@ -1,7 +1,6 @@
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import { Box, ClickAwayListener, MenuItem, TextField } from '@mui/material'
+import { Box, ClickAwayListener, MenuItem } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { Edit, LabelContainer, TextBoxWrap, TypeContainer } from './styles'
+import { Edit, LabelContainer, StyledTextField, TextBoxWrap, TypeContainer } from './styles'
 import { TypeProps } from './types'
 import { useState } from 'react'
 
@@ -33,14 +32,13 @@ export const TypeField = ({
                         <Edit onClick={handleEditClick} />
                     </LabelContainer>
                     <TypeContainer>
-                        <TextField
+                        <StyledTextField
                             {...register(label.toLowerCase())}
                             onBlur={onBlur}
                             select
                             onChange={handleSelectChange}
-                            SelectProps={{
-                                IconComponent: () => (!isOpen ? null : <ArrowDropDownIcon />),
-                            }}
+                            isOpen={isOpen}
+                            fullWidth
                             variant="standard"
                             value={defaultValue}
                             InputProps={{
@@ -53,7 +51,7 @@ export const TypeField = ({
                                     {option}
                                 </MenuItem>
                             ))}
-                        </TextField>
+                        </StyledTextField>
                     </TypeContainer>
                 </Box>
             </ClickAwayListener>
