@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import CustomDialog from '../../components/Dialog/Index'
+import { useSnackBar } from '../../hooks'
 import { List, UpdateList } from '../../services/apiTypes'
 import { useDeleteList } from '../../services/hooks/List/useDeleteList'
 import { useUpdateList } from '../../services/hooks/List/useUpdateList'
@@ -18,11 +19,16 @@ export const ListHeader = ({ list }: Props) => {
     const [title, setTitle] = useState(list.title)
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
-    const { mutate, isSuccess } = useDeleteList()
-    const { mutate: updateList, status: listUpdateStatus } = useUpdateList(
-        list.id
-    )
-
+    const { mutate, isSuccess, status, data: deleteData } = useDeleteList()
+    const {
+        mutate: updateList,
+        status: listUpdateStatus,
+        isSuccess: listSuccess,
+        error,
+        isError,
+        data,
+    } = useUpdateList(list.id)
+    const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
         setOpen(true)
@@ -38,7 +44,16 @@ export const ListHeader = ({ list }: Props) => {
     const handleEdit = () => {
         setOpenEdit(true)
         var newTitle: UpdateList = { id: list.id, title: title ?? list.title }
-        updateList(newTitle)
+        updateList(newTitle, {
+            onSuccess: (data) => {
+                setSnackbarText(`${list.title} was changed to ${title}`)
+                if (data.status >= 400) {
+                    setSnackbarSeverity('error')
+                    setSnackbarText(`${data.statusText}, please try again.`)
+                }
+            },
+        })
+
         handleEditClose()
     }
     const handleEditClose = () => {
@@ -53,11 +68,22 @@ export const ListHeader = ({ list }: Props) => {
 
     const handleDelete = () => {
         setOpen(true)
-        mutate(list.id)
-        handleClose()
-        navigate('/makelist')
+        mutate(list.id, {
+            onSuccess: (deleteData) => {
+                handleClose()
+
+                setSnackbarText(`${list.title} was deleted`)
+                navigate('/makelist')
+                if (deleteData.status >= 400) {
+                    setSnackbarSeverity('error')
+                    setSnackbarText(
+                        `${deleteData.statusText}, please try again.`
+                    )
+                }
+            },
+        })
     }
-   
+
     return (
         <>
             <Header>
@@ -103,6 +129,7 @@ export const ListHeader = ({ list }: Props) => {
                     variant="standard"
                 />
             </CustomDialog>
+            {snackbar}
         </>
     )
 }

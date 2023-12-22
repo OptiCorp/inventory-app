@@ -26,7 +26,7 @@ export const FlexWrapper = styled.div`
 
 export const SearchResultsContainer = styled.div`
     grid-column: 1/1;
-    max-width: 1000px;
+    max-width: 900px;
 `
 
 type Props = {
@@ -34,7 +34,7 @@ type Props = {
 }
 export const SearchContainerList = styled.div<Props>`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 3rem;
     height: ${({ height }) => height};
 `

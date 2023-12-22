@@ -28,11 +28,12 @@ import GlobalStyles from './style/GlobalStyles'
 import AddCategory from './pages/admin/category/AddCategory.tsx'
 import AddVendor from './pages/admin/vendor/AddVendor.tsx'
 import AddLocation from './pages/admin/location/AddLocation.tsx'
+import { useSnackBar } from './hooks/useSnackbar.tsx'
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
     const queryClient = new QueryClient()
-
+    const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route element={<TopBar />}>
@@ -67,7 +68,7 @@ function App() {
                 {isAuthenticated && (
                     <UmAppContextProvider>
                         <GlobalStyles />
-
+{snackbar}
                         <RouterProvider router={router} />
                     </UmAppContextProvider>
                 )}

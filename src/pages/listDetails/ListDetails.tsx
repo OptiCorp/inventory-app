@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
 import { Button } from '../../components/Button/SubmitButton.tsx'
 import SearchBar from '../../components/searchBar/SearchBar'
 import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact.tsx'
 import SearchResultCard from '../../components/searchResultCard/SearchResultCard.tsx'
-import { useWindowDimensions } from '../../hooks'
-import { Item } from '../../services/apiTypes.ts'
+import { useSnackBar, useWindowDimensions } from '../../hooks'
+import { Item, UpdateList } from '../../services/apiTypes.ts'
 import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'
@@ -21,15 +21,16 @@ import {
     SearchContainerList,
     SearchResultsContainer,
 } from './styles.ts'
+import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx'
 
 const ListDetails = () => {
     const { listId } = useParams()
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { width } = useWindowDimensions()
-
+const navigate = useNavigate()
     const { data: list, isFetching } = useGetListById(listId!)
-
+ const { snackbar, setSnackbarText, setSnackbarSeverity } = useSnackBar()
     const {
         data: items,
         isLoading,
@@ -41,7 +42,7 @@ const ListDetails = () => {
             fetchNextPage()
         }
     }
-
+ const { mutate: updateList, status: listUpdateStatus } = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
@@ -59,8 +60,12 @@ const ListDetails = () => {
         }
     }, [items])
 
-  
-
+     const handleSave = () => {
+       
+         var save: UpdateList = { id: list!.id, title: list!.title }
+         updateList(save)
+         navigate('/makelist')
+     }
 
     return (
         <>
@@ -71,7 +76,9 @@ const ListDetails = () => {
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        placeholder={'Search for ID, description, PO number or S/N'}
+                        placeholder={
+                            'Search for ID, description, PO number or S/N'
+                        }
                     />
                     <Container>
                         {items?.pages.map((page, i) =>
@@ -85,7 +92,10 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCard part={item} icon={'add'} />
+                                        <SearchResultCard
+                                            part={item}
+                                            icon={'add'}
+                                        />
                                     </div>
                                 ) : (
                                     <div
@@ -96,7 +106,10 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCardCompact part={item} icon={'add'} />
+                                        <SearchResultCardCompact
+                                            part={item}
+                                            icon={'add'}
+                                        />
                                     </div>
                                 )
                             )
@@ -106,11 +119,7 @@ const ListDetails = () => {
                 {list ? (
                     <>
                         <FlexWrapper>
-
                             <ListHeader list={list} />
-
-
-                        
 
                             {list.items ? (
                                 <ListContainer>
@@ -136,7 +145,7 @@ const ListDetails = () => {
                         </FlexWrapper>
                     </>
                 ) : null}
-
+                {snackbar}
                 {(isLoading || isFetching) && (
                     <GlobalSpinnerContainer>
                         <Spinner />
