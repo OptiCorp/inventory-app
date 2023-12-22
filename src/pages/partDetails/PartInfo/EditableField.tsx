@@ -1,10 +1,16 @@
 import { Box, ClickAwayListener, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { Edit, InfoContainer, LabelContainer, TextBoxWrap } from './styles'
+import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles'
 import { EditableFieldProps } from './types'
 import { useState } from 'react'
 
-const EditableField = ({ label, defaultValue, onBlur, handleInputChange }: EditableFieldProps) => {
+const EditableField = ({
+    multiline,
+    label,
+    defaultValue,
+    onBlur,
+    handleInputChange,
+}: EditableFieldProps) => {
     const {
         register,
         formState: { errors },
@@ -12,12 +18,16 @@ const EditableField = ({ label, defaultValue, onBlur, handleInputChange }: Edita
     const [open, setOpen] = useState(false)
 
     const fieldErrorMessage = errors[label]?.message as string
+
     const handleClickAway = () => {
-        setOpen(false)
+        if (!fieldErrorMessage) {
+            setOpen(false)
+        }
     }
     const handleEditClick = () => {
         setOpen(true)
     }
+
     return (
         <TextBoxWrap>
             <ClickAwayListener onClickAway={handleClickAway}>
@@ -51,10 +61,12 @@ const EditableField = ({ label, defaultValue, onBlur, handleInputChange }: Edita
                                 handleInputChange?.(e.target.value)
                             }}
                             defaultValue={defaultValue}
+                            multiline={multiline}
+                            fullWidth
                         />
                     </InfoContainer>
 
-                    {fieldErrorMessage && <p style={{ color: 'red' }}>{fieldErrorMessage}</p>}
+                    {fieldErrorMessage && <ErrorP>{fieldErrorMessage}</ErrorP>}
                 </Box>
             </ClickAwayListener>
         </TextBoxWrap>
