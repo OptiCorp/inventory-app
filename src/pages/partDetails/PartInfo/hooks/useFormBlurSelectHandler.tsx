@@ -24,9 +24,9 @@ export const useFormBlurSelectHandler = (
             setSnackbarSeverity: SetState<AlertColor>
         ): void => {
             const fieldValue = obj[field]
-
+            // TODO: FIX infinite loop if text field left empty then open a select field
             if (selected === fieldValue || !selected) return
-            formContext.trigger().then(() => {
+            formContext.handleSubmit(() => {
                 mutate(
                     {
                         ...obj,
@@ -34,9 +34,16 @@ export const useFormBlurSelectHandler = (
                     },
                     {
                         onSuccess: (data) => {
-                            if (data.status >= 400) {
+                            if (data.status >= 400 && data.status < 500) {
                                 setSnackbarSeverity('error')
                                 setSnackbarText(`${data.statusText}, please try again.`)
+                                return
+                            } else if (data.status >= 500) {
+                                setSnackbarSeverity('error')
+                                setSnackbarText(
+                                    `Something went wrong on our end, refresh page and try again later.`
+                                )
+                                return
                             } else {
                                 if (options) {
                                     const selectedOption = options.find(
@@ -56,7 +63,7 @@ export const useFormBlurSelectHandler = (
                         },
                     }
                 )
-            })
+            })()
         },
         [formContext, mutate, obj, options]
     )
