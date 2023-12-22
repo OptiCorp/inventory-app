@@ -6,7 +6,7 @@ import {
     UpdateVendor,
     Vendor,
 } from '../../services/apiTypes'
-import { AdminActions, AdminSearchCardContainer } from './styles'
+import { AdminActions, AdminSearchCardContainer, TitleContainer } from './styles'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Button } from '@mui/material'
@@ -90,21 +90,20 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
 
     return (
         <AdminSearchCardContainer>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <TitleContainer>
                 {isEditing ? (
                     <input
                         type="text"
                         placeholder={data.name}
-                        style={{ fontSize: '20px' }}
+                        style={{ fontSize: '20px', width: '150px' }}
                         onBlur={(e) => handleEdit(isEditing, e)}
                     />
                 ) : (
                     <h2>{data.name}</h2>
                 )}
-            </div>
+            </TitleContainer>
             <AdminActions>
                 <Button
-                    variant="outlined"
                     color={isEditing ? 'success' : 'primary'}
                     sx={{ color: 'black', margin: '0 4px' }}
                     onClick={() => handleEdit(isEditing)}
@@ -117,7 +116,6 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
                 </Button>
                 <Button
                     onClick={() => handleDelete()}
-                    variant="outlined"
                     color="error"
                     sx={{ color: 'black', margin: '0 4px' }}
                 >

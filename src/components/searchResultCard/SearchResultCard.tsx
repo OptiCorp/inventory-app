@@ -10,7 +10,7 @@ type Props = {
 
 const SearchResultCard = ({ part, icon }: Props) => {
     const navigate = useNavigate()
-    console.log(part.id)
+
     return (
         <>
             <ResultCardContainer>

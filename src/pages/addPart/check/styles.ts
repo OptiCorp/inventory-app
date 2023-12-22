@@ -1,13 +1,14 @@
 import styled from 'styled-components'
-import { COLORS } from '../../../style/GlobalStyles'
 
 export const ButtonWrap = styled.div`
     display: flex;
     justify-content: end;
 `
 export const StyledTextArea = styled.textarea`
-    background-color: ${COLORS.secondary};
-    margin: 16;
+    background-color: #f6f6f6;
+    border: none;
+    border-bottom: 1px solid #000;
+    margin: 0 16px 0;
     display: block;
     max-width: 500px;
 `
@@ -38,5 +39,6 @@ export const StyledLabelText = styled.p`
     font-weight: 600;
     display: inline;
     margin: 0;
+    margin-left: 10px;
     font-size: 0.8rem;
 `

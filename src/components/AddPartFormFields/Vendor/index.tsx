@@ -8,6 +8,7 @@ import { FormSelect } from '../FormSelect'
 import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors.tsx'
 import { Vendor as VendorType } from '../../../services/apiTypes.ts'
 import { FormOption } from '../../../services/apiTypes.ts'
+import { StyledDiv } from '../Category/styles.ts'
 
 export const Vendor = () => {
     const { setValue } = useFormContext()
@@ -25,7 +26,7 @@ export const Vendor = () => {
     }, [selectedOption, setValue])
 
     return (
-        <div>
+        <StyledDiv>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="vendor">Choose a vendor</label>{' '}
@@ -43,6 +44,6 @@ export const Vendor = () => {
                 setState={setSelectedOption}
                 state={selectedOption}
             ></FormSelect>
-        </div>
+        </StyledDiv>
     )
 }

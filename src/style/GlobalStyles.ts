@@ -6,6 +6,7 @@ export const COLORS = {
     secondary: '#FFF',
     primary: '#000',
     gray: '#CACACA',
+    card: '#FBFBFB',
 
     lightGray: '#CCC',
     silverGray: '#DCDCDC',
@@ -29,8 +30,8 @@ const GlobalStyles = createGlobalStyle`
         background-color: ${COLORS.secondary};
     }
     .wrapper {
+   width: 100%;
     display: grid;
-    padding-inline: 2rem;
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     overflow-x: hidden;

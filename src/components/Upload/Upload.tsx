@@ -21,7 +21,7 @@ export const ExampleUpload = () => {
                 <StyledLabel>
                     {' '}
                     <input type="file" style={{ display: 'none' }} />
-                    upload new
+                    UPLOAD NEW
                 </StyledLabel>
             </Container>
         </>

@@ -8,6 +8,7 @@ import { FormSelect } from '../FormSelect'
 import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations.tsx'
 import { Location as LocationType } from '../../../services/apiTypes.ts'
 import { FormOption } from '../../../services/apiTypes.ts'
+import { StyledDiv } from '../Category/styles.ts'
 
 export const Location = () => {
     const { setValue } = useFormContext()
@@ -25,7 +26,7 @@ export const Location = () => {
     }, [selectedOption, setValue])
 
     return (
-        <div>
+        <StyledDiv>
             <InputWrap>
                 <IconContainer>
                     <label htmlFor="location">Choose a location</label>{' '}
@@ -43,6 +44,6 @@ export const Location = () => {
                 setState={setSelectedOption}
                 state={selectedOption}
             ></FormSelect>
-        </div>
+        </StyledDiv>
     )
 }

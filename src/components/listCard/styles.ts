@@ -7,13 +7,13 @@ import { COLORS } from '../../style/GlobalStyles'
 export const ListWrapper = styled.div`
     position: relative;
     padding: 8px;
-    background-color: ${COLORS.secondary};
+    background-color: ${COLORS.card};
     &:hover {
         background: ${COLORS.whiteSmoke};
     }
     cursor: pointer;
     border-radius: 6px;
-    box-shadow: 2.5px 2.5px ${COLORS.gray};
+    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
     width: 95%;
     max-width: 450px;
 `

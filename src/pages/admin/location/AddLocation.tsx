@@ -7,6 +7,7 @@ import {
     FormContainer,
     InputWrap,
     StyledForm,
+    SubmitButtonContainer,
 } from '../styles'
 import { ErrorMessage } from '@hookform/error-message'
 import { Button } from '../../../components/Button/SubmitButton'
@@ -25,7 +26,7 @@ const AddLocation = () => {
                             name="name"
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
-                        <ButtonContainer>
+                        <SubmitButtonContainer>
                             <Button
                                 id="addLocation"
                                 type="submit"
@@ -34,7 +35,7 @@ const AddLocation = () => {
                             >
                                 Add location
                             </Button>
-                        </ButtonContainer>
+                        </SubmitButtonContainer>
                     </InputWrap>
                 </StyledForm>
             </FormContainer>

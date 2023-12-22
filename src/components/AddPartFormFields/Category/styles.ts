@@ -25,3 +25,7 @@ export const IconContainer = styled.div`
     display: flex;
     gap: 4px;
 `
+
+export const StyledDiv = styled.div`
+    margin-top: 24px;
+`

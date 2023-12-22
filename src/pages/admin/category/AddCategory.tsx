@@ -9,6 +9,7 @@ import {
     FormContainer,
     InputWrap,
     StyledForm,
+    SubmitButtonContainer,
 } from '../styles'
 import { ErrorMessage } from '@hookform/error-message'
 
@@ -25,7 +26,7 @@ const AddCategory = () => {
                             name="name"
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
-                        <ButtonContainer>
+                        <SubmitButtonContainer>
                             <Button
                                 id="addCategory"
                                 type="submit"
@@ -34,7 +35,7 @@ const AddCategory = () => {
                             >
                                 Add category
                             </Button>
-                        </ButtonContainer>
+                        </SubmitButtonContainer>
                     </InputWrap>
                 </StyledForm>
             </FormContainer>
