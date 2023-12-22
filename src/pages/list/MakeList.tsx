@@ -10,6 +10,8 @@ import { useAddList } from '../../services/hooks/List/useAddList.tsx'
 import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx'
 import { GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
 import { FlexWrapper, SavedListsTitle, SubmitButton } from './styles.ts'
+import { Button } from '../../components/Button/SubmitButton.tsx'
+import { COLORS } from '../../style/GlobalStyles.ts'
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
@@ -59,10 +61,13 @@ const MakeList = () => {
                     searchTerm={searchTerm}
                     placeholder={'Search for title or items'}
                 />
-
-                <SubmitButton style={{ marginLeft: '13px' }} onClick={handleClickOpen}>
-                    New list
-                </SubmitButton>
+                <Button
+                    backgroundColor={` ${COLORS.primary}`}
+                    color={` ${COLORS.secondary}`}
+                    onClick={handleClickOpen}
+                >
+                    NEW LIST
+                </Button>
                 <CustomDialog
                     title="New list"
                     open={open}

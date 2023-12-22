@@ -8,8 +8,8 @@ export const SubmitButton = styled.button`
     height: 30px;
     cursor: pointer;
     &:hover {
-        background-color: ${COLORS.gray};
     }
+    border: none;
 `
 
 export const CancelButton = styled.button`
@@ -19,6 +19,6 @@ export const CancelButton = styled.button`
     height: 30px;
     cursor: pointer;
     &:hover {
-        background-color: whitesmoke;
     }
+    border: 1px solid #000;
 `
