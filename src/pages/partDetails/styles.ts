@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
+import { TextField } from '@mui/material'
 
 export const StyledContainerDiv = styled.div`
     display: flex;
@@ -37,7 +38,10 @@ export const StyledList = styled.ul`
     text-decoration: none;
 `
 export const ListItem = styled.li`
-    line-height: 2rem;
-
     margin: 0 auto;
+    line-height: 2rem;
+`
+export const ScrollTextField = styled(TextField)`
+    overflow-y: auto;
+    max-height: 200px;
 `
