@@ -20,7 +20,12 @@ export const Log = ({ item }: { item: Item }) => {
     return (
         <>
             <h4>Log</h4>
-            <ScrollTextField value={formattedLogEntries} multiline variant="filled" disabled />
+            <ScrollTextField
+                value={formattedLogEntries.length < 1 ? 'No log entries' : formattedLogEntries}
+                multiline
+                variant="filled"
+                disabled
+            />
         </>
     )
 }
