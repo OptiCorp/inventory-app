@@ -44,6 +44,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
     const inputChange = useFormInputChangeHandler()
     const { snackbar } = useSnackBar()
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
+
     if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
         return <p>Loading.. </p>
     }
@@ -64,7 +65,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
                 <SelectField
                     label="category"
-                    defaultValue={selectedCategoryId || item.category.name}
+                    defaultValue={selectedCategoryId || (item.category ? item.category.name : '')}
                     onBlur={() =>
                         blurCategorySelectField(
                             selectedCategoryId,
@@ -80,7 +81,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
                 <SelectField
                     label="location"
-                    defaultValue={selectedLocationId || item.location.name}
+                    defaultValue={selectedLocationId || (item.location ? item.location.name : '')}
                     onBlur={() =>
                         blurLocationsSelectField(
                             selectedLocationId,
@@ -139,7 +140,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
                 <SelectField
                     label="vendor"
-                    defaultValue={selectedVendorId || item.vendor.name}
+                    defaultValue={selectedVendorId || (item.vendor ? item.vendor.name : '')}
                     onBlur={() =>
                         blurVendorsSelectField(
                             selectedVendorId,
