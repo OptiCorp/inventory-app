@@ -3,7 +3,7 @@ import { useWindowDimensions } from '../../../hooks/index.ts'
 import { Item } from '../../../services/apiTypes.ts'
 import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact.tsx'
 import { useGetItemsByUser } from '../../../services/hooks/Items/useGetItemByUser.tsx'
-import { RecentlyAddedContainer } from './styles.ts'
+import { Container, RecentlyAddedContainer } from './styles.ts'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { COLORS } from '../../../style/GlobalStyles.ts'
 import { useNavigate } from 'react-router-dom'
@@ -17,13 +17,7 @@ const RecentlyAdded = () => {
 
     return (
         <RecentlyAddedContainer>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}
-            >
+            <Container>
                 <h3>Recently added by you</h3>
                 <Button
                     onClick={() => navigate('batch')}
@@ -31,7 +25,7 @@ const RecentlyAdded = () => {
                     backgroundColor={COLORS.primary}
                     color="white"
                 />
-            </div>
+            </Container>
             {myItems?.map((item: Item) =>
                 width > 800 ? (
                     <SearchResultCard key={item.id} part={item} />
