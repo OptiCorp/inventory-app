@@ -11,7 +11,8 @@ export const InputWrap = styled.div`
 
 export const ErrorP = styled.span`
     color: red;
-    width: 70%;
+    margin-right: auto;
+    margin-left: 20px;
     font-weight: 600;
 `
 export const StyledSelect = styled.select`
