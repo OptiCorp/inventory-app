@@ -20,7 +20,11 @@ export const COLORS = {
     aliceBlue: '#F0F8FF',
 }
 
-const GlobalStyles = createGlobalStyle`
+type Props = {
+    width: number
+}
+
+const GlobalStyles = createGlobalStyle<Props>`
    body, :root, html {
         margin: 0;
         width: 100%;
@@ -30,8 +34,8 @@ const GlobalStyles = createGlobalStyle`
         background-color: ${COLORS.secondary};
     }
     .wrapper {
-   width: 100%;
     display: grid;
+    padding: ${({ width }) => (width < 500 ? 0 : '8px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     overflow-x: hidden;

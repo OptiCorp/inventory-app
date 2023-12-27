@@ -6,8 +6,14 @@ import { COLORS } from '../../../style/GlobalStyles'
 import { FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
 import { RadioWrapper, StyledInput } from '../batch/styles.ts'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+
 const CheckForm = () => {
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
     const [checked, setChecked] = useState<boolean>(false)
+    const [desription, setDescription] = useState<string>(
+        getLocalStorageWithExpiry('checks-data') || ''
+    )
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
 
@@ -16,6 +22,7 @@ const CheckForm = () => {
             setError('Tick box before continuing')
             return
         }
+        setLocalStorageWithExpiry('checks-data', desription, 0.5)
         navigate('/add-part/upload')
     }
 
@@ -39,7 +46,13 @@ const CheckForm = () => {
                 <StyledLabelText>
                     Describe what has been checked, and inform about deviations
                 </StyledLabelText>
-                <StyledTextArea id="textArea" rows={5} cols={40} />
+                <StyledTextArea
+                    id="textArea"
+                    rows={5}
+                    cols={40}
+                    onBlur={(e) => setDescription(e.currentTarget.value)}
+                    defaultValue={desription}
+                />
             </FormRadio>
             <Button
                 backgroundColor={` ${COLORS.primary}`}

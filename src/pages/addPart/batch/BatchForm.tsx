@@ -5,15 +5,19 @@ import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 import { COLORS } from '../../../style/GlobalStyles.ts'
 import { FormContainer } from '../styles.ts'
 import { FormBatchRadio, RadioWrapper, StyledInput } from './styles.ts'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
 
 enum Batch {
-    yes,
-    no,
-    undefined,
+    yes = 'yes',
+    no = 'no',
+    undefined = 'undefined',
 }
 
 const BatchForm = () => {
-    const [batchType, setBatchType] = useState<Batch>(Batch.undefined)
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
+    const [batchType, setBatchType] = useState<string>(
+        getLocalStorageWithExpiry('batch-data') || Batch.undefined
+    )
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
 
@@ -22,6 +26,7 @@ const BatchForm = () => {
             setError('One option must be picked')
             return
         }
+        setLocalStorageWithExpiry('batch-data', batchType, 1)
         navigate('/add-part/checks')
     }
 
@@ -35,6 +40,7 @@ const BatchForm = () => {
                 <label>
                     <RadioWrapper>
                         <StyledInput
+                            checked={batchType === Batch.no ? true : false}
                             type="radio"
                             name="batchCheck"
                             onChange={() => setBatchType(Batch.no)}
@@ -45,6 +51,7 @@ const BatchForm = () => {
                 <label>
                     <RadioWrapper>
                         <StyledInput
+                            checked={batchType === Batch.yes ? true : false}
                             type="radio"
                             name="batchCheck"
                             onChange={() => setBatchType(Batch.yes)}

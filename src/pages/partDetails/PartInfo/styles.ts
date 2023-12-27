@@ -4,16 +4,16 @@ import { COLORS } from '../../../style/GlobalStyles'
 import { StyledTextFieldProps } from './types'
 import { TextField } from '@mui/material'
 
-
-export const PartInfoForm = styled.form`    
-    display: flex; 
-    flex-direction: column; 
-    gap: 42px 
+export const PartInfoForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
 `
 
 export const Container = styled.div`
     display: grid;
     gap: 42px;
+
     grid-template-columns: repeat(1, 1fr);
 
     @media only screen and (min-width: 550px) {
@@ -71,9 +71,8 @@ export const ErrorP = styled.span`
     font-weight: 600;
 `
 
-
 export const StyledTextField = styled(TextField)<StyledTextFieldProps>`
     & .MuiSvgIcon-root {
-        display: ${(props) => (!props.isOpen && 'none')};
+        display: ${(props) => !props.isOpen && 'none'};
     }
 `
