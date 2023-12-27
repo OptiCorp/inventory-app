@@ -24,6 +24,7 @@ import {
     HeaderWrap,
     TopBarContainer,
 } from './styles'
+import { useMsal } from '@azure/msal-react'
 
 const TopBar = () => {
     const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false)
@@ -32,6 +33,11 @@ const TopBar = () => {
 
     const hamburgerLink = (location: string) => {
         navigate(location)
+    }
+    const { instance } = useMsal()
+    const handleSignOut = () => {
+        navigate('/')
+        instance.logoutPopup()
     }
 
     return (
@@ -190,7 +196,7 @@ const TopBar = () => {
                                 <ListItem>
                                     <ListItemButton
                                         onClick={() => {
-                                            hamburgerLink('makelist')
+                                            handleSignOut()
                                             setHamburgerIsOpen(false)
                                         }}
                                     >
