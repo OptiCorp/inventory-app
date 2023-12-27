@@ -12,6 +12,7 @@ export const partSchema = z.object({
     locationId: z.string().nullish(),
     parentId: z.string().nullish(),
     addedById: z.string().min(1),
+    uniqueWpId: z.boolean().refine((data) => data, {}),
 })
 
 export type PartSchema = z.infer<typeof partSchema>

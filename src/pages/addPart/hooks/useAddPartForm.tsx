@@ -18,6 +18,7 @@ const defaultValues: PartSchema = {
     description: '',
     comment: '',
     addedById: '',
+    uniqueWpId: false,
 }
 
 enum Batch {
