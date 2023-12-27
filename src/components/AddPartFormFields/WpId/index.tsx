@@ -22,7 +22,8 @@ export const WpId = () => {
 
     useEffect(() => {
         setValue('wpId', wpId)
-    }, [setValue, wpId])
+        setValue('uniqueWpId', isUnique)
+    }, [setValue, wpId, isUnique])
 
     return (
         <StyledDiv>
