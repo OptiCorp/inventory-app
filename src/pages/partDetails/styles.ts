@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
-import { TextField } from '@mui/material'
+import { Link, TextField } from '@mui/material'
 
 export const StyledContainerDiv = styled.div`
     display: flex;
@@ -44,4 +44,16 @@ export const ListItem = styled.li`
 export const ScrollTextField = styled(TextField)`
     overflow-y: auto;
     max-height: 200px;
+`
+
+export const BreadcrumbsMargin = styled.div`
+margin-bottom: 10px;
+`
+export const BreadcrumbLink = styled(Link)`
+color: ${COLORS.primary} !important;
+border-bottom: 1px black dotted;
+cursor: pointer;
+&:hover {
+    font-weight: bolder;
+}
 `
