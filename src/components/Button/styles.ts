@@ -24,3 +24,9 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: end;
 `
+
+export const ButtonsWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    //gap: 25px;
+`

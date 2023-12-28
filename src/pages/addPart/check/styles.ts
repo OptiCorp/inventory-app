@@ -8,9 +8,10 @@ export const StyledTextArea = styled.textarea`
     background-color: #f6f6f6;
     border: none;
     border-bottom: 1px solid #000;
-    margin: 0 16px 0;
+    margin: 0;
     display: block;
     max-width: 500px;
+    padding: 1rem;
 `
 export const StyledInput = styled.input`
     margin: 0;
