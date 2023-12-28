@@ -166,3 +166,15 @@ export type FormOption = {
     value: string
     label: string
 }
+
+export type AddDocument = {
+    itemId: string
+    files: File[]
+}
+
+export type Document = {
+    id: string
+    blobRef: string
+    contentType: string
+    bytes: string
+}

@@ -1,6 +1,15 @@
 import { useMsal } from '@azure/msal-react'
 import { useState } from 'react'
-import { BackgroundContainer, ButtonWrapper, Header, LoginContainer, TitleHeader } from './styles'
+import {
+    BackgroundContainer,
+    ButtonWrapper,
+    Header,
+    LoginButton,
+    LoginContainer,
+    TitleHeader,
+} from './styles'
+import { Button } from '../../components/Button/SubmitButton'
+import { COLORS } from '../../style/GlobalStyles'
 
 export const Login = () => {
     const { instance } = useMsal()
@@ -17,14 +26,14 @@ export const Login = () => {
                     <TitleHeader>Sign in to your Account</TitleHeader>
                 </Header>
                 <ButtonWrapper>
-                    <button
+                    <LoginButton
                         type="submit"
                         aria-disabled={isSubmitting ? true : false}
                         aria-label={isSubmitting ? 'loading data' : ''}
                         onClick={onSubmit}
                     >
                         {isSubmitting ? <>loading</> : 'Log in'}
-                    </button>
+                    </LoginButton>
                 </ButtonWrapper>
             </LoginContainer>
         </BackgroundContainer>
