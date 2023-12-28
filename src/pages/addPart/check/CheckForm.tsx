@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton'
 import ProgressBar from '../../../components/progressBar/ProgressBar'
@@ -7,12 +7,15 @@ import { FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
 import { RadioWrapper, StyledInput } from '../batch/styles.ts'
 import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+import { ButtonsWrapper } from '../../../components/Button/styles.ts'
 
 const CheckForm = () => {
     const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
-    const [checked, setChecked] = useState<boolean>(false)
-    const [desription, setDescription] = useState<string>(
-        getLocalStorageWithExpiry('checks-data') || ''
+    const [checked, setChecked] = useState<boolean>(
+        getLocalStorageWithExpiry('checks-check') === 'true'
+    )
+    const [description, setDescription] = useState<string>(
+        getLocalStorageWithExpiry('checks-description') || ''
     )
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
@@ -22,9 +25,16 @@ const CheckForm = () => {
             setError('Tick box before continuing')
             return
         }
-        setLocalStorageWithExpiry('checks-data', desription, 0.5)
         navigate('/add-part/upload')
     }
+
+    useEffect(() => {
+        setLocalStorageWithExpiry('checks-check', checked.toString(), 5)
+    }, [checked])
+
+    useEffect(() => {
+        setLocalStorageWithExpiry('checks-description', description, 5)
+    }, [description])
 
     return (
         <FormContainer>
@@ -35,6 +45,7 @@ const CheckForm = () => {
                 <label>
                     <RadioWrapper>
                         <StyledInput
+                            checked={checked}
                             type="checkbox"
                             name="checks"
                             onChange={() => setChecked(!checked)}
@@ -51,16 +62,25 @@ const CheckForm = () => {
                     rows={5}
                     cols={40}
                     onBlur={(e) => setDescription(e.currentTarget.value)}
-                    defaultValue={desription}
+                    defaultValue={description}
                 />
             </FormRadio>
-            <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
-                onClick={handleClick}
-            >
-                NEXT
-            </Button>
+            <ButtonsWrapper>
+                <Button
+                    backgroundColor={` ${COLORS.secondary}`}
+                    color={` ${COLORS.primary}`}
+                    onClick={() => navigate('/add-part/batch')}
+                >
+                    Back
+                </Button>
+                <Button
+                    backgroundColor={` ${COLORS.primary}`}
+                    color={` ${COLORS.secondary}`}
+                    onClick={handleClick}
+                >
+                    NEXT
+                </Button>
+            </ButtonsWrapper>
         </FormContainer>
     )
 }

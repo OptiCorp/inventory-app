@@ -23,7 +23,6 @@ export const Category = () => {
         setValue('categoryId', selectedOption?.value || '')
     }, [selectedOption, setValue])
 
-    console.log(selectedOption)
     return (
         <StyledDiv>
             <InputWrap>

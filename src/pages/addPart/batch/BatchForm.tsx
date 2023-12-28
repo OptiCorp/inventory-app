@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
@@ -26,9 +26,12 @@ const BatchForm = () => {
             setError('One option must be picked')
             return
         }
-        setLocalStorageWithExpiry('batch-data', batchType, 1)
         navigate('/add-part/checks')
     }
+
+    useEffect(() => {
+        setLocalStorageWithExpiry('batch-data', batchType, 5)
+    }, [batchType])
 
     return (
         <FormContainer>
