@@ -5,6 +5,7 @@ import { COLORS } from '../../style/GlobalStyles'
 type ProgressProps = {
     active: boolean
     width: number
+    finished?: boolean
 }
 
 export const Container = styled.div`
@@ -15,11 +16,13 @@ export const Container = styled.div`
 
 export const ProgressCircle = styled.div<ProgressProps>`
     border-radius: 50%;
-    background-color: ${({ active }) => (active ? COLORS.primary : COLORS.gray)};
-    width: 20px;
-    height: 20px;
+    border: 5px solid gray;
+    background-color: ${({ finished }) => (finished ? COLORS.primary : COLORS.gray)};
+    border-color: ${({ active, finished }) => (active || finished ? COLORS.primary : COLORS.gray)};
+    width: 10px;
+    height: 10px;
     padding: 8px;
-    color: ${({ active }) => (active ? COLORS.secondary : COLORS.primary)};
+    color: ${({ finished }) => (finished ? COLORS.secondary : COLORS.primary)};
     display: flex;
     justify-content: center;
     align-items: center;

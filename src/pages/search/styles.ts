@@ -7,7 +7,6 @@ type Props = {
 export const SearchContainer = styled.div<Props>`
     display: flex;
     flex-direction: column;
-
     height: ${({ height }) => height};
 `
 
@@ -37,6 +36,8 @@ export const StyledLink = styled(Link)`
 
 export const StyledSearchedLink = styled(Link)`
     color: ${COLORS.primary};
+    text-decoration: none;
+    border-bottom: 1px dotted #000;
 `
 
 export const GlobalSpinnerContainer = styled.div`
@@ -72,4 +73,9 @@ export const RecentTitle = styled.h3`
     font-weight: 600;
     margin: 0;
     line-height: 2rem;
+    font-size: 16px;
+`
+
+export const SpanMargin = styled.span`
+    margin-bottom: 8px;
 `

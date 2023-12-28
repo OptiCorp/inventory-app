@@ -1,18 +1,18 @@
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
 import TextField from '@mui/material/TextField'
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import CustomDialog from '../../components/Dialog/Index.tsx'
 import ListCard from '../../components/listCard/listCard.tsx'
 import SearchBar from '../../components/searchBar/SearchBar'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
+import { useSnackBar } from '../../hooks/useSnackbar.tsx'
 import { List } from '../../services/apiTypes.ts'
 import { useAddList } from '../../services/hooks/List/useAddList.tsx'
 import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx'
 import { GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
-import { CancelButton, FlexWrapper, SavedListsTitle, SubmitButton } from './styles.ts'
+import { FlexWrapper, SavedListsTitle, SubmitButton } from './styles.ts'
+import { Button } from '../../components/Button/SubmitButton.tsx'
+import { COLORS } from '../../style/GlobalStyles.ts'
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
@@ -24,7 +24,7 @@ const MakeList = () => {
     const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id)
 
     const { mutate, isSuccess } = useAddList()
-
+    const { snackbar } = useSnackBar()
     useEffect(() => {
         setSearchTerm((prev) => searchParam || prev)
     }, [searchParam])
@@ -63,30 +63,31 @@ const MakeList = () => {
                     placeholder={'Search for title or items'}
                 />
 
-                <SubmitButton style={{ marginLeft: '13px' }} onClick={handleClickOpen}>
-                    New list
-                </SubmitButton>
+                <Button
+                    backgroundColor={` ${COLORS.primary}`}
+                    color={` ${COLORS.secondary}`}
+                    onClick={handleClickOpen}
+                >
+                    NEW LIST
+                </Button>
 
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>New list</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            onChange={(e) => setTitle(e.target.value)}
-                            autoFocus
-                            margin="dense"
-                            id="title"
-                            label="List title"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <CancelButton onClick={handleClose}>Cancel</CancelButton>
-                        <SubmitButton onClick={handleSubmit}>Confirm</SubmitButton>
-                    </DialogActions>
-                </Dialog>
-
-                <SavedListsTitle>Your saved lists</SavedListsTitle>
+                <CustomDialog
+                    title="New list"
+                    open={open}
+                    onClose={handleClose}
+                    CancelButtonOnClick={handleClose}
+                    SubmitButtonOnClick={handleSubmit}
+                >
+                    <TextField
+                        onChange={(e) => setTitle(e.target.value)}
+                        autoFocus
+                        margin="dense"
+                        id="title"
+                        label="List title"
+                        fullWidth
+                        variant="standard"
+                    />
+                </CustomDialog>
 
                 {isLoading && (
                     <GlobalSpinnerContainer>
@@ -100,6 +101,7 @@ const MakeList = () => {
                     ))}
                 </FlexWrapper>
             </SearchContainer>
+            {snackbar}
         </>
     )
 }

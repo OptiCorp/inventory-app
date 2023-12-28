@@ -1,31 +1,30 @@
 import { Alert, Snackbar } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import UmAppContext from '../contexts/UmAppContext'
 
-const useSnackBar = () => {
-    const [showSnackbar, setShowSnackBar] = useState(false)
-    const [snackbarText, setSnackbarText] = useState('')
+export const useSnackBar = () => {
+    const {
+        showSnackbar,
+        snackbarText,
+        setSnackbarText,
+        setShowSnackbar,
+        snackbarSeverity,
+        setSnackbarSeverity,
+    } = useContext(UmAppContext)
 
     const snackbar = (
         <Snackbar
             autoHideDuration={3000}
             onClose={() => {
-                setShowSnackBar(false)
+                setShowSnackbar(false)
                 setSnackbarText('')
+                setSnackbarSeverity('success')
             }}
             open={showSnackbar}
         >
-            <Alert>{snackbarText}</Alert>
+            <Alert severity={snackbarSeverity}>{snackbarText}</Alert>
         </Snackbar>
     )
-    useEffect(() => {
-        if (snackbarText.length < 1) return
-        setShowSnackBar(true)
-    }, [snackbarText])
 
-    return {
-        setSnackbarText,
-        snackbar,
-    }
+    return { snackbar }
 }
-
-export default useSnackBar

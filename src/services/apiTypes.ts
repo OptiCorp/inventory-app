@@ -46,7 +46,6 @@ export type Item = {
     location: Location
     user: User
     logEntries: LogEntry[]
-    [key: string]: any
 }
 
 export type LogEntry = {
@@ -76,11 +75,16 @@ export type List = {
     createdById: string
     createdDate: string
     updatedDate: string | null
-    items: string[] | null
+    items: Item[]
 }
 
 export type AddList = {
     createdById: string
+    title: string
+}
+
+export type UpdateList = {
+    id: string
     title: string
 }
 
@@ -91,13 +95,14 @@ export type MutateItemList = {
 
 export type AddItem = {
     wpId: string
+    categoryId: string
     serialNumber: string
     productNumber: string
     type: string
-    location?: string | null
+    locationId?: string | null
     description: string
     parentId?: string | null
-    vendor: string
+    vendorId: string
     addedById: string | null
     comment?: string | null
 }
@@ -127,6 +132,11 @@ export type Vendor = {
     addedById: string
 }
 
+export type AddVendor = {
+    name: string
+    addedById: string
+}
+
 export type UpdateVendor = {
     id: string
     name: string
@@ -150,4 +160,21 @@ export type AddCategory = {
 export type UpdateCategory = {
     id: string
     name: string
+}
+
+export type FormOption = {
+    value: string
+    label: string
+}
+
+export type AddDocument = {
+    itemId: string
+    files: File[]
+}
+
+export type Document = {
+    id: string
+    blobRef: string
+    contentType: string
+    bytes: string
 }

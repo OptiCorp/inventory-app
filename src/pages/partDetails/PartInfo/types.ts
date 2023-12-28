@@ -1,43 +1,47 @@
-import { Vendor } from '../../../services/apiTypes'
 
-export type Types = 'Unit' | 'Assembly' | 'Sub-Assembly' | 'Part'
+import type { ChangeEvent, Dispatch, SetStateAction } from "react"
+import { Category, Location, Vendor } from "../../../services/apiTypes"
 
+
+
+
+export type Types = 'Unit' | 'Assembly' | 'Subassembly' | 'Part'
+
+export type SetState<T> = Dispatch<SetStateAction<T>>
 export type EditableFieldProps = {
     label: ItemFields
-    defaultValue: string | null
+    defaultValue: string
     onBlur: () => void
-    isSelect?: boolean
     options?: Types[]
-    activeEditMode: ItemFields | null
-    setActiveEditMode: React.Dispatch<React.SetStateAction<ItemFields | null>>
-    handleSelectChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    handleSelectChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
     handleInputChange?: (
         value: string | undefined
     ) => void /* (fieldName: keyof UpdateItem, value: string | undefined) => void */
     selectedType?: string
+    multiline?: boolean
+}
+
+export type StyledTextFieldProps = {
+    isOpen: boolean
 }
 
 export type TypeProps = {
-    handleSelectChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    handleSelectChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
     selectedType?: string
     label: ItemFields
     defaultValue: string | null
     onBlur: () => void
-    options?: Types[]
-    activeEditMode: ItemFields | null
-    setActiveEditMode: React.Dispatch<React.SetStateAction<ItemFields | null>>
+    options: Types[]
 }
 
-export type VendorProps = {
+export type SelectProps = {
     id: string
-    handleSelectChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
     selectedType?: string
     label: ItemFields
     defaultValue: string | null
+    options: Vendor[] | Category[] | Location[]
     onBlur: () => void
-    options?: Vendor[]
-    activeEditMode: ItemFields | null
-    setActiveEditMode: React.Dispatch<React.SetStateAction<ItemFields | null>>
+    handleSelectChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export type ItemFields =
@@ -47,3 +51,4 @@ export type ItemFields =
     | 'productNumber'
     | 'serialNumber'
     | 'vendor'
+    | 'description'

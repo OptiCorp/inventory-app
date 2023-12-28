@@ -6,6 +6,7 @@ import {
     AddItem,
     AddList,
     AddLocation,
+    AddVendor,
     Category,
     Item,
     List,
@@ -15,8 +16,11 @@ import {
     UpdateLocation,
     UpdateVendor,
     User,
+    UpdateList,
     UserRole,
     Vendor,
+    AddDocument,
+    Document,
 } from './apiTypes'
 
 const request = {
@@ -33,7 +37,8 @@ const apiService = () => {
     // Generic function for get requests
 
     // Microsoft Graph
-    const getMsGraphImageByFetch = async (url: string): Promise<any> => {
+
+    const getMsGraphImageByFetch = async (url: string): Promise<string | undefined> => {
         return pca.acquireTokenSilent(microsoftGraphRequest).then(async (tokenResponse) => {
             const getOperation = {
                 method: 'GET',
@@ -56,7 +61,7 @@ const apiService = () => {
     }
 
     // User Management
-    const getByFetch = async (url: string): Promise<any> => {
+    const getByFetch = async <T>(url: string): Promise<T> => {
         return pca.acquireTokenSilent(request).then(async (tokenResponse) => {
             const getOperation = {
                 method: 'GET',
@@ -72,7 +77,7 @@ const apiService = () => {
     }
 
     // Generic function for post requests
-    const postByFetch = async (url: string, bodyData?: any) => {
+    const postByFetch = async <T>(url: string, bodyData: T) => {
         try {
             const tokenResponse = await pca.acquireTokenSilent(request)
             const postOperation = {
@@ -92,8 +97,27 @@ const apiService = () => {
         }
     }
 
+    const postFileByFetch = async (url: string, bodyData: FormData) => {
+        try {
+            const tokenResponse = await pca.acquireTokenSilent(request)
+            const postOperation = {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${tokenResponse.accessToken}`,
+                    'Access-Control-Allow-Origin': '*',
+                },
+                body: bodyData,
+            }
+            const res = await fetch(`${API_URL}/${url}`, postOperation)
+            return res
+        } catch (error) {
+            console.error('An error occurred:', error)
+            throw error
+        }
+    }
+
     // Generic function for put requests
-    const putByFetch = async (url: string, bodyData: any) => {
+    const putByFetch = async <T>(url: string, bodyData: T) => {
         try {
             const tokenResponse = await pca.acquireTokenSilent(request)
             const putOperations = {
@@ -198,12 +222,12 @@ const apiService = () => {
     // USER ROLE
 
     const getAllUserRoles = async (): Promise<UserRole[]> => {
-        const data = await getByFetch('GetAllUserRoles')
+        const data = await getByFetch<UserRole[]>('GetAllUserRoles')
         return data
     }
 
     const getUserRole = async (id: string): Promise<UserRole> => {
-        const data = await getByFetch(`GetUserRole?id=${id}`)
+        const data = await getByFetch<UserRole>(`GetUserRole?id=${id}`)
         return data
     }
 
@@ -251,7 +275,7 @@ const apiService = () => {
         return await getByFetch(`List/ByUserId/${userId}`)
     }
 
-    const getListById = async (id: string) => {
+    const getListById = async (id: string): Promise<List> => {
         return await getByFetch(`List/${id}`)
     }
 
@@ -259,7 +283,7 @@ const apiService = () => {
         return await getByFetch(`Item/ByUserId/${userId}`)
     }
 
-    const getItemById = async (id: string) => {
+    const getItemById = async (id: string): Promise<Item> => {
         return await getByFetch(`Item/${id}`)
     }
 
@@ -271,8 +295,17 @@ const apiService = () => {
         return await putByFetch(`Item/${id}?updatedById=${updatedById}`, item)
     }
 
+    const isWpIdUnique = async (id: string) => {
+        if (!id) return
+        return await getByFetch(`Item/IsWpIdUnique/${id}`)
+    }
+
     const addList = async (list: AddList): Promise<Response> => {
         return await postByFetch(`List`, list)
+    }
+
+    const updateList = async (id: string, list: UpdateList): Promise<Response> => {
+        return await putByFetch(`List/${id}`, list)
     }
 
     const deleteList = async (listId: string): Promise<Response> => {
@@ -292,8 +325,10 @@ const apiService = () => {
     }
 
     // Location
-    const getLocation = async () => {
-        const data = await getByFetch('Location')
+
+    const getLocation = async (): Promise<Location[]> => {
+        const data: Location[] = await getByFetch('Location')
+
         return data
     }
 
@@ -302,7 +337,7 @@ const apiService = () => {
     }
 
     const getLocationBySearchString = async (searchString: string): Promise<Location[]> => {
-        return await getByFetch(`Location/${searchString}`)
+        return await getByFetch(`Location/BySearchString/${searchString}`)
     }
 
     const addLocation = async (location: AddLocation): Promise<Response> => {
@@ -319,7 +354,8 @@ const apiService = () => {
 
     // Vendor
     const getVendor = async (): Promise<Vendor[]> => {
-        const data = await getByFetch('Vendor')
+        const data = await getByFetch<Vendor[]>('Vendor')
+
         return data
     }
 
@@ -331,7 +367,7 @@ const apiService = () => {
         return await getByFetch(`Vendor/BySearchString/${searchString}`)
     }
 
-    const addVendor = async (vendor: Omit<Vendor, 'id'>): Promise<Response> => {
+    const addVendor = async (vendor: AddVendor): Promise<Response> => {
         return await postByFetch('Vendor', vendor)
     }
 
@@ -344,17 +380,19 @@ const apiService = () => {
     }
 
     // Category
-    const getCategory = async () => {
-        const data = await getByFetch('Category')
+
+    const getCategory = async (): Promise<Category[]> => {
+        const data: Category[] = await getByFetch('Category')
+
         return data
     }
 
-    const getCategoryById = async (id: string) => {
+    const getCategoryById = async (id: string): Promise<Category> => {
         return await getByFetch(`Category/${id}`)
     }
 
     const getCategoryBySearchString = async (searchString: string): Promise<Category[]> => {
-        return await getByFetch(`Category/${searchString}`)
+        return await getByFetch(`Category/BySearchString/${searchString}`)
     }
 
     const addCategory = async (category: AddCategory): Promise<Response> => {
@@ -367,6 +405,17 @@ const apiService = () => {
 
     const deleteCategory = async (id: string) => {
         return await deleteByFetch(`Category/${id}`)
+    }
+
+    const getDocumentsByItemId = async (itemId: string): Promise<Document[]> => {
+        return await getByFetch(`Documentation/ByItemId/${itemId}`)
+    }
+
+    const addDocument = async (document: AddDocument): Promise<Response> => {
+        var formData = new FormData()
+        formData.append('ItemId', document.itemId)
+        formData.append('Files', document.files[0])
+        return await postFileByFetch(`Documentation`, formData)
     }
 
     return {
@@ -391,6 +440,7 @@ const apiService = () => {
         getListsByUserId,
         addList,
         deleteList,
+        updateList,
         getItemById,
         updateItemById,
         getListById,
@@ -414,6 +464,9 @@ const apiService = () => {
         addCategory,
         updateCategoryById,
         deleteCategory,
+        isWpIdUnique,
+        addDocument,
+        getDocumentsByItemId,
     }
 }
 

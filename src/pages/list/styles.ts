@@ -35,3 +35,10 @@ export const FlexWrapper = styled.div`
     gap: 16px;
     padding-bottom: 10px;
 `
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+`

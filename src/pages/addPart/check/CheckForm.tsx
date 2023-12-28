@@ -1,12 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton'
 import ProgressBar from '../../../components/progressBar/ProgressBar'
 import { COLORS } from '../../../style/GlobalStyles'
 import { FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
+import { RadioWrapper, StyledInput } from '../batch/styles.ts'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+import { ButtonsWrapper } from '../../../components/Button/styles.ts'
+
 const CheckForm = () => {
-    const [checked, setChecked] = useState<boolean>(false)
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
+    const [checked, setChecked] = useState<boolean>(
+        getLocalStorageWithExpiry('checks-check') === 'true'
+    )
+    const [description, setDescription] = useState<string>(
+        getLocalStorageWithExpiry('checks-description') || ''
+    )
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
 
@@ -18,6 +28,14 @@ const CheckForm = () => {
         navigate('/add-part/upload')
     }
 
+    useEffect(() => {
+        setLocalStorageWithExpiry('checks-check', checked.toString(), 5)
+    }, [checked])
+
+    useEffect(() => {
+        setLocalStorageWithExpiry('checks-description', description, 5)
+    }, [description])
+
     return (
         <FormContainer>
             <ProgressBar progressLevel={2} />
@@ -25,22 +43,44 @@ const CheckForm = () => {
             <span style={{ color: 'red' }}>{error}</span>
             <FormRadio>
                 <label>
-                    <input type="radio" name="checks" onChange={() => setChecked(true)} /> I have
-                    performed all necessary checks before adding this item to the system
+                    <RadioWrapper>
+                        <StyledInput
+                            checked={checked}
+                            type="checkbox"
+                            name="checks"
+                            onChange={() => setChecked(!checked)}
+                        />{' '}
+                        I have performed all necessary checks before adding this item to the system
+                    </RadioWrapper>
                 </label>
 
                 <StyledLabelText>
                     Describe what has been checked, and inform about deviations
                 </StyledLabelText>
-                <StyledTextArea id="textArea" rows={5} cols={40} />
+                <StyledTextArea
+                    id="textArea"
+                    rows={5}
+                    cols={40}
+                    onBlur={(e) => setDescription(e.currentTarget.value)}
+                    defaultValue={description}
+                />
             </FormRadio>
-            <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
-                onClick={handleClick}
-            >
-                Next
-            </Button>
+            <ButtonsWrapper>
+                <Button
+                    backgroundColor={` ${COLORS.secondary}`}
+                    color={` ${COLORS.primary}`}
+                    onClick={() => navigate('/add-part/batch')}
+                >
+                    Back
+                </Button>
+                <Button
+                    backgroundColor={` ${COLORS.primary}`}
+                    color={` ${COLORS.secondary}`}
+                    onClick={handleClick}
+                >
+                    NEXT
+                </Button>
+            </ButtonsWrapper>
         </FormContainer>
     )
 }

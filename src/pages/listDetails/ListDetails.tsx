@@ -1,25 +1,38 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
+import { Button } from '../../components/Button/SubmitButton.tsx'
 import SearchBar from '../../components/searchBar/SearchBar'
 import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact.tsx'
 import SearchResultCard from '../../components/searchResultCard/SearchResultCard.tsx'
-import { useWindowDimensions } from '../../hooks'
-import { Item } from '../../services/apiTypes.ts'
+import UmAppContext from '../../contexts/UmAppContext.tsx'
+import { useSnackBar, useWindowDimensions } from '../../hooks'
+import { Item, UpdateList } from '../../services/apiTypes.ts'
 import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
-import { Container, GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
-import { FlexWrapper, ListTitle } from './styles.ts'
-import { format } from 'date-fns'
+import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx'
+import { COLORS } from '../../style/GlobalStyles.ts'
+import { Container, GlobalSpinnerContainer, Spinner } from '../search/styles.ts'
+import { ListHeader } from './ListHeader.tsx'
+import { SideList } from './Sidelist/SideList.tsx'
+import {
+    ButtonWrap,
+    FlexWrapper,
+    ListContainer,
+    ListTitle,
+    SearchContainerList,
+    SearchResultsContainer,
+} from './styles.ts'
 
 const ListDetails = () => {
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
     const { listId } = useParams()
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { width } = useWindowDimensions()
-
+    const navigate = useNavigate()
     const { data: list, isFetching } = useGetListById(listId!)
-
+    const { snackbar } = useSnackBar()
     const {
         data: items,
         isLoading,
@@ -31,7 +44,11 @@ const ListDetails = () => {
             fetchNextPage()
         }
     }
-
+    const {
+        mutate: updateList,
+        status: listUpdateStatus,
+        data,
+    } = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
@@ -49,73 +66,106 @@ const ListDetails = () => {
         }
     }, [items])
 
+    const handleSave = () => {
+        var save: UpdateList = { id: list!.id, title: list!.title }
+        updateList(save, {
+            onSuccess: (data) => {
+                setSnackbarText(`${list!.title} was saved`)
+                navigate('/makelist')
+                if (data.status >= 400) {
+                    setSnackbarSeverity('error')
+                    setSnackbarText(`${data.statusText}, please try again.`)
+                }
+            },
+        })
+    }
+
     return (
         <>
-            <SearchContainer>
+            <SearchContainerList>
+                <SearchResultsContainer>
+                    <ListTitle>Add items</ListTitle>
+
+                    <SearchBar
+                        setSearchTerm={setSearchTerm}
+                        searchTerm={searchTerm}
+                        placeholder={
+                            'Search for ID, description, PO number or S/N'
+                        }
+                    />
+                    <Container>
+                        {items?.pages.map((page, i) =>
+                            page.map((item, index) =>
+                                width > 800 ? (
+                                    <div
+                                        id={
+                                            i === items.pages.length - 1 &&
+                                            index === page.length - 1
+                                                ? 'lastItem'
+                                                : ''
+                                        }
+                                    >
+                                        <SearchResultCard
+                                            part={item}
+                                            icon={'add'}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div
+                                        id={
+                                            i === items.pages.length - 1 &&
+                                            index === page.length - 1
+                                                ? 'lastItem'
+                                                : ''
+                                        }
+                                    >
+                                        <SearchResultCardCompact
+                                            part={item}
+                                            icon={'add'}
+                                        />
+                                    </div>
+                                )
+                            )
+                        )}
+                    </Container>
+                </SearchResultsContainer>
                 {list ? (
                     <>
-                        <ListTitle>
-                            {list.title},{' '}
-                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
-                        </ListTitle>
                         <FlexWrapper>
+                            <ListHeader list={list} />
+
                             {list.items ? (
-                                <>
-                                    {list.items.map((item: Item) =>
-                                        width > 800 ? (
-                                            <SearchResultCard part={item} icon={'remove'} />
-                                        ) : (
-                                            <SearchResultCardCompact part={item} icon={'remove'} />
-                                        )
-                                    )}
-                                </>
+                                <ListContainer>
+                                    {list.items.map((item: Item) => (
+                                        <SideList part={item} key={item.id} />
+                                    ))}
+                                </ListContainer>
                             ) : null}
+                            <ButtonWrap>
+                                <Button
+                                    backgroundColor={`${COLORS.secondary}`}
+                                    color={`${COLORS.primary}`}
+                                    onClick={handleSave}
+                                >
+                                    Save list
+                                </Button>
+                                <Button
+                                    backgroundColor={`${COLORS.secondary}`}
+                                    color={`${COLORS.primary}`}
+                                >
+                                    Export
+                                </Button>
+                            </ButtonWrap>
                         </FlexWrapper>
                     </>
                 ) : null}
-
-                <ListTitle>Add items</ListTitle>
-
-                <SearchBar
-                    setSearchTerm={setSearchTerm}
-                    searchTerm={searchTerm}
-                    placeholder={'Search for ID, description, PO number or S/N'}
-                />
-
-                <Container>
-                    {items?.pages.map((page, i) =>
-                        page.map((item, index) =>
-                            width > 800 ? (
-                                <div
-                                    id={
-                                        i === items.pages.length - 1 && index === page.length - 1
-                                            ? 'lastItem'
-                                            : ''
-                                    }
-                                >
-                                    <SearchResultCard part={item} icon={'add'} />
-                                </div>
-                            ) : (
-                                <div
-                                    id={
-                                        i === items.pages.length - 1 && index === page.length - 1
-                                            ? 'lastItem'
-                                            : ''
-                                    }
-                                >
-                                    <SearchResultCardCompact part={item} icon={'add'} />
-                                </div>
-                            )
-                        )
-                    )}
-                </Container>
-
+                {snackbar}
                 {(isLoading || isFetching) && (
                     <GlobalSpinnerContainer>
                         <Spinner />
                     </GlobalSpinnerContainer>
                 )}
-            </SearchContainer>
+            </SearchContainerList>
         </>
     )
 }

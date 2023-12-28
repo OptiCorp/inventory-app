@@ -11,7 +11,8 @@ export const InputWrap = styled.div`
 
 export const ErrorP = styled.span`
     color: red;
-    width: 70%;
+    margin-right: auto;
+    margin-left: 20px;
     font-weight: 600;
 `
 export const HelperText = styled.span`
@@ -27,4 +28,12 @@ export const IconContainer = styled.div`
     gap: 4px;
 `
 
-export const StyledInput = styled.input``
+export const StyledInput = styled.input`
+    &&& {
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #000;
+        margin-bottom: 0;
+    }
+`

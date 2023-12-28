@@ -16,10 +16,17 @@ export const SubmitButton = styled('button')<{
     height: 30px;
     border: 1px solid ${COLORS.primary};
     cursor: pointer;
-    margin-inline: auto;
+    margin-right: 0;
+    text-transform: uppercase;
 `
 
 export const Wrapper = styled.div`
     display: flex;
     justify-content: end;
+`
+
+export const ButtonsWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    //gap: 25px;
 `

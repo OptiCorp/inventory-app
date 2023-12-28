@@ -6,15 +6,20 @@ import { useContext } from 'react'
 import UmAppContext from '../../../contexts/UmAppContext'
 import { useAddItems } from '../../../services/hooks/Items/useAddItem'
 import { PartSchema, partSchema } from './partValidator'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
 
 const defaultValues: PartSchema = {
     wpId: '',
-    description: '',
+    type: '',
+    categoryId: '',
     serialNumber: '',
     productNumber: '',
-    vendor: '',
-    type: 'unit',
+    vendorId: '',
+    locationId: '',
+    description: '',
+    comment: '',
     addedById: '',
+    uniqueWpId: false,
 }
 
 enum Batch {
@@ -26,6 +31,7 @@ enum Batch {
 export const usePartsForm = () => {
     const { currentUser } = useContext(UmAppContext)
     const { mutate } = useAddItems()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
 
     const appLocation = useLocation()
 
@@ -45,7 +51,16 @@ export const usePartsForm = () => {
         register,
     } = methods
 
-    const onSubmit = handleSubmit((data) => mutate([data]))
+    const onSubmit = handleSubmit((data) => {
+        mutate([data], {
+            onSuccess: () => {
+                setLocalStorageWithExpiry('batch-data', '', 0)
+                setLocalStorageWithExpiry('checks-check', '', 0)
+                setLocalStorageWithExpiry('checks-description', '', 0)
+                setLocalStorageWithExpiry('upload-check', '', 0)
+            },
+        })
+    })
 
     return {
         methods,

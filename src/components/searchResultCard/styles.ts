@@ -14,7 +14,6 @@ export const ResultCardContainer = styled.div`
 export const DescriptionParagraph = styled.p`
     width: 100%;
     display: -webkit-box;
-    background-color: ${COLORS.aliceBlue};
     border-radius: 3px;
     width: 90%;
     overflow: hidden;
@@ -24,7 +23,6 @@ export const DescriptionParagraph = styled.p`
 `
 
 export const CompactDesriptionParagraph = styled.p`
-    background-color: ${COLORS.aliceBlue};
     border-radius: 3px;
     overflow: hidden;
     display: flex;
@@ -36,10 +34,9 @@ export const CompactDesriptionParagraph = styled.p`
 `
 
 export const ResultCardCompactContainer = styled.div`
-    background-color: ${COLORS.secondary};
-    border-radius: 8px;
+    background-color: ${COLORS.card};
     margin: 16px;
-    box-shadow: 2.5px 2.5px gray;
+    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     max-width: 500px;
@@ -54,18 +51,31 @@ export const CompactCardWrapper = styled.div`
 export const SearchCard = styled.div`
     position: relative;
     line-height: 25px;
-    border-radius: 5px;
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background: #fbfbfb;
-    box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    background: ${COLORS.card};
+    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
 `
 
-export const CompactCard = styled.div`
+export const SearchCardSkeleton = styled.div`
+    position: relative;
+    line-height: 25px;
+    border-radius: 5px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    background-color: ${COLORS.secondary};
+`
+
+export const FlexContainer = styled.div`
+    display: flex;
+`
+
+export const CompactCardSkeleton = styled.div`
     border-radius: 5px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-basis: 100%;
     cursor: pointer;
@@ -74,11 +84,22 @@ export const CompactCard = styled.div`
     padding: 1rem;
 `
 
+export const CompactCard = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: 100%;
+    cursor: pointer;
+    background-color: ${COLORS.card};
+    padding: 1rem;
+`
+
 export const SecondInfoBox = styled.div`
     padding: 8px;
     line-height: 25px;
     grid-column: 2/2;
     border-right: 1px solid rgba(208, 208, 208);
+    border-left: 1px solid rgba(208, 208, 208);
 `
 
 export const ThirdInfoBox = styled.div`
@@ -93,7 +114,6 @@ export const FirstInfoBox = styled.div`
     line-height: 25px;
     padding-left: 30px;
     padding-right: 30px;
-    border-right: 1px solid rgba(208, 208, 208);
 `
 
 export const InfoP = styled.div`

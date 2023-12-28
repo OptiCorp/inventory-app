@@ -1,5 +1,6 @@
 import { InteractionStatus } from '@azure/msal-browser'
 import { useAccount, useMsal } from '@azure/msal-react'
+import { AlertColor } from '@mui/material'
 import decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
 import apiService from '../services/api'
@@ -8,7 +9,25 @@ import { AzureUserInfo, UmAppContextType } from './types'
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
 
-export function UmAppContextProvider({ children }: { children: React.ReactNode }) {
+export function UmAppContextProvider({
+    children,
+}: {
+    children: React.ReactNode
+}) {
+    // snackbar
+
+    const [showSnackbar, setShowSnackbar] = useState(false)
+    const [snackbarText, setSnackbarText] = useState('')
+    const [snackbarSeverity, setSnackbarSeverity] =
+        useState<AlertColor>('success')
+
+    //msal
+
+    useEffect(() => {
+        if (snackbarText?.length < 1) return
+        setShowSnackbar(true)
+    }, [snackbarText])
+
     const { instance, inProgress, accounts } = useMsal()
     const account = useAccount(accounts[0] || {})
     const api = apiService()
@@ -34,7 +53,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
     async function fetchUserByEmail(azureAdId: string) {
         const response = await api.getUserByAzureAdUserId(azureAdId)
         if (response) {
-            const user = response
+            const user = response as User
             setCurrentUser(user)
         } else {
             console.error('Error fetching user by email')
@@ -89,6 +108,13 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
         return (
             <UmAppContext.Provider
                 value={{
+                    showSnackbar,
+                    setShowSnackbar,
+
+                    snackbarText,
+                    setSnackbarText,
+                    snackbarSeverity,
+                    setSnackbarSeverity,
                     account,
                     idToken,
                     accessToken,

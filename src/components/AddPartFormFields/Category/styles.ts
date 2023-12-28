@@ -2,12 +2,17 @@ import { styled } from 'styled-components'
 
 export const InputWrap = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    flex-wrap: wrap;
 `
 
 export const ErrorP = styled.span`
     color: red;
-
+    margin-right: auto;
+    margin-left: 20px;
     font-weight: 600;
 `
 export const StyledSelect = styled.select`
@@ -20,4 +25,8 @@ export const StyledSelect = styled.select`
 export const IconContainer = styled.div`
     display: flex;
     gap: 4px;
+`
+
+export const StyledDiv = styled.div`
+    margin-top: 24px;
 `

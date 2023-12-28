@@ -5,12 +5,13 @@ type InputProps = {
 }
 
 export const StyledInput = styled.input<InputProps>`
-    border-style: none none solid none;
+    border-style: none;
+    border-bottom: 1px solid #000;
     flex-basis: 90%;
     padding: 1rem;
     text-indent: 50px;
 
-    max-width: 2000px;
+    max-width: 1000px;
     font-size: ${({ width }) => (width >= 600 ? '20px' : '16px')};
     outline: none;
 `

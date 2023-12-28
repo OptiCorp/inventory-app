@@ -1,13 +1,14 @@
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
+import { Link, TextField } from '@mui/material'
 
 export const StyledContainerDiv = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 3rem;
     max-width: 1000px;
     margin-inline: auto;
     padding: 16px;
+    background: #fff;
 `
 
 export const SecondList = styled.ul`
@@ -28,9 +29,7 @@ export const Wrapper = styled.div`
 `
 export const StyledList = styled.ul`
     margin: auto;
-
     display: grid;
-
     font-size: 1.2rem;
     color: ${COLORS.secondary};
     list-style: none;
@@ -39,7 +38,22 @@ export const StyledList = styled.ul`
     text-decoration: none;
 `
 export const ListItem = styled.li`
-    line-height: 2rem;
-
     margin: 0 auto;
+    line-height: 2rem;
+`
+export const ScrollTextField = styled(TextField)`
+    overflow-y: auto;
+    max-height: 200px;
+`
+
+export const BreadcrumbsMargin = styled.div`
+margin-bottom: 10px;
+`
+export const BreadcrumbLink = styled(Link)`
+color: ${COLORS.primary} !important;
+border-bottom: 1px black dotted;
+cursor: pointer;
+&:hover {
+    font-weight: bolder;
+}
 `

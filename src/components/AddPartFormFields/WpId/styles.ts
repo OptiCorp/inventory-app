@@ -1,5 +1,8 @@
 import { styled } from 'styled-components'
 
+interface StyledInputProps {
+    isUnique?: string | undefined
+}
 export const InputWrap = styled.div`
     display: flex;
     flex-direction: row;
@@ -11,8 +14,21 @@ export const InputWrap = styled.div`
 
 export const ErrorP = styled.span`
     color: red;
-    width: 70%;
-
+    margin-right: auto;
+    margin-left: 20px;
     font-weight: 600;
 `
-export const StyledInput = styled.input``
+export const StyledInput = styled.input<StyledInputProps>`
+    &&& {
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #000;
+        border: ${(props) => (props.isUnique === 'false' ? '1px solid red' : null)};
+    }
+`
+
+export const IconContainer = styled.div`
+    display: flex;
+    gap: 4px;
+`

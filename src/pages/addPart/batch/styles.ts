@@ -19,3 +19,12 @@ export const FormBatchRadio = styled.form`
         cursor: pointer;
     }
 `
+
+export const StyledInput = styled.input`
+    margin-bottom: auto;
+    margin-right: 10px;
+`
+
+export const RadioWrapper = styled.div`
+    display: flex;
+`

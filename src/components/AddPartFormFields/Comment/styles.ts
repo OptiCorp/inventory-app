@@ -7,11 +7,18 @@ export const InputWrap = styled.div`
     padding-bottom: 0.4rem;
 `
 export const StyledTextArea = styled.textarea`
-    background-color: ${COLORS.secondary};
     margin: 0;
     padding: 1rem;
-
-    width: 60%;
-
+    width: 100%;
+    max-width: 500px;
     display: block;
+    background-color: #f6f6f6;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #000;
+    box-sizing: border-box;
+`
+
+export const StyledDiv = styled.div`
+    margin-bottom: 15px;
 `
