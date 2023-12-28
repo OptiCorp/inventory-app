@@ -13,6 +13,7 @@ import {
     RecentSearchContainer,
     RecentTitle,
     SearchContainer,
+    SpanMargin,
     Spinner,
     StyledSearchedLink,
 } from './styles'
@@ -53,7 +54,9 @@ const Search = () => {
     }, [searchParam])
 
     useEffect(() => {
-        setSearches((prev) => [searchTerm, ...prev.slice(0, 4)])
+        if (searchTerm !== '') {
+            setSearches((prev) => [searchTerm, ...prev.slice(0, 9)])
+        }
     }, [debouncedSearchTerm])
 
     return (
@@ -104,9 +107,11 @@ const Search = () => {
                         <RecentTitle>Recent Searches</RecentTitle>
 
                         {searches.map((search, index) => (
-                            <StyledSearchedLink key={index} to={`/search/${search}`}>
-                                {search}
-                            </StyledSearchedLink>
+                            <SpanMargin>
+                                <StyledSearchedLink key={index} to={`/search/${search}`}>
+                                    {search}
+                                </StyledSearchedLink>
+                            </SpanMargin>
                         ))}
                     </RecentSearchContainer>
                 ) : null}
