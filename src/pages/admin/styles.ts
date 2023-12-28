@@ -28,7 +28,7 @@ export const AdminInput = styled.input`
         border-top: none;
         border-left: none;
         border-right: none;
-        background: #f2f2f2;
+        background: ${COLORS.input};
     }
 `
 

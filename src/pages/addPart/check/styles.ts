@@ -1,11 +1,12 @@
 import styled from 'styled-components'
+import { COLORS } from '../../../style/GlobalStyles.ts'
 
 export const ButtonWrap = styled.div`
     display: flex;
     justify-content: end;
 `
 export const StyledTextArea = styled.textarea`
-    background-color: #f6f6f6;
+    background-color: ${COLORS.input};
     border: none;
     border-bottom: 1px solid #000;
     margin: 0;

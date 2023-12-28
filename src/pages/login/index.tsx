@@ -33,7 +33,7 @@ export const Login = () => {
                         aria-label={isSubmitting ? 'loading data' : ''}
                         onClick={onSubmit}
                     >
-                        {isSubmitting ? <>loading</> : 'Log in'}
+                        {isSubmitting ? <>Logging in..</> : 'Log in'}
                     </LoginButton>
                 </ButtonWrapper>
             </LoginContainer>
