@@ -23,7 +23,8 @@ export const Login = () => {
         <BackgroundContainer>
             <LoginContainer>
                 <Header>
-                    <TitleHeader>Sign in to your Account</TitleHeader>
+                    <img alt="logo" src={'/WP 1.svg'} width="60" style={{ margin: 'auto' }} />
+                    <TitleHeader>Log in to your account</TitleHeader>
                 </Header>
                 <ButtonWrapper>
                     <LoginButton
