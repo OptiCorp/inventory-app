@@ -6,7 +6,6 @@ export const LoginContainer = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto 1fr;
     align-items: center;
-    background-color: rgb(35 54 69 / 0.1);
     backdrop-filter: blur(5px);
     height: 100vh;
     width: 100%;
@@ -38,7 +37,7 @@ export const BackgroundContainer = styled.div`
 
 export const TitleHeader = styled.h1`
     font-style: italic;
-    color: ${COLORS.secondary};
+    color: ${COLORS.primary};
     text-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5);
     font-weight: 500;
     margin: 0 auto;
@@ -63,4 +62,13 @@ export const InfoText = styled.p`
     font-weight: 600;
     color: ${COLORS.secondary};
     margin: 0 auto;
+`
+
+export const LoginButton = styled.button`
+    color: ${COLORS.secondary};
+    background-color: ${COLORS.primary};
+    width: 150px;
+    height: 30px;
+    border: 1px solid ${COLORS.primary};
+    text-transform: uppercase;
 `
