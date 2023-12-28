@@ -30,7 +30,7 @@ const Upload = () => {
                     <li> Maximum file size: 20MB </li>
                 </ul>{' '}
             </p>
-            <ExampleUpload />
+            {/* <ExampleUpload /> */}
             <span style={{ color: 'red' }}>{error}</span>
             <label>
                 <RadioWrapper>

@@ -1,5 +1,4 @@
 import { Item } from '../../../services/apiTypes'
-
 import { FaPen } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { AssemblyList, Container, ListItem, PartList } from './styles'
@@ -13,10 +12,9 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                 <PartList>
                     <ListItem
                         onClick={() => {
-                            navigate(`/${item?.parent?.id}/${item?.parent?.wpId} `)
+                            navigate(`/${item?.parent?.id}`)
                         }}
                     >
-                        {' '}
                         {item?.parent?.id ?? 'No known parts'}
                     </ListItem>
 
