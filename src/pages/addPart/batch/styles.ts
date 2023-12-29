@@ -21,8 +21,10 @@ export const FormBatchRadio = styled.form`
 `
 
 export const StyledInput = styled.input`
-    margin-bottom: auto;
-    margin-right: 10px;
+    && {
+        width: auto;
+        margin: 13px;
+    }
 `
 
 export const RadioWrapper = styled.div`

@@ -22,16 +22,10 @@ const defaultValues: PartSchema = {
     uniqueWpId: false,
 }
 
-enum Batch {
-    yes,
-    no,
-    undefined,
-}
-
 export const usePartsForm = () => {
     const { currentUser } = useContext(UmAppContext)
     const { mutate } = useAddItems()
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
+    const { deleteLocalStorage } = useLocalStorage()
 
     const appLocation = useLocation()
 
@@ -52,14 +46,34 @@ export const usePartsForm = () => {
     } = methods
 
     const onSubmit = handleSubmit((data) => {
-        mutate([data], {
-            onSuccess: () => {
-                setLocalStorageWithExpiry('batch-data', '', 0)
-                setLocalStorageWithExpiry('checks-check', '', 0)
-                setLocalStorageWithExpiry('checks-description', '', 0)
-                setLocalStorageWithExpiry('upload-check', '', 0)
-            },
-        })
+        if (data.files) {
+            const files = [...data.files!]
+            delete data.files
+
+            mutate(
+                { items: [data], files: files },
+                {
+                    onSuccess: () => {
+                        deleteLocalStorage('batch-data')
+                        deleteLocalStorage('checks-check')
+                        deleteLocalStorage('checks-description')
+                        deleteLocalStorage('upload-check')
+                    },
+                }
+            )
+        } else {
+            mutate(
+                { items: [data], files: undefined },
+                {
+                    onSuccess: () => {
+                        deleteLocalStorage('batch-data')
+                        deleteLocalStorage('checks-check')
+                        deleteLocalStorage('checks-description')
+                        deleteLocalStorage('upload-check')
+                    },
+                }
+            )
+        }
     })
 
     return {

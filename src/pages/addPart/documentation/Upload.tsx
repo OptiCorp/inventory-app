@@ -8,6 +8,7 @@ import { FormContainer } from '../styles.ts'
 import { RadioWrapper, StyledInput } from '../batch/styles.ts'
 import useLocalStorage from '../../../hooks/useLocalStorage.ts'
 import { ButtonsWrapper } from '../../../components/Button/styles.ts'
+import AddPartUpload from '../../../components/Upload/AddPartUpload.tsx'
 
 const Upload = () => {
     const navigate = useNavigate()
@@ -39,7 +40,7 @@ const Upload = () => {
                     <li> Maximum file size: 20MB </li>
                 </ul>{' '}
             </p>
-            {/* <ExampleUpload /> */}
+            <AddPartUpload />
             <span style={{ color: 'red' }}>{error}</span>
             <label>
                 <RadioWrapper>
@@ -49,7 +50,7 @@ const Upload = () => {
                         name="checks"
                         onChange={() => setChecked(!checked)}
                     />{' '}
-                    I have uploaded all necessary documentation for this item. E.g:{' '}
+                    <p>I have uploaded all necessary documentation for this item. E.g: </p>
                 </RadioWrapper>
             </label>
             <ul>

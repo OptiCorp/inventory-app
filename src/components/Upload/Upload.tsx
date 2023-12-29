@@ -11,8 +11,6 @@ type UploadProps = {
 }
 
 export const ExampleUpload = ({ item }: UploadProps) => {
-    const [modalIsOpen, setModalIsOpen] = useState(false)
-    const [currentImageOpen, setCurrentImageOpen] = useState<Document>()
     const { data } = useGetDocumentsByItemId(item.id)
     const { mutate } = useUploadDocument()
 
@@ -26,29 +24,11 @@ export const ExampleUpload = ({ item }: UploadProps) => {
         }
     }
 
-    const handleOpen = (document: Document) => {
-        setCurrentImageOpen(document)
-        setModalIsOpen(true)
-    }
-
-    const handleClose = () => {
-        setModalIsOpen(false)
-        setCurrentImageOpen(undefined)
-    }
-
     return (
         <>
-            {/* <Modal open={modalIsOpen} onClose={handleClose}>
-                <Box sx={{ position: 'absolute', top: '50%', left: '50%' }}>
-                    <img
-                        src={`data:${currentImageOpen?.contentType};base64, ${currentImageOpen?.bytes}`}
-                        width={200}
-                    />
-                </Box>
-            </Modal> */}
             <Wrapper>
                 {data?.map((document) => (
-                    <FileContainer onClick={() => handleOpen(document)}>
+                    <FileContainer>
                         {document.contentType === 'image/png' ? (
                             <AiOutlineFileImage size={60} />
                         ) : document.contentType === 'image/pdf' ? (
@@ -63,7 +43,12 @@ export const ExampleUpload = ({ item }: UploadProps) => {
             <Container>
                 <StyledLabel>
                     {' '}
-                    <input type="file" style={{ display: 'none' }} onChange={handleFileUpload} />
+                    <input
+                        type="file"
+                        multiple
+                        style={{ display: 'none' }}
+                        onChange={handleFileUpload}
+                    />
                     UPLOAD NEW
                 </StyledLabel>
             </Container>

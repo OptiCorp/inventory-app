@@ -312,8 +312,22 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`)
     }
 
-    const addItem = async (item: AddItem[]): Promise<Response> => {
-        return await postByFetch(`Item`, item)
+    const addItem = async (items: AddItem[], files?: File[]): Promise<Response | Response[][]> => {
+        var res = await postByFetch(`Item`, items)
+        if (!files) {
+            return res
+        }
+
+        const reader = res.body?.getReader()
+        var itemResponses: { id: string }[] = JSON.parse(
+            new TextDecoder().decode((await reader?.read())!.value)
+        )
+        var documentResponses: Response[][] = []
+        itemResponses.forEach(async (item) => {
+            const documentResponse = await addDocument({ itemId: item.id, files: files })
+            documentResponses.push(documentResponse)
+        })
+        return documentResponses
     }
 
     const addItemsToList = async (listId: string, itemId: string): Promise<Response> => {
@@ -411,11 +425,16 @@ const apiService = () => {
         return await getByFetch(`Documentation/ByItemId/${itemId}`)
     }
 
-    const addDocument = async (document: AddDocument): Promise<Response> => {
-        var formData = new FormData()
-        formData.append('ItemId', document.itemId)
-        formData.append('Files', document.files[0])
-        return await postFileByFetch(`Documentation`, formData)
+    const addDocument = async (document: AddDocument): Promise<Response[]> => {
+        var responses: Response[] = []
+        document.files.forEach(async (file) => {
+            const formData = new FormData()
+            formData.append('ItemId', document.itemId)
+            formData.append('Files', file)
+            const res = await postFileByFetch(`Documentation`, formData)
+            responses.push(res)
+        })
+        return responses
     }
 
     return {
