@@ -17,35 +17,31 @@ type response = {
 
 // WIP
 export const AddPartFormm = () => {
-    const { methods, onSubmit, formState } = usePartsForm()
+    // const { methods, onSubmit, formState } = usePartsForm()
     const navigate = useNavigate()
 
     return (
-        <FormProvider {...methods}>
-            <FormContainer>
-                <StyledForm onSubmit={onSubmit} id="addPart">
-                    <ProgressBar progressLevel={4} />
-                    <h4>Add details</h4>
-                    <FormContent />
-                    <ButtonsWrapper>
-                        <Button
-                            backgroundColor={` ${COLORS.secondary}`}
-                            color={` ${COLORS.primary}`}
-                            onClick={() => navigate('/add-part/upload')}
-                        >
-                            Back
-                        </Button>
-                        <Button
-                            id="addPart"
-                            type="submit"
-                            backgroundColor={`${COLORS.primary}`}
-                            color={`${COLORS.secondary}`}
-                        >
-                            FINISH
-                        </Button>
-                    </ButtonsWrapper>
-                </StyledForm>
-            </FormContainer>
-        </FormProvider>
+        <FormContainer>
+            <ProgressBar progressLevel={4} />
+            <h4>Add details</h4>
+            <FormContent />
+            <ButtonsWrapper>
+                <Button
+                    backgroundColor={` ${COLORS.secondary}`}
+                    color={` ${COLORS.primary}`}
+                    onClick={() => navigate('/add-part/upload')}
+                >
+                    Back
+                </Button>
+                <Button
+                    id="addPart"
+                    type="submit"
+                    backgroundColor={`${COLORS.primary}`}
+                    color={`${COLORS.secondary}`}
+                >
+                    FINISH
+                </Button>
+            </ButtonsWrapper>
+        </FormContainer>
     )
 }

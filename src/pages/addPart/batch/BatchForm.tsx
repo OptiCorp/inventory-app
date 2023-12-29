@@ -39,33 +39,31 @@ const BatchForm = () => {
             <h3>Add as a batch?</h3>
             <span style={{ color: 'red' }}>{error}</span>
 
-            <FormBatchRadio>
-                <label>
-                    <RadioWrapper>
-                        <StyledInput
-                            checked={batchType === Batch.no ? true : false}
-                            type="radio"
-                            name="batchCheck"
-                            onChange={() => setBatchType(Batch.no)}
-                        />{' '}
-                        I want to add one unique part
-                    </RadioWrapper>
-                </label>
-                <label>
-                    <RadioWrapper>
-                        <StyledInput
-                            checked={batchType === Batch.yes ? true : false}
-                            type="radio"
-                            name="batchCheck"
-                            onChange={() => setBatchType(Batch.yes)}
-                        />{' '}
-                        <div>
-                            I want to add a batch of several identical parts, assigning a unique
-                            WellPartner serial number to each of them
-                        </div>
-                    </RadioWrapper>
-                </label>
-            </FormBatchRadio>
+            <label>
+                <RadioWrapper>
+                    <StyledInput
+                        checked={batchType === Batch.no ? true : false}
+                        type="radio"
+                        name="batchCheck"
+                        onChange={() => setBatchType(Batch.no)}
+                    />{' '}
+                    <p>I want to add one unique part</p>
+                </RadioWrapper>
+            </label>
+            <label>
+                <RadioWrapper>
+                    <StyledInput
+                        checked={batchType === Batch.yes ? true : false}
+                        type="radio"
+                        name="batchCheck"
+                        onChange={() => setBatchType(Batch.yes)}
+                    />{' '}
+                    <p>
+                        I want to add a batch of several identical parts, assigning a unique
+                        WellPartner serial number to each of them
+                    </p>
+                </RadioWrapper>
+            </label>
 
             <Button
                 backgroundColor={` ${COLORS.primary}`}

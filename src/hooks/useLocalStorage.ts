@@ -33,7 +33,11 @@ const useLocalStorage = () => {
         return data.value
     }
 
-    return { setLocalStorageWithExpiry, getLocalStorageWithExpiry }
+    const deleteLocalStorage = (key: string) => {
+        localStorage.removeItem(key)
+    }
+
+    return { setLocalStorageWithExpiry, getLocalStorageWithExpiry, deleteLocalStorage }
 }
 
 export default useLocalStorage
