@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { COLORS } from '../../../style/GlobalStyles.ts'
 
 export const InputWrap = styled.div`
     display: flex;
@@ -17,7 +18,7 @@ export const ErrorP = styled.span`
 `
 export const StyledInput = styled.input`
     &&& {
-        background-color: #f2f2f2;
+        background-color: ${COLORS.input};
         border: none;
         border-radius: 0;
         border-bottom: 1px solid #000;

@@ -1,5 +1,6 @@
 import Select from 'react-select'
 import { FormOption } from '../../../services/apiTypes.ts'
+import { COLORS } from '../../../style/GlobalStyles.ts'
 
 type Props = {
     options: FormOption[]
@@ -14,7 +15,7 @@ export const FormSelect = ({ options, setState, state }: Props) => {
             width: '100%', // Set the desired width here
             maxWidth: '500px',
             height: '41px',
-            backgroundColor: '#F2F2F2',
+            backgroundColor: COLORS.input,
             borderRadius: 0,
             border: '0px',
             borderBottom: '1px solid #000',
