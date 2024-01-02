@@ -36,7 +36,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                         ) : (
                             <AiOutlineFileJpg size={60} />
                         )}
-                        <span>example</span>
+                        <span>{document.name}</span>
                     </FileContainer>
                 ))}
             </Wrapper>
@@ -46,6 +46,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                     <input
                         type="file"
                         multiple
+                        accept=".pdf,.docx,.jpg"
                         style={{ display: 'none' }}
                         onChange={handleFileUpload}
                     />

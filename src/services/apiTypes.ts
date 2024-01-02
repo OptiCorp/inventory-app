@@ -174,6 +174,7 @@ export type AddDocument = {
 
 export type Document = {
     id: string
+    name: string
     blobRef: string
     contentType: string
     bytes: string
