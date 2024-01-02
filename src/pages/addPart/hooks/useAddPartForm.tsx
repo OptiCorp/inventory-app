@@ -58,6 +58,7 @@ export const usePartsForm = () => {
                         deleteLocalStorage('checks-check')
                         deleteLocalStorage('checks-description')
                         deleteLocalStorage('upload-check')
+                        reset()
                     },
                 }
             )
@@ -70,6 +71,7 @@ export const usePartsForm = () => {
                         deleteLocalStorage('checks-check')
                         deleteLocalStorage('checks-description')
                         deleteLocalStorage('upload-check')
+                        reset()
                     },
                 }
             )
