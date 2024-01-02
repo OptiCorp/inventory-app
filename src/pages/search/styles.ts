@@ -42,8 +42,9 @@ export const StyledSearchedLink = styled(Link)`
 
 export const GlobalSpinnerContainer = styled.div`
     padding-top: 6rem;
-    padding-left: 43%;
     padding-bottom: 4rem;
+    display: flex;
+    justify-content: center;
 `
 
 const rotate360 = keyframes`
