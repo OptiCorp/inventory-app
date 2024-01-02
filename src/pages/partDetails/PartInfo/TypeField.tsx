@@ -37,7 +37,7 @@ export const TypeField = ({
                             onBlur={onBlur}
                             select
                             onChange={handleSelectChange}
-                            isOpen={isOpen}
+                            $isOpen={isOpen}
                             fullWidth
                             variant="standard"
                             value={defaultValue}

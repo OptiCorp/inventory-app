@@ -1,5 +1,5 @@
 
-import type { ChangeEvent, Dispatch, SetStateAction } from "react"
+import type { ChangeEvent, ComponentProps, Dispatch, SetStateAction } from "react"
 import { Category, Location, Vendor } from "../../../services/apiTypes"
 
 
@@ -8,21 +8,22 @@ import { Category, Location, Vendor } from "../../../services/apiTypes"
 export type Types = 'Unit' | 'Assembly' | 'Subassembly' | 'Part'
 
 export type SetState<T> = Dispatch<SetStateAction<T>>
+
 export type EditableFieldProps = {
     label: ItemFields
-    defaultValue: string
-    onBlur: () => void
+    defaultValue: ComponentProps<"input">["defaultValue"]
+    onBlur: ComponentProps<"input">["onBlur"]
     options?: Types[]
     handleSelectChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
     handleInputChange?: (
         value: string | undefined
-    ) => void /* (fieldName: keyof UpdateItem, value: string | undefined) => void */
+    ) => void 
     selectedType?: string
     multiline?: boolean
-}
+} 
 
 export type StyledTextFieldProps = {
-    isOpen: boolean
+    $isOpen: boolean
 }
 
 export type TypeProps = {
@@ -30,7 +31,7 @@ export type TypeProps = {
     selectedType?: string
     label: ItemFields
     defaultValue: string | null
-    onBlur: () => void
+    onBlur: ComponentProps<"input">["onBlur"]
     options: Types[]
 }
 

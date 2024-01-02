@@ -43,7 +43,7 @@ export const SelectField = ({
                         select
                         onChange={handleSelectChange}
                         fullWidth
-                        isOpen={isOpen}
+                        $isOpen={isOpen}
                         variant="standard"
                         value={defaultValue}
                         InputProps={{
