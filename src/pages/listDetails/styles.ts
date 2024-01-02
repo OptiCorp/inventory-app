@@ -7,6 +7,12 @@ export const ListTitle = styled.h2`
 
     margin-inline: 20px;
 `
+export const StyledDate = styled.h3`
+    font-weight: 600;
+    width: 100%;
+
+    line-height: 2rem;
+`
 
 export const FlexWrapper = styled.div`
     display: grid;
@@ -14,10 +20,9 @@ export const FlexWrapper = styled.div`
     grid-auto-rows: max-content;
     grid-template-rows: auto 1fr auto;
     gap: 16px;
-    height: 85%;
+    height: 90vh;
     padding-bottom: 20px;
-    width: 45%;
-    position: fixed;
+
     right: 2%;
     grid-column: 2/2;
     justify-content: space-between;
@@ -78,8 +83,6 @@ export const ButtonWrap = styled.div`
 export const FlexContainer = styled.div`
     display: flex;
     justify-content: flex-end;
-    flex-wrap: wrap;
-    flex-basis: 1;
 `
 export const Header = styled.div`
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;

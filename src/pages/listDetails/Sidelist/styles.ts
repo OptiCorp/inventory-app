@@ -15,7 +15,7 @@ export const InfoIcon = styled(InfoOutlinedIcon)`
 `
 export const EditIcon = styled(CreateOutlinedIcon)`
     color: black;
-    margin-inline: 30px;
+    margin-inline: auto;
     &:hover {
         color: ${COLORS.cautionaryYellow};
     }

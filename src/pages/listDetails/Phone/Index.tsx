@@ -1,13 +1,27 @@
 import { useState } from 'react'
+import TabComponent from '../../../components/Tabs/Tabs'
+import { PhoneList } from './List/PhoneList'
+import { AddMoreCompact } from './AddMore'
 
 const Index = () => {
-    const [value, setValue] = useState('1')
+    const [activeTab, setActiveTab] = useState<number>(0)
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue)
-    }
-
-    return <></>
+    return (
+        <>
+            <TabComponent
+                tabs={[
+                    {
+                        title: 'List',
+                        render: () => <PhoneList />,
+                    },
+                    {
+                        title: 'Add more',
+                        render: () => <AddMoreCompact />,
+                    },
+                ]}
+            />
+        </>
+    )
 }
 
 export default Index

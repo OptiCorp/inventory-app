@@ -3,17 +3,20 @@ import { useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
 import SearchBar from '../../../components/searchBar/SearchBar'
 import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact'
-import { useWindowDimensions } from '../../../hooks'
+import { useSnackBar, useWindowDimensions } from '../../../hooks'
 import { Item } from '../../../services/apiTypes'
 import { useGetItemsNotInListInfinite } from '../../../services/hooks/Items/useGetItemsNotInListInfinite'
+import { useGetListById } from '../../../services/hooks/List/useGetListById'
 import { useUpdateList } from '../../../services/hooks/List/useUpdateList'
+import { GlobalSpinnerContainer, Spinner } from '../../search/styles'
 import { PhoneContainer, PhoneListTitle } from './styles'
 
 type Props = {
     part: Item
 }
 
-export const AddMore = ({ part }: Props) => {
+export const AddMoreCompact = () => {
+    const { snackbar } = useSnackBar()
     const [searchTerm, setSearchTerm] = useState('')
     const { width } = useWindowDimensions()
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
@@ -51,7 +54,7 @@ export const AddMore = ({ part }: Props) => {
             }
         }
     }, [items])
-
+    const { data: list, isFetching } = useGetListById(listId!)
     return (
         <>
             <PhoneListTitle>Add items</PhoneListTitle>
@@ -77,6 +80,12 @@ export const AddMore = ({ part }: Props) => {
                     ))
                 )}
             </PhoneContainer>
+            {snackbar}
+            {(isLoading || isFetching) && (
+                <GlobalSpinnerContainer>
+                    <Spinner />
+                </GlobalSpinnerContainer>
+            )}
         </>
     )
 }
