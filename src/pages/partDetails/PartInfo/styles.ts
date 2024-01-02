@@ -73,6 +73,6 @@ export const ErrorP = styled.span`
 
 export const StyledTextField = styled(TextField)<StyledTextFieldProps>`
     & .MuiSvgIcon-root {
-        display: ${(props) => !props.isOpen && 'none'};
+        display: ${(props) => !props.$isOpen && 'none'};
     }
 `
