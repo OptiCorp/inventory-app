@@ -54,7 +54,7 @@ const Search = () => {
     }, [searchParam])
 
     useEffect(() => {
-        if (searchTerm !== '') {
+        if (searchTerm !== '' && !searches.includes(searchTerm)) {
             setSearches((prev) => [searchTerm, ...prev.slice(0, 9)])
         }
     }, [debouncedSearchTerm])
