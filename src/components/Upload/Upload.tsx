@@ -21,6 +21,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { useDeleteDocument } from '../../services/hooks/Documents/useDeleteDocument'
+import { Button as SubmitButton } from '../Button/SubmitButton'
+import { COLORS } from '../../style/GlobalStyles'
 
 type UploadProps = {
     item: Item
@@ -95,7 +97,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                 ))}
             </Wrapper>
             <Container>
-                <StyledLabel>
+                <SubmitButton color={COLORS.primary} backgroundColor={COLORS.secondary}>
                     {' '}
                     <input
                         type="file"
@@ -105,7 +107,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                         onChange={handleFileUpload}
                     />
                     UPLOAD NEW
-                </StyledLabel>
+                </SubmitButton>
             </Container>
         </>
     )
