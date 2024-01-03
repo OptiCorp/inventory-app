@@ -14,6 +14,8 @@ import { useFormContext } from 'react-hook-form'
 import { ChangeEvent, useState } from 'react'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import { Button as SubmitButton } from '../Button/SubmitButton'
+import { COLORS } from '../../style/GlobalStyles'
 
 const AddPartUpload = () => {
     const { register } = useFormContext()
@@ -52,7 +54,7 @@ const AddPartUpload = () => {
                 ))}
             </Wrapper>
             <Container>
-                <StyledLabel>
+                <SubmitButton color={COLORS.primary} backgroundColor={COLORS.secondary}>
                     {' '}
                     <input
                         type="file"
@@ -65,7 +67,7 @@ const AddPartUpload = () => {
                         }}
                     />
                     UPLOAD NEW
-                </StyledLabel>
+                </SubmitButton>
             </Container>
         </>
     )
