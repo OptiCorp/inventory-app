@@ -41,9 +41,12 @@ export const ExampleUpload = ({ item }: UploadProps) => {
         }
     }
 
-    // const handleFileDownload = (bytes: ArrayBuffer) => {
-    //     var blob = new Blob(bytes)
-    // }
+    const handleFileDownload = (file: Document) => {
+        var downloadLink = document.createElement('a')
+        downloadLink.download = `${file.name}`
+        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`
+        downloadLink.click()
+    }
 
     const handleFileDelete = (documentId: string) => {
         deleteDocument(documentId)
@@ -68,7 +71,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
-                                            // onClick={() => handleFileDownload(document.id)}
+                                            onClick={() => handleFileDownload(document)}
                                             sx={{ color: 'black' }}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
