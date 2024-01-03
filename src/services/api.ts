@@ -437,6 +437,10 @@ const apiService = () => {
         return responses
     }
 
+    const deleteDocument = async (documentId: string, itemId: string): Promise<Response> => {
+        return await deleteByFetch(`Documentation/${documentId}?itemId=${itemId}`)
+    }
+
     return {
         getAllUsers,
         getUser,
@@ -486,6 +490,7 @@ const apiService = () => {
         isWpIdUnique,
         addDocument,
         getDocumentsByItemId,
+        deleteDocument,
     }
 }
 

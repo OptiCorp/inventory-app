@@ -32,3 +32,33 @@ export const FileContainer = styled.div`
     align-items: center;
     padding: 4px;
 `
+
+export const FileShapeWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+`
+
+export const IconWrapper = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+`
+
+export const FileTypeWrapper = styled.div`
+    margin-left: 16px;
+`
+
+export const DocumentName = styled.span`
+    margin-top: 4px;
+`
+
+export const FileWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 16px;
+`

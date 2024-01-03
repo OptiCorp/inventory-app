@@ -3,7 +3,7 @@ import apiService from '../../api'
 
 export const useGetDocumentsByItemId = (itemId: string) => {
     return useQuery({
-        queryKey: ['documents', itemId],
+        queryKey: [itemId],
         queryFn: () => apiService().getDocumentsByItemId(itemId),
     })
 }
