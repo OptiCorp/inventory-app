@@ -7,7 +7,7 @@ import { COLORS } from '../../../style/GlobalStyles.ts'
 
 export const InfoIcon = styled(InfoOutlinedIcon)`
     color: black;
-    margin-inline: 30px;
+
     /* &:hover {
         color: 
     } */
@@ -15,7 +15,7 @@ export const InfoIcon = styled(InfoOutlinedIcon)`
 `
 export const EditIcon = styled(CreateOutlinedIcon)`
     color: black;
-    margin-inline: auto;
+
     &:hover {
         color: ${COLORS.cautionaryYellow};
     }

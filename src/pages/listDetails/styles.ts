@@ -89,12 +89,11 @@ export const FlexContainer = styled.div`
     flex-direction: row;
 `
 export const Header = styled.div`
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     display: flex;
-    justify-content: space-between;
+    padding-bottom: 3px;
+    justify-content: space-around;
     align-items: center;
     flex-direction: row;
-    background-color: ${COLORS.whiteSmoke};
 `
 export const NumberofItems = styled.span`
     width: 100%;

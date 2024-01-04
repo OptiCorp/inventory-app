@@ -10,7 +10,6 @@ import CustomDialog from '../Dialog/Index.tsx'
 import { StyledAddIcon, StyledRemoveIcon } from '../listCard/styles.ts'
 import {
     CompactCard,
-    CompactDesriptionParagraph,
     CompactInfoP,
     KeyWords,
     ResultCardCompactContainer,
@@ -87,12 +86,17 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
             >
                 <CompactCard>
                     <CompactInfoP>
-                        <KeyWords>ID:</KeyWords> {part.wpId}
+                        <KeyWords>ID:</KeyWords>
+                        {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
                         <KeyWords>Location</KeyWords>{' '}
                         {part.location?.name || 'Location'}
-                    </CompactInfoP>{' '}
+                    </CompactInfoP>
+                    <CompactInfoP>
+                        <KeyWords>Category</KeyWords>{' '}
+                        {part.category?.name || 'Category'}
+                    </CompactInfoP>
                     {icon === 'add' ? (
                         <StyledAddIcon
                             active={addItemSuccess}
@@ -112,9 +116,9 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         ></StyledRemoveIcon>
                     ) : null}
                 </CompactCard>
-                <CompactDesriptionParagraph>
+                {/* <CompactDesriptionParagraph>
                     {part.description}
-                </CompactDesriptionParagraph>
+                </CompactDesriptionParagraph> */}
             </ResultCardCompactContainer>
 
             <CustomDialog

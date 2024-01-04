@@ -88,7 +88,7 @@ export const CompactCard = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-basis: 100%;
+
     cursor: pointer;
     background-color: ${COLORS.card};
     padding: 1rem;
@@ -120,14 +120,16 @@ export const InfoP = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    width: 100%;
     flex-direction: row;
 `
 
-export const KeyWords = styled.span`
+export const KeyWords = styled.p`
     font-weight: 600;
+    width: 100%;
 `
 
 export const CompactInfoP = styled.div`
-    padding-right: 2rem;
     line-height: 1.5rem;
+    width: 100%;
 `
