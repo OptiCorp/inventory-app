@@ -1,4 +1,3 @@
-import { AiOutlineFileImage, AiOutlineFileJpg, AiOutlineFilePdf } from 'react-icons/ai'
 import {
     Container,
     DocumentName,
@@ -11,22 +10,40 @@ import {
     Wrapper,
 } from './styles'
 import { useFormContext } from 'react-hook-form'
-import { ChangeEvent, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { Button as SubmitButton } from '../Button/SubmitButton'
 import { COLORS } from '../../style/GlobalStyles'
+import { Button } from '@mui/material'
 
 const AddPartUpload = () => {
-    const { register } = useFormContext()
+    const { register, setValue } = useFormContext()
     const [files, setFiles] = useState<File[]>()
     const documentationField = register('files')
     const inputFile = useRef<HTMLInputElement | null>(null)
+
+    const handleFileDownload = async (file: File) => {
+        var downloadLink = document.createElement('a')
+        downloadLink.download = `${file.name}`
+        downloadLink.href = URL.createObjectURL(file)
+        downloadLink.click()
+    }
+
+    const handleFileRemoval = (index: number) => {
+        setFiles((files) => files?.splice(index, 1))
+    }
+
+    useEffect(() => {
+        console.log(files)
+        setValue('files', files)
+    }, [files])
+
     return (
         <>
             <Wrapper>
-                {files?.map((file) => (
-                    <FileWrapper>
+                {files?.map((file, index) => (
+                    <FileWrapper key={index}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"
@@ -40,8 +57,18 @@ const AddPartUpload = () => {
                                         <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
-                                        <FileDownloadOutlinedIcon fontSize="large" />
-                                        <DeleteOutlineOutlinedIcon fontSize="large" />
+                                        <Button
+                                            sx={{ color: 'black' }}
+                                            onClick={() => handleFileDownload(file)}
+                                        >
+                                            <FileDownloadOutlinedIcon fontSize="large" />
+                                        </Button>
+                                        <Button
+                                            sx={{ color: 'black' }}
+                                            onClick={() => handleFileRemoval(index)}
+                                        >
+                                            <DeleteOutlineOutlinedIcon fontSize="large" />
+                                        </Button>
                                     </IconWrapper>
                                 </FileShapeWrapper>
                             </foreignObject>
@@ -64,13 +91,16 @@ const AddPartUpload = () => {
                     <input
                         type="file"
                         multiple
+                        accept=".pdf,.png,.docx,.jpg"
                         style={{ display: 'none' }}
                         {...documentationField}
                         onChange={(e) => {
-                            documentationField.onChange(e)
                             setFiles([...e.target.files!])
                         }}
-                        ref={inputFile}
+                        ref={(e) => {
+                            documentationField.ref(e)
+                            inputFile.current = e
+                        }}
                     />
                     UPLOAD NEW
                 </SubmitButton>
