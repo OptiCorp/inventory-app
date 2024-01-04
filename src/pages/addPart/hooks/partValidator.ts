@@ -13,7 +13,7 @@ export const partSchema = z.object({
     parentId: z.string().nullish(),
     addedById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
-    files: z.instanceof(FileList).nullish(),
+    files: z.array(z.instanceof(File)).nullish(),
 })
 
 export type PartSchema = z.infer<typeof partSchema>

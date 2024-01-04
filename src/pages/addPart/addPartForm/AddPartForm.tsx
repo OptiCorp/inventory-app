@@ -17,7 +17,6 @@ type response = {
 
 // WIP
 export const AddPartFormm = () => {
-    // const { methods, onSubmit, formState } = usePartsForm()
     const navigate = useNavigate()
 
     return (
