@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import UmAppContext from '../../contexts/UmAppContext.tsx'
+import { useSnackBar } from '../../hooks/useSnackbar.tsx'
 import { Item, MutateItemList } from '../../services/apiTypes'
 import { useAddItemsToList } from '../../services/hooks/Items/useAddItemsToList.tsx'
 import { useRemoveItemsFromList } from '../../services/hooks/Items/useRemoveItemsFromList.tsx'
@@ -19,6 +21,8 @@ type Props = {
 }
 
 const SearchResultCardCompact = ({ part, icon }: Props) => {
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
+    const { snackbar } = useSnackBar()
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
@@ -27,7 +31,16 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
-        mutateAddItemToList(ids)
+        mutateAddItemToList(ids, {
+            onSuccess: (data) => {
+                setSnackbarText(`${part.wpId} was added`)
+
+                if (data.status >= 400) {
+                    setSnackbarSeverity('error')
+                    setSnackbarText(`${data.statusText}, please try again.`)
+                }
+            },
+        })
         handleClose(e)
     }
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {

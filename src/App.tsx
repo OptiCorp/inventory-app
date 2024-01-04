@@ -24,19 +24,19 @@ import ListDetails from './pages/listDetails/ListDetails.tsx'
 import PartDetails from './pages/partDetails/Index'
 import Search from './pages/search/Search'
 import GlobalStyles from './style/GlobalStyles'
-import AddCategory from './pages/admin/category/AddCategory.tsx'
-import AddLocation from './pages/admin/location/AddLocation.tsx'
+
 import { useSnackBar } from './hooks/useSnackbar.tsx'
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts'
+import AddCategory from './pages/admin/category/AddCategory.tsx'
+import AddLocation from './pages/admin/location/AddLocation.tsx'
 import AddVendor from './pages/admin/vendor/AddVendor.tsx'
+import Index from './pages/listDetails/Phone/Index.tsx'
 
 function App() {
     const isAuthenticated = useIsAuthenticated()
     const queryClient = new QueryClient()
-
-    const { snackbar } = useSnackBar()
-
     const { width } = useWindowDimensions()
+    const { snackbar } = useSnackBar()
 
     const router = createBrowserRouter(
         createRoutesFromElements(
@@ -53,7 +53,13 @@ function App() {
                     <Route path="add-form" element={<AddPartFormm />} />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />
-                <Route path="makelist/:listId?" element={<ListDetails />} />
+
+                {width > 800 ? (
+                    <Route path="makelist/:listId?" element={<ListDetails />} />
+                ) : (
+                    <Route path="makelist/:listId?" element={<Index />} />
+                )}
+
                 <Route path="admin">
                     <Route path="categories" element={<Categories />} />
                     <Route path="add-category" element={<AddCategory />} />

@@ -10,7 +10,7 @@ import { List, UpdateList } from '../../services/apiTypes'
 import { useDeleteList } from '../../services/hooks/List/useDeleteList'
 import { useUpdateList } from '../../services/hooks/List/useUpdateList'
 import { DeleteIcon, EditIcon, InfoIcon } from './Sidelist/styles'
-import { FlexContainer, Header, ListTitle } from './styles'
+import { FlexContainer, Header, ListTitle, StyledDate } from './styles'
 
 type Props = {
     list: List
@@ -87,13 +87,14 @@ export const ListHeader = ({ list }: Props) => {
     return (
         <>
             <Header>
-                <ListTitle>
-                    {list.title},{' '}
+                <ListTitle>{list.title}, </ListTitle>
+                <StyledDate>
+                    {' '}
                     {format(
                         new Date(list.createdDate),
                         'dd-MM-yyyy'
                     ).toString()}
-                </ListTitle>
+                </StyledDate>
                 <FlexContainer>
                     <InfoIcon />
                     <div onClick={(e) => handleOpenEdit(e)}>
