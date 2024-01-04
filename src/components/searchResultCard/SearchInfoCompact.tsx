@@ -27,7 +27,8 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
     const { mutate: mutateAddItemToList } = useAddItemsToList()
-    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList()
+    const { mutate: mutateRemoveItemFromList, data: removeData } =
+        useRemoveItemsFromList()
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
@@ -45,7 +46,18 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
     }
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
-        mutateRemoveItemFromList(ids)
+        mutateRemoveItemFromList(ids, {
+            onSuccess: (removeData) => {
+                setSnackbarText(`${part.wpId} was removed`)
+
+                if (removeData.status >= 400) {
+                    setSnackbarSeverity('error')
+                    setSnackbarText(
+                        `${removeData.statusText}, please try again.`
+                    )
+                }
+            },
+        })
         handleClose(e)
     }
     const handleClickOpen = (e: React.MouseEvent) => {

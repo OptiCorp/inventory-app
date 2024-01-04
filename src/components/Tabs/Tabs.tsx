@@ -1,10 +1,8 @@
-import { Tab } from '@mui/material'
+import { Chip, Tab } from '@mui/material'
 import { useState } from 'react'
+import { useParams } from 'react-router'
+import { useGetListById } from '../../services/hooks/List/useGetListById'
 import { Indicator, TabButton, TabContainer, Title } from './styles'
-
-type StyledProps = {
-    active: string
-}
 
 interface Tab {
     title: string
@@ -16,7 +14,9 @@ interface TabBarProps {
 }
 export default function TabComponent({ tabs }: TabBarProps) {
     const [activeTab, setActiveTab] = useState<number>(0)
+    const { listId } = useParams()
 
+    const { data: list, isFetching } = useGetListById(listId!)
     return (
         <>
             <TabContainer>
@@ -26,8 +26,17 @@ export default function TabComponent({ tabs }: TabBarProps) {
                         active={activeTab === index}
                         onClick={() => setActiveTab(index)}
                     >
-                        <Title active={activeTab === index}>{tab.title}</Title>
-                        <Indicator active={activeTab === index} />
+                        <Title active={activeTab === index}>
+                            {tab.title} {'  '} {'  '}
+                        </Title>
+                        <Indicator active={activeTab === index} />{' '}
+                        {tab.title === 'List' ? (
+                            <Chip
+                                variant="filled"
+                                label={`${list?.items?.length}`}
+                                color={activeTab ? 'default' : 'info'}
+                            />
+                        ) : null}
                     </TabButton>
                 ))}
             </TabContainer>

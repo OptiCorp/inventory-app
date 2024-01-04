@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Item, MutateItemList } from '../../../services/apiTypes.ts'
 import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList.tsx'
 
 import CustomDialog from '../../../components/Dialog/Index.tsx'
+import UmAppContext from '../../../contexts/UmAppContext.tsx'
 import { KeyWord, RemoveIcon, Wrapper } from './styles.ts'
 type Props = {
     part: Item
@@ -11,14 +12,27 @@ type Props = {
 
 export const SideList = ({ part }: Props) => {
     const { listId } = useParams()
-
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
     const [open, setOpen] = useState(false)
-    const { mutate: mutateRemoveItemFromList, isSuccess } =
-        useRemoveItemsFromList()
+    const {
+        mutate: mutateRemoveItemFromList,
+        isSuccess,
+        data,
+    } = useRemoveItemsFromList()
 
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
-        mutateRemoveItemFromList(ids)
+        mutateRemoveItemFromList(ids, {
+            onSuccess: (data) => {
+                setSnackbarSeverity('warning')
+                setSnackbarText(`${part.wpId} was deleted`)
+
+                if (data.status >= 400) {
+                    setSnackbarSeverity('error')
+                    setSnackbarText(`${data.statusText}, please try again.`)
+                }
+            },
+        })
         handleClose(e)
     }
 
