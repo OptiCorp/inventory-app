@@ -71,7 +71,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     )
                 }
             },
-        }) 
+        })
         handleClose(e)
     }
     const handleClickOpen = (e: React.MouseEvent) => {
@@ -106,10 +106,8 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 <div style={{ alignSelf: 'flex-end' }}>
                     {icon === 'add' && (
                         <StyledAddIcon
-                            style={{
-                                fontSize: '25px',
-                                ...(addItemSuccess && { color: 'green' }),
-                            }}
+                            active={addItemSuccess}
+                           
                             onClick={(e) =>
                                 handleAdd(e, {
                                     itemId: part.id,

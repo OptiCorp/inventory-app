@@ -34,11 +34,13 @@ export const StyledDeleteIcon = styled(DeleteForeverIcon)`
     }
 `
 
-export const StyledAddIcon = styled(AddCircleIcon)`
+export const StyledAddIcon = styled(AddCircleIcon)<{ active: boolean }>`
     color: black;
     position: absolute;
     top: 3px;
     right: 3px;
+    color: ${(props) =>
+        props.active ? 'green' : 'black'};
     &:hover {
         color: green;
     }
