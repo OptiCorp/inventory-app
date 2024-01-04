@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { AiOutlineFileJpg, AiOutlineFilePdf, AiOutlineFileImage } from 'react-icons/ai'
 import {
     Container,
@@ -32,6 +32,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
     const { data } = useGetDocumentsByItemId(item.id)
     const { mutate: uploadDocument } = useUploadDocument()
     const { mutate: deleteDocument } = useDeleteDocument(item.id)
+    const inputFile = useRef<HTMLInputElement | null>(null)
 
     const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -97,7 +98,11 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                 ))}
             </Wrapper>
             <Container>
-                <SubmitButton color={COLORS.primary} backgroundColor={COLORS.secondary}>
+                <SubmitButton
+                    color={COLORS.primary}
+                    backgroundColor={COLORS.secondary}
+                    onClick={() => inputFile.current?.click()}
+                >
                     {' '}
                     <input
                         type="file"
@@ -105,6 +110,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                         accept=".pdf,.png,.docx,.jpg"
                         style={{ display: 'none' }}
                         onChange={handleFileUpload}
+                        ref={inputFile}
                     />
                     UPLOAD NEW
                 </SubmitButton>

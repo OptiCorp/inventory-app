@@ -11,7 +11,7 @@ import {
     Wrapper,
 } from './styles'
 import { useFormContext } from 'react-hook-form'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { Button as SubmitButton } from '../Button/SubmitButton'
@@ -21,6 +21,7 @@ const AddPartUpload = () => {
     const { register } = useFormContext()
     const [files, setFiles] = useState<File[]>()
     const documentationField = register('files')
+    const inputFile = useRef<HTMLInputElement | null>(null)
     return (
         <>
             <Wrapper>
@@ -54,7 +55,11 @@ const AddPartUpload = () => {
                 ))}
             </Wrapper>
             <Container>
-                <SubmitButton color={COLORS.primary} backgroundColor={COLORS.secondary}>
+                <SubmitButton
+                    color={COLORS.primary}
+                    backgroundColor={COLORS.secondary}
+                    onClick={() => inputFile.current?.click()}
+                >
                     {' '}
                     <input
                         type="file"
@@ -65,6 +70,7 @@ const AddPartUpload = () => {
                             documentationField.onChange(e)
                             setFiles([...e.target.files!])
                         }}
+                        ref={inputFile}
                     />
                     UPLOAD NEW
                 </SubmitButton>
