@@ -15,7 +15,9 @@ export const TabButton = styled.button<{ active: boolean }>`
     padding: 10px;
     border: none;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: row;
     align-items: center;
     position: relative;
     border-top-right-radius: 20px;
@@ -28,9 +30,21 @@ export const TabButton = styled.button<{ active: boolean }>`
         outline: none;
     }
 `
+
+export const NumberofItems = styled.span`
+    position: relative;
+
+    left: 20px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: white;
+    color: black;
+    border: 2px solid black;
+`
 export const Title = styled.span<{ active: boolean }>`
     position: relative;
     display: flex;
+
     align-items: center;
     justify-content: center;
     height: inherit;

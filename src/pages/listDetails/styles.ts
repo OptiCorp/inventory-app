@@ -82,7 +82,11 @@ export const ButtonWrap = styled.div`
 `
 export const FlexContainer = styled.div`
     display: flex;
+    width: 100%;
     justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: row;
 `
 export const Header = styled.div`
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -92,3 +96,9 @@ export const Header = styled.div`
     flex-direction: row;
     background-color: ${COLORS.whiteSmoke};
 `
+export const NumberofItems = styled.span`
+    width: 100%;
+
+    padding: 5px 10px;
+`
+export const IconContainer = styled.div``

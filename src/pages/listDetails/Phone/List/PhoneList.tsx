@@ -4,12 +4,10 @@ import { useDebounce } from 'usehooks-ts'
 import { Button } from '../../../../components/Button/SubmitButton'
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../../hooks'
-import { Item, UpdateList } from '../../../../services/apiTypes'
+import { Item, List, UpdateList } from '../../../../services/apiTypes'
 import { useGetItemsNotInListInfinite } from '../../../../services/hooks/Items/useGetItemsNotInListInfinite'
-import { useGetListById } from '../../../../services/hooks/List/useGetListById'
 import { useUpdateList } from '../../../../services/hooks/List/useUpdateList'
 import { COLORS } from '../../../../style/GlobalStyles'
-import { GlobalSpinnerContainer, Spinner } from '../../../search/styles'
 import { ListHeader } from '../../ListHeader'
 import { SideList } from '../../Sidelist/SideList'
 import {
@@ -17,12 +15,14 @@ import {
     FlexWrapperCompact,
     ListContainerCompact,
 } from './styles'
-
-export const PhoneList = () => {
+type Props = {
+    list: List
+}
+export const PhoneList = ({ list }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    const { listId } = useParams()
+
     const [searchTerm, setSearchTerm] = useState('')
-    const { data: list, isFetching } = useGetListById(listId!)
+    const { listId } = useParams()
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const {
         mutate: updateList,
@@ -80,11 +80,11 @@ export const PhoneList = () => {
                         </ButtonWrapCompact>
                     </FlexWrapperCompact>
                     {snackbar}
-                    {(isLoading || isFetching) && (
+                    {/* {(isLoading || isFetching) && (
                         <GlobalSpinnerContainer>
                             <Spinner />
                         </GlobalSpinnerContainer>
-                    )}
+                    )} */}
                 </>
             )}
         </>

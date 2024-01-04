@@ -80,6 +80,10 @@ const ListDetails = () => {
         })
     }
 
+    
+
+
+
     return (
         <>
             <SearchContainerList>

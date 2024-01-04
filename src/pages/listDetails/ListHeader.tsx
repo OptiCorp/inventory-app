@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { useContext, useState } from 'react'
 
-import { TextField } from '@mui/material'
+import { Chip, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import CustomDialog from '../../components/Dialog/Index'
 import UmAppContext from '../../contexts/UmAppContext'
@@ -9,8 +9,14 @@ import { useSnackBar } from '../../hooks'
 import { List, UpdateList } from '../../services/apiTypes'
 import { useDeleteList } from '../../services/hooks/List/useDeleteList'
 import { useUpdateList } from '../../services/hooks/List/useUpdateList'
-import { DeleteIcon, EditIcon, InfoIcon } from './Sidelist/styles'
-import { FlexContainer, Header, ListTitle, StyledDate } from './styles'
+import { DeleteIcon, EditIcon } from './Sidelist/styles'
+import {
+    FlexContainer,
+    Header,
+    IconContainer,
+    ListTitle,
+    StyledDate,
+} from './styles'
 
 type Props = {
     list: List
@@ -96,13 +102,13 @@ export const ListHeader = ({ list }: Props) => {
                     ).toString()}
                 </StyledDate>
                 <FlexContainer>
-                    <InfoIcon />
-                    <div onClick={(e) => handleOpenEdit(e)}>
+                    <Chip label={`${list?.items?.length} Items`} />{' '}
+                    <IconContainer onClick={(e) => handleOpenEdit(e)}>
                         <EditIcon />
-                    </div>
-                    <div onClick={(e) => handleOpen(e)}>
+                    </IconContainer>
+                    <IconContainer onClick={(e) => handleOpen(e)}>
                         <DeleteIcon />
-                    </div>
+                    </IconContainer>
                 </FlexContainer>
             </Header>{' '}
             <CustomDialog

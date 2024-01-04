@@ -5,7 +5,7 @@ export const ButtonWrapCompact = styled.div`
     display: flex;
     flex-direction: row;
     gap: 2rem;
-
+    padding: 10px;
     margin-inline: auto;
 `
 export const FlexWrapperCompact = styled.div`

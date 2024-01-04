@@ -71,7 +71,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     )
                 }
             },
-        })
+        }) 
         handleClose(e)
     }
     const handleClickOpen = (e: React.MouseEvent) => {
@@ -83,10 +83,8 @@ export const Searchinfo = ({ part, icon }: Props) => {
 
         setOpen(false)
     }
-
     return (
         <>
-            {' '}
             <FirstInfoBox>
                 <InfoP>
                     <KeyWords>WP ID</KeyWords>
@@ -106,9 +104,12 @@ export const Searchinfo = ({ part, icon }: Props) => {
             </SecondInfoBox>
             <ThirdInfoBox>
                 <div style={{ alignSelf: 'flex-end' }}>
-                    {icon === 'add' ? (
+                    {icon === 'add' && (
                         <StyledAddIcon
-                            style={{ fontSize: '25px' }}
+                            style={{
+                                fontSize: '25px',
+                                ...(addItemSuccess && { color: 'green' }),
+                            }}
                             onClick={(e) =>
                                 handleAdd(e, {
                                     itemId: part.id,
@@ -116,33 +117,31 @@ export const Searchinfo = ({ part, icon }: Props) => {
                                 })
                             }
                         ></StyledAddIcon>
-                    ) : null}
+                    )}
 
-                    {icon === 'remove' ? (
+                    {icon === 'remove' && (
                         <StyledRemoveIcon
                             style={{ fontSize: '25px' }}
                             onClick={handleClickOpen}
                         ></StyledRemoveIcon>
-                    ) : null}
+                    )}
                 </div>
                 <InfoP>
-                    <KeyWords>Location</KeyWords>{' '}
+                    <KeyWords>Location</KeyWords>
                     {part.location?.name || 'Location'}
                 </InfoP>
                 <InfoP>
-                    {' '}
                     <KeyWords>Vendor</KeyWords>
                     {part.vendor?.name || ''}
                 </InfoP>
                 <InfoP>
-                    {' '}
                     <KeyWords>
                         {part.updatedDate ? 'Last updated' : 'Created on'}
-                    </KeyWords>{' '}
+                    </KeyWords>
                     {format(
                         new Date(part.updatedDate || part.createdDate),
                         'yyyy-MM-dd HH:mm:ss'
-                    ).toString()}{' '}
+                    ).toString()}
                 </InfoP>
             </ThirdInfoBox>
             <CustomDialog

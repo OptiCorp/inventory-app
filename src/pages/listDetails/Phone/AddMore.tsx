@@ -18,7 +18,7 @@ type Props = {
 export const AddMoreCompact = () => {
     const { snackbar } = useSnackBar()
     const [searchTerm, setSearchTerm] = useState('')
-    const { width } = useWindowDimensions()
+  
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { listId } = useParams()
     const {
@@ -34,9 +34,7 @@ export const AddMoreCompact = () => {
     }
 
     const {
-        mutate: updateList,
-        status: listUpdateStatus,
-        data,
+      
     } = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
