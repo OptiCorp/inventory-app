@@ -5,11 +5,11 @@ import { useSnackBar } from '../../hooks/useSnackbar.tsx'
 import { Item, MutateItemList } from '../../services/apiTypes'
 import { useAddItemsToList } from '../../services/hooks/Items/useAddItemsToList.tsx'
 import { useRemoveItemsFromList } from '../../services/hooks/Items/useRemoveItemsFromList.tsx'
+import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
 import CustomDialog from '../Dialog/Index.tsx'
 import { StyledAddIcon, StyledRemoveIcon } from '../listCard/styles.ts'
 import {
     CompactCard,
-    CompactDesriptionParagraph,
     CompactInfoP,
     KeyWords,
     ResultCardCompactContainer,
@@ -26,14 +26,22 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { listId } = useParams()
-    const { mutate: mutateAddItemToList } = useAddItemsToList()
+    const { data: list, isFetching } = useGetListById(listId!)
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
+        useAddItemsToList()
     const { mutate: mutateRemoveItemFromList, data: removeData } =
         useRemoveItemsFromList()
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
+        const alreadyAdded = list?.items.some((item) => item.wpId === part.wpId)
+        if (alreadyAdded) {
+            setSnackbarSeverity('error')
+            setSnackbarText('already in list')
+        }
         mutateAddItemToList(ids, {
             onSuccess: (data) => {
+                if (alreadyAdded) return
                 setSnackbarText(`${part.wpId} was added`)
 
                 if (data.status >= 400) {
@@ -78,14 +86,20 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
             >
                 <CompactCard>
                     <CompactInfoP>
-                        <KeyWords>ID:</KeyWords> {part.wpId}
+                        <KeyWords>ID:</KeyWords>
+                        {part.wpId}
                     </CompactInfoP>{' '}
                     <CompactInfoP>
                         <KeyWords>Location</KeyWords>{' '}
                         {part.location?.name || 'Location'}
-                    </CompactInfoP>{' '}
+                    </CompactInfoP>
+                    <CompactInfoP>
+                        <KeyWords>Category</KeyWords>{' '}
+                        {part.category?.name || 'Category'}
+                    </CompactInfoP>
                     {icon === 'add' ? (
                         <StyledAddIcon
+                            active={addItemSuccess}
                             style={{ fontSize: '25px' }}
                             onClick={(e) =>
                                 handleAdd(e, {
@@ -102,9 +116,9 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         ></StyledRemoveIcon>
                     ) : null}
                 </CompactCard>
-                <CompactDesriptionParagraph>
+                {/* <CompactDesriptionParagraph>
                     {part.description}
-                </CompactDesriptionParagraph>
+                </CompactDesriptionParagraph> */}
             </ResultCardCompactContainer>
 
             <CustomDialog

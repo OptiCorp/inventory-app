@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
 import { Button } from '../../../../components/Button/SubmitButton'
+import SearchResultCardCompact from '../../../../components/searchResultCard/SearchInfoCompact'
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../../hooks'
 import { Item, List, UpdateList } from '../../../../services/apiTypes'
@@ -9,7 +10,6 @@ import { useGetItemsNotInListInfinite } from '../../../../services/hooks/Items/u
 import { useUpdateList } from '../../../../services/hooks/List/useUpdateList'
 import { COLORS } from '../../../../style/GlobalStyles'
 import { ListHeader } from '../../ListHeader'
-import { SideList } from '../../Sidelist/SideList'
 import {
     ButtonWrapCompact,
     FlexWrapperCompact,
@@ -59,7 +59,11 @@ export const PhoneList = ({ list }: Props) => {
                         {list?.items ? (
                             <ListContainerCompact>
                                 {list.items.map((item: Item) => (
-                                    <SideList part={item} key={item.id} />
+                                    <SearchResultCardCompact
+                                        part={item}
+                                        icon={'remove'}
+                                    />
+                                    // <SideList part={item} key={item.id} />
                                 ))}
                             </ListContainerCompact>
                         ) : null}
@@ -67,15 +71,15 @@ export const PhoneList = ({ list }: Props) => {
                             <Button
                                 backgroundColor={`${COLORS.secondary}`}
                                 color={`${COLORS.primary}`}
+                            >
+                                Export
+                            </Button>
+                            <Button
+                                backgroundColor={`${COLORS.primary}`}
+                                color={`${COLORS.secondary}`}
                                 onClick={handleSave}
                             >
                                 Save list
-                            </Button>
-                            <Button
-                                backgroundColor={`${COLORS.secondary}`}
-                                color={`${COLORS.primary}`}
-                            >
-                                Export
                             </Button>
                         </ButtonWrapCompact>
                     </FlexWrapperCompact>

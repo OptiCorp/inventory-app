@@ -56,11 +56,9 @@ export const SideList = ({ part }: Props) => {
                         {part.wpId}
                     </KeyWord>
                     <KeyWord>
-                        {' '}
                         <b>Location</b> {part.location?.name || 'Location'}
                     </KeyWord>
                     <KeyWord>
-                        {' '}
                         <b>Vendor</b> {part.vendor?.name || 'Vendor'}
                     </KeyWord>
 
