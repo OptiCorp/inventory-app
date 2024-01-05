@@ -31,11 +31,12 @@ const AddPartUpload = () => {
     }
 
     const handleFileRemoval = (index: number) => {
-        setFiles((files) => files?.splice(index, 1))
+        const filesCopy = [...files!]
+        filesCopy.splice(index, 1)
+        setFiles(filesCopy)
     }
 
     useEffect(() => {
-        console.log(files)
         setValue('files', files)
     }, [files])
 
