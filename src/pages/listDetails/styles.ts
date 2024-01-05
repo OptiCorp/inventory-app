@@ -4,7 +4,7 @@ import { COLORS } from '../../style/GlobalStyles.ts'
 export const ListTitle = styled.h2`
     font-weight: 600;
     line-height: 2rem;
-
+    width: 100%;
     margin-inline: 20px;
 `
 export const StyledDate = styled.h3`
@@ -85,7 +85,7 @@ export const FlexContainer = styled.div`
     width: 100%;
     justify-content: flex-end;
     align-items: center;
-    gap: 1rem;
+
     flex-direction: row;
 `
 export const Header = styled.div`

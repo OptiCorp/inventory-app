@@ -101,8 +101,8 @@ export const ListHeader = ({ list }: Props) => {
                         'dd-MM-yyyy'
                     ).toString()}
                 </StyledDate>
+                <Chip label={`${list?.items?.length} Items`} />{' '}
                 <FlexContainer>
-                    <Chip label={`${list?.items?.length} Items`} />{' '}
                     <IconContainer onClick={(e) => handleOpenEdit(e)}>
                         <EditIcon />
                     </IconContainer>
