@@ -1,10 +1,10 @@
+import { ComponentProps } from 'react'
 import styled from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
-import { ComponentProps } from 'react'
 
 export const SubmitButton = styled('button')<{
     $backgroundColor: string
-    color: ComponentProps<'button'>["color"]
+    color: ComponentProps<'button'>['color']
 }>`
     &:active {
         transform: scale(1.03);
@@ -28,6 +28,5 @@ export const Wrapper = styled.div`
 
 export const ButtonsWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
-    //gap: 25px;
+    justify-content: end;
 `

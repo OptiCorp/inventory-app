@@ -1,14 +1,14 @@
-import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
+import { Breadcrumbs } from '@mui/material'
+import { FormProvider } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ExampleUpload } from '../../components/Upload/Upload'
 import { useGetItemById } from '../../services/hooks/Items/useGetItemById'
 import { Comments } from './Comments/Comments'
-import { FormProvider } from 'react-hook-form'
 import { Hierarchy } from './Hierarchy'
 import { Log } from './Log'
 import PartInfo from './PartInfo/PartInfo'
+import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
 import { useUpdatePartForm } from './useUpdatePartForm'
-import { ExampleUpload } from '../../components/Upload/Upload'
-import { Breadcrumbs } from '@mui/material'
 
 const PartDetails = () => {
     const { id } = useParams() as { id: string }
@@ -16,7 +16,7 @@ const PartDetails = () => {
     const { methods } = useUpdatePartForm(item!)
     const navigate = useNavigate()
     if (!item) return null
-
+    console.log(item)
     return (
         <StyledContainerDiv>
             {item.parentId && (
@@ -28,7 +28,10 @@ const PartDetails = () => {
                         >
                             {item.parent?.id}
                         </BreadcrumbLink>
-                        <BreadcrumbLink onClick={() => navigate(`/${item.id}`)} underline="none">
+                        <BreadcrumbLink
+                            onClick={() => navigate(`/${item.id}`)}
+                            underline="none"
+                        >
                             {item.id}
                         </BreadcrumbLink>
                     </Breadcrumbs>

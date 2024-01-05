@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton'
+import { ButtonsWrapper } from '../../../components/Button/styles.ts'
 import ProgressBar from '../../../components/progressBar/ProgressBar'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
 import { COLORS } from '../../../style/GlobalStyles'
+import { RadioWrapper, StyledInput } from '../batch/styles.ts'
 import { FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
-import { RadioWrapper, StyledInput } from '../batch/styles.ts'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
-import { ButtonsWrapper } from '../../../components/Button/styles.ts'
 
 const CheckForm = () => {
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } =
+        useLocalStorage()
     const [checked, setChecked] = useState<boolean>(
         getLocalStorageWithExpiry('checks-check') === 'true'
     )
@@ -51,8 +52,8 @@ const CheckForm = () => {
                             onChange={() => setChecked(!checked)}
                         />{' '}
                         <p>
-                            I have performed all necessary checks before adding this item to the
-                            system
+                            I have performed all necessary checks before adding
+                            this item to the system
                         </p>
                     </RadioWrapper>
                 </label>
@@ -69,13 +70,6 @@ const CheckForm = () => {
                 />
             </FormRadio>
             <ButtonsWrapper>
-                <Button
-                    backgroundColor={` ${COLORS.secondary}`}
-                    color={` ${COLORS.primary}`}
-                    onClick={() => navigate('/add-part/batch')}
-                >
-                    Back
-                </Button>
                 <Button
                     backgroundColor={` ${COLORS.primary}`}
                     color={` ${COLORS.secondary}`}

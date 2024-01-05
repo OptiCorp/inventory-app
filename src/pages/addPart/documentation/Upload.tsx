@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
-import { ExampleUpload } from '../../../components/Upload/Upload.tsx'
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
-import { COLORS } from '../../../style/GlobalStyles.ts'
-import { FormContainer } from '../styles.ts'
-import { RadioWrapper, StyledInput } from '../batch/styles.ts'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
 import { ButtonsWrapper } from '../../../components/Button/styles.ts'
 import AddPartUpload from '../../../components/Upload/AddPartUpload.tsx'
+import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+import { COLORS } from '../../../style/GlobalStyles.ts'
+import { RadioWrapper, StyledInput } from '../batch/styles.ts'
+import { FormContainer } from '../styles.ts'
 
 const Upload = () => {
     const navigate = useNavigate()
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } =
+        useLocalStorage()
     const [checked, setChecked] = useState<boolean>(
         getLocalStorageWithExpiry('upload-check') === 'true'
     )
@@ -50,7 +50,10 @@ const Upload = () => {
                         name="checks"
                         onChange={() => setChecked(!checked)}
                     />{' '}
-                    <p>I have uploaded all necessary documentation for this item. E.g: </p>
+                    <p>
+                        I have uploaded all necessary documentation for this
+                        item. E.g:{' '}
+                    </p>
                 </RadioWrapper>
             </label>
             <ul>
@@ -60,13 +63,6 @@ const Upload = () => {
                 <li>Photos.</li>
             </ul>
             <ButtonsWrapper>
-                <Button
-                    backgroundColor={` ${COLORS.secondary}`}
-                    color={` ${COLORS.primary}`}
-                    onClick={() => navigate('/add-part/checks')}
-                >
-                    Back
-                </Button>
                 <Button
                     backgroundColor={` ${COLORS.primary}`}
                     color={` ${COLORS.secondary}`}

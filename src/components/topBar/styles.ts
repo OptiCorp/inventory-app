@@ -21,10 +21,6 @@ export const StyledNavLink = styled(NavLink)`
     }
 `
 
-export const HeaderWrap = styled.div`
-    display: flex;
-`
-
 export const DropdownItem = styled(ListItem)`
     && {
         margin-left: 20px;
@@ -40,4 +36,12 @@ export const HamburgerContainer = styled(Box)`
         justify-content: space-between;
         height: 100%;
     }
+`
+export const HeaderWrap = styled.div`
+    display: flex;
+`
+export const BackButton = styled.div`
+    position: relative;
+    margin: 0;
+    cursor: pointer;
 `

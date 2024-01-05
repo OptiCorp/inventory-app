@@ -1,15 +1,12 @@
-import { FormProvider } from 'react-hook-form'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
 
 import { FormContainer } from '../styles.ts'
 
-import { Button } from '../../../components/Button/SubmitButton.tsx'
-import { COLORS } from '../../../style/GlobalStyles.ts'
-import { usePartsForm } from '../hooks/useAddPartForm.tsx'
-import { FormContent } from './FormContent.tsx'
-import { StyledForm } from './styles.ts'
 import { useNavigate } from 'react-router-dom'
+import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { ButtonsWrapper } from '../../../components/Button/styles.ts'
+import { COLORS } from '../../../style/GlobalStyles.ts'
+import { FormContent } from './FormContent.tsx'
 
 type response = {
     error: string
@@ -25,13 +22,6 @@ export const AddPartFormm = () => {
             <h4>Add details</h4>
             <FormContent />
             <ButtonsWrapper>
-                <Button
-                    backgroundColor={` ${COLORS.secondary}`}
-                    color={` ${COLORS.primary}`}
-                    onClick={() => navigate('/add-part/upload')}
-                >
-                    Back
-                </Button>
                 <Button
                     id="addPart"
                     type="submit"
