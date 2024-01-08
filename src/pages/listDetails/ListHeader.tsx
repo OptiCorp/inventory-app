@@ -5,7 +5,7 @@ import { Chip, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import CustomDialog from '../../components/Dialog/Index'
 import UmAppContext from '../../contexts/UmAppContext'
-import { useSnackBar } from '../../hooks'
+import { useSnackBar, useWindowDimensions } from '../../hooks'
 import { List, UpdateList } from '../../services/apiTypes'
 import { useDeleteList } from '../../services/hooks/List/useDeleteList'
 import { useUpdateList } from '../../services/hooks/List/useUpdateList'
@@ -14,8 +14,11 @@ import {
     FlexContainer,
     Header,
     IconContainer,
+    IconContainerCompact,
     ListTitle,
     StyledDate,
+    Wrapper,
+    WrapperCompact,
 } from './styles'
 
 type Props = {
@@ -23,6 +26,8 @@ type Props = {
 }
 
 export const ListHeader = ({ list }: Props) => {
+    const { width } = useWindowDimensions()
+
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
     const [title, setTitle] = useState(list.title)
     const [open, setOpen] = useState(false)
@@ -92,25 +97,58 @@ export const ListHeader = ({ list }: Props) => {
 
     return (
         <>
-            <Header>
-                <ListTitle>{list.title}, </ListTitle>
-                <StyledDate>
-                    {' '}
-                    {format(
-                        new Date(list.createdDate),
-                        'dd-MM-yyyy'
-                    ).toString()}
-                </StyledDate>
-                <Chip label={`${list?.items?.length} Items`} />{' '}
-                <FlexContainer>
-                    <IconContainer onClick={(e) => handleOpenEdit(e)}>
-                        <EditIcon />
-                    </IconContainer>
-                    <IconContainer onClick={(e) => handleOpen(e)}>
-                        <DeleteIcon />
-                    </IconContainer>
-                </FlexContainer>
-            </Header>{' '}
+            {' '}
+            {width > 800 ? (
+                <Header>
+                    <Wrapper>
+                        <StyledDate>
+                            {' '}
+                            {format(
+                                new Date(list.createdDate),
+                                'dd-MM-yyyy'
+                            ).toString()}
+                        </StyledDate>{' '}
+                        <ListTitle>{list.title}</ListTitle>
+                    </Wrapper>
+                    <FlexContainer>
+                        <IconContainer>
+                            <Chip
+                                style={{ marginRight: '20px' }}
+                                label={`${list?.items?.length} Items`}
+                            />{' '}
+                        </IconContainer>
+                        <IconContainer onClick={(e) => handleOpenEdit(e)}>
+                            <EditIcon />
+                        </IconContainer>
+                        <IconContainer onClick={(e) => handleOpen(e)}>
+                            <DeleteIcon />
+                        </IconContainer>
+                    </FlexContainer>
+                </Header>
+            ) : (
+                <>
+                    <WrapperCompact>
+                        <Wrapper>
+                            <StyledDate>
+                                {' '}
+                                {format(
+                                    new Date(list.createdDate),
+                                    'dd-MM-yyyy'
+                                ).toString()}
+                            </StyledDate>{' '}
+                            <ListTitle>{list.title}</ListTitle>{' '}
+                        </Wrapper>{' '}
+                        <IconContainerCompact>
+                            <IconContainer onClick={(e) => handleOpenEdit(e)}>
+                                <EditIcon />
+                            </IconContainer>
+                            <IconContainer onClick={(e) => handleOpen(e)}>
+                                <DeleteIcon />
+                            </IconContainer>{' '}
+                        </IconContainerCompact>
+                    </WrapperCompact>
+                </>
+            )}
             <CustomDialog
                 open={open}
                 onClose={handleClose}

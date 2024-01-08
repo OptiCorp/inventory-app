@@ -24,7 +24,7 @@ export const SideList = ({ part }: Props) => {
         e.stopPropagation()
         mutateRemoveItemFromList(ids, {
             onSuccess: (data) => {
-                setSnackbarSeverity('warning')
+                setSnackbarSeverity('success')
                 setSnackbarText(`${part.wpId} was deleted`)
 
                 if (data.status >= 400) {

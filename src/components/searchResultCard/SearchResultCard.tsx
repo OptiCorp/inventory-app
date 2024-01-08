@@ -14,12 +14,7 @@ const SearchResultCard = ({ part, icon }: Props) => {
     return (
         <>
             <ResultCardContainer>
-                <SearchCard
-                    title=""
-                    onClick={() => {
-                        navigate(`/${part.id}`)
-                    }}
-                >
+                <SearchCard title="">
                     <Searchinfo part={part} icon={icon} />
                 </SearchCard>
             </ResultCardContainer>

@@ -45,9 +45,7 @@ export const PhoneList = ({ list }: Props) => {
         })
     }
     const {
-        data: items,
-        isLoading,
-        fetchNextPage,
+      
     } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
     return (
         <>

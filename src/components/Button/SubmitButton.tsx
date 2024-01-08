@@ -1,12 +1,13 @@
 import { ComponentProps, FunctionComponent } from 'react'
 import { SubmitButton, Wrapper } from './styles'
 interface ButtonProps {
-    children: React.ReactNode
+    children?: React.ReactNode
     type?: ComponentProps<'button'>['type']
     onClick?: ComponentProps<'button'>['onClick']
     form?: string
     id?: string
     backgroundColor: string
+    height?: string
     // variant: 'Primary' | 'Secondary' | 'Danger'
     color: ComponentProps<'button'>['color']
 }
@@ -19,6 +20,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
     form,
     backgroundColor,
     color,
+    height,
 }) => {
     return (
         <Wrapper>
@@ -27,6 +29,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
                 onClick={onClick}
                 id={id}
                 type={type}
+                height={height}
                 form={form}
                 $backgroundColor={backgroundColor}
             >
