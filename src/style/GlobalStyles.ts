@@ -8,7 +8,7 @@ export const COLORS = {
     gray: '#CACACA',
     card: '#FBFBFB',
     input: '#F2F2F2',
-
+    green: '#008000',
     lightGray: '#CCC',
     silverGray: '#DCDCDC',
     paleGray: '#EAEAEA',

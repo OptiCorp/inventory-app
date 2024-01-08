@@ -1,21 +1,19 @@
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
+import { Button } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { COLORS } from '../../style/GlobalStyles'
+import { Button as SubmitButton } from '../Button/SubmitButton'
 import {
     Container,
     DocumentName,
-    FileContainer,
     FileShapeWrapper,
     FileTypeWrapper,
     FileWrapper,
     IconWrapper,
-    StyledLabel,
     Wrapper,
 } from './styles'
-import { useFormContext } from 'react-hook-form'
-import { useEffect, useRef, useState } from 'react'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { Button as SubmitButton } from '../Button/SubmitButton'
-import { COLORS } from '../../style/GlobalStyles'
-import { Button } from '@mui/material'
 
 const AddPartUpload = () => {
     const { register, setValue } = useFormContext()
@@ -55,18 +53,28 @@ const AddPartUpload = () => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
+                                        <h3>
+                                            .
+                                            {file.type
+                                                .split('/')[1]
+                                                .toUpperCase()}
+                                        </h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() => handleFileDownload(file)}
+                                            onClick={() =>
+                                                handleFileDownload(file)
+                                            }
                                         >
+                                            {' '}
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() => handleFileRemoval(index)}
+                                            onClick={() =>
+                                                handleFileRemoval(index)
+                                            }
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
                                         </Button>

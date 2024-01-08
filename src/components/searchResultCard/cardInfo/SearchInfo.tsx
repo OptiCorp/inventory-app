@@ -11,7 +11,11 @@ import UmAppContext from '../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../hooks'
 import { useGetListById } from '../../../services/hooks/List/useGetListById'
 import CustomDialog from '../../Dialog/Index'
-import { StyledAddIcon, StyledRemoveIcon } from '../../listCard/styles'
+import {
+    StyledAddIcon,
+    StyledInfoIcon,
+    StyledRemoveIcon,
+} from '../../listCard/styles'
 import {
     DescriptionParagraph,
     FirstInfoBox,
@@ -25,17 +29,18 @@ type Props = {
     part: Item
     icon?: string
 }
-
 export const Searchinfo = ({ part, icon }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
     const { snackbar } = useSnackBar()
     const [open, setOpen] = useState(false)
+    const [alreadyAdded, setAlreadyAdded] = useState(false)
     const { listId } = useParams()
     const navigate = useNavigate()
     const { data: list, isFetching } = useGetListById(listId!)
     const {
         mutate: mutateAddItemToList,
         isSuccess: addItemSuccess,
+
         data,
     } = useAddItemsToList()
     const {
@@ -46,8 +51,17 @@ export const Searchinfo = ({ part, icon }: Props) => {
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
+        const alreadyAdded = list?.items.some((item) => item.id === part.id)
+        if (alreadyAdded) {
+            {
+                setAlreadyAdded(true)
+            }
+            setSnackbarSeverity('error')
+            setSnackbarText('already in list')
+        }
         mutateAddItemToList(ids, {
             onSuccess: (data) => {
+                if (alreadyAdded) return
                 setSnackbarText(`${part.wpId} was added`)
 
                 if (data.status >= 400) {
@@ -103,11 +117,12 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 <DescriptionParagraph>{part.description}</DescriptionParagraph>
             </SecondInfoBox>
             <ThirdInfoBox>
+                {' '}
                 <div style={{ alignSelf: 'flex-end' }}>
-                    {icon === 'add' && (
+                    {icon === 'add' ? (
                         <StyledAddIcon
+                            alreadyAdded={alreadyAdded}
                             active={addItemSuccess}
-                           
                             onClick={(e) =>
                                 handleAdd(e, {
                                     itemId: part.id,
@@ -115,15 +130,20 @@ export const Searchinfo = ({ part, icon }: Props) => {
                                 })
                             }
                         ></StyledAddIcon>
-                    )}
-
-                    {icon === 'remove' && (
-                        <StyledRemoveIcon
-                            style={{ fontSize: '25px' }}
-                            onClick={handleClickOpen}
-                        ></StyledRemoveIcon>
+                    ) : (
+                        icon === 'remove' && (
+                            <StyledRemoveIcon
+                                style={{ fontSize: '25px' }}
+                                onClick={handleClickOpen}
+                            ></StyledRemoveIcon>
+                        )
                     )}
                 </div>
+                <StyledInfoIcon
+                    onClick={() => {
+                        navigate(`/${part.id}`)
+                    }}
+                ></StyledInfoIcon>
                 <InfoP>
                     <KeyWords>Location</KeyWords>
                     {part.location?.name || 'Location'}

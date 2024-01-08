@@ -5,7 +5,7 @@ export const TabContainer = styled.section`
     display: flex;
     flex-direction: row;
     width: 100%;
-    border-bottom: 5px solid black;
+    border-bottom: 2px solid black;
 
     height: 60px;
 `

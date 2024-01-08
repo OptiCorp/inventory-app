@@ -1,29 +1,15 @@
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles.ts'
 
-export const ListTitle = styled.h2`
-    font-weight: 600;
-    line-height: 2rem;
-    width: 100%;
-    margin-inline: 20px;
-`
-export const StyledDate = styled.h3`
-    font-weight: 600;
-    width: 100%;
-
-    line-height: 2rem;
-`
-
 export const FlexWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: max-content;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 50px 1fr auto;
     gap: 16px;
     height: 90vh;
     padding-bottom: 20px;
 
-    right: 2%;
     grid-column: 2/2;
     justify-content: space-between;
     background-color: ${COLORS.silverGray};
@@ -82,18 +68,15 @@ export const ButtonWrap = styled.div`
 `
 export const FlexContainer = styled.div`
     display: flex;
-    width: 100%;
-    justify-content: flex-end;
+    margin: 10px 0;
+    gap: 10px;
     align-items: center;
-
     flex-direction: row;
 `
 export const Header = styled.div`
     display: flex;
-    padding-bottom: 3px;
-    justify-content: space-around;
-    align-items: center;
     flex-direction: row;
+    align-items: baseline;
 `
 export const NumberofItems = styled.span`
     width: 100%;
@@ -101,3 +84,38 @@ export const NumberofItems = styled.span`
     padding: 5px 10px;
 `
 export const IconContainer = styled.div``
+
+export const ListTitle = styled.h3`
+    font-weight: 600;
+
+    width: 100%;
+    font-size: 1.2rem;
+    margin-inline: 20px;
+`
+export const StyledDate = styled.span`
+    font-weight: 600;
+    width: 100%;
+    font-size: 0.9rem;
+
+    margin-inline: 20px;
+`
+
+export const Wrapper = styled.div`
+    display: flex;
+    width: 100%;
+    margin-inline: 20px;
+    align-items: center;
+    align-items: baseline;
+    margin: 1rem 0;
+    flex-direction: column;
+`
+export const WrapperCompact = styled.div`
+    display: flex;
+    align-items: baseline;
+    height: 60px;
+    flex-direction: row;
+`
+export const IconContainerCompact = styled.div`
+    margin: 10px 0;
+    display: flex;
+`
