@@ -13,7 +13,18 @@ const SearchResultCard = ({ part, icon }: Props) => {
 
     return (
         <>
-            <ResultCardContainer>
+            <ResultCardContainer
+                style={{
+                    cursor: `${
+                        location.pathname === `/search` ? `pointer` : null
+                    }`,
+                }}
+                onClick={() => {
+                    location.pathname === '/search'
+                        ? navigate(`/${part.id}`)
+                        : null
+                }}
+            >
                 <SearchCard title="">
                     <Searchinfo part={part} icon={icon} />
                 </SearchCard>

@@ -11,7 +11,7 @@ export const ListWrapper = styled.div`
     &:hover {
         background: ${COLORS.whiteSmoke};
     }
-
+    cursor: pointer;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
     width: 95%;
     max-width: 450px;
@@ -69,26 +69,6 @@ export const StyledAddIcon = styled(AddCircleIcon)<{
 
     cursor: pointer;
 `
-
-// export const StyledRedAddIcon = styled(AddCircleIcon)<{
-//     active: boolean
-//     alreadyAdded: boolean
-// }>`
-//     color: black;
-//     position: absolute;
-
-//     padding: 10px;
-//     top: 3px;
-//     right: 3px;
-
-//     color: ${(props) =>
-//         props.active && props.alreadyAdded ? COLORS.dangerRed : COLORS.primary};
-//     &:hover {
-//         color: ${(props) => (props.alreadyAdded ? 'red' : COLORS.green)};
-//     }
-
-//     cursor: pointer;
-// `
 
 export const StyledRemoveIcon = styled(RemoveCircleIcon)`
     color: ${COLORS.primary};

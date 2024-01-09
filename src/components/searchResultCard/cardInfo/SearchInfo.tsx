@@ -138,12 +138,14 @@ export const Searchinfo = ({ part, icon }: Props) => {
                             ></StyledRemoveIcon>
                         )
                     )}
-                </div>
-                <StyledInfoIcon
-                    onClick={() => {
-                        navigate(`/${part.id}`)
-                    }}
-                ></StyledInfoIcon>
+                </div>{' '}
+                {location.pathname.includes('/makelist') && (
+                    <StyledInfoIcon
+                        onClick={() => {
+                            navigate(`/${part.id}`)
+                        }}
+                    ></StyledInfoIcon>
+                )}
                 <InfoP>
                     <KeyWords>Location</KeyWords>
                     {part.location?.name || 'Location'}
