@@ -1,7 +1,19 @@
 import { styled } from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import { COLORS } from '../../../style/GlobalStyles'
 
 export const Wrapper = styled.div`
+    .hidden {
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        padding-right: 16px;
+    }
+
+    .visible {
+        display: flex;
+        flex-direction: column;
+        padding-right: 16px;
+    }
     display: flex;
     padding: 12px 20px;
     margin: 8px 0;
@@ -9,28 +21,14 @@ export const Wrapper = styled.div`
     border: 1px dashed ${COLORS.primary};
     box-sizing: border-box;
     min-height: 80px;
+    overflow-x: auto;
+    position: relative;
 `
 export const Container = styled.div`
     padding-left: 10px;
     margin-bottom: 25px;
     display: flex;
     justify-content: flex-end;
-`
-export const StyledLabel = styled.label`
-    background-color: ${COLORS.secondary};
-    color: ${COLORS.primary};
-    border: 1px solid ${COLORS.primary};
-    cursor: pointer;
-    align-self: flex-end;
-    padding: 7px 30px 7px 30px;
-    width: 88px;
-`
-
-export const FileContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4px;
 `
 
 export const FileShapeWrapper = styled.div`
@@ -59,5 +57,6 @@ export const DocumentName = styled.span`
 export const FileWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding-right: 16px;
 `

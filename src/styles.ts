@@ -10,7 +10,7 @@ export const BodyWrapper = styled.div`
 export const AppContainer = styled.div`
     max-width: 1200px;
     width: 100%;
-    padding: 8px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 `

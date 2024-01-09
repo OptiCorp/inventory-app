@@ -8,11 +8,13 @@ import useLocalStorage from '../../../hooks/useLocalStorage.ts'
 import { COLORS } from '../../../style/GlobalStyles.ts'
 import { RadioWrapper, StyledInput } from '../batch/styles.ts'
 import { FormContainer } from '../styles.ts'
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions.ts'
+import AddPartUploadMobile from '../../../components/Upload/mobile/AddPartUploadMobile.tsx'
 
 const Upload = () => {
     const navigate = useNavigate()
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } =
-        useLocalStorage()
+    const { width } = useWindowDimensions()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
     const [checked, setChecked] = useState<boolean>(
         getLocalStorageWithExpiry('upload-check') === 'true'
     )
@@ -40,7 +42,8 @@ const Upload = () => {
                     <li> Maximum file size: 20MB </li>
                 </ul>{' '}
             </p>
-            <AddPartUpload />
+            {width > 500 ? <AddPartUpload /> : <AddPartUploadMobile />}
+
             <span style={{ color: 'red' }}>{error}</span>
             <label>
                 <RadioWrapper>
@@ -50,10 +53,7 @@ const Upload = () => {
                         name="checks"
                         onChange={() => setChecked(!checked)}
                     />{' '}
-                    <p>
-                        I have uploaded all necessary documentation for this
-                        item. E.g:{' '}
-                    </p>
+                    <p>I have uploaded all necessary documentation for this item. E.g: </p>
                 </RadioWrapper>
             </label>
             <ul>
