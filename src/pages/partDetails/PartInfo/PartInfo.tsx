@@ -54,12 +54,17 @@ const PartInfo = ({ item, isLoading }: Props) => {
             <Container>
                 <TypeField
                     label="type"
-                    defaultValue={selectedType || item.type}
+                    defaultValue={selectedType ?? item.type}
                     onBlur={() =>
                         blurSelectField(selectedType!, 'type', setSnackbarText, setSnackbarSeverity)
                     }
                     handleSelectChange={(e) => selectChange(e, setSelectedType)}
-                    options={['Unit', 'Assembly', 'Subassembly', 'Part']}
+                    options={[
+                        { name: 'Unit', id: 'Unit' },
+                        { name: 'Assembly', id: 'Assembly' },
+                        { name: 'Subassembly', id: 'Subassembly' },
+                        { name: 'Part', id: 'Part' },
+                    ]}
                     selectedType={selectedType}
                 />
 
@@ -74,7 +79,9 @@ const PartInfo = ({ item, isLoading }: Props) => {
                             setSnackbarSeverity
                         )
                     }
-                    handleSelectChange={(e) => selectChange(e, setSelectedCategoryId)}
+                    handleSelectChange={(e) => {
+                        selectChange(e, setSelectedCategoryId)
+                    }}
                     options={categories}
                     id={item.categoryId}
                 />
