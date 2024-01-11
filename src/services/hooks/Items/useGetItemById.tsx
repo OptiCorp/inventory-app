@@ -5,7 +5,7 @@ export const useGetItemById = (id: string) => {
     const api = apiService()
 
     return useQuery({
-        queryKey: ['items'],
+        queryKey: ['items', id], // needs id to update log entries
         queryFn: () => api.getItemById(id),
         enabled: !!id,
     })
