@@ -77,6 +77,12 @@ export const Hierarchy = ({ item }: { item: Item }) => {
     }
 
     const handleAddChildToParent = (ids: AddChildItemIds) => {
+        if (ids.childItemId === ids.itemId) {
+            setSnackbarText('Cant add itself as child')
+            setSnackbarSeverity('warning')
+            return
+        }
+
         mutateAddChildItemToParent(ids, {
             onSuccess: (data) => {
                 if (data.status >= 400 && data.status < 500) {
@@ -143,7 +149,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                             styles={{
                                 control: (provided) => ({
                                     ...provided,
-                                    maxWidth: '400px',
+                                    maxWidth: '300px',
                                 }),
                             }}
                             onInputChange={(value) => setSearchTerm(value)}
@@ -171,7 +177,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                     <FlexContainer>
                         {item.children?.map((childItem) => {
                             return (
-                                <ChildItemContainer>
+                                <ChildItemContainer key={childItem.wpId}>
                                     <LinkElement onClick={() => navigate(`/${childItem.id}`)}>
                                         {childItem.wpId}
                                     </LinkElement>
@@ -205,8 +211,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                             styles={{
                                 control: (provided) => ({
                                     ...provided,
-                                    minWidth: '400px',
-                                    maxWidth: '400px',
+                                    minWidth: '300px',
                                 }),
                             }}
                             options={filteredWpIds}
