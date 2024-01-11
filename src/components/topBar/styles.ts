@@ -1,4 +1,4 @@
-import { Box, ListItem } from '@mui/material'
+import { Box, Button, ListItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
@@ -9,13 +9,18 @@ export const TopBarContainer = styled.div`
     padding: 16px;
 `
 
-export const StyledLinkDiv = styled.div`
+export const StyledLinkDiv = styled.h3`
     padding: 0 16px 0 0;
+    font-size: 1.3rem;
+    cursor: pointer;
 `
 
 export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     color: ${COLORS.gray};
+    &:hover {
+        color: ${COLORS.primary};
+    }
     &.active {
         color: ${COLORS.primary};
     }
@@ -37,11 +42,62 @@ export const HamburgerContainer = styled(Box)`
         height: 100%;
     }
 `
-export const HeaderWrap = styled.div`
+export const CompactHeaderWrap = styled.div`
     display: flex;
 `
+
+export const HeaderWrap = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+`
+
 export const BackButton = styled.div`
     position: relative;
     margin: 0;
+    cursor: pointer;
+`
+export const StyledAdminButton = styled(Button)`
+    text-decoration: none;
+    font-family: inherit;
+
+    color: ${COLORS.gray};
+    &.active {
+        color: ${COLORS.primary};
+    }
+`
+
+export const DropDownMenu = styled.span`
+    position: absolute;
+    top: 70px;
+
+    background-color: red;
+    padding: 20px;
+`
+type Props = {
+    isOpen: boolean
+}
+export const MenuAdmin = styled.div<Props>`
+    text-decoration: none;
+    cursor: pointer;
+    color: ${({ isOpen }) => (isOpen ? COLORS.primary : COLORS.gray)};
+    &.active {
+        color: ${COLORS.primary} !important;
+    }
+    &:hover {
+        color: ${COLORS.primary};
+    }
+`
+export const MenuAdminLink = styled.span``
+
+export const LogOutWrapper = styled.div`
+    color: ${COLORS.gray};
+    &.active {
+        color: ${COLORS.primary};
+    }
+    &:hover {
+        color: ${COLORS.primary};
+    }
     cursor: pointer;
 `
