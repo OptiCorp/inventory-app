@@ -9,7 +9,7 @@ export const useUpdateItem = (id: string, updatedById: string) => {
         mutationFn: (item: UpdateItem) => api.updateItemById(id, item, updatedById),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['getItemById', id],
+                queryKey: ['items', id],
             })
         },
     })
