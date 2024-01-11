@@ -3,11 +3,6 @@ import type { ChangeEvent, ComponentProps, Dispatch, SetStateAction } from "reac
 import { Category, Vendor } from "../../../services/apiTypes"
 import { ActionMeta, PropsValue, SingleValue } from "react-select"
 
-
-
-
-/* export type Types = 'Unit' | 'Assembly' | 'Subassembly' | 'Part' */
-
 export type Types = {
     id: 'Unit' | 'Assembly' | 'Subassembly' | 'Part'
     name: 'Unit' | 'Assembly' | 'Subassembly' | 'Part'
