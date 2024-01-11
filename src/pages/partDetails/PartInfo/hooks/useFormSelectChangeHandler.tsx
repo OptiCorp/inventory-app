@@ -1,12 +1,11 @@
-import { ChangeEvent, useCallback } from 'react'
-
+import { useCallback } from 'react'
 import { SetState } from '../types'
+import { SingleValue } from 'react-select'
 
 export const useFormSelectChangeHandler = () => {
     const handleSelectChange = useCallback(
-        (event: ChangeEvent<HTMLTextAreaElement>, setSelected: SetState<string>) => {
-            const newSelected = event.target.value
-            setSelected(newSelected)
+        (newValue: SingleValue<{ value: string }>, setSelected: SetState<string>) => {
+            setSelected(newValue!.value)
         },
         []
     )
