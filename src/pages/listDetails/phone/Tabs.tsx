@@ -2,9 +2,9 @@ import { useParams } from 'react-router'
 import TabComponent from '../../../components/Tabs/Tabs'
 import { useGetListById } from '../../../services/hooks/List/useGetListById'
 import { AddMoreCompact } from './AddMore'
-import { PhoneList } from './List/PhoneList'
+import { PhoneList } from './list/PhoneList'
 
-const Index = () => {
+const Tabs = () => {
     const { listId } = useParams()
     const { data: list, isFetching } = useGetListById(listId!)
 
@@ -26,4 +26,4 @@ const Index = () => {
     )
 }
 
-export default Index
+export default Tabs

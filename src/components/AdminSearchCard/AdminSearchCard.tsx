@@ -1,3 +1,8 @@
+import DeleteIcon from '@mui/icons-material/Delete'
+import DoneIcon from '@mui/icons-material/Done'
+import EditIcon from '@mui/icons-material/Edit'
+import { Button } from '@mui/material'
+import { FormEvent, useState } from 'react'
 import {
     Category,
     Location,
@@ -6,18 +11,17 @@ import {
     UpdateVendor,
     Vendor,
 } from '../../services/apiTypes'
-import { AdminActions, AdminSearchCardContainer, TitleContainer } from './styles'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
-import { Button } from '@mui/material'
-import { FormEvent, useState } from 'react'
-import DoneIcon from '@mui/icons-material/Done'
-import { useUpdateCategory } from '../../services/hooks/Category/useUpdateCategory'
-import { useUpdateVendor } from '../../services/hooks/Vendor/useUpdateVendor'
-import { useUpdateLocation } from '../../services/hooks/Locations/useUpdateLocation'
-import { useDeleteCategory } from '../../services/hooks/Category/useDeleteCategory'
-import { useDeleteVendor } from '../../services/hooks/Vendor/useDeleteVendor'
-import { useDeleteLocation } from '../../services/hooks/Locations/useDeleteLocation'
+import { useDeleteCategory } from '../../services/hooks/category/useDeleteCategory'
+import { useUpdateCategory } from '../../services/hooks/category/useUpdateCategory'
+import { useDeleteLocation } from '../../services/hooks/locations/useDeleteLocation'
+import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocation'
+import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor'
+import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor'
+import {
+    AdminActions,
+    AdminSearchCardContainer,
+    TitleContainer,
+} from './styles'
 
 type Props = {
     data: Category | Vendor | Location
@@ -32,14 +36,23 @@ export enum SearchType {
 
 const AdminSearchCard = ({ data, searchType }: Props) => {
     const [isEditing, setIsEditing] = useState(false)
-    const { mutate: updateCategory, status: categoryUpdateStatus } = useUpdateCategory(data.id)
-    const { mutate: updateVendor, status: vendorUpdateStatus } = useUpdateVendor(data.id)
-    const { mutate: updateLocation, status: locationUpdateStatus } = useUpdateLocation(data.id)
-    const { mutate: deleteCategory, status: categoryDeleteStatus } = useDeleteCategory(data.id)
-    const { mutate: deleteVendor, status: categoryVendorStatus } = useDeleteVendor(data.id)
-    const { mutate: deleteLocation, status: categoryLocationStatus } = useDeleteLocation(data.id)
+    const { mutate: updateCategory, status: categoryUpdateStatus } =
+        useUpdateCategory(data.id)
+    const { mutate: updateVendor, status: vendorUpdateStatus } =
+        useUpdateVendor(data.id)
+    const { mutate: updateLocation, status: locationUpdateStatus } =
+        useUpdateLocation(data.id)
+    const { mutate: deleteCategory, status: categoryDeleteStatus } =
+        useDeleteCategory(data.id)
+    const { mutate: deleteVendor, status: categoryVendorStatus } =
+        useDeleteVendor(data.id)
+    const { mutate: deleteLocation, status: categoryLocationStatus } =
+        useDeleteLocation(data.id)
 
-    const handleEdit = (isEditing: boolean, event?: FormEvent<HTMLInputElement>) => {
+    const handleEdit = (
+        isEditing: boolean,
+        event?: FormEvent<HTMLInputElement>
+    ) => {
         if (isEditing) {
             if (event) {
                 switch (searchType) {

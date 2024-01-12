@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
-
+type Props = {
+    height?: string
+}
 export const SubmitButton = styled.button`
     width: 150px;
     background-color: ${COLORS.primary};
@@ -41,4 +43,9 @@ export const ButtonContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 8px;
+`
+export const SearchContainer = styled.div<Props>`
+    display: flex;
+    flex-direction: column;
+    height: ${({ height }) => height};
 `

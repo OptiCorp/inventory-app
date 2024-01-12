@@ -60,12 +60,12 @@ export const BackButton = styled.div`
 `
 
 type Props = {
-    isOpen: boolean
+    $isopen: boolean | string
 }
 export const MenuAdmin = styled.div<Props>`
     cursor: pointer;
 
-    color: ${({ isOpen }) => (isOpen ? COLORS.primary : COLORS.gray)};
+    color: ${({ $isopen }) => (String($isopen) ? COLORS.primary : COLORS.gray)};
     &.active {
         color: ${COLORS.primary} !important;
     }

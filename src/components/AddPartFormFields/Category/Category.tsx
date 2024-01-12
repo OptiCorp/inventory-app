@@ -6,7 +6,7 @@ import {
     Category as CategoryType,
     FormOption,
 } from '../../../services/apiTypes.ts'
-import { useGetCategories } from '../../../services/hooks/Category/useGetCategories.tsx'
+import { useGetCategories } from '../../../services/hooks/category/useGetCategories.tsx'
 import { ToolTip } from '../../ToolTip/ToolTip.tsx'
 import { FormSelect } from '../FormSelect/FormSelect.tsx'
 import { ErrorP, IconContainer, InputWrap, StyledDiv } from './styles.ts'

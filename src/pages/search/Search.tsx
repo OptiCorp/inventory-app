@@ -4,17 +4,16 @@ import { useDebounce, useLocalStorage } from 'usehooks-ts'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import { useWindowDimensions } from '../../hooks'
 
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner'
 import SearchResultCardCompact from '../../components/SearchResultCard/SearchInfoCompact'
 import SearchResultCard from '../../components/SearchResultCard/SearchResultCard'
-import { useGetItemsInfinite } from '../../services/hooks/Items/useGetItemsInfinite'
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite'
 import {
     Container,
-    GlobalSpinnerContainer,
     RecentSearchContainer,
     RecentTitle,
     SearchContainer,
     SpanMargin,
-    Spinner,
     StyledSearchedLink,
 } from './styles'
 
@@ -75,11 +74,7 @@ const Search = () => {
                     placeholder={'Search for ID, description, PO number or S/N'}
                 />
 
-                {isLoading && (
-                    <GlobalSpinnerContainer>
-                        <Spinner />
-                    </GlobalSpinnerContainer>
-                )}
+                {isLoading && <GlobalSpinner />}
 
                 <Container>
                     {data?.pages.map((page, i) =>

@@ -3,23 +3,24 @@ import { useAccount, useMsal } from '@azure/msal-react'
 import { AlertColor } from '@mui/material'
 import decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
+import { GlobalSpinner } from '../components/GlobalSpinner/GlobalSpinner.tsx'
 import apiService from '../services/api'
-import { ApiStatus, Item, User } from '../services/apiTypes'
+import { ApiStatus, User } from '../services/apiTypes'
 import { AzureUserInfo, UmAppContextType } from './types'
-import { GlobalSpinnerContainer, Spinner } from '../pages/search/styles.ts'
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
 
-export function UmAppContextProvider({ children }: { children: React.ReactNode }) {
- 
- 
-
- 
+export function UmAppContextProvider({
+    children,
+}: {
+    children: React.ReactNode
+}) {
     // snackbar
 
     const [showSnackbar, setShowSnackbar] = useState(false)
     const [snackbarText, setSnackbarText] = useState('')
-    const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('success')
+    const [snackbarSeverity, setSnackbarSeverity] =
+        useState<AlertColor>('success')
 
     //msal
 
@@ -101,11 +102,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
     }, [account, inProgress, instance])
 
     if (status === ApiStatus.LOADING) {
-        return (
-            <GlobalSpinnerContainer>
-                <Spinner />
-            </GlobalSpinnerContainer>
-        )
+        return <GlobalSpinner />
     }
 
     if (accounts.length > 0) {

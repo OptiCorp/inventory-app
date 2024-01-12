@@ -4,13 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ExampleUpload } from '../../components/Upload/Upload'
 import UploadMobile from '../../components/Upload/UploadMobile/UploadMobile'
 import { useWindowDimensions } from '../../hooks'
-import { useGetItemById } from '../../services/hooks/Items/useGetItemById'
-import { Comments } from './Comments/Comments'
-import { Hierarchy } from './Hierarchy'
+import { useGetItemById } from '../../services/hooks/items/useGetItemById'
 import { Log } from './Log'
-import PartInfo from './PartInfo/PartInfo'
+import { Comments } from './comments/Comments'
+import { Hierarchy } from './hierarchy'
+import PartInfo from './partInfo/PartInfo'
+import { useUpdatePartForm } from './partInfo/hooks/useUpdatePartForm'
 import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
-import { useUpdatePartForm } from './useUpdatePartForm'
 
 const PartDetails = () => {
     const { id } = useParams() as { id: string }

@@ -7,7 +7,7 @@ import AdminSearchCard, {
 import { Button } from '../../../components/Button/Button'
 import SearchBar from '../../../components/SearchBar/SearchBar'
 import { Location } from '../../../services/apiTypes'
-import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
+import { useGetLocations } from '../../../services/hooks/locations/useGetLocations'
 import {
     AdminContainer,
     ButtonContainer,

@@ -1,10 +1,10 @@
-import { useContext } from 'react'
-import { LocationSchema, locationSchema } from './locationValidator'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddLocation } from '../../../services/hooks/Locations/useAddLocation'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import UmAppContext from '../../../contexts/UmAppContext'
+import { useAddLocation } from '../../../services/hooks/locations/useAddLocation'
+import { LocationSchema, locationSchema } from './locationValidator'
 
 const defaultValues: LocationSchema = {
     name: '',

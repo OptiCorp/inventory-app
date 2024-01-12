@@ -4,13 +4,18 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import { Button, Container } from '@mui/material'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { AddDocument, Document, Item } from '../../../services/apiTypes'
-import { useDeleteDocument } from '../../../services/hooks/Documents/useDeleteDocument'
-import { useGetDocumentsByItemId } from '../../../services/hooks/Documents/useGetDocumentsByItemId'
-import { useUploadDocument } from '../../../services/hooks/Documents/useUploadDocument'
+import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument'
+import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId'
+import { useUploadDocument } from '../../../services/hooks/documents/useUploadDocument'
 import { COLORS } from '../../../style/GlobalStyles'
 import { SubmitButton, Wrapper } from '../../Button/styles'
-import { FileWrapper, FileShapeWrapper, FileTypeWrapper, IconWrapper, DocumentName } from './styles'
-
+import {
+    DocumentName,
+    FileShapeWrapper,
+    FileTypeWrapper,
+    FileWrapper,
+    IconWrapper,
+} from './styles'
 
 type UploadProps = {
     item: Item

@@ -8,14 +8,13 @@ import SearchBar from '../../components/SearchBar/SearchBar.tsx'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { useSnackBar } from '../../hooks/useSnackbar.tsx'
 import { List } from '../../services/apiTypes.ts'
-import { useAddList } from '../../services/hooks/List/useAddList.tsx'
-import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx'
+
 import { COLORS } from '../../style/GlobalStyles.ts'
-import {
-    GlobalSpinnerContainer,
-    SearchContainer,
-    Spinner,
-} from '../search/styles.ts'
+
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx'
+import { useAddList } from '../../services/hooks/list/useAddList.tsx'
+import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId.tsx'
+import { SearchContainer } from '../search/styles.ts'
 import { FlexWrapper } from './styles.ts'
 
 const MakeList = () => {
@@ -99,11 +98,7 @@ const MakeList = () => {
                     />
                 </CustomDialog>
 
-                {isLoading && (
-                    <GlobalSpinnerContainer>
-                        <Spinner />
-                    </GlobalSpinnerContainer>
-                )}
+                {isLoading && <GlobalSpinner />}
 
                 <FlexWrapper>
                     {filteredData.map((list: List) => (

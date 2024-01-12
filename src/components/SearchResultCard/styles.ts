@@ -10,8 +10,6 @@ export const ResultCardContainer = styled.div`
     margin-inline: auto;
 `
 
-
-
 export const CompactDesriptionParagraph = styled.p`
     border-radius: 3px;
     overflow: hidden;
@@ -77,7 +75,6 @@ export const CompactCard = styled.div`
     padding: 10px;
 `
 
-
 export const CompactInfoP = styled.div`
     line-height: 1.5rem;
     width: 100%;
@@ -88,4 +85,8 @@ export const ButtonText = styled.p`
 `
 export const DescriptionWrap = styled.div`
     padding-bottom: 5px;
+`
+export const KeyWords = styled.p`
+    font-weight: 600;
+    width: 100%;
 `

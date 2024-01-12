@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { Item } from '../../services/apiTypes'
+import { Item } from '../../../../services/apiTypes'
 
 const partInfoSchema = z.object({
     id: z.string(),
@@ -12,7 +12,9 @@ const partInfoSchema = z.object({
         .string()
         .min(1, 'Product number is required')
         .max(20, 'Product number must be at most 20 characters'),
-    description: z.string().max(450, 'Description must be at most 450 characters'),
+    description: z
+        .string()
+        .max(450, 'Description must be at most 450 characters'),
     parentId: z.string().nullish(),
 })
 export type PartInfoSchema = z.infer<typeof partInfoSchema>

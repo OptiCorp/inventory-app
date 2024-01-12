@@ -8,13 +8,17 @@ import SearchResultCard from '../../components/SearchResultCard/SearchResultCard
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { useSnackBar, useWindowDimensions } from '../../hooks'
 import { Item, UpdateList } from '../../services/apiTypes.ts'
-import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
 import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
-import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx'
+
+import { useGetItemsNotInListInfinite } from '../../services/hooks/items/useGetItemsNotInListInfinite.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'
-import { Container, GlobalSpinnerContainer, Spinner } from '../search/styles.ts'
+
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx'
+
+import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx'
+import { Container } from '../search/styles.ts'
 import { ListHeader } from './ListHeader.tsx'
-import { SideList } from './Sidelist/SideList.tsx'
+import { SideList } from './sidelist/SideList.tsx'
 import {
     ButtonWrap,
     FlexWrapper,
@@ -160,11 +164,7 @@ const ListDetails = () => {
                     </>
                 ) : null}
                 {snackbar}
-                {(isLoading || isFetching) && (
-                    <GlobalSpinnerContainer>
-                        <Spinner />
-                    </GlobalSpinnerContainer>
-                )}
+                {(isLoading || isFetching) && <GlobalSpinner />}
             </SearchContainerList>
         </>
     )

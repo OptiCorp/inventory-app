@@ -7,7 +7,7 @@ import AdminSearchCard, {
 import { Button } from '../../../components/Button/Button'
 import SearchBar from '../../../components/SearchBar/SearchBar'
 import { Category } from '../../../services/apiTypes'
-import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
+import { useGetCategories } from '../../../services/hooks/category/useGetCategories'
 import {
     AdminContainer,
     ButtonContainer,
