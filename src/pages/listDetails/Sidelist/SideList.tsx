@@ -14,11 +14,7 @@ export const SideList = ({ part }: Props) => {
     const { listId } = useParams()
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
     const [open, setOpen] = useState(false)
-    const {
-        mutate: mutateRemoveItemFromList,
-        isSuccess,
-        data,
-    } = useRemoveItemsFromList()
+    const { mutate: mutateRemoveItemFromList, isSuccess, data } = useRemoveItemsFromList()
 
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()

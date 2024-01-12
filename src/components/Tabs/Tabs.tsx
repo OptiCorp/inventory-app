@@ -2,13 +2,7 @@ import { Tab } from '@mui/material'
 import { useState } from 'react'
 import { useParams } from 'react-router'
 import { useGetListById } from '../../services/hooks/List/useGetListById'
-import {
-    Indicator,
-    NumberofItems,
-    TabButton,
-    TabContainer,
-    Title,
-} from './styles'
+import { Indicator, NumberofItems, TabButton, TabContainer, Title } from './styles'
 
 interface Tab {
     title: string

@@ -58,11 +58,7 @@ export const StyledAddIcon = styled(AddCircleIcon)<{
     right: 3px;
 
     color: ${(props) =>
-        props.alreadyAdded
-            ? COLORS.dangerRed
-            : props.active
-              ? COLORS.green
-              : COLORS.primary};
+        props.alreadyAdded ? COLORS.dangerRed : props.active ? COLORS.green : COLORS.primary};
     &:hover {
         color: ${(props) => (props.alreadyAdded ? 'red' : COLORS.green)};
     }

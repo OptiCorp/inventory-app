@@ -23,10 +23,7 @@ const SearchResultCardSkeleton = () => {
                 <ResultCardContainer onClick={handleClick}>
                     <SearchCardSkeleton>
                         <FlexContainer>
-                            <AddIcon
-                                fontSize="large"
-                                style={{ margin: '12px 0' }}
-                            />
+                            <AddIcon fontSize="large" style={{ margin: '12px 0' }} />
                             <h3>Add part</h3>
                         </FlexContainer>
                     </SearchCardSkeleton>
@@ -35,10 +32,7 @@ const SearchResultCardSkeleton = () => {
                 <ResultCardCompactContainer onClick={handleClick}>
                     <CompactCardSkeleton>
                         <FlexContainer>
-                            <AddIcon
-                                fontSize="large"
-                                style={{ margin: '10px 0' }}
-                            />
+                            <AddIcon fontSize="large" style={{ margin: '10px 0' }} />
                             <h3>Add part</h3>
                         </FlexContainer>
                     </CompactCardSkeleton>

@@ -28,10 +28,7 @@ const PartDetails = () => {
                         >
                             {item.parent?.id}
                         </BreadcrumbLink>
-                        <BreadcrumbLink
-                            onClick={() => navigate(`/${item.id}`)}
-                            underline="none"
-                        >
+                        <BreadcrumbLink onClick={() => navigate(`/${item.id}`)} underline="none">
                             {item.id}
                         </BreadcrumbLink>
                     </Breadcrumbs>

@@ -53,28 +53,19 @@ const AddPartUpload = () => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>
-                                            .
-                                            {file.type
-                                                .split('/')[1]
-                                                .toUpperCase()}
-                                        </h3>
+                                        <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() =>
-                                                handleFileDownload(file)
-                                            }
+                                            onClick={() => handleFileDownload(file)}
                                         >
                                             {' '}
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() =>
-                                                handleFileRemoval(index)
-                                            }
+                                            onClick={() => handleFileRemoval(index)}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
                                         </Button>

@@ -47,13 +47,13 @@ export const ScrollTextField = styled(TextField)`
 `
 
 export const BreadcrumbsMargin = styled.div`
-margin-bottom: 10px;
+    margin-bottom: 10px;
 `
 export const BreadcrumbLink = styled(Link)`
-color: ${COLORS.primary} !important;
-border-bottom: 1px black dotted;
-cursor: pointer;
-&:hover {
-    font-weight: bolder;
-}
+    color: ${COLORS.primary} !important;
+    border-bottom: 1px black dotted;
+    cursor: pointer;
+    &:hover {
+        font-weight: bolder;
+    }
 `

@@ -10,11 +10,7 @@ import { useGetItemsNotInListInfinite } from '../../../../services/hooks/Items/u
 import { useUpdateList } from '../../../../services/hooks/List/useUpdateList'
 import { COLORS } from '../../../../style/GlobalStyles'
 import { ListHeader } from '../../ListHeader'
-import {
-    ButtonWrapCompact,
-    FlexWrapperCompact,
-    ListContainerCompact,
-} from './styles'
+import { ButtonWrapCompact, FlexWrapperCompact, ListContainerCompact } from './styles'
 type Props = {
     list: List
 }
@@ -24,11 +20,7 @@ export const PhoneList = ({ list }: Props) => {
     const [searchTerm, setSearchTerm] = useState('')
     const { listId } = useParams()
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const {
-        mutate: updateList,
-        status: listUpdateStatus,
-        data,
-    } = useUpdateList(listId!)
+    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!)
     const { snackbar } = useSnackBar()
     const navigate = useNavigate()
     const handleSave = () => {
@@ -44,9 +36,7 @@ export const PhoneList = ({ list }: Props) => {
             },
         })
     }
-    const {
-      
-    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
+    const {} = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
     return (
         <>
             {list && (
@@ -57,10 +47,7 @@ export const PhoneList = ({ list }: Props) => {
                         {list?.items ? (
                             <ListContainerCompact>
                                 {list.items.map((item: Item) => (
-                                    <SearchResultCardCompact
-                                        part={item}
-                                        icon={'remove'}
-                                    />
+                                    <SearchResultCardCompact part={item} icon={'remove'} />
                                     // <SideList part={item} key={item.id} />
                                 ))}
                             </ListContainerCompact>

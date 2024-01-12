@@ -11,10 +11,6 @@ import { GlobalSpinnerContainer, Spinner } from '../pages/search/styles.ts'
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
 
 export function UmAppContextProvider({ children }: { children: React.ReactNode }) {
- 
- 
-
- 
     // snackbar
 
     const [showSnackbar, setShowSnackbar] = useState(false)

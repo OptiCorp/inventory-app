@@ -10,8 +10,7 @@ import { FormContainer } from '../styles'
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
 
 const CheckForm = () => {
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } =
-        useLocalStorage()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
     const [checked, setChecked] = useState<boolean>(
         getLocalStorageWithExpiry('checks-check') === 'true'
     )
@@ -52,8 +51,8 @@ const CheckForm = () => {
                             onChange={() => setChecked(!checked)}
                         />{' '}
                         <p>
-                            I have performed all necessary checks before adding
-                            this item to the system
+                            I have performed all necessary checks before adding this item to the
+                            system
                         </p>
                     </RadioWrapper>
                 </label>

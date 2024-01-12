@@ -79,9 +79,7 @@ const TopBar = () => {
                         open={hamburgerIsOpen}
                         onClose={() => setHamburgerIsOpen(false)}
                     >
-                        <HamburgerMenu
-                            setHamburgerIsOpen={setHamburgerIsOpen}
-                        />
+                        <HamburgerMenu setHamburgerIsOpen={setHamburgerIsOpen} />
                     </Drawer>
                 </HeaderWrap>
             </TopBarContainer>

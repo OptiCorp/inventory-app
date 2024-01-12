@@ -18,7 +18,7 @@ type Props = {
 export const AddMoreCompact = () => {
     const { snackbar } = useSnackBar()
     const [searchTerm, setSearchTerm] = useState('')
-  
+
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { listId } = useParams()
     const {
@@ -33,9 +33,7 @@ export const AddMoreCompact = () => {
         }
     }
 
-    const {
-      
-    } = useUpdateList(listId!)
+    const {} = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
@@ -67,8 +65,7 @@ export const AddMoreCompact = () => {
                     page.map((item, index) => (
                         <div
                             id={
-                                i === items.pages.length - 1 &&
-                                index === page.length - 1
+                                i === items.pages.length - 1 && index === page.length - 1
                                     ? 'lastItem'
                                     : ''
                             }

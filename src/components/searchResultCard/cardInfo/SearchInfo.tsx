@@ -11,11 +11,7 @@ import UmAppContext from '../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../hooks'
 import { useGetListById } from '../../../services/hooks/List/useGetListById'
 import CustomDialog from '../../Dialog/Index'
-import {
-    StyledAddIcon,
-    StyledInfoIcon,
-    StyledRemoveIcon,
-} from '../../listCard/styles'
+import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../listCard/styles'
 import {
     DescriptionParagraph,
     FirstInfoBox,
@@ -80,9 +76,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
 
                 if (removeData.status >= 400) {
                     setSnackbarSeverity('error')
-                    setSnackbarText(
-                        `${removeData.statusText}, please try again.`
-                    )
+                    setSnackbarText(`${removeData.statusText}, please try again.`)
                 }
             },
         })
@@ -155,9 +149,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     {part.vendor?.name || ''}
                 </InfoP>
                 <InfoP>
-                    <KeyWords>
-                        {part.updatedDate ? 'Last updated' : 'Created on'}
-                    </KeyWords>
+                    <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>
                     {format(
                         new Date(part.updatedDate || part.createdDate),
                         'yyyy-MM-dd HH:mm:ss'

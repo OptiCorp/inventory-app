@@ -34,26 +34,18 @@ const ListCard = ({ part }: Props) => {
         <>
             <ListWrapper onClick={() => navigate(`${part.id}`)}>
                 <div onClick={(e) => handleOpen(e)}>
-                    <StyledDeleteIcon
-                        style={{ fontSize: '30px' }}
-                    ></StyledDeleteIcon>
+                    <StyledDeleteIcon style={{ fontSize: '30px' }}></StyledDeleteIcon>
                 </div>
                 <StyledTitle>{part.title}</StyledTitle>
                 {part.updatedDate ? (
                     <h4>
                         Last updated:{' '}
-                        {format(
-                            new Date(part.updatedDate),
-                            'dd-MM-yyyy HH:mm:ss'
-                        ).toString()}
+                        {format(new Date(part.updatedDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 ) : (
                     <h4>
                         Created:{' '}
-                        {format(
-                            new Date(part.createdDate),
-                            'dd-MM-yyyy HH:mm:ss'
-                        ).toString()}
+                        {format(new Date(part.createdDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 )}
             </ListWrapper>

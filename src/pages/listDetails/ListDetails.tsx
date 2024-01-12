@@ -44,11 +44,7 @@ const ListDetails = () => {
             fetchNextPage()
         }
     }
-    const {
-        mutate: updateList,
-        status: listUpdateStatus,
-        data,
-    } = useUpdateList(listId!)
+    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
@@ -89,9 +85,7 @@ const ListDetails = () => {
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        placeholder={
-                            'Search for ID, description, PO number or S/N'
-                        }
+                        placeholder={'Search for ID, description, PO number or S/N'}
                     />
                     <Container>
                         {items?.pages.map((page, i) =>
@@ -105,10 +99,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCard
-                                            part={item}
-                                            icon={'add'}
-                                        />
+                                        <SearchResultCard part={item} icon={'add'} />
                                     </div>
                                 ) : (
                                     <div
@@ -119,10 +110,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCardCompact
-                                            part={item}
-                                            icon={'add'}
-                                        />
+                                        <SearchResultCardCompact part={item} icon={'add'} />
                                     </div>
                                 )
                             )

@@ -7,13 +7,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PlaceIcon from '@mui/icons-material/Place'
 import SearchIcon from '@mui/icons-material/Search'
-import {
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-} from '@mui/material'
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { DropdownItem, HamburgerContainer } from './styles'

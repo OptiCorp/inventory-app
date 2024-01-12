@@ -11,8 +11,7 @@ import { FormContainer } from '../styles.ts'
 
 const Upload = () => {
     const navigate = useNavigate()
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } =
-        useLocalStorage()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
     const [checked, setChecked] = useState<boolean>(
         getLocalStorageWithExpiry('upload-check') === 'true'
     )
@@ -50,10 +49,7 @@ const Upload = () => {
                         name="checks"
                         onChange={() => setChecked(!checked)}
                     />{' '}
-                    <p>
-                        I have uploaded all necessary documentation for this
-                        item. E.g:{' '}
-                    </p>
+                    <p>I have uploaded all necessary documentation for this item. E.g: </p>
                 </RadioWrapper>
             </label>
             <ul>

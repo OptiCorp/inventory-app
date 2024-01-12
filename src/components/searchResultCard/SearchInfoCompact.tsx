@@ -1,10 +1,5 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Typography,
-} from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
@@ -36,21 +31,19 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
     const [alreadyAdded, setAlreadyAdded] = useState(false)
     const { listId } = useParams()
     const { data: list, isFetching } = useGetListById(listId!)
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
-        useAddItemsToList()
-    const { mutate: mutateRemoveItemFromList, data: removeData } =
-        useRemoveItemsFromList()
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList()
+    const { mutate: mutateRemoveItemFromList, data: removeData } = useRemoveItemsFromList()
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation()
-         const alreadyAdded = list?.items.some((item) => item.id === part.id)
-         if (alreadyAdded) {
-             {
-                 setAlreadyAdded(true)
-             }
-             setSnackbarSeverity('error')
-             setSnackbarText('already in list')
-         }
+        const alreadyAdded = list?.items.some((item) => item.id === part.id)
+        if (alreadyAdded) {
+            {
+                setAlreadyAdded(true)
+            }
+            setSnackbarSeverity('error')
+            setSnackbarText('already in list')
+        }
         mutateAddItemToList(ids, {
             onSuccess: (data) => {
                 if (alreadyAdded) return
@@ -72,9 +65,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
 
                 if (removeData.status >= 400) {
                     setSnackbarSeverity('error')
-                    setSnackbarText(
-                        `${removeData.statusText}, please try again.`
-                    )
+                    setSnackbarText(`${removeData.statusText}, please try again.`)
                 }
             },
         })
@@ -110,12 +101,10 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                             {part.wpId}
                         </CompactInfoP>{' '}
                         <CompactInfoP>
-                            <KeyWords>Location</KeyWords>{' '}
-                            {part.location?.name || 'Location'}
+                            <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
                         </CompactInfoP>
                         <CompactInfoP>
-                            <KeyWords>Category</KeyWords>{' '}
-                            {part.category?.name || 'Category'}
+                            <KeyWords>Category</KeyWords> {part.category?.name || 'Category'}
                         </CompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>

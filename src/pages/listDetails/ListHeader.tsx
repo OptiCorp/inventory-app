@@ -45,9 +45,7 @@ export const ListHeader = ({ list }: Props) => {
         setOpen(true)
     }
 
-    const handleOpenEdit = (
-        e: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => {
+    const handleOpenEdit = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
         setOpenEdit(true)
     }
@@ -87,9 +85,7 @@ export const ListHeader = ({ list }: Props) => {
                 navigate('/makelist')
                 if (deleteData.status >= 400) {
                     setSnackbarSeverity('error')
-                    setSnackbarText(
-                        `${deleteData.statusText}, please try again.`
-                    )
+                    setSnackbarText(`${deleteData.statusText}, please try again.`)
                 }
             },
         })
@@ -103,10 +99,7 @@ export const ListHeader = ({ list }: Props) => {
                     <Wrapper>
                         <StyledDate>
                             {' '}
-                            {format(
-                                new Date(list.createdDate),
-                                'dd-MM-yyyy'
-                            ).toString()}
+                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
                         </StyledDate>{' '}
                         <ListTitle>{list.title}</ListTitle>
                     </Wrapper>
@@ -131,10 +124,7 @@ export const ListHeader = ({ list }: Props) => {
                         <Wrapper>
                             <StyledDate>
                                 {' '}
-                                {format(
-                                    new Date(list.createdDate),
-                                    'dd-MM-yyyy'
-                                ).toString()}
+                                {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
                             </StyledDate>{' '}
                             <ListTitle>{list.title}</ListTitle>{' '}
                         </Wrapper>{' '}
