@@ -66,7 +66,7 @@ const Search = () => {
         } else if (state?.resetInputField) {
             setSearchTerm('')
         }
-    }, [debouncedSearchTerm, state, searchTerm, setSearches, searches])
+    }, [debouncedSearchTerm, state])
 
     return (
         <>
