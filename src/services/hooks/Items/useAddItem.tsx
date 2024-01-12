@@ -17,6 +17,8 @@ export const useAddItems = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['items'],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries: ', error)
             })
             navigate('/add-part')
         },

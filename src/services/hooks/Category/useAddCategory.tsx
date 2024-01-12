@@ -10,6 +10,8 @@ export const useAddCategory = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['categories'],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries: ', error)
             })
         },
     })

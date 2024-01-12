@@ -10,6 +10,8 @@ export const useUpdateList = (id: string) => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['list', id],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries: ', error)
             })
         },
     })

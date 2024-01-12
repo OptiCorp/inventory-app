@@ -10,6 +10,8 @@ export const useAddLocation = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['locations'],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries: ', error)
             })
         },
     })

@@ -9,6 +9,8 @@ export const useDeleteCategory = (categoryId: string) => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['categories'],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries: ', error)
             })
         },
     })

@@ -10,6 +10,8 @@ export const useAddVendor = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['vendors'],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries: ', error)
             })
         },
     })

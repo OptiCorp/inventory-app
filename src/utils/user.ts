@@ -7,7 +7,7 @@ const useUserService = () => {
     const signOut = () => {
         navigate('/')
         instance.logoutPopup().catch((error) => {
-            console.log('Failed to logout: ', error)
+            console.error('Failed to logout: ', error)
         })
     }
 

@@ -10,6 +10,8 @@ export const useUpdateLocation = (id: string) => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['locations', id],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries: ', error)
             })
         },
     })

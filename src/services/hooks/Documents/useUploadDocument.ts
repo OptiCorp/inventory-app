@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
-import { AddDocument } from '../../apiTypes'
-import useSleep from '../../../hooks/useSleep'
 import { useContext } from 'react'
 import UmAppContext from '../../../contexts/UmAppContext'
+import useSleep from '../../../hooks/useSleep'
+import apiService from '../../api'
+import { AddDocument } from '../../apiTypes'
 
 export const useUploadDocument = () => {
     const Sleep = useSleep()
@@ -19,6 +19,8 @@ export const useUploadDocument = () => {
             setSnackbarText('Documents were uploaded')
             queryClient.invalidateQueries({
                 queryKey: [documents.itemId],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries', error)
             })
         },
     })
