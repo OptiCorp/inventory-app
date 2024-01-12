@@ -1,18 +1,18 @@
 import TextField from '@mui/material/TextField'
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Button } from '../../components/Button/SubmitButton.tsx'
 import CustomDialog from '../../components/Dialog/Index.tsx'
 import ListCard from '../../components/listCard/listCard.tsx'
 import SearchBar from '../../components/searchBar/SearchBar'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { useSnackBar } from '../../hooks/useSnackbar.tsx'
-import { List } from '../../services/apiTypes.ts'
+import { Item, List } from '../../services/apiTypes.ts'
 import { useAddList } from '../../services/hooks/List/useAddList.tsx'
 import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx'
-import { GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
-import { FlexWrapper, SavedListsTitle, SubmitButton } from './styles.ts'
-import { Button } from '../../components/Button/SubmitButton.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'
+import { GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
+import { FlexWrapper } from './styles.ts'
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext)
@@ -26,14 +26,14 @@ const MakeList = () => {
     const { mutate, isSuccess } = useAddList()
     const { snackbar } = useSnackBar()
     useEffect(() => {
-        setSearchTerm((prev) => searchParam || prev)
+        setSearchTerm((prev) => searchParam ?? prev)
     }, [searchParam])
 
     const filteredData = lists.filter(
         (list) =>
             list.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             list.items?.some(
-                (item: any) =>
+                (item: Item) =>
                     item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     item.wpId.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     item.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
