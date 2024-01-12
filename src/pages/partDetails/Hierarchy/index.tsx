@@ -1,19 +1,19 @@
-import React, { useContext, useState } from 'react'
-import Select from 'react-select'
-import { useGetItemsInfinite } from '../../../services/hooks/Items/useGetItemsInfinite'
-import { useDebounce } from 'usehooks-ts'
-import { Item } from '../../../services/apiTypes'
+import EditIcon from '@mui/icons-material/Edit'
 import { Box, ClickAwayListener } from '@mui/material'
-import { Edit, LabelContainer } from '../PartInfo/styles'
-import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
-import UmAppContext from '../../../contexts/UmAppContext'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRemoveParentIdFromItem } from '../../../services/hooks/Items/useRemoveParentIdFromItem'
+import Select from 'react-select'
+import { useDebounce } from 'usehooks-ts'
+import UmAppContext from '../../../contexts/UmAppContext'
+import { Item } from '../../../services/apiTypes'
 import {
     AddChildItemIds,
     useAddChildItemToParent,
 } from '../../../services/hooks/Items/useAddChildItemToParent'
-import EditIcon from '@mui/icons-material/Edit'
+import { useGetItemsInfinite } from '../../../services/hooks/Items/useGetItemsInfinite'
+import { useRemoveParentIdFromItem } from '../../../services/hooks/Items/useRemoveParentIdFromItem'
+import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
+import { Edit, LabelContainer } from '../PartInfo/styles'
 
 import {
     AccessibleButtonWrapper,
@@ -23,6 +23,7 @@ import {
     CustomRemoveIcon,
     FlexContainer,
     LinkElement,
+    ParentContainer,
 } from './styles'
 
 export const Hierarchy = ({ item }: { item: Item }) => {
@@ -46,7 +47,11 @@ export const Hierarchy = ({ item }: { item: Item }) => {
 
     const filteredWpIds = data?.pages
         .flatMap((el) => el)
-        .filter((el) => el.wpId?.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ?? false)
+        .filter(
+            (el) =>
+                el.wpId?.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) &&
+                el.wpId !== item.wpId
+        )
         .map((el) => ({ label: el.wpId, value: el }))
 
     const handleBlur = () => {
@@ -136,43 +141,46 @@ export const Hierarchy = ({ item }: { item: Item }) => {
 
     return (
         <div>
-            <ClickAwayListener onClickAway={clickAwayHandlerParent}>
-                <Box>
-                    <LabelContainer>
-                        <label>
-                            <strong>{`This ${item.type} is a part of:`}</strong>
-                        </label>
-                        <Edit onClick={() => setIsOpen((prev) => ({ ...prev, parent: true }))} />
-                    </LabelContainer>
-                    {isOpen.parent && (
-                        <Select
-                            styles={{
-                                control: (provided) => ({
-                                    ...provided,
-                                    maxWidth: '300px',
-                                }),
-                            }}
-                            onInputChange={(value) => setSearchTerm(value)}
-                            onMenuScrollToBottom={() => fetchNextPage()}
-                            options={filteredWpIds}
-                            isLoading={isLoading}
-                            placeholder="Search by wpid..."
-                            onChange={(value) => setSelectedId(value!.value.wpId)}
-                            onBlur={handleBlur}
-                        />
-                    )}
-                    {!isOpen.parent && (
-                        <>
-                            {item.parent && (
-                                <LinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
-                                    {item.parent?.wpId}
-                                </LinkElement>
-                            )}
-
-                        </>
-                    )}
-                </Box>
-            </ClickAwayListener>
+            <ParentContainer>
+                <ClickAwayListener onClickAway={clickAwayHandlerParent}>
+                    <Box>
+                        <LabelContainer>
+                            <label>
+                                <strong>{`This ${item.type} is a part of:`}</strong>
+                            </label>
+                            <Edit
+                                onClick={() => setIsOpen((prev) => ({ ...prev, parent: true }))}
+                            />
+                        </LabelContainer>
+                        {isOpen.parent && (
+                            <Select
+                                styles={{
+                                    control: (provided) => ({
+                                        ...provided,
+                                        maxWidth: '300px',
+                                    }),
+                                }}
+                                onInputChange={(value) => setSearchTerm(value)}
+                                onMenuScrollToBottom={() => fetchNextPage()}
+                                options={filteredWpIds}
+                                isLoading={isLoading}
+                                placeholder="Search by wpid..."
+                                onChange={(value) => setSelectedId(value!.value.wpId)}
+                                onBlur={handleBlur}
+                            />
+                        )}
+                        {!isOpen.parent && (
+                            <>
+                                {item.parent && (
+                                    <LinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
+                                        {item.parent?.wpId}
+                                    </LinkElement>
+                                )}
+                            </>
+                        )}
+                    </Box>
+                </ClickAwayListener>
+            </ParentContainer>
             <ClickAwayListener onClickAway={clickAwayHandlerChild}>
                 <Box>
                     <FlexContainer>
