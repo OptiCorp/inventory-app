@@ -1,7 +1,7 @@
 import { useMsal } from '@azure/msal-react'
 import { useNavigate } from 'react-router'
 
-const userService = () => {
+const useUserService = () => {
     const { instance } = useMsal()
     const navigate = useNavigate()
     const signOut = () => {
@@ -16,4 +16,4 @@ const userService = () => {
     }
 }
 
-export default userService
+export default useUserService
