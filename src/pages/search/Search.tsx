@@ -18,6 +18,10 @@ import {
     StyledSearchedLink,
 } from './styles'
 
+type StateType = {
+    resetInputField?: boolean;
+}
+
 const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>()
     const [searchTerm, setSearchTerm] = useState('')
@@ -26,10 +30,12 @@ const Search = () => {
     const { width } = useWindowDimensions()
     const [searches, setSearches] = useLocalStorage<string[]>('recent_searches', [])
     const location = useLocation()
-    const state = location.state
+    const state: StateType = location.state as StateType
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
-            fetchNextPage()
+            fetchNextPage().catch((error) => {
+                console.error('Failed to fetch next page: ', error)
+            })
         }
     }
 
@@ -51,7 +57,7 @@ const Search = () => {
     }, [data])
 
     useEffect(() => {
-        setSearchTerm((prev) => searchParam || prev)
+        setSearchTerm((prev) => searchParam ?? prev)
     }, [searchParam])
 
     useEffect(() => {
