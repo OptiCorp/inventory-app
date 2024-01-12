@@ -1,10 +1,10 @@
-import { useContext } from 'react'
-import { CategorySchema, categorySchema } from './categoryValidator'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAddCategory } from '../../../services/hooks/Category/useAddCategory'
+import { useContext } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import UmAppContext from '../../../contexts/UmAppContext'
+import { useAddCategory } from '../../../services/hooks/Category/useAddCategory'
+import { CategorySchema, categorySchema } from './categoryValidator'
 
 const defaultValues: CategorySchema = {
     name: '',
@@ -20,7 +20,7 @@ export const useAddCategoryForm = () => {
         resolver: zodResolver(categorySchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id || '',
+            addedById: currentUser?.id ?? '',
         },
     })
     const {

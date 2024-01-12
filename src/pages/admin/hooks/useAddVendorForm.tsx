@@ -1,10 +1,10 @@
-import { useContext } from 'react'
-import { VendorSchema, vendorSchema } from './vendorValidator'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAddVendor } from '../../../services/hooks/Vendor/useAddVendor'
+import { useContext } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import UmAppContext from '../../../contexts/UmAppContext'
+import { useAddVendor } from '../../../services/hooks/Vendor/useAddVendor'
+import { VendorSchema, vendorSchema } from './vendorValidator'
 
 const defaultValues: VendorSchema = {
     name: '',
@@ -20,7 +20,7 @@ export const useAddVendorForm = () => {
         resolver: zodResolver(vendorSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id || '',
+            addedById: currentUser?.id ?? '',
         },
     })
     const {

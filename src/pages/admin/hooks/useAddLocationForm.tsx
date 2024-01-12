@@ -1,10 +1,10 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
-import { LocationSchema, locationSchema } from './locationValidator'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import UmAppContext from '../../../contexts/UmAppContext'
 import { useAddLocation } from '../../../services/hooks/Locations/useAddLocation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { LocationSchema, locationSchema } from './locationValidator'
 
 const defaultValues: LocationSchema = {
     name: '',
@@ -20,7 +20,7 @@ export const useAddLocationForm = () => {
         resolver: zodResolver(locationSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id || '',
+            addedById: currentUser?.id ?? '',
         },
     })
     const {

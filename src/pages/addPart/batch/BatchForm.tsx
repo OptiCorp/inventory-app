@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../components/Button/SubmitButton.tsx'
 import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
 import { COLORS } from '../../../style/GlobalStyles.ts'
 import { FormContainer } from '../styles.ts'
-import { FormBatchRadio, RadioWrapper, StyledInput } from './styles.ts'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+import { RadioWrapper, StyledInput } from './styles.ts'
 
 enum Batch {
     yes = 'yes',
@@ -16,7 +16,7 @@ enum Batch {
 const BatchForm = () => {
     const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
     const [batchType, setBatchType] = useState<string>(
-        getLocalStorageWithExpiry('batch-data') || Batch.undefined
+        getLocalStorageWithExpiry('batch-data') ?? Batch.undefined
     )
     const [error, setError] = useState<string>()
     const navigate = useNavigate()

@@ -1,17 +1,16 @@
+import { ErrorMessage } from '@hookform/error-message'
 import { FormProvider } from 'react-hook-form'
+import { Button } from '../../../components/Button/SubmitButton'
+import { COLORS } from '../../../style/GlobalStyles'
 import { useAddLocationForm } from '../hooks/useAddLocationForm'
 import {
     AdminInput,
-    ButtonContainer,
     ErrorP,
     FormContainer,
     InputWrap,
     StyledForm,
-    SubmitButtonContainer,
+    SubmitButtonContainer
 } from '../styles'
-import { ErrorMessage } from '@hookform/error-message'
-import { Button } from '../../../components/Button/SubmitButton'
-import { COLORS } from '../../../style/GlobalStyles'
 
 const AddLocation = () => {
     const { methods, onSubmit, register } = useAddLocationForm()

@@ -15,7 +15,7 @@ const CheckForm = () => {
         getLocalStorageWithExpiry('checks-check') === 'true'
     )
     const [description, setDescription] = useState<string>(
-        getLocalStorageWithExpiry('checks-description') || ''
+        getLocalStorageWithExpiry('checks-description') ?? ''
     )
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
