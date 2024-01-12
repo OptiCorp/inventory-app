@@ -52,7 +52,7 @@ export const ListHeader = ({ list }: Props) => {
 
     const handleEdit = () => {
         setOpenEdit(true)
-        var newTitle: UpdateList = { id: list.id, title: title ?? list.title }
+        const newTitle: UpdateList = { id: list.id, title: title ?? list.title }
         updateList(newTitle, {
             onSuccess: (data) => {
                 setSnackbarText(`${list.title} was changed to ${title}`)

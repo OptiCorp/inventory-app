@@ -22,7 +22,7 @@ const AddPartUpload = () => {
     const inputFile = useRef<HTMLInputElement | null>(null)
 
     const handleFileDownload = async (file: File) => {
-        var downloadLink = document.createElement('a')
+        const downloadLink = document.createElement('a')
         downloadLink.download = `${file.name}`
         downloadLink.href = URL.createObjectURL(file)
         downloadLink.click()

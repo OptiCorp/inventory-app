@@ -47,7 +47,7 @@ export const usePartsForm = () => {
 
     const onSubmit = handleSubmit((data) => {
         if (data.files) {
-            const files = [...data.files!]
+            const files = [...data.files]
             delete data.files
 
             mutate(

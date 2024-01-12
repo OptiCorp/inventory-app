@@ -45,7 +45,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
     }
 
     const handleFileDownload = (file: Document) => {
-        var downloadLink = document.createElement('a')
+        const downloadLink = document.createElement('a')
         downloadLink.download = `${file.name}`
         downloadLink.href = `data:${file.contentType};base64,${file.bytes}`
         downloadLink.click()

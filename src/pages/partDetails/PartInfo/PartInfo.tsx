@@ -56,7 +56,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
                     label="type"
                     defaultValue={selectedType || item.type}
                     onBlur={() =>
-                        blurSelectField(selectedType!, 'type', setSnackbarText, setSnackbarSeverity)
+                        blurSelectField(selectedType, 'type', setSnackbarText, setSnackbarSeverity)
                     }
                     handleSelectChange={(e) => selectChange(e, setSelectedType)}
                     options={['Unit', 'Assembly', 'Subassembly', 'Part']}

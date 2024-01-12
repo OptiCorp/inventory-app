@@ -313,16 +313,16 @@ const apiService = () => {
     }
 
     const addItem = async (items: AddItem[], files?: File[]): Promise<Response | Response[][]> => {
-        var res = await postByFetch(`Item`, items)
+        const res = await postByFetch(`Item`, items)
         if (!files) {
             return res
         }
 
         const reader = res.body?.getReader()
-        var itemResponses: { id: string }[] = JSON.parse(
+        const itemResponses: { id: string }[] = JSON.parse(
             new TextDecoder().decode((await reader?.read())!.value)
         )
-        var documentResponses: Response[][] = []
+        const documentResponses: Response[][] = []
         itemResponses.forEach(async (item) => {
             const documentResponse = await addDocument({ itemId: item.id, files: files })
             documentResponses.push(documentResponse)
@@ -426,7 +426,7 @@ const apiService = () => {
     }
 
     const addDocument = async (document: AddDocument): Promise<Response[]> => {
-        var responses: Response[] = []
+        const responses: Response[] = []
         document.files.forEach(async (file) => {
             const formData = new FormData()
             formData.append('ItemId', document.itemId)

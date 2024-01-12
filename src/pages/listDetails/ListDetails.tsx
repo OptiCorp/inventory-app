@@ -63,7 +63,7 @@ const ListDetails = () => {
     }, [items])
 
     const handleSave = () => {
-        var save: UpdateList = { id: list!.id, title: list!.title }
+        const save: UpdateList = { id: list!.id, title: list!.title }
         updateList(save, {
             onSuccess: (data) => {
                 setSnackbarText(`${list!.title} was saved`)

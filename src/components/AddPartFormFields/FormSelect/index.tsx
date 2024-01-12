@@ -32,7 +32,7 @@ export const FormSelect = ({ options, setState, state }: Props) => {
             <Select
                 maxMenuHeight={250}
                 defaultValue={state}
-                onChange={(selectedOption) => setState(selectedOption as FormOption)}
+                onChange={(selectedOption) => setState(selectedOption!)}
                 options={options}
                 styles={customStyles}
             />

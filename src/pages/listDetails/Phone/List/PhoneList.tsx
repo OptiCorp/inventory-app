@@ -24,10 +24,10 @@ export const PhoneList = ({ list }: Props) => {
     const { snackbar } = useSnackBar()
     const navigate = useNavigate()
     const handleSave = () => {
-        var save: UpdateList = { id: list!.id, title: list!.title }
+        const save: UpdateList = { id: list.id, title: list.title }
         updateList(save, {
             onSuccess: (data) => {
-                setSnackbarText(`${list!.title} was saved`)
+                setSnackbarText(`${list.title} was saved`)
                 navigate('/makelist')
                 if (data.status >= 400) {
                     setSnackbarSeverity('error')
