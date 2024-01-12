@@ -109,42 +109,42 @@ const TopBar = () => {
                                     >
                                         <StyledLinkDiv>Admin</StyledLinkDiv>
                                     </MenuAdmin>
-                                    <Menu {...bindMenu(popupState)}>
-                                        <MenuItem onClick={popupState.close}>
-                                            <MenuAdminLink
-                                                onClick={() => {
-                                                    adminLinks(
-                                                        'admin/categories'
-                                                    )
-                                                }}
-                                            >
-                                                Categories
-                                            </MenuAdminLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={popupState.close}>
-                                            <MenuAdminLink
-                                                onClick={() => {
-                                                    adminLinks('admin/vendors')
-                                                }}
-                                            >
-                                                Vendors
-                                            </MenuAdminLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={popupState.close}>
-                                            <MenuAdminLink
-                                                onClick={() => {
-                                                    adminLinks(
-                                                        'admin/locations'
-                                                    )
-                                                }}
-                                            >
-                                                Locations
-                                            </MenuAdminLink>
-                                        </MenuItem>
-                                    </Menu>
-                                </>
-                            )}
-                        </PopupState>
+                                <Menu {...bindMenu(popupState)}>
+                                    <MenuItem onClick={popupState.close}>
+                                        <MenuAdminLink
+                                            onClick={() => {
+                                                adminLinks(
+                                                    'admin/categories'
+                                                )
+                                            }}
+                                        >
+                                            Categories
+                                        </MenuAdminLink>
+                                    </MenuItem>
+                                    <MenuItem onClick={popupState.close}>
+                                        <MenuAdminLink
+                                            onClick={() => {
+                                                adminLinks('admin/vendors')
+                                            }}
+                                        >
+                                            Vendors
+                                        </MenuAdminLink>
+                                    </MenuItem>
+                                    <MenuItem onClick={popupState.close}>
+                                        <MenuAdminLink
+                                            onClick={() => {
+                                                adminLinks(
+                                                    'admin/locations'
+                                                )
+                                            }}
+                                        >
+                                            Locations
+                                        </MenuAdminLink>
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        )}
+                    </PopupState>
                         <LogOutWrapper
                             onClick={() => {
                                 handleSignOut()

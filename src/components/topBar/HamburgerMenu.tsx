@@ -17,7 +17,6 @@ import {
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { DropdownItem, HamburgerContainer } from './styles'
-
 type Props = {
     setHamburgerIsOpen: (hamburgerOpen: boolean) => void
 }

@@ -1,4 +1,4 @@
-import { Box, Button, ListItem } from '@mui/material'
+import { Box, ListItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { COLORS } from '../../style/GlobalStyles'
@@ -10,7 +10,7 @@ export const TopBarContainer = styled.div`
 `
 
 export const StyledLinkDiv = styled.h3`
-    padding: 0 16px 0 0;
+    padding: 0 16px 0 17px;
     font-size: 1.3rem;
     cursor: pointer;
 `
@@ -58,29 +58,13 @@ export const BackButton = styled.div`
     margin: 0;
     cursor: pointer;
 `
-export const StyledAdminButton = styled(Button)`
-    text-decoration: none;
-    font-family: inherit;
 
-    color: ${COLORS.gray};
-    &.active {
-        color: ${COLORS.primary};
-    }
-`
-
-export const DropDownMenu = styled.span`
-    position: absolute;
-    top: 70px;
-
-    background-color: red;
-    padding: 20px;
-`
 type Props = {
     isOpen: boolean
 }
 export const MenuAdmin = styled.div<Props>`
-    text-decoration: none;
     cursor: pointer;
+
     color: ${({ isOpen }) => (isOpen ? COLORS.primary : COLORS.gray)};
     &.active {
         color: ${COLORS.primary} !important;
@@ -89,7 +73,9 @@ export const MenuAdmin = styled.div<Props>`
         color: ${COLORS.primary};
     }
 `
-export const MenuAdminLink = styled.span``
+export const MenuAdminLink = styled.span`
+    padding: 2px 4px;
+`
 
 export const LogOutWrapper = styled.div`
     color: ${COLORS.gray};
