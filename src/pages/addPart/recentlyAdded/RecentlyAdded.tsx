@@ -1,12 +1,12 @@
-import SearchResultCard from '../../../components/searchResultCard/SearchResultCard.tsx'
+import { useNavigate } from 'react-router-dom'
+import { Button } from '../../../components/Button/Button.tsx'
+import SearchResultCardCompact from '../../../components/SearchResultCard/SearchInfoCompact.tsx'
+import SearchResultCard from '../../../components/SearchResultCard/SearchResultCard.tsx'
 import { useWindowDimensions } from '../../../hooks/index.ts'
 import { Item } from '../../../services/apiTypes.ts'
-import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact.tsx'
 import { useGetItemsByUser } from '../../../services/hooks/Items/useGetItemByUser.tsx'
-import { Container, RecentlyAddedContainer } from './styles.ts'
-import { Button } from '../../../components/Button/SubmitButton.tsx'
 import { COLORS } from '../../../style/GlobalStyles.ts'
-import { useNavigate } from 'react-router-dom'
+import { Container, RecentlyAddedContainer } from './styles.ts'
 
 const RecentlyAdded = () => {
     const { width } = useWindowDimensions()

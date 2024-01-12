@@ -1,4 +1,11 @@
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import { Button } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { COLORS } from '../../../style/GlobalStyles'
+import { SubmitButton } from '../../Button/styles'
 import {
     Container,
     DocumentName,
@@ -8,13 +15,6 @@ import {
     IconWrapper,
     Wrapper,
 } from './styles'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { SubmitButton } from '../../Button/styles'
-import { COLORS } from '../../../style/GlobalStyles'
-import { useEffect, useRef, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
 
 const AddPartUploadMobile = () => {
     const { register, setValue } = useFormContext()
@@ -46,7 +46,9 @@ const AddPartUploadMobile = () => {
         })
     }
 
-    const observer = new IntersectionObserver(handleIntersect, { threshold: 0.5 })
+    const observer = new IntersectionObserver(handleIntersect, {
+        threshold: 0.5,
+    })
 
     useEffect(() => {
         setValue('files', files)
@@ -81,18 +83,27 @@ const AddPartUploadMobile = () => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
+                                        <h3>
+                                            .
+                                            {file.type
+                                                .split('/')[1]
+                                                .toUpperCase()}
+                                        </h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() => handleFileDownload(file)}
+                                            onClick={() =>
+                                                handleFileDownload(file)
+                                            }
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() => handleFileRemoval(index)}
+                                            onClick={() =>
+                                                handleFileRemoval(index)
+                                            }
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
                                         </Button>

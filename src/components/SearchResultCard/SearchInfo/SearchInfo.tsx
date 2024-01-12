@@ -1,29 +1,20 @@
 import { format } from 'date-fns'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { Item, MutateItemList } from '../../../services/apiTypes'
+import { MutateItemList } from '../../../services/apiTypes'
 
 import { useAddItemsToList } from '../../../services/hooks/Items/useAddItemsToList'
 import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList'
 
-import UmAppContext from '../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../hooks'
 import { useGetListById } from '../../../services/hooks/List/useGetListById'
-import CustomDialog from '../../Dialog/Index'
+import CustomDialog from '../../CustomDialog/CustomDialog'
 import {
     StyledAddIcon,
     StyledInfoIcon,
     StyledRemoveIcon,
-} from '../../listCard/styles'
-import {
-    DescriptionParagraph,
-    FirstInfoBox,
-    InfoP,
-    KeyWords,
-    SecondInfoBox,
-    ThirdInfoBox,
-} from '../styles'
+} from '../../ListCard/styles'
 
 type Props = {
     part: Item

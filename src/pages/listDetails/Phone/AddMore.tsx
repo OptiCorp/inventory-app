@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
-import SearchBar from '../../../components/searchBar/SearchBar'
-import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact'
-import { useSnackBar, useWindowDimensions } from '../../../hooks'
+import SearchBar from '../../../components/SearchBar/SearchBar'
+import SearchResultCardCompact from '../../../components/SearchResultCard/SearchInfoCompact'
+import { useSnackBar } from '../../../hooks'
 import { Item } from '../../../services/apiTypes'
 import { useGetItemsNotInListInfinite } from '../../../services/hooks/Items/useGetItemsNotInListInfinite'
 import { useGetListById } from '../../../services/hooks/List/useGetListById'
@@ -18,7 +18,7 @@ type Props = {
 export const AddMoreCompact = () => {
     const { snackbar } = useSnackBar()
     const [searchTerm, setSearchTerm] = useState('')
-  
+
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
     const { listId } = useParams()
     const {
@@ -33,9 +33,7 @@ export const AddMoreCompact = () => {
         }
     }
 
-    const {
-      
-    } = useUpdateList(listId!)
+    const {} = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',

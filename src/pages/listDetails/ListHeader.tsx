@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 
 import { Chip, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import CustomDialog from '../../components/Dialog/Index'
+import CustomDialog from '../../components/CustomDialog/CustomDialog'
 import UmAppContext from '../../contexts/UmAppContext'
 import { useSnackBar, useWindowDimensions } from '../../hooks'
 import { List, UpdateList } from '../../services/apiTypes'

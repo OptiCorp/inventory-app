@@ -1,17 +1,22 @@
 import { ErrorMessage } from '@hookform/error-message'
+import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
-import { ToolTip } from '../../ToolTip'
-import { ErrorP, IconContainer, InputWrap, StyledDiv } from './styles'
-import { useEffect, useState } from 'react'
-import { FormSelect } from '../FormSelect'
+import {
+    Category as CategoryType,
+    FormOption,
+} from '../../../services/apiTypes.ts'
 import { useGetCategories } from '../../../services/hooks/Category/useGetCategories.tsx'
-import { Category as CategoryType, FormOption } from '../../../services/apiTypes.ts'
+import { ToolTip } from '../../ToolTip/ToolTip.tsx'
+import { FormSelect } from '../FormSelect/FormSelect.tsx'
+import { ErrorP, IconContainer, InputWrap, StyledDiv } from './styles.ts'
 
 export const Category = () => {
     const { setValue } = useFormContext()
 
-    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null)
+    const [selectedOption, setSelectedOption] = useState<FormOption | null>(
+        null
+    )
     const { data: categories = [] } = useGetCategories()
 
     const categoryOptions = categories.map((category: CategoryType) => ({

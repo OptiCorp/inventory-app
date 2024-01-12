@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
-import { useDebounce } from 'usehooks-ts'
-import { useGetVendorsInfinite } from '../../../services/hooks/Vendor/useGetVendorInfinite'
-import SearchBar from '../../../components/searchBar/SearchBar'
-import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
-import { Button } from '../../../components/Button/SubmitButton'
 import { useNavigate } from 'react-router-dom'
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import { useDebounce } from 'usehooks-ts'
+import AdminSearchCard, {
+    SearchType,
+} from '../../../components/AdminSearchCard/AdminSearchCard'
+import { Button } from '../../../components/Button/Button'
+import SearchBar from '../../../components/SearchBar/SearchBar'
 import { Vendor } from '../../../services/apiTypes'
+import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import {
+    AdminContainer,
+    ButtonContainer,
+    SearchResultContainer,
+} from '../styles'
 
 const Vendors = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
@@ -20,7 +25,9 @@ const Vendors = () => {
         if (initialData) {
             setFilteredData(
                 initialData.filter((vendor) =>
-                    vendor.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+                    vendor.name
+                        .toLowerCase()
+                        .includes(debouncedSearchTerm.toLowerCase())
                 )
             )
         }
@@ -35,8 +42,14 @@ const Vendors = () => {
             />
             <SearchResultContainer>
                 {filteredData?.map((vendor, i) => (
-                    <div id={i === filteredData.length - 1 ? 'lastItem' : ''} key={vendor.id}>
-                        <AdminSearchCard searchType={SearchType.Vendor} data={vendor} />
+                    <div
+                        id={i === filteredData.length - 1 ? 'lastItem' : ''}
+                        key={vendor.id}
+                    >
+                        <AdminSearchCard
+                            searchType={SearchType.Vendor}
+                            data={vendor}
+                        />
                     </div>
                 ))}
             </SearchResultContainer>

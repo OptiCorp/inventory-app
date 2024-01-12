@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
-import { Button } from '../../../../components/Button/SubmitButton'
-import SearchResultCardCompact from '../../../../components/searchResultCard/SearchInfoCompact'
+import { Button } from '../../../../components/Button/Button'
+import SearchResultCardCompact from '../../../../components/SearchResultCard/SearchInfoCompact'
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../../hooks'
 import { Item, List, UpdateList } from '../../../../services/apiTypes'
@@ -44,9 +44,7 @@ export const PhoneList = ({ list }: Props) => {
             },
         })
     }
-    const {
-      
-    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
+    const {} = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
     return (
         <>
             {list && (

@@ -8,8 +8,6 @@ import {
     LoginContainer,
     TitleHeader,
 } from './styles'
-import { Button } from '../../components/Button/SubmitButton'
-import { COLORS } from '../../style/GlobalStyles'
 
 export const Login = () => {
     const { instance } = useMsal()
@@ -23,7 +21,12 @@ export const Login = () => {
         <BackgroundContainer>
             <LoginContainer>
                 <Header>
-                    <img alt="logo" src={'/WP 1.svg'} width="60" style={{ margin: 'auto' }} />
+                    <img
+                        alt="logo"
+                        src={'/WP 1.svg'}
+                        width="60"
+                        style={{ margin: 'auto' }}
+                    />
                     <TitleHeader>Log in to your account</TitleHeader>
                 </Header>
                 <ButtonWrapper>

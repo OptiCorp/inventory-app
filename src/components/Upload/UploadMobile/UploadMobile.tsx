@@ -1,23 +1,16 @@
-import { Button } from '@mui/material'
-import {
-    Container,
-    DocumentName,
-    FileShapeWrapper,
-    FileTypeWrapper,
-    FileWrapper,
-    IconWrapper,
-    Wrapper,
-} from './styles'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { SubmitButton } from '../../Button/styles'
-import { COLORS } from '../../../style/GlobalStyles'
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
+import { Button, Container } from '@mui/material'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { AddDocument, Document, Item } from '../../../services/apiTypes'
+import { useDeleteDocument } from '../../../services/hooks/Documents/useDeleteDocument'
 import { useGetDocumentsByItemId } from '../../../services/hooks/Documents/useGetDocumentsByItemId'
 import { useUploadDocument } from '../../../services/hooks/Documents/useUploadDocument'
-import { useDeleteDocument } from '../../../services/hooks/Documents/useDeleteDocument'
-import { AddDocument, Item, Document } from '../../../services/apiTypes'
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
+import { COLORS } from '../../../style/GlobalStyles'
+import { SubmitButton, Wrapper } from '../../Button/styles'
+import { FileWrapper, FileShapeWrapper, FileTypeWrapper, IconWrapper, DocumentName } from './styles'
+
 
 type UploadProps = {
     item: Item
@@ -97,17 +90,26 @@ const UploadMobile = ({ item }: UploadProps) => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
+                                        <h3>
+                                            .
+                                            {document.contentType
+                                                .split('/')[1]
+                                                .toUpperCase()}
+                                        </h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
-                                            onClick={() => handleFileDownload(document)}
+                                            onClick={() =>
+                                                handleFileDownload(document)
+                                            }
                                             sx={{ color: 'black' }}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
-                                            onClick={() => handleFileDelete(document.id)}
+                                            onClick={() =>
+                                                handleFileDelete(document.id)
+                                            }
                                             sx={{ color: 'black' }}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
@@ -120,7 +122,9 @@ const UploadMobile = ({ item }: UploadProps) => {
                                 stroke="black"
                             />
                         </svg>
-                        <DocumentName>{document.name.split('.')[0]}</DocumentName>
+                        <DocumentName>
+                            {document.name.split('.')[0]}
+                        </DocumentName>
                     </FileWrapper>
                 ))}
                 {showArrow === true && data?.length! > 2 && (

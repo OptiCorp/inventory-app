@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { useDebounce, useLocalStorage } from 'usehooks-ts'
-import SearchBar from '../../components/searchBar/SearchBar'
+import SearchBar from '../../components/SearchBar/SearchBar'
 import { useWindowDimensions } from '../../hooks'
 
-import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
-import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
+import SearchResultCardCompact from '../../components/SearchResultCard/SearchInfoCompact'
+import SearchResultCard from '../../components/SearchResultCard/SearchResultCard'
 import { useGetItemsInfinite } from '../../services/hooks/Items/useGetItemsInfinite'
 import {
     Container,

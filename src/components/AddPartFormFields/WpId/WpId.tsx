@@ -1,13 +1,13 @@
 import { ErrorMessage } from '@hookform/error-message'
-import { useFormContext } from 'react-hook-form'
-import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles'
 import { useEffect, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
+import { useDebounce } from 'usehooks-ts'
 import { v4 as uuid } from 'uuid'
 import { useIsWpIdUnique } from '../../../services/hooks/Items/useIsWpIdUnique.tsx'
-import { useDebounce } from 'usehooks-ts'
-import { ToolTip } from '../../ToolTip'
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
+import { ToolTip } from '../../ToolTip/ToolTip.tsx'
 import { StyledDiv } from '../Category/styles.ts'
+import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles.ts'
 
 export const WpId = () => {
     const {
@@ -34,7 +34,10 @@ export const WpId = () => {
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
                 </IconContainer>
-                <ErrorMessage name="wpId" render={({ message }) => <ErrorP>{message}</ErrorP>} />
+                <ErrorMessage
+                    name="wpId"
+                    render={({ message }) => <ErrorP>{message}</ErrorP>}
+                />
             </InputWrap>
             <StyledInput
                 type="text"
@@ -55,7 +58,8 @@ export const WpId = () => {
                     )}
                     {isUnique === false && (
                         <p style={{ color: 'red', marginTop: '0px' }}>
-                            WellPartner ID is not unique. Please choose a different one.
+                            WellPartner ID is not unique. Please choose a
+                            different one.
                         </p>
                     )}
                 </>

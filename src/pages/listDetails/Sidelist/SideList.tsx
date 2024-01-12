@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Item, MutateItemList } from '../../../services/apiTypes.ts'
 import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList.tsx'
 
-import CustomDialog from '../../../components/Dialog/Index.tsx'
+import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx'
 import UmAppContext from '../../../contexts/UmAppContext.tsx'
 import { KeyWord, RemoveIcon, Wrapper } from './styles.ts'
 type Props = {
