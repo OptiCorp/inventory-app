@@ -16,7 +16,7 @@ export const Comments = ({ item }: { item: Item }) => {
                         id="filled-multiline-static"
                         multiline
                         rows={5}
-                        defaultValue={item.comment || content}
+                        defaultValue={item.comment ?? content}
                         fullWidth
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                             setContent(e.target.value)

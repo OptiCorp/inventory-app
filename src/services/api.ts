@@ -72,7 +72,7 @@ const apiService = () => {
                 },
             }
             const res = await fetch(`${API_URL}/${url}`, getOperation)
-            return res.json()
+            return (await res.json()) as T
         })
     }
 

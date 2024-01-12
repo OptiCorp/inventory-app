@@ -6,7 +6,6 @@ import SearchResultCardCompact from '../../../../components/searchResultCard/Sea
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../../hooks'
 import { Item, List, UpdateList } from '../../../../services/apiTypes'
-import { useGetItemsNotInListInfinite } from '../../../../services/hooks/Items/useGetItemsNotInListInfinite'
 import { useUpdateList } from '../../../../services/hooks/List/useUpdateList'
 import { COLORS } from '../../../../style/GlobalStyles'
 import { ListHeader } from '../../ListHeader'
@@ -36,7 +35,6 @@ export const PhoneList = ({ list }: Props) => {
             },
         })
     }
-    const {} = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
     return (
         <>
             {list && (
@@ -51,7 +49,7 @@ export const PhoneList = ({ list }: Props) => {
                                     // <SideList part={item} key={item.id} />
                                 ))}
                             </ListContainerCompact>
-                        ) : null}
+                        ) : null}»
                         <ButtonWrapCompact>
                             <Button
                                 backgroundColor={`${COLORS.secondary}`}

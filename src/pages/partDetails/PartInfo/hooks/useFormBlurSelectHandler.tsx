@@ -1,11 +1,11 @@
-import { useCallback, useContext } from 'react'
-import { Category, Item, Location, Vendor } from '../../../../services/apiTypes'
-import { useFormContext } from 'react-hook-form'
-import { PartInfoSchema } from '../../useUpdatePartForm'
-import { useUpdateItem } from '../../../../services/hooks/Items/useUpdateItem'
-import UmAppContext from '../../../../contexts/UmAppContext'
-import { SetState } from '../types'
 import { AlertColor } from '@mui/material'
+import { useCallback, useContext } from 'react'
+import { useFormContext } from 'react-hook-form'
+import UmAppContext from '../../../../contexts/UmAppContext'
+import { Category, Item, Location, Vendor } from '../../../../services/apiTypes'
+import { useUpdateItem } from '../../../../services/hooks/Items/useUpdateItem'
+import { PartInfoSchema } from '../../useUpdatePartForm'
+import { SetState } from '../types'
 
 type FieldId = 'type' | 'categoryId' | 'locationId' | 'vendorId'
 
@@ -63,7 +63,9 @@ export const useFormBlurSelectHandler = (
                         },
                     }
                 )
-            })()
+            })().catch((error) => {
+                console.error('Failed to submit form: ', error)
+            })
         },
         [formContext, mutate, obj, options]
     )

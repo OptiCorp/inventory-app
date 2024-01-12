@@ -8,8 +8,6 @@ import {
     LoginContainer,
     TitleHeader,
 } from './styles'
-import { Button } from '../../components/Button/SubmitButton'
-import { COLORS } from '../../style/GlobalStyles'
 
 export const Login = () => {
     const { instance } = useMsal()
@@ -17,7 +15,9 @@ export const Login = () => {
 
     const onSubmit = () => {
         setIsSubmitting(true)
-        instance.loginPopup()
+        instance.loginPopup().catch((error) => {
+            console.error('Failed to login: ', error)
+        })
     }
     return (
         <BackgroundContainer>

@@ -3,11 +3,10 @@ import { useParams } from 'react-router-dom'
 import { useDebounce } from 'usehooks-ts'
 import SearchBar from '../../../components/searchBar/SearchBar'
 import SearchResultCardCompact from '../../../components/searchResultCard/SearchInfoCompact'
-import { useSnackBar, useWindowDimensions } from '../../../hooks'
+import { useSnackBar } from '../../../hooks'
 import { Item } from '../../../services/apiTypes'
 import { useGetItemsNotInListInfinite } from '../../../services/hooks/Items/useGetItemsNotInListInfinite'
 import { useGetListById } from '../../../services/hooks/List/useGetListById'
-import { useUpdateList } from '../../../services/hooks/List/useUpdateList'
 import { GlobalSpinnerContainer, Spinner } from '../../search/styles'
 import { PhoneContainer, PhoneListTitle } from './styles'
 
@@ -29,11 +28,12 @@ export const AddMoreCompact = () => {
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
-            fetchNextPage()
+            fetchNextPage().catch((error) => {
+                console.error('Failed to fetch next page: ', error)
+            })
         }
     }
 
-    const {} = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',

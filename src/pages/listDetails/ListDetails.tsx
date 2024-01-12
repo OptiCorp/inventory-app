@@ -41,7 +41,9 @@ const ListDetails = () => {
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
-            fetchNextPage()
+            fetchNextPage().catch((error) => {
+                console.error('Failed to fetch next page: ', error)
+            })
         }
     }
     const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!)
