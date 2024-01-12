@@ -6,7 +6,9 @@ const userService = () => {
     const navigate = useNavigate()
     const signOut = () => {
         navigate('/')
-        instance.logoutPopup()
+        instance.logoutPopup().catch((error) => {
+            console.log('Failed to logout: ', error)
+        })
     }
 
     return {
