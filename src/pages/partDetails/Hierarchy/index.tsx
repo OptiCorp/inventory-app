@@ -27,7 +27,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                             {item?.children?.map((x) => (
                                 <ListItem
                                     onClick={() => {
-                                        navigate(`/${x.id}/${x.wpId}`)
+                                        navigate(`/${x.id}`)
                                     }}
                                 >
                                     {x?.id ?? ''}

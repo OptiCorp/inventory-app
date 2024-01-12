@@ -9,12 +9,15 @@ import { Log } from './Log'
 import PartInfo from './PartInfo/PartInfo'
 import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
 import { useUpdatePartForm } from './useUpdatePartForm'
+import { useWindowDimensions } from '../../hooks'
+import UploadMobile from '../../components/Upload/mobile/UploadMobile'
 
 const PartDetails = () => {
     const { id } = useParams() as { id: string }
     const { data: item, isLoading } = useGetItemById(id)
     const { methods } = useUpdatePartForm(item!)
     const navigate = useNavigate()
+    const { width } = useWindowDimensions()
     if (!item) return null
     console.log(item)
     return (
@@ -28,10 +31,7 @@ const PartDetails = () => {
                         >
                             {item.parent?.id}
                         </BreadcrumbLink>
-                        <BreadcrumbLink
-                            onClick={() => navigate(`/${item.id}`)}
-                            underline="none"
-                        >
+                        <BreadcrumbLink onClick={() => navigate(`/${item.id}`)} underline="none">
                             {item.id}
                         </BreadcrumbLink>
                     </Breadcrumbs>
@@ -40,7 +40,8 @@ const PartDetails = () => {
             <FormProvider {...methods}>
                 <PartInfo item={item} isLoading={isLoading} />
                 <Hierarchy item={item} />
-                <ExampleUpload item={item} />
+                {width > 500 ? <ExampleUpload item={item} /> : <UploadMobile item={item} />}
+
                 <Comments item={item} />
                 <Log item={item} />
             </FormProvider>
