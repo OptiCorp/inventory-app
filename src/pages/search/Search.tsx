@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useDebounce, useLocalStorage } from 'usehooks-ts'
 import SearchBar from '../../components/searchBar/SearchBar'
 import { useWindowDimensions } from '../../hooks'
@@ -22,10 +22,15 @@ const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>()
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm)
+    const { data, isLoading, fetchNextPage } =
+        useGetItemsInfinite(debouncedSearchTerm)
     const { width } = useWindowDimensions()
-    const [searches, setSearches] = useLocalStorage<string[]>('recent_searches', [])
-
+    const [searches, setSearches] = useLocalStorage<string[]>(
+        'recent_searches',
+        []
+    )
+    const location = useLocation()
+    const state = location.state
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
             fetchNextPage()
@@ -56,8 +61,10 @@ const Search = () => {
     useEffect(() => {
         if (searchTerm !== '' && !searches.includes(searchTerm)) {
             setSearches((prev) => [searchTerm, ...prev.slice(0, 9)])
+        } else if (state?.resetInputField) {
+            setSearchTerm('')
         }
-    }, [debouncedSearchTerm])
+    }, [debouncedSearchTerm, state])
 
     return (
         <>
@@ -80,7 +87,8 @@ const Search = () => {
                             width > 800 ? (
                                 <div
                                     id={
-                                        i === data.pages.length - 1 && index === page.length - 1
+                                        i === data.pages.length - 1 &&
+                                        index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
@@ -90,7 +98,8 @@ const Search = () => {
                             ) : (
                                 <div
                                     id={
-                                        i === data.pages.length - 1 && index === page.length - 1
+                                        i === data.pages.length - 1 &&
+                                        index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
@@ -108,7 +117,10 @@ const Search = () => {
 
                         {searches.map((search, index) => (
                             <SpanMargin>
-                                <StyledSearchedLink key={index} to={`/search/${search}`}>
+                                <StyledSearchedLink
+                                    key={index}
+                                    to={`/search/${search}`}
+                                >
                                     {search}
                                 </StyledSearchedLink>
                             </SpanMargin>

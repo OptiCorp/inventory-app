@@ -5,8 +5,7 @@ export const ResultCardContainer = styled.div`
     margin: 16px;
 
     padding: 4px;
-    border-radius: 8px;
-    cursor: pointer;
+
     max-width: 700px;
     margin-inline: auto;
 `
@@ -61,7 +60,7 @@ export const SearchCard = styled.div`
 export const SearchCardSkeleton = styled.div`
     position: relative;
     line-height: 25px;
-    border-radius: 5px;
+
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -73,7 +72,6 @@ export const FlexContainer = styled.div`
 `
 
 export const CompactCardSkeleton = styled.div`
-    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,13 +83,7 @@ export const CompactCardSkeleton = styled.div`
 `
 
 export const CompactCard = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-basis: 100%;
-    cursor: pointer;
-    background-color: ${COLORS.card};
-    padding: 1rem;
+    padding: 10px;
 `
 
 export const SecondInfoBox = styled.div`
@@ -120,14 +112,23 @@ export const InfoP = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    width: 100%;
     flex-direction: row;
 `
 
-export const KeyWords = styled.span`
+export const KeyWords = styled.p`
     font-weight: 600;
+    width: 100%;
 `
 
 export const CompactInfoP = styled.div`
-    padding-right: 2rem;
     line-height: 1.5rem;
+    width: 100%;
+`
+export const ButtonText = styled.p`
+    display: inline;
+    font-size: 0.8rem;
+`
+export const DescriptionWrap = styled.div`
+    padding-bottom: 5px;
 `

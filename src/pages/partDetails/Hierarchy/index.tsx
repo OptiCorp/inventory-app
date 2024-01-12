@@ -168,6 +168,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                     {item.parent?.wpId}
                                 </LinkElement>
                             )}
+
                         </>
                     )}
                 </Box>

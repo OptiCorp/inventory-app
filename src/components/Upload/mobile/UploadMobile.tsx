@@ -1,38 +1,34 @@
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
-import { AiOutlineFileJpg, AiOutlineFilePdf, AiOutlineFileImage } from 'react-icons/ai'
+import { Button } from '@mui/material'
 import {
     Container,
     DocumentName,
-    FileContainer,
-    FileTypeWrapper,
     FileShapeWrapper,
-    IconWrapper,
-    StyledLabel,
-    Wrapper,
+    FileTypeWrapper,
     FileWrapper,
+    IconWrapper,
+    Wrapper,
 } from './styles'
-import { useUploadDocument } from '../../services/hooks/Documents/useUploadDocument'
-import { AddDocument, Document, Item } from '../../services/apiTypes'
-import { useGetDocumentsByItemId } from '../../services/hooks/Documents/useGetDocumentsByItemId'
-import { Box, Button, Modal } from '@mui/material'
-import { useSnackBar } from '../../hooks'
-import UmAppContext from '../../contexts/UmAppContext'
-import { useQueryClient } from '@tanstack/react-query'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { useDeleteDocument } from '../../services/hooks/Documents/useDeleteDocument'
-import { Button as SubmitButton } from '../Button/SubmitButton'
-import { COLORS } from '../../style/GlobalStyles'
+import { SubmitButton } from '../../Button/styles'
+import { COLORS } from '../../../style/GlobalStyles'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useGetDocumentsByItemId } from '../../../services/hooks/Documents/useGetDocumentsByItemId'
+import { useUploadDocument } from '../../../services/hooks/Documents/useUploadDocument'
+import { useDeleteDocument } from '../../../services/hooks/Documents/useDeleteDocument'
+import { AddDocument, Item, Document } from '../../../services/apiTypes'
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
 
 type UploadProps = {
     item: Item
 }
 
-export const ExampleUpload = ({ item }: UploadProps) => {
+const UploadMobile = ({ item }: UploadProps) => {
     const { data } = useGetDocumentsByItemId(item.id)
     const { mutate: uploadDocument } = useUploadDocument()
     const { mutate: deleteDocument } = useDeleteDocument(item.id)
     const inputFile = useRef<HTMLInputElement | null>(null)
+    const [showArrow, setShowArrow] = useState(true)
 
     const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -55,11 +51,42 @@ export const ExampleUpload = ({ item }: UploadProps) => {
         deleteDocument(documentId)
     }
 
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.className = 'visible'
+            } else {
+                entry.target.className = 'hidden'
+            }
+        })
+    }
+
+    const observer = new IntersectionObserver(handleIntersect, {
+        threshold: 0.5,
+    })
+
+    useEffect(() => {
+        const files = document.getElementsByClassName('files')
+        if (files.length !== 0) {
+            for (let i = 0; i < files.length; i++) {
+                observer.observe(files[i])
+            }
+        }
+
+        return () => {
+            if (files.length !== 0) {
+                for (let i = 0; i < files.length; i++) {
+                    observer.unobserve(files[i])
+                }
+            }
+        }
+    }, [data])
+
     return (
         <>
-            <Wrapper>
+            <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {data?.map((document) => (
-                    <FileWrapper>
+                    <FileWrapper className="files">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"
@@ -96,11 +123,17 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                         <DocumentName>{document.name.split('.')[0]}</DocumentName>
                     </FileWrapper>
                 ))}
+                {showArrow === true && data?.length! > 2 && (
+                    <ArrowCircleRightOutlinedIcon
+                        fontSize="large"
+                        sx={{ position: 'sticky', top: '75px', right: '-10px' }}
+                    />
+                )}
             </Wrapper>
             <Container>
                 <SubmitButton
                     color={COLORS.primary}
-                    backgroundColor={COLORS.secondary}
+                    $backgroundColor={COLORS.secondary}
                     onClick={() => inputFile.current?.click()}
                 >
                     {' '}
@@ -118,3 +151,5 @@ export const ExampleUpload = ({ item }: UploadProps) => {
         </>
     )
 }
+
+export default UploadMobile

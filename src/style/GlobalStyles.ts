@@ -8,7 +8,7 @@ export const COLORS = {
     gray: '#CACACA',
     card: '#FBFBFB',
     input: '#F2F2F2',
-
+    green: '#008000',
     lightGray: '#CCC',
     silverGray: '#DCDCDC',
     paleGray: '#EAEAEA',
@@ -35,7 +35,6 @@ const GlobalStyles = createGlobalStyle<Props>`
         background-color: ${COLORS.secondary};
     }
     .wrapper {
-    display: grid;
     padding: ${({ width }) => (width < 500 ? 0 : '8px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;

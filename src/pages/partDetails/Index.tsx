@@ -1,22 +1,25 @@
-import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
+import { Breadcrumbs } from '@mui/material'
+import { FormProvider } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ExampleUpload } from '../../components/Upload/Upload'
 import { useGetItemById } from '../../services/hooks/Items/useGetItemById'
 import { Comments } from './Comments/Comments'
-import { FormProvider } from 'react-hook-form'
 import { Hierarchy } from './Hierarchy'
 import { Log } from './Log'
 import PartInfo from './PartInfo/PartInfo'
+import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
 import { useUpdatePartForm } from './useUpdatePartForm'
-import { ExampleUpload } from '../../components/Upload/Upload'
-import { Breadcrumbs } from '@mui/material'
+import { useWindowDimensions } from '../../hooks'
+import UploadMobile from '../../components/Upload/mobile/UploadMobile'
 
 const PartDetails = () => {
     const { id } = useParams() as { id: string }
     const { data: item, isLoading } = useGetItemById(id)
     const { methods } = useUpdatePartForm(item!)
     const navigate = useNavigate()
+    const { width } = useWindowDimensions()
     if (!item) return null
-
+    console.log(item)
     return (
         <StyledContainerDiv>
             {item.parentId && (
@@ -37,7 +40,8 @@ const PartDetails = () => {
             <FormProvider {...methods}>
                 <PartInfo item={item} isLoading={isLoading} />
                 <Hierarchy item={item} />
-                <ExampleUpload item={item} />
+                {width > 500 ? <ExampleUpload item={item} /> : <UploadMobile item={item} />}
+
                 <Comments item={item} />
                 <Log item={item} />
             </FormProvider>

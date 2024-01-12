@@ -54,14 +54,32 @@ Clone and Run the application:
 -   [Prettier](https://prettier.io/)
 -   [ESLint](https://eslint.org/)
 
-## Branch name convention
+## Proper Code Etiquette Guidelines
 
-1. type (feat, fix, chore, refactor)
-2. Issue number
-3. Descriptive text.
+### Naming Conventions
 
-### Example:
+#### Files and Folders
+- Apply camelCase for folder names, such as `userProfilePage`, with the exception of component folder names that should be capitalized, i.e `UserProfile`.
+- Choose descriptive names for component files. For instance, use `UserProfile.tsx` instead of generic names like `Component1.tsx` or `Index.tsx`.
+- Organize folder structure hierarchically, considering trees and pages. Fro example, use `src/pages/add-part/.../batch`, where the batch directory is a subdirectory of its parent, and so forth.
+- Ensure page folders align with their corresponding URL segments. For example, name the page folder as `add-part-form` in `src/pages/add-part/add-part-form`, resulting in the URL `https://.../add-part/add-part-form`.
+
+#### Branches
+
+Branches should have the following format:
+
+1. **Type**: Use one of the following prefixes to specify the nature of the change:
+    - **feat** for new features or enhancements.
+    - **fix** for bug fixes.
+    - **chore** for routine tasks or maintenance.
+    - **refactor** for code restructuring.
+2. **Issue Number**: Include the associated issue number to link the branch to a specific task or topic.
+3. **Descriptive Text**: Add descriptive text beginning with an active verb, summarizing the purpose of the branch.
 
 ```
-feat/#1/users-endpoint
+<type>/<issue number>/<description>
 ```
+
+#### Commit Messages
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+

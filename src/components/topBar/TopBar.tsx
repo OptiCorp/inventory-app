@@ -1,37 +1,70 @@
-import AddIcon from '@mui/icons-material/Add'
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
-import BusinessIcon from '@mui/icons-material/Business'
-import CategoryIcon from '@mui/icons-material/Category'
-import ListAltIcon from '@mui/icons-material/ListAlt'
-import LogoutIcon from '@mui/icons-material/Logout'
+import { useMsal } from '@azure/msal-react'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import MenuIcon from '@mui/icons-material/Menu'
-import PlaceIcon from '@mui/icons-material/Place'
-import SearchIcon from '@mui/icons-material/Search'
+import { Button, Drawer, Menu, MenuItem } from '@mui/material'
+import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state'
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useWindowDimensions } from '../../hooks'
+import { HamburgerMenu } from './HamburgerMenu'
 import {
-    Button,
-    Drawer,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-} from '@mui/material'
-import { useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import {
-    DropdownItem,
-    HamburgerContainer,
+    BackButton,
+    CompactHeaderWrap,
     HeaderWrap,
+    LogOutWrapper,
+    MenuAdmin,
+    MenuAdminLink,
+    StyledLinkDiv,
+    StyledNavLink,
     TopBarContainer,
 } from './styles'
-import { useMsal } from '@azure/msal-react'
-
 const TopBar = () => {
     const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false)
-    const [adminDropdownIsOpen, setAdminDropdownIsOpen] = useState(false)
-    const navigate = useNavigate()
 
-    const hamburgerLink = (location: string) => {
+    const { listId } = useParams()
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const [returnButton, setReturnButton] = useState(false)
+
+    const handleBack = () => {
+        if (location.pathname === '/add-part/checks') {
+            navigate('/add-part/batch')
+        } else if (location.pathname === '/add-part/upload') {
+            navigate('/add-part/checks')
+        } else if (location.pathname === '/add-part/add-form') {
+            navigate('/add-part/upload')
+        } else if (location.pathname === `/makelist/${listId}`) {
+            navigate('/makelist')
+        } else if (location.pathname === '/add-part/batch') {
+            navigate('/add-part')
+        } else {
+            navigate(-1)
+        }
+    }
+
+    const handleSearchIconClick = () => {
+        navigate('/search', {
+            state: { resetInputField: true },
+        })
+    }
+
+    useEffect(() => {
+        const excludedRoutes = [
+            '/',
+            '/search',
+            '/add-part',
+            '/makelist',
+
+            '/admin/categories',
+            '/admin/vendors',
+            '/admin/locations',
+        ]
+        setReturnButton(!excludedRoutes.includes(location.pathname))
+    }, [location.pathname])
+    const { width } = useWindowDimensions()
+
+    const adminLinks = (location: string) => {
         navigate(location)
     }
     const { instance } = useMsal()
@@ -43,173 +76,103 @@ const TopBar = () => {
     return (
         <div>
             <TopBarContainer>
-                <img
-                    alt="logo"
-                    src={'/WP 1.svg'}
-                    onClick={() => navigate('search')}
-                    width="40"
-                    style={{ cursor: 'pointer' }}
-                />
-                <HeaderWrap>
-                    <Button
-                        style={{ color: 'black', padding: 0, minWidth: 0 }}
-                        onClick={() => setHamburgerIsOpen(true)}
-                    >
-                        <MenuIcon sx={{ fontSize: 40 }} />
-                    </Button>
-
-                    <Drawer
-                        anchor="right"
-                        open={hamburgerIsOpen}
-                        onClose={() => setHamburgerIsOpen(false)}
-                    >
-                        <HamburgerContainer>
-                            <List>
-                                <ListItem>
-                                    <ListItemButton
-                                        onClick={() => {
-                                            hamburgerLink('search')
-                                            setHamburgerIsOpen(false)
-                                        }}
+                {returnButton ? (
+                    <BackButton onClick={handleBack}>
+                        <ArrowBackIcon fontSize="large" onClick={handleBack} />
+                    </BackButton>
+                ) : (
+                    <img
+                        alt="logo"
+                        src={'/WP 1.svg'}
+                        onClick={handleSearchIconClick}
+                        width="40"
+                        style={{ cursor: 'pointer' }}
+                    />
+                )}
+                {width > 800 ? (
+                    <HeaderWrap>
+                        <StyledNavLink to="search">
+                            <StyledLinkDiv>Find parts</StyledLinkDiv>
+                        </StyledNavLink>
+                        <StyledNavLink to="add-part">
+                            <StyledLinkDiv>Add part</StyledLinkDiv>
+                        </StyledNavLink>
+                        <StyledNavLink to="makelist">
+                            <StyledLinkDiv>Make list</StyledLinkDiv>
+                        </StyledNavLink>
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+                            {(popupState) => (
+                                <>
+                                    <MenuAdmin
+                                        isOpen={popupState.isOpen}
+                                        {...bindTrigger(popupState)}
                                     >
-                                        <ListItemIcon>
-                                            <SearchIcon fontSize="large" />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'Find parts'} />
-                                    </ListItemButton>
-                                </ListItem>
+                                        <StyledLinkDiv>Admin</StyledLinkDiv>
+                                    </MenuAdmin>
+                                <Menu {...bindMenu(popupState)}>
+                                    <MenuItem onClick={popupState.close}>
+                                        <MenuAdminLink
+                                            onClick={() => {
+                                                adminLinks(
+                                                    'admin/categories'
+                                                )
+                                            }}
+                                        >
+                                            Categories
+                                        </MenuAdminLink>
+                                    </MenuItem>
+                                    <MenuItem onClick={popupState.close}>
+                                        <MenuAdminLink
+                                            onClick={() => {
+                                                adminLinks('admin/vendors')
+                                            }}
+                                        >
+                                            Vendors
+                                        </MenuAdminLink>
+                                    </MenuItem>
+                                    <MenuItem onClick={popupState.close}>
+                                        <MenuAdminLink
+                                            onClick={() => {
+                                                adminLinks(
+                                                    'admin/locations'
+                                                )
+                                            }}
+                                        >
+                                            Locations
+                                        </MenuAdminLink>
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        )}
+                    </PopupState>
+                        <LogOutWrapper
+                            onClick={() => {
+                                handleSignOut()
+                            }}
+                        >
+                            <StyledLinkDiv>Log out</StyledLinkDiv>
+                        </LogOutWrapper>
+                    </HeaderWrap>
+                ) : (
+                    <CompactHeaderWrap>
+                        <Button
+                            style={{ color: 'black', padding: 0, minWidth: 0 }}
+                            onClick={() => setHamburgerIsOpen(true)}
+                        >
+                            <MenuIcon sx={{ fontSize: 40 }} />
+                        </Button>
 
-                                <ListItem>
-                                    <ListItemButton
-                                        onClick={() => {
-                                            hamburgerLink('add-part')
-                                            setHamburgerIsOpen(false)
-                                        }}
-                                    >
-                                        <ListItemIcon>
-                                            <AddIcon fontSize="large" />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'Add parts'} />
-                                    </ListItemButton>
-                                </ListItem>
-
-                                <ListItem>
-                                    <ListItemButton
-                                        onClick={() => {
-                                            hamburgerLink('makelist')
-                                            setHamburgerIsOpen(false)
-                                        }}
-                                    >
-                                        <ListItemIcon>
-                                            <ListAltIcon fontSize="large" />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'Make lists'} />
-                                    </ListItemButton>
-                                </ListItem>
-
-                                <ListItem
-                                    style={{ padding: '8px 16px 0 16px' }}
-                                >
-                                    <ListItemButton
-                                        onClick={() => {
-                                            setAdminDropdownIsOpen(
-                                                !adminDropdownIsOpen
-                                            )
-                                        }}
-                                    >
-                                        <ListItemIcon>
-                                            <AdminPanelSettingsIcon fontSize="large" />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'Admin'} />
-                                    </ListItemButton>
-                                </ListItem>
-
-                                {adminDropdownIsOpen ? (
-                                    <List style={{ padding: 0 }}>
-                                        <DropdownItem>
-                                            <ListItemButton
-                                                onClick={() => {
-                                                    hamburgerLink(
-                                                        'admin/categories'
-                                                    )
-                                                    setHamburgerIsOpen(false)
-                                                    setAdminDropdownIsOpen(
-                                                        false
-                                                    )
-                                                }}
-                                            >
-                                                <ListItemIcon>
-                                                    <CategoryIcon fontSize="large" />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={'Categories'}
-                                                />
-                                            </ListItemButton>
-                                        </DropdownItem>
-
-                                        <DropdownItem>
-                                            <ListItemButton
-                                                onClick={() => {
-                                                    hamburgerLink(
-                                                        'admin/vendors'
-                                                    )
-                                                    setHamburgerIsOpen(false)
-                                                    setAdminDropdownIsOpen(
-                                                        false
-                                                    )
-                                                }}
-                                            >
-                                                <ListItemIcon>
-                                                    <BusinessIcon fontSize="large" />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={'Vendors'}
-                                                />
-                                            </ListItemButton>
-                                        </DropdownItem>
-
-                                        <DropdownItem>
-                                            <ListItemButton
-                                                onClick={() => {
-                                                    hamburgerLink(
-                                                        'admin/locations'
-                                                    )
-                                                    setHamburgerIsOpen(false)
-                                                    setAdminDropdownIsOpen(
-                                                        false
-                                                    )
-                                                }}
-                                            >
-                                                <ListItemIcon>
-                                                    <PlaceIcon fontSize="large" />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={'Locations'}
-                                                />
-                                            </ListItemButton>
-                                        </DropdownItem>
-                                    </List>
-                                ) : null}
-                            </List>
-
-                            <List>
-                                <ListItem>
-                                    <ListItemButton
-                                        onClick={() => {
-                                            handleSignOut()
-                                            setHamburgerIsOpen(false)
-                                        }}
-                                    >
-                                        <ListItemIcon>
-                                            <LogoutIcon fontSize="large" />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'Log out'} />
-                                    </ListItemButton>
-                                </ListItem>
-                            </List>
-                        </HamburgerContainer>
-                    </Drawer>
-                </HeaderWrap>
+                        <Drawer
+                            anchor="right"
+                            open={hamburgerIsOpen}
+                            onClose={() => setHamburgerIsOpen(false)}
+                        >
+                            <HamburgerMenu
+                                setHamburgerIsOpen={setHamburgerIsOpen}
+                            />
+                        </Drawer>
+                    </CompactHeaderWrap>
+                )}
             </TopBarContainer>
             <Outlet />
         </div>
