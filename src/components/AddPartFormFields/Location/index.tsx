@@ -1,14 +1,13 @@
 import { ErrorMessage } from '@hookform/error-message'
+import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
-import { ToolTip } from '../../ToolTip'
-import { ErrorP, IconContainer, InputWrap } from './styles'
-import { useEffect, useState } from 'react'
-import { FormSelect } from '../FormSelect'
+import { FormOption, Location as LocationType } from '../../../services/apiTypes.ts'
 import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations.tsx'
-import { Location as LocationType } from '../../../services/apiTypes.ts'
-import { FormOption } from '../../../services/apiTypes.ts'
+import { ToolTip } from '../../ToolTip'
 import { StyledDiv } from '../Category/styles.ts'
+import { FormSelect } from '../FormSelect'
+import { ErrorP, IconContainer, InputWrap } from './styles'
 
 export const Location = () => {
     const { setValue } = useFormContext()
@@ -22,7 +21,7 @@ export const Location = () => {
     }))
 
     useEffect(() => {
-        setValue('locationId', selectedOption?.value || '')
+        setValue('locationId', selectedOption?.value ?? '')
     }, [selectedOption, setValue])
 
     return (

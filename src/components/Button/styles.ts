@@ -16,7 +16,7 @@ export const SubmitButton = styled('button')<{
 
     background-color: ${(props) => props.$backgroundColor};
     color: ${(props) => props.color};
-    height: ${(props) => props.height || '30px'};
+    height: ${(props) => props.height ?? '30px'};
     border: 1px solid ${COLORS.primary};
     cursor: pointer;
     margin-right: 0;

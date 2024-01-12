@@ -20,7 +20,7 @@ export const Category = () => {
     }))
 
     useEffect(() => {
-        setValue('categoryId', selectedOption?.value || '')
+        setValue('categoryId', selectedOption?.value ?? '')
     }, [selectedOption, setValue])
 
     return (

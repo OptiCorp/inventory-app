@@ -1,3 +1,8 @@
+import DeleteIcon from '@mui/icons-material/Delete'
+import DoneIcon from '@mui/icons-material/Done'
+import EditIcon from '@mui/icons-material/Edit'
+import { Button } from '@mui/material'
+import { FormEvent, useState } from 'react'
 import {
     Category,
     Location,
@@ -6,18 +11,13 @@ import {
     UpdateVendor,
     Vendor,
 } from '../../services/apiTypes'
-import { AdminActions, AdminSearchCardContainer, TitleContainer } from './styles'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
-import { Button } from '@mui/material'
-import { FormEvent, useState } from 'react'
-import DoneIcon from '@mui/icons-material/Done'
-import { useUpdateCategory } from '../../services/hooks/Category/useUpdateCategory'
-import { useUpdateVendor } from '../../services/hooks/Vendor/useUpdateVendor'
-import { useUpdateLocation } from '../../services/hooks/Locations/useUpdateLocation'
 import { useDeleteCategory } from '../../services/hooks/Category/useDeleteCategory'
-import { useDeleteVendor } from '../../services/hooks/Vendor/useDeleteVendor'
+import { useUpdateCategory } from '../../services/hooks/Category/useUpdateCategory'
 import { useDeleteLocation } from '../../services/hooks/Locations/useDeleteLocation'
+import { useUpdateLocation } from '../../services/hooks/Locations/useUpdateLocation'
+import { useDeleteVendor } from '../../services/hooks/Vendor/useDeleteVendor'
+import { useUpdateVendor } from '../../services/hooks/Vendor/useUpdateVendor'
+import { AdminActions, AdminSearchCardContainer, TitleContainer } from './styles'
 
 type Props = {
     data: Category | Vendor | Location
@@ -43,30 +43,33 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
         if (isEditing) {
             if (event) {
                 switch (searchType) {
-                    case SearchType.Category:
+                    case SearchType.Category: {
                         data.name = event?.currentTarget.value
-                        var newCategory: UpdateCategory = {
+                        const newCategory: UpdateCategory = {
                             id: data.id,
                             name: event?.currentTarget.value,
                         }
                         updateCategory(newCategory)
                         break
-                    case SearchType.Vendor:
+                    }
+                    case SearchType.Vendor: {
                         data.name = event?.currentTarget.value
-                        var newVendor: UpdateVendor = {
+                        const newVendor: UpdateVendor = {
                             id: data.id,
                             name: event?.currentTarget.value,
                         }
                         updateVendor(newVendor)
                         break
-                    case SearchType.Location:
+                    }
+                    case SearchType.Location: {
                         data.name = event?.currentTarget.value
-                        var newLocation: UpdateLocation = {
+                        const newLocation: UpdateLocation = {
                             id: data.id,
                             name: event?.currentTarget.value,
                         }
                         updateLocation(newLocation)
                         break
+                    }
                 }
             }
             setIsEditing(!isEditing)

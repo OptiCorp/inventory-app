@@ -151,7 +151,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 <InfoP>
                     <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>
                     {format(
-                        new Date(part.updatedDate || part.createdDate),
+                        new Date(part.updatedDate ?? part.createdDate),
                         'yyyy-MM-dd HH:mm:ss'
                     ).toString()}
                 </InfoP>

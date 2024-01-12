@@ -3,10 +3,10 @@ import { useAccount, useMsal } from '@azure/msal-react'
 import { AlertColor } from '@mui/material'
 import decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
-import apiService from '../services/api'
-import { ApiStatus, Item, User } from '../services/apiTypes'
-import { AzureUserInfo, UmAppContextType } from './types'
 import { GlobalSpinnerContainer, Spinner } from '../pages/search/styles.ts'
+import apiService from '../services/api'
+import { ApiStatus, User } from '../services/apiTypes'
+import { AzureUserInfo, UmAppContextType } from './types'
 
 const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType)
 

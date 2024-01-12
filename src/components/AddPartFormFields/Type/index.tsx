@@ -1,11 +1,11 @@
 import { ErrorMessage } from '@hookform/error-message'
+import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
-import { ToolTip } from '../../ToolTip'
-import { ErrorP, IconContainer, InputWrap } from './styles'
-import { FormSelect } from '../FormSelect'
-import { useEffect, useState } from 'react'
 import { FormOption } from '../../../services/apiTypes.ts'
+import { ToolTip } from '../../ToolTip'
+import { FormSelect } from '../FormSelect'
+import { ErrorP, IconContainer, InputWrap } from './styles'
 
 export const Type = () => {
     const { setValue } = useFormContext()
@@ -20,7 +20,7 @@ export const Type = () => {
     ]
 
     useEffect(() => {
-        setValue('type', selectedOption?.value || '')
+        setValue('type', selectedOption?.value ?? '')
     }, [selectedOption, setValue])
 
     return (
