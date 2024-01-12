@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
 import { useContext } from 'react'
 import UmAppContext from '../../../contexts/UmAppContext'
+import apiService from '../../api'
 
 export const useDeleteDocument = (itemId: string) => {
     const api = apiService()
@@ -13,6 +13,8 @@ export const useDeleteDocument = (itemId: string) => {
             error ? setSnackbarText(error.message) : setSnackbarText('Document deleted')
             queryClient.invalidateQueries({
                 queryKey: [itemId],
+            }).catch((error) => {
+                console.error('Failed to invalidate queries', error)
             })
         },
     })

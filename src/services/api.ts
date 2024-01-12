@@ -3,24 +3,24 @@ import { pca } from '../msalConfig'
 
 import {
     AddCategory,
+    AddDocument,
     AddItem,
     AddList,
     AddLocation,
     AddVendor,
     Category,
+    Document,
     Item,
     List,
     Location,
     UpdateCategory,
     UpdateItem,
+    UpdateList,
     UpdateLocation,
     UpdateVendor,
     User,
-    UpdateList,
     UserRole,
     Vendor,
-    AddDocument,
-    Document,
 } from './apiTypes'
 
 const request = {
@@ -321,12 +321,12 @@ const apiService = () => {
         const reader = res.body?.getReader()
         const itemResponses: { id: string }[] = JSON.parse(
             new TextDecoder().decode((await reader?.read())!.value)
-        )
+        ) as { id: string }[]
         const documentResponses: Response[][] = []
-        itemResponses.forEach(async (item) => {
+        for (const item of itemResponses) {
             const documentResponse = await addDocument({ itemId: item.id, files: files })
             documentResponses.push(documentResponse)
-        })
+        }
         return documentResponses
     }
 
@@ -427,13 +427,13 @@ const apiService = () => {
 
     const addDocument = async (document: AddDocument): Promise<Response[]> => {
         const responses: Response[] = []
-        document.files.forEach(async (file) => {
+        for (const file of document.files) {
             const formData = new FormData()
             formData.append('ItemId', document.itemId)
             formData.append('Files', file)
             const res = await postFileByFetch(`Documentation`, formData)
             responses.push(res)
-        })
+        }
         return responses
     }
 
