@@ -113,6 +113,7 @@ export type UpdateItem = {
     serialNumber: string
     productNumber: string
     type: string
+    children: Item[] | null
     categoryId: string | null | undefined
     locationId?: string | null
     description: string

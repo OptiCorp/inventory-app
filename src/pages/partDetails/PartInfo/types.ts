@@ -1,11 +1,12 @@
 
 import type { ChangeEvent, ComponentProps, Dispatch, SetStateAction } from "react"
-import { Category, Location, Vendor } from "../../../services/apiTypes"
+import { Category, Vendor } from "../../../services/apiTypes"
+import { ActionMeta, PropsValue, SingleValue } from "react-select"
 
-
-
-
-export type Types = 'Unit' | 'Assembly' | 'Subassembly' | 'Part'
+export type Types = {
+    id: 'Unit' | 'Assembly' | 'Subassembly' | 'Part'
+    name: 'Unit' | 'Assembly' | 'Subassembly' | 'Part'
+}
 
 export type SetState<T> = Dispatch<SetStateAction<T>>
 
@@ -27,7 +28,7 @@ export type StyledTextFieldProps = {
 }
 
 export type TypeProps = {
-    handleSelectChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    handleSelectChange?: (newValue: SingleValue<{ value: string}>, actionMeta: ActionMeta<{ value: string }>) => void
     selectedType?: string
     label: ItemFields
     defaultValue: string | null
@@ -39,10 +40,10 @@ export type SelectProps = {
     id: string
     selectedType?: string
     label: ItemFields
-    defaultValue: string | null
-    options: Vendor[] | Category[] | Location[]
+    defaultValue: PropsValue<{ value: string}>  | string
+    options: Types[] | Category[] | Vendor[]
     onBlur: () => void
-    handleSelectChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    handleSelectChange?: (newValue: SingleValue<{ value: string}>, actionMeta: ActionMeta<{ value: string }>) => void
 }
 
 export type ItemFields =

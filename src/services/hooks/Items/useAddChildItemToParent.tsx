@@ -1,15 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import apiService from '../../api'
-import { UpdateItem } from '../../apiTypes'
-
-export const useUpdateItem = (id: string, updatedById: string) => {
+export type AddChildItemIds = {
+    itemId: string
+    childItemId: string
+}
+export const useAddChildItemToParent = () => {
     const api = apiService()
     const queryClient = useQueryClient()
+
     return useMutation({
-        mutationFn: (item: UpdateItem) => api.updateItemById(id, item, updatedById),
+        mutationFn: (ids: AddChildItemIds) => api.addChildItemToParent(ids.itemId, ids.childItemId),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['items', id],
+                queryKey: ['items'],
             })
         },
     })
