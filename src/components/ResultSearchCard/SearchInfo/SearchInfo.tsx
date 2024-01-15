@@ -8,7 +8,6 @@ import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToLi
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList'
 
 import UmAppContext from '../../../contexts/UmAppContext'
-import { useSnackBar } from '../../../hooks'
 import { useGetListById } from '../../../services/hooks/list/useGetListById'
 import CustomDialog from '../../CustomDialog/CustomDialog'
 import {
@@ -31,18 +30,14 @@ type Props = {
 }
 export const Searchinfo = ({ part, icon }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    const { snackbar } = useSnackBar()
+
     const [open, setOpen] = useState(false)
     const [alreadyAdded, setAlreadyAdded] = useState(false)
     const { listId } = useParams()
     const navigate = useNavigate()
-    const { data: list, isFetching } = useGetListById(listId!)
-    const {
-        mutate: mutateAddItemToList,
-        isSuccess: addItemSuccess,
-
-        data,
-    } = useAddItemsToList()
+    const { data: list } = useGetListById(listId!)
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
+        useAddItemsToList()
     const {
         mutate: mutateRemoveItemFromList,
         isSuccess: removeItemSuccess,
