@@ -17,17 +17,12 @@ import { useDeleteLocation } from '../../services/hooks/Locations/useDeleteLocat
 import { useUpdateLocation } from '../../services/hooks/Locations/useUpdateLocation'
 import { useDeleteVendor } from '../../services/hooks/Vendor/useDeleteVendor'
 import { useUpdateVendor } from '../../services/hooks/Vendor/useUpdateVendor'
+import { SearchType } from '../../utils/constant'
 import { AdminActions, AdminSearchCardContainer, TitleContainer } from './styles'
 
 type Props = {
     data: Category | Vendor | Location
     searchType: SearchType
-}
-
-export enum SearchType {
-    Category = 'category',
-    Vendor = 'vendor',
-    Location = 'location',
 }
 
 const AdminSearchCard = ({ data, searchType }: Props) => {

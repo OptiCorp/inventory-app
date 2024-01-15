@@ -22,7 +22,7 @@ const useLocalStorage = () => {
             return null
         }
         console.log(dataStr)
-        const data: Data = JSON.parse(dataStr)
+        const data: Data = JSON.parse(dataStr) as Data
         const now = new Date()
 
         if (data.expiry < now.getTime()) {

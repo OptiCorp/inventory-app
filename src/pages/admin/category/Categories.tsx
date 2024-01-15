@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import SearchBar from '../../../components/searchBar/SearchBar'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
-import { useDebounce } from 'usehooks-ts'
-import { useGetCategoriesInfinite } from '../../../services/hooks/Category/useGetCategoriesInfinite'
-import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
-import { Button } from '../../../components/Button/SubmitButton'
 import { useNavigate } from 'react-router-dom'
-import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
+import { useDebounce } from 'usehooks-ts'
+import { Button } from '../../../components/Button/SubmitButton'
+import AdminSearchCard from '../../../components/admin/AdminSearchCard'
+import SearchBar from '../../../components/searchBar/SearchBar'
 import { Category } from '../../../services/apiTypes'
+import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
+import { SearchType } from '../../../utils/constant'
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 
 const Categories = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')

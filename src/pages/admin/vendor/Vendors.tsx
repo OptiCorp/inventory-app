@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
-import { useDebounce } from 'usehooks-ts'
-import { useGetVendorsInfinite } from '../../../services/hooks/Vendor/useGetVendorInfinite'
-import SearchBar from '../../../components/searchBar/SearchBar'
-import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
-import { Button } from '../../../components/Button/SubmitButton'
 import { useNavigate } from 'react-router-dom'
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import { useDebounce } from 'usehooks-ts'
+import { Button } from '../../../components/Button/SubmitButton'
+import AdminSearchCard from '../../../components/admin/AdminSearchCard'
+import SearchBar from '../../../components/searchBar/SearchBar'
 import { Vendor } from '../../../services/apiTypes'
+import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
+import { SearchType } from '../../../utils/constant'
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 
 const Vendors = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')

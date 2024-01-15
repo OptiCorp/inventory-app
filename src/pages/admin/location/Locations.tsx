@@ -1,13 +1,13 @@
-import { useDebounce } from 'usehooks-ts'
-import { useGetLocationsInfinite } from '../../../services/hooks/Locations/useGetLocationsInfinite'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 import { useEffect, useState } from 'react'
-import SearchBar from '../../../components/searchBar/SearchBar'
-import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
-import { Button } from '../../../components/Button/SubmitButton'
 import { useNavigate } from 'react-router-dom'
-import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
+import { useDebounce } from 'usehooks-ts'
+import { Button } from '../../../components/Button/SubmitButton'
+import AdminSearchCard from '../../../components/admin/AdminSearchCard'
+import SearchBar from '../../../components/searchBar/SearchBar'
 import { Location } from '../../../services/apiTypes'
+import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
+import { SearchType } from '../../../utils/constant'
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
 
 const Locations = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')

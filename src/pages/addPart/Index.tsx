@@ -7,7 +7,15 @@ const AddPart = () => {
     const { methods, onSubmit, formState, control } = usePartsForm()
     return (
         <FormProvider {...methods}>
-            <StyledForm onSubmit={onSubmit} id="addPart">
+            <StyledForm
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    onSubmit().catch((error) => {
+                        console.log('Unable to add part', error)
+                    })
+                }}
+                id="addPart"
+            >
                 <Outlet />
             </StyledForm>
         </FormProvider>
