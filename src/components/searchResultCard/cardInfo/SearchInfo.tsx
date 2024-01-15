@@ -1,17 +1,17 @@
-import { format } from 'date-fns'
-import { useContext, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { format } from 'date-fns';
+import { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { Item, MutateItemList } from '../../../services/apiTypes'
+import { Item, MutateItemList } from '../../../services/apiTypes';
 
-import { useAddItemsToList } from '../../../services/hooks/Items/useAddItemsToList'
-import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList'
+import { useAddItemsToList } from '../../../services/hooks/Items/useAddItemsToList';
+import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList';
 
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useSnackBar } from '../../../hooks'
-import { useGetListById } from '../../../services/hooks/List/useGetListById'
-import CustomDialog from '../../Dialog/Index'
-import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../listCard/styles'
+import UmAppContext from '../../../contexts/UmAppContext';
+import { useSnackBar } from '../../../hooks';
+import { useGetListById } from '../../../services/hooks/List/useGetListById';
+import CustomDialog from '../../Dialog/Index';
+import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../listCard/styles';
 import {
     DescriptionParagraph,
     FirstInfoBox,
@@ -19,78 +19,78 @@ import {
     KeyWords,
     SecondInfoBox,
     ThirdInfoBox,
-} from '../styles'
+} from '../styles';
 
 type Props = {
-    part: Item
-    icon?: string
-}
+    part: Item;
+    icon?: string;
+};
 export const Searchinfo = ({ part, icon }: Props) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    const { snackbar } = useSnackBar()
-    const [open, setOpen] = useState(false)
-    const [alreadyAdded, setAlreadyAdded] = useState(false)
-    const { listId } = useParams()
-    const navigate = useNavigate()
-    const { data: list, isFetching } = useGetListById(listId!)
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { snackbar } = useSnackBar();
+    const [open, setOpen] = useState(false);
+    const [alreadyAdded, setAlreadyAdded] = useState(false);
+    const { listId } = useParams();
+    const navigate = useNavigate();
+    const { data: list, isFetching } = useGetListById(listId!);
     const {
         mutate: mutateAddItemToList,
         isSuccess: addItemSuccess,
 
         data,
-    } = useAddItemsToList()
+    } = useAddItemsToList();
     const {
         mutate: mutateRemoveItemFromList,
         isSuccess: removeItemSuccess,
         data: removeData,
-    } = useRemoveItemsFromList()
+    } = useRemoveItemsFromList();
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation()
-        const alreadyAdded = list?.items.some((item) => item.id === part.id)
+        e.stopPropagation();
+        const alreadyAdded = list?.items.some((item) => item.id === part.id);
         if (alreadyAdded) {
             {
-                setAlreadyAdded(true)
+                setAlreadyAdded(true);
             }
-            setSnackbarSeverity('error')
-            setSnackbarText('already in list')
+            setSnackbarSeverity('error');
+            setSnackbarText('already in list');
         }
         mutateAddItemToList(ids, {
             onSuccess: (data) => {
-                if (alreadyAdded) return
-                setSnackbarText(`${part.wpId} was added`)
+                if (alreadyAdded) return;
+                setSnackbarText(`${part.wpId} was added`);
 
                 if (data.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
                 }
             },
-        })
-        handleClose(e)
-    }
+        });
+        handleClose(e);
+    };
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation()
+        e.stopPropagation();
         mutateRemoveItemFromList(ids, {
             onSuccess: (removeData) => {
-                setSnackbarText(`${part.wpId} was removed`)
+                setSnackbarText(`${part.wpId} was removed`);
 
                 if (removeData.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${removeData.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${removeData.statusText}, please try again.`);
                 }
             },
-        })
-        handleClose(e)
-    }
+        });
+        handleClose(e);
+    };
     const handleClickOpen = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        setOpen(true)
-    }
+        e.stopPropagation();
+        setOpen(true);
+    };
     const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation()
+        e.stopPropagation();
 
-        setOpen(false)
-    }
+        setOpen(false);
+    };
     return (
         <>
             <FirstInfoBox>
@@ -136,7 +136,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 {location.pathname.includes('/makelist') && (
                     <StyledInfoIcon
                         onClick={() => {
-                            navigate(`/${part.id}`)
+                            navigate(`/${part.id}`);
                         }}
                     ></StyledInfoIcon>
                 )}
@@ -169,5 +169,5 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 }
             />
         </>
-    )
-}
+    );
+};

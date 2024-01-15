@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
-import { UpdateVendor } from '../../apiTypes'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '../../api';
+import { UpdateVendor } from '../../apiTypes';
 
 export const useUpdateVendor = (id: string) => {
-    const api = apiService()
-    const queryClient = useQueryClient()
+    const api = apiService();
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (vendor: UpdateVendor) => api.updateVendorById(id, vendor),
         onSuccess: () => {
@@ -13,8 +13,8 @@ export const useUpdateVendor = (id: string) => {
                     queryKey: ['vendor', id],
                 })
                 .catch((error) => {
-                    console.error('Failed to invalidate queries: ', error)
-                })
+                    console.error('Failed to invalidate queries: ', error);
+                });
         },
-    })
-}
+    });
+};

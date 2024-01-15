@@ -1,20 +1,20 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddLocation } from '../../../services/hooks/Locations/useAddLocation'
-import { LocationSchema, locationSchema } from './locationValidator'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import UmAppContext from '../../../contexts/UmAppContext';
+import { useAddLocation } from '../../../services/hooks/Locations/useAddLocation';
+import { LocationSchema, locationSchema } from './locationValidator';
 
 const defaultValues: LocationSchema = {
     name: '',
     addedById: '',
-}
+};
 
 export const useAddLocationForm = () => {
-    const { currentUser } = useContext(UmAppContext)
-    const { mutate } = useAddLocation()
-    const navigate = useNavigate()
+    const { currentUser } = useContext(UmAppContext);
+    const { mutate } = useAddLocation();
+    const navigate = useNavigate();
 
     const methods = useForm<LocationSchema>({
         resolver: zodResolver(locationSchema),
@@ -22,7 +22,7 @@ export const useAddLocationForm = () => {
             ...defaultValues,
             addedById: currentUser?.id ?? '',
         },
-    })
+    });
     const {
         handleSubmit,
         control,
@@ -30,12 +30,12 @@ export const useAddLocationForm = () => {
         resetField,
         formState: { errors },
         register,
-    } = methods
+    } = methods;
 
     const onSubmit = handleSubmit((data) => {
-        mutate(data)
-        navigate('/admin/locations')
-    })
+        mutate(data);
+        navigate('/admin/locations');
+    });
 
     return {
         methods,
@@ -44,5 +44,5 @@ export const useAddLocationForm = () => {
         reset,
         resetField,
         register,
-    }
-}
+    };
+};

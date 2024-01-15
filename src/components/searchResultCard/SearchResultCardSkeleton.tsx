@@ -1,22 +1,22 @@
-import AddIcon from '@mui/icons-material/Add'
-import { useNavigate } from 'react-router-dom'
-import { useWindowDimensions } from '../../hooks'
+import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom';
+import { useWindowDimensions } from '../../hooks';
 import {
     CompactCardSkeleton,
     FlexContainer,
     ResultCardCompactContainer,
     ResultCardContainer,
     SearchCardSkeleton,
-} from './styles'
+} from './styles';
 
 const SearchResultCardSkeleton = () => {
-    const { width } = useWindowDimensions()
+    const { width } = useWindowDimensions();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('batch')
-    }
+        navigate('batch');
+    };
     return (
         <>
             {width > 800 ? (
@@ -39,7 +39,7 @@ const SearchResultCardSkeleton = () => {
                 </ResultCardCompactContainer>
             )}
         </>
-    )
-}
+    );
+};
 
-export default SearchResultCardSkeleton
+export default SearchResultCardSkeleton;

@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import { styled } from 'styled-components';
 
 export const InputWrap = styled.div`
     display: flex;
@@ -7,26 +7,26 @@ export const InputWrap = styled.div`
     align-items: center;
 
     flex-wrap: wrap;
-`
+`;
 
 export const ErrorP = styled.span`
     color: red;
     margin-right: auto;
     margin-left: 20px;
     font-weight: 600;
-`
+`;
 export const StyledSelect = styled.select`
     option {
         cursor: pointer;
     }
 
     cursor: pointer;
-`
+`;
 export const IconContainer = styled.div`
     display: flex;
     gap: 4px;
-`
+`;
 
 export const StyledDiv = styled.div`
     margin-top: 24px;
-`
+`;

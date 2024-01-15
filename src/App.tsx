@@ -1,42 +1,42 @@
-import { useIsAuthenticated } from '@azure/msal-react'
+import { useIsAuthenticated } from '@azure/msal-react';
 import {
     Route,
     RouterProvider,
     createBrowserRouter,
     createRoutesFromElements,
-} from 'react-router-dom'
-import { Login } from './pages/login'
+} from 'react-router-dom';
+import { Login } from './pages/login';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import TopBar from './components/topBar/TopBar.tsx'
-import { UmAppContextProvider } from './contexts/UmAppContext'
-import AddPart from './pages/addPart/Index'
-import { AddPartFormm } from './pages/addPart/addPartForm/AddPartForm'
-import BatchForm from './pages/addPart/batch/BatchForm'
-import CheckForm from './pages/addPart/check/CheckForm'
-import Upload from './pages/addPart/documentation/Upload'
-import RecentlyAdded from './pages/addPart/recentlyAdded/RecentlyAdded'
-import Categories from './pages/admin/category/Categories.tsx'
-import Locations from './pages/admin/location/Locations.tsx'
-import Vendors from './pages/admin/vendor/Vendors.tsx'
-import MakeList from './pages/list/MakeList'
-import ListDetails from './pages/listDetails/ListDetails.tsx'
-import PartDetails from './pages/partDetails/Index'
-import Search from './pages/search/Search'
-import GlobalStyles from './style/GlobalStyles'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import TopBar from './components/topBar/TopBar.tsx';
+import { UmAppContextProvider } from './contexts/UmAppContext';
+import AddPart from './pages/addPart/Index';
+import { AddPartFormm } from './pages/addPart/addPartForm/AddPartForm';
+import BatchForm from './pages/addPart/batch/BatchForm';
+import CheckForm from './pages/addPart/check/CheckForm';
+import Upload from './pages/addPart/documentation/Upload';
+import RecentlyAdded from './pages/addPart/recentlyAdded/RecentlyAdded';
+import Categories from './pages/admin/category/Categories.tsx';
+import Locations from './pages/admin/location/Locations.tsx';
+import Vendors from './pages/admin/vendor/Vendors.tsx';
+import MakeList from './pages/list/MakeList';
+import ListDetails from './pages/listDetails/ListDetails.tsx';
+import PartDetails from './pages/partDetails/Index';
+import Search from './pages/search/Search';
+import GlobalStyles from './style/GlobalStyles';
 
-import { useSnackBar } from './hooks/useSnackbar.tsx'
-import { useWindowDimensions } from './hooks/useWindowDimensions.ts'
-import AddCategory from './pages/admin/category/AddCategory.tsx'
-import AddLocation from './pages/admin/location/AddLocation.tsx'
-import AddVendor from './pages/admin/vendor/AddVendor.tsx'
-import Index from './pages/listDetails/Phone/Index.tsx'
+import { useSnackBar } from './hooks/useSnackbar.tsx';
+import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
+import AddCategory from './pages/admin/category/AddCategory.tsx';
+import AddLocation from './pages/admin/location/AddLocation.tsx';
+import AddVendor from './pages/admin/vendor/AddVendor.tsx';
+import Index from './pages/listDetails/Phone/Index.tsx';
 
 function App() {
-    const isAuthenticated = useIsAuthenticated()
-    const queryClient = new QueryClient()
-    const { width } = useWindowDimensions()
-    const { snackbar } = useSnackBar()
+    const isAuthenticated = useIsAuthenticated();
+    const queryClient = new QueryClient();
+    const { width } = useWindowDimensions();
+    const { snackbar } = useSnackBar();
 
     const router = createBrowserRouter(
         createRoutesFromElements(
@@ -70,7 +70,7 @@ function App() {
                 </Route>
             </Route>
         )
-    )
+    );
 
     return (
         <QueryClientProvider client={queryClient}>
@@ -86,7 +86,7 @@ function App() {
                 {!isAuthenticated && <Login />}
             </div>
         </QueryClientProvider>
-    )
+    );
 }
 
-export default App
+export default App;

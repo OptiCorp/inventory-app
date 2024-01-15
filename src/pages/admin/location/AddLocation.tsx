@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { ErrorMessage } from '@hookform/error-message'
-import { FormProvider } from 'react-hook-form'
-import { Button } from '../../../components/Button/SubmitButton'
-import { COLORS } from '../../../style/GlobalStyles'
-import { useAddLocationForm } from '../hooks/useAddLocationForm'
+import { ErrorMessage } from '@hookform/error-message';
+import { FormProvider } from 'react-hook-form';
+import { Button } from '../../../components/Button/SubmitButton';
+import { COLORS } from '../../../style/GlobalStyles';
+import { useAddLocationForm } from '../hooks/useAddLocationForm';
 import {
     AdminInput,
     ErrorP,
@@ -11,10 +11,10 @@ import {
     InputWrap,
     StyledForm,
     SubmitButtonContainer,
-} from '../styles'
+} from '../styles';
 
 const AddLocation = () => {
-    const { methods, onSubmit, register } = useAddLocationForm()
+    const { methods, onSubmit, register } = useAddLocationForm();
     return (
         <FormProvider {...methods}>
             <FormContainer>
@@ -40,7 +40,7 @@ const AddLocation = () => {
                 </StyledForm>
             </FormContainer>
         </FormProvider>
-    )
-}
+    );
+};
 
-export default AddLocation
+export default AddLocation;

@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api.ts'
-import { MutateItemList } from '../../apiTypes.ts'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '../../api.ts';
+import { MutateItemList } from '../../apiTypes.ts';
 
 export const useRemoveItemsFromList = () => {
-    const api = apiService()
-    const queryClient = useQueryClient()
+    const api = apiService();
+    const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (ids: MutateItemList) => api.removeItemsFromList(ids.listId, ids.itemId),
@@ -12,5 +12,5 @@ export const useRemoveItemsFromList = () => {
             queryClient.invalidateQueries({
                 queryKey: ['list'],
             }),
-    })
-}
+    });
+};

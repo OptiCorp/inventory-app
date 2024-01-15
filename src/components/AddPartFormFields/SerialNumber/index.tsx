@@ -1,15 +1,15 @@
-import { ErrorMessage } from '@hookform/error-message'
-import { useFormContext } from 'react-hook-form'
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
-import { ToolTip } from '../../ToolTip'
-import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles'
-import { StyledDiv } from '../Category/styles.ts'
+import { ErrorMessage } from '@hookform/error-message';
+import { useFormContext } from 'react-hook-form';
+import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
+import { ToolTip } from '../../ToolTip';
+import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles';
+import { StyledDiv } from '../Category/styles.ts';
 
 export const SerialNumber = () => {
     const {
         register,
         formState: { errors },
-    } = useFormContext()
+    } = useFormContext();
     return (
         <StyledDiv>
             <InputWrap>
@@ -30,5 +30,5 @@ export const SerialNumber = () => {
                 {...register('serialNumber')}
             />
         </StyledDiv>
-    )
-}
+    );
+};

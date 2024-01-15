@@ -1,8 +1,8 @@
-import { Box, ClickAwayListener, TextField } from '@mui/material'
-import { useFormContext } from 'react-hook-form'
-import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles'
-import { EditableFieldProps } from './types'
-import { useState } from 'react'
+import { Box, ClickAwayListener, TextField } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
+import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles';
+import { EditableFieldProps } from './types';
+import { useState } from 'react';
 
 const EditableField = ({
     multiline,
@@ -14,19 +14,19 @@ const EditableField = ({
     const {
         register,
         formState: { errors },
-    } = useFormContext()
-    const [open, setOpen] = useState(false)
+    } = useFormContext();
+    const [open, setOpen] = useState(false);
 
-    const fieldErrorMessage = errors[label]?.message as string
+    const fieldErrorMessage = errors[label]?.message as string;
 
     const handleClickAway = () => {
         if (!fieldErrorMessage) {
-            setOpen(false)
+            setOpen(false);
         }
-    }
+    };
     const handleEditClick = () => {
-        setOpen(true)
-    }
+        setOpen(true);
+    };
 
     return (
         <TextBoxWrap>
@@ -43,7 +43,7 @@ const EditableField = ({
                         </label>
                         <Edit
                             onClick={() => {
-                                handleEditClick()
+                                handleEditClick();
                             }}
                         />
                     </LabelContainer>
@@ -58,7 +58,7 @@ const EditableField = ({
                                 onBlur,
                             })}
                             onChange={(e) => {
-                                handleInputChange?.(e.target.value)
+                                handleInputChange?.(e.target.value);
                             }}
                             defaultValue={defaultValue}
                             multiline={multiline}
@@ -70,7 +70,7 @@ const EditableField = ({
                 </Box>
             </ClickAwayListener>
         </TextBoxWrap>
-    )
-}
+    );
+};
 
-export default EditableField
+export default EditableField;

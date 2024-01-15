@@ -1,15 +1,15 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
-import { Icon, SearchBarContainer, StyledInput } from './styles'
-import { useWindowDimensions } from '../../hooks'
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Icon, SearchBarContainer, StyledInput } from './styles';
+import { useWindowDimensions } from '../../hooks';
 
 type Props = {
-    setSearchTerm: Dispatch<SetStateAction<string>>
-    searchTerm: string
-    placeholder: string
-}
+    setSearchTerm: Dispatch<SetStateAction<string>>;
+    searchTerm: string;
+    placeholder: string;
+};
 
 const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
-    const { width } = useWindowDimensions()
+    const { width } = useWindowDimensions();
 
     return (
         <>
@@ -26,7 +26,7 @@ const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
                 />
             </SearchBarContainer>
         </>
-    )
-}
+    );
+};
 
-export default SearchBar
+export default SearchBar;

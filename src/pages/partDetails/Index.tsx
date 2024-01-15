@@ -1,22 +1,22 @@
-import { Breadcrumbs } from '@mui/material'
-import { FormProvider } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
-import { ExampleUpload } from '../../components/Upload/Upload'
-import { useGetItemById } from '../../services/hooks/Items/useGetItemById'
-import { Comments } from './Comments/Comments'
-import { Hierarchy } from './Hierarchy'
-import { Log } from './Log'
-import PartInfo from './PartInfo/PartInfo'
-import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
-import { useUpdatePartForm } from './useUpdatePartForm'
+import { Breadcrumbs } from '@mui/material';
+import { FormProvider } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ExampleUpload } from '../../components/Upload/Upload';
+import { useGetItemById } from '../../services/hooks/Items/useGetItemById';
+import { Comments } from './Comments/Comments';
+import { Hierarchy } from './Hierarchy';
+import { Log } from './Log';
+import PartInfo from './PartInfo/PartInfo';
+import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles';
+import { useUpdatePartForm } from './useUpdatePartForm';
 
 const PartDetails = () => {
-    const { id } = useParams() as { id: string }
-    const { data: item, isLoading } = useGetItemById(id)
-    const { methods } = useUpdatePartForm(item!)
-    const navigate = useNavigate()
-    if (!item) return null
-    console.log(item)
+    const { id } = useParams() as { id: string };
+    const { data: item, isLoading } = useGetItemById(id);
+    const { methods } = useUpdatePartForm(item!);
+    const navigate = useNavigate();
+    if (!item) return null;
+    console.log(item);
     return (
         <StyledContainerDiv>
             {item.parentId && (
@@ -42,7 +42,7 @@ const PartDetails = () => {
                 <Log item={item} />
             </FormProvider>
         </StyledContainerDiv>
-    )
-}
+    );
+};
 
-export default PartDetails
+export default PartDetails;

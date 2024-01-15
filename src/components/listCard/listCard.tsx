@@ -1,34 +1,34 @@
-import { format } from 'date-fns'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { List } from '../../services/apiTypes'
-import { useDeleteList } from '../../services/hooks/List/useDeleteList.tsx'
-import CustomDialog from '../Dialog/Index.tsx'
-import { ListWrapper, StyledDeleteIcon, StyledTitle } from './styles'
+import { format } from 'date-fns';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { List } from '../../services/apiTypes';
+import { useDeleteList } from '../../services/hooks/List/useDeleteList.tsx';
+import CustomDialog from '../Dialog/Index.tsx';
+import { ListWrapper, StyledDeleteIcon, StyledTitle } from './styles';
 
 type Props = {
-    part: List
-}
+    part: List;
+};
 
 const ListCard = ({ part }: Props) => {
-    const navigate = useNavigate()
-    const { mutate, isSuccess } = useDeleteList()
-    const [open, setOpen] = useState(false)
+    const navigate = useNavigate();
+    const { mutate, isSuccess } = useDeleteList();
+    const [open, setOpen] = useState(false);
 
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.stopPropagation()
-        setOpen(true)
-    }
+        e.stopPropagation();
+        setOpen(true);
+    };
 
     const handleClose = () => {
-        setOpen(false)
-    }
+        setOpen(false);
+    };
 
     const handleDelete = () => {
-        setOpen(true)
-        mutate(part.id)
-        handleClose()
-    }
+        setOpen(true);
+        mutate(part.id);
+        handleClose();
+    };
 
     return (
         <>
@@ -57,7 +57,7 @@ const ListCard = ({ part }: Props) => {
                 SubmitButtonOnClick={handleDelete}
             />
         </>
-    )
-}
+    );
+};
 
-export default ListCard
+export default ListCard;

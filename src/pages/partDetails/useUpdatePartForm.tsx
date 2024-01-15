@@ -1,8 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useLocation } from 'react-router'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { Item } from '../../services/apiTypes'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useLocation } from 'react-router';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { Item } from '../../services/apiTypes';
 
 const partInfoSchema = z.object({
     id: z.string(),
@@ -14,16 +14,16 @@ const partInfoSchema = z.object({
         .max(20, 'Product number must be at most 20 characters'),
     description: z.string().max(450, 'Description must be at most 450 characters'),
     parentId: z.string().nullish(),
-})
-export type PartInfoSchema = z.infer<typeof partInfoSchema>
+});
+export type PartInfoSchema = z.infer<typeof partInfoSchema>;
 
 export const useUpdatePartForm = (item: Item) => {
-    const appLocation = useLocation()
+    const appLocation = useLocation();
 
     const methods = useForm<PartInfoSchema>({
         resolver: zodResolver(partInfoSchema),
         values: item,
-    })
+    });
 
     const {
         handleSubmit,
@@ -32,7 +32,7 @@ export const useUpdatePartForm = (item: Item) => {
         resetField,
         formState: { errors },
         register,
-    } = methods
+    } = methods;
 
     return {
         methods,
@@ -43,5 +43,5 @@ export const useUpdatePartForm = (item: Item) => {
         reset,
         formState: { errors },
         resetField,
-    }
-}
+    };
+};

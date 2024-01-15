@@ -1,11 +1,11 @@
-import { useFormContext } from 'react-hook-form'
-import { InputWrap, StyledDiv, StyledTextArea } from './styles'
+import { useFormContext } from 'react-hook-form';
+import { InputWrap, StyledDiv, StyledTextArea } from './styles';
 
 export const Comment = () => {
     const {
         register,
         formState: { errors },
-    } = useFormContext()
+    } = useFormContext();
     return (
         <StyledDiv>
             <InputWrap>
@@ -13,5 +13,5 @@ export const Comment = () => {
             </InputWrap>
             <StyledTextArea {...register('comment')} rows={5} cols={40} maxLength={450} />
         </StyledDiv>
-    )
-}
+    );
+};

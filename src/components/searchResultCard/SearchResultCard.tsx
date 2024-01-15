@@ -1,15 +1,15 @@
-import { useNavigate } from 'react-router-dom'
-import { Item } from '../../services/apiTypes'
-import { Searchinfo } from './cardInfo/SearchInfo'
-import { ResultCardContainer, SearchCard } from './styles'
+import { useNavigate } from 'react-router-dom';
+import { Item } from '../../services/apiTypes';
+import { Searchinfo } from './cardInfo/SearchInfo';
+import { ResultCardContainer, SearchCard } from './styles';
 
 type Props = {
-    part: Item
-    icon?: string
-}
+    part: Item;
+    icon?: string;
+};
 
 const SearchResultCard = ({ part, icon }: Props) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
         <>
@@ -18,7 +18,7 @@ const SearchResultCard = ({ part, icon }: Props) => {
                     cursor: `${location.pathname === `/search` ? `pointer` : null}`,
                 }}
                 onClick={() => {
-                    location.pathname === '/search' ? navigate(`/${part.id}`) : null
+                    location.pathname === '/search' ? navigate(`/${part.id}`) : null;
                 }}
             >
                 <SearchCard title="">
@@ -26,7 +26,7 @@ const SearchResultCard = ({ part, icon }: Props) => {
                 </SearchCard>
             </ResultCardContainer>
         </>
-    )
-}
+    );
+};
 
-export default SearchResultCard
+export default SearchResultCard;

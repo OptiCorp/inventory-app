@@ -1,9 +1,9 @@
-import { Item } from '../../../services/apiTypes'
-import { FaPen } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
-import { AssemblyList, Container, ListItem, PartList } from './styles'
+import { Item } from '../../../services/apiTypes';
+import { FaPen } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { AssemblyList, Container, ListItem, PartList } from './styles';
 export const Hierarchy = ({ item }: { item: Item }) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
         <>
@@ -12,7 +12,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                 <PartList>
                     <ListItem
                         onClick={() => {
-                            navigate(`/${item?.parent?.id}`)
+                            navigate(`/${item?.parent?.id}`);
                         }}
                     >
                         {item?.parent?.id ?? 'No known parts'}
@@ -27,7 +27,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                             {item?.children?.map((x) => (
                                 <ListItem
                                     onClick={() => {
-                                        navigate(`/${x.id}/${x.wpId}`)
+                                        navigate(`/${x.id}/${x.wpId}`);
                                     }}
                                 >
                                     {x?.id ?? ''}
@@ -41,5 +41,5 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                 </AssemblyList>
             </Container>
         </>
-    )
-}
+    );
+};

@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
-import { UpdateItem } from '../../apiTypes'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '../../api';
+import { UpdateItem } from '../../apiTypes';
 
 export const useUpdateItem = (id: string, updatedById: string) => {
-    const api = apiService()
-    const queryClient = useQueryClient()
+    const api = apiService();
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (item: UpdateItem) => api.updateItemById(id, item, updatedById),
         onSuccess: () => {
@@ -13,8 +13,8 @@ export const useUpdateItem = (id: string, updatedById: string) => {
                     queryKey: ['getItemById', id],
                 })
                 .catch((error) => {
-                    console.error('Failed to invalidate queries: ', error)
-                })
+                    console.error('Failed to invalidate queries: ', error);
+                });
         },
-    })
-}
+    });
+};

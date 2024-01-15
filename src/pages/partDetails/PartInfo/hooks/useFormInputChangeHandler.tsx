@@ -1,6 +1,6 @@
-import { useCallback } from 'react'
-import { SetState } from '../types'
-import { Item, UpdateItem } from '../../../../services/apiTypes'
+import { useCallback } from 'react';
+import { SetState } from '../types';
+import { Item, UpdateItem } from '../../../../services/apiTypes';
 
 export const useFormInputChangeHandler = () => {
     const handleInputChange = useCallback(
@@ -9,10 +9,10 @@ export const useFormInputChangeHandler = () => {
                 return {
                     ...prev,
                     [fieldName]: value,
-                }
-            })
+                };
+            });
         },
         []
-    )
-    return handleInputChange
-}
+    );
+    return handleInputChange;
+};

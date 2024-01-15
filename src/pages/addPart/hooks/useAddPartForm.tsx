@@ -1,12 +1,12 @@
-import { useForm } from 'react-hook-form'
-import { useLocation } from 'react-router'
+import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router';
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext } from 'react'
-import UmAppContext from '../../../contexts/UmAppContext'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
-import { useAddItems } from '../../../services/hooks/Items/useAddItem'
-import { PartSchema, partSchema } from './partValidator'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useContext } from 'react';
+import UmAppContext from '../../../contexts/UmAppContext';
+import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+import { useAddItems } from '../../../services/hooks/Items/useAddItem';
+import { PartSchema, partSchema } from './partValidator';
 
 const defaultValues: PartSchema = {
     wpId: '',
@@ -20,14 +20,14 @@ const defaultValues: PartSchema = {
     comment: '',
     addedById: '',
     uniqueWpId: false,
-}
+};
 
 export const usePartsForm = () => {
-    const { currentUser } = useContext(UmAppContext)
-    const { mutate } = useAddItems()
-    const { deleteLocalStorage } = useLocalStorage()
+    const { currentUser } = useContext(UmAppContext);
+    const { mutate } = useAddItems();
+    const { deleteLocalStorage } = useLocalStorage();
 
-    const appLocation = useLocation()
+    const appLocation = useLocation();
 
     const methods = useForm<PartSchema>({
         resolver: zodResolver(partSchema),
@@ -35,7 +35,7 @@ export const usePartsForm = () => {
             ...defaultValues,
             addedById: currentUser?.id ?? '',
         },
-    })
+    });
     const {
         handleSubmit,
         control,
@@ -43,40 +43,40 @@ export const usePartsForm = () => {
         resetField,
         formState: { errors },
         register,
-    } = methods
+    } = methods;
 
     const onSubmit = handleSubmit((data) => {
         if (data.files) {
-            const files = [...data.files]
-            delete data.files
+            const files = [...data.files];
+            delete data.files;
 
             mutate(
                 { items: [data], files: files },
                 {
                     onSuccess: () => {
-                        deleteLocalStorage('batch-data')
-                        deleteLocalStorage('checks-check')
-                        deleteLocalStorage('checks-description')
-                        deleteLocalStorage('upload-check')
-                        reset()
+                        deleteLocalStorage('batch-data');
+                        deleteLocalStorage('checks-check');
+                        deleteLocalStorage('checks-description');
+                        deleteLocalStorage('upload-check');
+                        reset();
                     },
                 }
-            )
+            );
         } else {
             mutate(
                 { items: [data], files: undefined },
                 {
                     onSuccess: () => {
-                        deleteLocalStorage('batch-data')
-                        deleteLocalStorage('checks-check')
-                        deleteLocalStorage('checks-description')
-                        deleteLocalStorage('upload-check')
-                        reset()
+                        deleteLocalStorage('batch-data');
+                        deleteLocalStorage('checks-check');
+                        deleteLocalStorage('checks-description');
+                        deleteLocalStorage('upload-check');
+                        reset();
                     },
                 }
-            )
+            );
         }
-    })
+    });
 
     return {
         methods,
@@ -88,5 +88,5 @@ export const usePartsForm = () => {
         reset,
         formState: { errors },
         resetField,
-    }
-}
+    };
+};

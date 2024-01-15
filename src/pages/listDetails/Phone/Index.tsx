@@ -1,12 +1,12 @@
-import { useParams } from 'react-router'
-import TabComponent from '../../../components/Tabs/Tabs'
-import { useGetListById } from '../../../services/hooks/List/useGetListById'
-import { AddMoreCompact } from './AddMore'
-import { PhoneList } from './List/PhoneList'
+import { useParams } from 'react-router';
+import TabComponent from '../../../components/Tabs/Tabs';
+import { useGetListById } from '../../../services/hooks/List/useGetListById';
+import { AddMoreCompact } from './AddMore';
+import { PhoneList } from './List/PhoneList';
 
 const Index = () => {
-    const { listId } = useParams()
-    const { data: list, isFetching } = useGetListById(listId!)
+    const { listId } = useParams();
+    const { data: list, isFetching } = useGetListById(listId!);
 
     return (
         <>
@@ -23,7 +23,7 @@ const Index = () => {
                 ]}
             />
         </>
-    )
-}
+    );
+};
 
-export default Index
+export default Index;

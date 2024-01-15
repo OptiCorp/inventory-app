@@ -1,10 +1,10 @@
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import { Button } from '@mui/material'
-import { useEffect, useRef, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { COLORS } from '../../style/GlobalStyles'
-import { Button as SubmitButton } from '../Button/SubmitButton'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { Button } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { COLORS } from '../../style/GlobalStyles';
+import { Button as SubmitButton } from '../Button/SubmitButton';
 import {
     Container,
     DocumentName,
@@ -13,30 +13,30 @@ import {
     FileWrapper,
     IconWrapper,
     Wrapper,
-} from './styles'
+} from './styles';
 
 const AddPartUpload = () => {
-    const { register, setValue } = useFormContext()
-    const [files, setFiles] = useState<File[]>()
-    const documentationField = register('files')
-    const inputFile = useRef<HTMLInputElement | null>(null)
+    const { register, setValue } = useFormContext();
+    const [files, setFiles] = useState<File[]>();
+    const documentationField = register('files');
+    const inputFile = useRef<HTMLInputElement | null>(null);
 
     const handleFileDownload = (file: File) => {
-        const downloadLink = document.createElement('a')
-        downloadLink.download = `${file.name}`
-        downloadLink.href = URL.createObjectURL(file)
-        downloadLink.click()
-    }
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `${file.name}`;
+        downloadLink.href = URL.createObjectURL(file);
+        downloadLink.click();
+    };
 
     const handleFileRemoval = (index: number) => {
-        const filesCopy = [...files!]
-        filesCopy.splice(index, 1)
-        setFiles(filesCopy)
-    }
+        const filesCopy = [...files!];
+        filesCopy.splice(index, 1);
+        setFiles(filesCopy);
+    };
 
     useEffect(() => {
-        setValue('files', files)
-    }, [files])
+        setValue('files', files);
+    }, [files]);
 
     return (
         <>
@@ -95,18 +95,18 @@ const AddPartUpload = () => {
                         style={{ display: 'none' }}
                         {...documentationField}
                         onChange={(e) => {
-                            setFiles([...e.target.files!])
+                            setFiles([...e.target.files!]);
                         }}
                         ref={(e) => {
-                            documentationField.ref(e)
-                            inputFile.current = e
+                            documentationField.ref(e);
+                            inputFile.current = e;
                         }}
                     />
                     UPLOAD NEW
                 </SubmitButton>
             </Container>
         </>
-    )
-}
+    );
+};
 
-export default AddPartUpload
+export default AddPartUpload;

@@ -1,13 +1,13 @@
-import { CSSProperties } from 'react'
-import Select from 'react-select'
-import { FormOption } from '../../../services/apiTypes.ts'
-import { COLORS } from '../../../style/GlobalStyles.ts'
+import { CSSProperties } from 'react';
+import Select from 'react-select';
+import { FormOption } from '../../../services/apiTypes.ts';
+import { COLORS } from '../../../style/GlobalStyles.ts';
 
 type Props = {
-    options: FormOption[]
-    setState: (value: FormOption) => void
-    state: FormOption | null
-}
+    options: FormOption[];
+    setState: (value: FormOption) => void;
+    state: FormOption | null;
+};
 
 export const FormSelect = ({ options, setState, state }: Props) => {
     const customStyles = {
@@ -26,7 +26,7 @@ export const FormSelect = ({ options, setState, state }: Props) => {
             width: '70%',
             maxWidth: '500px',
         }),
-    }
+    };
 
     return (
         <div style={{ marginTop: '5px', marginBottom: '10px' }}>
@@ -38,5 +38,5 @@ export const FormSelect = ({ options, setState, state }: Props) => {
                 styles={customStyles}
             />
         </div>
-    )
-}
+    );
+};

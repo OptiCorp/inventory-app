@@ -1,20 +1,20 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddCategory } from '../../../services/hooks/Category/useAddCategory'
-import { CategorySchema, categorySchema } from './categoryValidator'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import UmAppContext from '../../../contexts/UmAppContext';
+import { useAddCategory } from '../../../services/hooks/Category/useAddCategory';
+import { CategorySchema, categorySchema } from './categoryValidator';
 
 const defaultValues: CategorySchema = {
     name: '',
     addedById: '',
-}
+};
 
 export const useAddCategoryForm = () => {
-    const navigate = useNavigate()
-    const { currentUser } = useContext(UmAppContext)
-    const { mutate } = useAddCategory()
+    const navigate = useNavigate();
+    const { currentUser } = useContext(UmAppContext);
+    const { mutate } = useAddCategory();
 
     const methods = useForm<CategorySchema>({
         resolver: zodResolver(categorySchema),
@@ -22,7 +22,7 @@ export const useAddCategoryForm = () => {
             ...defaultValues,
             addedById: currentUser?.id ?? '',
         },
-    })
+    });
     const {
         handleSubmit,
         control,
@@ -30,12 +30,12 @@ export const useAddCategoryForm = () => {
         resetField,
         formState: { errors },
         register,
-    } = methods
+    } = methods;
 
     const onSubmit = handleSubmit((data) => {
-        mutate(data)
-        navigate('/admin/categories')
-    })
+        mutate(data);
+        navigate('/admin/categories');
+    });
 
     return {
         methods,
@@ -44,5 +44,5 @@ export const useAddCategoryForm = () => {
         reset,
         resetField,
         register,
-    }
-}
+    };
+};

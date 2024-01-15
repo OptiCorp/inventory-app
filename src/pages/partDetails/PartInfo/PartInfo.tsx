@@ -1,52 +1,52 @@
-import { useContext, useState } from 'react'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useSnackBar } from '../../../hooks'
-import type { Item } from '../../../services/apiTypes'
-import { Container, PartInfoForm } from './styles'
-import { TypeField } from './TypeField'
-import { useGetCategories } from '../../../services/hooks/Category/useGetCategories'
-import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations'
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
-import EditableField from './EditableField'
-import { SelectField } from './SelectField'
+import { useContext, useState } from 'react';
+import UmAppContext from '../../../contexts/UmAppContext';
+import { useSnackBar } from '../../../hooks';
+import type { Item } from '../../../services/apiTypes';
+import { useGetCategories } from '../../../services/hooks/Category/useGetCategories';
+import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations';
+import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors';
+import EditableField from './EditableField';
+import { SelectField } from './SelectField';
+import { TypeField } from './TypeField';
 import {
     useFormBlurInputHandler,
     useFormBlurSelectHandler,
     useFormInputChangeHandler,
     useFormSelectChangeHandler,
-} from './hooks'
+} from './hooks';
+import { Container, PartInfoForm } from './styles';
 
 type Props = {
-    item: Item
-    isLoading: boolean
-}
+    item: Item;
+    isLoading: boolean;
+};
 
 const PartInfo = ({ item, isLoading }: Props) => {
-    const internalItem = { ...item }
-    const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors()
-    const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations()
-    const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories()
-    const [selectedType, setSelectedType] = useState<typeof item.type>(item.type)
-    const [selectedVendorId, setSelectedVendorId] = useState<typeof item.vendorId>(item.vendorId)
+    const internalItem = { ...item };
+    const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors();
+    const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations();
+    const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories();
+    const [selectedType, setSelectedType] = useState<typeof item.type>(item.type);
+    const [selectedVendorId, setSelectedVendorId] = useState<typeof item.vendorId>(item.vendorId);
     const [selectedLocationId, setSelectedLocationId] = useState<typeof item.locationId>(
         item.locationId
-    )
+    );
     const [selectedCategoryId, setSelectedCategoryId] = useState<typeof item.categoryId>(
         item.categoryId
-    )
-    const [updatedItem, setUpdatedItem] = useState({ ...item })
-    const blurCategorySelectField = useFormBlurSelectHandler(internalItem, categories)
-    const blurLocationsSelectField = useFormBlurSelectHandler(internalItem, locations)
-    const blurVendorsSelectField = useFormBlurSelectHandler(internalItem, vendors)
-    const blurSelectField = useFormBlurSelectHandler(internalItem)
-    const blurInputField = useFormBlurInputHandler(internalItem)
-    const selectChange = useFormSelectChangeHandler()
-    const inputChange = useFormInputChangeHandler()
-    const { snackbar } = useSnackBar()
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
+    );
+    const [updatedItem, setUpdatedItem] = useState({ ...item });
+    const blurCategorySelectField = useFormBlurSelectHandler(internalItem, categories);
+    const blurLocationsSelectField = useFormBlurSelectHandler(internalItem, locations);
+    const blurVendorsSelectField = useFormBlurSelectHandler(internalItem, vendors);
+    const blurSelectField = useFormBlurSelectHandler(internalItem);
+    const blurInputField = useFormBlurInputHandler(internalItem);
+    const selectChange = useFormSelectChangeHandler();
+    const inputChange = useFormInputChangeHandler();
+    const { snackbar } = useSnackBar();
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
     if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
-        return <p>Loading.. </p>
+        return <p>Loading.. </p>;
     }
 
     return (
@@ -172,7 +172,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
             {snackbar}
         </PartInfoForm>
-    )
-}
+    );
+};
 
-export default PartInfo
+export default PartInfo;

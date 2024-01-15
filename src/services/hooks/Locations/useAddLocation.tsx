@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
-import { AddLocation } from '../../apiTypes'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '../../api';
+import { AddLocation } from '../../apiTypes';
 
 export const useAddLocation = () => {
-    const api = apiService()
-    const queryClient = useQueryClient()
+    const api = apiService();
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (location: AddLocation) => api.addLocation(location),
         onSuccess: () => {
@@ -13,8 +13,8 @@ export const useAddLocation = () => {
                     queryKey: ['locations'],
                 })
                 .catch((error) => {
-                    console.error('Failed to invalidate queries: ', error)
-                })
+                    console.error('Failed to invalidate queries: ', error);
+                });
         },
-    })
-}
+    });
+};

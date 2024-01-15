@@ -1,15 +1,15 @@
-import { format } from 'date-fns'
-import { useContext, useState } from 'react'
+import { format } from 'date-fns';
+import { useContext, useState } from 'react';
 
-import { Chip, TextField } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-import CustomDialog from '../../components/Dialog/Index'
-import UmAppContext from '../../contexts/UmAppContext'
-import { useSnackBar, useWindowDimensions } from '../../hooks'
-import { List, UpdateList } from '../../services/apiTypes'
-import { useDeleteList } from '../../services/hooks/List/useDeleteList'
-import { useUpdateList } from '../../services/hooks/List/useUpdateList'
-import { DeleteIcon, EditIcon } from './Sidelist/styles'
+import { Chip, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import CustomDialog from '../../components/Dialog/Index';
+import UmAppContext from '../../contexts/UmAppContext';
+import { useSnackBar, useWindowDimensions } from '../../hooks';
+import { List, UpdateList } from '../../services/apiTypes';
+import { useDeleteList } from '../../services/hooks/List/useDeleteList';
+import { useUpdateList } from '../../services/hooks/List/useUpdateList';
+import { DeleteIcon, EditIcon } from './Sidelist/styles';
 import {
     FlexContainer,
     Header,
@@ -19,77 +19,77 @@ import {
     StyledDate,
     Wrapper,
     WrapperCompact,
-} from './styles'
+} from './styles';
 
 type Props = {
-    list: List
-}
+    list: List;
+};
 
 export const ListHeader = ({ list }: Props) => {
-    const { width } = useWindowDimensions()
+    const { width } = useWindowDimensions();
 
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    const [title, setTitle] = useState(list.title)
-    const [open, setOpen] = useState(false)
-    const [openEdit, setOpenEdit] = useState(false)
-    const { mutate, isSuccess, status, data: deleteData } = useDeleteList()
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const [title, setTitle] = useState(list.title);
+    const [open, setOpen] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
+    const { mutate, isSuccess, status, data: deleteData } = useDeleteList();
     const {
         mutate: updateList,
         status: listUpdateStatus,
         isSuccess: listSuccess,
-    } = useUpdateList(list.id)
-    const { snackbar } = useSnackBar()
+    } = useUpdateList(list.id);
+    const { snackbar } = useSnackBar();
 
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.stopPropagation()
-        setOpen(true)
-    }
+        e.stopPropagation();
+        setOpen(true);
+    };
 
     const handleOpenEdit = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.stopPropagation()
-        setOpenEdit(true)
-    }
+        e.stopPropagation();
+        setOpenEdit(true);
+    };
 
     const handleEdit = () => {
-        setOpenEdit(true)
-        const newTitle: UpdateList = { id: list.id, title: title ?? list.title }
+        setOpenEdit(true);
+        const newTitle: UpdateList = { id: list.id, title: title ?? list.title };
         updateList(newTitle, {
             onSuccess: (data) => {
-                setSnackbarText(`${list.title} was changed to ${title}`)
+                setSnackbarText(`${list.title} was changed to ${title}`);
                 if (data.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
                 }
             },
-        })
+        });
 
-        handleEditClose()
-    }
+        handleEditClose();
+    };
     const handleEditClose = () => {
-        setOpenEdit(false)
-    }
+        setOpenEdit(false);
+    };
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleClose = () => {
-        setOpen(false)
-    }
+        setOpen(false);
+    };
 
     const handleDelete = () => {
-        setOpen(true)
+        setOpen(true);
         mutate(list.id, {
             onSuccess: (deleteData) => {
-                handleClose()
+                handleClose();
 
-                setSnackbarText(`${list.title} was deleted`)
-                navigate('/makelist')
+                setSnackbarText(`${list.title} was deleted`);
+                navigate('/makelist');
                 if (deleteData.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${deleteData.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${deleteData.statusText}, please try again.`);
                 }
             },
-        })
-    }
+        });
+    };
 
     return (
         <>
@@ -166,5 +166,5 @@ export const ListHeader = ({ list }: Props) => {
             </CustomDialog>
             {snackbar}
         </>
-    )
-}
+    );
+};

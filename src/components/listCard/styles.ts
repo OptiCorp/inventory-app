@@ -1,9 +1,9 @@
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import InfoIcon from '@mui/icons-material/Info'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import { styled } from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import InfoIcon from '@mui/icons-material/Info';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { styled } from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 export const ListWrapper = styled.div`
     position: relative;
     padding: 8px;
@@ -15,13 +15,13 @@ export const ListWrapper = styled.div`
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
     width: 95%;
     max-width: 450px;
-`
+`;
 
 export const StyledTitle = styled.h2`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-`
+`;
 
 export const StyledDeleteIcon = styled(DeleteForeverIcon)`
     color: ${COLORS.primary};
@@ -32,7 +32,7 @@ export const StyledDeleteIcon = styled(DeleteForeverIcon)`
     &:hover {
         color: ${COLORS.dangerRed};
     }
-`
+`;
 
 export const StyledInfoIcon = styled(InfoIcon)`
     color: ${COLORS.primary};
@@ -44,11 +44,11 @@ export const StyledInfoIcon = styled(InfoIcon)`
     &:hover {
         color: ${COLORS.green};
     }
-`
+`;
 
 export const StyledAddIcon = styled(AddCircleIcon)<{
-    active: boolean
-    alreadyAdded: boolean
+    active: boolean;
+    alreadyAdded: boolean;
 }>`
     color: black;
     position: absolute;
@@ -64,7 +64,7 @@ export const StyledAddIcon = styled(AddCircleIcon)<{
     }
 
     cursor: pointer;
-`
+`;
 
 export const StyledRemoveIcon = styled(RemoveCircleIcon)`
     color: ${COLORS.primary};
@@ -76,4 +76,4 @@ export const StyledRemoveIcon = styled(RemoveCircleIcon)`
         color: ${COLORS.dangerRed};
     }
     cursor: pointer;
-`
+`;

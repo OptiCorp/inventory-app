@@ -1,14 +1,14 @@
-import { ErrorMessage } from '@hookform/error-message'
-import { useFormContext } from 'react-hook-form'
-import { StyledTextArea } from '../Comment/styles'
-import { ErrorP, InputWrap, StyledDiv } from './styles'
-import React from 'react'
+import { ErrorMessage } from '@hookform/error-message';
+import { useFormContext } from 'react-hook-form';
+import { StyledTextArea } from '../Comment/styles';
+import { ErrorP, InputWrap, StyledDiv } from './styles';
+import React from 'react';
 
 export const Description = () => {
     const {
         register,
         formState: { errors },
-    } = useFormContext()
+    } = useFormContext();
     return (
         <StyledDiv>
             <InputWrap>
@@ -26,5 +26,5 @@ export const Description = () => {
                 {...register('description')}
             />
         </StyledDiv>
-    )
-}
+    );
+};

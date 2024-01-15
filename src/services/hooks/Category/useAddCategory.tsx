@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
-import { AddCategory } from '../../apiTypes'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '../../api';
+import { AddCategory } from '../../apiTypes';
 
 export const useAddCategory = () => {
-    const api = apiService()
-    const queryClient = useQueryClient()
+    const api = apiService();
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (category: AddCategory) => api.addCategory(category),
         onSuccess: () => {
@@ -13,8 +13,8 @@ export const useAddCategory = () => {
                     queryKey: ['categories'],
                 })
                 .catch((error) => {
-                    console.error('Failed to invalidate queries: ', error)
-                })
+                    console.error('Failed to invalidate queries: ', error);
+                });
         },
-    })
-}
+    });
+};

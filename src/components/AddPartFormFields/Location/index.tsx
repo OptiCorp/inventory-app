@@ -1,28 +1,28 @@
-import { ErrorMessage } from '@hookform/error-message'
-import { useEffect, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
-import { FormOption, Location as LocationType } from '../../../services/apiTypes.ts'
-import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations.tsx'
-import { ToolTip } from '../../ToolTip'
-import { StyledDiv } from '../Category/styles.ts'
-import { FormSelect } from '../FormSelect'
-import { ErrorP, IconContainer, InputWrap } from './styles'
+import { ErrorMessage } from '@hookform/error-message';
+import { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
+import { FormOption, Location as LocationType } from '../../../services/apiTypes.ts';
+import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations.tsx';
+import { ToolTip } from '../../ToolTip';
+import { StyledDiv } from '../Category/styles.ts';
+import { FormSelect } from '../FormSelect';
+import { ErrorP, IconContainer, InputWrap } from './styles';
 
 export const Location = () => {
-    const { setValue } = useFormContext()
+    const { setValue } = useFormContext();
 
-    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null)
-    const { data: categories = [] } = useGetLocations()
+    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null);
+    const { data: categories = [] } = useGetLocations();
 
     const locationOptions = categories.map((location: LocationType) => ({
         value: location.id,
         label: location.name,
-    }))
+    }));
 
     useEffect(() => {
-        setValue('locationId', selectedOption?.value ?? '')
-    }, [selectedOption, setValue])
+        setValue('locationId', selectedOption?.value ?? '');
+    }, [selectedOption, setValue]);
 
     return (
         <StyledDiv>
@@ -44,5 +44,5 @@ export const Location = () => {
                 state={selectedOption}
             ></FormSelect>
         </StyledDiv>
-    )
-}
+    );
+};

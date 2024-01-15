@@ -1,33 +1,33 @@
-import TextField from '@mui/material/TextField'
-import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Button } from '../../components/Button/SubmitButton.tsx'
-import CustomDialog from '../../components/Dialog/Index.tsx'
-import ListCard from '../../components/listCard/listCard.tsx'
-import SearchBar from '../../components/searchBar/SearchBar'
-import UmAppContext from '../../contexts/UmAppContext.tsx'
-import { useSnackBar } from '../../hooks/useSnackbar.tsx'
-import { Item, List } from '../../services/apiTypes.ts'
-import { useAddList } from '../../services/hooks/List/useAddList.tsx'
-import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx'
-import { COLORS } from '../../style/GlobalStyles.ts'
-import { GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts'
-import { FlexWrapper } from './styles.ts'
+import TextField from '@mui/material/TextField';
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Button } from '../../components/Button/SubmitButton.tsx';
+import CustomDialog from '../../components/Dialog/Index.tsx';
+import ListCard from '../../components/listCard/listCard.tsx';
+import SearchBar from '../../components/searchBar/SearchBar';
+import UmAppContext from '../../contexts/UmAppContext.tsx';
+import { useSnackBar } from '../../hooks/useSnackbar.tsx';
+import { Item, List } from '../../services/apiTypes.ts';
+import { useAddList } from '../../services/hooks/List/useAddList.tsx';
+import { useGetListsByUserId } from '../../services/hooks/List/useGetListsByUserId.tsx';
+import { COLORS } from '../../style/GlobalStyles.ts';
+import { GlobalSpinnerContainer, SearchContainer, Spinner } from '../search/styles.ts';
+import { FlexWrapper } from './styles.ts';
 
 const MakeList = () => {
-    const { currentUser } = useContext(UmAppContext)
-    const { searchParam } = useParams<{ searchParam: string }>()
-    const [searchTerm, setSearchTerm] = useState('')
-    const [title, setTitle] = useState('')
-    const [open, setOpen] = useState(false)
+    const { currentUser } = useContext(UmAppContext);
+    const { searchParam } = useParams<{ searchParam: string }>();
+    const [searchTerm, setSearchTerm] = useState('');
+    const [title, setTitle] = useState('');
+    const [open, setOpen] = useState(false);
 
-    const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id)
+    const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id);
 
-    const { mutate, isSuccess } = useAddList()
-    const { snackbar } = useSnackBar()
+    const { mutate, isSuccess } = useAddList();
+    const { snackbar } = useSnackBar();
     useEffect(() => {
-        setSearchTerm((prev) => searchParam ?? prev)
-    }, [searchParam])
+        setSearchTerm((prev) => searchParam ?? prev);
+    }, [searchParam]);
 
     const filteredData = lists.filter(
         (list) =>
@@ -39,20 +39,20 @@ const MakeList = () => {
                     item.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     item.description.toLowerCase().includes(searchTerm.toLowerCase())
             )
-    )
+    );
 
     const handleClickOpen = () => {
-        setOpen(true)
-    }
+        setOpen(true);
+    };
 
     const handleClose = () => {
-        setOpen(false)
-    }
+        setOpen(false);
+    };
 
     const handleSubmit = () => {
-        mutate({ createdById: currentUser!.id, title: title })
-        handleClose()
-    }
+        mutate({ createdById: currentUser!.id, title: title });
+        handleClose();
+    };
 
     return (
         <>
@@ -103,7 +103,7 @@ const MakeList = () => {
             </SearchContainer>
             {snackbar}
         </>
-    )
-}
+    );
+};
 
-export default MakeList
+export default MakeList;

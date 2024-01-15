@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import { styled } from 'styled-components';
 
 export const StyledForm = styled.form`
     input,
@@ -12,4 +12,4 @@ export const StyledForm = styled.form`
         border-radius: 4px;
         box-sizing: border-box;
     }
-`
+`;

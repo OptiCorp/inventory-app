@@ -1,28 +1,28 @@
-import { ErrorMessage } from '@hookform/error-message'
-import { useEffect, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa'
-import { FormOption, Vendor as VendorType } from '../../../services/apiTypes.ts'
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors.tsx'
-import { ToolTip } from '../../ToolTip'
-import { StyledDiv } from '../Category/styles.ts'
-import { FormSelect } from '../FormSelect'
-import { ErrorP, IconContainer, InputWrap } from './styles'
+import { ErrorMessage } from '@hookform/error-message';
+import { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
+import { FormOption, Vendor as VendorType } from '../../../services/apiTypes.ts';
+import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors.tsx';
+import { ToolTip } from '../../ToolTip';
+import { StyledDiv } from '../Category/styles.ts';
+import { FormSelect } from '../FormSelect';
+import { ErrorP, IconContainer, InputWrap } from './styles';
 
 export const Vendor = () => {
-    const { setValue } = useFormContext()
+    const { setValue } = useFormContext();
 
-    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null)
-    const { data: categories = [] } = useGetVendors()
+    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null);
+    const { data: categories = [] } = useGetVendors();
 
     const vendorOptions = categories.map((vendor: VendorType) => ({
         value: vendor.id,
         label: vendor.name,
-    }))
+    }));
 
     useEffect(() => {
-        setValue('vendorId', selectedOption?.value ?? '')
-    }, [selectedOption, setValue])
+        setValue('vendorId', selectedOption?.value ?? '');
+    }, [selectedOption, setValue]);
 
     return (
         <StyledDiv>
@@ -44,5 +44,5 @@ export const Vendor = () => {
                 state={selectedOption}
             ></FormSelect>
         </StyledDiv>
-    )
-}
+    );
+};

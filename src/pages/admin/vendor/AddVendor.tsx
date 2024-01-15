@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { ErrorMessage } from '@hookform/error-message'
-import { FormProvider } from 'react-hook-form'
-import { Button } from '../../../components/Button/SubmitButton'
-import { COLORS } from '../../../style/GlobalStyles'
-import { useAddVendorForm } from '../hooks/useAddVendorForm'
+import { ErrorMessage } from '@hookform/error-message';
+import { FormProvider } from 'react-hook-form';
+import { Button } from '../../../components/Button/SubmitButton';
+import { COLORS } from '../../../style/GlobalStyles';
+import { useAddVendorForm } from '../hooks/useAddVendorForm';
 import {
     AdminInput,
     ErrorP,
@@ -11,10 +11,10 @@ import {
     InputWrap,
     StyledForm,
     SubmitButtonContainer,
-} from '../styles'
+} from '../styles';
 
 const AddVendor = () => {
-    const { methods, onSubmit, register } = useAddVendorForm()
+    const { methods, onSubmit, register } = useAddVendorForm();
     return (
         <FormProvider {...methods}>
             <FormContainer>
@@ -40,7 +40,7 @@ const AddVendor = () => {
                 </StyledForm>
             </FormContainer>
         </FormProvider>
-    )
-}
+    );
+};
 
-export default AddVendor
+export default AddVendor;

@@ -1,4 +1,4 @@
-import { any, z } from 'zod'
+import { any, z } from 'zod';
 
 export const partSchema = z.object({
     wpId: z.string().min(1, 'WellPartner ID is required'),
@@ -14,6 +14,6 @@ export const partSchema = z.object({
     addedById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),
-})
+});
 
-export type PartSchema = z.infer<typeof partSchema>
+export type PartSchema = z.infer<typeof partSchema>;

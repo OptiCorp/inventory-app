@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const FormBatchRadio = styled.form`
     display: flex;
@@ -18,15 +18,15 @@ export const FormBatchRadio = styled.form`
         margin-right: 1rem;
         cursor: pointer;
     }
-`
+`;
 
 export const StyledInput = styled.input`
     && {
         width: auto;
         margin: 13px;
     }
-`
+`;
 
 export const RadioWrapper = styled.div`
     display: flex;
-`
+`;

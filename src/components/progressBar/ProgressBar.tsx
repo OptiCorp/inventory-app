@@ -1,16 +1,16 @@
-import { useLocation } from 'react-router-dom'
-import { useWindowDimensions } from '../../hooks'
-import { Container, ProgressCircle, ProgressLine, ProgressLink } from './styles'
+import { useLocation } from 'react-router-dom';
+import { useWindowDimensions } from '../../hooks';
+import { Container, ProgressCircle, ProgressLine, ProgressLink } from './styles';
 
 type Props = {
-    progressLevel: number
-}
+    progressLevel: number;
+};
 
 const ProgressBar = ({ progressLevel }: Props) => {
-    const { width } = useWindowDimensions()
-    const location = useLocation()
+    const { width } = useWindowDimensions();
+    const location = useLocation();
 
-    const paths = location.pathname.split('/').filter((name) => name !== '')
+    const paths = location.pathname.split('/').filter((name) => name !== '');
 
     return (
         <Container>
@@ -48,7 +48,7 @@ const ProgressBar = ({ progressLevel }: Props) => {
                 4
             </ProgressCircle>
         </Container>
-    )
-}
+    );
+};
 
-export default ProgressBar
+export default ProgressBar;

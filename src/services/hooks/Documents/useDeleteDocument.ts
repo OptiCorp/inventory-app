@@ -1,23 +1,23 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useContext } from 'react'
-import UmAppContext from '../../../contexts/UmAppContext'
-import apiService from '../../api'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useContext } from 'react';
+import UmAppContext from '../../../contexts/UmAppContext';
+import apiService from '../../api';
 
 export const useDeleteDocument = (itemId: string) => {
-    const api = apiService()
-    const queryClient = useQueryClient()
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
+    const api = apiService();
+    const queryClient = useQueryClient();
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
     return useMutation({
         mutationFn: (documentId: string) => api.deleteDocument(documentId, itemId),
         onSettled(_data, error) {
-            error ? setSnackbarText(error.message) : setSnackbarText('Document deleted')
+            error ? setSnackbarText(error.message) : setSnackbarText('Document deleted');
             queryClient
                 .invalidateQueries({
                     queryKey: [itemId],
                 })
                 .catch((error) => {
-                    console.error('Failed to invalidate queries', error)
-                })
+                    console.error('Failed to invalidate queries', error);
+                });
         },
-    })
-}
+    });
+};

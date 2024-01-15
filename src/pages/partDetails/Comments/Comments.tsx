@@ -1,12 +1,12 @@
-import { TextField } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
-import { Button } from '../../../components/Button/SubmitButton'
-import { Item } from '../../../services/apiTypes'
-import { COLORS } from '../../../style/GlobalStyles'
-import { Wrapper } from './styles'
+import { TextField } from '@mui/material';
+import { ChangeEvent, useState } from 'react';
+import { Button } from '../../../components/Button/SubmitButton';
+import { Item } from '../../../services/apiTypes';
+import { COLORS } from '../../../style/GlobalStyles';
+import { Wrapper } from './styles';
 
 export const Comments = ({ item }: { item: Item }) => {
-    const [content, setContent] = useState(item?.comment)
+    const [content, setContent] = useState(item?.comment);
     return (
         <>
             <div>
@@ -19,7 +19,7 @@ export const Comments = ({ item }: { item: Item }) => {
                         defaultValue={item.comment ?? content}
                         fullWidth
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            setContent(e.target.value)
+                            setContent(e.target.value);
                         }}
                         key={item?.wpId ?? ''}
                         variant="filled"
@@ -41,5 +41,5 @@ export const Comments = ({ item }: { item: Item }) => {
                 </Wrapper>
             </div>
         </>
-    )
-}
+    );
+};

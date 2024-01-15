@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDebounce } from 'usehooks-ts'
-import { Button } from '../../components/Button/SubmitButton.tsx'
-import SearchBar from '../../components/searchBar/SearchBar'
-import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact.tsx'
-import SearchResultCard from '../../components/searchResultCard/SearchResultCard.tsx'
-import UmAppContext from '../../contexts/UmAppContext.tsx'
-import { useSnackBar, useWindowDimensions } from '../../hooks'
-import { Item, UpdateList } from '../../services/apiTypes.ts'
-import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx'
-import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
-import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx'
-import { COLORS } from '../../style/GlobalStyles.ts'
-import { Container, GlobalSpinnerContainer, Spinner } from '../search/styles.ts'
-import { ListHeader } from './ListHeader.tsx'
-import { SideList } from './Sidelist/SideList.tsx'
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDebounce } from 'usehooks-ts';
+import { Button } from '../../components/Button/SubmitButton.tsx';
+import SearchBar from '../../components/searchBar/SearchBar';
+import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact.tsx';
+import SearchResultCard from '../../components/searchResultCard/SearchResultCard.tsx';
+import UmAppContext from '../../contexts/UmAppContext.tsx';
+import { useSnackBar, useWindowDimensions } from '../../hooks';
+import { Item, UpdateList } from '../../services/apiTypes.ts';
+import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx';
+import { useGetListById } from '../../services/hooks/List/useGetListById.tsx';
+import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx';
+import { COLORS } from '../../style/GlobalStyles.ts';
+import { Container, GlobalSpinnerContainer, Spinner } from '../search/styles.ts';
+import { ListHeader } from './ListHeader.tsx';
+import { SideList } from './Sidelist/SideList.tsx';
 import {
     ButtonWrap,
     FlexWrapper,
@@ -22,61 +22,61 @@ import {
     ListTitle,
     SearchContainerList,
     SearchResultsContainer,
-} from './styles.ts'
+} from './styles.ts';
 
 const ListDetails = () => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    const { listId } = useParams()
-    const [searchTerm, setSearchTerm] = useState('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { width } = useWindowDimensions()
-    const navigate = useNavigate()
-    const { data: list, isFetching } = useGetListById(listId!)
-    const { snackbar } = useSnackBar()
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { listId } = useParams();
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { width } = useWindowDimensions();
+    const navigate = useNavigate();
+    const { data: list, isFetching } = useGetListById(listId!);
+    const { snackbar } = useSnackBar();
     const {
         data: items,
         isLoading,
         fetchNextPage,
-    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
+    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
             fetchNextPage().catch((error) => {
-                console.error('Failed to fetch next page: ', error)
-            })
+                console.error('Failed to fetch next page: ', error);
+            });
         }
-    }
-    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!)
+    };
+    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!);
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
-    })
+    });
 
     useEffect(() => {
-        const lastItem = document.getElementById('lastItem')
+        const lastItem = document.getElementById('lastItem');
         if (lastItem) {
-            observer.observe(lastItem)
+            observer.observe(lastItem);
         }
         return () => {
             if (lastItem) {
-                observer.unobserve(lastItem)
+                observer.unobserve(lastItem);
             }
-        }
-    }, [items])
+        };
+    }, [items]);
 
     const handleSave = () => {
-        const save: UpdateList = { id: list!.id, title: list!.title }
+        const save: UpdateList = { id: list!.id, title: list!.title };
         updateList(save, {
             onSuccess: (data) => {
-                setSnackbarText(`${list!.title} was saved`)
-                navigate('/makelist')
+                setSnackbarText(`${list!.title} was saved`);
+                navigate('/makelist');
                 if (data.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
                 }
             },
-        })
-    }
+        });
+    };
 
     return (
         <>
@@ -157,7 +157,7 @@ const ListDetails = () => {
                 )}
             </SearchContainerList>
         </>
-    )
-}
+    );
+};
 
-export default ListDetails
+export default ListDetails;

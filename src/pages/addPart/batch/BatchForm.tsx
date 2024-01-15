@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { Button } from '../../../components/Button/SubmitButton.tsx'
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
-import { COLORS } from '../../../style/GlobalStyles.ts'
-import { FormContainer } from '../styles.ts'
-import { RadioWrapper, StyledInput } from './styles.ts'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { Button } from '../../../components/Button/SubmitButton.tsx';
+import ProgressBar from '../../../components/progressBar/ProgressBar.tsx';
+import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+import { COLORS } from '../../../style/GlobalStyles.ts';
+import { FormContainer } from '../styles.ts';
+import { RadioWrapper, StyledInput } from './styles.ts';
 
 enum Batch {
     yes = 'yes',
@@ -14,24 +14,24 @@ enum Batch {
 }
 
 const BatchForm = () => {
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage();
     const [batchType, setBatchType] = useState<Batch>(
         (getLocalStorageWithExpiry('batch-data') as Batch) ?? Batch.undefined
-    )
-    const [error, setError] = useState<string>()
-    const navigate = useNavigate()
+    );
+    const [error, setError] = useState<string>();
+    const navigate = useNavigate();
 
     const handleClick = () => {
         if (batchType === Batch.undefined) {
-            setError('One option must be picked')
-            return
+            setError('One option must be picked');
+            return;
         }
-        navigate('/add-part/checks')
-    }
+        navigate('/add-part/checks');
+    };
 
     useEffect(() => {
-        setLocalStorageWithExpiry('batch-data', batchType, 5)
-    }, [batchType])
+        setLocalStorageWithExpiry('batch-data', batchType, 5);
+    }, [batchType]);
 
     return (
         <FormContainer>
@@ -73,7 +73,7 @@ const BatchForm = () => {
                 NEXT
             </Button>
         </FormContainer>
-    )
-}
+    );
+};
 
-export default BatchForm
+export default BatchForm;

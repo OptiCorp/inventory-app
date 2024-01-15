@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '../../api';
 
 export const useDeleteVendor = (vendorId: string) => {
-    const api = apiService()
-    const queryClient = useQueryClient()
+    const api = apiService();
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: () => api.deleteVendor(vendorId),
         onSuccess: () => {
@@ -12,8 +12,8 @@ export const useDeleteVendor = (vendorId: string) => {
                     queryKey: ['vendors'],
                 })
                 .catch((error) => {
-                    console.error('Failed to invalidate queries: ', error)
-                })
+                    console.error('Failed to invalidate queries: ', error);
+                });
         },
-    })
-}
+    });
+};

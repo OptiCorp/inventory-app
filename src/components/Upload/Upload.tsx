@@ -1,5 +1,5 @@
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
-import { AiOutlineFileJpg, AiOutlineFilePdf, AiOutlineFileImage } from 'react-icons/ai'
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
+import { AiOutlineFileJpg, AiOutlineFilePdf, AiOutlineFileImage } from 'react-icons/ai';
 import {
     Container,
     DocumentName,
@@ -10,50 +10,50 @@ import {
     StyledLabel,
     Wrapper,
     FileWrapper,
-} from './styles'
-import { useUploadDocument } from '../../services/hooks/Documents/useUploadDocument'
-import { AddDocument, Document, Item } from '../../services/apiTypes'
-import { useGetDocumentsByItemId } from '../../services/hooks/Documents/useGetDocumentsByItemId'
-import { Box, Button, Modal } from '@mui/material'
-import { useSnackBar } from '../../hooks'
-import UmAppContext from '../../contexts/UmAppContext'
-import { useQueryClient } from '@tanstack/react-query'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { useDeleteDocument } from '../../services/hooks/Documents/useDeleteDocument'
-import { Button as SubmitButton } from '../Button/SubmitButton'
-import { COLORS } from '../../style/GlobalStyles'
+} from './styles';
+import { useUploadDocument } from '../../services/hooks/Documents/useUploadDocument';
+import { AddDocument, Document, Item } from '../../services/apiTypes';
+import { useGetDocumentsByItemId } from '../../services/hooks/Documents/useGetDocumentsByItemId';
+import { Box, Button, Modal } from '@mui/material';
+import { useSnackBar } from '../../hooks';
+import UmAppContext from '../../contexts/UmAppContext';
+import { useQueryClient } from '@tanstack/react-query';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { useDeleteDocument } from '../../services/hooks/Documents/useDeleteDocument';
+import { Button as SubmitButton } from '../Button/SubmitButton';
+import { COLORS } from '../../style/GlobalStyles';
 
 type UploadProps = {
-    item: Item
-}
+    item: Item;
+};
 
 export const ExampleUpload = ({ item }: UploadProps) => {
-    const { data } = useGetDocumentsByItemId(item.id)
-    const { mutate: uploadDocument } = useUploadDocument()
-    const { mutate: deleteDocument } = useDeleteDocument(item.id)
-    const inputFile = useRef<HTMLInputElement | null>(null)
+    const { data } = useGetDocumentsByItemId(item.id);
+    const { mutate: uploadDocument } = useUploadDocument();
+    const { mutate: deleteDocument } = useDeleteDocument(item.id);
+    const inputFile = useRef<HTMLInputElement | null>(null);
 
     const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const document: AddDocument = {
                 itemId: item.id,
                 files: [...e.target.files],
-            }
-            uploadDocument(document)
+            };
+            uploadDocument(document);
         }
-    }
+    };
 
     const handleFileDownload = (file: Document) => {
-        const downloadLink = document.createElement('a')
-        downloadLink.download = `${file.name}`
-        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`
-        downloadLink.click()
-    }
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `${file.name}`;
+        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`;
+        downloadLink.click();
+    };
 
     const handleFileDelete = (documentId: string) => {
-        deleteDocument(documentId)
-    }
+        deleteDocument(documentId);
+    };
 
     return (
         <>
@@ -116,5 +116,5 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                 </SubmitButton>
             </Container>
         </>
-    )
-}
+    );
+};

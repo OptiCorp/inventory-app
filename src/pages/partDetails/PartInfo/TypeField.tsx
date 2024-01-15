@@ -1,8 +1,8 @@
-import { Box, ClickAwayListener, MenuItem } from '@mui/material'
-import { useFormContext } from 'react-hook-form'
-import { Edit, LabelContainer, StyledTextField, TextBoxWrap, TypeContainer } from './styles'
-import { TypeProps } from './types'
-import { useState } from 'react'
+import { Box, ClickAwayListener, MenuItem } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
+import { Edit, LabelContainer, StyledTextField, TextBoxWrap, TypeContainer } from './styles';
+import { TypeProps } from './types';
+import { useState } from 'react';
 
 export const TypeField = ({
     handleSelectChange,
@@ -11,15 +11,15 @@ export const TypeField = ({
     onBlur,
     options,
 }: TypeProps) => {
-    const { register } = useFormContext()
-    const [isOpen, setIsOpen] = useState(false)
+    const { register } = useFormContext();
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleClickAway = () => {
-        setIsOpen(false)
-    }
+        setIsOpen(false);
+    };
     const handleEditClick = () => {
-        setIsOpen(true)
-    }
+        setIsOpen(true);
+    };
 
     return (
         <TextBoxWrap>
@@ -56,5 +56,5 @@ export const TypeField = ({
                 </Box>
             </ClickAwayListener>
         </TextBoxWrap>
-    )
-}
+    );
+};

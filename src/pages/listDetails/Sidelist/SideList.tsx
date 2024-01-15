@@ -1,47 +1,47 @@
-import { useContext, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Item, MutateItemList } from '../../../services/apiTypes.ts'
-import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList.tsx'
+import { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Item, MutateItemList } from '../../../services/apiTypes.ts';
+import { useRemoveItemsFromList } from '../../../services/hooks/Items/useRemoveItemsFromList.tsx';
 
-import CustomDialog from '../../../components/Dialog/Index.tsx'
-import UmAppContext from '../../../contexts/UmAppContext.tsx'
-import { KeyWord, RemoveIcon, Wrapper } from './styles.ts'
+import CustomDialog from '../../../components/Dialog/Index.tsx';
+import UmAppContext from '../../../contexts/UmAppContext.tsx';
+import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
 type Props = {
-    part: Item
-}
+    part: Item;
+};
 
 export const SideList = ({ part }: Props) => {
-    const { listId } = useParams()
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    const [open, setOpen] = useState(false)
-    const { mutate: mutateRemoveItemFromList, isSuccess, data } = useRemoveItemsFromList()
+    const { listId } = useParams();
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const [open, setOpen] = useState(false);
+    const { mutate: mutateRemoveItemFromList, isSuccess, data } = useRemoveItemsFromList();
 
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation()
+        e.stopPropagation();
         mutateRemoveItemFromList(ids, {
             onSuccess: (data) => {
-                setSnackbarSeverity('success')
-                setSnackbarText(`${part.wpId} was deleted`)
+                setSnackbarSeverity('success');
+                setSnackbarText(`${part.wpId} was deleted`);
 
                 if (data.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
                 }
             },
-        })
-        handleClose(e)
-    }
+        });
+        handleClose(e);
+    };
 
     const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation()
+        e.stopPropagation();
 
-        setOpen(false)
-    }
+        setOpen(false);
+    };
 
     const handleClickOpen = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        setOpen(true)
-    }
+        e.stopPropagation();
+        setOpen(true);
+    };
 
     return (
         <>
@@ -75,5 +75,5 @@ export const SideList = ({ part }: Props) => {
                 }
             />
         </>
-    )
-}
+    );
+};

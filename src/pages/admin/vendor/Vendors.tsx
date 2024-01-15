@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDebounce } from 'usehooks-ts'
-import { Button } from '../../../components/Button/SubmitButton'
-import AdminSearchCard from '../../../components/admin/AdminSearchCard'
-import SearchBar from '../../../components/searchBar/SearchBar'
-import { Vendor } from '../../../services/apiTypes'
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
-import { SearchType } from '../../../utils/constant'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDebounce } from 'usehooks-ts';
+import { Button } from '../../../components/Button/SubmitButton';
+import AdminSearchCard from '../../../components/admin/AdminSearchCard';
+import SearchBar from '../../../components/searchBar/SearchBar';
+import { Vendor } from '../../../services/apiTypes';
+import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors';
+import { SearchType } from '../../../utils/constant';
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles';
 
 const Vendors = () => {
-    const [searchTerm, setSearchTerm] = useState<string>('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data: initialData } = useGetVendors()
-    const [filteredData, setFilteredData] = useState<Vendor[]>([])
-    const navigate = useNavigate()
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { data: initialData } = useGetVendors();
+    const [filteredData, setFilteredData] = useState<Vendor[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (initialData) {
@@ -22,9 +22,9 @@ const Vendors = () => {
                 initialData.filter((vendor) =>
                     vendor.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
                 )
-            )
+            );
         }
-    }, [initialData, debouncedSearchTerm])
+    }, [initialData, debouncedSearchTerm]);
 
     return (
         <AdminContainer>
@@ -49,7 +49,7 @@ const Vendors = () => {
                 />
             </ButtonContainer>
         </AdminContainer>
-    )
-}
+    );
+};
 
-export default Vendors
+export default Vendors;

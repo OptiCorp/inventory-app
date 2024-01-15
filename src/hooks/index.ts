@@ -1,2 +1,2 @@
-export * from './useWindowDimensions'
-export * from './useSnackbar'
+export * from './useWindowDimensions';
+export * from './useSnackbar';

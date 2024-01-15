@@ -1,40 +1,40 @@
-import { useContext, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDebounce } from 'usehooks-ts'
-import { Button } from '../../../../components/Button/SubmitButton'
-import SearchResultCardCompact from '../../../../components/searchResultCard/SearchInfoCompact'
-import UmAppContext from '../../../../contexts/UmAppContext'
-import { useSnackBar } from '../../../../hooks'
-import { Item, List, UpdateList } from '../../../../services/apiTypes'
-import { useUpdateList } from '../../../../services/hooks/List/useUpdateList'
-import { COLORS } from '../../../../style/GlobalStyles'
-import { ListHeader } from '../../ListHeader'
-import { ButtonWrapCompact, FlexWrapperCompact, ListContainerCompact } from './styles'
+import { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDebounce } from 'usehooks-ts';
+import { Button } from '../../../../components/Button/SubmitButton';
+import SearchResultCardCompact from '../../../../components/searchResultCard/SearchInfoCompact';
+import UmAppContext from '../../../../contexts/UmAppContext';
+import { useSnackBar } from '../../../../hooks';
+import { Item, List, UpdateList } from '../../../../services/apiTypes';
+import { useUpdateList } from '../../../../services/hooks/List/useUpdateList';
+import { COLORS } from '../../../../style/GlobalStyles';
+import { ListHeader } from '../../ListHeader';
+import { ButtonWrapCompact, FlexWrapperCompact, ListContainerCompact } from './styles';
 type Props = {
-    list: List
-}
+    list: List;
+};
 export const PhoneList = ({ list }: Props) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
-    const [searchTerm, setSearchTerm] = useState('')
-    const { listId } = useParams()
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!)
-    const { snackbar } = useSnackBar()
-    const navigate = useNavigate()
+    const [searchTerm, setSearchTerm] = useState('');
+    const { listId } = useParams();
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!);
+    const { snackbar } = useSnackBar();
+    const navigate = useNavigate();
     const handleSave = () => {
-        const save: UpdateList = { id: list.id, title: list.title }
+        const save: UpdateList = { id: list.id, title: list.title };
         updateList(save, {
             onSuccess: (data) => {
-                setSnackbarText(`${list.title} was saved`)
-                navigate('/makelist')
+                setSnackbarText(`${list.title} was saved`);
+                navigate('/makelist');
                 if (data.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
                 }
             },
-        })
-    }
+        });
+    };
     return (
         <>
             {list && (
@@ -75,5 +75,5 @@ export const PhoneList = ({ list }: Props) => {
                 </>
             )}
         </>
-    )
-}
+    );
+};

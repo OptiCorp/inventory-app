@@ -1,8 +1,8 @@
-import { Box, ClickAwayListener, MenuItem } from '@mui/material'
-import { useFormContext } from 'react-hook-form'
-import { Edit, LabelContainer, StyledTextField } from './styles'
-import { SelectProps } from './types'
-import { useState } from 'react'
+import { Box, ClickAwayListener, MenuItem } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
+import { Edit, LabelContainer, StyledTextField } from './styles';
+import { SelectProps } from './types';
+import { useState } from 'react';
 
 export const SelectField = ({
     handleSelectChange,
@@ -11,16 +11,16 @@ export const SelectField = ({
     onBlur,
     options,
 }: SelectProps) => {
-    const { register } = useFormContext()
-    const [isOpen, setIsOpen] = useState(false)
+    const { register } = useFormContext();
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleClickAway = () => {
-        setIsOpen(false)
-    }
+        setIsOpen(false);
+    };
 
     const handleEditClick = () => {
-        setIsOpen(true)
-    }
+        setIsOpen(true);
+    };
 
     return (
         <div>
@@ -32,7 +32,7 @@ export const SelectField = ({
                         </label>
                         <Edit
                             onClick={() => {
-                                handleEditClick()
+                                handleEditClick();
                             }}
                         />
                     </LabelContainer>
@@ -60,5 +60,5 @@ export const SelectField = ({
                 </Box>
             </ClickAwayListener>
         </div>
-    )
-}
+    );
+};

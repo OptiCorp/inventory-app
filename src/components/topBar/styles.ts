@@ -1,17 +1,17 @@
-import { Box, ListItem } from '@mui/material'
-import { NavLink } from 'react-router-dom'
-import { styled } from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import { Box, ListItem } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { styled } from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 
 export const TopBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 16px;
-`
+`;
 
 export const StyledLinkDiv = styled.div`
     padding: 0 16px 0 0;
-`
+`;
 
 export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
@@ -19,14 +19,14 @@ export const StyledNavLink = styled(NavLink)`
     &.active {
         color: ${COLORS.primary};
     }
-`
+`;
 
 export const DropdownItem = styled(ListItem)`
     && {
         margin-left: 20px;
         padding: 0 16px;
     }
-`
+`;
 
 export const HamburgerContainer = styled(Box)`
     &&&& {
@@ -36,12 +36,12 @@ export const HamburgerContainer = styled(Box)`
         justify-content: space-between;
         height: 100%;
     }
-`
+`;
 export const HeaderWrap = styled.div`
     display: flex;
-`
+`;
 export const BackButton = styled.div`
     position: relative;
     margin: 0;
     cursor: pointer;
-`
+`;
