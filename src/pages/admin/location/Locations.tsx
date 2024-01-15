@@ -42,10 +42,11 @@ const Locations = () => {
             <ButtonContainer>
                 <Button
                     onClick={() => navigate('/admin/add-location')}
-                    children={'Add new location'}
                     backgroundColor={'black'}
                     color={'white'}
-                />
+                >
+                    Add new location
+                </Button>
             </ButtonContainer>
         </AdminContainer>
     );

@@ -43,10 +43,11 @@ const Categories = () => {
             <ButtonContainer>
                 <Button
                     onClick={() => navigate('/admin/add-category')}
-                    children={'Add new category'}
                     backgroundColor={'black'}
                     color={'white'}
-                />{' '}
+                >
+                    Add new category
+                </Button>
             </ButtonContainer>
         </AdminContainer>
     );

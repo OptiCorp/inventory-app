@@ -43,10 +43,11 @@ const Vendors = () => {
             <ButtonContainer>
                 <Button
                     onClick={() => navigate('/admin/add-vendor')}
-                    children={'Add new vendor'}
                     backgroundColor={'black'}
                     color={'white'}
-                />
+                >
+                    Add new vendor
+                </Button>
             </ButtonContainer>
         </AdminContainer>
     );

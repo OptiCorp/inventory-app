@@ -3,6 +3,7 @@ import { useAccount, useMsal } from '@azure/msal-react';
 import { AlertColor } from '@mui/material';
 import decode from 'jwt-decode';
 import { createContext, useEffect, useState } from 'react';
+import { GlobalSpinner } from '../components/GlobalSpinner/GlobalSpinner';
 import apiService from '../services/api';
 import { ApiStatus, User } from '../services/apiTypes';
 import { AzureUserInfo, UmAppContextType } from './types';
