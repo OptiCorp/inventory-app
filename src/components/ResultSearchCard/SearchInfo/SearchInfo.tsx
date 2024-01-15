@@ -15,7 +15,7 @@ import {
     StyledInfoIcon,
     StyledRemoveIcon,
 } from '../../ListCard/styles'
-import { KeyWords } from '../../SearchResultCard/styles'
+import { KeyWords } from '../../ResultSearchCard/styles'
 import {
     DescriptionParagraph,
     FirstInfoBox,
