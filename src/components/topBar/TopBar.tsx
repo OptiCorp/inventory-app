@@ -3,7 +3,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Button, Drawer, Menu, MenuItem } from '@mui/material'
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useWindowDimensions } from '../../hooks'
 
@@ -20,7 +20,7 @@ import {
     TopBarContainer,
 } from './styles'
 
-const TopBar = () => {
+export const TopBar: FC = () => {
     const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false)
 
     const { listId } = useParams()
@@ -198,5 +198,3 @@ const TopBar = () => {
         )
     }
 }
-
-export default TopBar
