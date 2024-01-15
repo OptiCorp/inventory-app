@@ -1,4 +1,11 @@
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import { Button } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { COLORS } from '../../../style/GlobalStyles'
+import { SubmitButton } from '../../Button/styles'
 import {
     Container,
     DocumentName,
@@ -8,13 +15,6 @@ import {
     IconWrapper,
     Wrapper,
 } from './styles'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { SubmitButton } from '../../Button/styles'
-import { COLORS } from '../../../style/GlobalStyles'
-import { useEffect, useRef, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
 
 const AddPartUploadMobile = () => {
     const { register, setValue } = useFormContext()
@@ -23,8 +23,8 @@ const AddPartUploadMobile = () => {
     const inputFile = useRef<HTMLInputElement | null>(null)
     const [showArrow, setShowArrow] = useState(true)
 
-    const handleFileDownload = async (file: File) => {
-        var downloadLink = document.createElement('a')
+    const handleFileDownload = (file: File) => {
+        const downloadLink = document.createElement('a')
         downloadLink.download = `${file.name}`
         downloadLink.href = URL.createObjectURL(file)
         downloadLink.click()
