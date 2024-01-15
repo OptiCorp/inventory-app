@@ -64,20 +64,27 @@ Clone and Run the application:
 - Organize folder structure hierarchically, considering trees and pages. Fro example, use `src/pages/add-part/.../batch`, where the batch directory is a subdirectory of its parent, and so forth.
 - Ensure page folders align with their corresponding URL segments. For example, name the page folder as `add-part-form` in `src/pages/add-part/add-part-form`, resulting in the URL `https://.../add-part/add-part-form`.
 
-#### Branches
+#### Issues
 
-Branches should have the following format:
+Issues should have the following format:
 
 1. **Type**: Use one of the following prefixes to specify the nature of the change:
     - **feat** for new features or enhancements.
     - **fix** for bug fixes.
     - **chore** for routine tasks or maintenance.
     - **refactor** for code restructuring.
-2. **Issue Number**: Include the associated issue number to link the branch to a specific task or topic.
-3. **Descriptive Text**: Add descriptive text beginning with an active verb, summarizing the purpose of the branch.
+2. **Descriptive Text**: Add a concise descriptive text.
 
 ```
-<type>/<issue number>/<description>
+fix: Failed to Login BrowserAuthError
+```
+
+#### Branches
+
+Branches should have the auto-generated given to branches created from issues.
+
+```
+205-fix-failed-to-login-browserautherror
 ```
 
 #### Commit Messages
