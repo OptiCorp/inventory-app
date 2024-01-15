@@ -2,15 +2,15 @@ import { Breadcrumbs } from '@mui/material'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ExampleUpload } from '../../components/Upload/Upload'
-import { useGetItemById } from '../../services/hooks/Items/useGetItemById'
-import { Comments } from './Comments/Comments'
-import { Hierarchy } from './Hierarchy'
-import { Log } from './Log'
-import PartInfo from './PartInfo/PartInfo'
-import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
-import { useUpdatePartForm } from './useUpdatePartForm'
+import UploadMobile from '../../components/Upload/UploadMobile/UploadMobile'
 import { useWindowDimensions } from '../../hooks'
-import UploadMobile from '../../components/Upload/mobile/UploadMobile'
+import { useGetItemById } from '../../services/hooks/items/useGetItemById'
+import { Log } from './Log'
+import { Comments } from './comments/Comments'
+import { Hierarchy } from './hierarchy'
+import PartInfo from './partInfo/PartInfo'
+import { useUpdatePartForm } from './partInfo/hooks/useUpdatePartForm'
+import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles'
 
 const PartDetails = () => {
     const { id } = useParams() as { id: string }
@@ -31,7 +31,10 @@ const PartDetails = () => {
                         >
                             {item.parent?.id}
                         </BreadcrumbLink>
-                        <BreadcrumbLink onClick={() => navigate(`/${item.id}`)} underline="none">
+                        <BreadcrumbLink
+                            onClick={() => navigate(`/${item.id}`)}
+                            underline="none"
+                        >
                             {item.id}
                         </BreadcrumbLink>
                     </Breadcrumbs>
@@ -40,7 +43,11 @@ const PartDetails = () => {
             <FormProvider {...methods}>
                 <PartInfo item={item} isLoading={isLoading} />
                 <Hierarchy item={item} />
-                {width > 500 ? <ExampleUpload item={item} /> : <UploadMobile item={item} />}
+                {width > 500 ? (
+                    <ExampleUpload item={item} />
+                ) : (
+                    <UploadMobile item={item} />
+                )}
 
                 <Comments item={item} />
                 <Log item={item} />

@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { useDebounce, useLocalStorage } from 'usehooks-ts'
-import SearchBar from '../../components/searchBar/SearchBar'
+import SearchBar from '../../components/SearchBar/SearchBar'
 import { useWindowDimensions } from '../../hooks'
 
-import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
-import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
-import { useGetItemsInfinite } from '../../services/hooks/Items/useGetItemsInfinite'
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner'
+import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard'
+import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact'
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite'
 import {
     Container,
-    GlobalSpinnerContainer,
     RecentSearchContainer,
     RecentTitle,
     SearchContainer,
     SpanMargin,
-    Spinner,
     StyledSearchedLink,
 } from './styles'
 
@@ -75,11 +74,7 @@ const Search = () => {
                     placeholder={'Search for ID, description, PO number or S/N'}
                 />
 
-                {isLoading && (
-                    <GlobalSpinnerContainer>
-                        <Spinner />
-                    </GlobalSpinnerContainer>
-                )}
+                {isLoading && <GlobalSpinner />}
 
                 <Container>
                     {data?.pages.map((page, i) =>

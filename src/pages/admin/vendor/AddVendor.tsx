@@ -1,17 +1,16 @@
+import { ErrorMessage } from '@hookform/error-message'
 import { FormProvider } from 'react-hook-form'
+import { Button } from '../../../components/Button/Button'
+import { COLORS } from '../../../style/GlobalStyles'
+import { useAddVendorForm } from '../hooks/useAddVendorForm'
 import {
     AdminInput,
-    ButtonContainer,
     ErrorP,
     FormContainer,
     InputWrap,
     StyledForm,
     SubmitButtonContainer,
 } from '../styles'
-import { ErrorMessage } from '@hookform/error-message'
-import { Button } from '../../../components/Button/SubmitButton'
-import { COLORS } from '../../../style/GlobalStyles'
-import { useAddVendorForm } from '../hooks/useAddVendorForm'
 
 const AddVendor = () => {
     const { methods, onSubmit, register } = useAddVendorForm()
