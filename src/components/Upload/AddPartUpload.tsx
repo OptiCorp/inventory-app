@@ -1,12 +1,11 @@
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { COLORS } from '../../style/GlobalStyles';
-import { Button as SubmitButton } from '../Button/SubmitButton';
+import { Button as SubmitButton } from '../Button/Button';
 import {
-    Container,
     DocumentName,
     FileShapeWrapper,
     FileTypeWrapper,

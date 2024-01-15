@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Button } from '../../../components/Button/SubmitButton.tsx';
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx';
+import { Button } from '../../../components/Button/Button.tsx';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
 import { COLORS } from '../../../style/GlobalStyles.ts';
 import { FormContainer } from '../styles.ts';

@@ -1,28 +1,22 @@
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
-import { AiOutlineFileJpg, AiOutlineFilePdf, AiOutlineFileImage } from 'react-icons/ai';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { Button } from '@mui/material';
+import { ChangeEvent, useRef } from 'react';
+import { AddDocument, Document, Item } from '../../services/apiTypes';
+import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
+import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
+import { useUploadDocument } from '../../services/hooks/documents/useUploadDocument';
+import { COLORS } from '../../style/GlobalStyles';
+import { Button as SubmitButton } from '../Button/Button';
 import {
     Container,
     DocumentName,
-    FileContainer,
-    FileTypeWrapper,
     FileShapeWrapper,
-    IconWrapper,
-    StyledLabel,
-    Wrapper,
+    FileTypeWrapper,
     FileWrapper,
+    IconWrapper,
+    Wrapper,
 } from './styles';
-import { useUploadDocument } from '../../services/hooks/Documents/useUploadDocument';
-import { AddDocument, Document, Item } from '../../services/apiTypes';
-import { useGetDocumentsByItemId } from '../../services/hooks/Documents/useGetDocumentsByItemId';
-import { Box, Button, Modal } from '@mui/material';
-import { useSnackBar } from '../../hooks';
-import UmAppContext from '../../contexts/UmAppContext';
-import { useQueryClient } from '@tanstack/react-query';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { useDeleteDocument } from '../../services/hooks/Documents/useDeleteDocument';
-import { Button as SubmitButton } from '../Button/SubmitButton';
-import { COLORS } from '../../style/GlobalStyles';
 
 type UploadProps = {
     item: Item;

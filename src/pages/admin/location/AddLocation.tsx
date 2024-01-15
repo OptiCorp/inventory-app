@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { ErrorMessage } from '@hookform/error-message';
 import { FormProvider } from 'react-hook-form';
-import { Button } from '../../../components/Button/SubmitButton';
+import { Button } from '../../../components/Button/Button';
 import { COLORS } from '../../../style/GlobalStyles';
 import { useAddLocationForm } from '../hooks/useAddLocationForm';
 import {

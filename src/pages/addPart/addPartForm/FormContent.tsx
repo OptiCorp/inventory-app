@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Comment } from '../../../components/AddPartFormFields/Comment';
-import { Description } from '../../../components/AddPartFormFields/Description';
-import { ProductNumber } from '../../../components/AddPartFormFields/ProductNumber';
-import { SerialNumber } from '../../../components/AddPartFormFields/SerialNumber';
-import { Type } from '../../../components/AddPartFormFields/Type';
-import { Vendor } from '../../../components/AddPartFormFields/Vendor';
-import { WpId } from '../../../components/AddPartFormFields/WpId';
-import { Category } from '../../../components/AddPartFormFields/Category';
-import { Location } from '../../../components/AddPartFormFields/Location';
+import { Category } from '../../../components/AddPartFormFields/Category/Category';
+import { Comment } from '../../../components/AddPartFormFields/Comment/Comment';
+import { Description } from '../../../components/AddPartFormFields/Description/Description';
+import { Location } from '../../../components/AddPartFormFields/Location/Location';
+import { ProductNumber } from '../../../components/AddPartFormFields/ProductNumber/ProductNumber';
+import { SerialNumber } from '../../../components/AddPartFormFields/SerialNumber/SerialNumber';
+import { Type } from '../../../components/AddPartFormFields/Type/Type';
+import { Vendor } from '../../../components/AddPartFormFields/Vendor/Vendor';
+import { WpId } from '../../../components/AddPartFormFields/WpId/WpId';
 import UmAppContext from '../../../contexts/UmAppContext';
 
 export const FormContent = () => {

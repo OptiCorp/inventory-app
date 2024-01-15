@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 type Props = {
     height?: string;
@@ -38,36 +38,6 @@ export const StyledSearchedLink = styled(Link)`
     color: ${COLORS.primary};
     text-decoration: none;
     border-bottom: 1px dotted #000;
-`;
-
-export const GlobalSpinnerContainer = styled.div`
-    padding-top: 6rem;
-    padding-bottom: 4rem;
-    display: flex;
-    justify-content: center;
-`;
-
-const rotate360 = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-export const Spinner = styled.div`
-    animation: ${rotate360} 1s linear infinite;
-    transform: translateZ(0);
-
-    border-top: 2px solid grey;
-    border-right: 2px solid grey;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid black;
-    background: transparent;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
 `;
 
 export const RecentTitle = styled.h3`

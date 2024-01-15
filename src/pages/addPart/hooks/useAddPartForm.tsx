@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
-import { useAddItems } from '../../../services/hooks/Items/useAddItem';
+import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
 import { PartSchema, partSchema } from './partValidator';
 
 const defaultValues: PartSchema = {
@@ -22,7 +22,7 @@ const defaultValues: PartSchema = {
     uniqueWpId: false,
 };
 
-export const usePartsForm = () => {
+export const useAddPartForm = () => {
     const { currentUser } = useContext(UmAppContext);
     const { mutate } = useAddItems();
     const { deleteLocalStorage } = useLocalStorage();

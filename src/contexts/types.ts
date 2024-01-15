@@ -1,9 +1,8 @@
 import { AccountInfo } from '@azure/msal-browser';
 import { IMsalContext } from '@azure/msal-react';
 import { AlertColor } from '@mui/material';
-import { SetState } from '../pages/partDetails/PartInfo/types';
+import { SetState } from '../pages/partDetails/partInfo/types';
 import { User } from '../services/apiTypes';
-
 export interface UmAppContextType {
     snackbarText: string;
     // setSnackbarText: (snackbarText: string) => void

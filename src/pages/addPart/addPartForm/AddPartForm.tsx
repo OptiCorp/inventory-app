@@ -1,9 +1,9 @@
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 
 import { FormContainer } from '../styles.ts';
 
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../../components/Button/SubmitButton.tsx';
+import { Button } from '../../../components/Button/Button.tsx';
 import { ButtonsWrapper } from '../../../components/Button/styles.ts';
 import { COLORS } from '../../../style/GlobalStyles.ts';
 import { FormContent } from './FormContent.tsx';

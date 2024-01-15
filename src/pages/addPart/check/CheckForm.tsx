@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Button } from '../../../components/Button/SubmitButton';
+import { Button } from '../../../components/Button/Button.tsx';
 import { ButtonsWrapper } from '../../../components/Button/styles.ts';
-import ProgressBar from '../../../components/progressBar/ProgressBar';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
 import { COLORS } from '../../../style/GlobalStyles';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';

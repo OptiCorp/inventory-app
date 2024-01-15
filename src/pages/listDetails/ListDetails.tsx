@@ -1,20 +1,24 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
-import { Button } from '../../components/Button/SubmitButton.tsx';
-import SearchBar from '../../components/searchBar/SearchBar';
-import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact.tsx';
-import SearchResultCard from '../../components/searchResultCard/SearchResultCard.tsx';
+import { Button } from '../../components/Button/Button.tsx';
+import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard.tsx';
+import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact.tsx';
+import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import UmAppContext from '../../contexts/UmAppContext.tsx';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes.ts';
-import { useGetItemsNotInListInfinite } from '../../services/hooks/Items/useGetItemsNotInListInfinite.tsx';
-import { useGetListById } from '../../services/hooks/List/useGetListById.tsx';
-import { useUpdateList } from '../../services/hooks/List/useUpdateList.tsx';
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
+
+import { useGetItemsNotInListInfinite } from '../../services/hooks/items/useGetItemsNotInListInfinite.tsx';
 import { COLORS } from '../../style/GlobalStyles.ts';
-import { Container, GlobalSpinnerContainer, Spinner } from '../search/styles.ts';
+
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
+
+import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx';
+import { Container } from '../search/styles.ts';
 import { ListHeader } from './ListHeader.tsx';
-import { SideList } from './Sidelist/SideList.tsx';
+import { SideList } from './sidelist/SideList.tsx';
 import {
     ButtonWrap,
     FlexWrapper,
@@ -150,11 +154,7 @@ const ListDetails = () => {
                     </>
                 ) : null}
                 {snackbar}
-                {(isLoading || isFetching) && (
-                    <GlobalSpinnerContainer>
-                        <Spinner />
-                    </GlobalSpinnerContainer>
-                )}
+                {(isLoading || isFetching) && <GlobalSpinner />}
             </SearchContainerList>
         </>
     );

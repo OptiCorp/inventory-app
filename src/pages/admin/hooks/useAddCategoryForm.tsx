@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import UmAppContext from '../../../contexts/UmAppContext';
-import { useAddCategory } from '../../../services/hooks/Category/useAddCategory';
+import { useAddCategory } from '../../../services/hooks/category/useAddCategory';
 import { CategorySchema, categorySchema } from './categoryValidator';
 
 const defaultValues: CategorySchema = {
