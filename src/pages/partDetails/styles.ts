@@ -5,7 +5,6 @@ import { Link, TextField } from '@mui/material';
 export const StyledContainerDiv = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 1000px;
     margin-inline: auto;
     padding: 16px;
     background: #fff;

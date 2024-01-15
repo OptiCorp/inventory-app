@@ -1,8 +1,9 @@
-import { Box, ClickAwayListener, MenuItem } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
-import { Edit, LabelContainer, StyledTextField } from './styles';
-import { SelectProps } from './types';
-import { useState } from 'react';
+import { Box, ClickAwayListener } from '@mui/material'
+import { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import Select, { CSSObjectWithLabel } from 'react-select'
+import { Edit, LabelContainer } from './styles'
+import { SelectProps } from './types'
 
 export const SelectField = ({
     handleSelectChange,
@@ -19,8 +20,41 @@ export const SelectField = ({
     };
 
     const handleEditClick = () => {
-        setIsOpen(true);
-    };
+        setIsOpen(true)
+    }
+    const newOptions = options.map((option) => ({
+        value: option?.id,
+        label: option.name ? option.name : option?.id,
+    }))
+
+    const customStyles = {
+        control: (provided: CSSObjectWithLabel) => ({
+            ...provided,
+            width: '100%',
+            maxWidth: '500px',
+            height: '41px',
+            backgroundColor: '#fff',
+            borderRadius: 0,
+            border: '0px',
+            borderBottom: '1px solid #000',
+        }),
+        menu: (provided: CSSObjectWithLabel) => ({
+            ...provided,
+            width: '70%',
+            maxWidth: '500px',
+        }),
+        option: (
+            provided: CSSObjectWithLabel,
+            state: { data: { value: string } }
+        ): CSSObjectWithLabel => {
+            const stateValue = state.data.value
+            return {
+                ...provided,
+                color: stateValue === defaultValue ? 'gray' : 'inherit',
+                cursor: stateValue === defaultValue ? 'not-allowed' : 'pointer',
+            }
+        },
+    }
 
     return (
         <div>
@@ -36,27 +70,18 @@ export const SelectField = ({
                             }}
                         />
                     </LabelContainer>
-
-                    <StyledTextField
-                        {...register(label.toLowerCase())}
-                        onBlur={onBlur}
-                        select
-                        onChange={handleSelectChange}
-                        fullWidth
-                        $isOpen={isOpen}
-                        variant="standard"
-                        value={defaultValue}
-                        InputProps={{
-                            disableUnderline: !isOpen,
-                            readOnly: !isOpen,
-                        }}
-                    >
-                        {options?.map((option) => (
-                            <MenuItem key={option.name} value={option.id}>
-                                {option.name}
-                            </MenuItem>
-                        ))}
-                    </StyledTextField>
+                    {isOpen && (
+                        <Select
+                            {...register(label.toLowerCase())}
+                            options={newOptions}
+                            onChange={handleSelectChange}
+                            onBlur={onBlur}
+                            styles={customStyles}
+                        />
+                    )}
+                    {!isOpen && (
+                        <p>{newOptions.find((option) => option.value === defaultValue)?.label}</p>
+                    )}
                 </Box>
             </ClickAwayListener>
         </div>

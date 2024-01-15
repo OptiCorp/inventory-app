@@ -1,48 +1,67 @@
-import styled from 'styled-components';
+import Add from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Close'
+import styled from 'styled-components'
+import { COLORS } from '../../../style/GlobalStyles'
 
-export const Wrapper = styled.div`
+
+
+export const ParentContainer = styled.div`
+    margin-bottom: 28px;
+`
+export const AddIcon = styled(Add)<{ disabled: boolean }>`
+    color: ${(props) => (props.disabled ? '#ddd' : COLORS.primary)};
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+
+    &:hover {
+        scale: 110%;
+        color: ${(props) => (props.disabled ? '#ddd' : 'green')};
+    }
+`
+
+export const CustomRemoveIcon = styled(RemoveIcon)`
+    position: absolute;
+    right: 0px;
+    top: 2px;
+    cursor: pointer;
     background-color: black;
-    height: fit-content;
-    border-right: 1px solid rgba(208, 208, 208);
-    border-radius: 5px;
-`;
-export const PartList = styled.ul`
-    margin: 0;
-    max-width: 500px;
-    gap: 20px;
-    list-style: none;
-    display: flex;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.2rem !important;
 
-    flex-direction: row;
-    text-decoration: underline;
-`;
-export const ListItem = styled.li`
-    line-height: 2rem;
-    cursor: pointer;
+    &:hover {
+        color: red;
+        scale: 110%;
+    }
+`
 
-    margin: 0;
-`;
-export const Test = styled.div`
+export const FlexContainer = styled.div`
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    cursor: pointer;
-    flex-wrap: wrap;
+    gap: 10px;
+`
+export const ChildItemContainer = styled.div`
+    position: relative;
+    display: flex;
     align-items: center;
-`;
-export const Container = styled.div`
-    display: flex;
 
-    flex-wrap: wrap;
-    flex-direction: column;
-`;
-export const AssemblyList = styled.ul`
-    margin: 0;
+`
+
+export const LinkElement = styled.p`
+    display: inline-block;
+    border-bottom: 1px dotted ${COLORS.primary};
+    cursor: pointer;
+`
+export const ChildItemSearchContainer = styled.div`
     display: flex;
-    list-style: none;
-    flex-wrap: wrap;
-    max-width: 500px;
-    gap: 20px;
-    flex-direction: row;
-    text-decoration: underline;
-`;
+    align-items: center;
+`
+
+export const AccessibleButtonWrapper = styled.button`
+    border: none;
+    background: transparent;
+    margin: 0;
+    cursor: pointer;
+
+    &:hover {
+        color: #ff001e;
+    }
+`

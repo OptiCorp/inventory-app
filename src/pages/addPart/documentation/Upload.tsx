@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../../../components/Button/SubmitButton.tsx';
-import { ButtonsWrapper } from '../../../components/Button/styles.ts';
-import AddPartUpload from '../../../components/Upload/AddPartUpload.tsx';
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx';
-import useLocalStorage from '../../../hooks/useLocalStorage.ts';
-import { COLORS } from '../../../style/GlobalStyles.ts';
-import { RadioWrapper, StyledInput } from '../batch/styles.ts';
-import { FormContainer } from '../styles.ts';
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Button } from '../../../components/Button/SubmitButton.tsx'
+import { ButtonsWrapper } from '../../../components/Button/styles.ts'
+import AddPartUpload from '../../../components/Upload/AddPartUpload.tsx'
+import AddPartUploadMobile from '../../../components/Upload/mobile/AddPartUploadMobile.tsx'
+import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
+import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions.ts'
+import { COLORS } from '../../../style/GlobalStyles.ts'
+import { RadioWrapper, StyledInput } from '../batch/styles.ts'
+import { FormContainer } from '../styles.ts'
 
 const Upload = () => {
-    const navigate = useNavigate();
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage();
+    const navigate = useNavigate()
+    const { width } = useWindowDimensions()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
     const [checked, setChecked] = useState<boolean>(
         getLocalStorageWithExpiry('upload-check') === 'true'
     );
@@ -39,7 +42,8 @@ const Upload = () => {
                     <li> Maximum file size: 20MB </li>
                 </ul>{' '}
             </p>
-            <AddPartUpload />
+            {width > 500 ? <AddPartUpload /> : <AddPartUploadMobile />}
+
             <span style={{ color: 'red' }}>{error}</span>
             <label>
                 <RadioWrapper>

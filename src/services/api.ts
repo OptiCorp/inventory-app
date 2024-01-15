@@ -77,7 +77,7 @@ const apiService = () => {
     };
 
     // Generic function for post requests
-    const postByFetch = async <T>(url: string, bodyData: T) => {
+    const postByFetch = async <T>(url: string, bodyData?: T) => {
         try {
             const tokenResponse = await pca.acquireTokenSilent(request);
             const postOperation = {
@@ -295,6 +295,10 @@ const apiService = () => {
         return await putByFetch(`Item/${id}?updatedById=${updatedById}`, item);
     };
 
+    const removeParentIdFromItem = async (itemId: string): Promise<Response> => {
+        return await postByFetch(`Item/RemoveParentId?itemId=${itemId}`)
+    }
+
     const isWpIdUnique = async (id: string) => {
         if (!id) return;
         return await getByFetch(`Item/IsWpIdUnique/${id}`);
@@ -329,6 +333,10 @@ const apiService = () => {
         }
         return documentResponses;
     };
+
+    const addChildItemToParent = async (itemId: string, childItemId: string): Promise<Response> => {
+        return await postByFetch(`Item/AddChildItemToParent?itemId=${itemId}&childItemId=${childItemId}`)
+    }
 
     const addItemsToList = async (listId: string, itemId: string): Promise<Response> => {
         return await postByFetch(`List/AddItems/?listId=${listId}`, [itemId]);
@@ -459,6 +467,7 @@ const apiService = () => {
         getItemsNotInListBySearchString,
         getItemsByUserId,
         addItem,
+        addChildItemToParent,
         getListsBySearchString,
         getListsByUserId,
         addList,
@@ -466,6 +475,7 @@ const apiService = () => {
         updateList,
         getItemById,
         updateItemById,
+        removeParentIdFromItem,
         getListById,
         addItemsToList,
         removeItemsFromList,

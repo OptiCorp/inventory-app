@@ -10,7 +10,7 @@ export const useUpdateItem = (id: string, updatedById: string) => {
         onSuccess: () => {
             queryClient
                 .invalidateQueries({
-                    queryKey: ['getItemById', id],
+                    queryKey: ['items', id],
                 })
                 .catch((error) => {
                     console.error('Failed to invalidate queries: ', error);
