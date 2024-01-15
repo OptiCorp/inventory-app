@@ -27,7 +27,14 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
     const { instance } = useMsal()
     const handleSignOut = () => {
         navigate('/')
-        instance.logoutPopup()
+        instance
+            .logoutPopup()
+            .then(() => {
+                console.log('Logout successful')
+            })
+            .catch((error) => {
+                console.log('Logout failed', error)
+            })
     }
 
     return (

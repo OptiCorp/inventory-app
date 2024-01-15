@@ -15,11 +15,13 @@ export const useAddItems = () => {
     return useMutation({
         mutationFn: (object: MutationObject) => api.addItem(object.items, object.files),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['items'],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['items'],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
             navigate('/add-part')
         },
     })

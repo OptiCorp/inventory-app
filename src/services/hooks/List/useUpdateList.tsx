@@ -8,11 +8,13 @@ export const useUpdateList = (id: string) => {
     return useMutation({
         mutationFn: (list: UpdateList) => api.updateList(id, list),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['list', id],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['list', id],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

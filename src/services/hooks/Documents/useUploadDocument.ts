@@ -17,11 +17,13 @@ export const useUploadDocument = () => {
                 await Sleep(200)
             }
             setSnackbarText('Documents were uploaded')
-            queryClient.invalidateQueries({
-                queryKey: [documents.itemId],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: [documents.itemId],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries', error)
+                })
         },
     })
 }

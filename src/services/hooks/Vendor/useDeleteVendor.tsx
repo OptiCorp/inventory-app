@@ -7,11 +7,13 @@ export const useDeleteVendor = (vendorId: string) => {
     return useMutation({
         mutationFn: () => api.deleteVendor(vendorId),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['vendors'],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['vendors'],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

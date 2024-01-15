@@ -8,11 +8,13 @@ export const useUpdateLocation = (id: string) => {
     return useMutation({
         mutationFn: (location: UpdateLocation) => api.updateLocationById(id, location),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['locations', id],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['locations', id],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

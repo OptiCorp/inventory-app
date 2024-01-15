@@ -8,11 +8,13 @@ export const useAddCategory = () => {
     return useMutation({
         mutationFn: (category: AddCategory) => api.addCategory(category),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['categories'],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['categories'],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

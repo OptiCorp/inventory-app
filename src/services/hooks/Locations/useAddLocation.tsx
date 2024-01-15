@@ -8,11 +8,13 @@ export const useAddLocation = () => {
     return useMutation({
         mutationFn: (location: AddLocation) => api.addLocation(location),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['locations'],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['locations'],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

@@ -9,7 +9,7 @@ import {
     FormContainer,
     InputWrap,
     StyledForm,
-    SubmitButtonContainer
+    SubmitButtonContainer,
 } from '../styles'
 
 const AddVendor = () => {

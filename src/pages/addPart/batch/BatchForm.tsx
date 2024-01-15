@@ -16,8 +16,8 @@ enum Batch {
 const BatchForm = () => {
     const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
     const [batchType, setBatchType] = useState<Batch>(
-    (getLocalStorageWithExpiry('batch-data') as Batch) ?? Batch.undefined
-)
+        (getLocalStorageWithExpiry('batch-data') as Batch) ?? Batch.undefined
+    )
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
 

@@ -1,3 +1,5 @@
+import { AccountInfo } from '@azure/msal-browser'
+import { IMsalContext } from '@azure/msal-react'
 import { AlertColor } from '@mui/material'
 import { SetState } from '../pages/partDetails/PartInfo/types'
 import { User } from '../services/apiTypes'
@@ -16,9 +18,9 @@ export interface UmAppContextType {
     // ) => void
     idToken: string
     accessToken: string
-    account: any
-    accounts: any
-    instance: any
+    account: AccountInfo | null
+    accounts: AccountInfo[]
+    instance: IMsalContext['instance']
     currentUser: User | null
 }
 

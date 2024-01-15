@@ -17,7 +17,7 @@ module.exports = {
     rules: {
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
         '@typescript-eslint/consistent-type-definitions': 'off', // turning it off for now
-        '@typescript-eslint/no-unused-vars' : 'off', // turning it off for now
+        '@typescript-eslint/no-unused-vars': 'off', // turning it off for now
         'react-hooks/exhaustive-deps': 'off', // turning it off for now
     },
 }

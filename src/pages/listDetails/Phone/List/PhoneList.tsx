@@ -41,7 +41,6 @@ export const PhoneList = ({ list }: Props) => {
                 <>
                     <FlexWrapperCompact>
                         <ListHeader list={list} />
-
                         {list?.items ? (
                             <ListContainerCompact>
                                 {list.items.map((item: Item) => (
@@ -49,7 +48,8 @@ export const PhoneList = ({ list }: Props) => {
                                     // <SideList part={item} key={item.id} />
                                 ))}
                             </ListContainerCompact>
-                        ) : null}»
+                        ) : null}
+                        »
                         <ButtonWrapCompact>
                             <Button
                                 backgroundColor={`${COLORS.secondary}`}

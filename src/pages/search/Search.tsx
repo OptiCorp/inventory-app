@@ -19,7 +19,7 @@ import {
 } from './styles'
 
 type StateType = {
-    resetInputField?: boolean;
+    resetInputField?: boolean
 }
 
 const Search = () => {

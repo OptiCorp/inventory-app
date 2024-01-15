@@ -7,11 +7,13 @@ export const useDeleteLocation = (locationId: string) => {
     return useMutation({
         mutationFn: () => api.deleteLocation(locationId),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['locations'],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['locations'],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

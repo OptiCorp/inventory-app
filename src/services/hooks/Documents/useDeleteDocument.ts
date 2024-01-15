@@ -11,11 +11,13 @@ export const useDeleteDocument = (itemId: string) => {
         mutationFn: (documentId: string) => api.deleteDocument(documentId, itemId),
         onSettled(_data, error) {
             error ? setSnackbarText(error.message) : setSnackbarText('Document deleted')
-            queryClient.invalidateQueries({
-                queryKey: [itemId],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: [itemId],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries', error)
+                })
         },
     })
 }

@@ -7,11 +7,13 @@ export const useDeleteCategory = (categoryId: string) => {
     return useMutation({
         mutationFn: () => api.deleteCategory(categoryId),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['categories'],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['categories'],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

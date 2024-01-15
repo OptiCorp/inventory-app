@@ -71,6 +71,12 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
     useEffect(() => {
         if (idToken) {
             fetchUserAndUpdateContext(idToken)
+                .then(() => {
+                    console.log('User fetched and context updated')
+                })
+                .catch((error) => {
+                    console.error('Error fetching and updating user:', error)
+                })
         }
     }, [idToken])
 
@@ -89,7 +95,9 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
                 })
                 .catch((err) => {
                     console.error(err)
-                    instance.loginRedirect()
+                    instance.loginRedirect().catch((error) => {
+                        console.error('Failed to redirect', error)
+                    })
                 })
         } else {
             console.error('No account is available')

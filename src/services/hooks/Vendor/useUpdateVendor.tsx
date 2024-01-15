@@ -8,11 +8,13 @@ export const useUpdateVendor = (id: string) => {
     return useMutation({
         mutationFn: (vendor: UpdateVendor) => api.updateVendorById(id, vendor),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['vendor', id],
-            }).catch((error) => {
-                console.error('Failed to invalidate queries: ', error)
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['vendor', id],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error)
+                })
         },
     })
 }

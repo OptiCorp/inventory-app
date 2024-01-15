@@ -19,40 +19,42 @@ export const useFormBlurInputHandler = (obj: Item) => {
             setSnackbarSeverity: SetState<AlertColor>,
             shortSnackbarText?: boolean
         ) => {
-            formContext.handleSubmit(() => {
-                const fieldValue = updatedObject[field]
-                if (!fieldValue || fieldValue === obj[field]) return
+            formContext
+                .handleSubmit(() => {
+                    const fieldValue = updatedObject[field]
+                    if (!fieldValue || fieldValue === obj[field]) return
 
-                mutate(
-                    {
-                        ...obj,
-                        [field]: fieldValue,
-                    },
-                    {
-                        onSuccess(data) {
-                            if (data) {
-                                if (data.status >= 400) {
-                                    setSnackbarSeverity('error')
-                                    setSnackbarText(`${data.statusText}, please try again.`)
-                                } else if (data.status >= 500) {
-                                    setSnackbarSeverity('error')
-                                    setSnackbarText(
-                                        `Something went wrong on our end, please try again later.`
-                                    )
-                                } else if (shortSnackbarText) {
-                                    setSnackbarText(`${field.toUpperCase()} was updated`)
-                                } else {
-                                    setSnackbarText(
-                                        `${field.toUpperCase()} was changed to ${fieldValue}`
-                                    )
-                                }
-                            }
+                    mutate(
+                        {
+                            ...obj,
+                            [field]: fieldValue,
                         },
-                    }
-                )
-            })().catch((error) => {
-                console.error('Failed to submit form: ', error)
-            })
+                        {
+                            onSuccess(data) {
+                                if (data) {
+                                    if (data.status >= 400) {
+                                        setSnackbarSeverity('error')
+                                        setSnackbarText(`${data.statusText}, please try again.`)
+                                    } else if (data.status >= 500) {
+                                        setSnackbarSeverity('error')
+                                        setSnackbarText(
+                                            `Something went wrong on our end, please try again later.`
+                                        )
+                                    } else if (shortSnackbarText) {
+                                        setSnackbarText(`${field.toUpperCase()} was updated`)
+                                    } else {
+                                        setSnackbarText(
+                                            `${field.toUpperCase()} was changed to ${fieldValue}`
+                                        )
+                                    }
+                                }
+                            },
+                        }
+                    )
+                })()
+                .catch((error) => {
+                    console.error('Failed to submit form: ', error)
+                })
         },
         [formContext, mutate, obj]
     )
