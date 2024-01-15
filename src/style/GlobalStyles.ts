@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
-export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)'
+export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
 
 export const COLORS = {
     secondary: '#FFF',
@@ -19,11 +19,11 @@ export const COLORS = {
     dangerRed: '#EB0000',
     whiteSmoke: '#f5f5f5',
     aliceBlue: '#F0F8FF',
-}
+};
 
 type Props = {
-    width: number
-}
+    width: number;
+};
 
 const GlobalStyles = createGlobalStyle<Props>`
    body, :root, html {
@@ -53,6 +53,6 @@ body::-webkit-scrollbar {
 ::-webkit-scrollbar {
     display: none;
 }
-`
+`;
 
-export default GlobalStyles
+export default GlobalStyles;

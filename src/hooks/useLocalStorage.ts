@@ -1,43 +1,43 @@
 type Data = {
-    value: string
-    expiry: number
-}
+    value: string;
+    expiry: number;
+};
 
 const useLocalStorage = () => {
     const setLocalStorageWithExpiry = (key: string, value: string, ttl_minutes: number) => {
-        const now = new Date()
+        const now = new Date();
 
         const data: Data = {
             value: value,
             expiry: now.getTime() + ttl_minutes * 60000,
-        }
+        };
 
-        localStorage.setItem(key, JSON.stringify(data))
-    }
+        localStorage.setItem(key, JSON.stringify(data));
+    };
 
     const getLocalStorageWithExpiry = (key: string) => {
-        const dataStr = localStorage.getItem(key)
+        const dataStr = localStorage.getItem(key);
 
         if (!dataStr) {
-            return null
+            return null;
         }
-        console.log(dataStr)
-        const data: Data = JSON.parse(dataStr)
-        const now = new Date()
+        console.log(dataStr);
+        const data: Data = JSON.parse(dataStr) as Data;
+        const now = new Date();
 
         if (data.expiry < now.getTime()) {
-            localStorage.removeItem(key)
-            return null
+            localStorage.removeItem(key);
+            return null;
         }
 
-        return data.value
-    }
+        return data.value;
+    };
 
     const deleteLocalStorage = (key: string) => {
-        localStorage.removeItem(key)
-    }
+        localStorage.removeItem(key);
+    };
 
-    return { setLocalStorageWithExpiry, getLocalStorageWithExpiry, deleteLocalStorage }
-}
+    return { setLocalStorageWithExpiry, getLocalStorageWithExpiry, deleteLocalStorage };
+};
 
-export default useLocalStorage
+export default useLocalStorage;

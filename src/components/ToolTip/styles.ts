@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import styled from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 
 export const ToolTipContent = styled.div`
     position: absolute;
@@ -11,4 +11,4 @@ export const ToolTipContent = styled.div`
     color: ${COLORS.secondary};
     padding: 4px 8px;
     border-radius: 4px;
-`
+`;

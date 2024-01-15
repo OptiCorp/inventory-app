@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import styled from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 
 export const TabContainer = styled.section`
     display: flex;
@@ -8,7 +8,7 @@ export const TabContainer = styled.section`
     border-bottom: 2px solid black;
 
     height: 60px;
-`
+`;
 export const TabButton = styled.button<{ active: boolean }>`
     padding: 1rem;
     width: 100px;
@@ -19,12 +19,11 @@ export const TabButton = styled.button<{ active: boolean }>`
     align-items: center;
     position: relative;
     transition: 0.6s;
-    background: ${(props) =>
-        props.active ? ` ${COLORS.primary}` : ` ${COLORS.secondary}`};
+    background: ${(props) => (props.active ? ` ${COLORS.primary}` : ` ${COLORS.secondary}`)};
     &:focus {
         outline: none;
     }
-`
+`;
 
 export const NumberofItems = styled.span<{ active: boolean }>`
     color: white;
@@ -32,9 +31,8 @@ export const NumberofItems = styled.span<{ active: boolean }>`
     right: 0;
     font-size: 1rem;
     padding: 1rem;
-    color: ${(props) =>
-        props.active ? ` ${COLORS.secondary}` : ` ${COLORS.primary}`};
-`
+    color: ${(props) => (props.active ? ` ${COLORS.secondary}` : ` ${COLORS.primary}`)};
+`;
 export const Title = styled.span<{ active: boolean }>`
     position: relative;
     display: flex;
@@ -44,10 +42,9 @@ export const Title = styled.span<{ active: boolean }>`
     height: inherit;
     text-transform: uppercase;
     font-size: 0.8rem;
-    color: ${(props) =>
-        props.active ? `${COLORS.secondary}` : ` ${COLORS.primary}`};
+    color: ${(props) => (props.active ? `${COLORS.secondary}` : ` ${COLORS.primary}`)};
     transition: 0.6s;
-`
+`;
 export const Indicator = styled.span<{ active: boolean }>`
     position: absolute;
     top: 0;
@@ -56,4 +53,4 @@ export const Indicator = styled.span<{ active: boolean }>`
     height: 100%;
 
     transition: 0.6s;
-`
+`;

@@ -1,41 +1,40 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { Button } from '../../../components/Button/Button.tsx'
-import { ButtonsWrapper } from '../../../components/Button/styles.ts'
-import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
-import { COLORS } from '../../../style/GlobalStyles'
-import { RadioWrapper, StyledInput } from '../batch/styles.ts'
-import { FormContainer } from '../styles'
-import { FormRadio, StyledLabelText, StyledTextArea } from './styles'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { Button } from '../../../components/Button/Button.tsx';
+import { ButtonsWrapper } from '../../../components/Button/styles.ts';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
+import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+import { COLORS } from '../../../style/GlobalStyles';
+import { RadioWrapper, StyledInput } from '../batch/styles.ts';
+import { FormContainer } from '../styles';
+import { FormRadio, StyledLabelText, StyledTextArea } from './styles';
 
 const CheckForm = () => {
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } =
-        useLocalStorage()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage();
     const [checked, setChecked] = useState<boolean>(
         getLocalStorageWithExpiry('checks-check') === 'true'
-    )
+    );
     const [description, setDescription] = useState<string>(
-        getLocalStorageWithExpiry('checks-description') || ''
-    )
-    const [error, setError] = useState<string>()
-    const navigate = useNavigate()
+        getLocalStorageWithExpiry('checks-description') ?? ''
+    );
+    const [error, setError] = useState<string>();
+    const navigate = useNavigate();
 
     const handleClick = () => {
         if (!checked) {
-            setError('Tick box before continuing')
-            return
+            setError('Tick box before continuing');
+            return;
         }
-        navigate('/add-part/upload')
-    }
+        navigate('/add-part/upload');
+    };
 
     useEffect(() => {
-        setLocalStorageWithExpiry('checks-check', checked.toString(), 5)
-    }, [checked])
+        setLocalStorageWithExpiry('checks-check', checked.toString(), 5);
+    }, [checked]);
 
     useEffect(() => {
-        setLocalStorageWithExpiry('checks-description', description, 5)
-    }, [description])
+        setLocalStorageWithExpiry('checks-description', description, 5);
+    }, [description]);
 
     return (
         <FormContainer>
@@ -52,8 +51,8 @@ const CheckForm = () => {
                             onChange={() => setChecked(!checked)}
                         />{' '}
                         <p>
-                            I have performed all necessary checks before adding
-                            this item to the system
+                            I have performed all necessary checks before adding this item to the
+                            system
                         </p>
                     </RadioWrapper>
                 </label>
@@ -79,7 +78,7 @@ const CheckForm = () => {
                 </Button>
             </ButtonsWrapper>
         </FormContainer>
-    )
-}
+    );
+};
 
-export default CheckForm
+export default CheckForm;

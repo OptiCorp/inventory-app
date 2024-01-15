@@ -1,4 +1,4 @@
-import { GlobalSpinnerContainer, Spinner } from './styles'
+import { GlobalSpinnerContainer, Spinner } from './styles';
 
 export const GlobalSpinner = () => {
     return (
@@ -7,5 +7,5 @@ export const GlobalSpinner = () => {
                 <Spinner />
             </GlobalSpinnerContainer>
         </>
-    )
-}
+    );
+};

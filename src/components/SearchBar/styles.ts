@@ -1,8 +1,8 @@
-import { styled } from 'styled-components'
+import { styled } from 'styled-components';
 
 type InputProps = {
-    width: number
-}
+    width: number;
+};
 
 export const StyledInput = styled.input<InputProps>`
     border-style: none;
@@ -14,12 +14,12 @@ export const StyledInput = styled.input<InputProps>`
     max-width: 1000px;
     font-size: ${({ width }) => (width >= 600 ? '20px' : '16px')};
     outline: none;
-`
+`;
 
 export const SearchBarContainer = styled.div`
     display: flex;
     flex-basis: 100%;
-`
+`;
 
 export const Icon = styled.span`
     padding-top: 1rem;
@@ -27,4 +27,4 @@ export const Icon = styled.span`
     width: 0;
     height: 0;
     z-index: 2;
-`
+`;

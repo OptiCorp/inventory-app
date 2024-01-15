@@ -1,20 +1,20 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-import { CancelButton, SubmitButton } from './styles'
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { CancelButton, SubmitButton } from './styles';
 
 interface DialogProps {
-    title: string
-    submitButtonText?: string
-    cancelButtonText?: string
-    SubmitButtonOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void
-    CancelButtonOnClick: () => void
-    open: boolean
+    title: string;
+    submitButtonText?: string;
+    cancelButtonText?: string;
+    SubmitButtonOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    CancelButtonOnClick: () => void;
+    open: boolean;
 
-    onClose?: (e: React.MouseEvent) => void
-    children?: React.ReactNode
+    onClose?: (e: React.MouseEvent) => void;
+    children?: React.ReactNode;
 
-    type?: 'submit' | 'reset' | 'button'
-    PrimaryType?: 'submit' | 'reset' | 'button'
-    form?: string
+    type?: 'submit' | 'reset' | 'button';
+    PrimaryType?: 'submit' | 'reset' | 'button';
+    form?: string;
 }
 
 const CustomDialog: React.FC<DialogProps> = ({
@@ -46,7 +46,7 @@ const CustomDialog: React.FC<DialogProps> = ({
                 </DialogActions>
             </Dialog>
         </>
-    )
-}
+    );
+};
 
-export default CustomDialog
+export default CustomDialog;

@@ -1,10 +1,10 @@
-import { Box, ClickAwayListener } from '@mui/material'
-import { useFormContext } from 'react-hook-form'
+import { Box, ClickAwayListener } from '@mui/material';
+import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { useState } from 'react'
-import Select, { CSSObjectWithLabel } from 'react-select'
-import { TextBoxWrap, LabelContainer, Edit } from './styles'
-import { TypeProps } from './types'
+import Select, { CSSObjectWithLabel } from 'react-select';
+import { Edit, LabelContainer, TextBoxWrap } from './styles';
+import { TypeProps } from './types';
 
 export const TypeField = ({
     handleSelectChange,
@@ -13,20 +13,20 @@ export const TypeField = ({
     onBlur,
     options,
 }: TypeProps) => {
-    const { register } = useFormContext()
-    const [isOpen, setIsOpen] = useState(false)
+    const { register } = useFormContext();
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleClickAway = () => {
-        setIsOpen(false)
-    }
+        setIsOpen(false);
+    };
     const handleEditClick = () => {
-        setIsOpen(true)
-    }
+        setIsOpen(true);
+    };
 
     const newOptions = options.map((option) => ({
         value: option.id,
         label: option.name,
-    }))
+    }));
 
     const customStyles = {
         control: (provided: CSSObjectWithLabel) => ({
@@ -48,14 +48,14 @@ export const TypeField = ({
             provided: CSSObjectWithLabel,
             state: { data: { value: string } }
         ): CSSObjectWithLabel => {
-            const stateValue = state.data.value
+            const stateValue = state.data.value;
             return {
                 ...provided,
                 color: stateValue === defaultValue ? 'gray' : 'inherit',
                 cursor: stateValue === defaultValue ? 'not-allowed' : 'pointer',
-            }
+            };
         },
-    }
+    };
 
     return (
         <TextBoxWrap>
@@ -67,7 +67,7 @@ export const TypeField = ({
                         </label>
                         <Edit
                             onClick={() => {
-                                handleEditClick()
+                                handleEditClick();
                             }}
                         />
                     </LabelContainer>
@@ -86,5 +86,5 @@ export const TypeField = ({
                 </Box>
             </ClickAwayListener>
         </TextBoxWrap>
-    )
-}
+    );
+};

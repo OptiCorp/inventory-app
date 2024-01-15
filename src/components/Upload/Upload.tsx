@@ -1,13 +1,13 @@
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import { Button } from '@mui/material'
-import { ChangeEvent, useRef } from 'react'
-import { AddDocument, Document, Item } from '../../services/apiTypes'
-import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument'
-import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId'
-import { useUploadDocument } from '../../services/hooks/documents/useUploadDocument'
-import { COLORS } from '../../style/GlobalStyles'
-import { Button as SubmitButton } from '../Button/Button'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { Button } from '@mui/material';
+import { ChangeEvent, useRef } from 'react';
+import { AddDocument, Document, Item } from '../../services/apiTypes';
+import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
+import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
+import { useUploadDocument } from '../../services/hooks/documents/useUploadDocument';
+import { COLORS } from '../../style/GlobalStyles';
+import { Button as SubmitButton } from '../Button/Button';
 import {
     Container,
     DocumentName,
@@ -16,38 +16,38 @@ import {
     FileWrapper,
     IconWrapper,
     Wrapper,
-} from './styles'
+} from './styles';
 
 type UploadProps = {
-    item: Item
-}
+    item: Item;
+};
 
 export const ExampleUpload = ({ item }: UploadProps) => {
-    const { data } = useGetDocumentsByItemId(item.id)
-    const { mutate: uploadDocument } = useUploadDocument()
-    const { mutate: deleteDocument } = useDeleteDocument(item.id)
-    const inputFile = useRef<HTMLInputElement | null>(null)
+    const { data } = useGetDocumentsByItemId(item.id);
+    const { mutate: uploadDocument } = useUploadDocument();
+    const { mutate: deleteDocument } = useDeleteDocument(item.id);
+    const inputFile = useRef<HTMLInputElement | null>(null);
 
     const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const document: AddDocument = {
                 itemId: item.id,
                 files: [...e.target.files],
-            }
-            uploadDocument(document)
+            };
+            uploadDocument(document);
         }
-    }
+    };
 
     const handleFileDownload = (file: Document) => {
-        var downloadLink = document.createElement('a')
-        downloadLink.download = `${file.name}`
-        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`
-        downloadLink.click()
-    }
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `${file.name}`;
+        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`;
+        downloadLink.click();
+    };
 
     const handleFileDelete = (documentId: string) => {
-        deleteDocument(documentId)
-    }
+        deleteDocument(documentId);
+    };
 
     return (
         <>
@@ -64,26 +64,17 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>
-                                            .
-                                            {document.contentType
-                                                .split('/')[1]
-                                                .toUpperCase()}
-                                        </h3>
+                                        <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
-                                            onClick={() =>
-                                                handleFileDownload(document)
-                                            }
+                                            onClick={() => handleFileDownload(document)}
                                             sx={{ color: 'black' }}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
-                                            onClick={() =>
-                                                handleFileDelete(document.id)
-                                            }
+                                            onClick={() => handleFileDelete(document.id)}
                                             sx={{ color: 'black' }}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
@@ -96,9 +87,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                                 stroke="black"
                             />
                         </svg>
-                        <DocumentName>
-                            {document.name.split('.')[0]}
-                        </DocumentName>
+                        <DocumentName>{document.name.split('.')[0]}</DocumentName>
                     </FileWrapper>
                 ))}
             </Wrapper>
@@ -121,5 +110,5 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                 </SubmitButton>
             </Container>
         </>
-    )
-}
+    );
+};

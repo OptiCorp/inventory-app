@@ -1,11 +1,11 @@
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import { Button } from '@mui/material'
-import { useEffect, useRef, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { COLORS } from '../../../style/GlobalStyles'
-import { SubmitButton } from '../../Button/styles'
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { Button } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { COLORS } from '../../../style/GlobalStyles';
+import { SubmitButton } from '../../Button/styles';
 import {
     Container,
     DocumentName,
@@ -14,59 +14,59 @@ import {
     FileWrapper,
     IconWrapper,
     Wrapper,
-} from './styles'
+} from './styles';
 
 const AddPartUploadMobile = () => {
-    const { register, setValue } = useFormContext()
-    const [files, setFiles] = useState<File[]>()
-    const documentationField = register('files')
-    const inputFile = useRef<HTMLInputElement | null>(null)
-    const [showArrow, setShowArrow] = useState(true)
+    const { register, setValue } = useFormContext();
+    const [files, setFiles] = useState<File[]>();
+    const documentationField = register('files');
+    const inputFile = useRef<HTMLInputElement | null>(null);
+    const [showArrow, setShowArrow] = useState(true);
 
-    const handleFileDownload = async (file: File) => {
-        var downloadLink = document.createElement('a')
-        downloadLink.download = `${file.name}`
-        downloadLink.href = URL.createObjectURL(file)
-        downloadLink.click()
-    }
+    const handleFileDownload = (file: File) => {
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `${file.name}`;
+        downloadLink.href = URL.createObjectURL(file);
+        downloadLink.click();
+    };
 
     const handleFileRemoval = (index: number) => {
-        const filesCopy = [...files!]
-        filesCopy.splice(index, 1)
-        setFiles(filesCopy)
-    }
+        const filesCopy = [...files!];
+        filesCopy.splice(index, 1);
+        setFiles(filesCopy);
+    };
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.className = 'visible'
+                entry.target.className = 'visible';
             } else {
-                entry.target.className = 'hidden'
+                entry.target.className = 'hidden';
             }
-        })
-    }
+        });
+    };
 
     const observer = new IntersectionObserver(handleIntersect, {
         threshold: 0.5,
-    })
+    });
 
     useEffect(() => {
-        setValue('files', files)
-        const fileClass = document.getElementsByClassName('fileClass')
+        setValue('files', files);
+        const fileClass = document.getElementsByClassName('fileClass');
         if (fileClass.length !== 0) {
             for (let i = 0; i < fileClass.length; i++) {
-                observer.observe(fileClass[i])
+                observer.observe(fileClass[i]);
             }
         }
 
         return () => {
             if (fileClass.length !== 0) {
                 for (let i = 0; i < fileClass.length; i++) {
-                    observer.unobserve(fileClass[i])
+                    observer.unobserve(fileClass[i]);
                 }
             }
-        }
-    }, [files])
+        };
+    }, [files]);
 
     return (
         <>
@@ -83,27 +83,18 @@ const AddPartUploadMobile = () => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>
-                                            .
-                                            {file.type
-                                                .split('/')[1]
-                                                .toUpperCase()}
-                                        </h3>
+                                        <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() =>
-                                                handleFileDownload(file)
-                                            }
+                                            onClick={() => handleFileDownload(file)}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() =>
-                                                handleFileRemoval(index)
-                                            }
+                                            onClick={() => handleFileRemoval(index)}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
                                         </Button>
@@ -139,18 +130,18 @@ const AddPartUploadMobile = () => {
                         style={{ display: 'none' }}
                         {...documentationField}
                         onChange={(e) => {
-                            setFiles([...e.target.files!])
+                            setFiles([...e.target.files!]);
                         }}
                         ref={(e) => {
-                            documentationField.ref(e)
-                            inputFile.current = e
+                            documentationField.ref(e);
+                            inputFile.current = e;
                         }}
                     />
                     UPLOAD NEW
                 </SubmitButton>
             </Container>
         </>
-    )
-}
+    );
+};
 
-export default AddPartUploadMobile
+export default AddPartUploadMobile;

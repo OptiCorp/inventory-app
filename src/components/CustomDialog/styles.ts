@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import styled from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 
 export const SubmitButton = styled.button`
     width: 150px;
@@ -10,7 +10,7 @@ export const SubmitButton = styled.button`
     &:hover {
     }
     border: none;
-`
+`;
 
 export const CancelButton = styled.button`
     width: 150px;
@@ -21,4 +21,4 @@ export const CancelButton = styled.button`
     &:hover {
     }
     border: 1px solid #000;
-`
+`;

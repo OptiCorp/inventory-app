@@ -1,52 +1,52 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useDebounce } from 'usehooks-ts'
-import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner'
-import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact'
-import SearchBar from '../../../components/SearchBar/SearchBar'
-import { useSnackBar } from '../../../hooks'
-import { useGetListById } from '../../../services/hooks/list/useGetListById'
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDebounce } from 'usehooks-ts';
+import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
+import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact';
+import SearchBar from '../../../components/SearchBar/SearchBar';
+import { useSnackBar } from '../../../hooks';
+import { useGetListById } from '../../../services/hooks/list/useGetListById';
 
-import { useGetItemsNotInListInfinite } from '../../../services/hooks/items/useGetItemsNotInListInfinite'
-import { useUpdateList } from '../../../services/hooks/list/useUpdateList'
-import { PhoneContainer, PhoneListTitle } from './styles'
+import { useGetItemsNotInListInfinite } from '../../../services/hooks/items/useGetItemsNotInListInfinite';
+import { PhoneContainer, PhoneListTitle } from './styles';
 
 export const AddMoreCompact = () => {
-    const { snackbar } = useSnackBar()
-    const [searchTerm, setSearchTerm] = useState('')
+    const { snackbar } = useSnackBar();
+    const [searchTerm, setSearchTerm] = useState('');
 
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { listId } = useParams()
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { listId } = useParams();
     const {
         data: items,
         isLoading,
         fetchNextPage,
-    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!)
+    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
-            fetchNextPage()
+            fetchNextPage().catch((error) => {
+                console.error('Failed to fetch next page: ', error);
+            });
         }
-    }
+    };
 
-    const {} = useUpdateList(listId!)
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
-    })
+    });
 
     useEffect(() => {
-        const lastItem = document.getElementById('lastItem')
+        const lastItem = document.getElementById('lastItem');
         if (lastItem) {
-            observer.observe(lastItem)
+            observer.observe(lastItem);
         }
         return () => {
             if (lastItem) {
-                observer.unobserve(lastItem)
+                observer.unobserve(lastItem);
             }
-        }
-    }, [items])
-    const { data: list, isFetching } = useGetListById(listId!)
+        };
+    }, [items]);
+    const { data: list, isFetching } = useGetListById(listId!);
     return (
         <>
             <PhoneListTitle>Add items</PhoneListTitle>
@@ -61,8 +61,7 @@ export const AddMoreCompact = () => {
                     page.map((item, index) => (
                         <div
                             id={
-                                i === items.pages.length - 1 &&
-                                index === page.length - 1
+                                i === items.pages.length - 1 && index === page.length - 1
                                     ? 'lastItem'
                                     : ''
                             }
@@ -75,5 +74,5 @@ export const AddMoreCompact = () => {
             {snackbar}
             {(isLoading || isFetching) && <GlobalSpinner />}
         </>
-    )
-}
+    );
+};

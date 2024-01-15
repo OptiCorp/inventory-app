@@ -1,15 +1,15 @@
-import { ComponentProps, FunctionComponent } from 'react'
-import { SubmitButton, Wrapper } from './styles'
+import { ComponentProps, FunctionComponent } from 'react';
+import { SubmitButton, Wrapper } from './styles';
 interface ButtonProps {
-    children?: React.ReactNode
-    type?: ComponentProps<'button'>['type']
-    onClick?: ComponentProps<'button'>['onClick']
-    form?: string
-    id?: string
-    backgroundColor: string
-    height?: string
+    children?: React.ReactNode;
+    type?: ComponentProps<'button'>['type'];
+    onClick?: ComponentProps<'button'>['onClick'];
+    form?: string;
+    id?: string;
+    backgroundColor: string;
+    height?: string;
     // variant: 'Primary' | 'Secondary' | 'Danger'
-    color: ComponentProps<'button'>['color']
+    color: ComponentProps<'button'>['color'];
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -36,5 +36,5 @@ export const Button: FunctionComponent<ButtonProps> = ({
                 {children}
             </SubmitButton>
         </Wrapper>
-    )
-}
+    );
+};

@@ -1,97 +1,84 @@
-import { format } from 'date-fns'
-import { useContext, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { format } from 'date-fns';
+import { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { Item, MutateItemList } from '../../../services/apiTypes'
+import { Item, MutateItemList } from '../../../services/apiTypes';
 
-import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList'
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList'
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
 
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useGetListById } from '../../../services/hooks/list/useGetListById'
-import CustomDialog from '../../CustomDialog/CustomDialog'
-import {
-    StyledAddIcon,
-    StyledInfoIcon,
-    StyledRemoveIcon,
-} from '../../ListCard/styles'
-import { KeyWords } from '../../ResultSearchCard/styles'
-import {
-    DescriptionParagraph,
-    FirstInfoBox,
-    InfoP,
-    SecondInfoBox,
-    ThirdInfoBox,
-} from './styles'
+import UmAppContext from '../../../contexts/UmAppContext';
+import { useGetListById } from '../../../services/hooks/list/useGetListById';
+import CustomDialog from '../../CustomDialog/CustomDialog';
+import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
+import { KeyWords } from '../../ResultSearchCard/styles';
+import { DescriptionParagraph, FirstInfoBox, InfoP, SecondInfoBox, ThirdInfoBox } from './styles';
 
 type Props = {
-    part: Item
-    icon?: string
-}
+    part: Item;
+    icon?: string;
+};
 export const Searchinfo = ({ part, icon }: Props) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
-    const [open, setOpen] = useState(false)
-    const [alreadyAdded, setAlreadyAdded] = useState(false)
-    const { listId } = useParams()
-    const navigate = useNavigate()
-    const { data: list } = useGetListById(listId!)
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
-        useAddItemsToList()
+    const [open, setOpen] = useState(false);
+    const [alreadyAdded, setAlreadyAdded] = useState(false);
+    const { listId } = useParams();
+    const navigate = useNavigate();
+    const { data: list } = useGetListById(listId!);
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
     const {
         mutate: mutateRemoveItemFromList,
         isSuccess: removeItemSuccess,
         data: removeData,
-    } = useRemoveItemsFromList()
+    } = useRemoveItemsFromList();
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation()
-        const alreadyAdded = list?.items.some((item) => item.id === part.id)
+        e.stopPropagation();
+        const alreadyAdded = list?.items.some((item) => item.id === part.id);
         if (alreadyAdded) {
             {
-                setAlreadyAdded(true)
+                setAlreadyAdded(true);
             }
-            setSnackbarSeverity('error')
-            setSnackbarText('already in list')
+            setSnackbarSeverity('error');
+            setSnackbarText('already in list');
         }
         mutateAddItemToList(ids, {
             onSuccess: (data) => {
-                if (alreadyAdded) return
-                setSnackbarText(`${part.wpId} was added`)
+                if (alreadyAdded) return;
+                setSnackbarText(`${part.wpId} was added`);
 
                 if (data.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
                 }
             },
-        })
-        handleClose(e)
-    }
+        });
+        handleClose(e);
+    };
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation()
+        e.stopPropagation();
         mutateRemoveItemFromList(ids, {
             onSuccess: (removeData) => {
-                setSnackbarText(`${part.wpId} was removed`)
+                setSnackbarText(`${part.wpId} was removed`);
 
                 if (removeData.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(
-                        `${removeData.statusText}, please try again.`
-                    )
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${removeData.statusText}, please try again.`);
                 }
             },
-        })
-        handleClose(e)
-    }
+        });
+        handleClose(e);
+    };
     const handleClickOpen = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        setOpen(true)
-    }
+        e.stopPropagation();
+        setOpen(true);
+    };
     const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation()
+        e.stopPropagation();
 
-        setOpen(false)
-    }
+        setOpen(false);
+    };
     return (
         <>
             <FirstInfoBox>
@@ -137,7 +124,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 {location.pathname.includes('/makelist') && (
                     <StyledInfoIcon
                         onClick={() => {
-                            navigate(`/${part.id}`)
+                            navigate(`/${part.id}`);
                         }}
                     ></StyledInfoIcon>
                 )}
@@ -150,11 +137,9 @@ export const Searchinfo = ({ part, icon }: Props) => {
                     {part.vendor?.name || ''}
                 </InfoP>
                 <InfoP>
-                    <KeyWords>
-                        {part.updatedDate ? 'Last updated' : 'Created on'}
-                    </KeyWords>
+                    <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>
                     {format(
-                        new Date(part.updatedDate || part.createdDate),
+                        new Date(part.updatedDate ?? part.createdDate),
                         'yyyy-MM-dd HH:mm:ss'
                     ).toString()}
                 </InfoP>
@@ -172,5 +157,5 @@ export const Searchinfo = ({ part, icon }: Props) => {
                 }
             />
         </>
-    )
-}
+    );
+};

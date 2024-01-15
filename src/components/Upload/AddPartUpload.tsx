@@ -1,34 +1,41 @@
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import { Button, Container } from '@mui/material'
-import { useEffect, useRef, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { COLORS } from '../../style/GlobalStyles'
-import { Button as SubmitButton } from '../Button/Button'
-import { Wrapper, FileWrapper, FileShapeWrapper, FileTypeWrapper, IconWrapper, DocumentName } from './styles'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { Button, Container } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { COLORS } from '../../style/GlobalStyles';
+import { Button as SubmitButton } from '../Button/Button';
+import {
+    DocumentName,
+    FileShapeWrapper,
+    FileTypeWrapper,
+    FileWrapper,
+    IconWrapper,
+    Wrapper,
+} from './styles';
 
 const AddPartUpload = () => {
-    const { register, setValue } = useFormContext()
-    const [files, setFiles] = useState<File[]>()
-    const documentationField = register('files')
-    const inputFile = useRef<HTMLInputElement | null>(null)
+    const { register, setValue } = useFormContext();
+    const [files, setFiles] = useState<File[]>();
+    const documentationField = register('files');
+    const inputFile = useRef<HTMLInputElement | null>(null);
 
-    const handleFileDownload = async (file: File) => {
-        var downloadLink = document.createElement('a')
-        downloadLink.download = `${file.name}`
-        downloadLink.href = URL.createObjectURL(file)
-        downloadLink.click()
-    }
+    const handleFileDownload = (file: File) => {
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `${file.name}`;
+        downloadLink.href = URL.createObjectURL(file);
+        downloadLink.click();
+    };
 
     const handleFileRemoval = (index: number) => {
-        const filesCopy = [...files!]
-        filesCopy.splice(index, 1)
-        setFiles(filesCopy)
-    }
+        const filesCopy = [...files!];
+        filesCopy.splice(index, 1);
+        setFiles(filesCopy);
+    };
 
     useEffect(() => {
-        setValue('files', files)
-    }, [files])
+        setValue('files', files);
+    }, [files]);
 
     return (
         <>
@@ -45,28 +52,19 @@ const AddPartUpload = () => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>
-                                            .
-                                            {file.type
-                                                .split('/')[1]
-                                                .toUpperCase()}
-                                        </h3>
+                                        <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() =>
-                                                handleFileDownload(file)
-                                            }
+                                            onClick={() => handleFileDownload(file)}
                                         >
                                             {' '}
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
                                             sx={{ color: 'black' }}
-                                            onClick={() =>
-                                                handleFileRemoval(index)
-                                            }
+                                            onClick={() => handleFileRemoval(index)}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
                                         </Button>
@@ -96,18 +94,18 @@ const AddPartUpload = () => {
                         style={{ display: 'none' }}
                         {...documentationField}
                         onChange={(e) => {
-                            setFiles([...e.target.files!])
+                            setFiles([...e.target.files!]);
                         }}
                         ref={(e) => {
-                            documentationField.ref(e)
-                            inputFile.current = e
+                            documentationField.ref(e);
+                            inputFile.current = e;
                         }}
                     />
                     UPLOAD NEW
                 </SubmitButton>
             </Container>
         </>
-    )
-}
+    );
+};
 
-export default AddPartUpload
+export default AddPartUpload;

@@ -1,13 +1,13 @@
-import { useMsal } from '@azure/msal-react'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import MenuIcon from '@mui/icons-material/Menu'
-import { Button, Drawer, Menu, MenuItem } from '@mui/material'
-import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state'
-import { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useWindowDimensions } from '../../hooks'
+import { useMsal } from '@azure/msal-react';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Button, Drawer, Menu, MenuItem } from '@mui/material';
+import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { useEffect, useState } from 'react';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useWindowDimensions } from '../../hooks';
 
-import { HamburgerMenu } from './HamburgerMenu'
+import { HamburgerMenu } from './HamburgerMenu';
 import {
     BackButton,
     CompactHeaderWrap,
@@ -18,38 +18,38 @@ import {
     StyledLinkDiv,
     StyledNavLink,
     TopBarContainer,
-} from './styles'
+} from './styles';
 
 export const TopBar = () => {
-    const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false)
+    const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
 
-    const { listId } = useParams()
-    const navigate = useNavigate()
-    const location = useLocation()
+    const { listId } = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const [returnButton, setReturnButton] = useState(false)
+    const [returnButton, setReturnButton] = useState(false);
 
     const handleBack = () => {
         if (location.pathname === '/add-part/checks') {
-            navigate('/add-part/batch')
+            navigate('/add-part/batch');
         } else if (location.pathname === '/add-part/upload') {
-            navigate('/add-part/checks')
+            navigate('/add-part/checks');
         } else if (location.pathname === '/add-part/add-form') {
-            navigate('/add-part/upload')
+            navigate('/add-part/upload');
         } else if (location.pathname === `/makelist/${listId}`) {
-            navigate('/makelist')
+            navigate('/makelist');
         } else if (location.pathname === '/add-part/batch') {
-            navigate('/add-part')
+            navigate('/add-part');
         } else {
-            navigate(-1)
+            navigate(-1);
         }
-    }
+    };
 
     const handleSearchIconClick = () => {
         navigate('/search', {
             state: { resetInputField: true },
-        })
-    }
+        });
+    };
 
     useEffect(() => {
         const excludedRoutes = [
@@ -61,19 +61,21 @@ export const TopBar = () => {
             '/admin/categories',
             '/admin/vendors',
             '/admin/locations',
-        ]
-        setReturnButton(!excludedRoutes.includes(location.pathname))
-    }, [location.pathname])
-    const { width } = useWindowDimensions()
+        ];
+        setReturnButton(!excludedRoutes.includes(location.pathname));
+    }, [location.pathname]);
+    const { width } = useWindowDimensions();
 
     const adminLinks = (location: string) => {
-        navigate(location)
-    }
-    const { instance } = useMsal()
+        navigate(location);
+    };
+    const { instance } = useMsal();
     const handleSignOut = () => {
-        navigate('/')
-        instance.logoutPopup()
-    }
+        navigate('/');
+        instance.logoutPopup().catch((e) => {
+            console.error(e);
+        });
+    };
 
     return (
         <div>
@@ -115,9 +117,7 @@ export const TopBar = () => {
                                         <MenuItem onClick={popupState.close}>
                                             <MenuAdminLink
                                                 onClick={() => {
-                                                    adminLinks(
-                                                        'admin/categories'
-                                                    )
+                                                    adminLinks('admin/categories');
                                                 }}
                                             >
                                                 Categories
@@ -126,7 +126,7 @@ export const TopBar = () => {
                                         <MenuItem onClick={popupState.close}>
                                             <MenuAdminLink
                                                 onClick={() => {
-                                                    adminLinks('admin/vendors')
+                                                    adminLinks('admin/vendors');
                                                 }}
                                             >
                                                 Vendors
@@ -135,9 +135,7 @@ export const TopBar = () => {
                                         <MenuItem onClick={popupState.close}>
                                             <MenuAdminLink
                                                 onClick={() => {
-                                                    adminLinks(
-                                                        'admin/locations'
-                                                    )
+                                                    adminLinks('admin/locations');
                                                 }}
                                             >
                                                 Locations
@@ -149,7 +147,7 @@ export const TopBar = () => {
                         </PopupState>
                         <LogOutWrapper
                             onClick={() => {
-                                handleSignOut()
+                                handleSignOut();
                             }}
                         >
                             <StyledLinkDiv>Log out</StyledLinkDiv>
@@ -173,14 +171,14 @@ export const TopBar = () => {
                             open={hamburgerIsOpen}
                             onClose={() => setHamburgerIsOpen(false)}
                         >
-                            <HamburgerMenu
-                                setHamburgerIsOpen={setHamburgerIsOpen}
-                            />
+                            <HamburgerMenu setHamburgerIsOpen={setHamburgerIsOpen} />
                         </Drawer>
                     </CompactHeaderWrap>
                 )}
             </TopBarContainer>
             <Outlet />
         </div>
-    )
-}
+    );
+};
+
+export default TopBar;

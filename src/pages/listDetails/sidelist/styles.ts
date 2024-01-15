@@ -1,9 +1,9 @@
-import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import { styled } from 'styled-components'
-import { COLORS } from '../../../style/GlobalStyles.ts'
+import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { styled } from 'styled-components';
+import { COLORS } from '../../../style/GlobalStyles.ts';
 
 export const InfoIcon = styled(InfoOutlinedIcon)`
     color: black;
@@ -12,7 +12,7 @@ export const InfoIcon = styled(InfoOutlinedIcon)`
         color: 
     } */
     cursor: pointer;
-`
+`;
 export const EditIcon = styled(CreateOutlinedIcon)`
     color: black;
 
@@ -20,7 +20,7 @@ export const EditIcon = styled(CreateOutlinedIcon)`
         color: ${COLORS.cautionaryYellow};
     }
     cursor: pointer;
-`
+`;
 
 export const DeleteIcon = styled(DeleteForeverIcon)`
     color: ${COLORS.primary};
@@ -29,7 +29,7 @@ export const DeleteIcon = styled(DeleteForeverIcon)`
     &:hover {
         color: ${COLORS.dangerRed};
     }
-`
+`;
 
 export const Wrapper = styled.div`
     display: flex;
@@ -42,7 +42,7 @@ export const Wrapper = styled.div`
     padding: 5px;
     justify-content: space-evenly;
     background-color: ${COLORS.whiteSmoke};
-`
+`;
 
 export const RemoveIcon = styled(RemoveCircleIcon)`
     color: ${COLORS.primary};
@@ -51,7 +51,7 @@ export const RemoveIcon = styled(RemoveCircleIcon)`
         color: ${COLORS.dangerRed};
     }
     cursor: pointer;
-`
+`;
 
 export const KeyWord = styled.div`
     display: flex;
@@ -59,4 +59,4 @@ export const KeyWord = styled.div`
     gap: 10px;
     flex-wrap: wrap;
     width: 100%;
-`
+`;

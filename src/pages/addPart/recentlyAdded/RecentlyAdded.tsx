@@ -1,19 +1,19 @@
-import { useNavigate } from 'react-router-dom'
-import { Button } from '../../../components/Button/Button.tsx'
-import SearchResultCard from '../../../components/ResultSearchCard/ResultSearchCard.tsx'
-import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact.tsx'
-import { useWindowDimensions } from '../../../hooks/index.ts'
-import { Item } from '../../../services/apiTypes.ts'
-import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser.tsx'
-import { COLORS } from '../../../style/GlobalStyles.ts'
-import { Container, RecentlyAddedContainer } from './styles.ts'
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../../components/Button/Button.tsx';
+import SearchResultCard from '../../../components/ResultSearchCard/ResultSearchCard.tsx';
+import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact.tsx';
+import { useWindowDimensions } from '../../../hooks/index.ts';
+import { Item } from '../../../services/apiTypes.ts';
+import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser.tsx';
+import { COLORS } from '../../../style/GlobalStyles.ts';
+import { Container, RecentlyAddedContainer } from './styles.ts';
 
 const RecentlyAdded = () => {
-    const { width } = useWindowDimensions()
+    const { width } = useWindowDimensions();
 
-    const { data: myItems = [] } = useGetItemsByUser()
+    const { data: myItems = [] } = useGetItemsByUser();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
         <RecentlyAddedContainer>
@@ -34,7 +34,7 @@ const RecentlyAdded = () => {
                 )
             )}
         </RecentlyAddedContainer>
-    )
-}
+    );
+};
 
-export default RecentlyAdded
+export default RecentlyAdded;

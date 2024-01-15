@@ -1,20 +1,20 @@
-import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx'
+import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 
-import { FormContainer } from '../styles.ts'
+import { FormContainer } from '../styles.ts';
 
-import { useNavigate } from 'react-router-dom'
-import { Button } from '../../../components/Button/Button.tsx'
-import { ButtonsWrapper } from '../../../components/Button/styles.ts'
-import { COLORS } from '../../../style/GlobalStyles.ts'
-import { FormContent } from './FormContent.tsx'
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../../components/Button/Button.tsx';
+import { ButtonsWrapper } from '../../../components/Button/styles.ts';
+import { COLORS } from '../../../style/GlobalStyles.ts';
+import { FormContent } from './FormContent.tsx';
 
 type response = {
-    error: string
-}
+    error: string;
+};
 
 // WIP
 export const AddPartFormm = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
         <FormContainer>
@@ -32,5 +32,5 @@ export const AddPartFormm = () => {
                 </Button>
             </ButtonsWrapper>
         </FormContainer>
-    )
-}
+    );
+};

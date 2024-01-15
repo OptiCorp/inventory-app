@@ -1,37 +1,30 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDebounce } from 'usehooks-ts'
-import AdminSearchCard, {
-    SearchType,
-} from '../../../components/AdminSearchCard/AdminSearchCard'
-import { Button } from '../../../components/Button/Button'
-import SearchBar from '../../../components/SearchBar/SearchBar'
-import { Category } from '../../../services/apiTypes'
-import { useGetCategories } from '../../../services/hooks/category/useGetCategories'
-import {
-    AdminContainer,
-    ButtonContainer,
-    SearchResultContainer,
-} from '../styles'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDebounce } from 'usehooks-ts';
+import AdminSearchCard from '../../../components/AdminSearchCard/AdminSearchCard';
+import { Button } from '../../../components/Button/Button';
+import SearchBar from '../../../components/SearchBar/SearchBar';
+import { Category } from '../../../services/apiTypes';
+import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
+import { SearchType } from '../../../utils/constant';
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles';
 
 const Categories = () => {
-    const [searchTerm, setSearchTerm] = useState<string>('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data: initialData } = useGetCategories()
-    const navigate = useNavigate()
-    const [filteredData, setFilteredData] = useState<Category[]>([])
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { data: initialData } = useGetCategories();
+    const navigate = useNavigate();
+    const [filteredData, setFilteredData] = useState<Category[]>([]);
 
     useEffect(() => {
         if (initialData) {
             setFilteredData(
                 initialData.filter((category) =>
-                    category.name
-                        .toLowerCase()
-                        .includes(debouncedSearchTerm.toLowerCase())
+                    category.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
                 )
-            )
+            );
         }
-    }, [initialData, debouncedSearchTerm])
+    }, [initialData, debouncedSearchTerm]);
 
     return (
         <AdminContainer>
@@ -42,14 +35,8 @@ const Categories = () => {
             />
             <SearchResultContainer>
                 {filteredData?.map((category, i) => (
-                    <div
-                        id={i === filteredData.length - 1 ? 'lastItem' : ''}
-                        key={category.id}
-                    >
-                        <AdminSearchCard
-                            searchType={SearchType.Category}
-                            data={category}
-                        />
+                    <div id={i === filteredData.length - 1 ? 'lastItem' : ''} key={category.id}>
+                        <AdminSearchCard searchType={SearchType.Category} data={category} />
                     </div>
                 ))}
             </SearchResultContainer>
@@ -62,7 +49,7 @@ const Categories = () => {
                 />{' '}
             </ButtonContainer>
         </AdminContainer>
-    )
-}
+    );
+};
 
-export default Categories
+export default Categories;

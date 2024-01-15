@@ -1,5 +1,5 @@
-import { styled } from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import { styled } from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 
 export const AdminSearchCardContainer = styled.div`
     background: ${COLORS.card};
@@ -8,15 +8,15 @@ export const AdminSearchCardContainer = styled.div`
     margin: 8px;
     padding: 8px;
     justify-content: space-between;
-`
+`;
 
 export const AdminActions = styled.div`
     display: flex;
     align-items: center;
-`
+`;
 
 export const TitleContainer = styled.div`
     display: flex;
     align-items: center;
     height: 56px;
-`
+`;

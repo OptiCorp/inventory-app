@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import { useDebounce, useLocalStorage } from 'usehooks-ts'
-import SearchBar from '../../components/SearchBar/SearchBar'
-import { useWindowDimensions } from '../../hooks'
+import { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { useDebounce, useLocalStorage } from 'usehooks-ts';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import { useWindowDimensions } from '../../hooks';
 
-import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner'
-import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard'
-import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact'
-import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite'
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
+import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard';
+import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact';
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
     Container,
     RecentSearchContainer,
@@ -15,55 +15,57 @@ import {
     SearchContainer,
     SpanMargin,
     StyledSearchedLink,
-} from './styles'
+} from './styles';
+
+type StateType = {
+    resetInputField?: boolean;
+};
 
 const Search = () => {
-    const { searchParam } = useParams<{ searchParam: string }>()
-    const [searchTerm, setSearchTerm] = useState('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data, isLoading, fetchNextPage } =
-        useGetItemsInfinite(debouncedSearchTerm)
-    const { width } = useWindowDimensions()
-    const [searches, setSearches] = useLocalStorage<string[]>(
-        'recent_searches',
-        []
-    )
-    const location = useLocation()
-    const state = location.state
+    const { searchParam } = useParams<{ searchParam: string }>();
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
+    const { width } = useWindowDimensions();
+    const [searches, setSearches] = useLocalStorage<string[]>('recent_searches', []);
+    const location = useLocation();
+    const state: StateType = location.state as StateType;
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
-            fetchNextPage()
+            fetchNextPage().catch((error) => {
+                console.error('Failed to fetch next page: ', error);
+            });
         }
-    }
+    };
 
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
-    })
+    });
 
     useEffect(() => {
-        const lastItem = document.getElementById('lastItem')
+        const lastItem = document.getElementById('lastItem');
         if (lastItem) {
-            observer.observe(lastItem)
+            observer.observe(lastItem);
         }
         return () => {
             if (lastItem) {
-                observer.unobserve(lastItem)
+                observer.unobserve(lastItem);
             }
-        }
-    }, [data])
+        };
+    }, [data]);
 
     useEffect(() => {
-        setSearchTerm((prev) => searchParam || prev)
-    }, [searchParam])
+        setSearchTerm((prev) => searchParam ?? prev);
+    }, [searchParam]);
 
     useEffect(() => {
         if (searchTerm !== '' && !searches.includes(searchTerm)) {
-            setSearches((prev) => [searchTerm, ...prev.slice(0, 9)])
+            setSearches((prev) => [searchTerm, ...prev.slice(0, 9)]);
         } else if (state?.resetInputField) {
-            setSearchTerm('')
+            setSearchTerm('');
         }
-    }, [debouncedSearchTerm, state])
+    }, [debouncedSearchTerm, state]);
 
     return (
         <>
@@ -82,8 +84,7 @@ const Search = () => {
                             width > 800 ? (
                                 <div
                                     id={
-                                        i === data.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === data.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
@@ -93,8 +94,7 @@ const Search = () => {
                             ) : (
                                 <div
                                     id={
-                                        i === data.pages.length - 1 &&
-                                        index === page.length - 1
+                                        i === data.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
                                             : ''
                                     }
@@ -112,10 +112,7 @@ const Search = () => {
 
                         {searches.map((search, index) => (
                             <SpanMargin>
-                                <StyledSearchedLink
-                                    key={index}
-                                    to={`/search/${search}`}
-                                >
+                                <StyledSearchedLink key={index} to={`/search/${search}`}>
                                     {search}
                                 </StyledSearchedLink>
                             </SpanMargin>
@@ -124,7 +121,7 @@ const Search = () => {
                 ) : null}
             </SearchContainer>
         </>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;

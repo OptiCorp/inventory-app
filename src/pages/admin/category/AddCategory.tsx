@@ -1,8 +1,8 @@
-import { ErrorMessage } from '@hookform/error-message'
-import { FormProvider } from 'react-hook-form'
-import { Button } from '../../../components/Button/Button'
-import { COLORS } from '../../../style/GlobalStyles'
-import { useAddCategoryForm } from '../hooks/useAddCategoryForm'
+import { ErrorMessage } from '@hookform/error-message';
+import { FormProvider } from 'react-hook-form';
+import { Button } from '../../../components/Button/Button';
+import { COLORS } from '../../../style/GlobalStyles';
+import { useAddCategoryForm } from '../hooks/useAddCategoryForm';
 import {
     AdminInput,
     ErrorP,
@@ -10,10 +10,10 @@ import {
     InputWrap,
     StyledForm,
     SubmitButtonContainer,
-} from '../styles'
+} from '../styles';
 
 const AddCategory = () => {
-    const { methods, onSubmit, register } = useAddCategoryForm()
+    const { methods, onSubmit, register } = useAddCategoryForm();
     return (
         <FormProvider {...methods}>
             <FormContainer>
@@ -39,7 +39,7 @@ const AddCategory = () => {
                 </StyledForm>
             </FormContainer>
         </FormProvider>
-    )
-}
+    );
+};
 
-export default AddCategory
+export default AddCategory;

@@ -1,15 +1,19 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import apiService from '../../api'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '../../api';
 
 export const useDeleteCategory = (categoryId: string) => {
-    const api = apiService()
-    const queryClient = useQueryClient()
+    const api = apiService();
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: () => api.deleteCategory(categoryId),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['categories'],
-            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['categories'],
+                })
+                .catch((error) => {
+                    console.error('Failed to invalidate queries: ', error);
+                });
         },
-    })
-}
+    });
+};

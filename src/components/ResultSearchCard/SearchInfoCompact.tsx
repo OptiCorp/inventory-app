@@ -1,93 +1,84 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Typography,
-} from '@mui/material'
-import React, { useContext, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import UmAppContext from '../../contexts/UmAppContext.tsx'
-import { useSnackBar } from '../../hooks/useSnackbar.tsx'
-import { Item, MutateItemList } from '../../services/apiTypes.ts'
-import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx'
-import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx'
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx'
-import { COLORS } from '../../style/GlobalStyles.ts'
-import { Button } from '../Button/Button.tsx'
-import CustomDialog from '../CustomDialog/CustomDialog.tsx'
-import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import UmAppContext from '../../contexts/UmAppContext.tsx';
+import { useSnackBar } from '../../hooks/useSnackbar.tsx';
+import { Item, MutateItemList } from '../../services/apiTypes.ts';
+import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
+import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
+import { COLORS } from '../../style/GlobalStyles.ts';
+import { Button } from '../Button/Button.tsx';
+import CustomDialog from '../CustomDialog/CustomDialog.tsx';
+import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
 import {
     ButtonText,
     CompactInfoP,
     DescriptionWrap,
     KeyWords,
     ResultCardCompactContainer,
-} from './styles.ts'
+} from './styles.ts';
 type Props = {
-    part: Item
-    icon?: string
-}
+    part: Item;
+    icon?: string;
+};
 const SearchResultCardCompact = ({ part, icon }: Props) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext)
-    const { snackbar } = useSnackBar()
-    const navigate = useNavigate()
-    const [open, setOpen] = useState(false)
-    const [alreadyAdded, setAlreadyAdded] = useState(false)
-    const { listId } = useParams()
-    const { data: list, isFetching } = useGetListById(listId!)
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } =
-        useAddItemsToList()
-    const { mutate: mutateRemoveItemFromList, data: removeData } =
-        useRemoveItemsFromList()
+    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { snackbar } = useSnackBar();
+    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const [alreadyAdded, setAlreadyAdded] = useState(false);
+    const { listId } = useParams();
+    const { data: list, isFetching } = useGetListById(listId!);
+    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
+    const { mutate: mutateRemoveItemFromList, data: removeData } = useRemoveItemsFromList();
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation()
-        const alreadyAdded = list?.items.some((item) => item.id === part.id)
+        e.stopPropagation();
+        const alreadyAdded = list?.items.some((item) => item.id === part.id);
         if (alreadyAdded) {
             {
-                setAlreadyAdded(true)
+                setAlreadyAdded(true);
             }
-            setSnackbarSeverity('error')
-            setSnackbarText('already in list')
+            setSnackbarSeverity('error');
+            setSnackbarText('already in list');
         }
         mutateAddItemToList(ids, {
             onSuccess: (data) => {
-                if (alreadyAdded) return
-                setSnackbarText(`${part.wpId} was added`)
+                if (alreadyAdded) return;
+                setSnackbarText(`${part.wpId} was added`);
 
                 if (data.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
                 }
             },
-        })
-        handleClose(e)
-    }
+        });
+        handleClose(e);
+    };
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation()
+        e.stopPropagation();
         mutateRemoveItemFromList(ids, {
             onSuccess: (removeData) => {
-                setSnackbarText(`${part.wpId} was removed`)
+                setSnackbarText(`${part.wpId} was removed`);
 
                 if (removeData.status >= 400) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(
-                        `${removeData.statusText}, please try again.`
-                    )
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${removeData.statusText}, please try again.`);
                 }
             },
-        })
-        handleClose(e)
-    }
+        });
+        handleClose(e);
+    };
     const handleClickOpen = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        setOpen(true)
-    }
+        e.stopPropagation();
+        setOpen(true);
+    };
     const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        setOpen(false)
-    }
+        e.stopPropagation();
+        setOpen(false);
+    };
 
     return (
         <>
@@ -110,12 +101,10 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                             {part.wpId}
                         </CompactInfoP>{' '}
                         <CompactInfoP>
-                            <KeyWords>Location</KeyWords>{' '}
-                            {part.location?.name || 'Location'}
+                            <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
                         </CompactInfoP>
                         <CompactInfoP>
-                            <KeyWords>Category</KeyWords>{' '}
-                            {part.category?.name || 'Category'}
+                            <KeyWords>Category</KeyWords> {part.category?.name || 'Category'}
                         </CompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>
@@ -167,7 +156,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                 }
             />
         </>
-    )
-}
+    );
+};
 
-export default SearchResultCardCompact
+export default SearchResultCardCompact;

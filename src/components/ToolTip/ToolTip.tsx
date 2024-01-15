@@ -1,13 +1,13 @@
-import { ReactNode, useState } from 'react'
-import { ToolTipContent } from './styles'
+import { ReactNode, useState } from 'react';
+import { ToolTipContent } from './styles';
 
 type Props = {
-    content: string
-    children: ReactNode
-}
+    content: string;
+    children: ReactNode;
+};
 
 export const ToolTip = ({ content, children }: Props) => {
-    const [isVisble, setIsVisble] = useState(false)
+    const [isVisble, setIsVisble] = useState(false);
 
     return (
         <div style={{ position: 'relative' }}>
@@ -23,5 +23,5 @@ export const ToolTip = ({ content, children }: Props) => {
 
             {isVisble ? <ToolTipContent>{content}</ToolTipContent> : null}
         </div>
-    )
-}
+    );
+};

@@ -1,8 +1,8 @@
-import DeleteIcon from '@mui/icons-material/Delete'
-import DoneIcon from '@mui/icons-material/Done'
-import EditIcon from '@mui/icons-material/Edit'
-import { Button } from '@mui/material'
-import { FormEvent, useState } from 'react'
+import DeleteIcon from '@mui/icons-material/Delete';
+import DoneIcon from '@mui/icons-material/Done';
+import EditIcon from '@mui/icons-material/Edit';
+import { Button } from '@mui/material';
+import { FormEvent, useState } from 'react';
 import {
     Category,
     Location,
@@ -10,96 +10,81 @@ import {
     UpdateLocation,
     UpdateVendor,
     Vendor,
-} from '../../services/apiTypes'
-import { useDeleteCategory } from '../../services/hooks/category/useDeleteCategory'
-import { useUpdateCategory } from '../../services/hooks/category/useUpdateCategory'
-import { useDeleteLocation } from '../../services/hooks/locations/useDeleteLocation'
-import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocation'
-import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor'
-import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor'
-import {
-    AdminActions,
-    AdminSearchCardContainer,
-    TitleContainer,
-} from './styles'
+} from '../../services/apiTypes';
+import { useDeleteCategory } from '../../services/hooks/category/useDeleteCategory';
+import { useUpdateCategory } from '../../services/hooks/category/useUpdateCategory';
+import { useDeleteLocation } from '../../services/hooks/locations/useDeleteLocation';
+import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocation';
+import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor';
+import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor';
+import { SearchType } from '../../utils/constant';
+import { AdminActions, AdminSearchCardContainer, TitleContainer } from './styles';
 
 type Props = {
-    data: Category | Vendor | Location
-    searchType: SearchType
-}
-
-export enum SearchType {
-    Category = 'category',
-    Vendor = 'vendor',
-    Location = 'location',
-}
+    data: Category | Vendor | Location;
+    searchType: SearchType;
+};
 
 const AdminSearchCard = ({ data, searchType }: Props) => {
-    const [isEditing, setIsEditing] = useState(false)
-    const { mutate: updateCategory, status: categoryUpdateStatus } =
-        useUpdateCategory(data.id)
-    const { mutate: updateVendor, status: vendorUpdateStatus } =
-        useUpdateVendor(data.id)
-    const { mutate: updateLocation, status: locationUpdateStatus } =
-        useUpdateLocation(data.id)
-    const { mutate: deleteCategory, status: categoryDeleteStatus } =
-        useDeleteCategory(data.id)
-    const { mutate: deleteVendor, status: categoryVendorStatus } =
-        useDeleteVendor(data.id)
-    const { mutate: deleteLocation, status: categoryLocationStatus } =
-        useDeleteLocation(data.id)
+    const [isEditing, setIsEditing] = useState(false);
+    const { mutate: updateCategory, status: categoryUpdateStatus } = useUpdateCategory(data.id);
+    const { mutate: updateVendor, status: vendorUpdateStatus } = useUpdateVendor(data.id);
+    const { mutate: updateLocation, status: locationUpdateStatus } = useUpdateLocation(data.id);
+    const { mutate: deleteCategory, status: categoryDeleteStatus } = useDeleteCategory(data.id);
+    const { mutate: deleteVendor, status: categoryVendorStatus } = useDeleteVendor(data.id);
+    const { mutate: deleteLocation, status: categoryLocationStatus } = useDeleteLocation(data.id);
 
-    const handleEdit = (
-        isEditing: boolean,
-        event?: FormEvent<HTMLInputElement>
-    ) => {
+    const handleEdit = (isEditing: boolean, event?: FormEvent<HTMLInputElement>) => {
         if (isEditing) {
             if (event) {
                 switch (searchType) {
-                    case SearchType.Category:
-                        data.name = event?.currentTarget.value
-                        var newCategory: UpdateCategory = {
+                    case SearchType.Category: {
+                        data.name = event?.currentTarget.value;
+                        const newCategory: UpdateCategory = {
                             id: data.id,
                             name: event?.currentTarget.value,
-                        }
-                        updateCategory(newCategory)
-                        break
-                    case SearchType.Vendor:
-                        data.name = event?.currentTarget.value
-                        var newVendor: UpdateVendor = {
+                        };
+                        updateCategory(newCategory);
+                        break;
+                    }
+                    case SearchType.Vendor: {
+                        data.name = event?.currentTarget.value;
+                        const newVendor: UpdateVendor = {
                             id: data.id,
                             name: event?.currentTarget.value,
-                        }
-                        updateVendor(newVendor)
-                        break
-                    case SearchType.Location:
-                        data.name = event?.currentTarget.value
-                        var newLocation: UpdateLocation = {
+                        };
+                        updateVendor(newVendor);
+                        break;
+                    }
+                    case SearchType.Location: {
+                        data.name = event?.currentTarget.value;
+                        const newLocation: UpdateLocation = {
                             id: data.id,
                             name: event?.currentTarget.value,
-                        }
-                        updateLocation(newLocation)
-                        break
+                        };
+                        updateLocation(newLocation);
+                        break;
+                    }
                 }
             }
-            setIsEditing(!isEditing)
+            setIsEditing(!isEditing);
         } else {
-            setIsEditing(!isEditing)
+            setIsEditing(!isEditing);
         }
-    }
+    };
 
     const handleDelete = () => {
         switch (searchType) {
             case SearchType.Category:
-                deleteCategory()
-                break
+                deleteCategory();
+                break;
             case SearchType.Vendor:
-                deleteVendor()
-                break
+                deleteVendor();
+                break;
             case SearchType.Location:
-                deleteLocation()
+                deleteLocation();
         }
-    }
+    };
 
     return (
         <AdminSearchCardContainer>
@@ -136,7 +121,7 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
                 </Button>
             </AdminActions>
         </AdminSearchCardContainer>
-    )
-}
+    );
+};
 
-export default AdminSearchCard
+export default AdminSearchCard;
