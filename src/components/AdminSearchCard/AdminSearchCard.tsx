@@ -11,8 +11,8 @@ import {
     UpdateVendor,
     Vendor,
 } from '../../services/apiTypes'
-import { useDeleteCategory } from '../../services/hooks/category/useDeleteCategory'
-import { useUpdateCategory } from '../../services/hooks/category/useUpdateCategory'
+import { useDeleteCategory } from '../../services/hooks/categoryFix/useDeleteCategory'
+import { useUpdateCategory } from '../../services/hooks/categoryFix/useUpdateCategory'
 import { useDeleteLocation } from '../../services/hooks/locations/useDeleteLocation'
 import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocation'
 import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor'

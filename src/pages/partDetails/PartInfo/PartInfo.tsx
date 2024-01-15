@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import UmAppContext from '../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../hooks'
 import type { Item } from '../../../services/apiTypes'
-import { useGetCategories } from '../../../services/hooks/category/useGetCategories'
+import { useGetCategories } from '../../../services/hooks/categoryFix/useGetCategories'
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations'
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors'
 
@@ -17,7 +17,6 @@ import {
     useFormSelectChangeHandler,
 } from './hooks'
 import { PartInfoForm } from './styles'
-
 
 type Props = {
     item: Item

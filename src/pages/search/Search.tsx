@@ -5,8 +5,8 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 import { useWindowDimensions } from '../../hooks'
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner'
-import SearchResultCardCompact from '../../components/SearchResultCard/SearchInfoCompact'
-import SearchResultCard from '../../components/SearchResultCard/SearchResultCard'
+import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard'
+import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact'
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite'
 import {
     Container,

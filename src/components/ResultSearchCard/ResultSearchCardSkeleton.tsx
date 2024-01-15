@@ -7,7 +7,7 @@ import {
     ResultCardCompactContainer,
     ResultCardContainer,
     SearchCardSkeleton,
-} from './styles'
+} from '../SearchResultCard/styles'
 
 const SearchResultCardSkeleton = () => {
     const { width } = useWindowDimensions()

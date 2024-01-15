@@ -10,9 +10,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { useSnackBar } from '../../hooks/useSnackbar.tsx'
 import { Item, MutateItemList } from '../../services/apiTypes.ts'
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx'
 import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx'
 import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx'
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'
 import { Button } from '../Button/Button.tsx'
 import CustomDialog from '../CustomDialog/CustomDialog.tsx'
@@ -23,7 +23,7 @@ import {
     DescriptionWrap,
     KeyWords,
     ResultCardCompactContainer,
-} from './styles.ts'
+} from '../SearchResultCard/styles.ts'
 type Props = {
     part: Item
     icon?: string
