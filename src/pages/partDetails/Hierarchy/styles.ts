@@ -3,6 +3,11 @@ import { COLORS } from '../../../style/GlobalStyles'
 import RemoveIcon from '@mui/icons-material/Close'
 import Add from '@mui/icons-material/Add'
 
+
+
+export const ParentContainer = styled.div`
+    margin-bottom: 28px;
+`
 export const AddIcon = styled(Add)<{ disabled: boolean }>`
     color: ${(props) => (props.disabled ? '#ddd' : COLORS.primary)};
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
