@@ -8,7 +8,8 @@ interface CardProps {
     onClick?: () => void
 }
 
-export const Card: FunctionComponent<CardProps> = ({
+export const CustomCard
+    : FunctionComponent<CardProps> = ({
     children,
     title,
     onClick,
