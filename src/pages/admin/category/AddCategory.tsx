@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { ErrorMessage } from '@hookform/error-message'
 import { FormProvider } from 'react-hook-form'
-import { useAddCategoryForm } from '../hooks/useAddCategoryForm'
 import { Button } from '../../../components/Button/SubmitButton'
 import { COLORS } from '../../../style/GlobalStyles'
+import { useAddCategoryForm } from '../hooks/useAddCategoryForm'
 import {
     AdminInput,
-    ButtonContainer,
     ErrorP,
     FormContainer,
     InputWrap,
     StyledForm,
-    SubmitButtonContainer,
+    SubmitButtonContainer
 } from '../styles'
-import { ErrorMessage } from '@hookform/error-message'
 
 const AddCategory = () => {
     const { methods, onSubmit, register } = useAddCategoryForm()

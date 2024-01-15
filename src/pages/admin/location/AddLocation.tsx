@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { ErrorMessage } from '@hookform/error-message'
 import { FormProvider } from 'react-hook-form'
 import { Button } from '../../../components/Button/SubmitButton'
