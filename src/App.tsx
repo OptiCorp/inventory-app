@@ -8,7 +8,7 @@ import {
 import { Login } from './pages/login/Login.tsx'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import TopBar from './components/TopBar/TopBar.tsx'
+import { TopBar } from './components/TopBar/TopBar.tsx'
 import { UmAppContextProvider } from './contexts/UmAppContext'
 import AddPart from './pages/addPart/Index'
 import { AddPartFormm } from './pages/addPart/addPartForm/AddPartForm'
