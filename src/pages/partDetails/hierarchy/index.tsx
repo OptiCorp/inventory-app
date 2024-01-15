@@ -1,19 +1,19 @@
-import EditIcon from '@mui/icons-material/Edit'
-import { Box, ClickAwayListener } from '@mui/material'
-import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Select from 'react-select'
-import { useDebounce } from 'usehooks-ts'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { Item } from '../../../services/apiTypes'
+import EditIcon from '@mui/icons-material/Edit';
+import { Box, ClickAwayListener } from '@mui/material';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import { useDebounce } from 'usehooks-ts';
+import UmAppContext from '../../../contexts/UmAppContext';
+import { Item } from '../../../services/apiTypes';
 import {
     AddChildItemIds,
     useAddChildItemToParent,
-} from '../../../services/hooks/items/useAddChildItemToParent'
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite'
-import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem'
-import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem'
-import { Edit, LabelContainer } from '../partInfo/styles'
+} from '../../../services/hooks/items/useAddChildItemToParent';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
+import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem';
+import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
+import { Edit, LabelContainer } from '../partInfo/styles';
 
 import {
     AccessibleButtonWrapper,
@@ -24,41 +24,38 @@ import {
     FlexContainer,
     LinkElement,
     ParentContainer,
-} from './styles'
+} from './styles';
 
 export const Hierarchy = ({ item }: { item: Item }) => {
-    const { currentUser, setSnackbarText, setSnackbarSeverity } =
-        useContext(UmAppContext)
-    const [searchTerm, setSearchTerm] = useState('')
-    const [selectedId, setSelectedId] = useState(item.wpId)
+    const { currentUser, setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedId, setSelectedId] = useState(item.wpId);
     const [selectedChildItem, setSelectedChildItem] = useState({
         childItemId: '',
         childItemWpId: '',
-    })
+    });
     const [isOpen, setIsOpen] = useState({
         parent: false,
         child: false,
-    })
-    const debouncedSearchTerm = useDebounce(searchTerm, 1000)
-    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(searchTerm)
-    const { mutate: mutateUpdateItem } = useUpdateItem(item.id, currentUser!.id)
-    const { mutate: mutateRemoveParentFromItem } = useRemoveParentIdFromItem()
-    const { mutate: mutateAddChildItemToParent } = useAddChildItemToParent()
-    const navigate = useNavigate()
+    });
+    const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(searchTerm);
+    const { mutate: mutateUpdateItem } = useUpdateItem(item.id, currentUser!.id);
+    const { mutate: mutateRemoveParentFromItem } = useRemoveParentIdFromItem();
+    const { mutate: mutateAddChildItemToParent } = useAddChildItemToParent();
+    const navigate = useNavigate();
 
     const filteredWpIds = data?.pages
         .flatMap((el) => el)
         .filter(
             (el) =>
-                el.wpId
-                    ?.toLowerCase()
-                    .includes(debouncedSearchTerm.toLowerCase()) &&
+                el.wpId?.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) &&
                 el.wpId !== item.wpId
         )
-        .map((el) => ({ label: el.wpId, value: el }))
+        .map((el) => ({ label: el.wpId, value: el }));
 
     const handleBlur = () => {
-        if (selectedId === item.wpId) return
+        if (selectedId === item.wpId) return;
         mutateUpdateItem(
             {
                 ...item,
@@ -67,80 +64,80 @@ export const Hierarchy = ({ item }: { item: Item }) => {
             {
                 onSuccess: (data) => {
                     if (data.status >= 400 && data.status < 500) {
-                        setSnackbarSeverity('error')
-                        setSnackbarText(`${data.statusText}, please try again.`)
-                        return
+                        setSnackbarSeverity('error');
+                        setSnackbarText(`${data.statusText}, please try again.`);
+                        return;
                     } else if (data.status >= 500) {
-                        setSnackbarSeverity('error')
+                        setSnackbarSeverity('error');
                         setSnackbarText(
                             `Something went wrong on our end, refresh page and try again later.`
-                        )
-                        return
+                        );
+                        return;
                     } else {
-                        setSnackbarText(`WP Id was changed to ${selectedId}`)
+                        setSnackbarText(`WP Id was changed to ${selectedId}`);
                     }
                 },
             }
-        )
-    }
+        );
+    };
 
     const handleAddChildToParent = (ids: AddChildItemIds) => {
         if (ids.childItemId === ids.itemId) {
-            setSnackbarText('Cant add itself as child')
-            setSnackbarSeverity('warning')
-            return
+            setSnackbarText('Cant add itself as child');
+            setSnackbarSeverity('warning');
+            return;
         }
 
         mutateAddChildItemToParent(ids, {
             onSuccess: (data) => {
                 if (data.status >= 400 && data.status < 500) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
-                    return
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
+                    return;
                 } else if (data.status >= 500) {
-                    setSnackbarSeverity('error')
+                    setSnackbarSeverity('error');
                     setSnackbarText(
                         `Something went wrong on our end, refresh page and try again later.`
-                    )
-                    return
+                    );
+                    return;
                 } else {
-                    setSnackbarText(`Item added`)
+                    setSnackbarText(`Item added`);
                 }
             },
-        })
-    }
+        });
+    };
 
     const handleRemoveItem = (id: string) => {
         mutateRemoveParentFromItem(id, {
             onSuccess: (data) => {
                 if (data.status >= 400 && data.status < 500) {
-                    setSnackbarSeverity('error')
-                    setSnackbarText(`${data.statusText}, please try again.`)
-                    return
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${data.statusText}, please try again.`);
+                    return;
                 } else if (data.status >= 500) {
-                    setSnackbarSeverity('error')
+                    setSnackbarSeverity('error');
                     setSnackbarText(
                         `Something went wrong on our end, refresh page and try again later.`
-                    )
-                    return
+                    );
+                    return;
                 } else {
-                    setSnackbarText(`Item removed`)
+                    setSnackbarText(`Item removed`);
                 }
             },
-        })
-    }
+        });
+    };
 
     const clickAwayHandlerParent = () => {
-        setIsOpen((prev) => ({ ...prev, parent: false }))
-    }
+        setIsOpen((prev) => ({ ...prev, parent: false }));
+    };
 
     const clickAwayHandlerChild = () => {
-        setIsOpen((prev) => ({ ...prev, child: false }))
+        setIsOpen((prev) => ({ ...prev, child: false }));
         setSelectedChildItem({
             childItemId: '',
             childItemWpId: '',
-        })
-    }
+        });
+    };
 
     return (
         <div>
@@ -173,20 +170,14 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                 options={filteredWpIds}
                                 isLoading={isLoading}
                                 placeholder="Search by wpid..."
-                                onChange={(value) =>
-                                    setSelectedId(value!.value.wpId)
-                                }
+                                onChange={(value) => setSelectedId(value!.value.wpId)}
                                 onBlur={handleBlur}
                             />
                         )}
                         {!isOpen.parent && (
                             <>
                                 {item.parent && (
-                                    <LinkElement
-                                        onClick={() =>
-                                            navigate(`/${item.parent?.id}`)
-                                        }
-                                    >
+                                    <LinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
                                         {item.parent?.wpId}
                                     </LinkElement>
                                 )}
@@ -202,25 +193,19 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                         {item.children?.map((childItem) => {
                             return (
                                 <ChildItemContainer key={childItem.wpId}>
-                                    <LinkElement
-                                        onClick={() =>
-                                            navigate(`/${childItem.id}`)
-                                        }
-                                    >
+                                    <LinkElement onClick={() => navigate(`/${childItem.id}`)}>
                                         {childItem.wpId}
                                     </LinkElement>
 
                                     {isOpen.child && (
                                         <AccessibleButtonWrapper
-                                            onClick={() =>
-                                                handleRemoveItem(childItem.id)
-                                            }
+                                            onClick={() => handleRemoveItem(childItem.id)}
                                         >
                                             <CustomRemoveIcon />
                                         </AccessibleButtonWrapper>
                                     )}
                                 </ChildItemContainer>
-                            )
+                            );
                         })}
                         {!isOpen.child && !!item.children?.length && (
                             <AccessibleButtonWrapper
@@ -263,25 +248,22 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                         />
 
                         <AddIcon
-                            disabled={
-                                selectedChildItem.childItemWpId.length <= 0
-                            }
+                            disabled={selectedChildItem.childItemWpId.length <= 0}
                             onClick={() => {
-                                if (selectedChildItem.childItemWpId.length <= 0)
-                                    return
+                                if (selectedChildItem.childItemWpId.length <= 0) return;
                                 handleAddChildToParent({
                                     itemId: item.id,
                                     childItemId: selectedChildItem.childItemId,
-                                })
+                                });
                                 setSelectedChildItem({
                                     childItemId: '',
                                     childItemWpId: '',
-                                })
+                                });
                             }}
                         />
                     </ChildItemSearchContainer>
                 </Box>
             </ClickAwayListener>
         </div>
-    )
-}
+    );
+};

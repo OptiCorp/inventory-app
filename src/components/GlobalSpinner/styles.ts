@@ -1,11 +1,11 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components';
 
 export const GlobalSpinnerContainer = styled.div`
     padding-top: 6rem;
     padding-bottom: 4rem;
     display: flex;
     justify-content: center;
-`
+`;
 
 const rotate360 = keyframes`
   from {
@@ -14,7 +14,7 @@ const rotate360 = keyframes`
   to {
     transform: rotate(360deg);
   }
-`
+`;
 
 export const Spinner = styled.div`
     animation: ${rotate360} 1s linear infinite;
@@ -28,4 +28,4 @@ export const Spinner = styled.div`
     width: 24px;
     height: 24px;
     border-radius: 50%;
-`
+`;

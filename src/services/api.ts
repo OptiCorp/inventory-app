@@ -296,8 +296,8 @@ const apiService = () => {
     };
 
     const removeParentIdFromItem = async (itemId: string): Promise<Response> => {
-        return await postByFetch(`Item/RemoveParentId?itemId=${itemId}`)
-    }
+        return await postByFetch(`Item/RemoveParentId?itemId=${itemId}`);
+    };
 
     const isWpIdUnique = async (id: string) => {
         if (!id) return;
@@ -335,8 +335,10 @@ const apiService = () => {
     };
 
     const addChildItemToParent = async (itemId: string, childItemId: string): Promise<Response> => {
-        return await postByFetch(`Item/AddChildItemToParent?itemId=${itemId}&childItemId=${childItemId}`)
-    }
+        return await postByFetch(
+            `Item/AddChildItemToParent?itemId=${itemId}&childItemId=${childItemId}`
+        );
+    };
 
     const addItemsToList = async (listId: string, itemId: string): Promise<Response> => {
         return await postByFetch(`List/AddItems/?listId=${listId}`, [itemId]);

@@ -108,21 +108,21 @@ export type AddItem = {
 };
 
 export type UpdateItem = {
-    id: string
-    wpId: string
-    serialNumber: string
-    productNumber: string
-    type: string
-    children: Item[] | null
-    categoryId: string | null | undefined
-    locationId?: string | null
-    description: string
-    parentId?: string | null
-    vendorId: string
-    addedById: string | null
-    comment?: string | null
-    listId: string | null
-}
+    id: string;
+    wpId: string;
+    serialNumber: string;
+    productNumber: string;
+    type: string;
+    children: Item[] | null;
+    categoryId: string | null | undefined;
+    locationId?: string | null;
+    description: string;
+    parentId?: string | null;
+    vendorId: string;
+    addedById: string | null;
+    comment?: string | null;
+    listId: string | null;
+};
 
 export type Vendor = {
     id: string;

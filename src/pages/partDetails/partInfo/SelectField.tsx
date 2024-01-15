@@ -1,9 +1,9 @@
-import { Box, ClickAwayListener } from '@mui/material'
-import { useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import Select, { CSSObjectWithLabel } from 'react-select'
-import { Edit, LabelContainer } from './styles'
-import { SelectProps } from './types'
+import { Box, ClickAwayListener } from '@mui/material';
+import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import Select, { CSSObjectWithLabel } from 'react-select';
+import { Edit, LabelContainer } from './styles';
+import { SelectProps } from './types';
 
 export const SelectField = ({
     handleSelectChange,
@@ -20,12 +20,12 @@ export const SelectField = ({
     };
 
     const handleEditClick = () => {
-        setIsOpen(true)
-    }
+        setIsOpen(true);
+    };
     const newOptions = options.map((option) => ({
         value: option?.id,
         label: option.name ? option.name : option?.id,
-    }))
+    }));
 
     const customStyles = {
         control: (provided: CSSObjectWithLabel) => ({
@@ -47,14 +47,14 @@ export const SelectField = ({
             provided: CSSObjectWithLabel,
             state: { data: { value: string } }
         ): CSSObjectWithLabel => {
-            const stateValue = state.data.value
+            const stateValue = state.data.value;
             return {
                 ...provided,
                 color: stateValue === defaultValue ? 'gray' : 'inherit',
                 cursor: stateValue === defaultValue ? 'not-allowed' : 'pointer',
-            }
+            };
         },
-    }
+    };
 
     return (
         <div>

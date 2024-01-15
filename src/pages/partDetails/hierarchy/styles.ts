@@ -1,13 +1,11 @@
-import Add from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Close'
-import styled from 'styled-components'
-import { COLORS } from '../../../style/GlobalStyles'
-
-
+import Add from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Close';
+import styled from 'styled-components';
+import { COLORS } from '../../../style/GlobalStyles';
 
 export const ParentContainer = styled.div`
     margin-bottom: 28px;
-`
+`;
 export const AddIcon = styled(Add)<{ disabled: boolean }>`
     color: ${(props) => (props.disabled ? '#ddd' : COLORS.primary)};
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
@@ -16,7 +14,7 @@ export const AddIcon = styled(Add)<{ disabled: boolean }>`
         scale: 110%;
         color: ${(props) => (props.disabled ? '#ddd' : 'green')};
     }
-`
+`;
 
 export const CustomRemoveIcon = styled(RemoveIcon)`
     position: absolute;
@@ -32,28 +30,27 @@ export const CustomRemoveIcon = styled(RemoveIcon)`
         color: red;
         scale: 110%;
     }
-`
+`;
 
 export const FlexContainer = styled.div`
     display: flex;
     gap: 10px;
-`
+`;
 export const ChildItemContainer = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-
-`
+`;
 
 export const LinkElement = styled.p`
     display: inline-block;
     border-bottom: 1px dotted ${COLORS.primary};
     cursor: pointer;
-`
+`;
 export const ChildItemSearchContainer = styled.div`
     display: flex;
     align-items: center;
-`
+`;
 
 export const AccessibleButtonWrapper = styled.button`
     border: none;
@@ -64,4 +61,4 @@ export const AccessibleButtonWrapper = styled.button`
     &:hover {
         color: #ff001e;
     }
-`
+`;

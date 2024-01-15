@@ -4,6 +4,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
+
 export const ListWrapper = styled.div`
     position: relative;
     padding: 8px;

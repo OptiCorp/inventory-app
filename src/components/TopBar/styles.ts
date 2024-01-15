@@ -13,7 +13,7 @@ export const StyledLinkDiv = styled.h3`
     padding: 0 16px 0 17px;
     font-size: 1.3rem;
     cursor: pointer;
-`
+`;
 
 export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
@@ -41,27 +41,27 @@ export const HamburgerContainer = styled(Box)`
         justify-content: space-between;
         height: 100%;
     }
-`
+`;
 export const CompactHeaderWrap = styled.div`
     display: flex;
-`
+`;
 
 export const HeaderWrap = styled.div`
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
-`
+`;
 
 export const BackButton = styled.div`
     position: relative;
     margin: 0;
     cursor: pointer;
-`
+`;
 
 type Props = {
-    $isopen: boolean | string
-}
+    $isopen: boolean | string;
+};
 export const MenuAdmin = styled.div<Props>`
     cursor: pointer;
 
@@ -72,10 +72,10 @@ export const MenuAdmin = styled.div<Props>`
     &:hover {
         color: ${COLORS.primary};
     }
-`
+`;
 export const MenuAdminLink = styled.span`
     padding: 2px 4px;
-`
+`;
 
 export const LogOutWrapper = styled.div`
     color: ${COLORS.gray};
@@ -86,4 +86,4 @@ export const LogOutWrapper = styled.div`
         color: ${COLORS.primary};
     }
     cursor: pointer;
-`
+`;

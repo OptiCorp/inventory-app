@@ -1,84 +1,84 @@
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import { Button, Container } from '@mui/material'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { AddDocument, Document, Item } from '../../../services/apiTypes'
-import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument'
-import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId'
-import { useUploadDocument } from '../../../services/hooks/documents/useUploadDocument'
-import { COLORS } from '../../../style/GlobalStyles'
-import { SubmitButton, Wrapper } from '../../Button/styles'
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { Button, Container } from '@mui/material';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { AddDocument, Document, Item } from '../../../services/apiTypes';
+import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
+import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
+import { useUploadDocument } from '../../../services/hooks/documents/useUploadDocument';
+import { COLORS } from '../../../style/GlobalStyles';
+import { SubmitButton, Wrapper } from '../../Button/styles';
 import {
     DocumentName,
     FileShapeWrapper,
     FileTypeWrapper,
     FileWrapper,
     IconWrapper,
-} from './styles'
+} from './styles';
 
 type UploadProps = {
-    item: Item
-}
+    item: Item;
+};
 
 const UploadMobile = ({ item }: UploadProps) => {
-    const { data } = useGetDocumentsByItemId(item.id)
-    const { mutate: uploadDocument } = useUploadDocument()
-    const { mutate: deleteDocument } = useDeleteDocument(item.id)
-    const inputFile = useRef<HTMLInputElement | null>(null)
-    const [showArrow, setShowArrow] = useState(true)
+    const { data } = useGetDocumentsByItemId(item.id);
+    const { mutate: uploadDocument } = useUploadDocument();
+    const { mutate: deleteDocument } = useDeleteDocument(item.id);
+    const inputFile = useRef<HTMLInputElement | null>(null);
+    const [showArrow, setShowArrow] = useState(true);
 
     const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const document: AddDocument = {
                 itemId: item.id,
                 files: [...e.target.files],
-            }
-            uploadDocument(document)
+            };
+            uploadDocument(document);
         }
-    }
+    };
 
     const handleFileDownload = (file: Document) => {
-        const downloadLink = document.createElement('a')
-        downloadLink.download = `${file.name}`
-        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`
-        downloadLink.click()
-    }
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `${file.name}`;
+        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`;
+        downloadLink.click();
+    };
 
     const handleFileDelete = (documentId: string) => {
-        deleteDocument(documentId)
-    }
+        deleteDocument(documentId);
+    };
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.className = 'visible'
+                entry.target.className = 'visible';
             } else {
-                entry.target.className = 'hidden'
+                entry.target.className = 'hidden';
             }
-        })
-    }
+        });
+    };
 
     const observer = new IntersectionObserver(handleIntersect, {
         threshold: 0.5,
-    })
+    });
 
     useEffect(() => {
-        const files = document.getElementsByClassName('files')
+        const files = document.getElementsByClassName('files');
         if (files.length !== 0) {
             for (let i = 0; i < files.length; i++) {
-                observer.observe(files[i])
+                observer.observe(files[i]);
             }
         }
 
         return () => {
             if (files.length !== 0) {
                 for (let i = 0; i < files.length; i++) {
-                    observer.unobserve(files[i])
+                    observer.unobserve(files[i]);
                 }
             }
-        }
-    }, [data])
+        };
+    }, [data]);
 
     return (
         <>
@@ -95,26 +95,17 @@ const UploadMobile = ({ item }: UploadProps) => {
                             <foreignObject width={121} height={153}>
                                 <FileShapeWrapper>
                                     <FileTypeWrapper>
-                                        <h3>
-                                            .
-                                            {document.contentType
-                                                .split('/')[1]
-                                                .toUpperCase()}
-                                        </h3>
+                                        <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
                                     </FileTypeWrapper>
                                     <IconWrapper>
                                         <Button
-                                            onClick={() =>
-                                                handleFileDownload(document)
-                                            }
+                                            onClick={() => handleFileDownload(document)}
                                             sx={{ color: 'black' }}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
                                         </Button>
                                         <Button
-                                            onClick={() =>
-                                                handleFileDelete(document.id)
-                                            }
+                                            onClick={() => handleFileDelete(document.id)}
                                             sx={{ color: 'black' }}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
@@ -127,9 +118,7 @@ const UploadMobile = ({ item }: UploadProps) => {
                                 stroke="black"
                             />
                         </svg>
-                        <DocumentName>
-                            {document.name.split('.')[0]}
-                        </DocumentName>
+                        <DocumentName>{document.name.split('.')[0]}</DocumentName>
                     </FileWrapper>
                 ))}
                 {showArrow === true && data?.length! > 2 && (
@@ -158,7 +147,7 @@ const UploadMobile = ({ item }: UploadProps) => {
                 </SubmitButton>
             </Container>
         </>
-    )
-}
+    );
+};
 
-export default UploadMobile
+export default UploadMobile;
