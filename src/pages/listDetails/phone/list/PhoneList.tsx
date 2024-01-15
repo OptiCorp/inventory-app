@@ -43,7 +43,7 @@ export const PhoneList = ({ list }: Props) => {
             },
         });
     };
-    const {} = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
+
     return (
         <>
             {list && (

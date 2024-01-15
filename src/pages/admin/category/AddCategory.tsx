@@ -17,7 +17,15 @@ const AddCategory = () => {
     return (
         <FormProvider {...methods}>
             <FormContainer>
-                <StyledForm onSubmit={onSubmit} id="addCategory">
+                <StyledForm
+                    onSubmit={(e) => {
+                        e && e.preventDefault(); // Prevent the default form submission behavior
+                        onSubmit(e).catch((error) => {
+                            console.error('An error occurred:', error);
+                        });
+                    }}
+                    id="addCategory"
+                >
                     <InputWrap>
                         <label htmlFor="categoryName">Category name</label>
                         <AdminInput type="text" {...register('name')} />

@@ -66,15 +66,15 @@ const UploadMobile = ({ item }: UploadProps) => {
     useEffect(() => {
         const files = document.getElementsByClassName('files');
         if (files.length !== 0) {
-            for (let i = 0; i < files.length; i++) {
-                observer.observe(files[i]);
+            for (const element of files) {
+                observer.observe(element);
             }
         }
 
         return () => {
             if (files.length !== 0) {
-                for (let i = 0; i < files.length; i++) {
-                    observer.unobserve(files[i]);
+                for (const element of files) {
+                    observer.observe(element);
                 }
             }
         };
@@ -121,7 +121,7 @@ const UploadMobile = ({ item }: UploadProps) => {
                         <DocumentName>{document.name.split('.')[0]}</DocumentName>
                     </FileWrapper>
                 ))}
-                {showArrow === true && data?.length! > 2 && (
+                {showArrow === true && (data?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon
                         fontSize="large"
                         sx={{ position: 'sticky', top: '75px', right: '-10px' }}

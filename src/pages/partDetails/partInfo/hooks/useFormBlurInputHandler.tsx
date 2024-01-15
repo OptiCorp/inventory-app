@@ -44,7 +44,9 @@ export const useFormBlurInputHandler = (obj: Item) => {
                                         setSnackbarText(`${field.toUpperCase()} was updated`);
                                     } else {
                                         setSnackbarText(
-                                            `${field.toUpperCase()} was changed to ${fieldValue}`
+                                            `${field.toUpperCase()} was changed to ${String(
+                                                fieldValue
+                                            )}`
                                         );
                                     }
                                 }

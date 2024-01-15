@@ -54,15 +54,15 @@ const AddPartUploadMobile = () => {
         setValue('files', files);
         const fileClass = document.getElementsByClassName('fileClass');
         if (fileClass.length !== 0) {
-            for (let i = 0; i < fileClass.length; i++) {
-                observer.observe(fileClass[i]);
+            for (const element of fileClass) {
+                observer.observe(element);
             }
         }
 
         return () => {
             if (fileClass.length !== 0) {
-                for (let i = 0; i < fileClass.length; i++) {
-                    observer.unobserve(fileClass[i]);
+                for (const element of fileClass) {
+                    observer.observe(element);
                 }
             }
         };
@@ -109,7 +109,7 @@ const AddPartUploadMobile = () => {
                         <DocumentName>{file.name.split('.')[0]}</DocumentName>
                     </FileWrapper>
                 ))}
-                {showArrow === true && files?.length! > 2 && (
+                {showArrow === true && (files?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon
                         fontSize="large"
                         sx={{ position: 'sticky', top: '75px', right: '-10px' }}

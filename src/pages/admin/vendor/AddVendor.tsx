@@ -17,7 +17,15 @@ const AddVendor = () => {
     return (
         <FormProvider {...methods}>
             <FormContainer>
-                <StyledForm onSubmit={onSubmit} id="addVendor">
+                <StyledForm
+                    onSubmit={(e) => {
+                        e && e.preventDefault(); // Prevent the default form submission behavior
+                        onSubmit(e).catch((error) => {
+                            console.error('An error occurred:', error);
+                        });
+                    }}
+                    id="addVendor"
+                >
                     <InputWrap>
                         <label htmlFor="vendorName">Vendor name</label>
                         <AdminInput type="text" {...register('name')} />
