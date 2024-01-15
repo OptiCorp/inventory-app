@@ -7,7 +7,7 @@ import SearchResultCardCompact from '../../../../components/SearchResultCard/Sea
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../../hooks'
 import { Item, List, UpdateList } from '../../../../services/apiTypes'
-import { useGetListById } from '../../../../services/hooks/List/useGetListById'
+import { useGetListById } from '../../../../services/hooks/list/useGetListById'
 import { useGetItemsNotInListInfinite } from '../../../../services/hooks/items/useGetItemsNotInListInfinite'
 import { useUpdateList } from '../../../../services/hooks/list/useUpdateList'
 import { COLORS } from '../../../../style/GlobalStyles'

@@ -5,7 +5,7 @@ import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner'
 import SearchBar from '../../../components/SearchBar/SearchBar'
 import SearchResultCardCompact from '../../../components/SearchResultCard/SearchInfoCompact'
 import { useSnackBar } from '../../../hooks'
-import { useGetListById } from '../../../services/hooks/List/useGetListById'
+import { useGetListById } from '../../../services/hooks/list/useGetListById'
 
 import { useGetItemsNotInListInfinite } from '../../../services/hooks/items/useGetItemsNotInListInfinite'
 import { useUpdateList } from '../../../services/hooks/list/useUpdateList'

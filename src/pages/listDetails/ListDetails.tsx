@@ -8,7 +8,7 @@ import SearchResultCard from '../../components/SearchResultCard/SearchResultCard
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { useSnackBar, useWindowDimensions } from '../../hooks'
 import { Item, UpdateList } from '../../services/apiTypes.ts'
-import { useGetListById } from '../../services/hooks/List/useGetListById.tsx'
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx'
 
 import { useGetItemsNotInListInfinite } from '../../services/hooks/items/useGetItemsNotInListInfinite.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'

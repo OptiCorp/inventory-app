@@ -9,7 +9,7 @@ import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveI
 
 import UmAppContext from '../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../hooks'
-import { useGetListById } from '../../../services/hooks/List/useGetListById'
+import { useGetListById } from '../../../services/hooks/list/useGetListById'
 import CustomDialog from '../../CustomDialog/CustomDialog'
 import {
     StyledAddIcon,

@@ -2,9 +2,10 @@ import { format } from 'date-fns'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { List } from '../../services/apiTypes.ts'
-import { useDeleteList } from '../../services/hooks/List/useDeleteList.tsx'
+
 import CustomDialog from '../CustomDialog/CustomDialog.tsx'
 import { ListWrapper, StyledDeleteIcon, StyledTitle } from './styles.ts'
+import { useDeleteList } from '../../services/hooks/list/useDeleteList.tsx'
 
 type Props = {
     part: List
