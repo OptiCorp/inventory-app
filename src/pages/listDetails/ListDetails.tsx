@@ -8,14 +8,14 @@ import SearchBar from '../../components/SearchBar/SearchBar.tsx'
 import UmAppContext from '../../contexts/UmAppContext.tsx'
 import { useSnackBar, useWindowDimensions } from '../../hooks'
 import { Item, UpdateList } from '../../services/apiTypes.ts'
-import { useGetListById } from '../../services/hooks/listFix/useGetListById.tsx'
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx'
 
-import { useGetItemsNotInListInfinite } from '../../services/hooks/itemsFix/useGetItemsNotInListInfinite.tsx'
+import { useGetItemsNotInListInfinite } from '../../services/hooks/items/useGetItemsNotInListInfinite.tsx'
 import { COLORS } from '../../style/GlobalStyles.ts'
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx'
 
-import { useUpdateList } from '../../services/hooks/listFix/useUpdateList.tsx'
+import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx'
 import { Container } from '../search/styles.ts'
 import { ListHeader } from './ListHeader.tsx'
 import { SideList } from './sidelist/SideList.tsx'

@@ -4,12 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { Item, MutateItemList } from '../../../services/apiTypes'
 
-import { useAddItemsToList } from '../../../services/hooks/itemsFix/useAddItemsToList'
-import { useRemoveItemsFromList } from '../../../services/hooks/itemsFix/useRemoveItemsFromList'
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList'
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList'
 
 import UmAppContext from '../../../contexts/UmAppContext'
 import { useSnackBar } from '../../../hooks'
-import { useGetListById } from '../../../services/hooks/listFix/useGetListById'
+import { useGetListById } from '../../../services/hooks/list/useGetListById'
 import CustomDialog from '../../CustomDialog/CustomDialog'
 import {
     StyledAddIcon,

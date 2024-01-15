@@ -7,7 +7,7 @@ import { useWindowDimensions } from '../../hooks'
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner'
 import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard'
 import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact'
-import { useGetItemsInfinite } from '../../services/hooks/itemsFix/useGetItemsInfinite'
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite'
 import {
     Container,
     RecentSearchContainer,

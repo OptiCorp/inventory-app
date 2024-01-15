@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddVendor } from '../../../services/hooks/vendorFix/useAddVendor'
+import { useAddVendor } from '../../../services/hooks/vendor/useAddVendor'
 import { VendorSchema, vendorSchema } from './vendorValidator'
 
 const defaultValues: VendorSchema = {

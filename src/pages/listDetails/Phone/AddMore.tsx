@@ -5,10 +5,10 @@ import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner'
 import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact'
 import SearchBar from '../../../components/SearchBar/SearchBar'
 import { useSnackBar } from '../../../hooks'
-import { useGetListById } from '../../../services/hooks/listFix/useGetListById'
+import { useGetListById } from '../../../services/hooks/list/useGetListById'
 
-import { useGetItemsNotInListInfinite } from '../../../services/hooks/itemsFix/useGetItemsNotInListInfinite'
-import { useUpdateList } from '../../../services/hooks/listFix/useUpdateList'
+import { useGetItemsNotInListInfinite } from '../../../services/hooks/items/useGetItemsNotInListInfinite'
+import { useUpdateList } from '../../../services/hooks/list/useUpdateList'
 import { PhoneContainer, PhoneListTitle } from './styles'
 
 export const AddMoreCompact = () => {
