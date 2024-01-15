@@ -3,7 +3,7 @@ import { useCallback, useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 import UmAppContext from '../../../../contexts/UmAppContext'
 import { Category, Item, Location, Vendor } from '../../../../services/apiTypes'
-import { useUpdateItem } from '../../../../services/hooks/items/useUpdateItem'
+import { useUpdateItem } from '../../../../services/hooks/itemsFix/useUpdateItem'
 import { SetState } from '../types'
 import { PartInfoSchema } from './useUpdatePartForm'
 

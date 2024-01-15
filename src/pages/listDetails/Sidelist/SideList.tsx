@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Item, MutateItemList } from '../../../services/apiTypes.ts'
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx'
+import { useRemoveItemsFromList } from '../../../services/hooks/itemsFix/useRemoveItemsFromList.tsx'
 
 import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx'
 import UmAppContext from '../../../contexts/UmAppContext.tsx'

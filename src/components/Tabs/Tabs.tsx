@@ -1,7 +1,7 @@
 import { Tab } from '@mui/material'
 import { useState } from 'react'
 import { useParams } from 'react-router'
-import { useGetListById } from '../../services/hooks/list/useGetListById'
+import { useGetListById } from '../../services/hooks/listFix/useGetListById'
 import {
     Indicator,
     NumberofItems,

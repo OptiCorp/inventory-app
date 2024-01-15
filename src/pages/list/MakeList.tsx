@@ -12,8 +12,8 @@ import { List } from '../../services/apiTypes.ts'
 import { COLORS } from '../../style/GlobalStyles.ts'
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx'
-import { useAddList } from '../../services/hooks/list/useAddList.tsx'
-import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId.tsx'
+import { useAddList } from '../../services/hooks/listFix/useAddList.tsx'
+import { useGetListsByUserId } from '../../services/hooks/listFix/useGetListsByUserId.tsx'
 import { SearchContainer } from '../search/styles.ts'
 import { FlexWrapper } from './styles.ts'
 

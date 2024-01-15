@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
 import UmAppContext from '../../../contexts/UmAppContext'
 import useLocalStorage from '../../../hooks/useLocalStorage.ts'
-import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx'
+import { useAddItems } from '../../../services/hooks/itemsFix/useAddItem.tsx'
 import { PartSchema, partSchema } from './partValidator'
 
 const defaultValues: PartSchema = {

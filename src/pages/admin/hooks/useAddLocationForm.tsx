@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddLocation } from '../../../services/hooks/locations/useAddLocation'
+import { useAddLocation } from '../../../services/hooks/locationFix/useAddLocation'
 import { LocationSchema, locationSchema } from './locationValidator'
 
 const defaultValues: LocationSchema = {

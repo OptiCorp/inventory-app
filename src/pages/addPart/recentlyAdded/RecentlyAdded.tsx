@@ -4,7 +4,7 @@ import SearchResultCard from '../../../components/ResultSearchCard/ResultSearchC
 import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact.tsx'
 import { useWindowDimensions } from '../../../hooks/index.ts'
 import { Item } from '../../../services/apiTypes.ts'
-import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser.tsx'
+import { useGetItemsByUser } from '../../../services/hooks/itemsFix/useGetItemByUser.tsx'
 import { COLORS } from '../../../style/GlobalStyles.ts'
 import { Container, RecentlyAddedContainer } from './styles.ts'
 

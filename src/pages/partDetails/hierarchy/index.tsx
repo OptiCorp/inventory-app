@@ -9,10 +9,10 @@ import { Item } from '../../../services/apiTypes'
 import {
     AddChildItemIds,
     useAddChildItemToParent,
-} from '../../../services/hooks/items/useAddChildItemToParent'
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite'
-import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem'
-import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem'
+} from '../../../services/hooks/itemsFix/useAddChildItemToParent'
+import { useGetItemsInfinite } from '../../../services/hooks/itemsFix/useGetItemsInfinite'
+import { useRemoveParentIdFromItem } from '../../../services/hooks/itemsFix/useRemoveParentIdFromItem'
+import { useUpdateItem } from '../../../services/hooks/itemsFix/useUpdateItem'
 import { Edit, LabelContainer } from '../partInfo/styles'
 
 import {

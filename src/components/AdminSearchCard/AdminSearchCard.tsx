@@ -13,10 +13,10 @@ import {
 } from '../../services/apiTypes'
 import { useDeleteCategory } from '../../services/hooks/categoryFix/useDeleteCategory'
 import { useUpdateCategory } from '../../services/hooks/categoryFix/useUpdateCategory'
-import { useDeleteLocation } from '../../services/hooks/locations/useDeleteLocation'
-import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocation'
-import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor'
-import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor'
+import { useDeleteLocation } from '../../services/hooks/locationFix/useDeleteLocation'
+import { useUpdateLocation } from '../../services/hooks/locationFix/useUpdateLocation'
+import { useDeleteVendor } from '../../services/hooks/vendorFix/useDeleteVendor'
+import { useUpdateVendor } from '../../services/hooks/vendorFix/useUpdateVendor'
 import {
     AdminActions,
     AdminSearchCardContainer,

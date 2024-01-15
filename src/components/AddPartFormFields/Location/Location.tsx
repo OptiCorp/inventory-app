@@ -6,7 +6,7 @@ import {
     FormOption,
     Location as LocationType,
 } from '../../../services/apiTypes.ts'
-import { useGetLocations } from '../../../services/hooks/locations/useGetLocations.tsx'
+import { useGetLocations } from '../../../services/hooks/locationFix/useGetLocations.tsx'
 import { ToolTip } from '../../ToolTip/ToolTip.tsx'
 import { StyledDiv } from '../Category/styles.ts'
 import { FormSelect } from '../FormSelect/FormSelect.tsx'
