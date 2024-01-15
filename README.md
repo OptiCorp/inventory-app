@@ -56,15 +56,13 @@ Clone and Run the application:
 
 ## Proper Code Etiquette Guidelines
 
-### Naming Conventions
-
-#### Files and Folders
+### Files and Folders
 - Apply camelCase for folder names, such as `userProfilePage`, with the exception of component folder names that should be capitalized, i.e `UserProfile`.
 - Choose descriptive names for component files. For instance, use `UserProfile.tsx` instead of generic names like `Component1.tsx` or `Index.tsx`.
 - Organize folder structure hierarchically, considering trees and pages. Fro example, use `src/pages/add-part/.../batch`, where the batch directory is a subdirectory of its parent, and so forth.
 - Ensure page folders align with their corresponding URL segments. For example, name the page folder as `add-part-form` in `src/pages/add-part/add-part-form`, resulting in the URL `https://.../add-part/add-part-form`.
 
-#### Issues
+### Issues
 
 Issues should have the following format:
 
@@ -79,7 +77,7 @@ Issues should have the following format:
 fix: Failed to Login BrowserAuthError
 ```
 
-#### Branches
+### Branches
 
 Branches should have the auto-generated given to branches created from issues.
 
@@ -87,6 +85,6 @@ Branches should have the auto-generated given to branches created from issues.
 205-fix-failed-to-login-browserautherror
 ```
 
-#### Commit Messages
+### Commit Messages
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
