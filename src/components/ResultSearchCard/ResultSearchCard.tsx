@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Item } from '../../services/apiTypes'
-import { ResultCardContainer, SearchCard } from '../SearchResultCard/styles'
+import { ResultCardContainer, SearchCard } from './styles'
 import { Searchinfo } from './SearchInfo/SearchInfo'
 
 type Props = {
