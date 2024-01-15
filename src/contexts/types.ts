@@ -4,16 +4,13 @@ import { User } from '../services/apiTypes'
 
 export interface UmAppContextType {
     snackbarText: string
-    // setSnackbarText: (snackbarText: string) => void
+
     setSnackbarText: SetState<string>
     showSnackbar: boolean
     setShowSnackbar: (showSnackbar: boolean) => void
     snackbarSeverity: AlertColor
     setSnackbarSeverity: SetState<AlertColor>
 
-    // setSnackbarSeverity: (
-    //     AlertColor: 'success' | 'info' | 'warning' | 'error'
-    // ) => void
     idToken: string
     accessToken: string
     account: any

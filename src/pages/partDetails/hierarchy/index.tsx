@@ -9,13 +9,11 @@ import { Item } from '../../../services/apiTypes'
 import {
     AddChildItemIds,
     useAddChildItemToParent,
-
-} from '../../../services/hooks/Items/useAddChildItemToParent'
-import { useGetItemsInfinite } from '../../../services/hooks/Items/useGetItemsInfinite'
-import { useRemoveParentIdFromItem } from '../../../services/hooks/Items/useRemoveParentIdFromItem'
-import { useUpdateItem } from '../../../services/hooks/Items/useUpdateItem'
-import { Edit, LabelContainer } from '../PartInfo/styles'
-
+} from '../../../services/hooks/items/useAddChildItemToParent'
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite'
+import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem'
+import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem'
+import { Edit, LabelContainer } from '../partInfo/styles'
 
 import {
     AccessibleButtonWrapper,
@@ -52,11 +50,10 @@ export const Hierarchy = ({ item }: { item: Item }) => {
         .flatMap((el) => el)
         .filter(
             (el) =>
-
-
-                el.wpId?.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) &&
+                el.wpId
+                    ?.toLowerCase()
+                    .includes(debouncedSearchTerm.toLowerCase()) &&
                 el.wpId !== item.wpId
-
         )
         .map((el) => ({ label: el.wpId, value: el }))
 
@@ -147,7 +144,6 @@ export const Hierarchy = ({ item }: { item: Item }) => {
 
     return (
         <div>
-
             <ParentContainer>
                 <ClickAwayListener onClickAway={clickAwayHandlerParent}>
                     <Box>
@@ -156,7 +152,12 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                 <strong>{`This ${item.type} is a part of:`}</strong>
                             </label>
                             <Edit
-                                onClick={() => setIsOpen((prev) => ({ ...prev, parent: true }))}
+                                onClick={() =>
+                                    setIsOpen((prev) => ({
+                                        ...prev,
+                                        parent: true,
+                                    }))
+                                }
                             />
                         </LabelContainer>
                         {isOpen.parent && (
@@ -172,14 +173,20 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                 options={filteredWpIds}
                                 isLoading={isLoading}
                                 placeholder="Search by wpid..."
-                                onChange={(value) => setSelectedId(value!.value.wpId)}
+                                onChange={(value) =>
+                                    setSelectedId(value!.value.wpId)
+                                }
                                 onBlur={handleBlur}
                             />
                         )}
                         {!isOpen.parent && (
                             <>
                                 {item.parent && (
-                                    <LinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
+                                    <LinkElement
+                                        onClick={() =>
+                                            navigate(`/${item.parent?.id}`)
+                                        }
+                                    >
                                         {item.parent?.wpId}
                                     </LinkElement>
                                 )}

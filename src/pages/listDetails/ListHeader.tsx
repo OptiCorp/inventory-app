@@ -7,8 +7,8 @@ import CustomDialog from '../../components/CustomDialog/CustomDialog'
 import UmAppContext from '../../contexts/UmAppContext'
 import { useSnackBar, useWindowDimensions } from '../../hooks'
 import { List, UpdateList } from '../../services/apiTypes'
-import { useDeleteList } from '../../services/hooks/List/useDeleteList'
-import { useUpdateList } from '../../services/hooks/List/useUpdateList'
+import { useDeleteList } from '../../services/hooks/list/useDeleteList'
+import { useUpdateList } from '../../services/hooks/list/useUpdateList'
 import { DeleteIcon, EditIcon } from './sidelist/styles'
 import {
     FlexContainer,

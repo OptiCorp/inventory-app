@@ -1,6 +1,6 @@
 import { useParams } from 'react-router'
 import TabComponent from '../../../components/Tabs/Tabs'
-import { useGetListById } from '../../../services/hooks/List/useGetListById'
+import { useGetListById } from '../../../services/hooks/list/useGetListById'
 import { AddMoreCompact } from './AddMore'
 import { PhoneList } from './list/PhoneList'
 
