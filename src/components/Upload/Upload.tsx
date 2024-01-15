@@ -53,7 +53,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
         <>
             <Wrapper>
                 {data?.map((document) => (
-                    <FileWrapper>
+                    <FileWrapper key={document.id}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"

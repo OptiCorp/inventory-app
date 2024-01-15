@@ -34,7 +34,7 @@ const Locations = () => {
             />
             <SearchResultContainer>
                 {filteredData?.map((location, i) => (
-                    <div id={i === filteredData.length - 1 ? 'lastItem' : ''}>
+                    <div key={i} id={i === filteredData.length - 1 ? 'lastItem' : ''}>
                         <AdminSearchCard searchType={SearchType.Location} data={location} />
                     </div>
                 ))}

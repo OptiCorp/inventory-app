@@ -84,7 +84,7 @@ const UploadMobile = ({ item }: UploadProps) => {
         <>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {data?.map((document) => (
-                    <FileWrapper className="files">
+                    <FileWrapper key={document.id} className="files">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"

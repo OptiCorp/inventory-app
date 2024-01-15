@@ -98,6 +98,7 @@ const ListDetails = () => {
                             page.map((item, index) =>
                                 width > 800 ? (
                                     <div
+                                        key={index}
                                         id={
                                             i === items.pages.length - 1 &&
                                             index === page.length - 1
@@ -109,6 +110,7 @@ const ListDetails = () => {
                                     </div>
                                 ) : (
                                     <div
+                                        key={index}
                                         id={
                                             i === items.pages.length - 1 &&
                                             index === page.length - 1

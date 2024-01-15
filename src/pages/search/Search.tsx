@@ -83,6 +83,7 @@ const Search = () => {
                         page.map((item, index) =>
                             width > 800 ? (
                                 <div
+                                    key={index}
                                     id={
                                         i === data.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
@@ -93,6 +94,7 @@ const Search = () => {
                                 </div>
                             ) : (
                                 <div
+                                    key={index}
                                     id={
                                         i === data.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
@@ -111,8 +113,8 @@ const Search = () => {
                         <RecentTitle>Recent Searches</RecentTitle>
 
                         {searches.map((search, index) => (
-                            <SpanMargin>
-                                <StyledSearchedLink key={index} to={`/search/${search}`}>
+                            <SpanMargin key={index}>
+                                <StyledSearchedLink to={`/search/${search}`}>
                                     {search}
                                 </StyledSearchedLink>
                             </SpanMargin>
