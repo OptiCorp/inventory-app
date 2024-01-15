@@ -23,7 +23,7 @@ import {
     DescriptionWrap,
     KeyWords,
     ResultCardCompactContainer,
-} from '../SearchResultCard/styles.ts'
+} from './styles.ts'
 type Props = {
     part: Item
     icon?: string
