@@ -21,7 +21,7 @@ const AddPartUpload = () => {
     const documentationField = register('files')
     const inputFile = useRef<HTMLInputElement | null>(null)
 
-    const handleFileDownload = async (file: File) => {
+    const handleFileDownload = (file: File) => {
         const downloadLink = document.createElement('a')
         downloadLink.download = `${file.name}`
         downloadLink.href = URL.createObjectURL(file)
