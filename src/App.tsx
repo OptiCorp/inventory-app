@@ -11,7 +11,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TopBar } from './components/TopBar/TopBar.tsx';
 import { UmAppContextProvider } from './contexts/UmAppContext';
 import AddPart from './pages/addPart/Index';
-import { AddPartFormm } from './pages/addPart/addPartForm/AddPartForm';
 import BatchForm from './pages/addPart/batch/BatchForm';
 import CheckForm from './pages/addPart/check/CheckForm';
 import Upload from './pages/addPart/documentation/Upload';
@@ -27,6 +26,7 @@ import GlobalStyles from './style/GlobalStyles';
 
 import { useSnackBar } from './hooks/useSnackbar.tsx';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
+import { AddPartForm } from './pages/addPart/addPartForm/AddPartForm.tsx';
 import AddCategory from './pages/admin/category/AddCategory.tsx';
 import AddLocation from './pages/admin/location/AddLocation.tsx';
 import AddVendor from './pages/admin/vendor/AddVendor.tsx';
@@ -50,7 +50,7 @@ function App() {
                     <Route path="batch" element={<BatchForm />} />
                     <Route path="checks" element={<CheckForm />} />
                     <Route path="upload" element={<Upload />} />
-                    <Route path="add-form" element={<AddPartFormm />} />
+                    <Route path="add-form" element={<AddPartForm />} />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />
 

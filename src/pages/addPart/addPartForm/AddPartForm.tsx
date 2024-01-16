@@ -13,7 +13,7 @@ type response = {
 };
 
 // WIP
-export const AddPartFormm = () => {
+export const AddPartForm = () => {
     const navigate = useNavigate();
 
     return (
