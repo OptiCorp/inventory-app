@@ -27,11 +27,7 @@ export const SearchInfo = ({ part, icon }: Props) => {
     const navigate = useNavigate();
     const { data: list } = useGetListById('list');
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
-    const {
-        mutate: mutateRemoveItemFromList,
-        isSuccess: removeItemSuccess,
-        data: removeData,
-    } = useRemoveItemsFromList();
+    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation();

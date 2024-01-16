@@ -4,7 +4,7 @@ import { StyledForm } from './addPartForm/styles';
 import { useAddPartForm } from './hooks/useAddPartForm';
 
 const AddPart = () => {
-    const { methods, onSubmit, formState, control } = useAddPartForm();
+    const { methods, onSubmit } = useAddPartForm();
     return (
         <FormProvider {...methods}>
             <StyledForm

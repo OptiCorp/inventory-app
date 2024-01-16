@@ -46,7 +46,7 @@ export const AddMoreCompact = () => {
             }
         };
     }, [items]);
-    const { data: list, isFetching } = useGetListById(listId!);
+    const { isFetching } = useGetListById(listId!);
     return (
         <>
             <PhoneListTitle>Add items</PhoneListTitle>

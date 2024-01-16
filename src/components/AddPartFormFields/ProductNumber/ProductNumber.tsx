@@ -6,10 +6,7 @@ import { StyledDiv } from '../Category/styles.ts';
 import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles.ts';
 
 export const ProductNumber = () => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+    const { register } = useFormContext();
     return (
         <StyledDiv>
             <InputWrap>

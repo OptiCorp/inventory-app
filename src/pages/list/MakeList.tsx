@@ -26,7 +26,7 @@ const MakeList = () => {
 
     const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id);
 
-    const { mutate, isSuccess } = useAddList();
+    const { mutate } = useAddList();
     const { snackbar } = useSnackBar();
     useEffect(() => {
         setSearchTerm((prev) => searchParam ?? prev);

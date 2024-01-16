@@ -2,10 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { InputWrap, StyledDiv, StyledTextArea } from './styles';
 
 export const Comment = () => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+    const { register } = useFormContext();
     return (
         <StyledDiv>
             <InputWrap>

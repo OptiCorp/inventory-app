@@ -1,4 +1,3 @@
-import { useMsal } from '@azure/msal-react';
 import AddIcon from '@mui/icons-material/Add';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -8,7 +7,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import SearchIcon from '@mui/icons-material/Search';
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DropdownItem, HamburgerContainer } from './styles';
 
 type Props = {
@@ -20,20 +19,6 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
     const navigate = useNavigate();
     const hamburgerLink = (location: string) => {
         navigate(location);
-    };
-    const { id } = useParams() as { id: string };
-
-    const { instance } = useMsal();
-    const handleSignOut = () => {
-        navigate('/');
-        instance
-            .logoutPopup()
-            .then(() => {
-                console.log('Logout successful');
-            })
-            .catch((error) => {
-                console.log('Logout failed', error);
-            });
     };
 
     const menuItems = [

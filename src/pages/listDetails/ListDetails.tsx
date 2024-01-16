@@ -50,7 +50,7 @@ const ListDetails = () => {
             });
         }
     };
-    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!);
+    const { mutate: updateList } = useUpdateList(listId!);
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',

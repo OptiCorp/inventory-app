@@ -19,14 +19,14 @@ type Props = {
 export const PhoneList = ({ list }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm] = useState('');
     const { listId } = useParams();
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
-    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!);
+    const { mutate: updateList } = useUpdateList(listId!);
 
-    const { data: items, isLoading } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
+    const { isLoading } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
 
-    const { data: DataList, isFetching } = useGetListById(listId!);
+    const { isFetching } = useGetListById(listId!);
 
     const { snackbar } = useSnackBar();
     const navigate = useNavigate();
