@@ -1,5 +1,4 @@
-import { CSSProperties } from 'react';
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 import { FormOption } from '../../../services/apiTypes.ts';
 import { COLORS } from '../../../style/GlobalStyles.ts';
 
@@ -9,25 +8,25 @@ type Props = {
     state: FormOption | null;
 };
 
-export const FormSelect = ({ options, setState, state }: Props) => {
-    const customStyles = {
-        control: (provided: CSSProperties): CSSProperties => ({
-            ...provided,
-            width: '100%', // Set the desired width here
-            maxWidth: '500px',
-            height: '41px',
-            backgroundColor: COLORS.input,
-            borderRadius: 0,
-            border: '0px',
-            borderBottom: '1px solid #000',
-        }),
-        menu: (provided: CSSProperties): CSSProperties => ({
-            ...provided,
-            width: '70%',
-            maxWidth: '500px',
-        }),
-    };
+const customStyles: StylesConfig<FormOption, false> = {
+    control: (base) => ({
+        ...base,
+        width: '100%', // Set the desired width here
+        maxWidth: '500px',
+        height: '41px',
+        backgroundColor: COLORS.input,
+        borderRadius: 0,
+        border: '0px',
+        borderBottom: '1px solid #000',
+    }),
+    menu: (base) => ({
+        ...base,
+        width: '70%',
+        maxWidth: '500px',
+    }),
+};
 
+export const FormSelect = ({ options, setState, state }: Props) => {
     return (
         <div style={{ marginTop: '5px', marginBottom: '10px' }}>
             <Select
