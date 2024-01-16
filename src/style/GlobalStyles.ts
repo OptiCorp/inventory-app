@@ -3,8 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
 
 export const COLORS = {
-    secondary: '#FFF',
     primary: '#000',
+    secondary: '#FFF',
     gray: '#CACACA',
     card: '#FBFBFB',
     input: '#F2F2F2',
@@ -41,7 +41,7 @@ const GlobalStyles = createGlobalStyle<Props>`
     overflow-x: hidden;
   }
 
-  
+
 body::-webkit-scrollbar {
     display: none;
 }
