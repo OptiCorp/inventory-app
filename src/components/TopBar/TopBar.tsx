@@ -8,7 +8,8 @@ import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 import { NavigationLink } from './NavigationLink/NavigationLink';
 
-import { HamburgerMenu } from './HamburgerMenu';
+import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
+import { StyledLinkDiv } from './NavigationLink/styles';
 import {
     BackButton,
     CompactHeaderWrap,
@@ -16,7 +17,6 @@ import {
     LogOutWrapper,
     MenuAdmin,
     MenuAdminLink,
-    StyledLinkDiv,
     TopBarContainer,
 } from './styles';
 

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { StyledLinkDiv, StyledNavLink } from '../styles';
+import { StyledLinkDiv, StyledNavLink } from './styles';
 
 type NavigationLinkProps = {
     to: string;
