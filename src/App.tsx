@@ -24,6 +24,7 @@ import PartDetails from './pages/partDetails/Index';
 import Search from './pages/search/Search';
 import GlobalStyles from './style/GlobalStyles';
 
+import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
 import { useSnackBar } from './hooks/useSnackbar.tsx';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
 import { AddPartForm } from './pages/addPart/addPartForm/AddPartForm.tsx';
@@ -53,13 +54,15 @@ function App() {
                     <Route path="add-form" element={<AddPartForm />} />
                 </Route>
                 <Route path="makelist" element={<MakeList />} />
-
-                {width > 800 ? (
-                    <Route path="makelist/:listId?" element={<ListDetails />} />
-                ) : (
-                    <Route path="makelist/:listId?" element={<Index />} />
-                )}
-
+                <Route
+                    path={`makelist/:listId?`}
+                    element={
+                        <ResponsiveRoute
+                            desktopElement={<ListDetails />}
+                            mobileElement={<Index />}
+                        />
+                    }
+                />
                 <Route path="admin">
                     <Route path="categories" element={<Categories />} />
                     <Route path="add-category" element={<AddCategory />} />
