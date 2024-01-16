@@ -92,7 +92,7 @@ const Search = () => {
                                             : ''
                                     }
                                 >
-                                    <PartCard part={item} searchParam={searchParam} />
+                                    <PartCard part={item} />
                                 </div>
                             ) : (
                                 <div

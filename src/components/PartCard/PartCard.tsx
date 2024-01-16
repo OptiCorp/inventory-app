@@ -6,7 +6,6 @@ import { PartCardContainer, SearchCard } from './styles';
 type Props = {
     part: Item;
     icon?: string;
-    searchParam?: string;
 };
 
 const PartCard = ({ part, icon }: Props) => {
