@@ -50,7 +50,7 @@ jobs:
 
             - name: Run ESLint
               run: npm run lint
-              
+
     build:
         runs-on: ubuntu-latest
         steps:
