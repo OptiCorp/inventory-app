@@ -17,7 +17,7 @@ export const StyledLinkDiv = styled.h3`
 
 export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
-    color: ${COLORS.darkGrey};
+    color: ${COLORS.darkGray};
     &:hover {
         color: ${COLORS.primary};
     }
@@ -65,7 +65,7 @@ type Props = {
 export const MenuAdmin = styled.div<Props>`
     cursor: pointer;
 
-    color: ${({ $isopen }) => (String($isopen) ? COLORS.primary : COLORS.mainGrey)};
+    color: ${({ $isopen }) => (String($isopen) ? COLORS.primary : COLORS.mainGray)};
     &.active {
         color: ${COLORS.primary} !important;
     }
@@ -78,9 +78,9 @@ export const MenuAdminLink = styled.span`
 `;
 
 export const LogOutWrapper = styled.div`
-    color: ${COLORS.mainGrey};
+    color: ${COLORS.mainGray};
     &.active {
-        color: ${COLORS.mainGrey};
+        color: ${COLORS.mainGray};
     }
     &:hover {
         color: ${COLORS.primary};

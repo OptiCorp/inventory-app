@@ -21,9 +21,9 @@ export const Spinner = styled.div`
     animation: ${rotate360} 1s linear infinite;
     transform: translateZ(0);
 
-    border-top: 2px solid ${COLORS.mainGrey};
-    border-right: 2px solid ${COLORS.mainGrey};
-    border-bottom: 2px solid ${COLORS.mainGrey};
+    border-top: 2px solid ${COLORS.mainGray};
+    border-right: 2px solid ${COLORS.mainGray};
+    border-bottom: 2px solid ${COLORS.mainGray};
     border-left: 2px solid ${COLORS.primary};
     background: transparent;
     width: 24px;

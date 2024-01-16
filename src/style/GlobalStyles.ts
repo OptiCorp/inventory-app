@@ -6,9 +6,9 @@ export const COLORS = {
     secondary: ' #FFFFFF',
     primary: '#000',
     card: '#FBFBFB',
-    mainGrey: '#CACACA',
-    darkGrey: '#7E7E7E',
-    InputGrey: '#F2F2F2',
+    mainGray: '#CACACA',
+    darkGray: '#7E7E7E',
+    InputGray: '#F2F2F2',
     green: '#008000',
     dangerRed: '#EB0000',
 };
@@ -49,3 +49,9 @@ body::-webkit-scrollbar {
 `;
 
 export default GlobalStyles;
+
+type ColorsType = typeof COLORS;
+
+declare module 'styled-components' {
+    export type DefaultTheme = ColorsType;
+}

@@ -14,7 +14,7 @@ const customStyles: StylesConfig<FormOption, false> = {
         width: '100%', // Set the desired width here
         maxWidth: '500px',
         height: '41px',
-        backgroundColor: COLORS.input,
+        backgroundColor: `${COLORS.InputGray}`,
         borderRadius: 0,
         border: '0px',
         borderBottom: '1px solid #000',

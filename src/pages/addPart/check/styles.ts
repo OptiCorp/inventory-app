@@ -7,7 +7,7 @@ export const ButtonWrap = styled.div`
     justify-content: end;
 `;
 export const StyledTextArea = styled.textarea`
-    background-color: ${COLORS.InputGrey};
+    background-color: ${COLORS.InputGray};
     border: none;
     border-bottom: 1px solid #000;
     margin: 0;

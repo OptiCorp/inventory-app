@@ -6,11 +6,11 @@ type Props = {
 export const SubmitButton = styled.button`
     width: 150px;
     background-color: ${COLORS.primary};
-    color: ${COLORS.mainGrey};
+    color: ${COLORS.mainGray};
     height: 30px;
     cursor: pointer;
     &:hover {
-        background-color: grey;
+        background-color: ${COLORS.InputGray};
     }
 `;
 

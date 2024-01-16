@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import { COLORS } from './style/GlobalStyles';
 
 export const BodyWrapper = styled.div`
-    background-color: ${COLORS.InputGrey};
+    background-color: ${COLORS.InputGray};
     display: flex;
     justify-content: center;
     min-height: 100vh;
