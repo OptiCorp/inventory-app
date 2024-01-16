@@ -29,7 +29,6 @@ export const BackgroundContainer = styled.div`
     min-height: 100vh;
 
     @media (min-width: 1025px) {
-        background-image: url('/desktopBackground.png');
         background-size: cover;
         background-position: center;
     }

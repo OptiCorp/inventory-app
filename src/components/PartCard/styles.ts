@@ -1,11 +1,9 @@
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
-export const ResultCardContainer = styled.div`
+export const PartCardContainer = styled.div`
     margin: 16px;
-
     padding: 4px;
-
     max-width: 700px;
     margin-inline: auto;
 `;

@@ -1,14 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { Item } from '../../services/apiTypes';
-import { Searchinfo } from './SearchInfo/SearchInfo';
-import { ResultCardContainer, SearchCard } from './styles';
+import { SearchInfo } from './SearchInfo/SearchInfo';
+import { PartCardContainer, SearchCard } from './styles';
 
 type Props = {
     part: Item;
     icon?: string;
+    searchParam?: string;
 };
 
-const SearchResultCard = ({ part, icon }: Props) => {
+const PartCard = ({ part, icon }: Props) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -23,12 +24,12 @@ const SearchResultCard = ({ part, icon }: Props) => {
             : undefined;
 
     return (
-        <ResultCardContainer style={{ cursor: cursorStyle }} onClick={handleClick}>
+        <PartCardContainer style={{ cursor: cursorStyle }} onClick={handleClick}>
             <SearchCard title="">
-                <Searchinfo part={part} icon={icon} />
+                <SearchInfo part={part} icon={icon} />
             </SearchCard>
-        </ResultCardContainer>
+        </PartCardContainer>
     );
 };
 
-export default SearchResultCard;
+export default PartCard;

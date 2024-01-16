@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../components/Button/Button.tsx';
-import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard.tsx';
-import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact.tsx';
+import PartCard from '../../components/PartCard/PartCard.tsx';
+import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import UmAppContext from '../../contexts/UmAppContext.tsx';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
@@ -106,7 +106,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCard part={item} icon={'add'} />
+                                        <PartCard part={item} icon={'add'} />
                                     </div>
                                 ) : (
                                     <div

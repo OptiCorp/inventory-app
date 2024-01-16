@@ -11,21 +11,21 @@ import UmAppContext from '../../../contexts/UmAppContext';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import CustomDialog from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
-import { KeyWords } from '../../ResultSearchCard/styles';
+import { KeyWords } from '../styles';
 import { DescriptionParagraph, FirstInfoBox, InfoP, SecondInfoBox, ThirdInfoBox } from './styles';
 
 type Props = {
     part: Item;
     icon?: string;
 };
-export const Searchinfo = ({ part, icon }: Props) => {
+export const SearchInfo = ({ part, icon }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
     const [open, setOpen] = useState(false);
     const [alreadyAdded, setAlreadyAdded] = useState(false);
     const { listId } = useParams();
     const navigate = useNavigate();
-    const { data: list } = useGetListById(listId!);
+    const { data: list } = useGetListById('list');
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
     const {
         mutate: mutateRemoveItemFromList,
