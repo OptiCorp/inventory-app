@@ -6,6 +6,7 @@ import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
+import { NavigationLink } from './NavigationLink/NavigationLink';
 
 import { HamburgerMenu } from './HamburgerMenu';
 import {
@@ -16,7 +17,6 @@ import {
     MenuAdmin,
     MenuAdminLink,
     StyledLinkDiv,
-    StyledNavLink,
     TopBarContainer,
 } from './styles';
 
@@ -95,15 +95,9 @@ export const TopBar = () => {
                 )}
                 {width > 800 ? (
                     <HeaderWrap>
-                        <StyledNavLink to="search">
-                            <StyledLinkDiv>Find parts</StyledLinkDiv>
-                        </StyledNavLink>
-                        <StyledNavLink to="add-part">
-                            <StyledLinkDiv>Add part</StyledLinkDiv>
-                        </StyledNavLink>
-                        <StyledNavLink to="makelist">
-                            <StyledLinkDiv>Make list</StyledLinkDiv>
-                        </StyledNavLink>
+                        <NavigationLink to="search">Find parts</NavigationLink>
+                        <NavigationLink to="add-part">Add part</NavigationLink>
+                        <NavigationLink to="makelist">Make list</NavigationLink>
                         <PopupState variant="popover" popupId="demo-popup-menu">
                             {(popupState) => (
                                 <>
