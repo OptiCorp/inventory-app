@@ -60,6 +60,7 @@ export const AddMoreCompact = () => {
                 {items?.pages.map((page, i) =>
                     page.map((item, index) => (
                         <div
+                            key={index}
                             id={
                                 i === items.pages.length - 1 && index === page.length - 1
                                     ? 'lastItem'

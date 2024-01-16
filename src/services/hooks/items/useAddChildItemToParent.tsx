@@ -11,9 +11,13 @@ export const useAddChildItemToParent = () => {
     return useMutation({
         mutationFn: (ids: AddChildItemIds) => api.addChildItemToParent(ids.itemId, ids.childItemId),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['items'],
-            });
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['items'],
+                })
+                .catch((error) => {
+                    console.error('Failed: ', error);
+                });
         },
     });
 };

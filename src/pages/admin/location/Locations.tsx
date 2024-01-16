@@ -34,7 +34,7 @@ const Locations = () => {
             />
             <SearchResultContainer>
                 {filteredData?.map((location, i) => (
-                    <div id={i === filteredData.length - 1 ? 'lastItem' : ''}>
+                    <div key={i} id={i === filteredData.length - 1 ? 'lastItem' : ''}>
                         <AdminSearchCard searchType={SearchType.Location} data={location} />
                     </div>
                 ))}
@@ -42,10 +42,11 @@ const Locations = () => {
             <ButtonContainer>
                 <Button
                     onClick={() => navigate('/admin/add-location')}
-                    children={'Add new location'}
                     backgroundColor={'black'}
                     color={'white'}
-                />
+                >
+                    Add new location
+                </Button>
             </ButtonContainer>
         </AdminContainer>
     );

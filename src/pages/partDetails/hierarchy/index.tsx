@@ -166,7 +166,11 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                     }),
                                 }}
                                 onInputChange={(value) => setSearchTerm(value)}
-                                onMenuScrollToBottom={() => fetchNextPage()}
+                                onMenuScrollToBottom={() => {
+                                    fetchNextPage().catch((error) => {
+                                        console.error('An error occurred:', error);
+                                    });
+                                }}
                                 options={filteredWpIds}
                                 isLoading={isLoading}
                                 placeholder="Search by wpid..."
@@ -237,7 +241,11 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                             options={filteredWpIds}
                             onInputChange={(value) => setSearchTerm(value)}
                             isLoading={isLoading}
-                            onMenuScrollToBottom={() => fetchNextPage()}
+                            onMenuScrollToBottom={() => {
+                                fetchNextPage().catch((error) => {
+                                    console.error('An error occurred:', error);
+                                });
+                            }}
                             placeholder="Search for item to add.."
                             onChange={(value) =>
                                 setSelectedChildItem({

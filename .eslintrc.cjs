@@ -5,8 +5,10 @@ module.exports = {
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended-type-checked',
         'plugin:@typescript-eslint/stylistic-type-checked',
-        // 'plugin:react/recommended',
+        'plugin:react/recommended',
         'plugin:react-hooks/recommended',
+        'plugin:import/typescript',
+        'plugin:prettier/recommended',
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs'],
     parser: '@typescript-eslint/parser',
@@ -19,5 +21,7 @@ module.exports = {
         '@typescript-eslint/consistent-type-definitions': 'off', // turning it off for now
         '@typescript-eslint/no-unused-vars': 'off', // turning it off for now
         'react-hooks/exhaustive-deps': 'off', // turning it off for now
+        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 'off',
     },
 };

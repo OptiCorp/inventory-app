@@ -43,7 +43,7 @@ export const PhoneList = ({ list }: Props) => {
             },
         });
     };
-    const {} = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
+
     return (
         <>
             {list && (
@@ -53,7 +53,11 @@ export const PhoneList = ({ list }: Props) => {
                         {list?.items ? (
                             <ListContainerCompact>
                                 {list.items.map((item: Item) => (
-                                    <SearchResultCardCompact part={item} icon={'remove'} />
+                                    <SearchResultCardCompact
+                                        key={item.id}
+                                        part={item}
+                                        icon={'remove'}
+                                    />
                                     // <SideList part={item} key={item.id} />
                                 ))}
                             </ListContainerCompact>

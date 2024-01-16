@@ -2,9 +2,9 @@ import { useContext, useState } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../hooks';
 import type { Item } from '../../../services/apiTypes';
-import { useGetCategories } from '../../../services/hooks/Category/useGetCategories';
-import { useGetLocations } from '../../../services/hooks/Locations/useGetLocations';
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors';
+import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
+import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
+import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import EditableField from './EditableField';
 import { SelectField } from './SelectField';
 import { TypeField } from './TypeField';
@@ -15,11 +15,19 @@ import {
     useFormSelectChangeHandler,
 } from './hooks';
 import { Container, PartInfoForm } from './styles';
+import { Types } from './types';
 
 type Props = {
     item: Item;
     isLoading: boolean;
 };
+
+const typesOptions: Types[] = [
+    { id: 'Unit', name: 'Unit' },
+    { id: 'Assembly', name: 'Assembly' },
+    { id: 'Subassembly', name: 'Subassembly' },
+    { id: 'Part', name: 'Part' },
+];
 
 const PartInfo = ({ item, isLoading }: Props) => {
     const internalItem = { ...item };
@@ -59,7 +67,7 @@ const PartInfo = ({ item, isLoading }: Props) => {
                         blurSelectField(selectedType, 'type', setSnackbarText, setSnackbarSeverity)
                     }
                     handleSelectChange={(e) => selectChange(e, setSelectedType)}
-                    options={['Unit', 'Assembly', 'Subassembly', 'Part']}
+                    options={typesOptions}
                     selectedType={selectedType}
                 />
 

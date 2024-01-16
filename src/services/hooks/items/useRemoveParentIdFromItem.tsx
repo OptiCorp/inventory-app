@@ -7,9 +7,13 @@ export const useRemoveParentIdFromItem = () => {
     return useMutation({
         mutationFn: (itemId: string) => api.removeParentIdFromItem(itemId),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['items'],
-            });
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['items'],
+                })
+                .catch((error) => {
+                    console.error('Failed: ', error);
+                });
         },
     });
 };

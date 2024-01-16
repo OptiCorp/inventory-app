@@ -17,7 +17,15 @@ const AddLocation = () => {
     return (
         <FormProvider {...methods}>
             <FormContainer>
-                <StyledForm onSubmit={onSubmit} id="addLocation">
+                <StyledForm
+                    onSubmit={(e) => {
+                        e && e.preventDefault(); // Prevent the default form submission behavior
+                        onSubmit(e).catch((error) => {
+                            console.error('An error occurred:', error);
+                        });
+                    }}
+                    id="addLocation"
+                >
                     <InputWrap>
                         <label htmlFor="locationName">Location name</label>
                         <AdminInput type="text" {...register('name')} />

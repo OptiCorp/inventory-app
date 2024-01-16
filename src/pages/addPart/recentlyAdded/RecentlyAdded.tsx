@@ -21,10 +21,11 @@ const RecentlyAdded = () => {
                 <h3>Recently added by you</h3>
                 <Button
                     onClick={() => navigate('batch')}
-                    children="Add new item"
                     backgroundColor={COLORS.primary}
                     color="white"
-                />
+                >
+                    Add new item
+                </Button>
             </Container>
             {myItems?.map((item: Item) =>
                 width > 800 ? (
