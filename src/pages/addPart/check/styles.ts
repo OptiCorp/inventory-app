@@ -3,10 +3,11 @@ import { COLORS } from '../../../style/GlobalStyles.ts';
 
 export const ButtonWrap = styled.div`
     display: flex;
+
     justify-content: end;
 `;
 export const StyledTextArea = styled.textarea`
-    background-color: ${COLORS.input};
+    background-color: ${COLORS.InputGrey};
     border: none;
     border-bottom: 1px solid #000;
     margin: 0;

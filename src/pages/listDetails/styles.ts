@@ -12,7 +12,7 @@ export const FlexWrapper = styled.div`
 
     grid-column: 2/2;
     justify-content: space-between;
-    background-color: ${COLORS.silverGray};
+    background-color: ${COLORS.mainGrey};
 `;
 
 export const SearchResultsContainer = styled.div`
@@ -45,7 +45,7 @@ export const SubmitButton = styled.button`
     height: 30px;
     cursor: pointer;
     &:hover {
-        background-color: ${COLORS.gray};
+        background-color: ${COLORS.mainGrey};
     }
 `;
 
@@ -56,7 +56,7 @@ export const CancelButton = styled.button`
     height: 30px;
     cursor: pointer;
     &:hover {
-        background-color: whitesmoke;
+        background-color: ${COLORS.secondary};
     }
 `;
 export const ButtonWrap = styled.div`

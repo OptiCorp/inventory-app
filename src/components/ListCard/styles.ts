@@ -10,7 +10,7 @@ export const ListWrapper = styled.div`
     padding: 8px;
     background-color: ${COLORS.card};
     &:hover {
-        background: ${COLORS.whiteSmoke};
+        background: ${COLORS.InputGrey};
     }
     cursor: pointer;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);

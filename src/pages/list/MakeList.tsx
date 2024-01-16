@@ -15,7 +15,7 @@ import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx'
 import { useAddList } from '../../services/hooks/list/useAddList.tsx';
 import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId.tsx';
 import { SearchContainer } from '../search/styles.ts';
-import { FlexWrapper } from './styles.ts';
+import { FlexWrapper, SearchAndButton } from './styles.ts';
 
 const MakeList = () => {
     const { currentUser } = useContext(UmAppContext);
@@ -60,20 +60,21 @@ const MakeList = () => {
     return (
         <>
             <SearchContainer>
-                <SearchBar
-                    setSearchTerm={setSearchTerm}
-                    searchTerm={searchTerm}
-                    placeholder={'Search for title or items'}
-                />
+                <SearchAndButton>
+                    <SearchBar
+                        setSearchTerm={setSearchTerm}
+                        searchTerm={searchTerm}
+                        placeholder={'Search for title or items'}
+                    />
 
-                <Button
-                    backgroundColor={` ${COLORS.primary}`}
-                    color={` ${COLORS.secondary}`}
-                    onClick={handleClickOpen}
-                >
-                    NEW LIST
-                </Button>
-
+                    <Button
+                        backgroundColor={` ${COLORS.primary}`}
+                        color={` ${COLORS.secondary}`}
+                        onClick={handleClickOpen}
+                    >
+                        NEW LIST
+                    </Button>
+                </SearchAndButton>
                 <CustomDialog
                     title="New list"
                     open={open}

@@ -25,7 +25,7 @@ export const CompactLists = styled.div`
 
 export const Title = styled.h1`
     font-weight: 600;
-    color: ${COLORS.gray};
+    color: ${COLORS.mainGrey};
     letter-spacing: 0.3rem;
     display: inline;
     font-size: 1.2rem;

@@ -8,16 +8,13 @@ import { COLORS } from '../../../style/GlobalStyles.ts';
 export const InfoIcon = styled(InfoOutlinedIcon)`
     color: black;
 
-    /* &:hover {
-        color: 
-    } */
     cursor: pointer;
 `;
 export const EditIcon = styled(CreateOutlinedIcon)`
     color: black;
 
     &:hover {
-        color: ${COLORS.cautionaryYellow};
+        color: ${COLORS.secondary};
     }
     cursor: pointer;
 `;
@@ -41,7 +38,7 @@ export const Wrapper = styled.div`
     flex-direction: row;
     padding: 5px;
     justify-content: space-evenly;
-    background-color: ${COLORS.whiteSmoke};
+    background-color: ${COLORS.secondary};
 `;
 
 export const RemoveIcon = styled(RemoveCircleIcon)`

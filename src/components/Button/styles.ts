@@ -16,7 +16,8 @@ export const SubmitButton = styled('button')<{
 
     background-color: ${(props) => props.$backgroundColor};
     color: ${(props) => props.color};
-    height: ${(props) => props.height ?? '30px'};
+    height: ${(props) => props.height ?? 'auto'};
+    padding: 5px;
     border: 1px solid ${COLORS.primary};
     cursor: pointer;
     margin-right: 0;
@@ -25,10 +26,11 @@ export const SubmitButton = styled('button')<{
 
 export const Wrapper = styled.div`
     display: flex;
+    align-items: flex-end;
+
     justify-content: end;
 `;
 
 export const ButtonsWrapper = styled.div`
-    display: flex;
     justify-content: end;
 `;
