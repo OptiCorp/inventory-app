@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Item, MutateItemList } from '../../../services/apiTypes';
+import { MutateItemList } from '../../../services/apiTypes';
 
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
@@ -11,14 +11,11 @@ import UmAppContext from '../../../contexts/UmAppContext';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import CustomDialog from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
+import { PartCardProps } from '../PartCard';
 import { KeyWords } from '../styles';
 import { DescriptionParagraph, FirstInfoBox, InfoP, SecondInfoBox, ThirdInfoBox } from './styles';
 
-type Props = {
-    part: Item;
-    icon?: string;
-};
-export const SearchInfo = ({ part, icon }: Props) => {
+export const SearchInfo = ({ part, icon }: PartCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
     const [open, setOpen] = useState(false);

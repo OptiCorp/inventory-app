@@ -1,15 +1,27 @@
-import { useNavigate } from 'react-router-dom';
-import { Item } from '../../services/apiTypes';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Location, Vendor } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
 import { PartCardContainer, SearchCard } from './styles';
 
-type Props = {
-    part: Item;
+export type PartCardProps = {
+    part: {
+        id: string;
+        wpId: string;
+        name: string;
+        serialNumber: string;
+        productNumber: string;
+        description: string;
+        location?: Location;
+        vendor?: Vendor;
+        createdDate: string;
+        updatedDate?: string;
+    };
     icon?: string;
 };
 
-const PartCard = ({ part, icon }: Props) => {
+const PartCard = ({ part, icon }: PartCardProps) => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleClick = () => {
         if (location.pathname === '/search' || location.pathname === '/add-part') {
