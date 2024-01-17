@@ -6,7 +6,7 @@ export const StyledInfoDiv = styled.div`
     border-radius: 8px;
 
     padding: 2rem;
-    box-shadow: 2.5px 2.5px gray;
+    box-shadow: 2.5px 2.5px ${COLORS.mainGray};
 `;
 
 export const Lists = styled.div`
