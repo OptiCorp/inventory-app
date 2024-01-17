@@ -1,5 +1,3 @@
-import { Box, ListItem } from '@mui/material';
-import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
@@ -9,39 +7,6 @@ export const TopBarContainer = styled.div`
     padding: 16px;
 `;
 
-export const StyledLinkDiv = styled.h3`
-    padding: 0 16px 0 17px;
-    font-size: 1.3rem;
-    cursor: pointer;
-`;
-
-export const StyledNavLink = styled(NavLink)`
-    text-decoration: none;
-    color: ${COLORS.darkGray};
-    &:hover {
-        color: ${COLORS.primary};
-    }
-    &.active {
-        color: ${COLORS.primary};
-    }
-`;
-
-export const DropdownItem = styled(ListItem)`
-    && {
-        margin-left: 20px;
-        padding: 0 16px;
-    }
-`;
-
-export const HamburgerContainer = styled(Box)`
-    &&&& {
-        width: 250px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-    }
-`;
 export const CompactHeaderWrap = styled.div`
     display: flex;
 `;
@@ -65,12 +30,12 @@ type Props = {
 export const MenuAdmin = styled.div<Props>`
     cursor: pointer;
 
-    color: ${({ $isopen }) => (String($isopen) ? COLORS.primary : COLORS.mainGray)};
+    color: ${({ $isopen }) => (String($isopen) ? COLORS.black : COLORS.gray)};
     &.active {
-        color: ${COLORS.primary} !important;
+        color: ${COLORS.black} !important;
     }
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
 `;
 export const MenuAdminLink = styled.span`
@@ -78,12 +43,12 @@ export const MenuAdminLink = styled.span`
 `;
 
 export const LogOutWrapper = styled.div`
-    color: ${COLORS.mainGray};
+    color: ${COLORS.gray};
     &.active {
-        color: ${COLORS.mainGray};
+        color: ${COLORS.gray};
     }
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
     cursor: pointer;
 `;

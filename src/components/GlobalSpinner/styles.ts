@@ -21,10 +21,10 @@ export const Spinner = styled.div`
     animation: ${rotate360} 1s linear infinite;
     transform: translateZ(0);
 
-    border-top: 2px solid ${COLORS.mainGray};
-    border-right: 2px solid ${COLORS.mainGray};
-    border-bottom: 2px solid ${COLORS.mainGray};
-    border-left: 2px solid ${COLORS.primary};
+    border-top: 2px solid ${COLORS.gray};
+    border-right: 2px solid ${COLORS.gray};
+    border-bottom: 2px solid ${COLORS.gray};
+    border-left: 2px solid ${COLORS.black};
     background: transparent;
     width: 24px;
     height: 24px;

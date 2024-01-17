@@ -34,7 +34,7 @@ export const SelectField = ({
             width: '100%',
             maxWidth: '500px',
             height: '41px',
-            backgroundColor: `${COLORS.secondary}`,
+            backgroundColor: `${COLORS.white}`,
             borderRadius: 0,
             border: '0px',
             borderBottom: '1px solid #000',

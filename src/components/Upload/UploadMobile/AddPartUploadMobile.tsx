@@ -118,8 +118,8 @@ const AddPartUploadMobile = () => {
             </Wrapper>
             <Container>
                 <SubmitButton
-                    color={COLORS.primary}
-                    $backgroundColor={COLORS.secondary}
+                    color={COLORS.black}
+                    $backgroundColor={COLORS.white}
                     onClick={() => inputFile.current?.click()}
                 >
                     {' '}

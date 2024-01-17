@@ -35,7 +35,7 @@ export const Comments = ({ item }: { item: Item }) => {
                     />
                 </div>
                 <Wrapper>
-                    <Button backgroundColor={`${COLORS.secondary}`} color={`${COLORS.primary}`}>
+                    <Button backgroundColor={`${COLORS.white}`} color={`${COLORS.black}`}>
                         Sumbit
                     </Button>
                 </Wrapper>

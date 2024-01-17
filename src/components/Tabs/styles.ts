@@ -19,7 +19,7 @@ export const TabButton = styled.button<{ active: boolean }>`
     align-items: center;
     position: relative;
     transition: 0.6s;
-    background: ${(props) => (props.active ? ` ${COLORS.primary}` : ` ${COLORS.secondary}`)};
+    background: ${(props) => (props.active ? ` ${COLORS.black}` : ` ${COLORS.white}`)};
     &:focus {
         outline: none;
     }
@@ -31,7 +31,7 @@ export const NumberofItems = styled.span<{ active: boolean }>`
     right: 0;
     font-size: 1rem;
     padding: 1rem;
-    color: ${(props) => (props.active ? ` ${COLORS.secondary}` : ` ${COLORS.primary}`)};
+    color: ${(props) => (props.active ? ` ${COLORS.white}` : ` ${COLORS.black}`)};
 `;
 export const Title = styled.span<{ active: boolean }>`
     position: relative;
@@ -42,7 +42,7 @@ export const Title = styled.span<{ active: boolean }>`
     height: inherit;
     text-transform: uppercase;
     font-size: 0.8rem;
-    color: ${(props) => (props.active ? `${COLORS.secondary}` : ` ${COLORS.primary}`)};
+    color: ${(props) => (props.active ? `${COLORS.white}` : ` ${COLORS.black}`)};
     transition: 0.6s;
 `;
 export const Indicator = styled.span<{ active: boolean }>`

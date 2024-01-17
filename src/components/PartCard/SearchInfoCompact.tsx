@@ -3,7 +3,6 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UmAppContext from '../../contexts/UmAppContext.tsx';
-import { useSnackBar } from '../../hooks/useSnackbar.tsx';
 import { Item, MutateItemList } from '../../services/apiTypes.ts';
 import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
 import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
@@ -17,7 +16,7 @@ import {
     CompactInfoP,
     DescriptionWrap,
     KeyWords,
-    ResultCardCompactContainer,
+    PartCardCompactContainer,
 } from './styles.ts';
 type Props = {
     part: Item;
@@ -25,14 +24,13 @@ type Props = {
 };
 const SearchResultCardCompact = ({ part, icon }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
-    const { snackbar } = useSnackBar();
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [alreadyAdded, setAlreadyAdded] = useState(false);
     const { listId } = useParams();
-    const { data: list, isFetching } = useGetListById(listId!);
+    const { data: list } = useGetListById(listId!);
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
-    const { mutate: mutateRemoveItemFromList, data: removeData } = useRemoveItemsFromList();
+    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation();
@@ -82,7 +80,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
 
     return (
         <>
-            <ResultCardCompactContainer>
+            <PartCardCompactContainer>
                 <Accordion
                     style={{
                         boxShadow: 'none',
@@ -113,9 +111,9 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                             <Typography>{part.description}</Typography>
                         </DescriptionWrap>
                         <Button
-                            backgroundColor={`${COLORS.secondary}`}
+                            backgroundColor={`${COLORS.white}`}
                             height="20px"
-                            color={`${COLORS.primary}`}
+                            color={`${COLORS.black}`}
                             onClick={() => navigate(`/${part.id}`)}
                         >
                             <ButtonText> More info</ButtonText>
@@ -141,7 +139,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         onClick={handleClickOpen}
                     ></StyledRemoveIcon>
                 ) : null}
-            </ResultCardCompactContainer>
+            </PartCardCompactContainer>
 
             <CustomDialog
                 title="Remove item from list?"

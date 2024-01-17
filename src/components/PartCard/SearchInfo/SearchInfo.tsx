@@ -11,14 +11,14 @@ import UmAppContext from '../../../contexts/UmAppContext';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import CustomDialog from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
-import { KeyWords } from '../../ResultSearchCard/styles';
+import { KeyWords } from '../styles';
 import { DescriptionParagraph, FirstInfoBox, InfoP, SecondInfoBox, ThirdInfoBox } from './styles';
 
 type Props = {
     part: Item;
     icon?: string;
 };
-export const Searchinfo = ({ part, icon }: Props) => {
+export const SearchInfo = ({ part, icon }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
     const [open, setOpen] = useState(false);
@@ -27,11 +27,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
     const navigate = useNavigate();
     const { data: list } = useGetListById(listId!);
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
-    const {
-        mutate: mutateRemoveItemFromList,
-        isSuccess: removeItemSuccess,
-        data: removeData,
-    } = useRemoveItemsFromList();
+    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation();

@@ -7,7 +7,7 @@ export const ParentContainer = styled.div`
     margin-bottom: 28px;
 `;
 export const AddIcon = styled(Add)<{ disabled: boolean }>`
-    color: ${(props) => (props.disabled ? '#ddd' : COLORS.primary)};
+    color: ${(props) => (props.disabled ? '#ddd' : COLORS.black)};
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 
     &:hover {
@@ -22,12 +22,12 @@ export const CustomRemoveIcon = styled(RemoveIcon)`
     top: 2px;
     cursor: pointer;
     background-color: black;
-    color: ${COLORS.secondary};
+    color: ${COLORS.white};
     border-radius: 50%;
     font-size: 1.2rem !important;
 
     &:hover {
-        color: ${COLORS.dangerRed};
+        color: ${COLORS.red};
         scale: 110%;
     }
 `;
@@ -44,7 +44,7 @@ export const ChildItemContainer = styled.div`
 
 export const LinkElement = styled.p`
     display: inline-block;
-    border-bottom: 1px dotted ${COLORS.primary};
+    border-bottom: 1px dotted ${COLORS.black};
     cursor: pointer;
 `;
 export const ChildItemSearchContainer = styled.div`

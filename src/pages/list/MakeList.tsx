@@ -26,7 +26,7 @@ const MakeList = () => {
 
     const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id);
 
-    const { mutate, isSuccess } = useAddList();
+    const { mutate } = useAddList();
     const { snackbar } = useSnackBar();
     useEffect(() => {
         setSearchTerm((prev) => searchParam ?? prev);
@@ -68,8 +68,8 @@ const MakeList = () => {
                     />
 
                     <Button
-                        backgroundColor={` ${COLORS.primary}`}
-                        color={` ${COLORS.secondary}`}
+                        backgroundColor={` ${COLORS.black}`}
+                        color={` ${COLORS.white}`}
                         onClick={handleClickOpen}
                     >
                         NEW LIST

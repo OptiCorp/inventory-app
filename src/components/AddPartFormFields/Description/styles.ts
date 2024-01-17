@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import { COLORS } from '../../../style/GlobalStyles';
 
 export const InputWrap = styled.div`
     display: flex;

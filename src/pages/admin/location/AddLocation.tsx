@@ -37,8 +37,8 @@ const AddLocation = () => {
                             <Button
                                 id="addLocation"
                                 type="submit"
-                                backgroundColor={COLORS.primary}
-                                color={COLORS.secondary}
+                                backgroundColor={COLORS.black}
+                                color={COLORS.white}
                             >
                                 Add location
                             </Button>

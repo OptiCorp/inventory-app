@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Button/Button.tsx';
-import SearchResultCard from '../../../components/ResultSearchCard/ResultSearchCard.tsx';
-import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact.tsx';
+import PartCard from '../../../components/PartCard/PartCard.tsx';
+import SearchResultCardCompact from '../../../components/PartCard/SearchInfoCompact.tsx';
 import { useWindowDimensions } from '../../../hooks/index.ts';
 import { Item } from '../../../services/apiTypes.ts';
 import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser.tsx';
@@ -21,7 +21,7 @@ const RecentlyAdded = () => {
                 <h3>Recently added by you</h3>
                 <Button
                     onClick={() => navigate('batch')}
-                    backgroundColor={COLORS.primary}
+                    backgroundColor={COLORS.black}
                     color="white"
                 >
                     Add new item
@@ -29,7 +29,7 @@ const RecentlyAdded = () => {
             </Container>
             {myItems?.map((item: Item) =>
                 width > 800 ? (
-                    <SearchResultCard key={item.id} part={item} />
+                    <PartCard key={item.id} part={item} />
                 ) : (
                     <SearchResultCardCompact key={item.id} part={item} />
                 )
