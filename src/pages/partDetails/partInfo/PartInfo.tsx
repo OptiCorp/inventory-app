@@ -49,10 +49,11 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     const handleBlur = (fieldId: keyof PartInfoSchema, fieldName: keyof PartInfoSchema) => {
         const fieldValue = watch(fieldName);
         if (isDirty && dirtyFields[fieldName] && fieldValue) {
+            const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
             mutate(
                 {
                     ...item,
-                    [fieldId]: typeof fieldValue === 'string' ? fieldValue : fieldValue.value,
+                    [fieldId]: mutableValue,
                 },
                 {
                     onSuccess: (data) => {
@@ -75,7 +76,9 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                                 );
                             } else if (fieldValue) {
                                 setSnackbarText(
-                                    `${fieldName.toLowerCase()} was changed to ${fieldValue}`
+                                    `${fieldName.toLowerCase()} was changed to ${String(
+                                        fieldValue
+                                    )}`
                                 );
                             }
                         }
