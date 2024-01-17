@@ -40,11 +40,7 @@ const Locations = () => {
                 ))}
             </SearchResultContainer>
             <ButtonContainer>
-                <Button
-                    onClick={() => navigate('/admin/add-location')}
-                    backgroundColor={'black'}
-                    color={'white'}
-                >
+                <Button onClick={() => navigate('/admin/add-location')} variant="black">
                     Add new location
                 </Button>
             </ButtonContainer>

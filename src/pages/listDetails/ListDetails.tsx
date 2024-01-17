@@ -11,7 +11,6 @@ import { Item, UpdateList } from '../../services/apiTypes.ts';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
 
 import { useGetItemsNotInListInfinite } from '../../services/hooks/items/useGetItemsNotInListInfinite.tsx';
-import { COLORS } from '../../style/GlobalStyles.ts';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
 
@@ -138,19 +137,10 @@ const ListDetails = () => {
                                 </ListContainer>
                             ) : null}
                             <ButtonWrap>
-                                <Button
-                                    backgroundColor={`${COLORS.white}`}
-                                    color={`${COLORS.black}`}
-                                    onClick={handleSave}
-                                >
+                                <Button variant="white" onClick={handleSave}>
                                     Save list
                                 </Button>
-                                <Button
-                                    backgroundColor={`${COLORS.white}`}
-                                    color={`${COLORS.black}`}
-                                >
-                                    Export
-                                </Button>
+                                <Button variant="black">Export</Button>
                             </ButtonWrap>
                         </FlexWrapper>
                     </>

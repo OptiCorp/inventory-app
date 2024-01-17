@@ -41,11 +41,7 @@ const Vendors = () => {
                 ))}
             </SearchResultContainer>
             <ButtonContainer>
-                <Button
-                    onClick={() => navigate('/admin/add-vendor')}
-                    backgroundColor={'black'}
-                    color={'white'}
-                >
+                <Button onClick={() => navigate('/admin/add-vendor')} variant="black">
                     Add new vendor
                 </Button>
             </ButtonContainer>

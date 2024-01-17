@@ -6,7 +6,6 @@ import { AddDocument, Document, Item } from '../../services/apiTypes';
 import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocument } from '../../services/hooks/documents/useUploadDocument';
-import { COLORS } from '../../style/GlobalStyles';
 import { Button as SubmitButton } from '../Button/Button';
 import {
     Container,
@@ -92,11 +91,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                 ))}
             </Wrapper>
             <Container>
-                <SubmitButton
-                    color={COLORS.black}
-                    backgroundColor={COLORS.white}
-                    onClick={() => inputFile.current?.click()}
-                >
+                <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"

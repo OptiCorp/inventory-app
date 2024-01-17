@@ -7,7 +7,6 @@ import { Item, MutateItemList } from '../../services/apiTypes.ts';
 import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
 import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-import { COLORS } from '../../style/GlobalStyles.ts';
 import { Button } from '../Button/Button.tsx';
 import CustomDialog from '../CustomDialog/CustomDialog.tsx';
 import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
@@ -110,12 +109,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                             <KeyWords>Description</KeyWords>{' '}
                             <Typography>{part.description}</Typography>
                         </DescriptionWrap>
-                        <Button
-                            backgroundColor={`${COLORS.white}`}
-                            height="20px"
-                            color={`${COLORS.black}`}
-                            onClick={() => navigate(`/${part.id}`)}
-                        >
+                        <Button variant="white" onClick={() => navigate(`/${part.id}`)}>
                             <ButtonText> More info</ButtonText>
                         </Button>
                     </AccordionDetails>
