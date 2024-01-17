@@ -30,7 +30,7 @@ export const CompactDesriptionParagraph = styled.p`
     justify-content: start;
 `;
 
-export const ResultCardCompactContainer = styled.div`
+export const PartCardCompactContainer = styled.div`
     background-color: ${COLORS.card};
     margin: 16px;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);

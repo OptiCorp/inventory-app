@@ -16,7 +16,7 @@ import {
     CompactInfoP,
     DescriptionWrap,
     KeyWords,
-    ResultCardCompactContainer,
+    PartCardCompactContainer,
 } from './styles.ts';
 type Props = {
     part: Item;
@@ -80,7 +80,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
 
     return (
         <>
-            <ResultCardCompactContainer>
+            <PartCardCompactContainer>
                 <Accordion
                     style={{
                         boxShadow: 'none',
@@ -139,7 +139,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         onClick={handleClickOpen}
                     ></StyledRemoveIcon>
                 ) : null}
-            </ResultCardCompactContainer>
+            </PartCardCompactContainer>
 
             <CustomDialog
                 title="Remove item from list?"

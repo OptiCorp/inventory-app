@@ -25,7 +25,7 @@ export const SearchInfo = ({ part, icon }: Props) => {
     const [alreadyAdded, setAlreadyAdded] = useState(false);
     const { listId } = useParams();
     const navigate = useNavigate();
-    const { data: list } = useGetListById('list');
+    const { data: list } = useGetListById(listId!);
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
 
