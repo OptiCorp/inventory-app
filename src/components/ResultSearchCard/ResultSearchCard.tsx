@@ -15,10 +15,10 @@ const SearchResultCard = ({ part, icon }: Props) => {
         <>
             <ResultCardContainer
                 style={{
-                    cursor: `${location.pathname === `/search` ?? '/add-part' ? `pointer` : null}`,
+                    cursor: `${location.pathname.includes(`/makelist`) ? null : `pointer`}`,
                 }}
                 onClick={() => {
-                    location.pathname === '/search' ?? '/add-part' ? navigate(`/${part.id}`) : null;
+                    location.pathname.includes('/makelist') ? null : navigate(`/${part.id}`);
                 }}
             >
                 <SearchCard title="">

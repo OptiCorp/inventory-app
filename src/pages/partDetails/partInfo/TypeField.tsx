@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import Select, { CSSObjectWithLabel } from 'react-select';
+import { COLORS } from '../../../style/GlobalStyles';
 import { Edit, LabelContainer, TextBoxWrap } from './styles';
 import { TypeProps } from './types';
 
@@ -34,10 +35,10 @@ export const TypeField = ({
             width: '100%',
             maxWidth: '500px',
             height: '41px',
-            backgroundColor: '#fff',
+            backgroundColor: `${COLORS.secondary}`,
             borderRadius: 0,
             border: '0px',
-            borderBottom: '1px solid #000',
+            borderBottom: `1px solid ${COLORS.primary}`,
         }),
         menu: (provided: CSSObjectWithLabel) => ({
             ...provided,

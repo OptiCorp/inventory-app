@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 
 export const GlobalSpinnerContainer = styled.div`
     padding-top: 6rem;
@@ -20,10 +21,10 @@ export const Spinner = styled.div`
     animation: ${rotate360} 1s linear infinite;
     transform: translateZ(0);
 
-    border-top: 2px solid grey;
-    border-right: 2px solid grey;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid black;
+    border-top: 2px solid ${COLORS.mainGray};
+    border-right: 2px solid ${COLORS.mainGray};
+    border-bottom: 2px solid ${COLORS.mainGray};
+    border-left: 2px solid ${COLORS.primary};
     background: transparent;
     width: 24px;
     height: 24px;

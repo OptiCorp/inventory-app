@@ -8,7 +8,6 @@ interface ButtonProps {
     id?: string;
     backgroundColor: string;
     height?: string;
-    // variant: 'Primary' | 'Secondary' | 'Danger'
     color: ComponentProps<'button'>['color'];
 }
 

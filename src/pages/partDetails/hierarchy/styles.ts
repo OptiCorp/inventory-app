@@ -22,12 +22,12 @@ export const CustomRemoveIcon = styled(RemoveIcon)`
     top: 2px;
     cursor: pointer;
     background-color: black;
-    color: #fff;
+    color: ${COLORS.secondary};
     border-radius: 50%;
     font-size: 1.2rem !important;
 
     &:hover {
-        color: red;
+        color: ${COLORS.dangerRed};
         scale: 110%;
     }
 `;
