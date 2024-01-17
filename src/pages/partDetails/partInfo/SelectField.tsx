@@ -4,7 +4,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import Select, { CSSObjectWithLabel } from 'react-select';
 import { Edit, LabelContainer } from './styles';
 import { PartInfoSchema } from './hooks/useUpdatePartForm';
-import { ItemFields, Types } from './types';
+import { ItemFields } from './types';
 
 type Options = {
     value: string;
