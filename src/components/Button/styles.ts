@@ -18,7 +18,7 @@ export const SubmitButton = styled('button')<{
     color: ${(props) => props.color};
     height: ${(props) => props.height ?? 'auto'};
     padding: 5px;
-    border: 1px solid ${COLORS.primary};
+    border: 1px solid ${COLORS.black};
     cursor: pointer;
     margin-right: 0;
     text-transform: uppercase;

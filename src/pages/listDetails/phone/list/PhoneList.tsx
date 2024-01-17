@@ -65,14 +65,14 @@ export const PhoneList = ({ list }: Props) => {
                         »
                         <ButtonWrapCompact>
                             <Button
-                                backgroundColor={`${COLORS.secondary}`}
-                                color={`${COLORS.primary}`}
+                                backgroundColor={`${COLORS.white}`}
+                                color={`${COLORS.black}`}
                             >
                                 Export
                             </Button>
                             <Button
-                                backgroundColor={`${COLORS.primary}`}
-                                color={`${COLORS.secondary}`}
+                                backgroundColor={`${COLORS.black}`}
+                                color={`${COLORS.white}`}
                                 onClick={handleSave}
                             >
                                 Save list

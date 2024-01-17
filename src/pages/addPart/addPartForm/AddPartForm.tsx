@@ -18,8 +18,8 @@ export const AddPartForm = () => {
                 <Button
                     id="addPart"
                     type="submit"
-                    backgroundColor={`${COLORS.primary}`}
-                    color={`${COLORS.secondary}`}
+                    backgroundColor={`${COLORS.black}`}
+                    color={`${COLORS.white}`}
                 >
                     FINISH
                 </Button>

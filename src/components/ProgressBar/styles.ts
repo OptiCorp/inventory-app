@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
-const primaryColor: string = COLORS.primary;
-const grayColor: string = COLORS.mainGray;
+const primaryColor: string = COLORS.black;
+const grayColor: string = COLORS.gray;
 
 type ProgressProps = {
     active: boolean;
@@ -25,14 +25,14 @@ export const ProgressCircle = styled.div<ProgressProps>`
     width: 10px;
     height: 10px;
     padding: 8px;
-    color: ${({ finished }) => (finished ? COLORS.secondary : COLORS.primary)};
+    color: ${({ finished }) => (finished ? COLORS.white : COLORS.black)};
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
 export const ProgressLine = styled.div<ProgressProps>`
-    background-color: ${({ active }) => (active ? COLORS.primary : grayColor)};
+    background-color: ${({ active }) => (active ? COLORS.black : grayColor)};
     height: 3px;
     align-self: center;
     margin: 0 4px;

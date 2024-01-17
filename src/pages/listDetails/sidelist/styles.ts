@@ -14,17 +14,17 @@ export const EditIcon = styled(CreateOutlinedIcon)`
     color: black;
 
     &:hover {
-        color: ${COLORS.secondary};
+        color: ${COLORS.white};
     }
     cursor: pointer;
 `;
 
 export const DeleteIcon = styled(DeleteForeverIcon)`
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
     margin-inline: 30px;
     cursor: pointer;
     &:hover {
-        color: ${COLORS.dangerRed};
+        color: ${COLORS.red};
     }
 `;
 
@@ -38,14 +38,14 @@ export const Wrapper = styled.div`
     flex-direction: row;
     padding: 5px;
     justify-content: space-evenly;
-    background-color: ${COLORS.secondary};
+    background-color: ${COLORS.white};
 `;
 
 export const RemoveIcon = styled(RemoveCircleIcon)`
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
     margin-inline: 30px;
     &:hover {
-        color: ${COLORS.dangerRed};
+        color: ${COLORS.red};
     }
     cursor: pointer;
 `;

@@ -12,9 +12,9 @@ export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     color: ${COLORS.gray};
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
     &.active {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
 `;

@@ -35,10 +35,10 @@ export const TypeField = ({
             width: '100%',
             maxWidth: '500px',
             height: '41px',
-            backgroundColor: `${COLORS.secondary}`,
+            backgroundColor: `${COLORS.white}`,
             borderRadius: 0,
             border: '0px',
-            borderBottom: `1px solid ${COLORS.primary}`,
+            borderBottom: `1px solid ${COLORS.black}`,
         }),
         menu: (provided: CSSObjectWithLabel) => ({
             ...provided,

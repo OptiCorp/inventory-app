@@ -111,9 +111,9 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                             <Typography>{part.description}</Typography>
                         </DescriptionWrap>
                         <Button
-                            backgroundColor={`${COLORS.secondary}`}
+                            backgroundColor={`${COLORS.white}`}
                             height="20px"
-                            color={`${COLORS.primary}`}
+                            color={`${COLORS.black}`}
                             onClick={() => navigate(`/${part.id}`)}
                         >
                             <ButtonText> More info</ButtonText>

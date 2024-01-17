@@ -139,15 +139,15 @@ const ListDetails = () => {
                             ) : null}
                             <ButtonWrap>
                                 <Button
-                                    backgroundColor={`${COLORS.secondary}`}
-                                    color={`${COLORS.primary}`}
+                                    backgroundColor={`${COLORS.white}`}
+                                    color={`${COLORS.black}`}
                                     onClick={handleSave}
                                 >
                                     Save list
                                 </Button>
                                 <Button
-                                    backgroundColor={`${COLORS.secondary}`}
-                                    color={`${COLORS.primary}`}
+                                    backgroundColor={`${COLORS.white}`}
+                                    color={`${COLORS.black}`}
                                 >
                                     Export
                                 </Button>

@@ -36,7 +36,7 @@ export const BackgroundContainer = styled.div`
 
 export const TitleHeader = styled.h1`
     font-style: italic;
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
     text-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5);
     font-weight: 500;
     margin: 0 auto;
@@ -59,15 +59,15 @@ export const InfoText = styled.p`
     gap: 30px;
     text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.5);
     font-weight: 600;
-    color: ${COLORS.secondary};
+    color: ${COLORS.white};
     margin: 0 auto;
 `;
 
 export const LoginButton = styled.button`
-    color: ${COLORS.secondary};
-    background-color: ${COLORS.primary};
+    color: ${COLORS.white};
+    background-color: ${COLORS.black};
     width: 150px;
     height: 30px;
-    border: 1px solid ${COLORS.primary};
+    border: 1px solid ${COLORS.black};
     text-transform: uppercase;
 `;

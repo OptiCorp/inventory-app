@@ -21,7 +21,7 @@ const RecentlyAdded = () => {
                 <h3>Recently added by you</h3>
                 <Button
                     onClick={() => navigate('batch')}
-                    backgroundColor={COLORS.primary}
+                    backgroundColor={COLORS.black}
                     color="white"
                 >
                     Add new item

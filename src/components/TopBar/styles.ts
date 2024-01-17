@@ -30,12 +30,12 @@ type Props = {
 export const MenuAdmin = styled.div<Props>`
     cursor: pointer;
 
-    color: ${({ $isopen }) => (String($isopen) ? COLORS.primary : COLORS.mainGray)};
+    color: ${({ $isopen }) => (String($isopen) ? COLORS.black : COLORS.gray)};
     &.active {
-        color: ${COLORS.primary} !important;
+        color: ${COLORS.black} !important;
     }
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
 `;
 export const MenuAdminLink = styled.span`
@@ -43,12 +43,12 @@ export const MenuAdminLink = styled.span`
 `;
 
 export const LogOutWrapper = styled.div`
-    color: ${COLORS.mainGray};
+    color: ${COLORS.gray};
     &.active {
-        color: ${COLORS.mainGray};
+        color: ${COLORS.gray};
     }
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
     cursor: pointer;
 `;
