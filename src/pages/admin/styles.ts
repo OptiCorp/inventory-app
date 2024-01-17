@@ -11,13 +11,6 @@ export const SearchResultContainer = styled.div`
     flex-direction: column;
 `;
 
-// export const ButtonContainer = styled.div`
-//     display: flex;
-//     justify-content: end;
-//     max-width: 700px;
-//     margin: 16px;
-// `
-
 export const AdminInput = styled.input`
     &&& {
         width: 100%;
@@ -28,7 +21,7 @@ export const AdminInput = styled.input`
         border-top: none;
         border-left: none;
         border-right: none;
-        background: ${COLORS.input};
+        background: ${COLORS.InputGray};
     }
 `;
 

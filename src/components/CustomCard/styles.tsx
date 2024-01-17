@@ -6,7 +6,7 @@ export const StyledInfoDiv = styled.div`
     border-radius: 8px;
 
     padding: 2rem;
-    box-shadow: 2.5px 2.5px gray;
+    box-shadow: 2.5px 2.5px ${COLORS.mainGray};
 `;
 
 export const Lists = styled.div`
@@ -25,7 +25,7 @@ export const CompactLists = styled.div`
 
 export const Title = styled.h1`
     font-weight: 600;
-    color: ${COLORS.gray};
+    color: ${COLORS.mainGray};
     letter-spacing: 0.3rem;
     display: inline;
     font-size: 1.2rem;

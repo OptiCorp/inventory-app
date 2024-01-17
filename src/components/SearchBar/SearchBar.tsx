@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import { Icon, SearchBarContainer, StyledInput } from './styles';
 import { useWindowDimensions } from '../../hooks';
+import { Icon, SearchBarContainer, StyledInput } from './styles';
 
 type Props = {
     setSearchTerm: Dispatch<SetStateAction<string>>;

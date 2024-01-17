@@ -3,7 +3,7 @@ import { COLORS } from '../../style/GlobalStyles';
 
 export const ToolTipContent = styled.div`
     position: absolute;
-    background-color: ${COLORS.gray};
+    background-color: ${COLORS.mainGray};
     left: 20px;
     line-height: 20px;
     top: -10px;

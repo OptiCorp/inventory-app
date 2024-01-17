@@ -6,11 +6,11 @@ type Props = {
 export const SubmitButton = styled.button`
     width: 150px;
     background-color: ${COLORS.primary};
-    color: ${COLORS.gray};
+    color: ${COLORS.mainGray};
     height: 30px;
     cursor: pointer;
     &:hover {
-        background-color: grey;
+        background-color: ${COLORS.InputGray};
     }
 `;
 
@@ -48,4 +48,10 @@ export const SearchContainer = styled.div<Props>`
     display: flex;
     flex-direction: column;
     height: ${({ height }) => height};
+`;
+export const SearchAndButton = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px;
 `;

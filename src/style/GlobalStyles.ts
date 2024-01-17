@@ -3,24 +3,15 @@ import { createGlobalStyle } from 'styled-components';
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
 
 export const COLORS = {
+    secondary: ' #FFFFFF',
     primary: '#000',
-    secondary: '#FFF',
-    gray: '#CACACA',
     card: '#FBFBFB',
-    input: '#F2F2F2',
+    mainGray: '#CACACA',
+    darkGray: '#7E7E7E',
+    InputGray: '#F2F2F2',
     green: '#008000',
-    lightGray: '#CCC',
-    silverGray: '#DCDCDC',
-    paleGray: '#EAEAEA',
-    frostyGray: '#F0F3F3',
-    lightSteelBlue: '#DEEDEE',
-    cautionaryYellow: '#FBCA36',
-    warningOrange: '#ED8936',
     dangerRed: '#EB0000',
-    whiteSmoke: '#f5f5f5',
-    aliceBlue: '#F0F8FF',
 };
-
 type Props = {
     width: number;
 };
@@ -29,16 +20,18 @@ const GlobalStyles = createGlobalStyle<Props>`
    body, :root, html {
         margin: 0;
         width: 100%;
+
         font-family: 'Archivo', sans-serif;
-        height: 100vh;
-        font-size: 13px;
+        font-size: 1rem;
         background-color: ${COLORS.secondary};
     }
     .wrapper {
     padding: ${({ width }) => (width < 500 ? 0 : '8px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
+    display: grid;
     overflow-x: hidden;
+
   }
 
 
@@ -56,3 +49,9 @@ body::-webkit-scrollbar {
 `;
 
 export default GlobalStyles;
+
+type ColorsType = typeof COLORS;
+
+declare module 'styled-components' {
+    export type DefaultTheme = ColorsType;
+}

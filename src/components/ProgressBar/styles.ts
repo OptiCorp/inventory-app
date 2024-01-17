@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
+const primaryColor: string = COLORS.primary;
+const grayColor: string = COLORS.mainGray;
+
 type ProgressProps = {
     active: boolean;
     width: number;
@@ -17,8 +20,8 @@ export const Container = styled.div`
 export const ProgressCircle = styled.div<ProgressProps>`
     border-radius: 50%;
     border: 5px solid gray;
-    background-color: ${({ finished }) => (finished ? COLORS.primary : COLORS.gray)};
-    border-color: ${({ active, finished }) => (active || finished ? COLORS.primary : COLORS.gray)};
+    background-color: ${({ finished }) => (finished ?? false ? primaryColor : grayColor)};
+    border-color: ${({ active, finished }) => (active || finished ? primaryColor : grayColor)};
     width: 10px;
     height: 10px;
     padding: 8px;
@@ -29,7 +32,7 @@ export const ProgressCircle = styled.div<ProgressProps>`
 `;
 
 export const ProgressLine = styled.div<ProgressProps>`
-    background-color: ${({ active }) => (active ? COLORS.primary : COLORS.gray)};
+    background-color: ${({ active }) => (active ? COLORS.primary : grayColor)};
     height: 3px;
     align-self: center;
     margin: 0 4px;
