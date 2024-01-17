@@ -1,28 +1,39 @@
 import { Box, ClickAwayListener, TextField } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
+import { ComponentProps, useState } from 'react';
+import { ItemFields, Types } from './types';
 import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles';
-import { EditableFieldProps } from './types';
-import { useState } from 'react';
+type EditableFieldProps<TMultiLine = boolean> = TMultiLine extends true
+    ? {
+          label: ItemFields;
+          onBlur: ComponentProps<'input'>['onBlur'];
+          options?: Types[];
+          selectedType?: string;
+          rows: number;
+          isMultiLine: TMultiLine;
+      }
+    : {
+          label: ItemFields;
+          onBlur: ComponentProps<'input'>['onBlur'];
+          options?: Types[];
+          selectedType?: string;
+          rows?: number;
+          isMultiLine: TMultiLine;
+      };
 
-const EditableField = ({
-    multiline,
-    label,
-    defaultValue,
-    onBlur,
-    handleInputChange,
-}: EditableFieldProps) => {
+const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps) => {
     const {
         register,
+        control,
         formState: { errors },
     } = useFormContext();
+
     const [open, setOpen] = useState(false);
 
     const fieldErrorMessage = errors[label]?.message as string;
 
     const handleClickAway = () => {
-        if (!fieldErrorMessage) {
-            setOpen(false);
-        }
+        setOpen(false);
     };
     const handleEditClick = () => {
         setOpen(true);
@@ -47,24 +58,39 @@ const EditableField = ({
                             }}
                         />
                     </LabelContainer>
-                    <InfoContainer>
-                        <TextField
-                            variant="standard"
-                            InputProps={{
-                                disableUnderline: !open,
-                                readOnly: !open,
-                            }}
-                            {...register(label, {
-                                onBlur,
-                            })}
-                            onChange={(e) => {
-                                handleInputChange?.(e.target.value);
-                            }}
-                            defaultValue={defaultValue}
-                            multiline={multiline}
-                            fullWidth
-                        />
-                    </InfoContainer>
+                    <Controller
+                        control={control}
+                        name={label}
+                        render={(controllerProps) => {
+                            const {
+                                field: { onChange, value, name },
+                            } = controllerProps;
+                            const isEmpty = value === undefined || value === null || value === '';
+
+                            return (
+                                <>
+                                    <InfoContainer>
+                                        <TextField
+                                            {...register(label)}
+                                            variant="standard"
+                                            InputProps={{
+                                                disableUnderline: !open,
+                                                readOnly: !open,
+                                            }}
+                                            onBlur={onBlur}
+                                            onChange={onChange}
+                                            multiline={isMultiLine}
+                                            fullWidth
+                                            rows={rows}
+                                        />
+                                    </InfoContainer>
+                                    {isEmpty && (
+                                        <ErrorP>{name.toLowerCase()} can not be empty.</ErrorP>
+                                    )}
+                                </>
+                            );
+                        }}
+                    />
 
                     {fieldErrorMessage && <ErrorP>{fieldErrorMessage}</ErrorP>}
                 </Box>
