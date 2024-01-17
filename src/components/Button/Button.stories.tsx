@@ -22,8 +22,8 @@ export const Primary: Story = {
         color: 'white',
         children: 'Button',
         height: '40px',
-    }
-}
+    },
+};
 
 export const Secondary: Story = {
     args: {
