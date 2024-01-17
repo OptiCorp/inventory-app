@@ -23,15 +23,9 @@ type EditableFieldProps<TMultiLine = boolean> = TMultiLine extends true
       };
 
 const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps) => {
-    const {
-        register,
-        control,
-        formState: { errors },
-    } = useFormContext<PartInfoSchema>();
+    const { register, control } = useFormContext<PartInfoSchema>();
 
     const [open, setOpen] = useState(false);
-
-    const fieldErrorMessage = errors[label]?.message as string;
 
     const handleClickAway = () => {
         setOpen(false);
@@ -92,8 +86,6 @@ const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps)
                             );
                         }}
                     />
-
-                    {fieldErrorMessage && <ErrorP>{fieldErrorMessage}</ErrorP>}
                 </Box>
             </ClickAwayListener>
         </TextBoxWrap>
