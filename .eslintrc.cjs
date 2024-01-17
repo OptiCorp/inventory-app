@@ -23,5 +23,11 @@ module.exports = {
         'react-hooks/exhaustive-deps': 'off', // turning it off for now
         'react/react-in-jsx-scope': 'off',
         'react/prop-types': 'off',
+        'prettier/prettier': [
+            'error',
+            {
+                endOfLine: 'auto',
+            },
+        ],
     },
 };
