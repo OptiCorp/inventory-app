@@ -66,8 +66,8 @@ const BatchForm = () => {
             </label>
 
             <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
+                backgroundColor={` ${COLORS.black}`}
+                color={` ${COLORS.white}`}
                 onClick={handleClick}
             >
                 NEXT

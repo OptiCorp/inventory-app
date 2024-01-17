@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 import { Container, ProgressCircle, ProgressLine, ProgressLink } from './styles';
 
@@ -8,9 +7,6 @@ type Props = {
 
 const ProgressBar = ({ progressLevel }: Props) => {
     const { width } = useWindowDimensions();
-    const location = useLocation();
-
-    const paths = location.pathname.split('/').filter((name) => name !== '');
 
     return (
         <Container>

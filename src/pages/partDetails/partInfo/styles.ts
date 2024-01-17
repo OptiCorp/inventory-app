@@ -1,8 +1,8 @@
 import EditIcon from '@mui/icons-material/Edit';
+import { TextField } from '@mui/material';
 import styled from 'styled-components';
 import { COLORS } from '../../../style/GlobalStyles';
 import { StyledTextFieldProps } from './types';
-import { TextField } from '@mui/material';
 
 export const PartInfoForm = styled.form`
     display: flex;
@@ -66,7 +66,7 @@ export const TextBoxWrap = styled.div`
     margin: 0;
 `;
 export const ErrorP = styled.span`
-    color: ${COLORS.dangerRed};
+    color: ${COLORS.red};
     width: 70%;
     font-weight: 600;
 `;

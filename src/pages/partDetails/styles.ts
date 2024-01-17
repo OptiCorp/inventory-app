@@ -1,6 +1,6 @@
+import { Link, TextField } from '@mui/material';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
-import { Link, TextField } from '@mui/material';
 
 export const StyledContainerDiv = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ export const ThirdList = styled.ul`
 `;
 
 export const Wrapper = styled.div`
-    background-color: ${COLORS.primary};
+    background-color: ${COLORS.black};
     border-right: 1px solid rgba(208, 208, 208);
     border-radius: 5px;
 `;
@@ -30,7 +30,7 @@ export const StyledList = styled.ul`
     margin: auto;
     display: grid;
     font-size: 1.2rem;
-    color: ${COLORS.secondary};
+    color: ${COLORS.white};
     list-style: none;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 1rem;
@@ -49,7 +49,7 @@ export const BreadcrumbsMargin = styled.div`
     margin-bottom: 10px;
 `;
 export const BreadcrumbLink = styled(Link)`
-    color: ${COLORS.primary} !important;
+    color: ${COLORS.black} !important;
     border-bottom: 1px black dotted;
     cursor: pointer;
     &:hover {

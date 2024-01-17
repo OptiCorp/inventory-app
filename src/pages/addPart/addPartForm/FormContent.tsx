@@ -12,10 +12,7 @@ import { WpId } from '../../../components/AddPartFormFields/WpId/WpId';
 import UmAppContext from '../../../contexts/UmAppContext';
 
 export const FormContent = () => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+    const { register } = useFormContext();
     const { currentUser } = useContext(UmAppContext);
 
     return (

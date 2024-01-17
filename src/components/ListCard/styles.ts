@@ -8,9 +8,9 @@ import { COLORS } from '../../style/GlobalStyles';
 export const ListWrapper = styled.div`
     position: relative;
     padding: 8px;
-    background-color: ${COLORS.card};
+    background-color: ${COLORS.lightestGray};
     &:hover {
-        background: ${COLORS.InputGray};
+        background: ${COLORS.lightGray};
     }
     cursor: pointer;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
@@ -25,18 +25,18 @@ export const StyledTitle = styled.h2`
 `;
 
 export const StyledDeleteIcon = styled(DeleteForeverIcon)`
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
     position: absolute;
     top: 2px;
     cursor: pointer;
     right: 0;
     &:hover {
-        color: ${COLORS.dangerRed};
+        color: ${COLORS.red};
     }
 `;
 
 export const StyledInfoIcon = styled(InfoIcon)`
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
     position: absolute;
     padding: 10px;
     top: 2px;
@@ -59,7 +59,7 @@ export const StyledAddIcon = styled(AddCircleIcon)<{
     right: 3px;
 
     color: ${(props) =>
-        props.alreadyAdded ? COLORS.dangerRed : props.active ? COLORS.green : COLORS.primary};
+        props.alreadyAdded ? COLORS.red : props.active ? COLORS.green : COLORS.black};
     &:hover {
         color: ${(props) => (props.alreadyAdded ? 'red' : COLORS.green)};
     }
@@ -68,13 +68,13 @@ export const StyledAddIcon = styled(AddCircleIcon)<{
 `;
 
 export const StyledRemoveIcon = styled(RemoveCircleIcon)`
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
     position: absolute;
 
     top: 3px;
     right: 3px;
     &:hover {
-        color: ${COLORS.dangerRed};
+        color: ${COLORS.red};
     }
     cursor: pointer;
 `;

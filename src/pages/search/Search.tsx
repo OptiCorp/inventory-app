@@ -5,8 +5,8 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import { useWindowDimensions } from '../../hooks';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
-import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard';
-import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact';
+import PartCard from '../../components/PartCard/PartCard';
+import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
     Container,
@@ -67,6 +67,8 @@ const Search = () => {
         }
     }, [debouncedSearchTerm, state]);
 
+    console.log('search param', searchParam);
+
     return (
         <>
             <SearchContainer>
@@ -90,7 +92,7 @@ const Search = () => {
                                             : ''
                                     }
                                 >
-                                    <SearchResultCard part={item} />
+                                    <PartCard part={item} />
                                 </div>
                             ) : (
                                 <div

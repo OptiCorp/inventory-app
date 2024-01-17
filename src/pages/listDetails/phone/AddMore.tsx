@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
-import SearchResultCardCompact from '../../../components/ResultSearchCard/SearchInfoCompact';
+import SearchResultCardCompact from '../../../components/PartCard/SearchInfoCompact';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import { useSnackBar } from '../../../hooks';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
@@ -46,7 +46,7 @@ export const AddMoreCompact = () => {
             }
         };
     }, [items]);
-    const { data: list, isFetching } = useGetListById(listId!);
+    const { isFetching } = useGetListById(listId!);
     return (
         <>
             <PhoneListTitle>Add items</PhoneListTitle>

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     padding: 12px 20px;
     margin: 8px 0;
     border: dashed;
-    border: 1px dashed ${COLORS.primary};
+    border: 1px dashed ${COLORS.black};
     box-sizing: border-box;
     min-height: 80px;
 `;
@@ -17,9 +17,9 @@ export const Container = styled.div`
     justify-content: flex-end;
 `;
 export const StyledLabel = styled.label`
-    background-color: ${COLORS.secondary};
-    color: ${COLORS.primary};
-    border: 1px solid ${COLORS.primary};
+    background-color: ${COLORS.white};
+    color: ${COLORS.black};
+    border: 1px solid ${COLORS.black};
     cursor: pointer;
     align-self: flex-end;
     padding: 7px 30px 7px 30px;

@@ -37,8 +37,8 @@ const AddCategory = () => {
                             <Button
                                 id="addCategory"
                                 type="submit"
-                                backgroundColor={COLORS.primary}
-                                color={COLORS.secondary}
+                                backgroundColor={COLORS.black}
+                                color={COLORS.white}
                             >
                                 Add category
                             </Button>

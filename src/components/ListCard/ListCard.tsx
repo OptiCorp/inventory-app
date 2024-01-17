@@ -13,7 +13,7 @@ type Props = {
 
 const ListCard = ({ part }: Props) => {
     const navigate = useNavigate();
-    const { mutate, isSuccess } = useDeleteList();
+    const { mutate } = useDeleteList();
     const [open, setOpen] = useState(false);
 
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

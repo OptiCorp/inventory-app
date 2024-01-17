@@ -21,12 +21,12 @@ export const AdminInput = styled.input`
         border-top: none;
         border-left: none;
         border-right: none;
-        background: ${COLORS.InputGray};
+        background: ${COLORS.lightGray};
     }
 `;
 
 export const ErrorP = styled.span`
-    color: ${COLORS.dangerRed};
+    color: ${COLORS.red};
     font-weight: 600;
 `;
 
