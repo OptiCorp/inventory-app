@@ -1,57 +1,89 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { useFormContext } from 'react-hook-form';
 import UmAppContext from '../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../hooks';
-import type { Item } from '../../../services/apiTypes';
-import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
-import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
+import type { Category, Item, Location, Vendor } from '../../../services/apiTypes';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
-import EditableField from './EditableField';
+import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
+import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
+import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
+import { PartInfoSchema } from './hooks/useUpdatePartForm';
 import { SelectField } from './SelectField';
-import { TypeField } from './TypeField';
-import {
-    useFormBlurInputHandler,
-    useFormBlurSelectHandler,
-    useFormInputChangeHandler,
-    useFormSelectChangeHandler,
-} from './hooks';
+import EditableField from './EditableField';
+
 import { Container, PartInfoForm } from './styles';
 import { Types } from './types';
 
-type Props = {
+type PartInfoProps = {
     item: Item;
     isLoading: boolean;
 };
 
-const typesOptions: Types[] = [
-    { id: 'Unit', name: 'Unit' },
-    { id: 'Assembly', name: 'Assembly' },
-    { id: 'Subassembly', name: 'Subassembly' },
-    { id: 'Part', name: 'Part' },
-];
-
-const PartInfo = ({ item, isLoading }: Props) => {
-    const internalItem = { ...item };
+const PartInfo = ({ item, isLoading }: PartInfoProps) => {
+    const {
+        watch,
+        formState: { isDirty, dirtyFields },
+    } = useFormContext<PartInfoSchema>();
+    const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(UmAppContext);
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors();
     const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations();
     const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories();
-    const [selectedType, setSelectedType] = useState<typeof item.type>(item.type);
-    const [selectedVendorId, setSelectedVendorId] = useState<typeof item.vendorId>(item.vendorId);
-    const [selectedLocationId, setSelectedLocationId] = useState<typeof item.locationId>(
-        item.locationId
-    );
-    const [selectedCategoryId, setSelectedCategoryId] = useState<typeof item.categoryId>(
-        item.categoryId
-    );
-    const [updatedItem, setUpdatedItem] = useState({ ...item });
-    const blurCategorySelectField = useFormBlurSelectHandler(internalItem, categories);
-    const blurLocationsSelectField = useFormBlurSelectHandler(internalItem, locations);
-    const blurVendorsSelectField = useFormBlurSelectHandler(internalItem, vendors);
-    const blurSelectField = useFormBlurSelectHandler(internalItem);
-    const blurInputField = useFormBlurInputHandler(internalItem);
-    const selectChange = useFormSelectChangeHandler();
-    const inputChange = useFormInputChangeHandler();
     const { snackbar } = useSnackBar();
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { mutate } = useUpdateItem(item.id, currentUser!.id);
+
+    const typesOptions: Types[] = [
+        { id: 'Unit', name: 'Unit' },
+        { id: 'Assembly', name: 'Assembly' },
+        { id: 'Subassembly', name: 'Subassembly' },
+        { id: 'Part', name: 'Part' },
+    ];
+
+    const convertOptionsToSelectFormat = (
+        optionsArray: Category[] | Vendor[] | Location[] | Types[]
+    ) => {
+        return optionsArray.map((option) => ({
+            value: option.id,
+            label: option.name,
+        }));
+    };
+    const handleBlur = (fieldId: keyof PartInfoSchema, fieldName: keyof PartInfoSchema) => {
+        const fieldValue = watch(fieldName);
+        if (isDirty && dirtyFields[fieldName] && fieldValue) {
+            mutate(
+                {
+                    ...item,
+                    [fieldId]: typeof fieldValue === 'string' ? fieldValue : fieldValue.value,
+                },
+                {
+                    onSuccess: (data) => {
+                        if (data.status >= 400 && data.status < 500) {
+                            setSnackbarSeverity('error');
+                            setSnackbarText(`${data.statusText}, please try again.`);
+                            return;
+                        } else if (data.status >= 500) {
+                            setSnackbarSeverity('error');
+                            setSnackbarText(
+                                `Something went wrong on our end, refresh page and try again later.`
+                            );
+                            return;
+                        } else {
+                            if (fieldName === 'description') {
+                                setSnackbarText(`${fieldName.toLowerCase()} was updated`);
+                            } else if (typeof fieldValue !== 'string' && fieldValue.label) {
+                                setSnackbarText(
+                                    `${fieldName.toLowerCase()} was changed to ${fieldValue.label}`
+                                );
+                            } else if (fieldValue) {
+                                setSnackbarText(
+                                    `${fieldName.toLowerCase()} was changed to ${fieldValue}`
+                                );
+                            }
+                        }
+                    },
+                }
+            );
+        }
+    };
 
     if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
         return <p>Loading.. </p>;
@@ -60,47 +92,30 @@ const PartInfo = ({ item, isLoading }: Props) => {
     return (
         <PartInfoForm>
             <Container>
-                <TypeField
+                <SelectField
+                    placeholder="Select type..."
                     label="type"
-                    defaultValue={selectedType || item.type}
-                    onBlur={() =>
-                        blurSelectField(selectedType, 'type', setSnackbarText, setSnackbarSeverity)
-                    }
-                    handleSelectChange={(e) => selectChange(e, setSelectedType)}
-                    options={typesOptions}
-                    selectedType={selectedType}
+                    options={convertOptionsToSelectFormat(typesOptions)}
+                    onBlur={() => handleBlur('type', 'type')}
                 />
-
                 <SelectField
+                    placeholder="Select category..."
                     label="category"
-                    defaultValue={selectedCategoryId || (item.category ? item.category.name : '')}
-                    onBlur={() =>
-                        blurCategorySelectField(
-                            selectedCategoryId,
-                            'categoryId',
-                            setSnackbarText,
-                            setSnackbarSeverity
-                        )
-                    }
-                    handleSelectChange={(e) => selectChange(e, setSelectedCategoryId)}
-                    options={categories}
-                    id={item.categoryId}
+                    options={convertOptionsToSelectFormat(categories)}
+                    onBlur={() => handleBlur('categoryId', 'category')}
+                />
+                <SelectField
+                    placeholder="Select vendor..."
+                    label="vendor"
+                    options={convertOptionsToSelectFormat(vendors)}
+                    onBlur={() => handleBlur('vendorId', 'vendor')}
                 />
 
                 <SelectField
+                    placeholder="Select location..."
                     label="location"
-                    defaultValue={selectedLocationId || (item.location ? item.location.name : '')}
-                    onBlur={() =>
-                        blurLocationsSelectField(
-                            selectedLocationId,
-                            'locationId',
-                            setSnackbarText,
-                            setSnackbarSeverity
-                        )
-                    }
-                    handleSelectChange={(e) => selectChange(e, setSelectedLocationId)}
-                    options={locations}
-                    id={item.locationId}
+                    options={convertOptionsToSelectFormat(locations)}
+                    onBlur={() => handleBlur('locationId', 'location')}
                 />
 
                 <div>
@@ -116,66 +131,21 @@ const PartInfo = ({ item, isLoading }: Props) => {
 
                 <EditableField
                     label="productNumber"
-                    defaultValue={item.productNumber}
-                    onBlur={() =>
-                        blurInputField(
-                            'productNumber',
-                            updatedItem,
-                            setSnackbarText,
-                            setSnackbarSeverity
-                        )
-                    }
-                    handleInputChange={(value) =>
-                        inputChange('productNumber', value, setUpdatedItem)
-                    }
+                    isMultiLine={false}
+                    onBlur={() => handleBlur('productNumber', 'productNumber')}
                 />
 
                 <EditableField
                     label="serialNumber"
-                    defaultValue={item.serialNumber}
-                    onBlur={() =>
-                        blurInputField(
-                            'serialNumber',
-                            updatedItem,
-                            setSnackbarText,
-                            setSnackbarSeverity
-                        )
-                    }
-                    handleInputChange={(value) =>
-                        inputChange('serialNumber', value, setUpdatedItem)
-                    }
-                />
-
-                <SelectField
-                    label="vendor"
-                    defaultValue={selectedVendorId || (item.vendor ? item.vendor.name : '')}
-                    onBlur={() =>
-                        blurVendorsSelectField(
-                            selectedVendorId,
-                            'vendorId',
-                            setSnackbarText,
-                            setSnackbarSeverity
-                        )
-                    }
-                    handleSelectChange={(e) => selectChange(e, setSelectedVendorId)}
-                    options={vendors}
-                    id={item.vendorId}
+                    isMultiLine={false}
+                    onBlur={() => handleBlur('serialNumber', 'serialNumber')}
                 />
             </Container>
             <EditableField
                 label="description"
-                defaultValue={item.description}
-                handleInputChange={(value) => inputChange('description', value, setUpdatedItem)}
-                multiline
-                onBlur={() =>
-                    blurInputField(
-                        'description',
-                        updatedItem,
-                        setSnackbarText,
-                        setSnackbarSeverity,
-                        true
-                    )
-                }
+                isMultiLine
+                rows={3}
+                onBlur={() => handleBlur('description', 'description')}
             />
 
             {snackbar}
