@@ -3,6 +3,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { ComponentProps, useState } from 'react';
 import { ItemFields, Types } from './types';
 import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles';
+import { PartInfoSchema } from './hooks/useUpdatePartForm';
 type EditableFieldProps<TMultiLine = boolean> = TMultiLine extends true
     ? {
           label: ItemFields;
@@ -26,7 +27,7 @@ const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps)
         register,
         control,
         formState: { errors },
-    } = useFormContext();
+    } = useFormContext<PartInfoSchema>();
 
     const [open, setOpen] = useState(false);
 
