@@ -1,5 +1,4 @@
-import type { ComponentProps, Dispatch, SetStateAction } from 'react';
-import { ActionMeta, PropsValue, SingleValue } from 'react-select';
+import type { Dispatch, SetStateAction } from 'react';
 
 export type Types = {
     id: 'Unit' | 'Assembly' | 'Subassembly' | 'Part';
@@ -7,19 +6,6 @@ export type Types = {
 };
 
 export type SetState<T> = Dispatch<SetStateAction<T>>;
-
-export type TypeProps = {
-    handleSelectChange?: (
-        newValue: SingleValue<{ value: string }>,
-        actionMeta: ActionMeta<{ value: string }>
-    ) => void;
-    selectedType?: string;
-    label: ItemFields;
-    defaultValue: string | null;
-    onBlur: ComponentProps<'input'>['onBlur'];
-    options: Types[];
-    value: string;
-};
 
 export type ItemFields =
     | 'type'
