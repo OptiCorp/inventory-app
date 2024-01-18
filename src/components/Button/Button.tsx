@@ -1,5 +1,5 @@
 import { ComponentProps, FunctionComponent } from 'react';
-import { SubmitButton, Wrapper } from './styles';
+import { StyledButton, Wrapper } from './styles';
 interface ButtonProps {
     children?: React.ReactNode;
     type?: ComponentProps<'button'>['type'];
@@ -23,7 +23,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }) => {
     return (
         <Wrapper>
-            <SubmitButton
+            <StyledButton
                 color={color}
                 onClick={onClick}
                 id={id}
@@ -33,7 +33,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
                 $backgroundColor={backgroundColor}
             >
                 {children}
-            </SubmitButton>
+            </StyledButton>
         </Wrapper>
     );
 };

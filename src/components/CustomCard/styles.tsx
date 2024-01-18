@@ -9,12 +9,12 @@ export const StyledInfoDiv = styled.div`
     box-shadow: 2.5px 2.5px ${COLORS.mainGray};
 `;
 
-export const Lists = styled.div`
+export const StyledLists = styled.div`
     display: flex;
     flex-direction: column;
 `;
 
-export const CompactLists = styled.div`
+export const StyledCompactLists = styled.div`
     border-radius: 5px;
     display: flex;
     justify-content: start;
@@ -23,7 +23,7 @@ export const CompactLists = styled.div`
     width: 100%;
 `;
 
-export const Title = styled.h1`
+export const StyledTitle = styled.h1`
     font-weight: 600;
     color: ${COLORS.mainGray};
     letter-spacing: 0.3rem;

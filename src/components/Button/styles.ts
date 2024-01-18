@@ -2,7 +2,7 @@ import { ComponentProps } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
-export const SubmitButton = styled('button')<{
+export const StyledButton = styled('button')<{
     $backgroundColor: string;
     color: ComponentProps<'button'>['color'];
     height?: string;
@@ -28,9 +28,5 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: flex-end;
 
-    justify-content: end;
-`;
-
-export const ButtonsWrapper = styled.div`
     justify-content: end;
 `;

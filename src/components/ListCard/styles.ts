@@ -5,7 +5,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
-export const ListWrapper = styled.div`
+export const StyledListWrapper = styled.div`
     position: relative;
     padding: 8px;
     background-color: ${COLORS.card};

@@ -18,7 +18,7 @@ import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocat
 import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor';
 import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor';
 import { SearchType } from '../../utils/constant';
-import { AdminActions, AdminSearchCardContainer, TitleContainer } from './styles';
+import { StyledAdminActions, StyledAdminSearchCardContainer, StyledTitleContainer } from './styles';
 
 type Props = {
     data: Category | Vendor | Location;
@@ -87,8 +87,8 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
     };
 
     return (
-        <AdminSearchCardContainer>
-            <TitleContainer>
+        <StyledAdminSearchCardContainer>
+            <StyledTitleContainer>
                 {isEditing ? (
                     <input
                         type="text"
@@ -99,8 +99,8 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
                 ) : (
                     <h2>{data.name}</h2>
                 )}
-            </TitleContainer>
-            <AdminActions>
+            </StyledTitleContainer>
+            <StyledAdminActions>
                 <Button
                     color={isEditing ? 'success' : 'primary'}
                     sx={{ color: 'black', margin: '0 4px' }}
@@ -119,8 +119,8 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
                 >
                     <DeleteIcon sx={{ fontSize: 36 }} />
                 </Button>
-            </AdminActions>
-        </AdminSearchCardContainer>
+            </StyledAdminActions>
+        </StyledAdminSearchCardContainer>
     );
 };
 
