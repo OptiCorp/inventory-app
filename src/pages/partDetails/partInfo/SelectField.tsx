@@ -104,7 +104,7 @@ export const SelectField = ({ label, onBlur, options, placeholder }: SelectProps
                                         />
                                     )}
 
-                                    {!isOpen && typeof value !== 'string' && <p>{value.name}</p>}
+                                    {!isOpen && typeof value !== 'string' && <p>{value?.name}</p>}
                                     {!isOpen && typeof value === 'string' && <p>{value}</p>}
                                 </>
                             );
