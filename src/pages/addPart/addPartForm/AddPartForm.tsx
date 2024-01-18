@@ -4,7 +4,7 @@ import { FormContainer } from '../styles.ts';
 
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Button/Button.tsx';
-import { ButtonsWrapper } from '../../../components/Button/styles.ts';
+
 import { COLORS } from '../../../style/GlobalStyles.ts';
 import { FormContent } from './FormContent.tsx';
 
@@ -21,16 +21,15 @@ export const AddPartFormm = () => {
             <ProgressBar progressLevel={4} />
             <h4>Add details</h4>
             <FormContent />
-            <ButtonsWrapper>
-                <Button
-                    id="addPart"
-                    type="submit"
-                    backgroundColor={`${COLORS.primary}`}
-                    color={`${COLORS.secondary}`}
-                >
-                    FINISH
-                </Button>
-            </ButtonsWrapper>
+
+            <Button
+                id="addPart"
+                type="submit"
+                backgroundColor={`${COLORS.primary}`}
+                color={`${COLORS.secondary}`}
+            >
+                FINISH
+            </Button>
         </FormContainer>
     );
 };

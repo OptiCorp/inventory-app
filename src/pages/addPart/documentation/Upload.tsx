@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Button/Button.tsx';
-import { ButtonsWrapper } from '../../../components/Button/styles.ts';
+
 import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import AddPartUpload from '../../../components/Upload/AddPartUpload.tsx';
 import AddPartUploadMobile from '../../../components/Upload/UploadMobile/AddPartUploadMobile.tsx';
@@ -62,15 +62,14 @@ const Upload = () => {
                 <li>Certificates.</li>
                 <li>Photos.</li>
             </ul>
-            <ButtonsWrapper>
-                <Button
-                    backgroundColor={` ${COLORS.primary}`}
-                    color={` ${COLORS.secondary}`}
-                    onClick={handleClick}
-                >
-                    NEXT
-                </Button>
-            </ButtonsWrapper>
+
+            <Button
+                backgroundColor={` ${COLORS.primary}`}
+                color={` ${COLORS.secondary}`}
+                onClick={handleClick}
+            >
+                NEXT
+            </Button>
         </FormContainer>
     );
 };

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../components/Button/Button.tsx';
 import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard.tsx';
-import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfoCompact.tsx';
+import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfo/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import UmAppContext from '../../contexts/UmAppContext.tsx';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
