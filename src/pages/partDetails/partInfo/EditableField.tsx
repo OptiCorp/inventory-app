@@ -1,27 +1,21 @@
 import { Box, ClickAwayListener, TextField } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { ComponentProps, useState } from 'react';
-import { ItemFields, Types } from './types';
+import { ItemFields } from './types';
 import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles';
 import { PartInfoSchema } from './hooks';
 
-type EditableFieldProps<TMultiLine = boolean> = TMultiLine extends true
+type EditableFieldProps<TMultiLine = boolean> = {
+    label: ItemFields;
+    onBlur: ComponentProps<'input'>['onBlur'];
+} & (TMultiLine extends true
     ? {
-          label: ItemFields;
-          onBlur: ComponentProps<'input'>['onBlur'];
-          options?: Types[];
-          selectedType?: string;
+          /** Specifies if typefield is multi line (Must define rows if isMultiLine is true) */
+          isMultiLine: true;
+          /** Number of rows to display when multiline option is set to true. */
           rows: number;
-          isMultiLine: TMultiLine;
       }
-    : {
-          label: ItemFields;
-          onBlur: ComponentProps<'input'>['onBlur'];
-          options?: Types[];
-          selectedType?: string;
-          rows?: number;
-          isMultiLine: TMultiLine;
-      };
+    : { isMultiLine?: false; rows?: never });
 
 const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps) => {
     const { register, control } = useFormContext<PartInfoSchema>();

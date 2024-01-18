@@ -126,12 +126,10 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                 </div>
                 <EditableField
                     label="serialNumber"
-                    isMultiLine={false}
                     onBlur={() => handleBlur('serialNumber', 'serialNumber')}
                 />
                 <EditableField
                     label="productNumber"
-                    isMultiLine={false}
                     onBlur={() => handleBlur('productNumber', 'productNumber')}
                 />
 
