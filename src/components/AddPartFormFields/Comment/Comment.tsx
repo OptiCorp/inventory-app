@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
-import { InputWrap, StyledDiv, StyledTextArea } from './styles';
+import { StyledDiv } from '../styles';
+import { StyledInputWrap, StyledTextArea } from './styles';
 
 export const Comment = () => {
     const {
@@ -8,9 +9,9 @@ export const Comment = () => {
     } = useFormContext();
     return (
         <StyledDiv>
-            <InputWrap>
+            <StyledInputWrap>
                 <label htmlFor="Comment">Comment</label>{' '}
-            </InputWrap>
+            </StyledInputWrap>
             <StyledTextArea {...register('comment')} rows={5} cols={40} maxLength={450} />
         </StyledDiv>
     );

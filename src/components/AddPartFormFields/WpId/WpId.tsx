@@ -6,8 +6,8 @@ import { useDebounce } from 'usehooks-ts';
 import { v4 as uuid } from 'uuid';
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv } from '../Category/styles.ts';
-import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles.ts';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import { StyledInput, StyledParagraph } from './styles.ts';
 
 export const WpId = () => {
     const {
@@ -27,15 +27,18 @@ export const WpId = () => {
 
     return (
         <StyledDiv>
-            <InputWrap>
-                <IconContainer>
+            <StyledInputWrap>
+                <StyledIconContainer>
                     <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
                     <ToolTip content="Specify a unique WellPartner ID">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
-                </IconContainer>
-                <ErrorMessage name="wpId" render={({ message }) => <ErrorP>{message}</ErrorP>} />
-            </InputWrap>
+                </StyledIconContainer>
+                <ErrorMessage
+                    name="wpId"
+                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                />
+            </StyledInputWrap>
             <StyledInput
                 type="text"
                 placeholder="E.g 5321-1"
@@ -49,14 +52,12 @@ export const WpId = () => {
             {wpId && (
                 <>
                     {isUnique === true && (
-                        <p style={{ color: 'green', marginTop: '0px' }}>
-                            WellPartner ID is unique!
-                        </p>
+                        <StyledParagraph>WellPartner ID is unique!</StyledParagraph>
                     )}
                     {isUnique === false && (
-                        <p style={{ color: 'red', marginTop: '0px' }}>
+                        <StyledParagraph>
                             WellPartner ID is not unique. Please choose a different one.
-                        </p>
+                        </StyledParagraph>
                     )}
                 </>
             )}

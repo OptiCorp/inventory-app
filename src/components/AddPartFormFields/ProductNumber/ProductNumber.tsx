@@ -2,8 +2,8 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv } from '../Category/styles.ts';
-import { ErrorP, IconContainer, InputWrap, StyledInput } from './styles.ts';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import { StyledInput } from './styles.ts';
 
 export const ProductNumber = () => {
     const {
@@ -12,18 +12,18 @@ export const ProductNumber = () => {
     } = useFormContext();
     return (
         <StyledDiv>
-            <InputWrap>
-                <IconContainer>
+            <StyledInputWrap>
+                <StyledIconContainer>
                     <label htmlFor="productNumber">Product number</label>{' '}
                     <ToolTip content="Specify a product number">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
-                </IconContainer>
+                </StyledIconContainer>
                 <ErrorMessage
                     name="productNumber"
-                    render={({ message }) => <ErrorP>{message}</ErrorP>}
+                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
-            </InputWrap>
+            </StyledInputWrap>
             <StyledInput type="text" placeholder="E.g BV 113 EU" {...register('productNumber')} />
         </StyledDiv>
     );
