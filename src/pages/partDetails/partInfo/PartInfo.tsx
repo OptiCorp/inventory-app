@@ -106,12 +106,6 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                     options={convertOptionsToSelectFormat(categories)}
                     onBlur={() => handleBlur('categoryId', 'category')}
                 />
-                <SelectField
-                    placeholder="Select vendor..."
-                    label="vendor"
-                    options={convertOptionsToSelectFormat(vendors)}
-                    onBlur={() => handleBlur('vendorId', 'vendor')}
-                />
 
                 <SelectField
                     placeholder="Select location..."
@@ -130,17 +124,22 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                             : `${item.user.firstName} ${item.user.lastName}`}
                     </p>
                 </div>
-
+                <EditableField
+                    label="serialNumber"
+                    isMultiLine={false}
+                    onBlur={() => handleBlur('serialNumber', 'serialNumber')}
+                />
                 <EditableField
                     label="productNumber"
                     isMultiLine={false}
                     onBlur={() => handleBlur('productNumber', 'productNumber')}
                 />
 
-                <EditableField
-                    label="serialNumber"
-                    isMultiLine={false}
-                    onBlur={() => handleBlur('serialNumber', 'serialNumber')}
+                <SelectField
+                    placeholder="Select vendor..."
+                    label="vendor"
+                    options={convertOptionsToSelectFormat(vendors)}
+                    onBlur={() => handleBlur('vendorId', 'vendor')}
                 />
             </Container>
             <EditableField
