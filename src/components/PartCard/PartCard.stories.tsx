@@ -4,9 +4,6 @@ import PartCard from './PartCard';
 const meta = {
     title: 'Components/PartCard',
     component: PartCard,
-    parameters: {
-        layout: 'centered',
-    },
     tags: ['autodocs'],
 } as Meta<typeof PartCard>;
 
