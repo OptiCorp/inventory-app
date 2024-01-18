@@ -10,7 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DropdownItem, HamburgerContainer } from './styles';
+import { HamburgerContainer, StyledDropdownItem } from './styles';
 
 type Props = {
     setHamburgerIsOpen: (hamburgerOpen: boolean) => void;
@@ -98,7 +98,7 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
 
                     {adminDropdownIsOpen ? (
                         <List style={{ padding: 0 }}>
-                            <DropdownItem>
+                            <StyledDropdownItem>
                                 <ListItemButton
                                     onClick={() => {
                                         hamburgerLink('admin/categories');
@@ -111,9 +111,9 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
                                     </ListItemIcon>
                                     <ListItemText primary={'Categories'} />
                                 </ListItemButton>
-                            </DropdownItem>
+                            </StyledDropdownItem>
 
-                            <DropdownItem>
+                            <StyledDropdownItem>
                                 <ListItemButton
                                     onClick={() => {
                                         hamburgerLink('admin/vendors');
@@ -126,9 +126,9 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
                                     </ListItemIcon>
                                     <ListItemText primary={'Vendors'} />
                                 </ListItemButton>
-                            </DropdownItem>
+                            </StyledDropdownItem>
 
-                            <DropdownItem>
+                            <StyledDropdownItem>
                                 <ListItemButton
                                     onClick={() => {
                                         hamburgerLink('admin/locations');
@@ -141,7 +141,7 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
                                     </ListItemIcon>
                                     <ListItemText primary={'Locations'} />
                                 </ListItemButton>
-                            </DropdownItem>
+                            </StyledDropdownItem>
                         </List>
                     ) : null}
                 </List>
