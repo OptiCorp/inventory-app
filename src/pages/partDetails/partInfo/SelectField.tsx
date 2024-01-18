@@ -3,8 +3,8 @@ import { ComponentProps, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import Select, { CSSObjectWithLabel } from 'react-select';
 import { Edit, LabelContainer } from './styles';
-import { PartInfoSchema } from './hooks/useUpdatePartForm';
 import { ItemFields } from './types';
+import { PartInfoSchema } from './hooks';
 
 type Options = {
     value: string;

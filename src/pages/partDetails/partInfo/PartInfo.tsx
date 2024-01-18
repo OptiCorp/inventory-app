@@ -7,12 +7,11 @@ import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
-import { PartInfoSchema } from './hooks/useUpdatePartForm';
 import { SelectField } from './SelectField';
 import EditableField from './EditableField';
-
 import { Container, PartInfoForm } from './styles';
 import { Types } from './types';
+import { PartInfoSchema } from './hooks';
 
 type PartInfoProps = {
     item: Item;
