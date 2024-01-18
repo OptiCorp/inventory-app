@@ -98,7 +98,7 @@ export const SelectField = ({ label, onBlur, options, placeholder }: SelectProps
                                             onBlur={onBlur}
                                             onChange={onChange}
                                             styles={generateSelectedStyles(
-                                                typeof value !== 'string' ? value.id : value
+                                                typeof value !== 'string' ? value?.id : value
                                             )}
                                             placeholder={placeholder}
                                         />
