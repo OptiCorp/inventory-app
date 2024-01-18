@@ -6,17 +6,18 @@ import { useFormContext } from 'react-hook-form';
 import { COLORS } from '../../style/GlobalStyles';
 import { Button as SubmitButton } from '../Button/Button';
 import {
-    DocumentName,
-    FileShapeWrapper,
-    FileTypeWrapper,
-    FileWrapper,
-    IconWrapper,
+    StyledDocumentName,
+    StyledFileShapeWrapper,
+    StyledFileWrapper,
+    StyledIconWrapper,
+    StyledTypeWrapper,
     Wrapper,
 } from './styles';
 
 const AddPartUpload = () => {
     const { register, setValue } = useFormContext();
     const [files, setFiles] = useState<File[]>();
+
     const documentationField = register('files');
     const inputFile = useRef<HTMLInputElement | null>(null);
 
@@ -41,7 +42,7 @@ const AddPartUpload = () => {
         <>
             <Wrapper>
                 {files?.map((file, index) => (
-                    <FileWrapper key={index}>
+                    <StyledFileWrapper key={index}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"
@@ -50,11 +51,13 @@ const AddPartUpload = () => {
                             fill="none"
                         >
                             <foreignObject width={121} height={153}>
-                                <FileShapeWrapper>
-                                    <FileTypeWrapper>
-                                        <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
-                                    </FileTypeWrapper>
-                                    <IconWrapper>
+                                <StyledFileShapeWrapper>
+                                    <StyledTypeWrapper>
+                                        {file instanceof File ? (
+                                            <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
+                                        ) : null}
+                                    </StyledTypeWrapper>
+                                    <StyledIconWrapper>
                                         <Button
                                             sx={{ color: 'black' }}
                                             onClick={() => handleFileDownload(file)}
@@ -68,16 +71,16 @@ const AddPartUpload = () => {
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
                                         </Button>
-                                    </IconWrapper>
-                                </FileShapeWrapper>
+                                    </StyledIconWrapper>
+                                </StyledFileShapeWrapper>
                             </foreignObject>
                             <path
                                 d="M95 1H1V152H120V21.1333M95 1L120 21.1333M95 1V21.1333H120"
                                 stroke="black"
                             />
                         </svg>
-                        <DocumentName>{file.name.split('.')[0]}</DocumentName>
-                    </FileWrapper>
+                        <StyledDocumentName>{file.name.split('.')[0]}</StyledDocumentName>
+                    </StyledFileWrapper>
                 ))}
             </Wrapper>
             <Container>
