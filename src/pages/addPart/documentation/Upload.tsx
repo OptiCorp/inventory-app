@@ -7,7 +7,6 @@ import AddPartUpload from '../../../components/Upload/AddPartUpload.tsx';
 import AddPartUploadMobile from '../../../components/Upload/UploadMobile/AddPartUploadMobile.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions.ts';
-import { COLORS } from '../../../style/GlobalStyles.ts';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
 import { FormContainer } from '../styles.ts';
 
@@ -63,11 +62,7 @@ const Upload = () => {
                 <li>Photos.</li>
             </ul>
             <ButtonsWrapper>
-                <Button
-                    backgroundColor={` ${COLORS.black}`}
-                    color={` ${COLORS.white}`}
-                    onClick={handleClick}
-                >
+                <Button variant="black" onClick={handleClick}>
                     NEXT
                 </Button>
             </ButtonsWrapper>

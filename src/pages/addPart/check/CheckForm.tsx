@@ -4,7 +4,6 @@ import { Button } from '../../../components/Button/Button.tsx';
 import { ButtonsWrapper } from '../../../components/Button/styles.ts';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
-import { COLORS } from '../../../style/GlobalStyles';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
 import { FormContainer } from '../styles';
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles';
@@ -69,11 +68,7 @@ const CheckForm = () => {
                 />
             </FormRadio>
             <ButtonsWrapper>
-                <Button
-                    backgroundColor={` ${COLORS.black}`}
-                    color={` ${COLORS.white}`}
-                    onClick={handleClick}
-                >
+                <Button variant="black" onClick={handleClick}>
                     NEXT
                 </Button>
             </ButtonsWrapper>

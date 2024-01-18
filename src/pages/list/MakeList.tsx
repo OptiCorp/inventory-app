@@ -9,8 +9,6 @@ import UmAppContext from '../../contexts/UmAppContext.tsx';
 import { useSnackBar } from '../../hooks/useSnackbar.tsx';
 import { Item, List } from '../../services/apiTypes.ts';
 
-import { COLORS } from '../../style/GlobalStyles.ts';
-
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
 import { useAddList } from '../../services/hooks/list/useAddList.tsx';
 import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId.tsx';
@@ -67,11 +65,7 @@ const MakeList = () => {
                         placeholder={'Search for title or items'}
                     />
 
-                    <Button
-                        backgroundColor={` ${COLORS.black}`}
-                        color={` ${COLORS.white}`}
-                        onClick={handleClickOpen}
-                    >
+                    <Button variant="black" onClick={handleClickOpen}>
                         NEW LIST
                     </Button>
                 </SearchAndButton>

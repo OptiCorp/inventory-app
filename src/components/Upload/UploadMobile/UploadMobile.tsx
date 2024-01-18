@@ -130,6 +130,7 @@ const UploadMobile = ({ item }: UploadProps) => {
             </Wrapper>
             <Container>
                 <SubmitButton
+                    variant="white"
                     color={COLORS.black}
                     $backgroundColor={COLORS.white}
                     onClick={() => inputFile.current?.click()}
