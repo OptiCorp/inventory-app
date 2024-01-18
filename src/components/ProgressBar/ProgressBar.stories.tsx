@@ -5,7 +5,9 @@ const meta = {
     title: 'Components/ProgressBar',
     component: ProgressBar,
     tags: ['autodocs'],
-    layout: 'fullscreen',
+    parameters: {
+        layout: 'padded',
+    },
 } as Meta<typeof ProgressBar>;
 
 export default meta;
