@@ -1,16 +1,12 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
-import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import UmAppContext from '../../contexts/UmAppContext.tsx';
-import { Item, MutateItemList } from '../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
+import { usePartActions } from '../../services/hooks/list/usePartCardActions.tsx';
 import { COLORS } from '../../style/GlobalStyles.ts';
 import { Button } from '../Button/Button.tsx';
 import CustomDialog from '../CustomDialog/CustomDialog.tsx';
 import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
+import { PartCardProps } from './PartCard.tsx';
 import {
     ButtonText,
     CompactInfoP,
@@ -18,65 +14,20 @@ import {
     KeyWords,
     PartCardCompactContainer,
 } from './styles.ts';
-type Props = {
-    part: Item;
-    icon?: string;
-};
-const SearchResultCardCompact = ({ part, icon }: Props) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
-    const navigate = useNavigate();
-    const [open, setOpen] = useState(false);
-    const [alreadyAdded, setAlreadyAdded] = useState(false);
+
+const SearchResultCardCompact = ({ part, icon }: PartCardProps) => {
     const { listId } = useParams();
-    const { data: list } = useGetListById(listId!);
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
-    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
+    const navigate = useNavigate();
 
-    const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation();
-        const alreadyAdded = list?.items.some((item) => item.id === part.id);
-        if (alreadyAdded) {
-            {
-                setAlreadyAdded(true);
-            }
-            setSnackbarSeverity('error');
-            setSnackbarText('already in list');
-        }
-        mutateAddItemToList(ids, {
-            onSuccess: (data) => {
-                if (alreadyAdded) return;
-                setSnackbarText(`${part.wpId} was added`);
-
-                if (data.status >= 400) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(`${data.statusText}, please try again.`);
-                }
-            },
-        });
-        handleClose(e);
-    };
-    const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation();
-        mutateRemoveItemFromList(ids, {
-            onSuccess: (removeData) => {
-                setSnackbarText(`${part.wpId} was removed`);
-
-                if (removeData.status >= 400) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(`${removeData.statusText}, please try again.`);
-                }
-            },
-        });
-        handleClose(e);
-    };
-    const handleClickOpen = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        setOpen(true);
-    };
-    const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        setOpen(false);
-    };
+    const {
+        handleAdd,
+        handleDelete,
+        handleClickOpen,
+        handleClose,
+        open,
+        alreadyAdded,
+        addItemSuccess,
+    } = usePartActions({ part, icon }, listId);
 
     return (
         <>
@@ -99,10 +50,10 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                             {part.wpId}
                         </CompactInfoP>{' '}
                         <CompactInfoP>
-                            <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
+                            <KeyWords>Location</KeyWords> {part.location?.name ?? 'Location'}
                         </CompactInfoP>
                         <CompactInfoP>
-                            <KeyWords>Category</KeyWords> {part.category?.name || 'Category'}
+                            <KeyWords>Category</KeyWords> {part.category?.name ?? 'Category'}
                         </CompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>

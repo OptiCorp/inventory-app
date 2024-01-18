@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Location, Vendor } from '../../services/apiTypes';
+import { Category, Location, Vendor } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
 import { PartCardContainer, SearchCard } from './styles';
 
@@ -12,6 +12,7 @@ export type PartCardProps = {
         description: string;
         location?: Location;
         vendor?: Vendor;
+        category?: Category;
         createdDate: string;
         updatedDate?: string | null;
     };

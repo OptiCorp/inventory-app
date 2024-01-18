@@ -6,12 +6,12 @@ import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToLi
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 
-export const usePartActions = ({ part }: PartCardProps, listId: string) => {
+export const usePartActions = ({ part }: PartCardProps, listId: string | undefined) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
     const [open, setOpen] = useState(false);
     const [alreadyAdded, setAlreadyAdded] = useState(false);
-    const { data: list } = useGetListById(listId);
+    const { data: list } = useGetListById(listId ?? 'default'); // TODO: fix this to not use default
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
 
