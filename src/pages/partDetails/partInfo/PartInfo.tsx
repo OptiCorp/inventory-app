@@ -21,7 +21,7 @@ type PartInfoProps = {
 const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     const {
         watch,
-        formState: { isDirty, dirtyFields },
+        formState: { dirtyFields },
     } = useFormContext<PartInfoSchema>();
     const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(UmAppContext);
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors();
@@ -47,7 +47,7 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     };
     const handleBlur = (fieldId: keyof PartInfoSchema, fieldName: keyof PartInfoSchema) => {
         const fieldValue = watch(fieldName);
-        if (isDirty && dirtyFields[fieldName] && fieldValue) {
+        if (dirtyFields[fieldName] && fieldValue) {
             const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
             mutate(
                 {
