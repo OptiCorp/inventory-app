@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useWindowDimensions } from '../../hooks';
-import { Icon, SearchBarContainer, StyledInput } from './styles';
+import { StyledIcon, StyledInput, StyledSearchBarContainer } from './styles';
 
 type Props = {
     setSearchTerm: Dispatch<SetStateAction<string>>;
@@ -13,10 +13,10 @@ const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
 
     return (
         <>
-            <SearchBarContainer>
-                <Icon>
+            <StyledSearchBarContainer>
+                <StyledIcon>
                     <img src={'/search.png'} style={{ paddingLeft: '1rem' }} />
-                </Icon>
+                </StyledIcon>
                 <StyledInput
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                     type="text"
@@ -24,7 +24,7 @@ const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
                     placeholder={placeholder}
                     width={width}
                 />
-            </SearchBarContainer>
+            </StyledSearchBarContainer>
         </>
     );
 };

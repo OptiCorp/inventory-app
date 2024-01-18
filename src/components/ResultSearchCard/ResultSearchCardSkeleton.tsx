@@ -2,11 +2,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 import {
-    CompactCardSkeleton,
-    FlexContainer,
-    ResultCardCompactContainer,
-    ResultCardContainer,
-    SearchCardSkeleton,
+    StyledCompactCardSkeleton,
+    StyledFlexContainer,
+    StyledResultCardCompactContainer,
+    StyledResultCardContainer,
+    StyledSearchCardSkeleton,
 } from './styles';
 
 const SearchResultCardSkeleton = () => {
@@ -20,23 +20,23 @@ const SearchResultCardSkeleton = () => {
     return (
         <>
             {width > 800 ? (
-                <ResultCardContainer onClick={handleClick}>
-                    <SearchCardSkeleton>
-                        <FlexContainer>
+                <StyledResultCardContainer onClick={handleClick}>
+                    <StyledSearchCardSkeleton>
+                        <StyledFlexContainer>
                             <AddIcon fontSize="large" style={{ margin: '12px 0' }} />
                             <h3>Add part</h3>
-                        </FlexContainer>
-                    </SearchCardSkeleton>
-                </ResultCardContainer>
+                        </StyledFlexContainer>
+                    </StyledSearchCardSkeleton>
+                </StyledResultCardContainer>
             ) : (
-                <ResultCardCompactContainer onClick={handleClick}>
-                    <CompactCardSkeleton>
-                        <FlexContainer>
+                <StyledResultCardCompactContainer onClick={handleClick}>
+                    <StyledCompactCardSkeleton>
+                        <StyledFlexContainer>
                             <AddIcon fontSize="large" style={{ margin: '10px 0' }} />
                             <h3>Add part</h3>
-                        </FlexContainer>
-                    </CompactCardSkeleton>
-                </ResultCardCompactContainer>
+                        </StyledFlexContainer>
+                    </StyledCompactCardSkeleton>
+                </StyledResultCardCompactContainer>
             )}
         </>
     );

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Item } from '../../services/apiTypes';
 import { Searchinfo } from './SearchInfo/SearchInfo';
-import { ResultCardContainer, SearchCard } from './styles';
+import { StyledResultCardContainer, StyledSearchCard } from './styles';
 
 type Props = {
     part: Item;
@@ -13,7 +13,7 @@ const SearchResultCard = ({ part, icon }: Props) => {
 
     return (
         <>
-            <ResultCardContainer
+            <StyledResultCardContainer
                 style={{
                     cursor: `${location.pathname.includes(`/makelist`) ? null : `pointer`}`,
                 }}
@@ -21,10 +21,10 @@ const SearchResultCard = ({ part, icon }: Props) => {
                     location.pathname.includes('/makelist') ? null : navigate(`/${part.id}`);
                 }}
             >
-                <SearchCard title="">
+                <StyledSearchCard title="">
                     <Searchinfo part={part} icon={icon} />
-                </SearchCard>
-            </ResultCardContainer>
+                </StyledSearchCard>
+            </StyledResultCardContainer>
         </>
     );
 };

@@ -2,23 +2,22 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import UmAppContext from '../../contexts/UmAppContext.tsx';
-import { useSnackBar } from '../../hooks/useSnackbar.tsx';
-import { Item, MutateItemList } from '../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-import { COLORS } from '../../style/GlobalStyles.ts';
-import { Button } from '../Button/Button.tsx';
-import CustomDialog from '../CustomDialog/CustomDialog.tsx';
-import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
+import UmAppContext from '../../../contexts/UmAppContext.tsx';
+import { useSnackBar } from '../../../hooks/useSnackbar.tsx';
+import { Item, MutateItemList } from '../../../services/apiTypes.ts';
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
+import { useGetListById } from '../../../services/hooks/list/useGetListById.tsx';
+import { COLORS } from '../../../style/GlobalStyles.ts';
+import { Button } from '../../Button/Button.tsx';
+import CustomDialog from '../../CustomDialog/CustomDialog.tsx';
+import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles.ts';
 import {
-    ButtonText,
-    CompactInfoP,
-    DescriptionWrap,
-    KeyWords,
-    ResultCardCompactContainer,
-} from './styles.ts';
+    StyledCompactInfoP,
+    StyledDescriptionWrap,
+    StyledKeyWords,
+    StyledResultCardCompactContainer,
+} from '../styles.ts';
 type Props = {
     part: Item;
     icon?: string;
@@ -82,7 +81,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
 
     return (
         <>
-            <ResultCardCompactContainer>
+            <StyledResultCardCompactContainer>
                 <Accordion
                     style={{
                         boxShadow: 'none',
@@ -96,29 +95,30 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <CompactInfoP>
-                            <KeyWords>ID:</KeyWords>
+                        <StyledCompactInfoP>
+                            <StyledKeyWords>ID:</StyledKeyWords>
                             {part.wpId}
-                        </CompactInfoP>{' '}
-                        <CompactInfoP>
-                            <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
-                        </CompactInfoP>
-                        <CompactInfoP>
-                            <KeyWords>Category</KeyWords> {part.category?.name || 'Category'}
-                        </CompactInfoP>
+                        </StyledCompactInfoP>{' '}
+                        <StyledCompactInfoP>
+                            <StyledKeyWords>Location</StyledKeyWords>{' '}
+                            {part.location?.name || 'Location'}
+                        </StyledCompactInfoP>
+                        <StyledCompactInfoP>
+                            <StyledKeyWords>Category</StyledKeyWords>{' '}
+                            {part.category?.name || 'Category'}
+                        </StyledCompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>
-                        <DescriptionWrap>
-                            <KeyWords>Description</KeyWords>{' '}
+                        <StyledDescriptionWrap>
+                            <StyledKeyWords>Description</StyledKeyWords>{' '}
                             <Typography>{part.description}</Typography>
-                        </DescriptionWrap>
+                        </StyledDescriptionWrap>
                         <Button
                             backgroundColor={`${COLORS.secondary}`}
-                            height="20px"
                             color={`${COLORS.primary}`}
                             onClick={() => navigate(`/${part.id}`)}
                         >
-                            <ButtonText> More info</ButtonText>
+                            More info
                         </Button>
                     </AccordionDetails>
                 </Accordion>
@@ -141,7 +141,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         onClick={handleClickOpen}
                     ></StyledRemoveIcon>
                 ) : null}
-            </ResultCardCompactContainer>
+            </StyledResultCardCompactContainer>
 
             <CustomDialog
                 title="Remove item from list?"

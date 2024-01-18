@@ -11,8 +11,14 @@ import UmAppContext from '../../../contexts/UmAppContext';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import CustomDialog from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
-import { KeyWords } from '../../ResultSearchCard/styles';
-import { DescriptionParagraph, FirstInfoBox, InfoP, SecondInfoBox, ThirdInfoBox } from './styles';
+
+import {
+    StyledBox,
+    StyledDescriptionParagraph,
+    StyledInfoP,
+    StyledKeyWords,
+    StyledSecondInfoBox,
+} from './styles';
 
 type Props = {
     part: Item;
@@ -79,28 +85,34 @@ export const Searchinfo = ({ part, icon }: Props) => {
 
         setOpen(false);
     };
+
+    const date = format(
+        new Date(part.updatedDate ?? part.createdDate),
+        'yyyy-MM-dd HH:mm:ss'
+    ).toString();
+
     return (
         <>
-            <FirstInfoBox>
-                <InfoP>
-                    <KeyWords>WP ID</KeyWords>
+            <StyledBox>
+                <StyledInfoP>
+                    <StyledKeyWords>WP ID</StyledKeyWords>
                     {part.wpId}
-                </InfoP>
-                <InfoP>
-                    <KeyWords> S/N</KeyWords>
+                </StyledInfoP>
+                <StyledInfoP>
+                    <StyledKeyWords> S/N</StyledKeyWords>
                     {part.serialNumber}
-                </InfoP>
-                <InfoP>
-                    <KeyWords> P/N</KeyWords>
+                </StyledInfoP>
+                <StyledInfoP>
+                    <StyledKeyWords> P/N</StyledKeyWords>
                     {part.productNumber}
-                </InfoP>
-            </FirstInfoBox>
-            <SecondInfoBox>
-                <DescriptionParagraph>{part.description}</DescriptionParagraph>
-            </SecondInfoBox>
-            <ThirdInfoBox>
+                </StyledInfoP>
+            </StyledBox>
+            <StyledSecondInfoBox>
+                <StyledDescriptionParagraph>{part.description}</StyledDescriptionParagraph>
+            </StyledSecondInfoBox>
+            <StyledBox>
                 {' '}
-                <div style={{ alignSelf: 'flex-end' }}>
+                <>
                     {icon === 'add' ? (
                         <StyledAddIcon
                             alreadyAdded={alreadyAdded}
@@ -120,7 +132,7 @@ export const Searchinfo = ({ part, icon }: Props) => {
                             ></StyledRemoveIcon>
                         )
                     )}
-                </div>{' '}
+                </>
                 {location.pathname.includes('/makelist') && (
                     <StyledInfoIcon
                         onClick={() => {
@@ -128,22 +140,21 @@ export const Searchinfo = ({ part, icon }: Props) => {
                         }}
                     ></StyledInfoIcon>
                 )}
-                <InfoP>
-                    <KeyWords>Location</KeyWords>
+                <StyledInfoP>
+                    <StyledKeyWords>Location</StyledKeyWords>
                     {part.location?.name || 'Location'}
-                </InfoP>
-                <InfoP>
-                    <KeyWords>Vendor</KeyWords>
+                </StyledInfoP>
+                <StyledInfoP>
+                    <StyledKeyWords>Vendor</StyledKeyWords>
                     {part.vendor?.name || ''}
-                </InfoP>
-                <InfoP>
-                    <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>
-                    {format(
-                        new Date(part.updatedDate ?? part.createdDate),
-                        'yyyy-MM-dd HH:mm:ss'
-                    ).toString()}
-                </InfoP>
-            </ThirdInfoBox>
+                </StyledInfoP>
+                <StyledInfoP>
+                    <StyledKeyWords>
+                        {part.updatedDate ? 'Last updated' : 'Created on'}
+                    </StyledKeyWords>
+                    {date}
+                </StyledInfoP>
+            </StyledBox>
             <CustomDialog
                 title="Remove item from list?"
                 open={open}
