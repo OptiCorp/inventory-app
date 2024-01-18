@@ -64,10 +64,7 @@ export const PhoneList = ({ list }: Props) => {
                         ) : null}
                         »
                         <ButtonWrapCompact>
-                            <Button
-                                backgroundColor={`${COLORS.white}`}
-                                color={`${COLORS.black}`}
-                            >
+                            <Button backgroundColor={`${COLORS.white}`} color={`${COLORS.black}`}>
                                 Export
                             </Button>
                             <Button

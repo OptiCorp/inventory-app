@@ -69,7 +69,6 @@ export const SearchInfo = ({ part, icon }: PartCardProps) => {
     };
     const handleClose = (e: React.MouseEvent) => {
         e.stopPropagation();
-
         setOpen(false);
     };
     return (
@@ -123,11 +122,11 @@ export const SearchInfo = ({ part, icon }: PartCardProps) => {
                 )}
                 <InfoP>
                     <KeyWords>Location</KeyWords>
-                    {part.location?.name || 'Location'}
+                    {part.location?.name ?? 'Location'}
                 </InfoP>
                 <InfoP>
                     <KeyWords>Vendor</KeyWords>
-                    {part.vendor?.name || ''}
+                    {part.vendor?.name ?? ''}
                 </InfoP>
                 <InfoP>
                     <KeyWords>{part.updatedDate ? 'Last updated' : 'Created on'}</KeyWords>

@@ -7,14 +7,13 @@ export type PartCardProps = {
     part: {
         id: string;
         wpId: string;
-        name: string;
         serialNumber: string;
         productNumber: string;
         description: string;
         location?: Location;
         vendor?: Vendor;
         createdDate: string;
-        updatedDate?: string;
+        updatedDate?: string | null;
     };
     icon?: string;
 };

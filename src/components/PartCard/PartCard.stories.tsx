@@ -8,9 +8,6 @@ const meta = {
         layout: 'centered',
     },
     tags: ['autodocs'],
-    argTypes: {
-        backgroundColor: { control: 'color' },
-    },
 } as Meta<typeof PartCard>;
 
 export default meta;
@@ -21,7 +18,6 @@ export const Primary: Story = {
         part: {
             id: '1',
             wpId: 'AWpId: 1870',
-            name: 'Part Name',
             serialNumber: 'AQ11 54C7J',
             productNumber: '1129 AB345',
             description: 'supplanted spoilsmen portress automatists biuniqueness faithfully',
