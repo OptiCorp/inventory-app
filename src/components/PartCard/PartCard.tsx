@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Item } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
-import { PartCardContainer, SearchCard } from './styles';
+import { StyledPartCardContainer, StyledSearchCard } from './styles';
 
 type Props = {
     part: Item;
@@ -23,11 +23,11 @@ const PartCard = ({ part, icon }: Props) => {
             : undefined;
 
     return (
-        <PartCardContainer style={{ cursor: cursorStyle }} onClick={handleClick}>
-            <SearchCard title="">
+        <StyledPartCardContainer style={{ cursor: cursorStyle }} onClick={handleClick}>
+            <StyledSearchCard title="">
                 <SearchInfo part={part} icon={icon} />
-            </SearchCard>
-        </PartCardContainer>
+            </StyledSearchCard>
+        </StyledPartCardContainer>
     );
 };
 

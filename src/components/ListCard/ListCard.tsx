@@ -5,7 +5,7 @@ import { List } from '../../services/apiTypes.ts';
 
 import { useDeleteList } from '../../services/hooks/list/useDeleteList.tsx';
 import CustomDialog from '../CustomDialog/CustomDialog.tsx';
-import { ListWrapper, StyledDeleteIcon, StyledTitle } from './styles.ts';
+import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles.ts';
 
 type Props = {
     part: List;
@@ -33,7 +33,7 @@ const ListCard = ({ part }: Props) => {
 
     return (
         <>
-            <ListWrapper onClick={() => navigate(`${part.id}`)}>
+            <StyledListWrapper onClick={() => navigate(`${part.id}`)}>
                 <div onClick={(e) => handleOpen(e)}>
                     <StyledDeleteIcon style={{ fontSize: '30px' }}></StyledDeleteIcon>
                 </div>
@@ -49,7 +49,7 @@ const ListCard = ({ part }: Props) => {
                         {format(new Date(part.createdDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 )}
-            </ListWrapper>
+            </StyledListWrapper>
             <CustomDialog
                 open={open}
                 onClose={handleClose}

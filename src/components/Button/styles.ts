@@ -27,14 +27,3 @@ export const SubmitButton = styled('button')<{
     justify-content: center;
     align-items: center;
 `;
-
-export const Wrapper = styled.div`
-    display: flex;
-    align-items: flex-end;
-
-    justify-content: end;
-`;
-
-export const ButtonsWrapper = styled.div`
-    justify-content: end;
-`;

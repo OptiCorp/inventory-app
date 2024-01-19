@@ -1,18 +1,18 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Button } from '@mui/material';
+import { Button as ActionButton } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { COLORS } from '../../../style/GlobalStyles';
-import { SubmitButton } from '../../Button/styles';
+
+import { Button } from '../../Button/Button.tsx';
 import {
     Container,
-    DocumentName,
-    FileShapeWrapper,
-    FileTypeWrapper,
-    FileWrapper,
-    IconWrapper,
+    StyledDocumentName,
+    StyledFileShapeWrapper,
+    StyledFileTypeWrapper,
+    StyledFileWrapper,
+    StyledIconWrapper,
     Wrapper,
 } from './styles';
 
@@ -72,7 +72,7 @@ const AddPartUploadMobile = () => {
         <>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {files?.map((file, index) => (
-                    <FileWrapper className="fileClass" key={index}>
+                    <StyledFileWrapper className="fileClass" key={index}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"
@@ -81,33 +81,33 @@ const AddPartUploadMobile = () => {
                             fill="none"
                         >
                             <foreignObject width={121} height={153}>
-                                <FileShapeWrapper>
-                                    <FileTypeWrapper>
+                                <StyledFileShapeWrapper>
+                                    <StyledFileTypeWrapper>
                                         <h3>.{file.type.split('/')[1].toUpperCase()}</h3>
-                                    </FileTypeWrapper>
-                                    <IconWrapper>
-                                        <Button
+                                    </StyledFileTypeWrapper>
+                                    <StyledIconWrapper>
+                                        <ActionButton
                                             sx={{ color: 'black' }}
                                             onClick={() => handleFileDownload(file)}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
-                                        </Button>
-                                        <Button
+                                        </ActionButton>
+                                        <ActionButton
                                             sx={{ color: 'black' }}
                                             onClick={() => handleFileRemoval(index)}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
-                                        </Button>
-                                    </IconWrapper>
-                                </FileShapeWrapper>
+                                        </ActionButton>
+                                    </StyledIconWrapper>
+                                </StyledFileShapeWrapper>
                             </foreignObject>
                             <path
                                 d="M95 1H1V152H120V21.1333M95 1L120 21.1333M95 1V21.1333H120"
                                 stroke="black"
                             />
                         </svg>
-                        <DocumentName>{file.name.split('.')[0]}</DocumentName>
-                    </FileWrapper>
+                        <StyledDocumentName>{file.name.split('.')[0]}</StyledDocumentName>
+                    </StyledFileWrapper>
                 ))}
                 {showArrow === true && (files?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon
@@ -117,12 +117,7 @@ const AddPartUploadMobile = () => {
                 )}
             </Wrapper>
             <Container>
-                <SubmitButton
-                    variant="white"
-                    color={COLORS.black}
-                    $backgroundColor={COLORS.white}
-                    onClick={() => inputFile.current?.click()}
-                >
+                <Button variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"
@@ -139,7 +134,7 @@ const AddPartUploadMobile = () => {
                         }}
                     />
                     UPLOAD NEW
-                </SubmitButton>
+                </Button>
             </Container>
         </>
     );

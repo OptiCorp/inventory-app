@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { ToolTipContent } from './styles';
+import { ToolTipContent, Wrapper } from './styles';
 
 type Props = {
     content: string;
@@ -10,7 +10,7 @@ export const ToolTip = ({ content, children }: Props) => {
     const [isVisble, setIsVisble] = useState(false);
 
     return (
-        <div style={{ position: 'relative' }}>
+        <Wrapper>
             <span
                 onMouseLeave={() => setIsVisble(false)}
                 onMouseOver={() => setIsVisble(true)}
@@ -22,6 +22,6 @@ export const ToolTip = ({ content, children }: Props) => {
             </span>
 
             {isVisble ? <ToolTipContent>{content}</ToolTipContent> : null}
-        </div>
+        </Wrapper>
     );
 };

@@ -5,7 +5,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import { useWindowDimensions } from '../../hooks';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
-import PartCard from '../../components/PartCard/PartCard';
+
 import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
@@ -16,6 +16,7 @@ import {
     SpanMargin,
     StyledSearchedLink,
 } from './styles';
+import PartCard from '../../components/PartCard/PartCard';
 
 type StateType = {
     resetInputField?: boolean;

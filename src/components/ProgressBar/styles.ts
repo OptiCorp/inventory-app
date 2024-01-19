@@ -17,7 +17,7 @@ export const Container = styled.div`
     max-width: 500px;
 `;
 
-export const ProgressCircle = styled.div<ProgressProps>`
+export const StyledProgressCircle = styled.div<ProgressProps>`
     border-radius: 50%;
     border: 5px solid gray;
     background-color: ${({ finished }) => (finished ?? false ? primaryColor : grayColor)};
@@ -25,20 +25,20 @@ export const ProgressCircle = styled.div<ProgressProps>`
     width: 10px;
     height: 10px;
     padding: 8px;
-    color: ${({ finished }) => (finished ? COLORS.white : COLORS.black)};
+    color: ${({ finished }) => (finished ? COLORS.white : primaryColor)};
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
-export const ProgressLine = styled.div<ProgressProps>`
-    background-color: ${({ active }) => (active ? COLORS.black : grayColor)};
+export const StyledProgressLine = styled.div<ProgressProps>`
+    background-color: ${({ active }) => (active ? primaryColor : grayColor)};
     height: 3px;
     align-self: center;
     margin: 0 4px;
     flex-grow: 1;
 `;
 
-export const ProgressLink = styled(Link)`
+export const StyledProgressLink = styled(Link)`
     text-decoration: none;
 `;

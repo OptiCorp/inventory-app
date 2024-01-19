@@ -28,3 +28,9 @@ export const ButtonContainer = styled.div`
     width: 100%;
     margin: 8px 0;
 `;
+
+export const ButtonWrapper = styled.div`
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+`;

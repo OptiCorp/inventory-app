@@ -3,7 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../../../components/Button/Button';
 import { GlobalSpinner } from '../../../../components/GlobalSpinner/GlobalSpinner';
+
 import SearchResultCardCompact from '../../../../components/PartCard/SearchInfoCompact';
+
 import UmAppContext from '../../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../../hooks';
 import { Item, List, UpdateList } from '../../../../services/apiTypes';

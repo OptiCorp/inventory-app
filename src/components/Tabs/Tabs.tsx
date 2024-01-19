@@ -2,7 +2,13 @@ import { Tab } from '@mui/material';
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import { useGetListById } from '../../services/hooks/list/useGetListById';
-import { Indicator, NumberofItems, TabButton, TabContainer, Title } from './styles';
+import {
+    StyledIndicator,
+    StyledNumberofItems,
+    StyledTabButton,
+    StyledTabContainer,
+    StyledTitle,
+} from './styles';
 
 interface Tab {
     title: string;
@@ -19,23 +25,23 @@ export default function TabComponent({ tabs }: TabBarProps) {
     const { data: list } = useGetListById(listId!);
     return (
         <>
-            <TabContainer>
+            <StyledTabContainer>
                 {tabs.map((tab, index) => (
-                    <TabButton
+                    <StyledTabButton
                         key={index}
                         active={activeTab === index}
                         onClick={() => setActiveTab(index)}
                     >
-                        <Title active={activeTab === index}>{tab.title}</Title>
-                        <Indicator active={activeTab === index} />{' '}
-                        {tab.title === 'List' ? (
-                            <NumberofItems active={activeTab === index}>
+                        <StyledTitle active={activeTab === index}>{tab.title}</StyledTitle>
+                        <StyledIndicator active={activeTab === index} />{' '}
+                        {tab.title === 'List' && (
+                            <StyledNumberofItems active={activeTab === index}>
                                 {`[${list?.items?.length}]`}
-                            </NumberofItems>
-                        ) : null}
-                    </TabButton>
+                            </StyledNumberofItems>
+                        )}
+                    </StyledTabButton>
                 ))}
-            </TabContainer>
+            </StyledTabContainer>
             {tabs[activeTab].render()}
         </>
     );

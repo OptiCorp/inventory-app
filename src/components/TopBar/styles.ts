@@ -1,3 +1,5 @@
+import { Box, ListItem } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
@@ -7,18 +9,51 @@ export const TopBarContainer = styled.div`
     padding: 16px;
 `;
 
-export const CompactHeaderWrap = styled.div`
+export const StyledLink = styled.h3`
+    padding: 0 16px 0 17px;
+    font-size: 1.3rem;
+    cursor: pointer;
+`;
+
+export const StyledNavLink = styled(NavLink)`
+    text-decoration: none;
+    color: ${COLORS.darkGray};
+    &:hover {
+        color: ${COLORS.black};
+    }
+    &.active {
+        color: ${COLORS.black};
+    }
+`;
+
+export const StyledDropdownItem = styled(ListItem)`
+    && {
+        margin-left: 20px;
+        padding: 0 16px;
+    }
+`;
+
+export const HamburgerContainer = styled(Box)`
+    &&&& {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+`;
+export const CompactContainer = styled.div`
     display: flex;
 `;
 
-export const HeaderWrap = styled.div`
+export const StyledHeaderWrapper = styled.div`
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
 `;
 
-export const BackButton = styled.div`
+export const StyledBackButton = styled.div`
     position: relative;
     margin: 0;
     cursor: pointer;
@@ -27,7 +62,7 @@ export const BackButton = styled.div`
 type Props = {
     $isopen: boolean | string;
 };
-export const MenuAdmin = styled.div<Props>`
+export const StyledMenuAdmin = styled.div<Props>`
     cursor: pointer;
 
     color: ${({ $isopen }) => (String($isopen) ? COLORS.black : COLORS.gray)};
@@ -38,11 +73,13 @@ export const MenuAdmin = styled.div<Props>`
         color: ${COLORS.black};
     }
 `;
-export const MenuAdminLink = styled.span`
+export const StyledMenuAdminLink = styled.span`
     padding: 2px 4px;
 `;
 
-export const LogOutWrapper = styled.div`
+export const StyledLogOutWrapper = styled.div`
+    color: ${COLORS.gray};
+
     color: ${COLORS.gray};
     &.active {
         color: ${COLORS.gray};
