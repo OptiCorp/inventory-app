@@ -1,6 +1,6 @@
 import { ComponentProps, FunctionComponent } from 'react';
 import { COLORS } from '../../style/GlobalStyles';
-import { SubmitButton, Wrapper } from './styles';
+import { SubmitButton } from './styles';
 interface ButtonProps {
     variant: ButtonVariant;
     children?: React.ReactNode;
@@ -44,19 +44,17 @@ export const Button: FunctionComponent<ButtonProps> = ({
     const { backgroundColor, color, height } = buttonStyles[variant];
 
     return (
-        <Wrapper>
-            <SubmitButton
-                $backgroundColor={backgroundColor}
-                color={color}
-                height={height}
-                type={type}
-                onClick={onClick}
-                form={form}
-                id={id}
-                variant={variant}
-            >
-                {children}
-            </SubmitButton>
-        </Wrapper>
+        <SubmitButton
+            $backgroundColor={backgroundColor}
+            color={color}
+            height={height}
+            type={type}
+            onClick={onClick}
+            form={form}
+            id={id}
+            variant={variant}
+        >
+            {children}
+        </SubmitButton>
     );
 };

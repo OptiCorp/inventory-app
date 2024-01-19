@@ -5,7 +5,7 @@ import { Button } from '../../../components/Button/Button.tsx';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
-import { FormContainer } from '../styles';
+import { ButtonWrapper, FormContainer } from '../styles';
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles';
 
 const CheckForm = () => {
@@ -67,10 +67,11 @@ const CheckForm = () => {
                     defaultValue={description}
                 />
             </FormRadio>
-
-            <Button variant="black" onClick={handleClick}>
-                NEXT
-            </Button>
+            <ButtonWrapper>
+                <Button variant="black" onClick={handleClick}>
+                    NEXT
+                </Button>
+            </ButtonWrapper>
         </FormContainer>
     );
 };

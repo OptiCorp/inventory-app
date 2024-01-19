@@ -9,6 +9,7 @@ import useLocalStorage from '../../../hooks/useLocalStorage.ts';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions.ts';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
 import { FormContainer } from '../styles.ts';
+import { ButtonWrapper } from './styles.ts';
 
 const Upload = () => {
     const navigate = useNavigate();
@@ -61,10 +62,11 @@ const Upload = () => {
                 <li>Certificates.</li>
                 <li>Photos.</li>
             </ul>
-
-            <Button variant="black" onClick={handleClick}>
-                NEXT
-            </Button>
+            <ButtonWrapper>
+                <Button variant="black" onClick={handleClick}>
+                    NEXT
+                </Button>
+            </ButtonWrapper>
         </FormContainer>
     );
 };

@@ -1,7 +1,7 @@
 import { Button } from '../../../components/Button/Button.tsx';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 
-import { FormContainer } from '../styles.ts';
+import { ButtonWrapper, FormContainer } from '../styles.ts';
 
 import { FormContent } from './FormContent.tsx';
 
@@ -12,10 +12,11 @@ export const AddPartForm = () => {
             <ProgressBar progressLevel={4} />
             <h4>Add details</h4>
             <FormContent />
-
-            <Button id="addPart" type="submit" variant="black">
-                FINISH
-            </Button>
+            <ButtonWrapper>
+                <Button id="addPart" type="submit" variant="black">
+                    FINISH
+                </Button>
+            </ButtonWrapper>
         </FormContainer>
     );
 };
