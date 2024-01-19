@@ -12,13 +12,12 @@ const PartCard = ({ part, icon }: Props) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        if (location.pathname === '/search' || location.pathname === '/add-part') {
-            navigate(`/${part.id}`);
-        }
+        if (location.pathname.includes('makelist')) return;
+        navigate(`/${part.id}`);
     };
 
     const cursorStyle =
-        location.pathname === '/search' || location.pathname === '/add-part'
+        location.pathname.includes('/search') || location.pathname.includes('/add-part')
             ? 'pointer'
             : undefined;
 
