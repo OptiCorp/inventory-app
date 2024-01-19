@@ -1,20 +1,12 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, ClickAwayListener } from '@mui/material';
 import { useContext, useState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import { useDebounce } from 'usehooks-ts';
 import UmAppContext from '../../../contexts/UmAppContext';
 import { Item } from '../../../services/apiTypes';
-import {
-    AddChildItemIds,
-    useAddChildItemToParent,
-} from '../../../services/hooks/items/useAddChildItemToParent';
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
-import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem';
-import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
-import { Edit, LabelContainer } from '../partInfo/styles';
-
 import {
     AccessibleButtonWrapper,
     AddIcon,
@@ -25,11 +17,32 @@ import {
     LinkElement,
     ParentContainer,
 } from './styles';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
+import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
+import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem';
+import {
+    AddChildItemIds,
+    useAddChildItemToParent,
+} from '../../../services/hooks/items/useAddChildItemToParent';
+import { PartInfoSchema } from '../partInfo/hooks';
+import { Edit, LabelContainer } from '../partInfo/styles';
+
+type Options = {
+    label: string;
+    value: Item;
+};
+type Field =
+    | {
+          label: string;
+          value: Item | string;
+      }
+    | string
+    | null
+    | undefined;
 
 export const Hierarchy = ({ item }: { item: Item }) => {
     const { currentUser, setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedId, setSelectedId] = useState(item.wpId);
     const [selectedChildItem, setSelectedChildItem] = useState({
         childItemId: '',
         childItemWpId: '',
@@ -44,7 +57,12 @@ export const Hierarchy = ({ item }: { item: Item }) => {
     const { mutate: mutateRemoveParentFromItem } = useRemoveParentIdFromItem();
     const { mutate: mutateAddChildItemToParent } = useAddChildItemToParent();
     const navigate = useNavigate();
-
+    const {
+        watch,
+        register,
+        control,
+        formState: { dirtyFields },
+    } = useFormContext<PartInfoSchema>();
     const filteredWpIds = data?.pages
         .flatMap((el) => el)
         .filter(
@@ -54,31 +72,62 @@ export const Hierarchy = ({ item }: { item: Item }) => {
         )
         .map((el) => ({ label: el.wpId, value: el }));
 
-    const handleBlur = () => {
-        if (selectedId === item.wpId) return;
-        mutateUpdateItem(
-            {
-                ...item,
-                wpId: selectedId,
-            },
-            {
-                onSuccess: (data) => {
-                    if (data.status >= 400 && data.status < 500) {
-                        setSnackbarSeverity('error');
-                        setSnackbarText(`${data.statusText}, please try again.`);
-                        return;
-                    } else if (data.status >= 500) {
-                        setSnackbarSeverity('error');
-                        setSnackbarText(
-                            `Something went wrong on our end, refresh page and try again later.`
-                        );
-                        return;
-                    } else {
-                        setSnackbarText(`WP Id was changed to ${selectedId}`);
-                    }
+    const filterChildIds = (options: Options[]) => {
+        const childIds = item.children?.map((child) => child.id) ?? [];
+        return options?.filter((option) => !childIds.includes(option.value.id));
+    };
+
+    /**
+     * Handles the logic for displaying snackbar messages based on API response
+     *
+     * @param {Response} responseData - The API response data.
+     * @param {string} successText - The text to display in the snackbar if the request is successful.
+     * @param {string} [updatedElement] - Optional: The element that was updated.
+     * @returns {void}
+     */
+    const handleApiRequestSnackbar = (
+        responseData: Response,
+        successText: string,
+        updatedElement?: string
+    ): void => {
+        if (responseData.status >= 400 && responseData.status < 500) {
+            setSnackbarSeverity('error');
+            setSnackbarText(`${responseData.statusText}, please try again.`);
+            return;
+        } else if (responseData.status >= 500) {
+            setSnackbarSeverity('error');
+            setSnackbarText(`Something went wrong on our end, refresh page and try again later.`);
+            return;
+        } else {
+            setSnackbarText(`${successText}${updatedElement ? `: ${updatedElement}` : ''}`);
+        }
+    };
+
+    const handleBlur = (fieldId: keyof PartInfoSchema, fieldName: keyof PartInfoSchema) => {
+        const fieldValue: Field = watch(fieldName);
+        console.log(fieldValue);
+        if (
+            dirtyFields[fieldName] &&
+            fieldValue &&
+            typeof fieldValue === 'object' &&
+            typeof fieldValue.value === 'object'
+        ) {
+            mutateUpdateItem(
+                {
+                    ...item,
+                    [fieldId]: fieldValue.value.id,
                 },
-            }
-        );
+                {
+                    onSuccess: (data) => {
+                        handleApiRequestSnackbar(
+                            data,
+                            'Parent item was changed to WP ID',
+                            fieldValue.label
+                        );
+                    },
+                }
+            );
+        }
     };
 
     const handleAddChildToParent = (ids: AddChildItemIds) => {
@@ -90,19 +139,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
 
         mutateAddChildItemToParent(ids, {
             onSuccess: (data) => {
-                if (data.status >= 400 && data.status < 500) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(`${data.statusText}, please try again.`);
-                    return;
-                } else if (data.status >= 500) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(
-                        `Something went wrong on our end, refresh page and try again later.`
-                    );
-                    return;
-                } else {
-                    setSnackbarText(`Item added`);
-                }
+                handleApiRequestSnackbar(data, 'item added');
             },
         });
     };
@@ -110,19 +147,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
     const handleRemoveItem = (id: string) => {
         mutateRemoveParentFromItem(id, {
             onSuccess: (data) => {
-                if (data.status >= 400 && data.status < 500) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(`${data.statusText}, please try again.`);
-                    return;
-                } else if (data.status >= 500) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(
-                        `Something went wrong on our end, refresh page and try again later.`
-                    );
-                    return;
-                } else {
-                    setSnackbarText(`Item removed`);
-                }
+                handleApiRequestSnackbar(data, 'Item removed');
             },
         });
     };
@@ -157,36 +182,50 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                 }
                             />
                         </LabelContainer>
-                        {isOpen.parent && (
-                            <Select
-                                styles={{
-                                    control: (provided) => ({
-                                        ...provided,
-                                        maxWidth: '300px',
-                                    }),
-                                }}
-                                onInputChange={(value) => setSearchTerm(value)}
-                                onMenuScrollToBottom={() => {
-                                    fetchNextPage().catch((error) => {
-                                        console.error('An error occurred:', error);
-                                    });
-                                }}
-                                options={filteredWpIds}
-                                isLoading={isLoading}
-                                placeholder="Search by wpid..."
-                                onChange={(value) => setSelectedId(value!.value.wpId)}
-                                onBlur={handleBlur}
-                            />
-                        )}
-                        {!isOpen.parent && (
-                            <>
-                                {item.parent && (
-                                    <LinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
-                                        {item.parent?.wpId}
-                                    </LinkElement>
-                                )}
-                            </>
-                        )}
+
+                        <Controller
+                            control={control}
+                            name="parentId"
+                            render={(controllerProps) => {
+                                const {
+                                    field: { onChange },
+                                } = controllerProps;
+                                return (
+                                    <Select
+                                        {...register('parentId')}
+                                        styles={{
+                                            control: (provided) => ({
+                                                ...provided,
+                                                maxWidth: '300px',
+                                                borderRadius: '0',
+                                            }),
+                                        }}
+                                        onInputChange={(value) => setSearchTerm(value)}
+                                        onMenuScrollToBottom={() => {
+                                            fetchNextPage().catch((error) => {
+                                                console.error('An error occurred:', error);
+                                            });
+                                        }}
+                                        options={filterChildIds(filteredWpIds!)}
+                                        isLoading={isLoading}
+                                        placeholder="Search by wpid..."
+                                        onChange={onChange}
+                                        onBlur={() => handleBlur('parentId', 'parentId')}
+                                    />
+                                );
+                            }}
+                        />
+
+                        <div style={{ position: 'relative', width: 'fit-content' }}>
+                            <LinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
+                                {item.parent?.wpId}
+                            </LinkElement>
+                            {isOpen.parent && item.parent?.id && (
+                                <AccessibleButtonWrapper onClick={() => handleRemoveItem(item.id)}>
+                                    <CustomRemoveIcon />
+                                </AccessibleButtonWrapper>
+                            )}
+                        </div>
                     </Box>
                 </ClickAwayListener>
             </ParentContainer>
@@ -236,6 +275,7 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                 control: (provided) => ({
                                     ...provided,
                                     minWidth: '300px',
+                                    borderRadius: '0',
                                 }),
                             }}
                             options={filteredWpIds}
@@ -252,6 +292,17 @@ export const Hierarchy = ({ item }: { item: Item }) => {
                                     childItemId: value!.value.id,
                                     childItemWpId: value!.value.wpId,
                                 })
+                            }
+                            value={
+                                selectedChildItem.childItemWpId.length > 0
+                                    ? {
+                                          value: {
+                                              id: selectedChildItem.childItemId,
+                                              wpId: selectedChildItem.childItemWpId,
+                                          },
+                                          label: `${selectedChildItem.childItemWpId}`,
+                                      }
+                                    : null
                             }
                         />
 
