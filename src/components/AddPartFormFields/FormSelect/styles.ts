@@ -13,7 +13,7 @@ export const customStyles: StylesConfig<FormOption, false> = {
         width: '100%',
         maxWidth: '500px',
         height: '41px',
-        backgroundColor: `${COLORS.InputGray}`,
+        backgroundColor: `${COLORS.lightGray}`,
         borderRadius: 0,
         border: '0px',
         borderBottom: '1px solid #000',
