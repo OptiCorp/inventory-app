@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../components/Button/Button.tsx';
-import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard.tsx';
-import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfo/SearchInfoCompact.tsx';
+import PartCard from '../../components/PartCard/PartCard.tsx';
+import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import UmAppContext from '../../contexts/UmAppContext.tsx';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
@@ -11,7 +11,6 @@ import { Item, UpdateList } from '../../services/apiTypes.ts';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
 
 import { useGetItemsNotInListInfinite } from '../../services/hooks/items/useGetItemsNotInListInfinite.tsx';
-import { COLORS } from '../../style/GlobalStyles.ts';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
 
@@ -50,7 +49,7 @@ const ListDetails = () => {
             });
         }
     };
-    const { mutate: updateList, status: listUpdateStatus, data } = useUpdateList(listId!);
+    const { mutate: updateList } = useUpdateList(listId!);
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
@@ -106,7 +105,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCard part={item} icon={'add'} />
+                                        <PartCard part={item} icon={'add'} />
                                     </div>
                                 ) : (
                                     <div
@@ -138,19 +137,10 @@ const ListDetails = () => {
                                 </ListContainer>
                             ) : null}
                             <ButtonWrap>
-                                <Button
-                                    backgroundColor={`${COLORS.secondary}`}
-                                    color={`${COLORS.primary}`}
-                                    onClick={handleSave}
-                                >
+                                <Button variant="white" onClick={handleSave}>
                                     Save list
                                 </Button>
-                                <Button
-                                    backgroundColor={`${COLORS.secondary}`}
-                                    color={`${COLORS.primary}`}
-                                >
-                                    Export
-                                </Button>
+                                <Button variant="black">Export</Button>
                             </ButtonWrap>
                         </FlexWrapper>
                     </>

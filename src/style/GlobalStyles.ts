@@ -3,14 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
 
 export const COLORS = {
-    secondary: ' #FFFFFF',
-    primary: '#000',
-    card: '#FBFBFB',
-    mainGray: '#CACACA',
+    white: '#FFFFFF',
+    lightestGray: '#FBFBFB',
+    lightGray: '#F2F2F2',
+    gray: '#CACACA',
     darkGray: '#7E7E7E',
-    InputGray: '#F2F2F2',
+    black: '#000000',
     green: '#008000',
-    dangerRed: '#EB0000',
+    red: '#EB0000',
 };
 type Props = {
     width: number;
@@ -20,10 +20,10 @@ const GlobalStyles = createGlobalStyle<Props>`
    body, :root, html {
         margin: 0;
         width: 100%;
-      
+
         font-family: 'Archivo', sans-serif;
         font-size: 1rem;
-        background-color: ${COLORS.secondary};
+        background-color: ${COLORS.white};
     }
     .wrapper {
     padding: ${({ width }) => (width < 500 ? 0 : '8px')};
@@ -31,10 +31,10 @@ const GlobalStyles = createGlobalStyle<Props>`
     grid-template-rows: auto 1fr auto;
     display: grid;
     overflow-x: hidden;
-    
+
   }
 
-  
+
 body::-webkit-scrollbar {
     display: none;
 }

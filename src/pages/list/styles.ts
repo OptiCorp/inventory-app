@@ -5,19 +5,19 @@ type Props = {
 };
 export const SubmitButton = styled.button`
     width: 150px;
-    background-color: ${COLORS.primary};
-    color: ${COLORS.mainGray};
+    background-color: ${COLORS.black};
+    color: ${COLORS.gray};
     height: 30px;
     cursor: pointer;
     &:hover {
-        background-color: ${COLORS.InputGray};
+        background-color: ${COLORS.lightGray};
     }
 `;
 
 export const CancelButton = styled.button`
     width: 150px;
-    background-color: ${COLORS.secondary};
-    color: ${COLORS.primary};
+    background-color: ${COLORS.white};
+    color: ${COLORS.black};
     height: 30px;
     cursor: pointer;
     &:hover {

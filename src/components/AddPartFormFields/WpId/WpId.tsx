@@ -10,11 +10,7 @@ import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '.
 import { StyledInput, StyledParagraph } from './styles.ts';
 
 export const WpId = () => {
-    const {
-        register,
-        setValue,
-        formState: { errors },
-    } = useFormContext();
+    const { register, setValue } = useFormContext();
 
     const [wpId, setWpId] = useState(uuid().slice(0, 8));
     const debouncedWpId = useDebounce(wpId, 500);

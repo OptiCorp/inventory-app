@@ -1,39 +1,62 @@
 import { ComponentProps, FunctionComponent } from 'react';
-import { StyledButton, Wrapper } from './styles';
+import { COLORS } from '../../style/GlobalStyles';
+import { SubmitButton, Wrapper } from './styles';
 interface ButtonProps {
+    variant: ButtonVariant;
     children?: React.ReactNode;
     type?: ComponentProps<'button'>['type'];
     onClick?: ComponentProps<'button'>['onClick'];
     form?: string;
     id?: string;
-    backgroundColor: string;
-    height?: string;
-    color: ComponentProps<'button'>['color'];
 }
 
+type ButtonVariant = 'black' | 'white' | 'red';
+
+const buttonStyles: Record<
+    ButtonVariant,
+    { backgroundColor: string; color: string; height: string }
+> = {
+    black: {
+        backgroundColor: COLORS.black,
+        color: COLORS.white,
+        height: '40px',
+    },
+    white: {
+        backgroundColor: COLORS.white,
+        color: COLORS.black,
+        height: '40px',
+    },
+    red: {
+        backgroundColor: COLORS.white,
+        color: COLORS.red,
+        height: '40px',
+    },
+};
+
 export const Button: FunctionComponent<ButtonProps> = ({
+    variant,
     children,
     type,
     onClick,
-    id,
     form,
-    backgroundColor,
-    color,
-    height,
+    id,
 }) => {
+    const { backgroundColor, color, height } = buttonStyles[variant];
+
     return (
         <Wrapper>
-            <StyledButton
-                color={color}
-                onClick={onClick}
-                id={id}
-                type={type}
-                height={height}
-                form={form}
+            <SubmitButton
                 $backgroundColor={backgroundColor}
+                color={color}
+                height={height}
+                type={type}
+                onClick={onClick}
+                form={form}
+                id={id}
+                variant={variant}
             >
                 {children}
-            </StyledButton>
+            </SubmitButton>
         </Wrapper>
     );
 };

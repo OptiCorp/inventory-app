@@ -32,12 +32,8 @@ export const ListHeader = ({ list }: Props) => {
     const [title, setTitle] = useState(list.title);
     const [open, setOpen] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
-    const { mutate, isSuccess, status, data: deleteData } = useDeleteList();
-    const {
-        mutate: updateList,
-        status: listUpdateStatus,
-        isSuccess: listSuccess,
-    } = useUpdateList(list.id);
+    const { mutate } = useDeleteList();
+    const { mutate: updateList } = useUpdateList(list.id);
     const { snackbar } = useSnackBar();
 
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

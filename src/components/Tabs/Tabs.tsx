@@ -21,7 +21,8 @@ interface TabBarProps {
 export default function TabComponent({ tabs }: TabBarProps) {
     const [activeTab, setActiveTab] = useState<number>(0);
     const { listId } = useParams();
-    const { data: list, isFetching } = useGetListById(listId!);
+
+    const { data: list } = useGetListById(listId!);
     return (
         <>
             <StyledTabContainer>

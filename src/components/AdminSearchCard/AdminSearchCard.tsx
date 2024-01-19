@@ -27,12 +27,12 @@ type Props = {
 
 const AdminSearchCard = ({ data, searchType }: Props) => {
     const [isEditing, setIsEditing] = useState(false);
-    const { mutate: updateCategory, status: categoryUpdateStatus } = useUpdateCategory(data.id);
-    const { mutate: updateVendor, status: vendorUpdateStatus } = useUpdateVendor(data.id);
-    const { mutate: updateLocation, status: locationUpdateStatus } = useUpdateLocation(data.id);
-    const { mutate: deleteCategory, status: categoryDeleteStatus } = useDeleteCategory(data.id);
-    const { mutate: deleteVendor, status: categoryVendorStatus } = useDeleteVendor(data.id);
-    const { mutate: deleteLocation, status: categoryLocationStatus } = useDeleteLocation(data.id);
+    const { mutate: updateCategory } = useUpdateCategory(data.id);
+    const { mutate: updateVendor } = useUpdateVendor(data.id);
+    const { mutate: updateLocation } = useUpdateLocation(data.id);
+    const { mutate: deleteCategory } = useDeleteCategory(data.id);
+    const { mutate: deleteVendor } = useDeleteVendor(data.id);
+    const { mutate: deleteLocation } = useDeleteLocation(data.id);
 
     const handleEdit = (isEditing: boolean, event?: FormEvent<HTMLInputElement>) => {
         if (isEditing) {

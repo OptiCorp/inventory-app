@@ -3,8 +3,8 @@ import { COLORS } from '../../style/GlobalStyles';
 
 export const StyledDialogSubmitButton = styled.button`
     width: 150px;
-    background-color: ${COLORS.primary};
-    color: ${COLORS.secondary};
+    background-color: ${COLORS.black};
+    color: ${COLORS.white};
     height: 30px;
     cursor: pointer;
     &:hover {
@@ -14,8 +14,8 @@ export const StyledDialogSubmitButton = styled.button`
 
 export const StyledDialogCancelButton = styled.button`
     width: 150px;
-    background-color: ${COLORS.secondary};
-    color: ${COLORS.primary};
+    background-color: ${COLORS.white};
+    color: ${COLORS.black};
     height: 30px;
     cursor: pointer;
     &:hover {

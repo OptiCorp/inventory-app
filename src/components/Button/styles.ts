@@ -1,27 +1,31 @@
 import { ComponentProps } from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../../style/GlobalStyles';
 
-export const StyledButton = styled('button')<{
+export const SubmitButton = styled('button')<{
     $backgroundColor: string;
     color: ComponentProps<'button'>['color'];
     height?: string;
+    variant: string;
 }>`
     &:active {
         transform: scale(1.03);
     }
     &:hover {
     }
-    width: 150px;
+    width: 200px;
 
     background-color: ${(props) => props.$backgroundColor};
     color: ${(props) => props.color};
     height: ${(props) => props.height ?? 'auto'};
     padding: 5px;
-    border: 1px solid ${COLORS.primary};
+    border: 1px solid ${(props) => (props.variant === 'primary' ? 'black' : props.color)};
     cursor: pointer;
-    margin-right: 0;
     text-transform: uppercase;
+    font-family: 'Archivo', sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const Wrapper = styled.div`

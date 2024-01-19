@@ -12,7 +12,7 @@ export const StyledTextArea = styled.textarea`
     width: 100%;
     max-width: 500px;
     display: block;
-    background-color: ${COLORS.InputGray};
+    background-color: ${COLORS.lightGray};
     border: none;
     border-radius: 0;
     border-bottom: 1px solid #000;

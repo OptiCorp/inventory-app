@@ -19,10 +19,10 @@ export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     color: ${COLORS.darkGray};
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
     &.active {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
 `;
 
@@ -65,12 +65,12 @@ type Props = {
 export const StyledMenuAdmin = styled.div<Props>`
     cursor: pointer;
 
-    color: ${({ $isopen }) => (String($isopen) ? COLORS.primary : COLORS.mainGray)};
+    color: ${({ $isopen }) => (String($isopen) ? COLORS.black : COLORS.gray)};
     &.active {
-        color: ${COLORS.primary} !important;
+        color: ${COLORS.black} !important;
     }
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
 `;
 export const StyledMenuAdminLink = styled.span`
@@ -78,12 +78,14 @@ export const StyledMenuAdminLink = styled.span`
 `;
 
 export const StyledLogOutWrapper = styled.div`
-    color: ${COLORS.mainGray};
+    color: ${COLORS.gray};
+
+    color: ${COLORS.gray};
     &.active {
-        color: ${COLORS.mainGray};
+        color: ${COLORS.gray};
     }
     &:hover {
-        color: ${COLORS.primary};
+        color: ${COLORS.black};
     }
     cursor: pointer;
 `;

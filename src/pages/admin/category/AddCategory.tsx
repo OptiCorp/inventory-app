@@ -1,7 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { FormProvider } from 'react-hook-form';
 import { Button } from '../../../components/Button/Button';
-import { COLORS } from '../../../style/GlobalStyles';
 import { useAddCategoryForm } from '../hooks/useAddCategoryForm';
 import {
     AdminInput,
@@ -34,12 +33,7 @@ const AddCategory = () => {
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
                         <SubmitButtonContainer>
-                            <Button
-                                id="addCategory"
-                                type="submit"
-                                backgroundColor={COLORS.primary}
-                                color={COLORS.secondary}
-                            >
+                            <Button id="addCategory" type="submit" variant="black">
                                 Add category
                             </Button>
                         </SubmitButtonContainer>

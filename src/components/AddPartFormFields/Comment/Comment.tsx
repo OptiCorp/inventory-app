@@ -3,10 +3,7 @@ import { StyledDiv } from '../styles';
 import { StyledInputWrap, StyledTextArea } from './styles';
 
 export const Comment = () => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+    const { register } = useFormContext();
     return (
         <StyledDiv>
             <StyledInputWrap>

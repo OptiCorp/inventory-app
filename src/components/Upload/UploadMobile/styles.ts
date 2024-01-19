@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
     padding: 12px 20px;
     margin: 8px 0;
     border: dashed;
-    border: 1px dashed ${COLORS.primary};
+    border: 1px dashed ${COLORS.black};
     box-sizing: border-box;
     min-height: 80px;
     overflow-x: auto;

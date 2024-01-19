@@ -74,20 +74,22 @@ Issues should have the following format:
     - **refactor** for code restructuring.
 2. **Descriptive Text**: Add a concise descriptive text.
 
+If applicable, also give the issue a label. 
+
+**Example**
 ```
 fix: Failed to Login BrowserAuthError
 ```
 
 ### Branches
 
-Branches should have the auto-generated given to branches created from issues.
+Branches should have the auto-generated name given to branches created from issues.
 
+**Example**
 ```
 205-fix-failed-to-login-browserautherror
 ```
 
 ### Commit Messages
-
--   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
 -   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)

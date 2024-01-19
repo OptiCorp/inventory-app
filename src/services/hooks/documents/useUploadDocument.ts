@@ -9,7 +9,7 @@ export const useUploadDocument = () => {
     const Sleep = useSleep();
     const api = apiService();
     const queryClient = useQueryClient();
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText } = useContext(UmAppContext);
     return useMutation({
         mutationFn: async (document: AddDocument) => await api.addDocument(document),
         onSettled: async (data, _errors, documents) => {

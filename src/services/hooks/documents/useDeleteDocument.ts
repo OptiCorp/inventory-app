@@ -6,7 +6,7 @@ import apiService from '../../api';
 export const useDeleteDocument = (itemId: string) => {
     const api = apiService();
     const queryClient = useQueryClient();
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText } = useContext(UmAppContext);
     return useMutation({
         mutationFn: (documentId: string) => api.deleteDocument(documentId, itemId),
         onSettled(_data, error) {

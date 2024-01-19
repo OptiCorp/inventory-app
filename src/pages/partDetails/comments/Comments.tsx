@@ -2,7 +2,6 @@ import { TextField } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { Button } from '../../../components/Button/Button';
 import { Item } from '../../../services/apiTypes';
-import { COLORS } from '../../../style/GlobalStyles';
 import { Wrapper } from './styles';
 
 export const Comments = ({ item }: { item: Item }) => {
@@ -35,9 +34,7 @@ export const Comments = ({ item }: { item: Item }) => {
                     />
                 </div>
                 <Wrapper>
-                    <Button backgroundColor={`${COLORS.secondary}`} color={`${COLORS.primary}`}>
-                        Sumbit
-                    </Button>
+                    <Button variant="white">Sumbit</Button>
                 </Wrapper>
             </div>
         </>

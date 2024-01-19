@@ -2,36 +2,33 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import UmAppContext from '../../../contexts/UmAppContext.tsx';
-import { useSnackBar } from '../../../hooks/useSnackbar.tsx';
-import { Item, MutateItemList } from '../../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { useGetListById } from '../../../services/hooks/list/useGetListById.tsx';
-import { COLORS } from '../../../style/GlobalStyles.ts';
-import { Button } from '../../Button/Button.tsx';
-import CustomDialog from '../../CustomDialog/CustomDialog.tsx';
-import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles.ts';
+import UmAppContext from '../../contexts/UmAppContext.tsx';
+import { Item, MutateItemList } from '../../services/apiTypes.ts';
+import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
+import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
+import { Button } from '../Button/Button.tsx';
+import CustomDialog from '../CustomDialog/CustomDialog.tsx';
+import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
 import {
     StyledCompactInfoP,
     StyledDescriptionWrap,
     StyledKeyWords,
-    StyledResultCardCompactContainer,
-} from '../styles.ts';
+    StyledPartCardCompactContainer,
+} from './styles.ts';
 type Props = {
     part: Item;
     icon?: string;
 };
 const SearchResultCardCompact = ({ part, icon }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
-    const { snackbar } = useSnackBar();
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [alreadyAdded, setAlreadyAdded] = useState(false);
     const { listId } = useParams();
-    const { data: list, isFetching } = useGetListById(listId!);
+    const { data: list } = useGetListById(listId!);
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
-    const { mutate: mutateRemoveItemFromList, data: removeData } = useRemoveItemsFromList();
+    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
 
     const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation();
@@ -81,7 +78,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
 
     return (
         <>
-            <StyledResultCardCompactContainer>
+            <StyledPartCardCompactContainer>
                 <Accordion
                     style={{
                         boxShadow: 'none',
@@ -113,11 +110,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                             <StyledKeyWords>Description</StyledKeyWords>{' '}
                             <Typography>{part.description}</Typography>
                         </StyledDescriptionWrap>
-                        <Button
-                            backgroundColor={`${COLORS.secondary}`}
-                            color={`${COLORS.primary}`}
-                            onClick={() => navigate(`/${part.id}`)}
-                        >
+                        <Button variant="white" onClick={() => navigate(`/${part.id}`)}>
                             More info
                         </Button>
                     </AccordionDetails>
@@ -141,7 +134,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         onClick={handleClickOpen}
                     ></StyledRemoveIcon>
                 ) : null}
-            </StyledResultCardCompactContainer>
+            </StyledPartCardCompactContainer>
 
             <CustomDialog
                 title="Remove item from list?"

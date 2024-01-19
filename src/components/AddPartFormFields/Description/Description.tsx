@@ -6,10 +6,7 @@ import { StyledDiv, StyledErrorP } from '../styles';
 import { StyledInputWrap } from './styles';
 
 export const Description = () => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+    const { register } = useFormContext();
     return (
         <StyledDiv>
             <StyledInputWrap>

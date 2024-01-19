@@ -12,7 +12,7 @@ export const SearchContainer = styled.div<Props>`
 `;
 
 export const LoadMoreButton = styled.button`
-    background-color: ${COLORS.secondary};
+    background-color: ${COLORS.white};
     border-radius: 8px;
     box-shadow: 2.5px 2.5px gray;
 `;
@@ -32,11 +32,11 @@ export const RecentSearchContainer = styled.div`
 
 export const StyledLink = styled(Link)`
     text-decoration: none;
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
 `;
 
 export const StyledSearchedLink = styled(Link)`
-    color: ${COLORS.primary};
+    color: ${COLORS.black};
     text-decoration: none;
     border-bottom: 1px dotted #000;
 `;

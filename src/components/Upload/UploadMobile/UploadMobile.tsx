@@ -1,20 +1,21 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Button, Container } from '@mui/material';
+import { Container, Button as MuiButton } from '@mui/material';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { AddDocument, Document, Item } from '../../../services/apiTypes';
 import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocument } from '../../../services/hooks/documents/useUploadDocument';
-import { COLORS } from '../../../style/GlobalStyles';
-import { StyledButton, Wrapper } from '../../Button/styles';
+
+import { Button } from '../../Button/Button';
 import {
     StyledDocumentName,
     StyledFileShapeWrapper,
     StyledFileTypeWrapper,
     StyledFileWrapper,
     StyledIconWrapper,
+    Wrapper,
 } from './styles';
 
 type UploadProps = {
@@ -98,18 +99,18 @@ const UploadMobile = ({ item }: UploadProps) => {
                                         <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
                                     </StyledFileTypeWrapper>
                                     <StyledIconWrapper>
-                                        <Button
+                                        <MuiButton
                                             onClick={() => handleFileDownload(document)}
                                             sx={{ color: 'black' }}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
-                                        </Button>
-                                        <Button
+                                        </MuiButton>
+                                        <MuiButton
                                             onClick={() => handleFileDelete(document.id)}
                                             sx={{ color: 'black' }}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
-                                        </Button>
+                                        </MuiButton>
                                     </StyledIconWrapper>
                                 </StyledFileShapeWrapper>
                             </foreignObject>
@@ -129,11 +130,7 @@ const UploadMobile = ({ item }: UploadProps) => {
                 )}
             </Wrapper>
             <Container>
-                <StyledButton
-                    color={COLORS.primary}
-                    $backgroundColor={COLORS.secondary}
-                    onClick={() => inputFile.current?.click()}
-                >
+                <Button variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"
@@ -144,7 +141,7 @@ const UploadMobile = ({ item }: UploadProps) => {
                         ref={inputFile}
                     />
                     UPLOAD NEW
-                </StyledButton>
+                </Button>
             </Container>
         </>
     );

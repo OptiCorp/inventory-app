@@ -5,8 +5,8 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import { useWindowDimensions } from '../../hooks';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
-import SearchResultCard from '../../components/ResultSearchCard/ResultSearchCard';
-import SearchResultCardCompact from '../../components/ResultSearchCard/SearchInfo/SearchInfoCompact';
+
+import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
     Container,
@@ -16,6 +16,7 @@ import {
     SpanMargin,
     StyledSearchedLink,
 } from './styles';
+import PartCard from '../../components/PartCard/PartCard';
 
 type StateType = {
     resetInputField?: boolean;
@@ -67,6 +68,8 @@ const Search = () => {
         }
     }, [debouncedSearchTerm, state]);
 
+    console.log('search param', searchParam);
+
     return (
         <>
             <SearchContainer>
@@ -90,7 +93,7 @@ const Search = () => {
                                             : ''
                                     }
                                 >
-                                    <SearchResultCard part={item} />
+                                    <PartCard part={item} />
                                 </div>
                             ) : (
                                 <div

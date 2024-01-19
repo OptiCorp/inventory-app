@@ -7,22 +7,54 @@ import { Item } from '../../../../services/apiTypes';
 const partInfoSchema = z.object({
     id: z.string(),
     wpId: z.string(),
-    serialNumber: z.string().min(1, 'Serial number is required'),
+    serialNumber: z.string(),
     productNumber: z
         .string()
         .min(1, 'Product number is required')
         .max(20, 'Product number must be at most 20 characters'),
     description: z.string().max(450, 'Description must be at most 450 characters'),
     parentId: z.string().nullish(),
+    category: z.object({
+        createdDate: z.string(),
+        id: z.string(),
+        name: z.string(),
+        updatedDate: z.string(),
+        userId: z.string(),
+        value: z.string(),
+        label: z.string(),
+    }),
+    categoryId: z.string(),
+    vendor: z.object({
+        createdDate: z.string(),
+        id: z.string(),
+        name: z.string(),
+        updatedDate: z.string(),
+        userId: z.string(),
+        value: z.string(),
+        label: z.string(),
+    }),
+    vendorId: z.string(),
+    location: z.object({
+        createdDate: z.string(),
+        id: z.string(),
+        name: z.string(),
+        updatedDate: z.string(),
+        userId: z.string(),
+        value: z.string(),
+        label: z.string(),
+    }),
+    locationId: z.string(),
+    type: z.string(),
 });
 export type PartInfoSchema = z.infer<typeof partInfoSchema>;
 
 export const useUpdatePartForm = (item: Item) => {
     const appLocation = useLocation();
 
-    const methods = useForm<PartInfoSchema>({
+    const methods = useForm<Item>({
         resolver: zodResolver(partInfoSchema),
         values: item,
+        mode: 'onBlur',
     });
 
     const {

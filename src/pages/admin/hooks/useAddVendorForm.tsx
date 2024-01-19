@@ -23,14 +23,7 @@ export const useAddVendorForm = () => {
             addedById: currentUser?.id ?? '',
         },
     });
-    const {
-        handleSubmit,
-        control,
-        reset,
-        resetField,
-        formState: { errors },
-        register,
-    } = methods;
+    const { handleSubmit, control, reset, resetField, register } = methods;
 
     const onSubmit = handleSubmit((data) => {
         mutate(data);

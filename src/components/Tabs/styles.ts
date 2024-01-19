@@ -16,7 +16,7 @@ export const StyledTabButton = styled.button<{ active: boolean }>`
     align-items: center;
     position: relative;
     transition: 0.6s;
-    background: ${(props) => (props.active ? ` ${COLORS.primary}` : ` ${COLORS.secondary}`)};
+    background: ${(props) => (props.active ? ` ${COLORS.black}` : ` ${COLORS.white}`)};
     &:focus {
         outline: none;
     }
@@ -27,14 +27,14 @@ export const StyledNumberofItems = styled.span<{ active: boolean }>`
     position: absolute;
     right: 0;
     padding: 1rem;
-    color: ${(props) => (props.active ? ` ${COLORS.secondary}` : ` ${COLORS.primary}`)};
+    color: ${(props) => (props.active ? ` ${COLORS.white}` : ` ${COLORS.black}`)};
 `;
 export const StyledTitle = styled.span<{ active: boolean }>`
     position: relative;
     display: flex;
     text-transform: uppercase;
 
-    color: ${(props) => (props.active ? `${COLORS.secondary}` : ` ${COLORS.primary}`)};
+    color: ${(props) => (props.active ? `${COLORS.black}` : ` ${COLORS.white}`)};
     transition: 0.6s;
 `;
 export const StyledIndicator = styled.span<{ active: boolean }>`

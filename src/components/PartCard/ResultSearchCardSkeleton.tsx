@@ -4,9 +4,9 @@ import { useWindowDimensions } from '../../hooks';
 import {
     StyledCompactCardSkeleton,
     StyledFlexContainer,
-    StyledResultCardCompactContainer,
-    StyledResultCardContainer,
-    StyledSearchCardSkeleton,
+    StyledPartCardCompactContainer,
+    StyledPartCardContainer,
+    StyledPartCardSkeleton,
 } from './styles';
 
 const SearchResultCardSkeleton = () => {
@@ -20,23 +20,23 @@ const SearchResultCardSkeleton = () => {
     return (
         <>
             {width > 800 ? (
-                <StyledResultCardContainer onClick={handleClick}>
-                    <StyledSearchCardSkeleton>
+                <StyledPartCardContainer onClick={handleClick}>
+                    <StyledPartCardSkeleton>
                         <StyledFlexContainer>
                             <AddIcon fontSize="large" style={{ margin: '12px 0' }} />
                             <h3>Add part</h3>
                         </StyledFlexContainer>
-                    </StyledSearchCardSkeleton>
-                </StyledResultCardContainer>
+                    </StyledPartCardSkeleton>
+                </StyledPartCardContainer>
             ) : (
-                <StyledResultCardCompactContainer onClick={handleClick}>
+                <StyledPartCardCompactContainer onClick={handleClick}>
                     <StyledCompactCardSkeleton>
                         <StyledFlexContainer>
                             <AddIcon fontSize="large" style={{ margin: '10px 0' }} />
                             <h3>Add part</h3>
                         </StyledFlexContainer>
                     </StyledCompactCardSkeleton>
-                </StyledResultCardCompactContainer>
+                </StyledPartCardCompactContainer>
             )}
         </>
     );

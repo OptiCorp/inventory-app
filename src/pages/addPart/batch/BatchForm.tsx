@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { Button } from '../../../components/Button/Button.tsx';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
-import { COLORS } from '../../../style/GlobalStyles.ts';
 import { FormContainer } from '../styles.ts';
 import { RadioWrapper, StyledInput } from './styles.ts';
 
@@ -65,11 +64,7 @@ const BatchForm = () => {
                 </RadioWrapper>
             </label>
 
-            <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
-                onClick={handleClick}
-            >
+            <Button variant="black" onClick={handleClick}>
                 NEXT
             </Button>
         </FormContainer>

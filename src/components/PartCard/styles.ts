@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
-export const StyledResultCardContainer = styled.div`
+export const StyledPartCardContainer = styled.div`
     margin: 16px;
     padding: 4px;
     max-width: 700px;
@@ -30,8 +30,8 @@ export const StyledCompactDesriptionParagraph = styled.p`
     justify-content: start;
 `;
 
-export const StyledResultCardCompactContainer = styled.div`
-    background-color: ${COLORS.card};
+export const StyledPartCardCompactContainer = styled.div`
+    background-color: ${COLORS.lightGray};
     margin: 16px;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
     display: flex;
@@ -51,17 +51,17 @@ export const StyledSearchCard = styled.div`
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background: ${COLORS.card};
+    background: ${COLORS.lightestGray};
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
 `;
 
-export const StyledSearchCardSkeleton = styled.div`
+export const StyledPartCardSkeleton = styled.div`
     position: relative;
     line-height: 25px;
     padding: 1rem;
     display: flex;
     justify-content: center;
-    background-color: ${COLORS.secondary};
+    background-color: ${COLORS.white};
 `;
 
 export const StyledFlexContainer = styled.div`
@@ -75,7 +75,7 @@ export const StyledCompactCardSkeleton = styled.div`
     flex-basis: 100%;
     cursor: pointer;
     border-right: 1px solid rgba(208, 208, 208);
-    background-color: ${COLORS.secondary};
+    background-color: ${COLORS.white};
     padding: 1rem;
 `;
 

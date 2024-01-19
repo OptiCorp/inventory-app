@@ -4,8 +4,8 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import { Button as ActionButton } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Button } from '../../../components/Button/Button.tsx';
-import { COLORS } from '../../../style/GlobalStyles';
+
+import { Button } from '../../Button/Button.tsx';
 import {
     Container,
     StyledDocumentName,
@@ -117,11 +117,7 @@ const AddPartUploadMobile = () => {
                 )}
             </Wrapper>
             <Container>
-                <Button
-                    color={`${COLORS.primary}`}
-                    backgroundColor={COLORS.secondary}
-                    onClick={() => inputFile.current?.click()}
-                >
+                <Button variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"

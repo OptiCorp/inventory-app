@@ -3,7 +3,6 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import { Button, Container } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { COLORS } from '../../style/GlobalStyles';
 import { Button as SubmitButton } from '../Button/Button';
 import {
     StyledDocumentName,
@@ -84,11 +83,7 @@ const AddPartUpload = () => {
                 ))}
             </Wrapper>
             <Container>
-                <SubmitButton
-                    color={COLORS.primary}
-                    backgroundColor={COLORS.secondary}
-                    onClick={() => inputFile.current?.click()}
-                >
+                <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"
