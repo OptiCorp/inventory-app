@@ -1,55 +1,30 @@
-import { useMsal } from '@azure/msal-react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button, Drawer, Menu, MenuItem } from '@mui/material';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
-import { NavigationLink } from './NavigationLink/NavigationLink';
 
-import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
-import { StyledLinkDiv } from './NavigationLink/styles';
+import { HamburgerMenu } from './HamburgerMenu';
+import useNavigationControl from './hooks/useNavigation';
 import {
-    BackButton,
-    CompactHeaderWrap,
-    HeaderWrap,
-    LogOutWrapper,
-    MenuAdmin,
-    MenuAdminLink,
+    CompactContainer,
+    StyledBackButton,
+    StyledHeaderWrapper,
+    StyledLink,
+    StyledLogOutWrapper,
+    StyledMenuAdmin,
+    StyledMenuAdminLink,
+    StyledNavLink,
     TopBarContainer,
 } from './styles';
 
 export const TopBar = () => {
     const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
-
-    const { listId } = useParams();
-    const navigate = useNavigate();
-    const location = useLocation();
-
+    const { width } = useWindowDimensions();
     const [returnButton, setReturnButton] = useState(false);
-
-    const handleBack = () => {
-        if (location.pathname === '/add-part/checks') {
-            navigate('/add-part/batch');
-        } else if (location.pathname === '/add-part/upload') {
-            navigate('/add-part/checks');
-        } else if (location.pathname === '/add-part/add-form') {
-            navigate('/add-part/upload');
-        } else if (location.pathname === `/makelist/${listId}`) {
-            navigate('/makelist');
-        } else if (location.pathname === '/add-part/batch') {
-            navigate('/add-part');
-        } else {
-            navigate(-1);
-        }
-    };
-
-    const handleSearchIconClick = () => {
-        navigate('/search', {
-            state: { resetInputField: true },
-        });
-    };
+    const { handleBack, handleSearchIconClick, adminLinks, handleSignOut } = useNavigationControl();
 
     useEffect(() => {
         const excludedRoutes = [
@@ -57,33 +32,20 @@ export const TopBar = () => {
             '/search',
             '/add-part',
             '/makelist',
-
             '/admin/categories',
             '/admin/vendors',
             '/admin/locations',
         ];
         setReturnButton(!excludedRoutes.includes(location.pathname));
     }, [location.pathname]);
-    const { width } = useWindowDimensions();
-
-    const adminLinks = (location: string) => {
-        navigate(location);
-    };
-    const { instance } = useMsal();
-    const handleSignOut = () => {
-        navigate('/');
-        instance.logoutPopup().catch((e) => {
-            console.error(e);
-        });
-    };
 
     return (
-        <div>
+        <>
             <TopBarContainer>
                 {returnButton ? (
-                    <BackButton onClick={handleBack}>
+                    <StyledBackButton onClick={handleBack}>
                         <ArrowBackIcon fontSize="large" onClick={handleBack} />
-                    </BackButton>
+                    </StyledBackButton>
                 ) : (
                     <img
                         alt="logo"
@@ -94,61 +56,67 @@ export const TopBar = () => {
                     />
                 )}
                 {width > 800 ? (
-                    <HeaderWrap>
-                        <NavigationLink to="search">Find parts</NavigationLink>
-                        <NavigationLink to="add-part">Add part</NavigationLink>
-                        <NavigationLink to="makelist">Make list</NavigationLink>
+                    <StyledHeaderWrapper>
+                        <StyledNavLink to="search">
+                            <StyledLink>Find parts</StyledLink>
+                        </StyledNavLink>
+                        <StyledNavLink to="add-part">
+                            <StyledLink>Add part</StyledLink>
+                        </StyledNavLink>
+                        <StyledNavLink to="makelist">
+                            <StyledLink>Make list</StyledLink>
+                        </StyledNavLink>
                         <PopupState variant="popover" popupId="demo-popup-menu">
                             {(popupState) => (
                                 <>
-                                    <MenuAdmin
+                                    <StyledMenuAdmin
                                         $isopen={popupState.isOpen.toString()}
                                         {...bindTrigger(popupState)}
                                     >
-                                        <StyledLinkDiv>Admin</StyledLinkDiv>
-                                    </MenuAdmin>
+                                        <StyledLink>Admin</StyledLink>
+                                    </StyledMenuAdmin>
                                     <Menu {...bindMenu(popupState)}>
                                         <MenuItem onClick={popupState.close}>
-                                            <MenuAdminLink
+                                            <StyledMenuAdminLink
                                                 onClick={() => {
                                                     adminLinks('admin/categories');
                                                 }}
                                             >
                                                 Categories
-                                            </MenuAdminLink>
+                                            </StyledMenuAdminLink>
                                         </MenuItem>
                                         <MenuItem onClick={popupState.close}>
-                                            <MenuAdminLink
+                                            <StyledMenuAdminLink
                                                 onClick={() => {
                                                     adminLinks('admin/vendors');
                                                 }}
                                             >
                                                 Vendors
-                                            </MenuAdminLink>
+                                            </StyledMenuAdminLink>
                                         </MenuItem>
                                         <MenuItem onClick={popupState.close}>
-                                            <MenuAdminLink
+                                            <StyledMenuAdminLink
                                                 onClick={() => {
                                                     adminLinks('admin/locations');
                                                 }}
                                             >
                                                 Locations
-                                            </MenuAdminLink>
+                                            </StyledMenuAdminLink>
                                         </MenuItem>
                                     </Menu>
                                 </>
                             )}
                         </PopupState>
-                        <LogOutWrapper
+                        <StyledLogOutWrapper
                             onClick={() => {
                                 handleSignOut();
                             }}
                         >
-                            <StyledLinkDiv>Log out</StyledLinkDiv>
-                        </LogOutWrapper>
-                    </HeaderWrap>
+                            <StyledLink>Log out</StyledLink>
+                        </StyledLogOutWrapper>
+                    </StyledHeaderWrapper>
                 ) : (
-                    <CompactHeaderWrap>
+                    <CompactContainer>
                         <Button
                             style={{
                                 color: 'black',
@@ -167,11 +135,11 @@ export const TopBar = () => {
                         >
                             <HamburgerMenu setHamburgerIsOpen={setHamburgerIsOpen} />
                         </Drawer>
-                    </CompactHeaderWrap>
+                    </CompactContainer>
                 )}
             </TopBarContainer>
             <Outlet />
-        </div>
+        </>
     );
 };
 

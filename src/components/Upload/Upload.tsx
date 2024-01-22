@@ -6,15 +6,14 @@ import { AddDocument, Document, Item } from '../../services/apiTypes';
 import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocument } from '../../services/hooks/documents/useUploadDocument';
-import { COLORS } from '../../style/GlobalStyles';
 import { Button as SubmitButton } from '../Button/Button';
 import {
     Container,
-    DocumentName,
-    FileShapeWrapper,
-    FileTypeWrapper,
-    FileWrapper,
-    IconWrapper,
+    StyledDocumentName,
+    StyledFileShapeWrapper,
+    StyledFileWrapper,
+    StyledIconWrapper,
+    StyledTypeWrapper,
     Wrapper,
 } from './styles';
 
@@ -53,7 +52,7 @@ export const ExampleUpload = ({ item }: UploadProps) => {
         <>
             <Wrapper>
                 {data?.map((document) => (
-                    <FileWrapper key={document.id}>
+                    <StyledFileWrapper key={document.id}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"
@@ -62,11 +61,11 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                             fill="none"
                         >
                             <foreignObject width={121} height={153}>
-                                <FileShapeWrapper>
-                                    <FileTypeWrapper>
+                                <StyledFileShapeWrapper>
+                                    <StyledTypeWrapper>
                                         <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
-                                    </FileTypeWrapper>
-                                    <IconWrapper>
+                                    </StyledTypeWrapper>
+                                    <StyledIconWrapper>
                                         <Button
                                             onClick={() => handleFileDownload(document)}
                                             sx={{ color: 'black' }}
@@ -79,24 +78,20 @@ export const ExampleUpload = ({ item }: UploadProps) => {
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
                                         </Button>
-                                    </IconWrapper>
-                                </FileShapeWrapper>
+                                    </StyledIconWrapper>
+                                </StyledFileShapeWrapper>
                             </foreignObject>
                             <path
                                 d="M95 1H1V152H120V21.1333M95 1L120 21.1333M95 1V21.1333H120"
                                 stroke="black"
                             />
                         </svg>
-                        <DocumentName>{document.name.split('.')[0]}</DocumentName>
-                    </FileWrapper>
+                        <StyledDocumentName>{document.name.split('.')[0]}</StyledDocumentName>
+                    </StyledFileWrapper>
                 ))}
             </Wrapper>
             <Container>
-                <SubmitButton
-                    color={COLORS.black}
-                    backgroundColor={COLORS.white}
-                    onClick={() => inputFile.current?.click()}
-                >
+                <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"

@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
-export const AdminSearchCardContainer = styled.div`
+export const StyledAdminSearchCardContainer = styled.div`
     background: ${COLORS.lightestGray};
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
     display: flex;
@@ -10,12 +10,12 @@ export const AdminSearchCardContainer = styled.div`
     justify-content: space-between;
 `;
 
-export const AdminActions = styled.div`
+export const StyledAdminActions = styled.div`
     display: flex;
     align-items: center;
 `;
 
-export const TitleContainer = styled.div`
+export const StyledTitleContainer = styled.div`
     display: flex;
     align-items: center;
     height: 56px;

@@ -1,5 +1,5 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { CancelButton, SubmitButton } from './styles';
+import { StyledDialogCancelButton, StyledDialogSubmitButton } from './styles';
 
 interface DialogProps {
     title: string;
@@ -37,12 +37,12 @@ const CustomDialog: React.FC<DialogProps> = ({
                 <DialogTitle>{title}</DialogTitle>
                 {children ? <DialogContent>{children}</DialogContent> : null}
                 <DialogActions>
-                    <CancelButton onClick={CancelButtonOnClick} type={PrimaryType}>
+                    <StyledDialogCancelButton onClick={CancelButtonOnClick} type={PrimaryType}>
                         {cancelButtonText ?? 'CANCEL'}
-                    </CancelButton>
-                    <SubmitButton onClick={SubmitButtonOnClick} type={type} form={form}>
+                    </StyledDialogCancelButton>
+                    <StyledDialogSubmitButton onClick={SubmitButtonOnClick} type={type} form={form}>
                         {submitButtonText ?? 'CONFIRM'}
-                    </SubmitButton>
+                    </StyledDialogSubmitButton>
                 </DialogActions>
             </Dialog>
         </>

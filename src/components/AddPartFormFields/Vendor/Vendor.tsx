@@ -5,9 +5,10 @@ import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { FormOption, Vendor as VendorType } from '../../../services/apiTypes.ts';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv } from '../Category/styles.ts';
+
 import { FormSelect } from '../FormSelect/FormSelect.tsx';
-import { ErrorP, IconContainer, InputWrap } from './styles.ts';
+
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Vendor = () => {
     const { setValue } = useFormContext();
@@ -26,18 +27,18 @@ export const Vendor = () => {
 
     return (
         <StyledDiv>
-            <InputWrap>
-                <IconContainer>
+            <StyledInputWrap>
+                <StyledIconContainer>
                     <label htmlFor="vendor">Choose a vendor</label>{' '}
                     <ToolTip content="Specify a vendor">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
-                </IconContainer>
+                </StyledIconContainer>
                 <ErrorMessage
                     name="vendorId"
-                    render={({ message }) => <ErrorP>{message}</ErrorP>}
+                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
-            </InputWrap>
+            </StyledInputWrap>
             <FormSelect
                 options={vendorOptions}
                 setState={setSelectedOption}

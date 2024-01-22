@@ -2,10 +2,11 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
+
 import { FormOption } from '../../../services/apiTypes.ts';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 import { FormSelect } from '../FormSelect/FormSelect.tsx';
-import { ErrorP, IconContainer, InputWrap } from './styles.ts';
+import { StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Type = () => {
     const { setValue } = useFormContext();
@@ -25,15 +26,18 @@ export const Type = () => {
 
     return (
         <>
-            <InputWrap>
-                <IconContainer>
+            <StyledInputWrap>
+                <StyledIconContainer>
                     <label htmlFor="type">Choose an item type</label>{' '}
                     <ToolTip content="Specify Unit, or Item (lowest tier)">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
-                </IconContainer>
-                <ErrorMessage name="type" render={({ message }) => <ErrorP>{message}</ErrorP>} />
-            </InputWrap>
+                </StyledIconContainer>
+                <ErrorMessage
+                    name="type"
+                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                />
+            </StyledInputWrap>
             <FormSelect
                 options={options}
                 setState={setSelectedOption}

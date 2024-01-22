@@ -1,7 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { FormProvider } from 'react-hook-form';
 import { Button } from '../../../components/Button/Button';
-import { COLORS } from '../../../style/GlobalStyles';
 import { useAddLocationForm } from '../hooks/useAddLocationForm';
 import {
     AdminInput,
@@ -34,12 +33,7 @@ const AddLocation = () => {
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
                         <SubmitButtonContainer>
-                            <Button
-                                id="addLocation"
-                                type="submit"
-                                backgroundColor={COLORS.black}
-                                color={COLORS.white}
-                            >
+                            <Button id="addLocation" type="submit" variant="black">
                                 Add location
                             </Button>
                         </SubmitButtonContainer>

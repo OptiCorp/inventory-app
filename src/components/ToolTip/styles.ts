@@ -12,3 +12,7 @@ export const ToolTipContent = styled.div`
     padding: 4px 8px;
     border-radius: 4px;
 `;
+
+export const Wrapper = styled.div`
+    position: relative;
+`;

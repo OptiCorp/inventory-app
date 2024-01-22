@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router';
 import { Button } from '../../../components/Button/Button.tsx';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
-import { COLORS } from '../../../style/GlobalStyles.ts';
-import { FormContainer } from '../styles.ts';
+import { ButtonWrapper, FormContainer } from '../styles.ts';
 import { RadioWrapper, StyledInput } from './styles.ts';
 
 enum Batch {
@@ -64,14 +63,11 @@ const BatchForm = () => {
                     </p>
                 </RadioWrapper>
             </label>
-
-            <Button
-                backgroundColor={` ${COLORS.black}`}
-                color={` ${COLORS.white}`}
-                onClick={handleClick}
-            >
-                NEXT
-            </Button>
+            <ButtonWrapper>
+                <Button variant="black" onClick={handleClick}>
+                    NEXT
+                </Button>
+            </ButtonWrapper>
         </FormContainer>
     );
 };

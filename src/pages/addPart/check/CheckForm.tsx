@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Button } from '../../../components/Button/Button.tsx';
-import { ButtonsWrapper } from '../../../components/Button/styles.ts';
+
 import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
 import useLocalStorage from '../../../hooks/useLocalStorage.ts';
-import { COLORS } from '../../../style/GlobalStyles';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
-import { FormContainer } from '../styles';
+import { ButtonWrapper, FormContainer } from '../styles';
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles';
 
 const CheckForm = () => {
@@ -68,15 +67,11 @@ const CheckForm = () => {
                     defaultValue={description}
                 />
             </FormRadio>
-            <ButtonsWrapper>
-                <Button
-                    backgroundColor={` ${COLORS.black}`}
-                    color={` ${COLORS.white}`}
-                    onClick={handleClick}
-                >
+            <ButtonWrapper>
+                <Button variant="black" onClick={handleClick}>
                     NEXT
                 </Button>
-            </ButtonsWrapper>
+            </ButtonWrapper>
         </FormContainer>
     );
 };

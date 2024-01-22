@@ -41,11 +41,7 @@ const Categories = () => {
                 ))}
             </SearchResultContainer>
             <ButtonContainer>
-                <Button
-                    onClick={() => navigate('/admin/add-category')}
-                    backgroundColor={'black'}
-                    color={'white'}
-                >
+                <Button onClick={() => navigate('/admin/add-category')} variant="black">
                     Add new category
                 </Button>
             </ButtonContainer>

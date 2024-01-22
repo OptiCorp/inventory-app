@@ -2,11 +2,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 import {
-    CompactCardSkeleton,
-    FlexContainer,
-    PartCardCompactContainer,
-    PartCardContainer,
-    SearchCardSkeleton,
+    StyledCompactCardSkeleton,
+    StyledFlexContainer,
+    StyledPartCardCompactContainer,
+    StyledPartCardContainer,
+    StyledPartCardSkeleton,
 } from './styles';
 
 const SearchResultCardSkeleton = () => {
@@ -20,23 +20,23 @@ const SearchResultCardSkeleton = () => {
     return (
         <>
             {width > 800 ? (
-                <PartCardContainer onClick={handleClick}>
-                    <SearchCardSkeleton>
-                        <FlexContainer>
+                <StyledPartCardContainer onClick={handleClick}>
+                    <StyledPartCardSkeleton>
+                        <StyledFlexContainer>
                             <AddIcon fontSize="large" style={{ margin: '12px 0' }} />
                             <h3>Add part</h3>
-                        </FlexContainer>
-                    </SearchCardSkeleton>
-                </PartCardContainer>
+                        </StyledFlexContainer>
+                    </StyledPartCardSkeleton>
+                </StyledPartCardContainer>
             ) : (
-                <PartCardCompactContainer onClick={handleClick}>
-                    <CompactCardSkeleton>
-                        <FlexContainer>
+                <StyledPartCardCompactContainer onClick={handleClick}>
+                    <StyledCompactCardSkeleton>
+                        <StyledFlexContainer>
                             <AddIcon fontSize="large" style={{ margin: '10px 0' }} />
                             <h3>Add part</h3>
-                        </FlexContainer>
-                    </CompactCardSkeleton>
-                </PartCardCompactContainer>
+                        </StyledFlexContainer>
+                    </StyledCompactCardSkeleton>
+                </StyledPartCardCompactContainer>
             )}
         </>
     );

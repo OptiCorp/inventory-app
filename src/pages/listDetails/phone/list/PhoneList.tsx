@@ -3,14 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../../../components/Button/Button';
 import { GlobalSpinner } from '../../../../components/GlobalSpinner/GlobalSpinner';
+
 import SearchResultCardCompact from '../../../../components/PartCard/SearchInfoCompact';
+
 import UmAppContext from '../../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../../hooks';
 import { Item, List, UpdateList } from '../../../../services/apiTypes';
 import { useGetItemsNotInListInfinite } from '../../../../services/hooks/items/useGetItemsNotInListInfinite';
 import { useGetListById } from '../../../../services/hooks/list/useGetListById';
 import { useUpdateList } from '../../../../services/hooks/list/useUpdateList';
-import { COLORS } from '../../../../style/GlobalStyles';
 import { ListHeader } from '../../ListHeader';
 import { ButtonWrapCompact, FlexWrapperCompact, ListContainerCompact } from './styles';
 type Props = {
@@ -64,14 +65,8 @@ export const PhoneList = ({ list }: Props) => {
                         ) : null}
                         »
                         <ButtonWrapCompact>
-                            <Button backgroundColor={`${COLORS.white}`} color={`${COLORS.black}`}>
-                                Export
-                            </Button>
-                            <Button
-                                backgroundColor={`${COLORS.black}`}
-                                color={`${COLORS.white}`}
-                                onClick={handleSave}
-                            >
+                            <Button variant="white">Export</Button>
+                            <Button variant="black" onClick={handleSave}>
                                 Save list
                             </Button>
                         </ButtonWrapCompact>

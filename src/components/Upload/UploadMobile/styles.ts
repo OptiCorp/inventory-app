@@ -31,7 +31,7 @@ export const Container = styled.div`
     justify-content: flex-end;
 `;
 
-export const FileShapeWrapper = styled.div`
+export const StyledFileShapeWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -41,20 +41,20 @@ export const FileShapeWrapper = styled.div`
     box-sizing: border-box;
 `;
 
-export const IconWrapper = styled.div`
+export const StyledIconWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
 `;
 
-export const FileTypeWrapper = styled.div`
+export const StyledFileTypeWrapper = styled.div`
     margin-left: 16px;
 `;
 
-export const DocumentName = styled.span`
+export const StyledDocumentName = styled.span`
     margin-top: 4px;
 `;
 
-export const FileWrapper = styled.div`
+export const StyledFileWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

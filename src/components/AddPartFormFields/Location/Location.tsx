@@ -5,9 +5,9 @@ import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { FormOption, Location as LocationType } from '../../../services/apiTypes.ts';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv } from '../Category/styles.ts';
+
 import { FormSelect } from '../FormSelect/FormSelect.tsx';
-import { ErrorP, IconContainer, InputWrap } from './styles.ts';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Location = () => {
     const { setValue } = useFormContext();
@@ -26,18 +26,18 @@ export const Location = () => {
 
     return (
         <StyledDiv>
-            <InputWrap>
-                <IconContainer>
+            <StyledInputWrap>
+                <StyledIconContainer>
                     <label htmlFor="location">Choose a location</label>{' '}
                     <ToolTip content="Specify a location">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
-                </IconContainer>
+                </StyledIconContainer>
                 <ErrorMessage
                     name="locationId"
-                    render={({ message }) => <ErrorP>{message}</ErrorP>}
+                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
-            </InputWrap>
+            </StyledInputWrap>
             <FormSelect
                 options={locationOptions}
                 setState={setSelectedOption}

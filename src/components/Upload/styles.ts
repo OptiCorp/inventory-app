@@ -26,14 +26,14 @@ export const StyledLabel = styled.label`
     width: 88px;
 `;
 
-export const FileContainer = styled.div`
+export const StyledFileContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 4px;
 `;
 
-export const FileShapeWrapper = styled.div`
+export const StyledFileShapeWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -43,20 +43,20 @@ export const FileShapeWrapper = styled.div`
     box-sizing: border-box;
 `;
 
-export const IconWrapper = styled.div`
+export const StyledIconWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
 `;
 
-export const FileTypeWrapper = styled.div`
+export const StyledTypeWrapper = styled.div`
     margin-left: 16px;
 `;
 
-export const DocumentName = styled.span`
+export const StyledDocumentName = styled.span`
     margin-top: 4px;
 `;
 
-export const FileWrapper = styled.div`
+export const StyledFileWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding-right: 16px;

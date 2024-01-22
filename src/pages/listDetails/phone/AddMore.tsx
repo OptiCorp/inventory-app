@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 import SearchResultCardCompact from '../../../components/PartCard/SearchInfoCompact';
+
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import { useSnackBar } from '../../../hooks';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';

@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Location, Vendor } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
-import { PartCardContainer, SearchCard } from './styles';
+import { StyledPartCardContainer, StyledSearchCard } from './styles';
 
 export type PartCardProps = {
     part: {
@@ -23,22 +23,21 @@ const PartCard = ({ part, icon }: PartCardProps) => {
     const location = useLocation();
 
     const handleClick = () => {
-        if (location.pathname === '/search' || location.pathname === '/add-part') {
-            navigate(`/${part.id}`);
-        }
+        if (location.pathname.includes('makelist')) return;
+        navigate(`/${part.id}`);
     };
 
     const cursorStyle =
-        location.pathname === '/search' || location.pathname === '/add-part'
+        location.pathname.includes('/search') || location.pathname.includes('/add-part')
             ? 'pointer'
             : undefined;
 
     return (
-        <PartCardContainer style={{ cursor: cursorStyle }} onClick={handleClick}>
-            <SearchCard title="">
+        <StyledPartCardContainer style={{ cursor: cursorStyle }} onClick={handleClick}>
+            <StyledSearchCard title="">
                 <SearchInfo part={part} icon={icon} />
-            </SearchCard>
-        </PartCardContainer>
+            </StyledSearchCard>
+        </StyledPartCardContainer>
     );
 };
 

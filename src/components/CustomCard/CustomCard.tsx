@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { useWindowDimensions } from '../../hooks';
-import { CompactLists, Lists, StyledInfoDiv, Title } from './styles';
+import { StyledCompactLists, StyledInfoDiv, StyledLists, StyledTitle } from './styles';
 
 interface CardProps {
     children: React.ReactNode;
@@ -14,15 +14,15 @@ export const Card: FunctionComponent<CardProps> = ({ children, title, onClick })
         <>
             <StyledInfoDiv onClick={onClick}>
                 {width > 800 ? (
-                    <Lists>
-                        <Title>{title}</Title>
+                    <StyledLists>
+                        <StyledTitle>{title}</StyledTitle>
                         {children}
-                    </Lists>
+                    </StyledLists>
                 ) : (
-                    <CompactLists>
-                        <Title>{title}</Title>
+                    <StyledCompactLists>
+                        <StyledTitle>{title}</StyledTitle>
                         {children}
-                    </CompactLists>
+                    </StyledCompactLists>
                 )}
             </StyledInfoDiv>
         </>

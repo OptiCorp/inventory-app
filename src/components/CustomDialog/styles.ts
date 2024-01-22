@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
-export const SubmitButton = styled.button`
+export const StyledDialogSubmitButton = styled.button`
     width: 150px;
     background-color: ${COLORS.black};
     color: ${COLORS.white};
@@ -12,7 +12,7 @@ export const SubmitButton = styled.button`
     border: none;
 `;
 
-export const CancelButton = styled.button`
+export const StyledDialogCancelButton = styled.button`
     width: 150px;
     background-color: ${COLORS.white};
     color: ${COLORS.black};

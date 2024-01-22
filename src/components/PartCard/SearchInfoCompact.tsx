@@ -7,16 +7,14 @@ import { Item, MutateItemList } from '../../services/apiTypes.ts';
 import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
 import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-import { COLORS } from '../../style/GlobalStyles.ts';
 import { Button } from '../Button/Button.tsx';
 import CustomDialog from '../CustomDialog/CustomDialog.tsx';
 import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
 import {
-    ButtonText,
-    CompactInfoP,
-    DescriptionWrap,
-    KeyWords,
-    PartCardCompactContainer,
+    StyledCompactInfoP,
+    StyledDescriptionWrap,
+    StyledKeyWords,
+    StyledPartCardCompactContainer,
 } from './styles.ts';
 type Props = {
     part: Item;
@@ -80,7 +78,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
 
     return (
         <>
-            <PartCardCompactContainer>
+            <StyledPartCardCompactContainer>
                 <Accordion
                     style={{
                         boxShadow: 'none',
@@ -94,29 +92,26 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <CompactInfoP>
-                            <KeyWords>ID:</KeyWords>
+                        <StyledCompactInfoP>
+                            <StyledKeyWords>ID:</StyledKeyWords>
                             {part.wpId}
-                        </CompactInfoP>{' '}
-                        <CompactInfoP>
-                            <KeyWords>Location</KeyWords> {part.location?.name || 'Location'}
-                        </CompactInfoP>
-                        <CompactInfoP>
-                            <KeyWords>Category</KeyWords> {part.category?.name || 'Category'}
-                        </CompactInfoP>
+                        </StyledCompactInfoP>{' '}
+                        <StyledCompactInfoP>
+                            <StyledKeyWords>Location</StyledKeyWords>{' '}
+                            {part.location?.name || 'Location'}
+                        </StyledCompactInfoP>
+                        <StyledCompactInfoP>
+                            <StyledKeyWords>Category</StyledKeyWords>{' '}
+                            {part.category?.name || 'Category'}
+                        </StyledCompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>
-                        <DescriptionWrap>
-                            <KeyWords>Description</KeyWords>{' '}
+                        <StyledDescriptionWrap>
+                            <StyledKeyWords>Description</StyledKeyWords>{' '}
                             <Typography>{part.description}</Typography>
-                        </DescriptionWrap>
-                        <Button
-                            backgroundColor={`${COLORS.white}`}
-                            height="20px"
-                            color={`${COLORS.black}`}
-                            onClick={() => navigate(`/${part.id}`)}
-                        >
-                            <ButtonText> More info</ButtonText>
+                        </StyledDescriptionWrap>
+                        <Button variant="white" onClick={() => navigate(`/${part.id}`)}>
+                            More info
                         </Button>
                     </AccordionDetails>
                 </Accordion>
@@ -139,7 +134,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         onClick={handleClickOpen}
                     ></StyledRemoveIcon>
                 ) : null}
-            </PartCardCompactContainer>
+            </StyledPartCardCompactContainer>
 
             <CustomDialog
                 title="Remove item from list?"

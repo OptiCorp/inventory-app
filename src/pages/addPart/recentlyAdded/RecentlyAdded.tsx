@@ -5,7 +5,6 @@ import SearchResultCardCompact from '../../../components/PartCard/SearchInfoComp
 import { useWindowDimensions } from '../../../hooks/index.ts';
 import { Item } from '../../../services/apiTypes.ts';
 import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser.tsx';
-import { COLORS } from '../../../style/GlobalStyles.ts';
 import { Container, RecentlyAddedContainer } from './styles.ts';
 
 const RecentlyAdded = () => {
@@ -19,11 +18,7 @@ const RecentlyAdded = () => {
         <RecentlyAddedContainer>
             <Container>
                 <h3>Recently added by you</h3>
-                <Button
-                    onClick={() => navigate('batch')}
-                    backgroundColor={COLORS.black}
-                    color="white"
-                >
+                <Button onClick={() => navigate('batch')} variant="black">
                     Add new item
                 </Button>
             </Container>

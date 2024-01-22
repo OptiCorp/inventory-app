@@ -1,20 +1,21 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Button, Container } from '@mui/material';
+import { Container, Button as MuiButton } from '@mui/material';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { AddDocument, Document, Item } from '../../../services/apiTypes';
 import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocument } from '../../../services/hooks/documents/useUploadDocument';
-import { COLORS } from '../../../style/GlobalStyles';
-import { SubmitButton, Wrapper } from '../../Button/styles';
+
+import { Button } from '../../Button/Button';
 import {
-    DocumentName,
-    FileShapeWrapper,
-    FileTypeWrapper,
-    FileWrapper,
-    IconWrapper,
+    StyledDocumentName,
+    StyledFileShapeWrapper,
+    StyledFileTypeWrapper,
+    StyledFileWrapper,
+    StyledIconWrapper,
+    Wrapper,
 } from './styles';
 
 type UploadProps = {
@@ -84,7 +85,7 @@ const UploadMobile = ({ item }: UploadProps) => {
         <>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {data?.map((document) => (
-                    <FileWrapper key={document.id} className="files">
+                    <StyledFileWrapper key={document.id} className="files">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="121"
@@ -93,33 +94,33 @@ const UploadMobile = ({ item }: UploadProps) => {
                             fill="none"
                         >
                             <foreignObject width={121} height={153}>
-                                <FileShapeWrapper>
-                                    <FileTypeWrapper>
+                                <StyledFileShapeWrapper>
+                                    <StyledFileTypeWrapper>
                                         <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
-                                    </FileTypeWrapper>
-                                    <IconWrapper>
-                                        <Button
+                                    </StyledFileTypeWrapper>
+                                    <StyledIconWrapper>
+                                        <MuiButton
                                             onClick={() => handleFileDownload(document)}
                                             sx={{ color: 'black' }}
                                         >
                                             <FileDownloadOutlinedIcon fontSize="large" />
-                                        </Button>
-                                        <Button
+                                        </MuiButton>
+                                        <MuiButton
                                             onClick={() => handleFileDelete(document.id)}
                                             sx={{ color: 'black' }}
                                         >
                                             <DeleteOutlineOutlinedIcon fontSize="large" />
-                                        </Button>
-                                    </IconWrapper>
-                                </FileShapeWrapper>
+                                        </MuiButton>
+                                    </StyledIconWrapper>
+                                </StyledFileShapeWrapper>
                             </foreignObject>
                             <path
                                 d="M95 1H1V152H120V21.1333M95 1L120 21.1333M95 1V21.1333H120"
                                 stroke="black"
                             />
                         </svg>
-                        <DocumentName>{document.name.split('.')[0]}</DocumentName>
-                    </FileWrapper>
+                        <StyledDocumentName>{document.name.split('.')[0]}</StyledDocumentName>
+                    </StyledFileWrapper>
                 ))}
                 {showArrow === true && (data?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon
@@ -129,11 +130,7 @@ const UploadMobile = ({ item }: UploadProps) => {
                 )}
             </Wrapper>
             <Container>
-                <SubmitButton
-                    color={COLORS.black}
-                    $backgroundColor={COLORS.white}
-                    onClick={() => inputFile.current?.click()}
-                >
+                <Button variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"
@@ -144,7 +141,7 @@ const UploadMobile = ({ item }: UploadProps) => {
                         ref={inputFile}
                     />
                     UPLOAD NEW
-                </SubmitButton>
+                </Button>
             </Container>
         </>
     );
