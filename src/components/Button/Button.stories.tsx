@@ -18,27 +18,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
     args: {
-        backgroundColor: 'black',
-        color: 'white',
-        children: 'Button',
-        height: '40px',
+        variant: 'black',
     },
 };
 
 export const Secondary: Story = {
     args: {
-        backgroundColor: 'white',
-        color: 'black',
-        children: 'Button',
-        height: '40px',
+        variant: 'white',
     },
 };
 
 export const Danger: Story = {
     args: {
-        backgroundColor: 'white',
-        color: 'red',
-        children: 'Button',
-        height: '40px',
+        variant: 'red',
     },
 };
