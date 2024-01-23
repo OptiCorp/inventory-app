@@ -31,16 +31,9 @@ const themeOptions: ThemeOptions = {
     },
     spacing: 4,
     shadows: Array(25).fill('none') as Shadows, // removes shadows from all MUI components
-    components: {
-        // MuiButton: {
-        //     styleOverrides: {
-        //         root: {
-        //             color: '#000000',
-        //         },
-        //     },
-        // },
-    },
+    components: {},
 };
+
 // TODO: move global theme to wrap around all components
 export const globalTheme = createTheme(themeOptions);
 
