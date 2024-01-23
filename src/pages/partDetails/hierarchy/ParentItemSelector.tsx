@@ -17,7 +17,7 @@ import { Open, Options, SetState } from '../partInfo/types';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { useContext } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
-import { handleApiRequestSnackbar } from '../handleApiRequestSnackbar';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 
 type Field =
     | {
@@ -64,11 +64,11 @@ export const ParentItemSelector = ({
         formState: { dirtyFields },
     } = useFormContext<PartInfoSchema>();
     const { isLoading, fetchNextPage } = useGetItemsInfinite(searchTerm);
-    const { mutate: mutateUpdateItem } = useUpdateItem(item.id, currentUser!.id);
+    const { mutate: mutateUpdateItem } = useUpdateItem(item?.id, currentUser?.id ?? '');
 
     const filterChildIds = (options: Options[]) => {
-        const childIds = item.children?.map((child) => child.id) ?? [];
-        return options?.filter((option) => !childIds.includes(option.value.id));
+        const childIds = item.children?.map((child) => child?.id) ?? [];
+        return options?.filter((option) => !childIds.includes(option.value?.id));
     };
 
     const clickAwayHandler = () => {
@@ -77,7 +77,7 @@ export const ParentItemSelector = ({
 
     const handleBlur = (fieldId: keyof PartInfoSchema, fieldName: keyof PartInfoSchema) => {
         const fieldValue: Field = watch(fieldName);
-        console.log(fieldValue);
+        console.log('field value: ', fieldValue);
         if (
             dirtyFields[fieldName] &&
             fieldValue &&
@@ -87,7 +87,7 @@ export const ParentItemSelector = ({
             mutateUpdateItem(
                 {
                     ...item,
-                    [fieldId]: fieldValue.value.id,
+                    [fieldId]: fieldValue.value?.id,
                 },
                 {
                     onSuccess: (data) => {
@@ -159,7 +159,7 @@ export const ParentItemSelector = ({
                             {item.parent?.wpId}
                         </StyledLinkElement>
                         {isOpen.parent && item.parent?.id && (
-                            <AccessibleButtonWrapper onClick={() => handleRemoveItem(item.id)}>
+                            <AccessibleButtonWrapper onClick={() => handleRemoveItem(item?.id)}>
                                 <CustomRemoveIcon />
                             </AccessibleButtonWrapper>
                         )}
