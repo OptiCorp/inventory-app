@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { Shadows, ThemeOptions, createTheme } from '@mui/material/styles';
 
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
 
@@ -16,6 +17,33 @@ type Props = {
     width: number;
 };
 
+const themeOptions: ThemeOptions = {
+    palette: {
+        primary: {
+            main: '#000000',
+        },
+        secondary: {
+            main: '#ff0000',
+        },
+    },
+    typography: {
+        fontFamily: 'Archivo',
+    },
+    spacing: 4,
+    shadows: Array(25).fill('none') as Shadows, // removes shadows from all MUI components
+    components: {
+        // MuiButton: {
+        //     styleOverrides: {
+        //         root: {
+        //             color: '#000000',
+        //         },
+        //     },
+        // },
+    },
+};
+
+export const globalTheme = createTheme(themeOptions);
+
 const GlobalStyles = createGlobalStyle<Props>`
    body, :root, html {
         margin: 0;
@@ -26,7 +54,7 @@ const GlobalStyles = createGlobalStyle<Props>`
         background-color: ${COLORS.white};
     }
     .wrapper {
-    padding: ${({ width }) => (width < 500 ? 0 : '8px')};
+    padding: ${({ width }) => (width < 500 ? 0 : '0px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     display: grid;

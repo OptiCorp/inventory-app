@@ -8,7 +8,6 @@ import {
 import { Login } from './pages/login/Login.tsx';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TopBar } from './components/TopBar/TopBar.tsx';
 import { UmAppContextProvider } from './contexts/UmAppContext';
 import AddPart from './pages/addPart/Index';
 import BatchForm from './pages/addPart/batch/BatchForm';
@@ -33,6 +32,10 @@ import AddLocation from './pages/admin/location/AddLocation.tsx';
 import AddVendor from './pages/admin/vendor/AddVendor.tsx';
 import Index from './pages/listDetails/phone/Tabs.tsx';
 
+import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
+import { ThemeProvider } from '@mui/material/styles';
+import globalTheme from './style/GlobalStyles.ts';
+
 function App() {
     const isAuthenticated = useIsAuthenticated();
     const queryClient = new QueryClient();
@@ -41,7 +44,7 @@ function App() {
 
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route element={<TopBar />}>
+            <Route element={<ResponsiveAppBar />}>
                 <Route path="/" element={<Search />} />
                 <Route path="search/:searchParam?" element={<Search />} />
 
@@ -82,7 +85,6 @@ function App() {
                     <UmAppContextProvider>
                         <GlobalStyles width={width} />
                         {snackbar}
-
                         <RouterProvider router={router} />
                     </UmAppContextProvider>
                 )}

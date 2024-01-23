@@ -6,6 +6,7 @@ type Props = {
 };
 export const SearchContainer = styled.div<Props>`
     display: flex;
+    margin-top: 4px;
 
     flex-direction: column;
     height: ${({ height }) => height};
