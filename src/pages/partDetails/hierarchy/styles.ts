@@ -42,7 +42,12 @@ export const ChildItemContainer = styled.div`
     align-items: center;
 `;
 
-export const LinkElement = styled.p`
+export const StyledContainer = styled.div`
+    position: relative;
+    width: fit-content;
+`;
+
+export const StyledLinkElement = styled.p`
     display: inline-block;
     border-bottom: 1px dotted ${COLORS.black};
     cursor: pointer;
