@@ -18,7 +18,7 @@ import {
     AddChildItemIds,
     useAddChildItemToParent,
 } from '../../../services/hooks/items/useAddChildItemToParent';
-import { handleApiRequestSnackbar } from '../handleApiRequestSnackbar';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import EditIcon from '@mui/icons-material/Edit';
 
 type ChildItemSelector = {
@@ -59,7 +59,7 @@ export const ChildItemSelector = ({
     const handleAddChildToParent = (ids: AddChildItemIds) => {
         if (ids.childItemId === ids.itemId) {
             setSnackbarSeverity('warning');
-            setSnackbarText('Cant add itself as child');
+            setSnackbarText("Can't add itself as child");
             return;
         }
 
