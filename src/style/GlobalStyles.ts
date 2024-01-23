@@ -41,7 +41,7 @@ const themeOptions: ThemeOptions = {
         // },
     },
 };
-
+// TODO: move global theme to wrap around all components
 export const globalTheme = createTheme(themeOptions);
 
 const GlobalStyles = createGlobalStyle<Props>`
