@@ -4,7 +4,7 @@ import UmAppContext from '../../../contexts/UmAppContext';
 import { Item } from '../../../services/apiTypes';
 import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem';
-import { handleApiRequestSnackbar } from '../handleApiRequestSnackbar';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import { ParentItemSelector } from './ParentItemSelector';
 import { ChildItemSelector } from './ChildItemSelector';
 
