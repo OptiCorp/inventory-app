@@ -16,7 +16,7 @@ type Props = {
     width: number;
 };
 
-export const GlobalStyles = createGlobalStyle<Props>`
+const GlobalStyles = createGlobalStyle<Props>`
    body, :root, html {
         margin: 0;
         width: 100%;
