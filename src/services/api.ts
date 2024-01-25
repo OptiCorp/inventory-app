@@ -11,6 +11,7 @@ import {
     Category,
     Document,
     Item,
+    ItemTemplate,
     List,
     Location,
     UpdateCategory,
@@ -179,7 +180,7 @@ const apiService = () => {
     };
 
     const getUserByAzureAdUserId = async (id: string) => {
-        const data = await getByFetch(`User/ByAzureId/${id}`);
+        const data = await getByFetch(`User/ByAzureAdUserId/${id}`);
         return data;
     };
 
@@ -403,6 +404,19 @@ const apiService = () => {
         return await deleteByFetch(`Vendor/${id}`);
     };
 
+    // ItemTemplate
+
+    const getItemTemplateById = async (id: string): Promise<ItemTemplate> => {
+        return await getByFetch(`ItemTemplate/${id}`);
+    };
+
+    const updateItemTemplateById = async (
+        id: string,
+        itemTemplate: ItemTemplate
+    ): Promise<Response> => {
+        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
+    };
+
     // Category
 
     const getCategory = async (): Promise<Category[]> => {
@@ -503,6 +517,8 @@ const apiService = () => {
         addDocument,
         getDocumentsByItemId,
         deleteDocument,
+        getItemTemplateById,
+        updateItemTemplateById,
     };
 };
 
