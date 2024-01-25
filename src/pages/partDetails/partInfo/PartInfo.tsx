@@ -12,11 +12,20 @@ import EditableField from './EditableField';
 import { Container, PartInfoForm } from './styles';
 import { Types } from './types';
 import { PartInfoSchema } from './hooks';
+import { useUpdateItemTemplate } from '../../../services/hooks/itemTemplates/useUpdateItemTemplate';
+import { useGetItemTemplateById } from '../../../services/hooks/itemTemplates/useGetItemTemplateById';
 
 type PartInfoProps = {
     item: Item;
     isLoading: boolean;
 };
+
+type Field =
+    | {
+          label: string;
+          value: Item | string;
+      }
+    | string;
 
 const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     const {
@@ -28,7 +37,9 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations();
     const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories();
     const { snackbar } = useSnackBar();
-    const { mutate } = useUpdateItem(item.id, currentUser!.id);
+    const { mutate } = useUpdateItem(item?.id, currentUser!.id);
+    const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
+    const { mutate: mutateItemTemplate } = useUpdateItemTemplate(item.itemTemplate.id);
 
     const typesOptions: Types[] = [
         { id: 'Unit', name: 'Unit' },
@@ -41,14 +52,79 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
         optionsArray: Category[] | Vendor[] | Location[] | Types[]
     ) => {
         return optionsArray.map((option) => ({
-            value: option.id,
+            value: option?.id,
             label: option.name,
         }));
     };
-    const handleBlur = (fieldId: keyof PartInfoSchema, fieldName: keyof PartInfoSchema) => {
+
+    const handleBlurItemTemplateProperties = (field: string, fieldName: keyof PartInfoSchema) => {
+        const fieldValue: Field = watch(fieldName);
+        if (fieldValue && dirtyFields[fieldName] && fieldValue !== undefined) {
+            const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue?.value;
+
+            if (itemTemplateData) {
+                mutateItemTemplate(
+                    {
+                        ...itemTemplateData,
+                        [field]: mutableValue,
+                    },
+                    {
+                        onSuccess: (data) => {
+                            console.log(data);
+                            setSnackbarText('updated');
+                        },
+                    }
+                );
+            }
+        }
+    };
+
+    /* console.log('watch values: ', watch('itemTemplate.type')); */
+    const handleBlurItemProperties = (
+        fieldId: keyof PartInfoSchema,
+        fieldName: keyof PartInfoSchema
+    ) => {
         const fieldValue = watch(fieldName);
+        /* console.log('field name', fieldName);
+        console.log('field value: ', fieldValue); */
+        console.log('dirty field: ', dirtyFields[fieldName]);
+        const updatedItem = { ...item };
+        /* if (fieldName === 'itemTemplate') {
+            console.log('test', fieldValue.type.value);
+        }
+        if (fieldName === 'itemTemplate') {
+            updatedItem.itemTemplate = {
+                ...item.itemTemplate,
+                type: fieldValue.type,
+            };
+        } else {
+            updatedItem[fieldId] = fieldValue;
+        } */
+
         if (dirtyFields[fieldName] && fieldValue) {
-            const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
+            /* const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value; */
+            let mutableValue;
+            if (typeof fieldValue === 'string') {
+                console.log('string');
+                mutableValue = fieldValue;
+            } else if (typeof fieldValue !== 'string' && fieldName === 'itemTemplate') {
+                console.log('not string');
+                console.log('here fieldvalue: ', fieldValue);
+                console.log('here', fieldValue.type.value);
+                console.log('here2', fieldValue['category'].value);
+                mutableValue = fieldValue['type'].value;
+            } else {
+                console.log('loc', fieldValue.value);
+                mutableValue = fieldValue.value;
+            }
+
+            console.log('updated item: ', mutableValue);
+            /* let mutableValue = fieldValue;
+            if (fieldName === 'itemTemplate') {
+                mutableValue = fieldValue.type;
+                console.log(mutableValue);
+            } */
+
             mutate(
                 {
                     ...item,
@@ -67,6 +143,8 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                             );
                             return;
                         } else {
+                            // TODO: Do the snackbar nned to know what it was changed to?
+                            // Just say what field was updated?
                             if (fieldName === 'description') {
                                 setSnackbarText(`${fieldName.toLowerCase()} was updated`);
                             } else if (typeof fieldValue !== 'string' && fieldValue.label) {
@@ -96,22 +174,25 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
             <Container>
                 <SelectField
                     placeholder="Select type..."
+                    fieldName="TYPE"
                     label="type"
                     options={convertOptionsToSelectFormat(typesOptions)}
-                    onBlur={() => handleBlur('type', 'type')}
+                    onBlur={() => handleBlurItemTemplateProperties('type', 'type')}
                 />
                 <SelectField
                     placeholder="Select category..."
+                    fieldName="CATEGORY"
                     label="category"
                     options={convertOptionsToSelectFormat(categories)}
-                    onBlur={() => handleBlur('categoryId', 'category')}
+                    onBlur={() => handleBlurItemTemplateProperties('categoryId', 'category')}
                 />
 
                 <SelectField
                     placeholder="Select location..."
+                    fieldName="LOCATION"
                     label="location"
                     options={convertOptionsToSelectFormat(locations)}
-                    onBlur={() => handleBlur('locationId', 'location')}
+                    onBlur={() => handleBlurItemProperties('locationId', 'location')}
                 />
 
                 <div>
@@ -119,32 +200,38 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                         <strong>ADDED BY</strong>
                     </label>
                     <p>
-                        {!item.user
+                        {!item.createdBy
                             ? 'Not specified'
-                            : `${item.user.firstName} ${item.user.lastName}`}
+                            : `${item.createdBy.firstName} ${item.createdBy.lastName}`}
                     </p>
                 </div>
                 <EditableField
+                    fieldName="S/N"
                     label="serialNumber"
-                    onBlur={() => handleBlur('serialNumber', 'serialNumber')}
+                    onBlur={() => handleBlurItemProperties('serialNumber', 'serialNumber')}
                 />
                 <EditableField
+                    fieldName="P/N"
                     label="productNumber"
-                    onBlur={() => handleBlur('productNumber', 'productNumber')}
+                    onBlur={() =>
+                        handleBlurItemTemplateProperties('productNumber', 'productNumber')
+                    }
                 />
 
                 <SelectField
                     placeholder="Select vendor..."
+                    fieldName="VENDOR"
                     label="vendor"
                     options={convertOptionsToSelectFormat(vendors)}
-                    onBlur={() => handleBlur('vendorId', 'vendor')}
+                    onBlur={() => handleBlurItemProperties('vendorId', 'vendor')}
                 />
             </Container>
             <EditableField
+                fieldName="DESCRIPTION"
                 label="description"
                 isMultiLine
                 rows={3}
-                onBlur={() => handleBlur('description', 'description')}
+                onBlur={() => handleBlurItemTemplateProperties('description', 'description')}
             />
 
             {snackbar}
