@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Item, MutateItemList } from '../../../services/apiTypes';
+import { MutateItemList } from '../../../services/apiTypes';
 
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
@@ -19,12 +19,9 @@ import {
     StyledKeyWords,
     StyledSecondInfoBox,
 } from './styles';
+import { PartCardProps } from '../PartCard';
 
-type Props = {
-    part: Item;
-    icon?: string;
-};
-export const SearchInfo = ({ part, icon }: Props) => {
+export const SearchInfo = ({ part, icon }: PartCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
 
     const [open, setOpen] = useState(false);
@@ -78,7 +75,6 @@ export const SearchInfo = ({ part, icon }: Props) => {
     };
     const handleClose = (e: React.MouseEvent) => {
         e.stopPropagation();
-
         setOpen(false);
     };
 
@@ -138,11 +134,11 @@ export const SearchInfo = ({ part, icon }: Props) => {
                 )}
                 <StyledInfoP>
                     <StyledKeyWords>Location</StyledKeyWords>
-                    {part.location?.name || 'Location'}
+                    {part.location?.name ?? 'Location'}
                 </StyledInfoP>
                 <StyledInfoP>
                     <StyledKeyWords>Vendor</StyledKeyWords>
-                    {part.vendor?.name || ''}
+                    {part.vendor?.name ?? ''}
                 </StyledInfoP>
                 <StyledInfoP>
                     <StyledKeyWords>
