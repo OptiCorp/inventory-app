@@ -184,3 +184,13 @@ export type Document = {
     contentType: string;
     bytes: string;
 };
+
+export type TemplateData = {
+    inputValue?: string;
+    name: string;
+    id: string;
+    category: { id: string; name: string; userId: string };
+    type: string;
+    productNumber: string;
+    description: string;
+};
