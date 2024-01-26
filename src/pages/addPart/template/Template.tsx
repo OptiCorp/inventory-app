@@ -23,7 +23,7 @@ export default function Template() {
             <h4>Choose a template or create a new one</h4>
             <Autocomplete
                 value={value}
-                onChange={(event, newValue) => {
+                onChange={(_event, newValue) => {
                     setValue(newValue);
                 }}
                 id="free-solo-dialog-demo"
