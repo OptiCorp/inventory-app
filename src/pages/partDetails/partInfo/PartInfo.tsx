@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import UmAppContext from '../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../hooks';
-import type { Category, Item, Location, Vendor } from '../../../services/apiTypes';
+import type { Item } from '../../../services/apiTypes';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
@@ -14,6 +14,9 @@ import { Types } from './types';
 import { PartInfoSchema } from './hooks';
 import { useUpdateItemTemplate } from '../../../services/hooks/itemTemplates/useUpdateItemTemplate';
 import { useGetItemTemplateById } from '../../../services/hooks/itemTemplates/useGetItemTemplateById';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
+import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
+import { useDebounce } from 'usehooks-ts';
 
 type PartInfoProps = {
     item: Item;
@@ -30,6 +33,7 @@ type Field =
 const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     const {
         watch,
+        setValue,
         formState: { dirtyFields },
     } = useFormContext<PartInfoSchema>();
     const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(UmAppContext);
@@ -40,7 +44,14 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     const { mutate } = useUpdateItem(item?.id, currentUser!.id);
     const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
     const { mutate: mutateItemTemplate } = useUpdateItemTemplate(item.itemTemplate.id);
-
+    const [newWpId, setNewWpId] = useState('');
+    const debouncedWpId = useDebounce(newWpId, 300);
+    const {
+        data: isUniqueWpId,
+        isLoading: isLoadingUniqueWpId,
+        refetch,
+    } = useIsWpIdUnique(newWpId, false);
+    const wpId = watch('wpId');
     const typesOptions: Types[] = [
         { id: 'Unit', name: 'Unit' },
         { id: 'Assembly', name: 'Assembly' },
@@ -48,8 +59,14 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
         { id: 'Part', name: 'Part' },
     ];
 
-    const convertOptionsToSelectFormat = (
-        optionsArray: Category[] | Vendor[] | Location[] | Types[]
+    useEffect(() => {
+        if (newWpId && newWpId !== item.wpId) {
+            refetch().catch((error) => console.error(error));
+        }
+    }, [newWpId, item.wpId]);
+
+    const convertOptionsToSelectFormat = <T extends { id: string; name: string }>(
+        optionsArray: T[]
     ) => {
         return optionsArray.map((option) => ({
             value: option?.id,
@@ -58,73 +75,43 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
     };
 
     const handleBlurItemTemplateProperties = (field: string, fieldName: keyof PartInfoSchema) => {
-        const fieldValue: Field = watch(fieldName);
-        if (fieldValue && dirtyFields[fieldName] && fieldValue !== undefined) {
-            const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue?.value;
+        const fieldValue: Field = watch(fieldName) as Field;
+        const cleanFieldName = fieldName.replace('itemTemplate.', '');
+        const { itemTemplate } = dirtyFields;
 
-            if (itemTemplateData) {
-                mutateItemTemplate(
-                    {
-                        ...itemTemplateData,
-                        [field]: mutableValue,
-                    },
-                    {
-                        onSuccess: (data) => {
-                            console.log(data);
-                            setSnackbarText('updated');
+        if (itemTemplate && typeof itemTemplate === 'object') {
+            if (fieldValue) {
+                const mutableValue =
+                    typeof fieldValue === 'string' ? fieldValue : fieldValue?.value;
+                if (itemTemplateData) {
+                    mutateItemTemplate(
+                        {
+                            ...itemTemplateData,
+                            [field]: mutableValue,
                         },
-                    }
-                );
+                        {
+                            onSuccess: (data) => {
+                                handleApiRequestSnackbar(
+                                    data,
+                                    `${cleanFieldName} was updated`,
+                                    setSnackbarSeverity,
+                                    setSnackbarText
+                                );
+                            },
+                        }
+                    );
+                }
             }
         }
     };
 
-    /* console.log('watch values: ', watch('itemTemplate.type')); */
     const handleBlurItemProperties = (
         fieldId: keyof PartInfoSchema,
         fieldName: keyof PartInfoSchema
     ) => {
-        const fieldValue = watch(fieldName);
-        /* console.log('field name', fieldName);
-        console.log('field value: ', fieldValue); */
-        console.log('dirty field: ', dirtyFields[fieldName]);
-        const updatedItem = { ...item };
-        /* if (fieldName === 'itemTemplate') {
-            console.log('test', fieldValue.type.value);
-        }
-        if (fieldName === 'itemTemplate') {
-            updatedItem.itemTemplate = {
-                ...item.itemTemplate,
-                type: fieldValue.type,
-            };
-        } else {
-            updatedItem[fieldId] = fieldValue;
-        } */
-
+        const fieldValue: Field = watch(fieldName) as Field;
         if (dirtyFields[fieldName] && fieldValue) {
-            /* const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value; */
-            let mutableValue;
-            if (typeof fieldValue === 'string') {
-                console.log('string');
-                mutableValue = fieldValue;
-            } else if (typeof fieldValue !== 'string' && fieldName === 'itemTemplate') {
-                console.log('not string');
-                console.log('here fieldvalue: ', fieldValue);
-                console.log('here', fieldValue.type.value);
-                console.log('here2', fieldValue['category'].value);
-                mutableValue = fieldValue['type'].value;
-            } else {
-                console.log('loc', fieldValue.value);
-                mutableValue = fieldValue.value;
-            }
-
-            console.log('updated item: ', mutableValue);
-            /* let mutableValue = fieldValue;
-            if (fieldName === 'itemTemplate') {
-                mutableValue = fieldValue.type;
-                console.log(mutableValue);
-            } */
-
+            const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
             mutate(
                 {
                     ...item,
@@ -132,33 +119,12 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                 },
                 {
                     onSuccess: (data) => {
-                        if (data.status >= 400 && data.status < 500) {
-                            setSnackbarSeverity('error');
-                            setSnackbarText(`${data.statusText}, please try again.`);
-                            return;
-                        } else if (data.status >= 500) {
-                            setSnackbarSeverity('error');
-                            setSnackbarText(
-                                `Something went wrong on our end, refresh page and try again later.`
-                            );
-                            return;
-                        } else {
-                            // TODO: Do the snackbar nned to know what it was changed to?
-                            // Just say what field was updated?
-                            if (fieldName === 'description') {
-                                setSnackbarText(`${fieldName.toLowerCase()} was updated`);
-                            } else if (typeof fieldValue !== 'string' && fieldValue.label) {
-                                setSnackbarText(
-                                    `${fieldName.toLowerCase()} was changed to ${fieldValue.label}`
-                                );
-                            } else if (fieldValue) {
-                                setSnackbarText(
-                                    `${fieldName.toLowerCase()} was changed to ${String(
-                                        fieldValue
-                                    )}`
-                                );
-                            }
-                        }
+                        handleApiRequestSnackbar(
+                            data,
+                            `${fieldName} was updated`,
+                            setSnackbarSeverity,
+                            setSnackbarText
+                        );
                     },
                 }
             );
@@ -175,16 +141,26 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                 <SelectField
                     placeholder="Select type..."
                     fieldName="TYPE"
-                    label="type"
+                    label="itemTemplate.type"
                     options={convertOptionsToSelectFormat(typesOptions)}
-                    onBlur={() => handleBlurItemTemplateProperties('type', 'type')}
+                    onBlur={() =>
+                        handleBlurItemTemplateProperties(
+                            'type',
+                            'itemTemplate.type' as keyof PartInfoSchema
+                        )
+                    }
                 />
                 <SelectField
                     placeholder="Select category..."
                     fieldName="CATEGORY"
-                    label="category"
+                    label="itemTemplate.category"
                     options={convertOptionsToSelectFormat(categories)}
-                    onBlur={() => handleBlurItemTemplateProperties('categoryId', 'category')}
+                    onBlur={() =>
+                        handleBlurItemTemplateProperties(
+                            'categoryId',
+                            'itemTemplate.category' as keyof PartInfoSchema
+                        )
+                    }
                 />
 
                 <SelectField
@@ -212,9 +188,12 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                 />
                 <EditableField
                     fieldName="P/N"
-                    label="productNumber"
+                    label="itemTemplate.productNumber"
                     onBlur={() =>
-                        handleBlurItemTemplateProperties('productNumber', 'productNumber')
+                        handleBlurItemTemplateProperties(
+                            'productNumber',
+                            'itemTemplate.productNumber' as keyof PartInfoSchema
+                        )
                     }
                 />
 
@@ -225,13 +204,36 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                     options={convertOptionsToSelectFormat(vendors)}
                     onBlur={() => handleBlurItemProperties('vendorId', 'vendor')}
                 />
+
+                <EditableField
+                    fieldName="WPID"
+                    label="wpId"
+                    onBlur={() => {
+                        if (isUniqueWpId === true) {
+                            setValue('wpId', debouncedWpId);
+
+                            handleBlurItemProperties('wpId', 'wpId');
+                        }
+                    }}
+                    isUnique={isUniqueWpId}
+                    loading={isLoadingUniqueWpId}
+                    onChange={(event) => {
+                        setNewWpId(event.target.value);
+                    }}
+                    value={wpId}
+                />
             </Container>
             <EditableField
                 fieldName="DESCRIPTION"
-                label="description"
+                label="itemTemplate.description"
                 isMultiLine
                 rows={3}
-                onBlur={() => handleBlurItemTemplateProperties('description', 'description')}
+                onBlur={() =>
+                    handleBlurItemTemplateProperties(
+                        'description',
+                        'itemTemplate.description' as keyof PartInfoSchema
+                    )
+                }
             />
 
             {snackbar}
