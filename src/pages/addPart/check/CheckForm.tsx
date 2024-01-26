@@ -1,53 +1,35 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { Button } from '../../../components/Button/Button.tsx';
+import { useState } from 'react';
 
-import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
-import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+import { useController, useFormContext } from 'react-hook-form';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
-import { ButtonWrapper, FormContainer } from '../styles';
+import { PartSchema } from '../hooks/partValidator.ts';
+import { FormContainer } from '../styles';
 import { FormRadio, StyledLabelText, StyledTextArea } from './styles';
 
 const CheckForm = () => {
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage();
-    const [checked, setChecked] = useState<boolean>(
-        getLocalStorageWithExpiry('checks-check') === 'true'
-    );
-    const [description, setDescription] = useState<string>(
-        getLocalStorageWithExpiry('checks-description') ?? ''
-    );
-    const [error, setError] = useState<string>();
-    const navigate = useNavigate();
+    const [description, setDescription] = useState<string>('');
 
-    const handleClick = () => {
-        if (!checked) {
-            setError('Tick box before continuing');
-            return;
-        }
-        navigate('/add-part/upload');
-    };
-
-    useEffect(() => {
-        setLocalStorageWithExpiry('checks-check', checked.toString(), 5);
-    }, [checked]);
-
-    useEffect(() => {
-        setLocalStorageWithExpiry('checks-description', description, 5);
-    }, [description]);
+    const { control } = useFormContext<PartSchema>();
+    const {
+        field: { onChange, value },
+        fieldState: { error },
+    } = useController({
+        control,
+        name: 'isChecked',
+    });
 
     return (
         <FormContainer>
-            <ProgressBar progressLevel={2} />
             <h3>Pre-checks</h3>
-            <span style={{ color: 'red' }}>{error}</span>
+            <span style={{ color: 'red' }}>{error?.message}</span>
             <FormRadio>
                 <label>
                     <RadioWrapper>
                         <StyledInput
-                            checked={checked}
+                            checked={value}
                             type="checkbox"
                             name="checks"
-                            onChange={() => setChecked(!checked)}
+                            onChange={() => onChange(!value)}
                         />{' '}
                         <p>
                             I have performed all necessary checks before adding this item to the
@@ -67,11 +49,6 @@ const CheckForm = () => {
                     defaultValue={description}
                 />
             </FormRadio>
-            <ButtonWrapper>
-                <Button variant="black" onClick={handleClick}>
-                    NEXT
-                </Button>
-            </ButtonWrapper>
         </FormContainer>
     );
 };

@@ -1,39 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../../../components/Button/Button.tsx';
-
-import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
+import { useController, useFormContext } from 'react-hook-form';
 import AddPartUpload from '../../../components/Upload/AddPartUpload.tsx';
 import AddPartUploadMobile from '../../../components/Upload/UploadMobile/AddPartUploadMobile.tsx';
-import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions.ts';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
+import { PartSchema } from '../hooks/partValidator.ts';
 import { FormContainer } from '../styles.ts';
-import { ButtonWrapper } from './styles.ts';
 
 const Upload = () => {
-    const navigate = useNavigate();
     const { width } = useWindowDimensions();
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage();
-    const [checked, setChecked] = useState<boolean>(
-        getLocalStorageWithExpiry('upload-check') === 'true'
-    );
-    const [error, setError] = useState<string>();
-    const handleClick = () => {
-        if (!checked) {
-            setError('Tick box before continuing');
-            return;
-        }
-        navigate('/add-part/add-form');
-    };
 
-    useEffect(() => {
-        setLocalStorageWithExpiry('upload-check', checked.toString(), 5);
-    }, [checked]);
+    const { control } = useFormContext<PartSchema>();
+    const {
+        field: { onChange, value },
+        fieldState: { error },
+    } = useController({
+        control,
+        name: 'documentation',
+    });
 
     return (
         <FormContainer>
-            <ProgressBar progressLevel={3} />
             <h3 style={{ marginBottom: '0' }}>Upload documentation</h3>
             <p>
                 Add relevant documentation below.{' '}
@@ -44,14 +31,14 @@ const Upload = () => {
             </p>
             {width > 500 ? <AddPartUpload /> : <AddPartUploadMobile />}
 
-            <span style={{ color: 'red' }}>{error}</span>
+            <span style={{ color: 'red' }}>{error?.message}</span>
             <label>
                 <RadioWrapper>
                     <StyledInput
-                        checked={checked}
+                        checked={value}
                         type="checkbox"
                         name="checks"
-                        onChange={() => setChecked(!checked)}
+                        onChange={() => onChange(!value)}
                     />{' '}
                     <p>I have uploaded all necessary documentation for this item. E.g: </p>
                 </RadioWrapper>
@@ -62,11 +49,6 @@ const Upload = () => {
                 <li>Certificates.</li>
                 <li>Photos.</li>
             </ul>
-            <ButtonWrapper>
-                <Button variant="black" onClick={handleClick}>
-                    NEXT
-                </Button>
-            </ButtonWrapper>
         </FormContainer>
     );
 };

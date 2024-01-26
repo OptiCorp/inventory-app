@@ -25,6 +25,7 @@ export const FormContent = () => {
             <Vendor />
             <Location />
             <Description />
+
             <Comment />
             <input
                 type="text"

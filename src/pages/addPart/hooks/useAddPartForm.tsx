@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
-import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
 import { PartSchema, partSchema } from './partValidator';
 
@@ -17,15 +17,28 @@ const defaultValues: PartSchema = {
     vendorId: '',
     locationId: '',
     description: '',
+
     comment: '',
     addedById: '',
     uniqueWpId: false,
+    isBatch: false,
+    isChecked: false,
+    documentation: false,
+    templateData: {
+        type: '',
+        category: {
+            id: '',
+            name: '',
+            userId: '',
+        },
+        productNumber: '',
+        description: '',
+    },
 };
 
 export const useAddPartForm = () => {
     const { currentUser } = useContext(UmAppContext);
     const { mutate } = useAddItems();
-    const { deleteLocalStorage } = useLocalStorage();
 
     const appLocation = useLocation();
 
@@ -43,6 +56,8 @@ export const useAddPartForm = () => {
         resetField,
         formState: { errors },
         register,
+        trigger,
+        setValue,
     } = methods;
 
     const onSubmit = handleSubmit((data) => {
@@ -54,10 +69,6 @@ export const useAddPartForm = () => {
                 { items: [data], files: files },
                 {
                     onSuccess: () => {
-                        deleteLocalStorage('batch-data');
-                        deleteLocalStorage('checks-check');
-                        deleteLocalStorage('checks-description');
-                        deleteLocalStorage('upload-check');
                         reset();
                     },
                 }
@@ -67,10 +78,6 @@ export const useAddPartForm = () => {
                 { items: [data], files: undefined },
                 {
                     onSuccess: () => {
-                        deleteLocalStorage('batch-data');
-                        deleteLocalStorage('checks-check');
-                        deleteLocalStorage('checks-description');
-                        deleteLocalStorage('upload-check');
                         reset();
                     },
                 }
@@ -87,6 +94,8 @@ export const useAddPartForm = () => {
         register,
         reset,
         formState: { errors },
+        trigger,
+        setValue,
         resetField,
     };
 };
