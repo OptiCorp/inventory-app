@@ -30,7 +30,7 @@ const themeOptions: ThemeOptions = {
         fontFamily: 'Archivo',
     },
     spacing: 4,
-    shadows: Array(25).fill('none') as Shadows, // removes shadows from all MUI components
+    // shadows: Array(25).fill('none') as Shadows, // removes shadows from all MUI components
     components: {},
 };
 

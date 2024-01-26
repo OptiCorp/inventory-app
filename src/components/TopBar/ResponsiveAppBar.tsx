@@ -5,19 +5,17 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { StyledNavLink, StyledLink } from './styles';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { globalTheme } from '../../style/GlobalStyles';
+import useNavigationControl from './hooks/useNavigation';
 
-const pages = ['Add Part', 'Make List'];
+const pages = ['Find parts', 'Add part', 'Make list'];
 const settings = ['Profile', 'Account', 'Admin', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -39,6 +37,8 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
+    const { handleBack, handleSearchIconClick, adminLinks, handleSignOut } = useNavigationControl();
+
     return (
         <>
             <ThemeProvider theme={globalTheme}>
@@ -49,49 +49,24 @@ function ResponsiveAppBar() {
                                 alt="logo"
                                 src={'/WP 1.svg'}
                                 // onClick={handleSearchIconClick}
-                                width="40"
+                                width="48"
                                 style={{ cursor: 'pointer' }}
                             />
-                            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                                <IconButton
-                                    size="large"
-                                    aria-label="account of current user"
-                                    aria-controls="menu-appbar"
-                                    aria-haspopup="true"
-                                    onClick={handleOpenNavMenu}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorEl={anchorElNav}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'left',
-                                    }}
-                                    open={Boolean(anchorElNav)}
-                                    onClose={handleCloseNavMenu}
-                                    sx={{
-                                        display: { xs: 'block', md: 'none' },
-                                    }}
-                                >
-                                    {pages.map((page) => (
-                                        // TODO add links
-                                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                            <Typography textAlign="center">{page}</Typography>
-                                        </MenuItem>
-                                    ))}
-                                </Menu>
-                            </Box>
-                            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                 {pages.map((page) => (
-                                    <Button key={page} onClick={handleCloseNavMenu}>
+                                    // TODO instead of overriding styles, create new mui button
+                                    <Button
+                                        component={NavLink}
+                                        to={`/${page.toLowerCase().replace(' ', '-')}`}
+                                        sx={{
+                                            textTransform: 'capitalize',
+                                            fontSize: '1.2rem',
+                                            ':hover': { backgroundColor: 'transparent' },
+                                            marginLeft: '48px',
+                                        }}
+                                        key={page}
+                                        onClick={handleCloseNavMenu}
+                                    >
                                         {page}
                                     </Button>
                                 ))}
@@ -100,10 +75,7 @@ function ResponsiveAppBar() {
                             <Box sx={{ flexGrow: 0 }}>
                                 <Tooltip title="Open settings">
                                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                        <Avatar
-                                            alt="Remy Sharp"
-                                            src="/static/images/avatar/2.jpg"
-                                        />
+                                        <Avatar alt="Admin" />
                                     </IconButton>
                                 </Tooltip>
                                 <Menu
@@ -123,7 +95,14 @@ function ResponsiveAppBar() {
                                     onClose={handleCloseUserMenu}
                                 >
                                     {settings.map((setting) => (
-                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                        <MenuItem
+                                            key={setting}
+                                            onClick={() => {
+                                                if (setting === 'Logout') {
+                                                    handleSignOut();
+                                                }
+                                            }}
+                                        >
                                             <Typography textAlign="center">{setting}</Typography>
                                         </MenuItem>
                                     ))}
