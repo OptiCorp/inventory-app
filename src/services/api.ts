@@ -468,6 +468,23 @@ const apiService = () => {
         return await deleteByFetch(`Documentation/${documentId}?itemId=${itemId}`);
     };
 
+    // ItemTemplate
+
+    const getItemTemplateById = async (id: string): Promise<ItemTemplate> => {
+        return await getByFetch(`ItemTemplate/${id}`);
+    };
+
+    const updateItemTemplateById = async (
+        id: string,
+        itemTemplate: ItemTemplate
+    ): Promise<Response> => {
+        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
+    };
+
+    const getItemTemplates = async (): Promise<ItemTemplate[]> => {
+        return await getByFetch('ItemTemplate');
+    };
+
     return {
         getAllUsers,
         getUser,
@@ -520,9 +537,9 @@ const apiService = () => {
         addDocument,
         getDocumentsByItemId,
         deleteDocument,
-        getItemTemplates,
         getItemTemplateById,
         updateItemTemplateById,
+        getItemTemplates,
     };
 };
 

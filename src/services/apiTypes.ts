@@ -185,7 +185,7 @@ export type Document = {
     bytes: string;
 };
 
-export type TemplateData = {
+export type ItemTemplate = {
     inputValue?: string;
     name: string;
     id: string;
