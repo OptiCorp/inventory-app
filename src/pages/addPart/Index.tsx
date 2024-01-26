@@ -9,9 +9,9 @@ import { PartSchema } from './hooks/partValidator';
 import { useAddPartForm } from './hooks/useAddPartForm';
 import { ButtonWrapper } from './styles';
 
-type test = keyof PartSchema;
+type stepsSchema = keyof PartSchema;
 
-const steps: { fields: test[]; slug: string }[] = [
+const steps: { fields: stepsSchema[]; slug: string }[] = [
     {
         fields: ['isBatch'],
         slug: 'batch',
@@ -65,7 +65,7 @@ const AddPart = () => {
             location.pathname === '/add-part/add-form' ? null : (
                 <ButtonWrapper>
                     <Button variant={step === 4 ? 'disabled' : 'black'} onClick={handleClick}>
-                        NEXT2
+                        NEXT
                     </Button>
                 </ButtonWrapper>
             )}
