@@ -179,7 +179,7 @@ const apiService = () => {
     };
 
     const getUserByAzureAdUserId = async (id: string) => {
-        const data = await getByFetch(`User/ByAzureId/${id}`);
+        const data = await getByFetch(`User/ByAzureAdUserId/${id}`);
         return data;
     };
 
