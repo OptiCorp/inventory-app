@@ -1,36 +1,23 @@
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import Button from '@mui/material/Button';
-import MobileStepper from '@mui/material/MobileStepper';
+import { Step, StepLabel, Stepper } from '@mui/material';
 import React from 'react';
-
+import { PartSchema } from '../../pages/addPart/hooks/partValidator';
+type stepsSchema = keyof PartSchema;
 type ProgressBarProps = {
     activeStep: number;
-    handleNext: () => void;
-    handleBack: () => void;
+    steps: { fields: stepsSchema[]; slug: string }[];
 };
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ activeStep, handleNext, handleBack }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ activeStep, steps }) => {
     return (
-        <MobileStepper
-            variant="dots"
-            steps={5}
-            position="static"
-            activeStep={activeStep}
-            sx={{ maxWidth: 400, flexGrow: 1, color: 'black' }}
-            nextButton={
-                <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
-                    Next
-                    <KeyboardArrowRight />
-                </Button>
-            }
-            backButton={
-                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                    <KeyboardArrowLeft />
-                    Back
-                </Button>
-            }
-        />
+        <>
+            <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map((stepLabel, index) => (
+                    <Step key={stepLabel.slug}>
+                        <StepLabel>{index + 1}</StepLabel>
+                    </Step>
+                ))}
+            </Stepper>
+        </>
     );
 };
 
