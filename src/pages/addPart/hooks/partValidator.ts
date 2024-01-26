@@ -3,6 +3,9 @@ import { z } from 'zod';
 export const partSchema = z.object({
     templateData: z
         .object({
+            id: z.string(),
+            name: z.string(),
+            inputValue: z.string().nullish(),
             type: z.string(),
             category: z.object({
                 id: z.string(),

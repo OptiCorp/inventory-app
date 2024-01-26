@@ -25,6 +25,9 @@ const defaultValues: PartSchema = {
     isChecked: false,
     documentation: false,
     templateData: {
+        id: '',
+        name: '',
+        inputValue: '',
         type: '',
         category: {
             id: '',
@@ -39,7 +42,6 @@ const defaultValues: PartSchema = {
 export const useAddPartForm = () => {
     const { currentUser } = useContext(UmAppContext);
     const { mutate } = useAddItems();
-
     const appLocation = useLocation();
 
     const methods = useForm<PartSchema>({
@@ -58,6 +60,7 @@ export const useAddPartForm = () => {
         register,
         trigger,
         setValue,
+        watch,
     } = methods;
 
     const onSubmit = handleSubmit((data) => {
@@ -97,5 +100,6 @@ export const useAddPartForm = () => {
         trigger,
         setValue,
         resetField,
+        watch,
     };
 };

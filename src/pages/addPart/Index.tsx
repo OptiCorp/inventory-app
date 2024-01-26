@@ -2,10 +2,12 @@
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { Button } from '../../components/Button/Button';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { StyledForm } from './addPartForm/styles';
 import { PartSchema } from './hooks/partValidator';
 import { useAddPartForm } from './hooks/useAddPartForm';
+import { ButtonWrapper } from './styles';
 
 type stepsSchema = keyof PartSchema;
 
@@ -27,7 +29,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
         slug: 'template',
     },
     {
-        fields: ['serialNumber'],
+        fields: ['serialNumber', 'categoryId', 'productNumber', 'type', 'wpId', 'vendorId'],
         slug: 'add-form',
     },
 ];
@@ -50,20 +52,9 @@ const AddPart = () => {
         navigate(`/add-part/${steps[activeStep + 1].slug}`);
     };
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-        navigate(`/add-part/${steps[activeStep - 1].slug}`);
-    };
-
     return (
         <FormProvider {...methods}>
-            {steps.some((step) => location.pathname.includes(`/add-part/${step.slug}`)) && (
-                <ProgressBar
-                    activeStep={activeStep}
-                    handleNext={handleNext}
-                    handleBack={handleBack}
-                />
-            )}
+            <ProgressBar activeStep={activeStep} steps={steps} />
             <StyledForm
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -75,6 +66,14 @@ const AddPart = () => {
             >
                 <Outlet />
             </StyledForm>
+            {location.pathname === `/add-part` ||
+            location.pathname === '/add-part/add-form' ? null : (
+                <ButtonWrapper>
+                    <Button variant="black" onClick={handleNext}>
+                        NEXT
+                    </Button>
+                </ButtonWrapper>
+            )}
         </FormProvider>
     );
 };

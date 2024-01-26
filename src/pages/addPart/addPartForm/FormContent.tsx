@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Category } from '../../../components/AddPartFormFields/Category/Category';
 import { Comment } from '../../../components/AddPartFormFields/Comment/Comment';
@@ -10,14 +10,25 @@ import { Type } from '../../../components/AddPartFormFields/Type/Type';
 import { Vendor } from '../../../components/AddPartFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddPartFormFields/WpId/WpId';
 import UmAppContext from '../../../contexts/UmAppContext';
+import { ItemTemplate } from '../../../services/apiTypes';
 
 export const FormContent = () => {
-    const { register } = useFormContext();
     const { currentUser } = useContext(UmAppContext);
+    const { register, watch, setValue } = useFormContext();
 
+    const selectedTemplate = watch('templateData') as ItemTemplate | undefined;
+
+    useEffect(() => {
+        if (selectedTemplate) {
+            setValue('productNumber', selectedTemplate.productNumber);
+
+            setValue('type', selectedTemplate.type);
+            setValue('description', selectedTemplate.description);
+        }
+    }, [selectedTemplate, setValue]);
     return (
         <>
-            <Type />
+            <Type options={[]} />
             <Category />
             <WpId />
             <SerialNumber />
