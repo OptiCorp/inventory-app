@@ -33,8 +33,8 @@ import AddVendor from './pages/admin/vendor/AddVendor.tsx';
 import Index from './pages/listDetails/phone/Tabs.tsx';
 
 import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
-import { ThemeProvider } from '@mui/material/styles';
-import globalTheme from './style/GlobalStyles.ts';
+// import { ThemeProvider } from '@mui/material/styles';
+// import globalTheme from './style/GlobalStyles.ts';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -56,9 +56,9 @@ function App() {
                     <Route path="upload" element={<Upload />} />
                     <Route path="add-form" element={<AddPartForm />} />
                 </Route>
-                <Route path="makelist" element={<MakeList />} />
+                <Route path="make-list" element={<MakeList />} />
                 <Route
-                    path={`makelist/:listId?`}
+                    path={`make-list/:listId?`}
                     element={
                         <ResponsiveRoute
                             desktopElement={<ListDetails />}

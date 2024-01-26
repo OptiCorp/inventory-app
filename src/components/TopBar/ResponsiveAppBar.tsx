@@ -45,13 +45,15 @@ function ResponsiveAppBar() {
                 <AppBar color="transparent" position="static">
                     <Container maxWidth="xl">
                         <Toolbar disableGutters>
-                            <img
-                                alt="logo"
-                                src={'/WP 1.svg'}
-                                // onClick={handleSearchIconClick}
-                                width="48"
-                                style={{ cursor: 'pointer' }}
-                            />
+                            <Button component={NavLink} to="/">
+                                <img
+                                    alt="logo"
+                                    src={'/WP 1.svg'}
+                                    // onClick={handleSearchIconClick}
+                                    width="48"
+                                    style={{ cursor: 'pointer' }}
+                                />
+                            </Button>
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                 {pages.map((page) => (
                                     // TODO instead of overriding styles, create new mui button
