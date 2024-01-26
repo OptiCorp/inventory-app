@@ -22,15 +22,12 @@ const Upload = () => {
     return (
         <FormContainer>
             <h3 style={{ marginBottom: '0' }}>Upload documentation</h3>
-            <p>
-                Add relevant documentation below.{' '}
-                <ul style={{ marginLeft: '-25px' }}>
-                    <li> Accepted formats: PDF, DOCX and JPG. </li>
-                    <li> Maximum file size: 20MB </li>
-                </ul>{' '}
-            </p>
+            <p>Add relevant documentation below. </p>
+            <ul style={{ marginLeft: '-25px' }}>
+                <li> Accepted formats: PDF, DOCX and JPG. </li>
+                <li> Maximum file size: 20MB </li>
+            </ul>{' '}
             {width > 500 ? <AddPartUpload /> : <AddPartUploadMobile />}
-
             <span style={{ color: 'red' }}>{error?.message}</span>
             <label>
                 <RadioWrapper>
