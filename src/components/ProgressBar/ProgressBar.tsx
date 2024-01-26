@@ -1,53 +1,36 @@
-import { useWindowDimensions } from '../../hooks';
-import { Container, StyledProgressCircle, StyledProgressLine, StyledProgressLink } from './styles';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import Button from '@mui/material/Button';
+import MobileStepper from '@mui/material/MobileStepper';
+import React from 'react';
 
-type Props = {
-    progressLevel: number;
+type ProgressBarProps = {
+    activeStep: number;
+    handleNext: () => void;
+    handleBack: () => void;
 };
 
-const ProgressBar = ({ progressLevel }: Props) => {
-    const { width } = useWindowDimensions();
-
+const ProgressBar: React.FC<ProgressBarProps> = ({ activeStep, handleNext, handleBack }) => {
     return (
-        <Container>
-            <StyledProgressLink to={progressLevel >= 1 ? '/add-part/batch' : ''}>
-                <StyledProgressCircle
-                    finished={progressLevel > 1}
-                    active={progressLevel === 1}
-                    width={width}
-                >
-                    1
-                </StyledProgressCircle>
-            </StyledProgressLink>
-            <StyledProgressLine active={progressLevel >= 2} width={width} />
-            <StyledProgressLink to={progressLevel >= 2 ? '/add-part/checks' : ''}>
-                <StyledProgressCircle
-                    finished={progressLevel > 2}
-                    active={progressLevel == 2}
-                    width={width}
-                >
-                    2
-                </StyledProgressCircle>
-            </StyledProgressLink>
-            <StyledProgressLine active={progressLevel >= 3} width={width} />
-            <StyledProgressLink to={progressLevel >= 3 ? '/add-part/upload' : ''}>
-                <StyledProgressCircle
-                    finished={progressLevel > 3}
-                    active={progressLevel == 3}
-                    width={width}
-                >
-                    3
-                </StyledProgressCircle>
-            </StyledProgressLink>
-            <StyledProgressLine active={progressLevel >= 4} width={width} />
-            <StyledProgressCircle
-                finished={progressLevel > 4}
-                active={progressLevel === 4}
-                width={width}
-            >
-                4
-            </StyledProgressCircle>
-        </Container>
+        <MobileStepper
+            variant="dots"
+            steps={5}
+            position="static"
+            activeStep={activeStep}
+            sx={{ maxWidth: 400, flexGrow: 1, color: 'black' }}
+            nextButton={
+                <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
+                    Next
+                    <KeyboardArrowRight />
+                </Button>
+            }
+            backButton={
+                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                    <KeyboardArrowLeft />
+                    Back
+                </Button>
+            }
+        />
     );
 };
 

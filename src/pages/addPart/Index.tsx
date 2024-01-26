@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { useState } from 'react';
+import React from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Button } from '../../components/Button/Button';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { StyledForm } from './addPartForm/styles';
 import { PartSchema } from './hooks/partValidator';
 import { useAddPartForm } from './hooks/useAddPartForm';
-import { ButtonWrapper } from './styles';
 
 type stepsSchema = keyof PartSchema;
 
@@ -28,28 +26,44 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
         fields: ['templateData'],
         slug: 'template',
     },
+    {
+        fields: ['serialNumber'],
+        slug: 'add-form',
+    },
 ];
 
 const AddPart = () => {
     const { methods, onSubmit, trigger } = useAddPartForm();
 
     const navigate = useNavigate();
-    const [step, setStep] = useState(0);
-    const handleClick = async () => {
-        if (steps[step].slug === 'template') {
-            navigate(`/add-part/add-form`);
+
+    const [activeStep, setActiveStep] = React.useState(0);
+
+    const handleNext = async () => {
+        if (steps[activeStep].slug === 'template') {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            navigate(`/add-part/${steps[activeStep + 1].slug}`);
         }
-        const isValid = await trigger(steps[step].fields);
+        const isValid = await trigger(steps[activeStep].fields);
         if (!isValid) return;
-        setStep((prev) => {
-            if (steps.length - 1 === step) return step;
-            navigate(`/add-part/${steps[step + 1].slug}`);
-            return prev + 1;
-        });
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        navigate(`/add-part/${steps[activeStep + 1].slug}`);
     };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        navigate(`/add-part/${steps[activeStep - 1].slug}`);
+    };
+
     return (
         <FormProvider {...methods}>
-            {location.pathname === `/add-part` ? null : <ProgressBar progressLevel={step + 1} />}
+            {steps.some((step) => location.pathname.includes(`/add-part/${step.slug}`)) && (
+                <ProgressBar
+                    activeStep={activeStep}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                />
+            )}
             <StyledForm
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -61,14 +75,6 @@ const AddPart = () => {
             >
                 <Outlet />
             </StyledForm>
-            {location.pathname === `/add-part` ||
-            location.pathname === '/add-part/add-form' ? null : (
-                <ButtonWrapper>
-                    <Button variant={step === 4 ? 'disabled' : 'black'} onClick={handleClick}>
-                        NEXT
-                    </Button>
-                </ButtonWrapper>
-            )}
         </FormProvider>
     );
 };
