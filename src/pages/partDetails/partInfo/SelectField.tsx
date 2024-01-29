@@ -93,7 +93,6 @@ export const SelectField = ({ label, onBlur, options, placeholder, fieldName }: 
                             const {
                                 field: { onChange, value },
                             } = controllerProps;
-
                             return (
                                 <>
                                     {isOpen && (
