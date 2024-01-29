@@ -8,7 +8,7 @@ export const useDeleteDocument = (itemId: string) => {
     const queryClient = useQueryClient();
     const { setSnackbarText } = useContext(UmAppContext);
     return useMutation({
-        mutationFn: (documentId: string) => api.deleteDocument(documentId, itemId),
+        mutationFn: (documentId: string) => api.deleteDocument(documentId),
         onSettled(_data, error) {
             error ? setSnackbarText(error.message) : setSnackbarText('Document deleted');
             queryClient

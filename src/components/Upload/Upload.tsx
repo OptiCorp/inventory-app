@@ -5,7 +5,7 @@ import { ChangeEvent, useRef } from 'react';
 import { AddDocument, Document, Item } from '../../services/apiTypes';
 import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
-import { useUploadDocument } from '../../services/hooks/documents/useUploadDocument';
+import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
 import { Button as SubmitButton } from '../Button/Button';
 import {
     Container,
@@ -18,22 +18,25 @@ import {
 } from './styles';
 
 type UploadProps = {
-    item: Item;
+    itemId: string;
 };
 
-export const ExampleUpload = ({ item }: UploadProps) => {
-    const { data } = useGetDocumentsByItemId(item.id);
-    const { mutate: uploadDocument } = useUploadDocument();
-    const { mutate: deleteDocument } = useDeleteDocument(item.id);
+export const ExampleUpload = ({ itemId }: UploadProps) => {
+    const { data } = useGetDocumentsByItemId(itemId);
+    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem();
+    const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const inputFile = useRef<HTMLInputElement | null>(null);
 
     const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const document: AddDocument = {
-                itemId: item.id,
-                files: [...e.target.files],
-            };
-            uploadDocument(document);
+            [...e.target.files].forEach((file) => {
+                const document: AddDocument = {
+                    itemId: itemId,
+                    file: file,
+                    documentTypeId: '60da4d7b-ef3f-4f74-a1c1-46982c1b4c97',
+                };
+                uploadDocumentToItem(document);
+            });
         }
     };
 

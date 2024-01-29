@@ -174,7 +174,8 @@ export type FormOption = {
 
 export type AddDocument = {
     itemId: string;
-    files: File[];
+    file: File;
+    documentTypeId: string;
 };
 
 export type Document = {

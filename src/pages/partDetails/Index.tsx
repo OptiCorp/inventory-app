@@ -40,7 +40,11 @@ const PartDetails = () => {
             <FormProvider {...methods}>
                 <PartInfo item={item} isLoading={isLoading} />
                 <Hierarchy item={item} />
-                {width > 500 ? <ExampleUpload item={item} /> : <UploadMobile item={item} />}
+                {width > 500 ? (
+                    <ExampleUpload itemId={item.id} />
+                ) : (
+                    <UploadMobile itemId={item.id} />
+                )}
 
                 <Comments item={item} />
                 <Log item={item} />

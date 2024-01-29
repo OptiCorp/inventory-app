@@ -317,22 +317,10 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`);
     };
 
-    const addItem = async (items: AddItem[], files?: File[]): Promise<Response | Response[][]> => {
+    const addItem = async (items: AddItem[]): Promise<Response> => {
         const res = await postByFetch(`Item`, items);
-        if (!files) {
-            return res;
-        }
 
-        const reader = res.body?.getReader();
-        const itemResponses: { id: string }[] = JSON.parse(
-            new TextDecoder().decode((await reader?.read())!.value)
-        ) as { id: string }[];
-        const documentResponses: Response[][] = [];
-        for (const item of itemResponses) {
-            const documentResponse = await addDocument({ itemId: item.id, files: files });
-            documentResponses.push(documentResponse);
-        }
-        return documentResponses;
+        return res;
     };
 
     const addChildItemToParent = async (itemId: string, childItemId: string): Promise<Response> => {
@@ -446,23 +434,19 @@ const apiService = () => {
     };
 
     const getDocumentsByItemId = async (itemId: string): Promise<Document[]> => {
-        return await getByFetch(`Documentation/ByItemId/${itemId}`);
+        return await getByFetch(`Document/ByItemId/${itemId}`);
     };
 
-    const addDocument = async (document: AddDocument): Promise<Response[]> => {
-        const responses: Response[] = [];
-        for (const file of document.files) {
-            const formData = new FormData();
-            formData.append('ItemId', document.itemId);
-            formData.append('Files', file);
-            const res = await postFileByFetch(`Documentation`, formData);
-            responses.push(res);
-        }
-        return responses;
+    const addDocument = async (document: AddDocument): Promise<Response> => {
+        const formData = new FormData();
+        formData.append('File', document.file);
+        formData.append('DocumentTypeId', document.documentTypeId);
+        const res = await postFileByFetch(`Document/AddDocToItem/${document.itemId}`, formData);
+        return res;
     };
 
-    const deleteDocument = async (documentId: string, itemId: string): Promise<Response> => {
-        return await deleteByFetch(`Documentation/${documentId}?itemId=${itemId}`);
+    const deleteDocument = async (documentId: string): Promise<Response> => {
+        return await deleteByFetch(`Document/${documentId}`);
     };
 
     return {

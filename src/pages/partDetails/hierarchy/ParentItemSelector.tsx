@@ -109,7 +109,7 @@ export const ParentItemSelector = ({
                 <Box>
                     <LabelContainer>
                         <label>
-                            <strong>{`This ${item.type.toLowerCase()} is a part of:`}</strong>
+                            <strong>{`This ${item.itemTemplate.type.toLowerCase()} is a part of:`}</strong>
                         </label>
                         <Edit
                             onClick={() =>

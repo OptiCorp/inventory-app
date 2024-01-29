@@ -1,15 +1,15 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Container, Button as MuiButton } from '@mui/material';
+import { Button as MuiButton } from '@mui/material';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { AddDocument, Document, Item } from '../../../services/apiTypes';
 import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
-import { useUploadDocument } from '../../../services/hooks/documents/useUploadDocument';
 
 import { Button } from '../../Button/Button';
 import {
+    Container,
     StyledDocumentName,
     StyledFileShapeWrapper,
     StyledFileTypeWrapper,
@@ -17,25 +17,29 @@ import {
     StyledIconWrapper,
     Wrapper,
 } from './styles';
+import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
 
 type UploadProps = {
-    item: Item;
+    itemId: string;
 };
 
-const UploadMobile = ({ item }: UploadProps) => {
-    const { data } = useGetDocumentsByItemId(item.id);
-    const { mutate: uploadDocument } = useUploadDocument();
-    const { mutate: deleteDocument } = useDeleteDocument(item.id);
+const UploadMobile = ({ itemId }: UploadProps) => {
+    const { data } = useGetDocumentsByItemId(itemId);
+    const { mutate: uploadDocumentToitem } = useUploadDocumentToItem();
+    const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const inputFile = useRef<HTMLInputElement | null>(null);
     const [showArrow, setShowArrow] = useState(true);
 
     const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const document: AddDocument = {
-                itemId: item.id,
-                files: [...e.target.files],
-            };
-            uploadDocument(document);
+            [...e.target.files].forEach((file) => {
+                const document: AddDocument = {
+                    itemId: itemId,
+                    file: file,
+                    documentTypeId: '60da4d7b-ef3f-4f74-a1c1-46982c1b4c97',
+                };
+                uploadDocumentToitem(document);
+            });
         }
     };
 
