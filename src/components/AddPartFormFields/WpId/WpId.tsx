@@ -25,7 +25,7 @@ export const WpId = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
+                    <label htmlFor="WellPartner Id">WellPartner ID </label>
                     <ToolTip content="Specify a unique WellPartner ID">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
