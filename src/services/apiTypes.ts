@@ -53,12 +53,12 @@ export type ItemTemplate = {
 };
 
 export type LogEntry = {
+    createdBy: User;
     id: string;
     itemId: string;
     userId: string;
     message: string;
     createdDate: string;
-    user: User;
 };
 
 export type Category = {
