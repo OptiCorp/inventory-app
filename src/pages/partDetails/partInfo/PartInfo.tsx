@@ -9,7 +9,7 @@ import { useGetCategories } from '../../../services/hooks/category/useGetCategor
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { SelectField } from './SelectField';
 import EditableField from './EditableField';
-import { Container, PartInfoForm } from './styles';
+import { Container, CreatedByContainer, PartInfoForm } from './styles';
 import { Types } from './types';
 import { PartInfoSchema } from './hooks';
 import { useUpdateItemTemplate } from '../../../services/hooks/itemTemplates/useUpdateItemTemplate';
@@ -171,7 +171,7 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                     onBlur={() => handleBlurItemProperties('locationId', 'location')}
                 />
 
-                <div>
+                <CreatedByContainer>
                     <label>
                         <strong>ADDED BY</strong>
                     </label>
@@ -180,7 +180,7 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                             ? 'Not specified'
                             : `${item.createdBy.firstName} ${item.createdBy.lastName}`}
                     </p>
-                </div>
+                </CreatedByContainer>
                 <EditableField
                     fieldName="S/N"
                     label="serialNumber"

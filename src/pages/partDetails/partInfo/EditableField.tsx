@@ -1,8 +1,15 @@
-import { Box, ClickAwayListener, TextField } from '@mui/material';
+import { Box, ClickAwayListener } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { ChangeEvent, ComponentProps, useState } from 'react';
 import { FieldNames } from './types';
-import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles';
+import {
+    Edit,
+    ErrorP,
+    InfoContainer,
+    LabelContainer,
+    StyledTextField,
+    TextBoxWrap,
+} from './styles';
 import { PartInfoSchema } from './hooks';
 
 type EditableFieldProps<TMultiLine = boolean> = {
@@ -76,7 +83,7 @@ const EditableField = ({
                             return (
                                 <>
                                     <InfoContainer>
-                                        <TextField
+                                        <StyledTextField
                                             {...register(label)}
                                             variant="standard"
                                             InputProps={{
