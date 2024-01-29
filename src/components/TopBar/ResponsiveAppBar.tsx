@@ -10,8 +10,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { NavLink, Outlet } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { globalTheme } from '../../style/GlobalStyles';
 import useNavigationControl from './hooks/useNavigation';
 
@@ -37,7 +37,10 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
+    const theme = useTheme();
+
     const { handleBack, handleSearchIconClick, adminLinks, handleSignOut } = useNavigationControl();
+    const location = useLocation();
 
     return (
         <>
@@ -65,6 +68,11 @@ function ResponsiveAppBar() {
                                             fontSize: '1.2rem',
                                             ':hover': { backgroundColor: 'transparent' },
                                             marginLeft: '48px',
+                                            color: location.pathname.includes(
+                                                page.toLowerCase().replace(' ', '-')
+                                            )
+                                                ? 'primary.main'
+                                                : theme.palette.grey[600],
                                         }}
                                         key={page}
                                         onClick={handleCloseNavMenu}
