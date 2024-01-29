@@ -44,9 +44,17 @@ const partInfoSchema = z.object({
         label: z.string(),
     }),
     locationId: z.string(),
-    type: z.string(),
+    itemTemplate: z.object({
+        type: z.string(),
+    }),
+    /* type: z.string(), */
 });
-export type PartInfoSchema = z.infer<typeof partInfoSchema>;
+export type PartInfoSchema = z.infer<typeof partInfoSchema> & {
+    'itemTemplate.productNumber': string;
+    'itemTemplate.description': string;
+    'itemTemplate.category': string;
+    'itemTemplate.type': string;
+};
 
 export const useUpdatePartForm = (item: Item) => {
     const appLocation = useLocation();
