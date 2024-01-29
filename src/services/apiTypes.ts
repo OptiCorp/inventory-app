@@ -185,3 +185,9 @@ export type Document = {
     contentType: string;
     bytes: string;
 };
+
+export type DocumentType = {
+    id: string;
+    name: string;
+    description: string;
+};

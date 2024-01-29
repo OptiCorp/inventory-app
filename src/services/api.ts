@@ -10,6 +10,7 @@ import {
     AddVendor,
     Category,
     Document,
+    DocumentType,
     Item,
     ItemTemplate,
     List,
@@ -449,6 +450,10 @@ const apiService = () => {
         return await deleteByFetch(`Document/${documentId}`);
     };
 
+    const getDocumentTypes = async (): Promise<DocumentType[]> => {
+        return await getByFetch(`DocumentType`);
+    };
+
     return {
         getAllUsers,
         getUser,
@@ -503,6 +508,7 @@ const apiService = () => {
         deleteDocument,
         getItemTemplateById,
         updateItemTemplateById,
+        getDocumentTypes,
     };
 };
 

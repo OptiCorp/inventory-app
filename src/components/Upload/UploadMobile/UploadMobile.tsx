@@ -1,13 +1,23 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Button as MuiButton } from '@mui/material';
+import {
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    FormControlLabel,
+    List,
+    ListItem,
+    Button as MuiButton,
+    Radio,
+    RadioGroup,
+    Button,
+} from '@mui/material';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { AddDocument, Document, Item } from '../../../services/apiTypes';
 import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
-
-import { Button } from '../../Button/Button';
 import {
     Container,
     StyledDocumentName,
@@ -17,30 +27,38 @@ import {
     StyledIconWrapper,
     Wrapper,
 } from './styles';
+import { Button as SubmitButton } from '../../Button/Button';
 import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
+import { setFips } from 'crypto';
+import { useGetDocumentTypes } from '../../../services/hooks/documents/useGetDocumentTypes';
 
 type UploadProps = {
     itemId: string;
 };
 
 const UploadMobile = ({ itemId }: UploadProps) => {
-    const { data } = useGetDocumentsByItemId(itemId);
+    const { data: documents } = useGetDocumentsByItemId(itemId);
+    const { data: documentTypes } = useGetDocumentTypes();
     const { mutate: uploadDocumentToItem } = useUploadDocumentToItem();
     const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const inputFile = useRef<HTMLInputElement | null>(null);
     const [showArrow, setShowArrow] = useState(true);
+    const [openDocumentTypeDialog, setOpenDocumentTypeDialog] = useState(false);
+    const [chosenDocumentType, setChosenDocumentType] = useState<string | null>(null);
+    const [file, setFile] = useState<File | null>(null);
 
-    const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            [...e.target.files].forEach((file) => {
-                const document: AddDocument = {
-                    itemId: itemId,
-                    file: file,
-                    documentTypeId: '60da4d7b-ef3f-4f74-a1c1-46982c1b4c97',
-                };
-                uploadDocumentToItem(document);
-            });
+    const handleFileUpload = () => {
+        setOpenDocumentTypeDialog(false);
+        if (file) {
+            const document: AddDocument = {
+                itemId: itemId,
+                file: file,
+                documentTypeId: chosenDocumentType!,
+            };
+            uploadDocumentToItem(document);
         }
+        setFile(null);
+        setChosenDocumentType(null);
     };
 
     const handleFileDownload = (file: Document) => {
@@ -74,6 +92,9 @@ const UploadMobile = ({ itemId }: UploadProps) => {
             for (const element of files) {
                 observer.observe(element);
             }
+            if (files.length > 2) {
+                setShowArrow(true);
+            }
         }
 
         return () => {
@@ -83,12 +104,34 @@ const UploadMobile = ({ itemId }: UploadProps) => {
                 }
             }
         };
-    }, [data]);
+    }, [documents]);
 
     return (
         <>
+            <Dialog open={openDocumentTypeDialog}>
+                <DialogTitle>What kind of document is this?</DialogTitle>
+                <DialogContent>
+                    <RadioGroup onChange={(e) => setChosenDocumentType(e.target.value)} row={false}>
+                        <List>
+                            {documentTypes?.map((type) => (
+                                <ListItem>
+                                    <FormControlLabel
+                                        value={type.id}
+                                        control={<Radio />}
+                                        label={type.name}
+                                    />
+                                </ListItem>
+                            ))}
+                        </List>
+                    </RadioGroup>
+                </DialogContent>
+
+                <Button onClick={handleFileUpload} color="error" startIcon={<FileUploadIcon />}>
+                    UPLOAD FILE
+                </Button>
+            </Dialog>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
-                {data?.map((document) => (
+                {documents?.map((document) => (
                     <StyledFileWrapper key={document.id} className="files">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +169,7 @@ const UploadMobile = ({ itemId }: UploadProps) => {
                         <StyledDocumentName>{document.name.split('.')[0]}</StyledDocumentName>
                     </StyledFileWrapper>
                 ))}
-                {showArrow === true && (data?.length ?? 0) > 2 && (
+                {showArrow === true && (documents?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon
                         fontSize="large"
                         sx={{ position: 'sticky', top: '75px', right: '-10px' }}
@@ -134,18 +177,21 @@ const UploadMobile = ({ itemId }: UploadProps) => {
                 )}
             </Wrapper>
             <Container>
-                <Button variant="white" onClick={() => inputFile.current?.click()}>
+                <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
                     {' '}
                     <input
                         type="file"
-                        multiple
                         accept=".pdf,.png,.docx,.jpg"
                         style={{ display: 'none' }}
-                        onChange={handleFileUpload}
+                        onChange={(e) => {
+                            const file = [...e.target.files!][0];
+                            setFile(file);
+                            setOpenDocumentTypeDialog(true);
+                        }}
                         ref={inputFile}
                     />
-                    UPLOAD NEW
-                </Button>
+                    ADD DOCUMENT
+                </SubmitButton>
             </Container>
         </>
     );
