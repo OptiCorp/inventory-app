@@ -300,8 +300,7 @@ const apiService = () => {
         return await postByFetch(`Item/RemoveParentId?itemId=${itemId}`);
     };
 
-    const isWpIdUnique = async (id: string) => {
-        if (!id) return;
+    const isWpIdUnique = async (id: string): Promise<boolean> => {
         return await getByFetch(`Item/IsWpIdUnique/${id}`);
     };
 
@@ -405,6 +404,10 @@ const apiService = () => {
     };
 
     // ItemTemplate
+
+    const getItemTemplates = async (): Promise<ItemTemplate[]> => {
+        return await getByFetch('ItemTemplate');
+    };
 
     const getItemTemplateById = async (id: string): Promise<ItemTemplate> => {
         return await getByFetch(`ItemTemplate/${id}`);
@@ -517,6 +520,7 @@ const apiService = () => {
         addDocument,
         getDocumentsByItemId,
         deleteDocument,
+        getItemTemplates,
         getItemTemplateById,
         updateItemTemplateById,
     };
