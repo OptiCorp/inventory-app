@@ -3,8 +3,9 @@ import { ComponentProps, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import Select, { CSSObjectWithLabel } from 'react-select';
 import { Edit, LabelContainer } from './styles';
-import { ItemFields } from './types';
+import { FieldNames, ItemFields } from './types';
 import { PartInfoSchema } from './hooks';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 
 type Options = {
     value: string;
@@ -15,14 +16,17 @@ type SelectProps = {
     id?: string;
     selectedType?: string;
     label: ItemFields;
+    fieldName: FieldNames;
     options: Options[];
-    value?: string;
+    value?: string | { value: string };
     onBlur: ComponentProps<'input'>['onBlur'];
 };
 
-export const SelectField = ({ label, onBlur, options, placeholder }: SelectProps) => {
+export const SelectField = ({ label, onBlur, options, placeholder, fieldName }: SelectProps) => {
     const { register, control } = useFormContext<PartInfoSchema>();
     const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const { isLoading, fetchNextPage } = useGetItemsInfinite(searchTerm);
 
     const handleClickAway = () => {
         setIsOpen(false);
@@ -73,7 +77,7 @@ export const SelectField = ({ label, onBlur, options, placeholder }: SelectProps
                 <Box>
                     <LabelContainer>
                         <label>
-                            <strong>{label.toUpperCase()}</strong>
+                            <strong>{fieldName}</strong>
                         </label>
                         <Edit
                             onClick={() => {
@@ -89,6 +93,7 @@ export const SelectField = ({ label, onBlur, options, placeholder }: SelectProps
                             const {
                                 field: { onChange, value },
                             } = controllerProps;
+
                             return (
                                 <>
                                     {isOpen && (
@@ -97,6 +102,13 @@ export const SelectField = ({ label, onBlur, options, placeholder }: SelectProps
                                             options={options}
                                             onBlur={onBlur}
                                             onChange={onChange}
+                                            onInputChange={(value) => setSearchTerm(value)}
+                                            onMenuScrollToBottom={() => {
+                                                fetchNextPage().catch((error) => {
+                                                    console.error('An error occurred:', error);
+                                                });
+                                            }}
+                                            isLoading={isLoading}
                                             styles={generateSelectedStyles(
                                                 typeof value !== 'string' ? value?.id : value
                                             )}
@@ -104,7 +116,9 @@ export const SelectField = ({ label, onBlur, options, placeholder }: SelectProps
                                         />
                                     )}
 
-                                    {!isOpen && typeof value !== 'string' && <p>{value?.name}</p>}
+                                    {!isOpen && typeof value !== 'string' && (
+                                        <p>{value?.name ?? value?.label}</p>
+                                    )}
                                     {!isOpen && typeof value === 'string' && <p>{value}</p>}
                                 </>
                             );
