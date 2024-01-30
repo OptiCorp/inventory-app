@@ -15,17 +15,6 @@ export const FormContent = () => {
     const { currentUser } = useContext(UmAppContext);
     const { register } = useFormContext();
 
-    // const selectedTemplate = watch('templateData') as ItemTemplate | undefined;
-
-    // useEffect(() => {
-    //     if (selectedTemplate) {
-    //         setValue('productNumber', selectedTemplate.productNumber);
-
-    //         setValue('type', selectedTemplate.type);
-    //           setValue('categoryId', selectedTemplate.category.id);
-    //         setValue('description', selectedTemplate.description);
-    //     }
-    // }, [selectedTemplate, setValue]);
     return (
         <>
             <Type />
@@ -42,7 +31,7 @@ export const FormContent = () => {
                 type="text"
                 defaultValue={currentUser?.id}
                 style={{ display: 'none' }}
-                {...register('addedById', { value: currentUser?.id })}
+                {...register('createdById', { value: currentUser?.id })}
             />
         </>
     );

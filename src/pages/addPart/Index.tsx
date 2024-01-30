@@ -35,7 +35,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
 ];
 
 const AddPart = () => {
-    const { methods, onSubmit, trigger, reset } = useAddPartForm();
+    const { methods, onSubmit, trigger } = useAddPartForm();
 
     const navigate = useNavigate();
 
@@ -56,27 +56,18 @@ const AddPart = () => {
         steps.some((step) => {
             if (!location.pathname.includes(`/add-part/${step.slug}`)) {
                 setActiveStep(0);
-                reset();
             } else if (location.pathname === '/add-part/') {
                 setActiveStep(0);
-                reset();
             }
         });
     }, [!location.pathname.includes('/add-part/')]);
-
-    console.log(activeStep);
 
     return (
         <FormProvider {...methods}>
             {steps.some((step) => location.pathname.includes(`/add-part/${step.slug}`)) && (
                 <ProgressBar activeStep={activeStep} steps={steps} />
             )}
-            <StyledForm
-                onSubmit={() => {
-                    onSubmit;
-                }}
-                id="addPart"
-            >
+            <StyledForm onSubmit={onSubmit} id="addPart">
                 <Outlet />
             </StyledForm>
             {location.pathname === `/add-part` ||

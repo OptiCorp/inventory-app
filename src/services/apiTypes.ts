@@ -47,11 +47,6 @@ export type Item = {
     itemTemplate: ItemTemplate;
 };
 
-export type ItemTemplate = {
-    id: string;
-    type: string;
-};
-
 export type LogEntry = {
     createdBy: User;
     id: string;
@@ -107,7 +102,7 @@ export type AddItem = {
     description: string;
     parentId?: string | null;
     vendorId: string;
-    addedById: string | null;
+    createdById: string | null;
     comment?: string | null;
 };
 
