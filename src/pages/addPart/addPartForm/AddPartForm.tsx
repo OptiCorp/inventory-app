@@ -10,7 +10,8 @@ export const AddPartForm = () => {
             <h4>Add details</h4>
             <FormContent />
             <ButtonWrapper>
-                <Button id="addPart" type="submit" variant="black">
+         
+                <Button id="addPart" form="addPart" type="submit" variant="black">
                     FINISH
                 </Button>
             </ButtonWrapper>

@@ -7,12 +7,15 @@ export const partSchema = z.object({
             name: z.string(),
             inputValue: z.string().nullish(),
             type: z.string(),
+
             category: z.object({
                 id: z.string(),
                 name: z.string(),
-                userId: z.string().min(1),
+                updatedDate: z.string(),
+                createdDate: z.string(),
+                createdById: z.string(),
             }),
-
+            categoryId: z.string(),
             productNumber: z.string(),
             description: z.string().nullish(),
         })

@@ -2,9 +2,10 @@ import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
 
+import { ItemTemplate } from '../../../services/apiTypes.ts';
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
 import { PartSchema, partSchema } from './partValidator';
 
@@ -25,6 +26,7 @@ const defaultValues: PartSchema = {
     isChecked: false,
     documentation: false,
     templateData: {
+        categoryId: '',
         id: '',
         name: '',
         inputValue: '',
@@ -32,7 +34,9 @@ const defaultValues: PartSchema = {
         category: {
             id: '',
             name: '',
-            userId: '',
+            createdById: '',
+            createdDate: '',
+            updatedDate: '',
         },
         productNumber: '',
         description: '',
@@ -63,29 +67,29 @@ export const useAddPartForm = () => {
         watch,
     } = methods;
 
+    const selectedTemplate = watch('templateData') as ItemTemplate | undefined;
+
+    useEffect(() => {
+        register('templateData');
+    }, [register]);
+
+    useEffect(() => {
+        if (selectedTemplate) {
+            setValue('templateData', selectedTemplate);
+        }
+    }, []);
+
     const onSubmit = handleSubmit((data) => {
+        console.log(data);
         if (data.files) {
             const files = [...data.files];
             delete data.files;
 
-            mutate(
-                { items: [data], files: files },
-                {
-                    onSuccess: () => {
-                        reset();
-                    },
-                }
-            );
+            mutate({ items: [data], files: files }, {});
         } else {
-            mutate(
-                { items: [data], files: undefined },
-                {
-                    onSuccess: () => {
-                        reset();
-                    },
-                }
-            );
+            mutate({ items: [data], files: undefined }, {});
         }
+        console.log(data, defaultValues, 'fsdf');
     });
 
     return {

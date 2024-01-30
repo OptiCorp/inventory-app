@@ -1,10 +1,10 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-import { useController, useFormContext } from 'react-hook-form';
-// import { PartSchema } from '../hooks/partValidator.ts';
 import { useEffect } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
 
+import { Box } from '@mui/material';
 import { useGetItemTemplates } from '../../../services/hooks/template/useGetItemTemplates.tsx';
 import { PartSchema } from '../hooks/partValidator.ts';
 import { Container } from './styles.ts';
@@ -22,10 +22,11 @@ export default function Template() {
     const selectedTemplate = watch('templateData');
 
     useEffect(() => {
-        if (selectedTemplate) {
+        if (selectedTemplate?.id) {
             setValue('templateData', selectedTemplate);
         }
-    }, [selectedTemplate, setValue]);
+    }, [selectedTemplate?.id]);
+
     return (
         <Container>
             <h4>Choose a template or create a new one</h4>
@@ -35,14 +36,23 @@ export default function Template() {
                     onChange(newValue);
                 }}
                 id="free-solo-dialog-demo"
-                options={Templates}
+                options={Templates ?? ''}
                 getOptionLabel={(option) => option.name}
                 selectOnFocus
                 clearOnBlur
                 handleHomeEndKeys
-                renderOption={(props, option) => <li {...props}>{option.name}</li>}
                 sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="templates" />}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                renderInput={(params) => (
+                    <TextField key={value?.id} {...params} label="templates" />
+                )}
+                renderOption={(props, option) => {
+                    return (
+                        <Box component="li" {...props} key={option.id}>
+                            {option.name}
+                        </Box>
+                    );
+                }}
             />
         </Container>
     );

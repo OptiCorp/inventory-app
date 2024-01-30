@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
@@ -35,7 +35,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
 ];
 
 const AddPart = () => {
-    const { methods, onSubmit, trigger } = useAddPartForm();
+    const { methods, onSubmit, trigger, reset } = useAddPartForm();
 
     const navigate = useNavigate();
 
@@ -52,15 +52,28 @@ const AddPart = () => {
         navigate(`/add-part/${steps[activeStep + 1].slug}`);
     };
 
+    useEffect(() => {
+        steps.some((step) => {
+            if (!location.pathname.includes(`/add-part/${step.slug}`)) {
+                setActiveStep(0);
+                reset();
+            } else if (location.pathname === '/add-part/') {
+                setActiveStep(0);
+                reset();
+            }
+        });
+    }, [!location.pathname.includes('/add-part/')]);
+
+    console.log(activeStep);
+
     return (
         <FormProvider {...methods}>
-            <ProgressBar activeStep={activeStep} steps={steps} />
+            {steps.some((step) => location.pathname.includes(`/add-part/${step.slug}`)) && (
+                <ProgressBar activeStep={activeStep} steps={steps} />
+            )}
             <StyledForm
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    onSubmit().catch((error) => {
-                        console.log('Unable to add part', error);
-                    });
+                onSubmit={() => {
+                    onSubmit;
                 }}
                 id="addPart"
             >
