@@ -21,7 +21,7 @@ const File = ({ doc, file, handleFileRemoval }: FileProps) => {
         if (file) {
             const downloadLink = document.createElement('a');
             downloadLink.download = `${file.name}`;
-            downloadLink.href = `data:${file.type};base64,${file.name}`; // TODO: Fix download file
+            downloadLink.href = `data:${file.type};base64,${URL.createObjectURL(file)}`; // TODO: Fix download file
             downloadLink.click();
         }
         if (doc) {
