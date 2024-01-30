@@ -30,19 +30,14 @@ export const SideList = ({ part }: Props) => {
                 }
             },
         });
-        handleClose(e);
         handleClose();
     };
 
-    const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation();
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    const handleClickOpen = (e: React.MouseEvent) => {
-        e.stopPropagation();
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -70,9 +65,6 @@ export const SideList = ({ part }: Props) => {
                 title="Remove item from list?"
                 open={open}
                 onClose={handleClose}
-                CancelButtonOnClick={() => handleClose}
-                SubmitButtonOnClick={(e) =>
-                    handleDelete(e, {
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={() =>
                     handleDelete({
