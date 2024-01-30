@@ -26,7 +26,11 @@ const AddPartUpload = () => {
         <>
             <Wrapper>
                 {files?.map((file, index) => (
-                    <File file={file} handleFileRemoval={() => handleFileRemoval(index)} />
+                    <File
+                        key={index}
+                        file={file}
+                        handleFileRemoval={() => handleFileRemoval(index)}
+                    />
                 ))}
             </Wrapper>
             <Container>

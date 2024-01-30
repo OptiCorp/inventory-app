@@ -1,10 +1,6 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Button as ActionButton } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-
 import { Button } from '../../Button/Button.tsx';
 import { Container, Wrapper } from './styles';
 import File from '../../File/File.tsx';
@@ -58,7 +54,11 @@ const AddPartUploadMobile = () => {
         <>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {files?.map((file, index) => (
-                    <File file={file} handleFileRemoval={() => handleFileRemoval(index)} />
+                    <File
+                        key={index}
+                        file={file}
+                        handleFileRemoval={() => handleFileRemoval(index)}
+                    />
                 ))}
                 {showArrow === true && (files?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon

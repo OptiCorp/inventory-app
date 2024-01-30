@@ -1,7 +1,5 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import {
     Dialog,
     DialogContent,
@@ -15,18 +13,10 @@ import {
     ButtonGroup,
 } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import { AddDocument, Document, Item } from '../../../services/apiTypes';
+import { AddDocument } from '../../../services/apiTypes';
 import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
-import {
-    Container,
-    StyledDocumentName,
-    StyledFileShapeWrapper,
-    StyledFileTypeWrapper,
-    StyledFileWrapper,
-    StyledIconWrapper,
-    Wrapper,
-} from './styles';
+import { Container, Wrapper } from './styles';
 import { Button as SubmitButton } from '../../Button/Button';
 import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
 import { useGetDocumentTypes } from '../../../services/hooks/documents/useGetDocumentTypes';
@@ -107,7 +97,7 @@ const UploadMobile = ({ itemId }: UploadProps) => {
                     <RadioGroup onChange={(e) => setChosenDocumentType(e.target.value)} row={false}>
                         <List>
                             {documentTypes?.map((type) => (
-                                <ListItem>
+                                <ListItem key={type.id}>
                                     <FormControlLabel
                                         value={type.id}
                                         control={<Radio />}
@@ -140,7 +130,7 @@ const UploadMobile = ({ itemId }: UploadProps) => {
             </Dialog>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {documents?.map((document) => (
-                    <File doc={document} handleFileDelete={handleFileDelete} />
+                    <File key={document.id} doc={document} handleFileDelete={handleFileDelete} />
                 ))}
                 {showArrow === true && (documents?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon

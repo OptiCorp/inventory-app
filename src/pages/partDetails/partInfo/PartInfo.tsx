@@ -104,7 +104,7 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
             }
         }
     };
-  
+
     const handleBlurItemProperties = (
         fieldId: keyof PartInfoSchema,
         fieldName: keyof PartInfoSchema
@@ -120,8 +120,8 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                 console.log('not string');
                 console.log('here fieldvalue: ', fieldValue);
                 console.log('here', fieldValue.type.value);
-                console.log('here2', fieldValue['category'].value);
-                mutableValue = fieldValue['type'].value;
+                console.log('here2', fieldValue.category.value);
+                mutableValue = fieldValue.type.value;
             } else {
                 console.log('loc', fieldValue.value);
                 mutableValue = fieldValue.value;
@@ -225,7 +225,6 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                     label="vendor"
                     options={convertOptionsToSelectFormat(vendors)}
                     onBlur={() => handleBlurItemProperties('vendorId', 'vendor')}
-
                 />
 
                 <EditableField
@@ -248,7 +247,6 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
             </Container>
             <EditableField
                 fieldName="DESCRIPTION"
-
                 label="itemTemplate.description"
                 isMultiLine
                 rows={3}

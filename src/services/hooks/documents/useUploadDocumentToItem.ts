@@ -10,7 +10,7 @@ export const useUploadDocumentToItem = () => {
     const { setSnackbarText } = useContext(UmAppContext);
     return useMutation({
         mutationFn: async (document: AddDocument) => await api.addDocument(document),
-        onSettled: async (_data, errors, document) => {
+        onSettled: (_data, errors, document) => {
             if (!errors) {
                 setSnackbarText(`${document.file.name} was uploaded.`);
                 queryClient

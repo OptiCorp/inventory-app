@@ -22,7 +22,7 @@ const File = ({ doc, file, handleFileDelete, handleFileRemoval }: FileProps) => 
         if (file) {
             const downloadLink = document.createElement('a');
             downloadLink.download = `${file.name}`;
-            downloadLink.href = `data:${file.type};base64,${file.text}`;
+            downloadLink.href = `data:${file.type};base64,${file.name}`; // TODO: Fix download file
             downloadLink.click();
         }
         if (doc) {
@@ -34,7 +34,7 @@ const File = ({ doc, file, handleFileDelete, handleFileRemoval }: FileProps) => 
     };
 
     return (
-        <StyledFileWrapper key={doc ? doc.id : file?.name} className="files">
+        <StyledFileWrapper className="files">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="121"

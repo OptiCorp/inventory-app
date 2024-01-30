@@ -13,7 +13,7 @@ import {
     RadioGroup,
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import { AddDocument, Document } from '../../services/apiTypes';
+import { AddDocument } from '../../services/apiTypes';
 import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
@@ -68,7 +68,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                     <RadioGroup onChange={(e) => setChosenDocumentType(e.target.value)}>
                         <List>
                             {documentTypes?.map((type) => (
-                                <ListItem>
+                                <ListItem key={type.id}>
                                     <FormControlLabel
                                         value={type.id}
                                         control={<Radio />}
@@ -111,7 +111,11 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                     <CircularProgress />
                 ) : (
                     documents?.map((document) => (
-                        <File doc={document} handleFileDelete={handleFileDelete} />
+                        <File
+                            key={document.id}
+                            doc={document}
+                            handleFileDelete={handleFileDelete}
+                        />
                     ))
                 )}
             </Wrapper>
