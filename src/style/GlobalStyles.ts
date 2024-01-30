@@ -1,5 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 import { Shadows, ThemeOptions, createTheme } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
+
+declare module '@mui/material/Button' {
+    interface ButtonPropsVariantOverrides {
+        navigation: true;
+    }
+}
 
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
 
@@ -20,7 +27,7 @@ type Props = {
 const themeOptions: ThemeOptions = {
     palette: {
         primary: {
-            main: '#000000',
+            main: grey[900],
         },
         secondary: {
             main: '#ff0000',
@@ -31,7 +38,18 @@ const themeOptions: ThemeOptions = {
     },
     spacing: 4,
     // shadows: Array(25).fill('none') as Shadows, // removes shadows from all MUI components
-    components: {},
+    components: {
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: 'navigation' },
+                    style: {
+                        textTransform: 'capitalize',
+                    },
+                },
+            ],
+        },
+    },
 };
 
 // TODO: move global theme to wrap around all components

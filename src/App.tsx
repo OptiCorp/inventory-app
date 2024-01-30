@@ -21,7 +21,7 @@ import MakeList from './pages/list/MakeList';
 import ListDetails from './pages/listDetails/ListDetails.tsx';
 import PartDetails from './pages/partDetails/Index';
 import Search from './pages/search/Search';
-import GlobalStyles from './style/GlobalStyles';
+import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 
 import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
 import { useSnackBar } from './hooks/useSnackbar.tsx';
@@ -33,6 +33,7 @@ import AddVendor from './pages/admin/vendor/AddVendor.tsx';
 import Index from './pages/listDetails/phone/Tabs.tsx';
 
 import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
+import { ThemeProvider } from '@mui/material';
 // import { ThemeProvider } from '@mui/material/styles';
 // import globalTheme from './style/GlobalStyles.ts';
 
@@ -80,16 +81,18 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <div className="wrapper">
-                {isAuthenticated && (
-                    <UmAppContextProvider>
-                        <GlobalStyles width={width} />
-                        {snackbar}
-                        <RouterProvider router={router} />
-                    </UmAppContextProvider>
-                )}
-                {!isAuthenticated && <Login />}
-            </div>
+            <ThemeProvider theme={globalTheme}>
+                <div className="wrapper">
+                    {isAuthenticated && (
+                        <UmAppContextProvider>
+                            <GlobalStyles width={width} />
+                            {/* {snackbar} */}
+                            <RouterProvider router={router} />
+                        </UmAppContextProvider>
+                    )}
+                    {!isAuthenticated && <Login />}
+                </div>
+            </ThemeProvider>
         </QueryClientProvider>
     );
 }
