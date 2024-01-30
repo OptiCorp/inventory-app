@@ -19,10 +19,21 @@ export type Open = {
 export type SetState<T> = Dispatch<SetStateAction<T>>;
 
 export type ItemFields =
-    | 'type'
-    | 'category'
+    | 'itemTemplate.type'
+    | 'itemTemplate.category'
     | 'location'
-    | 'productNumber'
+    | 'itemTemplate.productNumber'
     | 'serialNumber'
     | 'vendor'
-    | 'description';
+    | 'itemTemplate.description'
+    | 'wpId';
+
+export type FieldNames =
+    | 'TYPE'
+    | 'CATEGORY'
+    | 'LOCATION'
+    | 'S/N'
+    | 'P/N'
+    | 'VENDOR'
+    | 'DESCRIPTION'
+    | 'WPID';

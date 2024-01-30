@@ -23,12 +23,10 @@ export type UserRole = {
 };
 
 export type Item = {
-    /* [index: string]: string | null | Item | Item[] | Category | Location | Vendor | User */
     id: string;
     wpId: string;
     serialNumber: string;
     productNumber: string;
-    type: string;
     categoryId: string;
     vendorId: string;
     locationId: string;
@@ -44,17 +42,23 @@ export type Item = {
     category: Category;
     vendor: Vendor;
     location: Location;
-    user: User;
+    createdBy: User;
     logEntries: LogEntry[];
+    itemTemplate: ItemTemplate;
+};
+
+export type ItemTemplate = {
+    id: string;
+    type: string;
 };
 
 export type LogEntry = {
+    createdBy: User;
     id: string;
     itemId: string;
     userId: string;
     message: string;
     createdDate: string;
-    user: User;
 };
 
 export type Category = {
@@ -112,7 +116,6 @@ export type UpdateItem = {
     wpId: string;
     serialNumber: string;
     productNumber: string;
-    type: string;
     children: Item[] | null;
     categoryId: string | null | undefined;
     locationId?: string | null;
@@ -122,6 +125,7 @@ export type UpdateItem = {
     addedById: string | null;
     comment?: string | null;
     listId: string | null;
+    itemTemplate: ItemTemplate;
 };
 
 export type Vendor = {

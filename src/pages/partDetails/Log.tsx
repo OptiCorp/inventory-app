@@ -10,7 +10,7 @@ export const Log = ({ item }: { item: Item }) => {
     });
     const formattedLogEntries = sortedLogEntries
         .map((entry) => {
-            const fullName = `${entry.user.firstName} ${entry.user.lastName}`;
+            const fullName = `${entry.createdBy.firstName} ${entry.createdBy.lastName}`;
             return `${format(new Date(entry.createdDate), 'dd.MM.yyyy').toString()}: ${
                 entry.message
             } by user ${fullName}`;

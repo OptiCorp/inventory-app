@@ -11,6 +11,7 @@ import {
     Category,
     Document,
     Item,
+    ItemTemplate,
     List,
     Location,
     UpdateCategory,
@@ -299,8 +300,7 @@ const apiService = () => {
         return await postByFetch(`Item/RemoveParentId?itemId=${itemId}`);
     };
 
-    const isWpIdUnique = async (id: string) => {
-        if (!id) return;
+    const isWpIdUnique = async (id: string): Promise<boolean> => {
         return await getByFetch(`Item/IsWpIdUnique/${id}`);
     };
 
@@ -403,6 +403,23 @@ const apiService = () => {
         return await deleteByFetch(`Vendor/${id}`);
     };
 
+    // ItemTemplate
+
+    const getItemTemplates = async (): Promise<ItemTemplate[]> => {
+        return await getByFetch('ItemTemplate');
+    };
+
+    const getItemTemplateById = async (id: string): Promise<ItemTemplate> => {
+        return await getByFetch(`ItemTemplate/${id}`);
+    };
+
+    const updateItemTemplateById = async (
+        id: string,
+        itemTemplate: ItemTemplate
+    ): Promise<Response> => {
+        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
+    };
+
     // Category
 
     const getCategory = async (): Promise<Category[]> => {
@@ -503,6 +520,9 @@ const apiService = () => {
         addDocument,
         getDocumentsByItemId,
         deleteDocument,
+        getItemTemplates,
+        getItemTemplateById,
+        updateItemTemplateById,
     };
 };
 
