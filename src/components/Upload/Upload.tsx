@@ -115,7 +115,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         <File
                             key={document.id}
                             doc={document}
-                            handleFileDelete={handleFileDelete}
+                            handleFileRemoval={() => handleFileDelete(document.id)}
                         />
                     ))
                 )}

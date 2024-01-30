@@ -13,11 +13,10 @@ import { Document } from '../../services/apiTypes';
 type FileProps = {
     doc?: Document;
     file?: File;
-    handleFileDelete?: (documentId: string) => void;
-    handleFileRemoval?: () => void;
+    handleFileRemoval: () => void;
 };
 
-const File = ({ doc, file, handleFileDelete, handleFileRemoval }: FileProps) => {
+const File = ({ doc, file, handleFileRemoval }: FileProps) => {
     const handleFileDownload = (doc?: Document, file?: File) => {
         if (file) {
             const downloadLink = document.createElement('a');
@@ -60,14 +59,7 @@ const File = ({ doc, file, handleFileDelete, handleFileRemoval }: FileProps) => 
                             >
                                 <FileDownloadOutlinedIcon fontSize="large" />
                             </MuiButton>
-                            <MuiButton
-                                onClick={
-                                    doc && handleFileDelete
-                                        ? () => handleFileDelete(doc.id)
-                                        : handleFileRemoval
-                                }
-                                sx={{ color: 'black' }}
-                            >
+                            <MuiButton onClick={handleFileRemoval} sx={{ color: 'black' }}>
                                 <DeleteOutlineOutlinedIcon fontSize="large" />
                             </MuiButton>
                         </StyledIconWrapper>

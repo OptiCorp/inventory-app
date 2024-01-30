@@ -140,7 +140,11 @@ const UploadMobile = ({ itemId }: UploadProps) => {
             </Dialog>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {documents?.map((document) => (
-                    <File key={document.id} doc={document} handleFileDelete={handleFileDelete} />
+                    <File
+                        key={document.id}
+                        doc={document}
+                        handleFileRemoval={() => handleFileDelete(document.id)}
+                    />
                 ))}
                 {showArrow === true && (documents?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon
