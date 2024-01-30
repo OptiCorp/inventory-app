@@ -8,6 +8,7 @@ const partInfoSchema = z.object({
     id: z.string(),
     wpId: z.string(),
     serialNumber: z.string(),
+    comment: z.string(),
     productNumber: z
         .string()
         .min(1, 'Product number is required')
