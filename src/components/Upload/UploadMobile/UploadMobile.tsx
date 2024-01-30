@@ -12,9 +12,9 @@ import {
     Button as MuiButton,
     Radio,
     RadioGroup,
-    Button,
+    ButtonGroup,
 } from '@mui/material';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AddDocument, Document, Item } from '../../../services/apiTypes';
 import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
@@ -29,8 +29,8 @@ import {
 } from './styles';
 import { Button as SubmitButton } from '../../Button/Button';
 import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
-import { setFips } from 'crypto';
 import { useGetDocumentTypes } from '../../../services/hooks/documents/useGetDocumentTypes';
+import File from '../../File/File';
 
 type UploadProps = {
     itemId: string;
@@ -59,13 +59,6 @@ const UploadMobile = ({ itemId }: UploadProps) => {
         }
         setFile(null);
         setChosenDocumentType(null);
-    };
-
-    const handleFileDownload = (file: Document) => {
-        const downloadLink = document.createElement('a');
-        downloadLink.download = `${file.name}`;
-        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`;
-        downloadLink.click();
     };
 
     const handleFileDelete = (documentId: string) => {
@@ -126,48 +119,28 @@ const UploadMobile = ({ itemId }: UploadProps) => {
                     </RadioGroup>
                 </DialogContent>
 
-                <Button onClick={handleFileUpload} color="error" startIcon={<FileUploadIcon />}>
-                    UPLOAD FILE
-                </Button>
+                <ButtonGroup>
+                    <MuiButton
+                        onClick={handleFileUpload}
+                        color="error"
+                        startIcon={<FileUploadIcon />}
+                        sx={{ backgroundColor: 'black', color: 'white', borderRadius: '0' }}
+                    >
+                        UPLOAD FILE
+                    </MuiButton>
+                    <MuiButton
+                        onClick={handleFileUpload}
+                        color="error"
+                        startIcon={<FileUploadIcon />}
+                        sx={{ backgroundColor: 'black', color: 'white', borderRadius: '0' }}
+                    >
+                        UPLOAD FILE
+                    </MuiButton>
+                </ButtonGroup>
             </Dialog>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {documents?.map((document) => (
-                    <StyledFileWrapper key={document.id} className="files">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="121"
-                            height="153"
-                            viewBox="0 0 121 153"
-                            fill="none"
-                        >
-                            <foreignObject width={121} height={153}>
-                                <StyledFileShapeWrapper>
-                                    <StyledFileTypeWrapper>
-                                        <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
-                                    </StyledFileTypeWrapper>
-                                    <StyledIconWrapper>
-                                        <MuiButton
-                                            onClick={() => handleFileDownload(document)}
-                                            sx={{ color: 'black' }}
-                                        >
-                                            <FileDownloadOutlinedIcon fontSize="large" />
-                                        </MuiButton>
-                                        <MuiButton
-                                            onClick={() => handleFileDelete(document.id)}
-                                            sx={{ color: 'black' }}
-                                        >
-                                            <DeleteOutlineOutlinedIcon fontSize="large" />
-                                        </MuiButton>
-                                    </StyledIconWrapper>
-                                </StyledFileShapeWrapper>
-                            </foreignObject>
-                            <path
-                                d="M95 1H1V152H120V21.1333M95 1L120 21.1333M95 1V21.1333H120"
-                                stroke="black"
-                            />
-                        </svg>
-                        <StyledDocumentName>{document.name.split('.')[0]}</StyledDocumentName>
-                    </StyledFileWrapper>
+                    <File doc={document} handleFileDelete={handleFileDelete} />
                 ))}
                 {showArrow === true && (documents?.length ?? 0) > 2 && (
                     <ArrowCircleRightOutlinedIcon
@@ -178,14 +151,12 @@ const UploadMobile = ({ itemId }: UploadProps) => {
             </Wrapper>
             <Container>
                 <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
-                    {' '}
                     <input
                         type="file"
                         accept=".pdf,.png,.docx,.jpg"
                         style={{ display: 'none' }}
                         onChange={(e) => {
-                            const file = [...e.target.files!][0];
-                            setFile(file);
+                            setFile([...e.target.files!][0]);
                             setOpenDocumentTypeDialog(true);
                         }}
                         ref={inputFile}
