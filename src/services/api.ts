@@ -299,8 +299,7 @@ const apiService = () => {
         return await postByFetch(`Item/RemoveParentId?itemId=${itemId}`);
     };
 
-    const isWpIdUnique = async (id: string) => {
-        if (!id) return;
+    const isWpIdUnique = async (id: string): Promise<boolean> => {
         return await getByFetch(`Item/IsWpIdUnique/${id}`);
     };
 
