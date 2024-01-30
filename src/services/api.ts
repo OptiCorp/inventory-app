@@ -1,5 +1,6 @@
 import { API_URL } from '../config';
 import { pca } from '../msalConfig';
+import { TemplateSchema } from '../pages/addPart/hooks/partValidator';
 
 import {
     AddCategory,
@@ -11,7 +12,6 @@ import {
     Category,
     Document,
     Item,
-    ItemTemplate,
     List,
     Location,
     UpdateCategory,
@@ -453,18 +453,18 @@ const apiService = () => {
 
     // ItemTemplate
 
-    const getItemTemplateById = async (id: string): Promise<ItemTemplate> => {
+    const getItemTemplateById = async (id: string): Promise<TemplateSchema> => {
         return await getByFetch(`ItemTemplate/${id}`);
     };
 
     const updateItemTemplateById = async (
         id: string,
-        itemTemplate: ItemTemplate
+        itemTemplate: TemplateSchema
     ): Promise<Response> => {
         return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
     };
 
-    const getItemTemplates = async (): Promise<ItemTemplate[]> => {
+    const getItemTemplates = async (): Promise<TemplateSchema[]> => {
         return await getByFetch('ItemTemplate');
     };
 

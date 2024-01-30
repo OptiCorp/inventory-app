@@ -1,7 +1,6 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-import { useEffect } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -10,8 +9,8 @@ import { PartSchema } from '../hooks/partValidator.ts';
 import { Container } from './styles.ts';
 
 export default function Template() {
-    const { data: Templates = [] } = useGetItemTemplates();
-    const { control, watch, setValue } = useFormContext<PartSchema>();
+    const { data: templates = [] } = useGetItemTemplates();
+    const { control, reset, watch } = useFormContext<PartSchema>();
     const {
         field: { onChange, value },
     } = useController({
@@ -19,37 +18,36 @@ export default function Template() {
 
         name: 'templateData',
     });
-    const selectedTemplate = watch('templateData');
-
-    useEffect(() => {
-        if (selectedTemplate?.id) {
-            setValue('templateData', selectedTemplate);
-        }
-    }, [selectedTemplate?.id]);
+    console.log(watch());
+    const selectedTemplate = templates.find((option) => option.id === value?.id);
 
     return (
         <Container>
             <h4>Choose a template or create a new one</h4>
             <Autocomplete
-                value={value}
-                onChange={(_event, newValue) => {
-                    onChange(newValue);
+                options={templates}
+                value={selectedTemplate}
+                onChange={(_event, template) => {
+                    onChange(template);
+                    console.log(template);
+                    reset({
+                        ...template,
+                    });
                 }}
                 id="free-solo-dialog-demo"
-                options={Templates ?? ''}
-                getOptionLabel={(option) => option.name}
                 selectOnFocus
+                getOptionLabel={(option) => option.name}
                 clearOnBlur
                 handleHomeEndKeys
                 sx={{ width: 300 }}
-                isOptionEqualToValue={(option, value) => option.id === value.id}
+                isOptionEqualToValue={(option, value) => option?.id === value?.id}
                 renderInput={(params) => (
                     <TextField key={value?.id} {...params} label="templates" />
                 )}
                 renderOption={(props, option) => {
                     return (
-                        <Box component="li" {...props} key={option.id}>
-                            {option.name}
+                        <Box component="li" {...props} key={option?.id}>
+                            {option?.name}
                         </Box>
                     );
                 }}

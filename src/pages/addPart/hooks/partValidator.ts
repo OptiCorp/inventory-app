@@ -1,25 +1,25 @@
 import { z } from 'zod';
 
-export const partSchema = z.object({
-    templateData: z
-        .object({
-            id: z.string(),
-            name: z.string(),
-            inputValue: z.string().nullish(),
-            type: z.string(),
+const templateSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    inputValue: z.string().nullish(),
+    type: z.string(),
 
-            category: z.object({
-                id: z.string(),
-                name: z.string(),
-                updatedDate: z.string(),
-                createdDate: z.string(),
-                createdById: z.string(),
-            }),
-            categoryId: z.string(),
-            productNumber: z.string(),
-            description: z.string().nullish(),
-        })
-        .nullable(),
+    category: z.object({
+        id: z.string(),
+        name: z.string(),
+        updatedDate: z.string(),
+        createdDate: z.string(),
+        createdById: z.string(),
+    }),
+    categoryId: z.string(),
+    productNumber: z.string(),
+    description: z.string().optional(),
+});
+
+export const partSchema = z.object({
+    templateData: templateSchema.nullish(),
     wpId: z.string().min(1, 'WellPartner ID is required'),
     categoryId: z.string().min(1, 'Category is required'),
     description: z.string().min(1, 'Description is required'),
@@ -33,9 +33,10 @@ export const partSchema = z.object({
     documentation: z.boolean().refine((value) => value),
     locationId: z.string().nullish(),
     parentId: z.string().nullish(),
-    addedById: z.string().min(1),
+    createdById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),
 });
 
 export type PartSchema = z.infer<typeof partSchema>;
+export type TemplateSchema = z.infer<typeof templateSchema>;

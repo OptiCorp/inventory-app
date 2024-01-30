@@ -5,9 +5,25 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
 
-import { ItemTemplate } from '../../../services/apiTypes.ts';
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
-import { PartSchema, partSchema } from './partValidator';
+import { PartSchema, TemplateSchema, partSchema } from './partValidator';
+
+const defaultTemplate: TemplateSchema = {
+    categoryId: '',
+    id: '',
+    name: '',
+    inputValue: '',
+    type: '',
+    category: {
+        id: '',
+        name: '',
+        createdById: '',
+        createdDate: '',
+        updatedDate: '',
+    },
+    productNumber: '',
+    description: '',
+};
 
 const defaultValues: PartSchema = {
     wpId: '',
@@ -20,27 +36,12 @@ const defaultValues: PartSchema = {
     description: '',
 
     comment: '',
-    addedById: '',
+    createdById: '',
     uniqueWpId: false,
     isBatch: false,
     isChecked: false,
     documentation: false,
-    templateData: {
-        categoryId: '',
-        id: '',
-        name: '',
-        inputValue: '',
-        type: '',
-        category: {
-            id: '',
-            name: '',
-            createdById: '',
-            createdDate: '',
-            updatedDate: '',
-        },
-        productNumber: '',
-        description: '',
-    },
+    templateData: defaultTemplate,
 };
 
 export const useAddPartForm = () => {
@@ -52,7 +53,7 @@ export const useAddPartForm = () => {
         resolver: zodResolver(partSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id ?? '',
+            createdById: currentUser?.id ?? '',
         },
     });
     const {
@@ -67,7 +68,7 @@ export const useAddPartForm = () => {
         watch,
     } = methods;
 
-    const selectedTemplate = watch('templateData') as ItemTemplate | undefined;
+    const selectedTemplate = watch('templateData');
 
     useEffect(() => {
         register('templateData');

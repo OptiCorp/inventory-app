@@ -1,30 +1,29 @@
-import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
-import { Category as CategoryType, FormOption } from '../../../services/apiTypes.ts';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 
-import { FormSelect } from '../FormSelect/FormSelect.tsx';
-
 import { ErrorMessage } from '@hookform/error-message';
+import { Autocomplete, TextField } from '@mui/material';
+import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Category = () => {
-    const { setValue } = useFormContext();
-
-    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null);
+    const { control, watch } = useFormContext<PartSchema>();
+    const {
+        field: { onChange, value },
+    } = useController({
+        name: 'categoryId',
+        control,
+    });
+    const selectedTemplate = watch('templateData');
     const { data: categories = [] } = useGetCategories();
+    const selectedCategory = categories.find((option) => option.id === value);
 
-    const categoryOptions = categories.map((category: CategoryType) => ({
+    const testOptions = categories.map((category) => ({
         value: category.id,
         label: category.name,
     }));
-
-    useEffect(() => {
-        setValue('categoryId', selectedOption?.value ?? '');
-    }, [selectedOption, setValue]);
-
     return (
         <StyledDiv>
             <StyledInputWrap>
@@ -39,11 +38,16 @@ export const Category = () => {
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>
-            <FormSelect
-                options={categoryOptions}
-                setState={setSelectedOption}
-                state={selectedOption}
-            ></FormSelect>
+            <Autocomplete
+                options={testOptions}
+                disabled={!!selectedTemplate?.id}
+                sx={{ width: 500, margin: '10px 0' }}
+                value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}
+                renderInput={(params) => (
+                    <TextField {...params} label="Categories" variant="outlined" />
+                )}
+                onChange={(_event, category) => onChange(category ? category?.value : null)}
+            />
         </StyledDiv>
     );
 };

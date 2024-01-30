@@ -1,6 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { FormOption, Vendor as VendorType } from '../../../services/apiTypes.ts';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors.tsx';
@@ -9,11 +9,14 @@ import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 import { FormSelect } from '../FormSelect/FormSelect.tsx';
 
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
+import { Autocomplete, TextField } from '@mui/material';
 
 export const Vendor = () => {
-    const { setValue } = useFormContext();
+    const { control, watch } = useFormContext<PartSchema>();
 
-    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null);
+    const selectedTemplate = watch('templateData');
+
     const { data: categories = [] } = useGetVendors();
 
     const vendorOptions = categories.map((vendor: VendorType) => ({
@@ -21,9 +24,15 @@ export const Vendor = () => {
         label: vendor.name,
     }));
 
-    useEffect(() => {
-        setValue('vendorId', selectedOption?.value ?? '');
-    }, [selectedOption, setValue]);
+    const {
+        field: { onChange, value },
+    } = useController({
+        control,
+
+        name: 'vendorId',
+    });
+
+    const selectedVendor = vendorOptions.find((option) => option.label === value);
 
     return (
         <StyledDiv>
@@ -39,11 +48,18 @@ export const Vendor = () => {
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>
-            <FormSelect
+
+            <Autocomplete
                 options={vendorOptions}
-                setState={setSelectedOption}
-                state={selectedOption}
-            ></FormSelect>
+                disabled={!!selectedTemplate?.id}
+                sx={{ width: 500 }}
+                value={selectedVendor}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+                onChange={(_event, newValue) => {
+                    onChange(newValue?.value);
+                }}
+                renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
+            />
         </StyledDiv>
     );
 };
