@@ -63,7 +63,6 @@ export const Comments = ({ item }: { item: Item }) => {
                                     rows={5}
                                     fullWidth
                                     onChange={onChange}
-                                    key={item?.wpId ?? ''}
                                     variant="filled"
                                     sx={{
                                         '&::before': {
