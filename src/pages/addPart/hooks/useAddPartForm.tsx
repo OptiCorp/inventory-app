@@ -47,11 +47,10 @@ export const useAddPartForm = () => {
 
     const onSubmit = handleSubmit((data) => {
         if (data.files) {
-            const files = [...data.files];
             delete data.files;
 
             mutate(
-                { items: [data], files: files },
+                { items: [data] },
                 {
                     onSuccess: () => {
                         deleteLocalStorage('batch-data');
@@ -64,7 +63,7 @@ export const useAddPartForm = () => {
             );
         } else {
             mutate(
-                { items: [data], files: undefined },
+                { items: [data] },
                 {
                     onSuccess: () => {
                         deleteLocalStorage('batch-data');

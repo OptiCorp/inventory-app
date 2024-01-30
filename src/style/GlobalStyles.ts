@@ -29,7 +29,6 @@ const GlobalStyles = createGlobalStyle<Props>`
     padding: ${({ width }) => (width < 500 ? 0 : '8px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
-    display: grid;
     overflow-x: hidden;
 
   }
