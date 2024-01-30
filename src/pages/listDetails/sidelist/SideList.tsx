@@ -2,10 +2,14 @@ import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Item, MutateItemList } from '../../../services/apiTypes.ts';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
+import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
+import IconButton from '@mui/material/IconButton';
 
 import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx';
 import UmAppContext from '../../../contexts/UmAppContext.tsx';
 import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
+import { useGetListById } from '../../../services/hooks/list/useGetListById';
 
 type Props = {
     part: Item;
@@ -13,12 +17,14 @@ type Props = {
 
 export const SideList = ({ part }: Props) => {
     const { listId } = useParams();
+    // console.log('listid', listId);
+    const { data: list } = useGetListById(listId!);
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
+    const { mutate: mutateAddItemToList } = useAddItemsToList();
 
-    const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation();
+    const handleDelete = (ids: MutateItemList) => {
         mutateRemoveItemFromList(ids, {
             onSuccess: (data) => {
                 setSnackbarSeverity('success');
@@ -33,6 +39,10 @@ export const SideList = ({ part }: Props) => {
         handleClose();
     };
 
+    const handleAdd = (ids: MutateItemList) => {
+        console.log('add');
+        mutateAddItemToList(ids, {});
+    };
 
     const handleClose = () => {
         setOpen(false);
@@ -58,6 +68,17 @@ export const SideList = ({ part }: Props) => {
                     </KeyWord>
 
                     <RemoveIcon onClick={handleClickOpen} />
+                    <IconButton
+                        onClick={() =>
+                            handleAdd({
+                                listId: listId ?? 'N/A',
+                                itemId: part.id,
+                                addSubItems: true,
+                            })
+                        }
+                    >
+                        <SubdirectoryArrowRightIcon />
+                    </IconButton>
                 </Wrapper>
             </>
 

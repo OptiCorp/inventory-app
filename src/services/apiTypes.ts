@@ -95,6 +95,7 @@ export type UpdateList = {
 export type MutateItemList = {
     listId: string;
     itemId: string;
+    addSubItems?: boolean;
 };
 
 export type AddItem = {
