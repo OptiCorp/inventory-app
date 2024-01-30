@@ -96,6 +96,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         </Button>
                         <Button
                             variant="contained"
+                            disabled={chosenDocumentType ? false : true}
                             onClick={handleFileUpload}
                             sx={{ color: '#ffffff', backgroundColor: '#000000', borderRadius: '0' }}
                             startIcon={<FileUploadIcon />}
