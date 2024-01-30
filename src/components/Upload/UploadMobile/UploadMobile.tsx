@@ -1,5 +1,6 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import CloseIcon from '@mui/icons-material/Close';
 import {
     Dialog,
     DialogContent,
@@ -7,10 +8,9 @@ import {
     FormControlLabel,
     List,
     ListItem,
-    Button as MuiButton,
+    Button,
     Radio,
     RadioGroup,
-    ButtonGroup,
 } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { AddDocument } from '../../../services/apiTypes';
@@ -54,6 +54,13 @@ const UploadMobile = ({ itemId }: UploadProps) => {
     const handleFileDelete = (documentId: string) => {
         deleteDocument(documentId);
     };
+
+    const handleCancel = () => {
+        setOpenDocumentTypeDialog(false);
+        setFile(null);
+        setChosenDocumentType(null);
+    };
+
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -91,7 +98,7 @@ const UploadMobile = ({ itemId }: UploadProps) => {
             <Dialog open={openDocumentTypeDialog}>
                 <DialogTitle>What kind of document is this?</DialogTitle>
                 <DialogContent>
-                    <RadioGroup onChange={(e) => setChosenDocumentType(e.target.value)} row={false}>
+                    <RadioGroup onChange={(e) => setChosenDocumentType(e.target.value)}>
                         <List>
                             {documentTypes?.map((type) => (
                                 <ListItem key={type.id}>
@@ -104,26 +111,32 @@ const UploadMobile = ({ itemId }: UploadProps) => {
                             ))}
                         </List>
                     </RadioGroup>
+                    <div
+                        style={{ display: 'flex', justifyContent: 'space-between', margin: '8px' }}
+                    >
+                        <Button
+                            variant="contained"
+                            onClick={handleCancel}
+                            sx={{
+                                color: '#000000',
+                                backgroundColor: '#ffffff',
+                                border: '1px solid black',
+                                borderRadius: '0',
+                            }}
+                            startIcon={<CloseIcon />}
+                        >
+                            CANCEL
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={handleFileUpload}
+                            sx={{ color: '#ffffff', backgroundColor: '#000000', borderRadius: '0' }}
+                            startIcon={<FileUploadIcon />}
+                        >
+                            UPLOAD
+                        </Button>
+                    </div>
                 </DialogContent>
-
-                <ButtonGroup>
-                    <MuiButton
-                        onClick={handleFileUpload}
-                        color="error"
-                        startIcon={<FileUploadIcon />}
-                        sx={{ backgroundColor: 'black', color: 'white', borderRadius: '0' }}
-                    >
-                        UPLOAD FILE
-                    </MuiButton>
-                    <MuiButton
-                        onClick={handleFileUpload}
-                        color="error"
-                        startIcon={<FileUploadIcon />}
-                        sx={{ backgroundColor: 'black', color: 'white', borderRadius: '0' }}
-                    >
-                        UPLOAD FILE
-                    </MuiButton>
-                </ButtonGroup>
             </Dialog>
             <Wrapper onTouchMove={() => setShowArrow(false)}>
                 {documents?.map((document) => (

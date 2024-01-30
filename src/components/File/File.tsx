@@ -45,7 +45,9 @@ const File = ({ doc, file, handleFileDelete, handleFileRemoval }: FileProps) => 
                 <foreignObject width={121} height={153}>
                     <StyledFileShapeWrapper>
                         <StyledFileTypeWrapper>
-                            <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
+                            <h3>
+                                .{doc ? doc.contentType.split('/')[1].toUpperCase() : file?.type}
+                            </h3>
                         </StyledFileTypeWrapper>
                         <StyledIconWrapper>
                             <MuiButton
