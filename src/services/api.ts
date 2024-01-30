@@ -342,10 +342,12 @@ const apiService = () => {
 
     const addItemsToList = async (
         listId: string,
-        itemIds: string[],
+        itemId: string,
         addSubItems: boolean
     ): Promise<Response> => {
-        return await postByFetch(`List/AddItems/?listId=${listId}`, { itemIds, addSubItems });
+        return await postByFetch(`List/AddItems/?listId=${listId}&addSubItems=${addSubItems}`, [
+            itemId,
+        ]);
     };
 
     const removeItemsFromList = async (listId: string, itemId: string): Promise<Response> => {
