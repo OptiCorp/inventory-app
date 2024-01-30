@@ -64,7 +64,7 @@ export const ParentItemSelector = ({
         formState: { dirtyFields },
     } = useFormContext<PartInfoSchema>();
     const { isLoading, fetchNextPage } = useGetItemsInfinite(searchTerm);
-    const { mutate: mutateUpdateItem } = useUpdateItem(item?.id, currentUser?.id ?? '');
+    const { mutate: mutateUpdateItem } = useUpdateItem(item?.id, currentUser!.id);
 
     const filterChildIds = (options: Options[]) => {
         const childIds = item.children?.map((child) => child?.id) ?? [];
@@ -76,8 +76,8 @@ export const ParentItemSelector = ({
     };
 
     const handleBlur = (fieldId: keyof PartInfoSchema, fieldName: keyof PartInfoSchema) => {
-        const fieldValue: Field = watch(fieldName);
-        console.log('field value: ', fieldValue);
+        const fieldValue: Field = watch(fieldName) as Field;
+
         if (
             dirtyFields[fieldName] &&
             fieldValue &&
