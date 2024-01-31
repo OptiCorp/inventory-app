@@ -1,109 +1,147 @@
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Button } from '@mui/material';
-import { ChangeEvent, useRef } from 'react';
-import { AddDocument, Document, Item } from '../../services/apiTypes';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    FormControlLabel,
+    List,
+    ListItem,
+    Radio,
+    RadioGroup,
+    Box,
+} from '@mui/material';
+import { useRef, useState } from 'react';
+import { AddDocument } from '../../services/apiTypes';
 import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
-import { useUploadDocument } from '../../services/hooks/documents/useUploadDocument';
+import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
 import { Button as SubmitButton } from '../Button/Button';
-import {
-    Container,
-    StyledDocumentName,
-    StyledFileShapeWrapper,
-    StyledFileWrapper,
-    StyledIconWrapper,
-    StyledTypeWrapper,
-    Wrapper,
-} from './styles';
+import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocumentTypes';
+import File from '../File/File';
+import { COLORS } from '../../style/GlobalStyles';
 
 type UploadProps = {
-    item: Item;
+    itemId: string;
 };
 
-export const ExampleUpload = ({ item }: UploadProps) => {
-    const { data } = useGetDocumentsByItemId(item.id);
-    const { mutate: uploadDocument } = useUploadDocument();
-    const { mutate: deleteDocument } = useDeleteDocument(item.id);
+export const ExampleUpload = ({ itemId }: UploadProps) => {
+    const { data: documents, isLoading } = useGetDocumentsByItemId(itemId);
+    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem(itemId);
+    const { mutate: deleteDocument } = useDeleteDocument(itemId);
+    const { data: documentTypes } = useGetDocumentTypes();
     const inputFile = useRef<HTMLInputElement | null>(null);
+    const [openDocumentTypeDialog, setOpenDocumentTypeDialog] = useState(false);
+    const [chosenDocumentType, setChosenDocumentType] = useState<string | null>(null);
+    const [file, setFile] = useState<File | null>(null);
 
-    const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
+    const handleFileUpload = () => {
+        setOpenDocumentTypeDialog(false);
+        if (file) {
             const document: AddDocument = {
-                itemId: item.id,
-                files: [...e.target.files],
+                file: file,
+                documentTypeId: chosenDocumentType!,
             };
-            uploadDocument(document);
+            uploadDocumentToItem(document);
         }
-    };
-
-    const handleFileDownload = (file: Document) => {
-        const downloadLink = document.createElement('a');
-        downloadLink.download = `${file.name}`;
-        downloadLink.href = `data:${file.contentType};base64,${file.bytes}`;
-        downloadLink.click();
+        setFile(null);
+        setChosenDocumentType(null);
     };
 
     const handleFileDelete = (documentId: string) => {
         deleteDocument(documentId);
     };
 
+    const handleCancel = () => {
+        setOpenDocumentTypeDialog(false);
+        setFile(null);
+        setChosenDocumentType(null);
+    };
+
     return (
-        <>
-            <Wrapper>
-                {data?.map((document) => (
-                    <StyledFileWrapper key={document.id}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="121"
-                            height="153"
-                            viewBox="0 0 121 153"
-                            fill="none"
+        <Box sx={{ margin: '8px 0' }}>
+            <Dialog open={openDocumentTypeDialog}>
+                <DialogTitle>What kind of document is this?</DialogTitle>
+                <DialogContent>
+                    <RadioGroup onChange={(e) => setChosenDocumentType(e.target.value)}>
+                        <List>
+                            {documentTypes?.map((type) => (
+                                <ListItem key={type.id}>
+                                    <FormControlLabel
+                                        value={type.id}
+                                        control={<Radio />}
+                                        label={type.name}
+                                    />
+                                </ListItem>
+                            ))}
+                        </List>
+                    </RadioGroup>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                        <Button
+                            variant="contained"
+                            onClick={handleCancel}
+                            sx={{
+                                color: '#000000',
+                                backgroundColor: '#ffffff',
+                                border: '1px solid black',
+                                borderRadius: '0',
+                            }}
+                            startIcon={<CloseIcon />}
                         >
-                            <foreignObject width={121} height={153}>
-                                <StyledFileShapeWrapper>
-                                    <StyledTypeWrapper>
-                                        <h3>.{document.contentType.split('/')[1].toUpperCase()}</h3>
-                                    </StyledTypeWrapper>
-                                    <StyledIconWrapper>
-                                        <Button
-                                            onClick={() => handleFileDownload(document)}
-                                            sx={{ color: 'black' }}
-                                        >
-                                            <FileDownloadOutlinedIcon fontSize="large" />
-                                        </Button>
-                                        <Button
-                                            onClick={() => handleFileDelete(document.id)}
-                                            sx={{ color: 'black' }}
-                                        >
-                                            <DeleteOutlineOutlinedIcon fontSize="large" />
-                                        </Button>
-                                    </StyledIconWrapper>
-                                </StyledFileShapeWrapper>
-                            </foreignObject>
-                            <path
-                                d="M95 1H1V152H120V21.1333M95 1L120 21.1333M95 1V21.1333H120"
-                                stroke="black"
-                            />
-                        </svg>
-                        <StyledDocumentName>{document.name.split('.')[0]}</StyledDocumentName>
-                    </StyledFileWrapper>
-                ))}
-            </Wrapper>
-            <Container>
+                            CANCEL
+                        </Button>
+                        <Button
+                            variant="contained"
+                            disabled={chosenDocumentType ? false : true}
+                            onClick={handleFileUpload}
+                            sx={{ color: '#ffffff', backgroundColor: '#000000', borderRadius: '0' }}
+                            startIcon={<FileUploadIcon />}
+                        >
+                            UPLOAD
+                        </Button>
+                    </Box>
+                </DialogContent>
+            </Dialog>
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    padding: '12px 20px',
+                    margin: '8px 0',
+                    border: `1px dashed ${COLORS.black}`,
+                    boxSizing: 'border-box',
+                    minHeight: '200px',
+                }}
+            >
+                {isLoading ? (
+                    <CircularProgress />
+                ) : (
+                    documents?.map((document) => (
+                        <File
+                            key={document.id}
+                            doc={document}
+                            handleFileRemoval={() => handleFileDelete(document.id)}
+                        />
+                    ))
+                )}
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'end' }}>
                 <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
-                    {' '}
                     <input
                         type="file"
-                        multiple
                         accept=".pdf,.png,.docx,.jpg"
                         style={{ display: 'none' }}
-                        onChange={handleFileUpload}
+                        onChange={(e) => {
+                            setFile([...e.target.files!][0]);
+                            setOpenDocumentTypeDialog(true);
+                        }}
                         ref={inputFile}
                     />
-                    UPLOAD NEW
+                    ADD DOCUMENT
                 </SubmitButton>
-            </Container>
-        </>
+            </Box>
+        </Box>
     );
 };

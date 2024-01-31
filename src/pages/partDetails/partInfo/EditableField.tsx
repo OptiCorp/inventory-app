@@ -1,13 +1,25 @@
-import { Box, ClickAwayListener, TextField } from '@mui/material';
+import { Box, ClickAwayListener } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
-import { ComponentProps, useState } from 'react';
-import { ItemFields } from './types';
-import { Edit, ErrorP, InfoContainer, LabelContainer, TextBoxWrap } from './styles';
+import { ChangeEvent, ComponentProps, useState } from 'react';
+import { FieldNames } from './types';
+import {
+    Edit,
+    ErrorP,
+    InfoContainer,
+    LabelContainer,
+    StyledTextField,
+    TextBoxWrap,
+} from './styles';
 import { PartInfoSchema } from './hooks';
 
 type EditableFieldProps<TMultiLine = boolean> = {
-    label: ItemFields;
+    fieldName: FieldNames;
+    label: keyof PartInfoSchema;
     onBlur: ComponentProps<'input'>['onBlur'];
+    onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    value?: string;
+    isUnique?: boolean;
+    loading?: boolean;
 } & (TMultiLine extends true
     ? {
           /** Specifies if typefield is multi line (Must define rows if isMultiLine is true) */
@@ -17,7 +29,17 @@ type EditableFieldProps<TMultiLine = boolean> = {
       }
     : { isMultiLine?: false; rows?: never });
 
-const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps) => {
+const EditableField = ({
+    isMultiLine,
+    label,
+    onBlur,
+    onChange,
+    rows,
+    fieldName,
+    value: parentValue,
+    isUnique,
+    loading,
+}: EditableFieldProps) => {
     const { register, control } = useFormContext<PartInfoSchema>();
 
     const [open, setOpen] = useState(false);
@@ -35,12 +57,7 @@ const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps)
                 <Box>
                     <LabelContainer>
                         <label>
-                            <strong>
-                                {label
-                                    .split(/(?=[A-Z])/)
-                                    .join(' ')
-                                    .toUpperCase()}
-                            </strong>
+                            <strong>{fieldName}</strong>
                         </label>
                         <Edit
                             onClick={() => {
@@ -53,14 +70,20 @@ const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps)
                         name={label}
                         render={(controllerProps) => {
                             const {
-                                field: { onChange, value, name },
+                                field: {
+                                    onChange: controllerOnChange,
+                                    value: controllerValue,
+                                    name,
+                                },
                             } = controllerProps;
+                            const fieldOnChange = onChange ?? controllerOnChange;
+                            const value = parentValue ?? controllerValue;
                             const isEmpty = value === undefined || value === null || value === '';
 
                             return (
                                 <>
                                     <InfoContainer>
-                                        <TextField
+                                        <StyledTextField
                                             {...register(label)}
                                             variant="standard"
                                             InputProps={{
@@ -68,14 +91,18 @@ const EditableField = ({ isMultiLine, label, onBlur, rows }: EditableFieldProps)
                                                 readOnly: !open,
                                             }}
                                             onBlur={onBlur}
-                                            onChange={onChange}
+                                            onChange={fieldOnChange}
                                             multiline={isMultiLine}
                                             fullWidth
                                             rows={rows}
                                         />
                                     </InfoContainer>
+                                    {loading && <p>Checking...</p>}
                                     {isEmpty && (
                                         <ErrorP>{name.toLowerCase()} can not be empty.</ErrorP>
+                                    )}
+                                    {isUnique === false && (
+                                        <ErrorP>{name.toLowerCase()} must be unique</ErrorP>
                                     )}
                                 </>
                             );

@@ -1,3 +1,5 @@
+import { grey } from '@mui/material/colors';
+import createTheme, { ThemeOptions } from '@mui/material/styles/createTheme';
 import { createGlobalStyle } from 'styled-components';
 import { Shadows, ThemeOptions, createTheme } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
@@ -37,7 +39,6 @@ const themeOptions: ThemeOptions = {
         fontFamily: 'Archivo',
     },
     spacing: 4,
-    // shadows: Array(25).fill('none') as Shadows, // removes shadows from all MUI components
     components: {
         MuiButton: {
             variants: [
@@ -68,7 +69,6 @@ const GlobalStyles = createGlobalStyle<Props>`
     padding: ${({ width }) => (width < 500 ? 0 : '0px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
-    display: grid;
     overflow-x: hidden;
 
   }

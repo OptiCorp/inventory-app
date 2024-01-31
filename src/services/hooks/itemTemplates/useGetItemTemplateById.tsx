@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import apiService from '../../api';
 
-export const useGetItemById = (id: string) => {
+export const useGetItemTemplateById = (id: string) => {
     const api = apiService();
 
     return useQuery({
-        queryKey: ['items', id],
-        queryFn: () => api.getItemById(id),
+        queryKey: ['itemTemplate', id],
+        queryFn: () => api.getItemTemplateById(id),
         enabled: !!id,
     });
 };
