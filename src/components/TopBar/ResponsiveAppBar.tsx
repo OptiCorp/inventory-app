@@ -19,23 +19,14 @@ const settings = ['Profile', 'Account', 'Admin', 'Logout'];
 
 function ResponsiveAppBar() {
     const navigate = useNavigate();
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
     const theme = useTheme();
-
     const { handleSignOut } = useNavigationControl();
     const location = useLocation();
 
@@ -71,7 +62,6 @@ function ResponsiveAppBar() {
                                             : theme.palette.grey[600],
                                     }}
                                     key={page}
-                                    onClick={handleCloseNavMenu}
                                 >
                                     {page}
                                 </Button>
