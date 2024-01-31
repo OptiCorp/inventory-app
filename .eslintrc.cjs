@@ -23,6 +23,8 @@ module.exports = {
         'react-hooks/exhaustive-deps': 'off', // turning it off for now
         'react/react-in-jsx-scope': 'off',
         'react/prop-types': 'off',
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': ['error'],
     },
     settings: {
         react: { version: 'detect' },
