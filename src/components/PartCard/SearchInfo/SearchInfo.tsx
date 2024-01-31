@@ -53,8 +53,9 @@ export const SearchInfo = ({ part, icon }: PartCardProps) => {
                 }
             },
         });
-        handleClose(e);
+        handleClose();
     };
+
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation();
         mutateRemoveItemFromList(ids, {
@@ -67,14 +68,15 @@ export const SearchInfo = ({ part, icon }: PartCardProps) => {
                 }
             },
         });
-        handleClose(e);
+        handleClose();
     };
+
     const handleClickOpen = (e: React.MouseEvent) => {
         e.stopPropagation();
         setOpen(true);
     };
-    const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation();
+
+    const handleClose = () => {
         setOpen(false);
     };
 
@@ -151,7 +153,7 @@ export const SearchInfo = ({ part, icon }: PartCardProps) => {
                 title="Remove item from list?"
                 open={open}
                 onClose={handleClose}
-                CancelButtonOnClick={() => handleClose}
+                CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={(e) =>
                     handleDelete(e, {
                         itemId: part.id,
