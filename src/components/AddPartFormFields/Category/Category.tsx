@@ -16,7 +16,7 @@ export const Category = () => {
         name: 'categoryId',
         control,
     });
-    const selectedTemplate = watch('templateData');
+    const selectedTemplate = watch('itemTemplateId');
     const { data: categories = [] } = useGetCategories();
     const selectedCategory = categories.find((option) => option.id === value);
 
@@ -24,6 +24,7 @@ export const Category = () => {
         value: category.id,
         label: category.name,
     }));
+
     return (
         <StyledDiv>
             <StyledInputWrap>
@@ -40,7 +41,7 @@ export const Category = () => {
             </StyledInputWrap>
             <Autocomplete
                 options={testOptions}
-                disabled={!!selectedTemplate?.id}
+                disabled={!!selectedTemplate}
                 sx={{ width: 500, margin: '10px 0' }}
                 value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}
                 renderInput={(params) => (

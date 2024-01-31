@@ -4,13 +4,13 @@ import { TextField } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 
+import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
-import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
 
 export const ProductNumber = () => {
     const { watch, register } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('templateData');
+    const selectedTemplate = watch('itemTemplateId');
 
     // useEffect(() => {
     //     if (selectedTemplate) {
@@ -36,7 +36,7 @@ export const ProductNumber = () => {
             </StyledInputWrap>
 
             <TextField
-                disabled={!!selectedTemplate?.id}
+                disabled={!!selectedTemplate}
                 id="filled-disabled"
                 sx={{ width: '500px' }}
                 label=""

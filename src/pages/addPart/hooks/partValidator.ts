@@ -20,6 +20,7 @@ const templateSchema = z.object({
 
 export const partSchema = z.object({
     templateData: templateSchema.nullish(),
+    itemTemplateId: z.string(),
     wpId: z.string().min(1, 'WellPartner ID is required'),
     categoryId: z.string().min(1, 'Category is required'),
     description: z.string().min(1, 'Description is required'),

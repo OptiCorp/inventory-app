@@ -10,7 +10,7 @@ import { Container } from './styles.ts';
 
 export default function Template() {
     const { data: templates = [] } = useGetItemTemplates();
-    const { control, reset, watch } = useFormContext<PartSchema>();
+    const { control, reset, register } = useFormContext<PartSchema>();
     const {
         field: { onChange, value },
     } = useController({
@@ -18,7 +18,7 @@ export default function Template() {
 
         name: 'templateData',
     });
-    console.log(watch());
+
     const selectedTemplate = templates.find((option) => option.id === value?.id);
 
     return (
@@ -27,9 +27,9 @@ export default function Template() {
             <Autocomplete
                 options={templates}
                 value={selectedTemplate}
+                {...register('itemTemplateId', { value: selectedTemplate?.id })}
                 onChange={(_event, template) => {
                     onChange(template);
-                    console.log(template);
                     reset({
                         ...template,
                     });

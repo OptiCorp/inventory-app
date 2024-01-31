@@ -34,7 +34,7 @@ const defaultValues: PartSchema = {
     vendorId: '',
     locationId: '',
     description: '',
-
+    itemTemplateId: '',
     comment: '',
     createdById: '',
     uniqueWpId: false,

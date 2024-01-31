@@ -11,7 +11,7 @@ import { StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts
 
 export const Type: FC = () => {
     const { control, watch } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('templateData');
+    const selectedTemplate = watch('itemTemplateId');
     const options: FormOption[] = [
         { value: 'unit', label: 'Unit' },
         { value: 'assembly', label: 'Assembly' },
@@ -51,7 +51,7 @@ export const Type: FC = () => {
                 sx={{ width: 500 }}
                 value={selectedType}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
-                disabled={!!selectedTemplate?.id}
+                disabled={!!selectedTemplate}
                 onChange={(_event, newValue) => {
                     onChange(newValue?.value);
                 }}

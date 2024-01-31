@@ -1,15 +1,15 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { useFormContext } from 'react-hook-form';
 
+import { TextField } from '@mui/material';
+import { PartSchema } from '../../../pages/addPart/hooks/partValidator';
 import { StyledDiv, StyledErrorP } from '../styles';
 import { StyledInputWrap } from './styles';
-import { PartSchema } from '../../../pages/addPart/hooks/partValidator';
-import { TextField } from '@mui/material';
 
 export const Description = () => {
     const { register } = useFormContext();
     const { watch } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('templateData');
+    const selectedTemplate = watch('itemTemplateId');
     return (
         <StyledDiv>
             <StyledInputWrap>
@@ -21,7 +21,7 @@ export const Description = () => {
             </StyledInputWrap>
 
             <TextField
-                disabled={!!selectedTemplate?.id}
+                disabled={!!selectedTemplate}
                 multiline
                 rows={4}
                 id="filled-disabled"
