@@ -440,11 +440,11 @@ const apiService = () => {
         return await getByFetch(`Document/ByItemId/${itemId}`);
     };
 
-    const addDocument = async (document: AddDocument): Promise<Response> => {
+    const addDocument = async (document: AddDocument, itemId: string): Promise<Response> => {
         const formData = new FormData();
         formData.append('File', document.file);
         formData.append('DocumentTypeId', document.documentTypeId);
-        const res = await postFileByFetch(`Document/AddDocToItem/${document.itemId}`, formData);
+        const res = await postFileByFetch(`Document/AddDocToItem/${itemId}`, formData);
         return res;
     };
 

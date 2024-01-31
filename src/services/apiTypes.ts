@@ -173,7 +173,6 @@ export type FormOption = {
 };
 
 export type AddDocument = {
-    itemId: string;
     file: File;
     documentTypeId: string;
 };

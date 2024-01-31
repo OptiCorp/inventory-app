@@ -11,6 +11,7 @@ import {
     ListItem,
     Radio,
     RadioGroup,
+    Box,
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import { AddDocument } from '../../services/apiTypes';
@@ -18,9 +19,9 @@ import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocum
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
 import { Button as SubmitButton } from '../Button/Button';
-import { Container, Wrapper } from './styles';
 import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocumentTypes';
 import File from '../File/File';
+import { COLORS } from '../../style/GlobalStyles';
 
 type UploadProps = {
     itemId: string;
@@ -28,7 +29,7 @@ type UploadProps = {
 
 export const ExampleUpload = ({ itemId }: UploadProps) => {
     const { data: documents, isLoading } = useGetDocumentsByItemId(itemId);
-    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem();
+    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem(itemId);
     const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const { data: documentTypes } = useGetDocumentTypes();
     const inputFile = useRef<HTMLInputElement | null>(null);
@@ -40,7 +41,6 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
         setOpenDocumentTypeDialog(false);
         if (file) {
             const document: AddDocument = {
-                itemId: itemId,
                 file: file,
                 documentTypeId: chosenDocumentType!,
             };
@@ -61,7 +61,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
     };
 
     return (
-        <>
+        <Box sx={{ margin: '8px 0' }}>
             <Dialog open={openDocumentTypeDialog}>
                 <DialogTitle>What kind of document is this?</DialogTitle>
                 <DialogContent>
@@ -78,9 +78,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                             ))}
                         </List>
                     </RadioGroup>
-                    <div
-                        style={{ display: 'flex', justifyContent: 'space-between', margin: '8px' }}
-                    >
+                    <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Button
                             variant="contained"
                             onClick={handleCancel}
@@ -103,11 +101,20 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         >
                             UPLOAD
                         </Button>
-                    </div>
+                    </Box>
                 </DialogContent>
             </Dialog>
 
-            <Wrapper>
+            <Box
+                sx={{
+                    display: 'flex',
+                    padding: '12px 20px',
+                    margin: '8px 0',
+                    border: `1px dashed ${COLORS.black}`,
+                    boxSizing: 'border-box',
+                    minHeight: '200px',
+                }}
+            >
                 {isLoading ? (
                     <CircularProgress />
                 ) : (
@@ -119,8 +126,8 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         />
                     ))
                 )}
-            </Wrapper>
-            <Container>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'end' }}>
                 <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
                     <input
                         type="file"
@@ -134,7 +141,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                     />
                     ADD DOCUMENT
                 </SubmitButton>
-            </Container>
-        </>
+            </Box>
+        </Box>
     );
 };

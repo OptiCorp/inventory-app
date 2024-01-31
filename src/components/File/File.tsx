@@ -21,7 +21,7 @@ const File = ({ doc, file, handleFileRemoval }: FileProps) => {
         if (file) {
             const downloadLink = document.createElement('a');
             downloadLink.download = `${file.name}`;
-            downloadLink.href = `data:${file.type};base64,${URL.createObjectURL(file)}`; // TODO: Fix download file
+            downloadLink.href = `data:${file.type};base64,${URL.createObjectURL(file)}`;
             downloadLink.click();
         }
         if (doc) {
@@ -45,7 +45,10 @@ const File = ({ doc, file, handleFileRemoval }: FileProps) => {
                     <StyledFileShapeWrapper>
                         <StyledFileTypeWrapper>
                             <h3>
-                                .{doc ? doc.contentType.split('/')[1].toUpperCase() : file?.type}
+                                .
+                                {doc
+                                    ? doc.contentType.split('/')[1].toUpperCase()
+                                    : file?.type.split('/')[1].toUpperCase()}
                             </h3>
                         </StyledFileTypeWrapper>
                         <StyledIconWrapper>

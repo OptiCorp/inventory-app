@@ -5,8 +5,6 @@ export const StyledFileShapeWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    width: 100%;
-    padding: 4px;
     box-sizing: border-box;
 `;
 
@@ -21,7 +19,6 @@ export const StyledDocumentName = styled.span`
 export const StyledFileWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding-right: 16px;
 `;
 

@@ -29,7 +29,7 @@ type UploadProps = {
 const UploadMobile = ({ itemId }: UploadProps) => {
     const { data: documents } = useGetDocumentsByItemId(itemId);
     const { data: documentTypes } = useGetDocumentTypes();
-    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem();
+    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem(itemId);
     const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const inputFile = useRef<HTMLInputElement | null>(null);
     const [showArrow, setShowArrow] = useState(true);
@@ -41,7 +41,6 @@ const UploadMobile = ({ itemId }: UploadProps) => {
         setOpenDocumentTypeDialog(false);
         if (file) {
             const document: AddDocument = {
-                itemId: itemId,
                 file: file,
                 documentTypeId: chosenDocumentType!,
             };

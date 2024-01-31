@@ -20,6 +20,7 @@ const defaultValues: PartSchema = {
     comment: '',
     addedById: '',
     uniqueWpId: false,
+    files: [],
 };
 
 export const useAddPartForm = () => {
