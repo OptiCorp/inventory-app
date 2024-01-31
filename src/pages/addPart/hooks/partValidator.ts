@@ -30,8 +30,20 @@ export const partSchema = z.object({
     type: z.string().min(1, 'Type is required'),
     comment: z.string().nullish(),
     isBatch: z.boolean(),
-    isChecked: z.boolean().refine((value) => value),
+    preCheck: z.object({
+        check: z.boolean().refine((value) => value),
+        comment: z.string(),
+    }),
     documentation: z.boolean().refine((value) => value),
+    documents: z
+        .object({
+            id: z.string(),
+            name: z.string(),
+            blobRef: z.string(),
+            contentType: z.string(),
+            bytes: z.string(),
+        })
+        .optional(),
     locationId: z.string().nullish(),
     parentId: z.string().nullish(),
     createdById: z.string().min(1),

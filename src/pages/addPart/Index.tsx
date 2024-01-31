@@ -17,7 +17,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
         slug: 'batch',
     },
     {
-        fields: ['isChecked'],
+        fields: ['preCheck'],
         slug: 'checks',
     },
     {

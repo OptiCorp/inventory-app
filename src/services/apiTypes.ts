@@ -24,6 +24,8 @@ export type UserRole = {
 
 export type Item = {
     id: string;
+    preCheck: PreCheck;
+    itemTemplateId: string;
     wpId: string;
     serialNumber: string;
     productNumber: string;
@@ -45,6 +47,7 @@ export type Item = {
     createdBy: User;
     logEntries: LogEntry[];
     itemTemplate: ItemTemplate;
+    documents?: Document;
 };
 
 export type LogEntry = {
@@ -97,8 +100,12 @@ export type AddItem = {
     categoryId: string;
     serialNumber: string;
     productNumber: string;
+
+    itemTemplateId: string;
+    preCheck: PreCheck;
     type: string;
     locationId?: string | null;
+    documents?: Document;
     description: string;
     parentId?: string | null;
     vendorId: string;
@@ -109,6 +116,7 @@ export type AddItem = {
 export type UpdateItem = {
     id: string;
     wpId: string;
+
     serialNumber: string;
     productNumber: string;
     children: Item[] | null;
@@ -121,6 +129,11 @@ export type UpdateItem = {
     comment?: string | null;
     listId: string | null;
     itemTemplate: ItemTemplate;
+};
+
+export type PreCheck = {
+    check: boolean;
+    comment: string;
 };
 
 export type Vendor = {

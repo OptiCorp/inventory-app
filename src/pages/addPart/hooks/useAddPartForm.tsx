@@ -39,8 +39,16 @@ const defaultValues: PartSchema = {
     createdById: '',
     uniqueWpId: false,
     isBatch: false,
-    isChecked: false,
+    preCheck: { check: false, comment: '' },
     documentation: false,
+    documents: {
+        id: '',
+
+        name: '',
+        blobRef: '',
+        contentType: '',
+        bytes: '',
+    },
     templateData: defaultTemplate,
 };
 
@@ -81,15 +89,16 @@ export const useAddPartForm = () => {
     }, []);
 
     const onSubmit = handleSubmit((data) => {
-        console.log(data);
+        console.log(errors);
         if (data.files) {
             const files = [...data.files];
             delete data.files;
-
+            console.log(errors);
             mutate({ items: [data], files: files }, {});
         } else {
             mutate({ items: [data], files: undefined }, {});
         }
+
         console.log(data, defaultValues, 'fsdf');
     });
 

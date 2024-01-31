@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useController, useFormContext } from 'react-hook-form';
 import { RadioWrapper, StyledInput } from '../batch/styles.ts';
 import { PartSchema } from '../hooks/partValidator.ts';
@@ -7,15 +5,13 @@ import { FormContainer } from '../styles';
 import { StyledLabelText, StyledTextArea } from './styles';
 
 const CheckForm = () => {
-    const [description, setDescription] = useState<string>('');
-
-    const { control } = useFormContext<PartSchema>();
+    const { control, register } = useFormContext<PartSchema>();
     const {
         field: { onChange, value },
         fieldState: { error },
     } = useController({
         control,
-        name: 'isChecked',
+        name: 'preCheck.check',
     });
 
     return (
@@ -38,13 +34,7 @@ const CheckForm = () => {
             <StyledLabelText>
                 Describe what has been checked, and inform about deviations
             </StyledLabelText>
-            <StyledTextArea
-                id="textArea"
-                rows={5}
-                cols={40}
-                onBlur={(e) => setDescription(e.currentTarget.value)}
-                defaultValue={description}
-            />
+            <StyledTextArea id="textArea" {...register('preCheck.comment')} rows={5} cols={40} />
         </FormContainer>
     );
 };

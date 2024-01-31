@@ -1,22 +1,22 @@
 import { useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useDebounce } from 'usehooks-ts';
 import UmAppContext from '../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../hooks';
 import type { Item } from '../../../services/apiTypes';
-import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
-import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
+import { useGetItemTemplateById } from '../../../services/hooks/itemTemplates/useGetItemTemplateById';
+import { useUpdateItemTemplate } from '../../../services/hooks/itemTemplates/useUpdateItemTemplate';
+import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
-import { SelectField } from './SelectField';
+import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
+import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import EditableField from './EditableField';
+import { SelectField } from './SelectField';
+import { PartInfoSchema } from './hooks';
 import { Container, CreatedByContainer, PartInfoForm } from './styles';
 import { Types } from './types';
-import { PartInfoSchema } from './hooks';
-import { useUpdateItemTemplate } from '../../../services/hooks/itemTemplates/useUpdateItemTemplate';
-import { useGetItemTemplateById } from '../../../services/hooks/itemTemplates/useGetItemTemplateById';
-import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
-import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
-import { useDebounce } from 'usehooks-ts';
 
 type PartInfoProps = {
     item: Item;
