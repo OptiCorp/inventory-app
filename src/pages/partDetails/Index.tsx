@@ -6,7 +6,7 @@ import UploadMobile from '../../components/Upload/UploadMobile/UploadMobile';
 import { useWindowDimensions } from '../../hooks';
 import { useGetItemById } from '../../services/hooks/items/useGetItemById';
 import { Log } from './Log';
-import { Comments } from './comments/Comments';
+import { Comments } from '../../components/PartDetails/CommentForm/CommentForm';
 import { Hierarchy } from './hierarchy';
 import PartInfo from './partInfo/PartInfo';
 import { useUpdatePartForm } from './partInfo/hooks/useUpdatePartForm';
