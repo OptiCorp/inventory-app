@@ -1,3 +1,5 @@
+import { grey } from '@mui/material/colors';
+import createTheme, { ThemeOptions } from '@mui/material/styles/createTheme';
 import { createGlobalStyle } from 'styled-components';
 
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
@@ -16,6 +18,25 @@ type Props = {
     width: number;
 };
 
+const themeOptions: ThemeOptions = {
+    palette: {
+        primary: {
+            main: grey[900],
+        },
+        secondary: {
+            main: '#ff0000',
+        },
+    },
+    typography: {
+        fontFamily: 'Archivo',
+    },
+    spacing: 4,
+    components: {},
+};
+
+// TODO: move global theme to wrap around all components
+export const globalTheme = createTheme(themeOptions);
+
 const GlobalStyles = createGlobalStyle<Props>`
    body, :root, html {
         margin: 0;
@@ -29,7 +50,6 @@ const GlobalStyles = createGlobalStyle<Props>`
     padding: ${({ width }) => (width < 500 ? 0 : '8px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
-    display: grid;
     overflow-x: hidden;
 
   }

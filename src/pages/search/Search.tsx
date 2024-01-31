@@ -88,7 +88,9 @@ const Search = () => {
                                 <div
                                     key={index}
                                     id={
-                                        i === data.pages.length - 1 && index === page.length - 1
+                                        i === data.pages.length - 1 &&
+                                        index === page.length - 1 &&
+                                        page.length >= 10
                                             ? 'lastItem'
                                             : ''
                                     }

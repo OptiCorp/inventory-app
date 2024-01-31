@@ -5,7 +5,6 @@ import { AddItem } from '../../apiTypes';
 
 type MutationObject = {
     items: AddItem[];
-    files?: File[];
 };
 
 export const useAddItems = () => {
@@ -13,7 +12,7 @@ export const useAddItems = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (object: MutationObject) => api.addItem(object.items, object.files),
+        mutationFn: (object: MutationObject) => api.addItem(object.items),
         onSuccess: () => {
             queryClient
                 .invalidateQueries({

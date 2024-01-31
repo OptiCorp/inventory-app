@@ -10,8 +10,6 @@ import { useSnackBar, useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes.ts';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
 
-import { useGetItemsNotInListInfinite } from '../../services/hooks/items/useGetItemsNotInListInfinite.tsx';
-
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
 
 import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx';
@@ -26,6 +24,7 @@ import {
     SearchContainerList,
     SearchResultsContainer,
 } from './styles.ts';
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
 
 const ListDetails = () => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
@@ -36,11 +35,7 @@ const ListDetails = () => {
     const navigate = useNavigate();
     const { data: list, isFetching } = useGetListById(listId!);
     const { snackbar } = useSnackBar();
-    const {
-        data: items,
-        isLoading,
-        fetchNextPage,
-    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
+    const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
@@ -86,7 +81,6 @@ const ListDetails = () => {
             <SearchContainerList>
                 <SearchResultsContainer>
                     <ListTitle>Add items</ListTitle>
-
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}

@@ -95,6 +95,7 @@ export type UpdateList = {
 export type MutateItemList = {
     listId: string;
     itemId: string;
+    addSubItems?: boolean;
 };
 
 export type AddItem = {
@@ -173,8 +174,8 @@ export type FormOption = {
 };
 
 export type AddDocument = {
-    itemId: string;
-    files: File[];
+    file: File;
+    documentTypeId: string;
 };
 
 export type Document = {
@@ -183,4 +184,10 @@ export type Document = {
     blobRef: string;
     contentType: string;
     bytes: string;
+};
+
+export type DocumentType = {
+    id: string;
+    name: string;
+    description: string;
 };
