@@ -12,6 +12,7 @@ import {
     Category,
     Document,
     Item,
+    ItemTemplate,
     List,
     Location,
     UpdateCategory,
@@ -468,6 +469,10 @@ const apiService = () => {
         return await getByFetch('ItemTemplate');
     };
 
+    const addItemTemplate = async (itemTemplateBody: ItemTemplate): Promise<Response> => {
+        return postByFetch('ItemTemplate', itemTemplateBody);
+    };
+
     return {
         getAllUsers,
         getUser,
@@ -523,6 +528,7 @@ const apiService = () => {
         getItemTemplateById,
         updateItemTemplateById,
         getItemTemplates,
+        addItemTemplate,
     };
 };
 
