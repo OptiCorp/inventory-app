@@ -1,4 +1,4 @@
-import { Breadcrumbs } from '@mui/material';
+import { Breadcrumbs, Button } from '@mui/material';
 import { FormProvider } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ExampleUpload } from '../../components/Upload/Upload';
@@ -11,7 +11,6 @@ import { Hierarchy } from './hierarchy';
 import PartInfo from './partInfo/PartInfo';
 import { useUpdatePartForm } from './partInfo/hooks/useUpdatePartForm';
 import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles';
-import { Button } from '../../components/Button/Button';
 import { ButtonContainer } from '../addPart/styles';
 import { useDeleteItemById } from '../../services/hooks/items/useDeleteItemById';
 import { useState } from 'react';
@@ -64,7 +63,12 @@ const PartDetails = () => {
                 <Log item={item} />
             </FormProvider>
             <ButtonContainer>
-                <Button variant="red" type="button" onClick={() => setIsOpen(true)}>
+                <Button
+                    variant="outlined"
+                    color="inherit"
+                    sx={{ borderRadius: '0', height: '40px', width: '200px' }}
+                    onClick={() => setIsOpen(true)}
+                >
                     Delete
                 </Button>
             </ButtonContainer>
