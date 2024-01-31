@@ -1,8 +1,6 @@
 import { grey } from '@mui/material/colors';
-import createTheme, { ThemeOptions } from '@mui/material/styles/createTheme';
+import { ThemeOptions, createTheme } from '@mui/material/styles';
 import { createGlobalStyle } from 'styled-components';
-import { Shadows, ThemeOptions, createTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
 
 declare module '@mui/material/Button' {
     interface ButtonPropsVariantOverrides {
