@@ -74,9 +74,10 @@ Issues should have the following format:
     - **refactor** for code restructuring.
 2. **Descriptive Text**: Add a concise descriptive text.
 
-If applicable, also give the issue a label. 
+If applicable, also give the issue a label.
 
 **Example**
+
 ```
 fix: Failed to Login BrowserAuthError
 ```
@@ -86,6 +87,7 @@ fix: Failed to Login BrowserAuthError
 Branches should have the auto-generated name given to branches created from issues.
 
 **Example**
+
 ```
 205-fix-failed-to-login-browserautherror
 ```

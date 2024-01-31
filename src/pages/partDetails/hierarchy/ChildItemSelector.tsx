@@ -20,6 +20,7 @@ import {
 } from '../../../services/hooks/items/useAddChildItemToParent';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import EditIcon from '@mui/icons-material/Edit';
+import { LabelContainer } from '../partInfo/styles';
 
 type ChildItemSelector = {
     item: Item;
@@ -80,6 +81,11 @@ export const ChildItemSelector = ({
     return (
         <ClickAwayListener onClickAway={clickAwayHandler}>
             <Box>
+                <LabelContainer>
+                    <label>
+                        <strong>{`This ${item.itemTemplate.type.toLowerCase()} consists of:`}</strong>
+                    </label>
+                </LabelContainer>
                 <FlexContainer>
                     {item.children?.map((childItem) => {
                         return (

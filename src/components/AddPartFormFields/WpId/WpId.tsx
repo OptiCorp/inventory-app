@@ -25,7 +25,7 @@ export const WpId = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="WellPartner Id">WellPartner ID </label>{' '}
+                    <label htmlFor="WellPartner Id">WellPartner ID </label>
                     <ToolTip content="Specify a unique WellPartner ID">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
@@ -42,7 +42,7 @@ export const WpId = () => {
                 autoComplete="off"
                 value={wpId}
                 onChange={(e) => setWpId(e.target.value)}
-                isUnique={isUnique?.toString()}
+                $isUnique={isUnique}
             />
             {isLoading && <p>Checking...</p>}
             {wpId && (
@@ -51,7 +51,7 @@ export const WpId = () => {
                         <StyledParagraph>WellPartner ID is unique!</StyledParagraph>
                     )}
                     {isUnique === false && (
-                        <StyledParagraph>
+                        <StyledParagraph $isUnique={isUnique}>
                             WellPartner ID is not unique. Please choose a different one.
                         </StyledParagraph>
                     )}
