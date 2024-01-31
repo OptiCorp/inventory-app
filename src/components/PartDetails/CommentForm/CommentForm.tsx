@@ -1,10 +1,10 @@
 import { TextField } from '@mui/material';
 import { FormEvent, useContext } from 'react';
-import { Button } from '../../../components/Button/Button';
+import { Button } from '../../Button/Button';
 import { Item } from '../../../services/apiTypes';
 import { Wrapper } from './styles';
 import { Controller, useFormContext } from 'react-hook-form';
-import { PartInfoSchema } from '../partInfo/hooks';
+import { PartInfoSchema } from '../../../pages/partDetails/partInfo/hooks';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import UmAppContext from '../../../contexts/UmAppContext';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
