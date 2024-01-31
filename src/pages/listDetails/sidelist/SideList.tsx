@@ -9,7 +9,6 @@ import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx';
 import UmAppContext from '../../../contexts/UmAppContext.tsx';
 import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
-import { useGetListById } from '../../../services/hooks/list/useGetListById';
 
 type Props = {
     part: Item;
@@ -17,8 +16,6 @@ type Props = {
 
 export const SideList = ({ part }: Props) => {
     const { listId } = useParams();
-    // console.log('listid', listId);
-    const { data: list } = useGetListById(listId!);
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
