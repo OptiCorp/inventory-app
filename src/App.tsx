@@ -23,6 +23,7 @@ import PartDetails from './pages/partDetails/Index';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 
+import { Navigate } from 'react-router-dom';
 import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
 import { useSnackBar } from './hooks/useSnackbar.tsx';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
@@ -32,10 +33,8 @@ import AddLocation from './pages/admin/location/AddLocation.tsx';
 import AddVendor from './pages/admin/vendor/AddVendor.tsx';
 import Index from './pages/listDetails/phone/Tabs.tsx';
 
-import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 import { ThemeProvider } from '@mui/material';
-// import { ThemeProvider } from '@mui/material/styles';
-// import globalTheme from './style/GlobalStyles.ts';
+import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -46,7 +45,8 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route element={<ResponsiveAppBar />}>
-                <Route path="/" element={<Search />} />
+                <Route path="/" element={<Navigate to="/find-parts" />} />
+                <Route path="/find-parts" element={<Search />} />
                 <Route path="search/:searchParam?" element={<Search />} />
 
                 <Route path=":id" element={<PartDetails />} />
@@ -86,7 +86,7 @@ function App() {
                     {isAuthenticated && (
                         <UmAppContextProvider>
                             <GlobalStyles width={width} />
-                            {/* {snackbar} */}
+                            {snackbar}
                             <RouterProvider router={router} />
                         </UmAppContextProvider>
                     )}
