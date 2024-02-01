@@ -17,6 +17,7 @@ import { useGetItemTemplateById } from '../../../services/hooks/itemTemplates/us
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { useDebounce } from 'usehooks-ts';
+import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 
 type PartInfoProps = {
     item: Item;
@@ -110,29 +111,30 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
         fieldName: keyof PartInfoSchema
     ) => {
         const fieldValue: Field = watch(fieldName) as Field;
-        if (dirtyFields[fieldName] && fieldValue) {
-            const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
-            mutate(
-                {
-                    ...item,
-                    [fieldId]: mutableValue,
+        // TODO: fix if field is changed, temp fix remove check..
+        /* if (dirtyFields[fieldName] && fieldValue) { */
+        const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
+        mutate(
+            {
+                ...item,
+                [fieldId]: mutableValue,
+            },
+            {
+                onSuccess: (data) => {
+                    handleApiRequestSnackbar(
+                        data,
+                        `${fieldName} was updated`,
+                        setSnackbarSeverity,
+                        setSnackbarText
+                    );
                 },
-                {
-                    onSuccess: (data) => {
-                        handleApiRequestSnackbar(
-                            data,
-                            `${fieldName} was updated`,
-                            setSnackbarSeverity,
-                            setSnackbarText
-                        );
-                    },
-                }
-            );
-        }
+            }
+        );
+        /* } */
     };
 
     if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
-        return <p>Loading.. </p>;
+        return <GlobalSpinner />;
     }
 
     return (
