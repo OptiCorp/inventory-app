@@ -139,6 +139,46 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
         <PartInfoForm>
             <Container>
                 <SelectField
+                    placeholder="Select location..."
+                    fieldName="LOCATION"
+                    label="location"
+                    options={convertOptionsToSelectFormat(locations)}
+                    onBlur={() => handleBlurItemProperties('locationId', 'location')}
+                />
+
+                <SelectField
+                    placeholder="Select vendor..."
+                    fieldName="VENDOR"
+                    label="vendor"
+                    options={convertOptionsToSelectFormat(vendors)}
+                    onBlur={() => handleBlurItemProperties('vendorId', 'vendor')}
+                />
+
+                <EditableField
+                    fieldName="S/N"
+                    label="serialNumber"
+                    onBlur={() => handleBlurItemProperties('serialNumber', 'serialNumber')}
+                />
+
+                <EditableField
+                    fieldName="WPID"
+                    label="wpId"
+                    onBlur={() => {
+                        if (isUniqueWpId === true) {
+                            setValue('wpId', debouncedWpId);
+
+                            handleBlurItemProperties('wpId', 'wpId');
+                        }
+                    }}
+                    isUnique={isUniqueWpId}
+                    loading={isLoadingUniqueWpId}
+                    onChange={(event) => {
+                        setNewWpId(event.target.value);
+                    }}
+                    value={wpId}
+                />
+
+                <SelectField
                     placeholder="Select type..."
                     fieldName="TYPE"
                     label="itemTemplate.type"
@@ -163,12 +203,15 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                     }
                 />
 
-                <SelectField
-                    placeholder="Select location..."
-                    fieldName="LOCATION"
-                    label="location"
-                    options={convertOptionsToSelectFormat(locations)}
-                    onBlur={() => handleBlurItemProperties('locationId', 'location')}
+                <EditableField
+                    fieldName="P/N"
+                    label="itemTemplate.productNumber"
+                    onBlur={() =>
+                        handleBlurItemTemplateProperties(
+                            'productNumber',
+                            'itemTemplate.productNumber' as keyof PartInfoSchema
+                        )
+                    }
                 />
 
                 <CreatedByContainer>
@@ -181,47 +224,6 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                             : `${item.createdBy.firstName} ${item.createdBy.lastName}`}
                     </p>
                 </CreatedByContainer>
-                <EditableField
-                    fieldName="S/N"
-                    label="serialNumber"
-                    onBlur={() => handleBlurItemProperties('serialNumber', 'serialNumber')}
-                />
-                <EditableField
-                    fieldName="P/N"
-                    label="itemTemplate.productNumber"
-                    onBlur={() =>
-                        handleBlurItemTemplateProperties(
-                            'productNumber',
-                            'itemTemplate.productNumber' as keyof PartInfoSchema
-                        )
-                    }
-                />
-
-                <SelectField
-                    placeholder="Select vendor..."
-                    fieldName="VENDOR"
-                    label="vendor"
-                    options={convertOptionsToSelectFormat(vendors)}
-                    onBlur={() => handleBlurItemProperties('vendorId', 'vendor')}
-                />
-
-                <EditableField
-                    fieldName="WPID"
-                    label="wpId"
-                    onBlur={() => {
-                        if (isUniqueWpId === true) {
-                            setValue('wpId', debouncedWpId);
-
-                            handleBlurItemProperties('wpId', 'wpId');
-                        }
-                    }}
-                    isUnique={isUniqueWpId}
-                    loading={isLoadingUniqueWpId}
-                    onChange={(event) => {
-                        setNewWpId(event.target.value);
-                    }}
-                    value={wpId}
-                />
             </Container>
             <EditableField
                 fieldName="DESCRIPTION"
