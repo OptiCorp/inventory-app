@@ -297,6 +297,10 @@ const apiService = () => {
         return await putByFetch(`Item/${id}?updatedById=${updatedById}`, item);
     };
 
+    const deleteItemById = async (id: string): Promise<Response> => {
+        return await deleteByFetch(`Item/${id}`);
+    };
+
     const removeParentIdFromItem = async (itemId: string): Promise<Response> => {
         return await postByFetch(`Item/RemoveParentId?itemId=${itemId}`);
     };
@@ -488,6 +492,7 @@ const apiService = () => {
         updateList,
         getItemById,
         updateItemById,
+        deleteItemById,
         removeParentIdFromItem,
         getListById,
         addItemsToList,
