@@ -7,11 +7,12 @@ import UmAppContext from '../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../hooks';
 import type { Item } from '../../../services/apiTypes';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
-import { useGetItemTemplateById } from '../../../services/hooks/itemTemplates/useGetItemTemplateById';
-import { useUpdateItemTemplate } from '../../../services/hooks/itemTemplates/useUpdateItemTemplate';
+
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
+import { useGetItemTemplateById } from '../../../services/hooks/template/useGetItemTemplateById';
+import { useUpdateItemTemplate } from '../../../services/hooks/template/useUpdateItemTemplate';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import EditableField from './EditableField';

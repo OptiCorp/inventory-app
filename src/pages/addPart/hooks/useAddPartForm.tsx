@@ -6,8 +6,9 @@ import { useContext, useEffect } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
 
 import { ItemTemplate } from '../../../services/apiTypes.ts';
-import { useAddItemTemplate } from '../../../services/hooks/itemTemplates/useAddItemTemplate.tsx';
+
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
+import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.tsx';
 import { PartSchema, TemplateSchema, partSchema } from './partValidator';
 
 const defaultTemplate: TemplateSchema = {
@@ -96,8 +97,6 @@ export const useAddPartForm = () => {
         }
     }, []);
 
-    console.log(watch());
-
     const templateSubmit = async () => {
         const data = await templateMutate({
             categoryId: selectedTemplate.categoryId || '',
@@ -129,13 +128,14 @@ export const useAddPartForm = () => {
                             ...data,
                             itemTemplate: {
                                 id: itemTemplateId,
-                                name: name,
+
                                 type: type,
                                 categoryId: categoryId,
                                 productNumber: productNumber,
 
                                 description: description,
                                 createdById: currentUser?.id ?? '',
+                                name: name ?? '',
                             },
                             itemTemplateId,
                         },
@@ -143,7 +143,7 @@ export const useAddPartForm = () => {
                     files: undefined,
                 });
             }
-            console.log(watch());
+
             if (data.files) {
                 const files = [...data.files];
                 delete data.files;
