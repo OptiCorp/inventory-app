@@ -11,6 +11,7 @@ import {
     AddVendor,
     Category,
     Document,
+    DocumentType,
     Item,
     List,
     Location,
@@ -22,7 +23,6 @@ import {
     User,
     UserRole,
     Vendor,
-    DocumentType,
 } from './apiTypes';
 
 const request = {
@@ -323,6 +323,7 @@ const apiService = () => {
 
     const addItem = async (
         items: PartSchema[],
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         files?: File[]
     ): Promise<Response | Response[][]> => {
         const res = await postByFetch(`Item`, items);
@@ -473,27 +474,6 @@ const apiService = () => {
         return postByFetch('ItemTemplate', itemTemplateBody);
     };
 
-    // ItemTemplate
-
-    const getItemTemplateById = async (id: string): Promise<TemplateSchema> => {
-        return await getByFetch(`ItemTemplate/${id}`);
-    };
-
-    const updateItemTemplateById = async (
-        id: string,
-        itemTemplate: TemplateSchema
-    ): Promise<Response> => {
-        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
-    };
-
-    const getItemTemplates = async (): Promise<TemplateSchema[]> => {
-        return await getByFetch('ItemTemplate');
-    };
-
-    const addItemTemplate = async (itemTemplateBody: AddTemplate): Promise<Response> => {
-        return postByFetch('ItemTemplate', itemTemplateBody);
-    };
-
     return {
         getAllUsers,
         getUser,
@@ -551,7 +531,7 @@ const apiService = () => {
         getItemTemplates,
         getItemTemplateById,
         updateItemTemplateById,
-        getItemTemplates,
+
         addItemTemplate,
     };
 };
