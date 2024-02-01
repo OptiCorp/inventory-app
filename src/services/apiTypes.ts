@@ -43,9 +43,8 @@ export type Item = {
     createdBy: User;
     logEntries: LogEntry[];
     itemTemplate: ItemTemplate;
-
     documents?: Document;
-
+}
 
 export type ItemTemplate = {
     id: string;
@@ -54,7 +53,7 @@ export type ItemTemplate = {
     categoryId: string;
     category: Category;
     description: string;
-
+}
 
 export type LogEntry = {
     createdBy: User;
