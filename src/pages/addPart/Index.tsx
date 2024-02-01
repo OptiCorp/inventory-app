@@ -67,6 +67,7 @@ const AddPart = () => {
             {steps.some((step) => location.pathname.includes(`/add-part/${step.slug}`)) && (
                 <ProgressBar activeStep={activeStep} steps={steps} />
             )}
+
             <StyledForm onSubmit={onSubmit} id="addPart">
                 <Outlet />
             </StyledForm>

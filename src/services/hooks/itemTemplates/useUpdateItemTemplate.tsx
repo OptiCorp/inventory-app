@@ -5,10 +5,7 @@ export type UpdateItemTemplate = {
     id: string;
     itemTemplate: TemplateSchema;
 };
-/**
- *
- * @param id The item template id
- */
+
 export const useUpdateItemTemplate = (id: string) => {
     const api = apiService();
     const queryClient = useQueryClient();

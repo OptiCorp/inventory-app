@@ -6,14 +6,14 @@ import { Location as LocationType } from '../../../services/apiTypes.ts';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 import { Autocomplete, TextField } from '@mui/material';
 import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Location = () => {
     const { data: categories = [] } = useGetLocations();
-    const { control, watch } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('templateData');
+    const { control } = useFormContext<PartSchema>();
+
     const locationOptions = categories.map((location: LocationType) => ({
         value: location.id,
         label: location.name,
@@ -44,7 +44,6 @@ export const Location = () => {
             </StyledInputWrap>
             <Autocomplete
                 options={locationOptions}
-                disabled={!!selectedTemplate?.id}
                 sx={{ width: 500 }}
                 value={selectedLocation}
                 isOptionEqualToValue={(option, value) => option.value === value.value}

@@ -321,11 +321,7 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`);
     };
 
-    const addItem = async (
-        items: PartSchema[],
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        files?: File[]
-    ): Promise<Response | Response[][]> => {
+    const addItem = async (items: PartSchema[]): Promise<Response | Response[][]> => {
         const res = await postByFetch(`Item`, items);
         return res;
     };

@@ -192,6 +192,7 @@ export type Document = {
 export type ItemTemplate = {
     inputValue?: string;
     name: string;
+    description: string;
     id: string;
     category: { id: string; name: string; userId: string };
     categoryId: string;

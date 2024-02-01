@@ -122,7 +122,7 @@ export const useAddPartForm = () => {
                     type,
                     description,
                 } = await templateSubmit();
-                setValue('itemTemplate.id', itemTemplateId);
+
                 mutate({
                     items: [
                         {
@@ -133,6 +133,7 @@ export const useAddPartForm = () => {
                                 type: type,
                                 categoryId: categoryId,
                                 productNumber: productNumber,
+
                                 description: description,
                                 createdById: currentUser?.id ?? '',
                             },
@@ -142,7 +143,7 @@ export const useAddPartForm = () => {
                     files: undefined,
                 });
             }
-            console.log(watch('itemTemplate.id'));
+            console.log(watch());
             if (data.files) {
                 const files = [...data.files];
                 delete data.files;
