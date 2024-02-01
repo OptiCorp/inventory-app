@@ -17,7 +17,7 @@ import { PartSchema } from '../hooks/partValidator';
 export const FormContent = () => {
     const { currentUser } = useContext(UmAppContext);
     const { register, watch } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('itemTemplateId');
+    const selectedTemplate = watch('itemTemplate.id');
 
     return (
         <>

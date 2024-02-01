@@ -10,8 +10,7 @@ import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '.
 
 export const ProductNumber = () => {
     const { watch, register } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('itemTemplateId');
-
+    const selectedTemplate = watch('itemTemplate.id');
     return (
         <StyledDiv>
             <StyledInputWrap>

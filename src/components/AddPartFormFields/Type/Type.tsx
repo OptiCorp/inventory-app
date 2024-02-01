@@ -11,7 +11,7 @@ import { StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts
 
 export const Type: FC = () => {
     const { control, watch } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('itemTemplateId');
+    const selectedTemplate = watch('itemTemplate.id');
     const options: FormOption[] = [
         { value: 'unit', label: 'Unit' },
         { value: 'assembly', label: 'Assembly' },

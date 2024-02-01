@@ -8,7 +8,7 @@ import { StyledInputWrap } from './styles';
 
 export const Description = () => {
     const { watch, register } = useFormContext<PartSchema>();
-    const selectedTemplate = watch('itemTemplateId');
+    const selectedTemplate = watch('itemTemplate.id');
     return (
         <StyledDiv>
             <StyledInputWrap>

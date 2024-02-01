@@ -146,9 +146,15 @@ export const useAddPartForm = () => {
             if (data.files) {
                 const files = [...data.files];
                 delete data.files;
-                mutate({ items: [data], files: files });
+                mutate({
+                    items: [{ ...data, itemTemplateId: selectedTemplate?.id }],
+                    files: files,
+                });
             } else {
-                mutate({ items: [data], files: undefined });
+                mutate({
+                    items: [{ ...data, itemTemplateId: selectedTemplate?.id }],
+                    files: undefined,
+                });
             }
         },
         (errors) => console.log(errors)

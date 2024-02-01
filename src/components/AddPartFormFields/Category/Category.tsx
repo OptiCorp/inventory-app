@@ -17,7 +17,7 @@ export const Category = () => {
         name: 'itemTemplate.categoryId',
         control,
     });
-    const selectedTemplate = watch('itemTemplateId');
+    const selectedTemplate = watch('itemTemplate.id');
     const { data: categories = [] } = useGetCategories();
     const selectedCategory = categories.find((option) => option.id === value);
 

@@ -14,6 +14,8 @@ const RecentlyAdded = () => {
 
     const navigate = useNavigate();
 
+    console.log(myItems);
+
     return (
         <RecentlyAddedContainer>
             <Container>
