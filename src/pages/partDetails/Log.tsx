@@ -21,6 +21,7 @@ export const Log = ({ item }: { item: Item }) => {
         <>
             <h4>Log</h4>
             <ScrollTextField
+                InputProps={{ sx: { borderRadius: 0 } }}
                 value={formattedLogEntries.length < 1 ? 'No log entries' : formattedLogEntries}
                 multiline
                 variant="filled"
