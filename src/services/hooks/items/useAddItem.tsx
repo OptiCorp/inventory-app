@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { PartSchema } from '../../../pages/addPart/hooks/partValidator';
 import apiService from '../../api';
-import { AddItem } from '../../apiTypes';
 
 type MutationObject = {
-    items: AddItem[];
+    items: PartSchema[];
     files?: File[];
 };
 

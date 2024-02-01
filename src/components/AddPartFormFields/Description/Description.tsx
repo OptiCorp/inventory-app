@@ -7,8 +7,7 @@ import { StyledDiv, StyledErrorP } from '../styles';
 import { StyledInputWrap } from './styles';
 
 export const Description = () => {
-    const { register } = useFormContext();
-    const { watch } = useFormContext<PartSchema>();
+    const { watch, register } = useFormContext<PartSchema>();
     const selectedTemplate = watch('itemTemplateId');
     return (
         <StyledDiv>
@@ -29,7 +28,7 @@ export const Description = () => {
                 label="Description"
                 placeholder="E.g. Hydraulic cylinders can be purchased in a range of ISO standard measurement bore"
                 variant="filled"
-                {...register('description')}
+                {...register('itemTemplate.description')}
             />
         </StyledDiv>
     );

@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AddTemplate } from '../../../pages/addPart/hooks/useAddPartForm';
 import apiService from '../../api';
-import { ItemTemplate } from '../../apiTypes';
 
 export const useAddItemTemplate = () => {
     const api = apiService();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (itemTemplateBody: ItemTemplate) => api.addItemTemplate(itemTemplateBody),
+        mutationFn: (itemTemplateBody: AddTemplate) => api.addItemTemplate(itemTemplateBody),
         onSuccess: () => {
             queryClient
                 .invalidateQueries({

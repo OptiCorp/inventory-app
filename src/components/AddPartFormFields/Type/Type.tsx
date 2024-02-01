@@ -24,7 +24,7 @@ export const Type: FC = () => {
     } = useController({
         control,
 
-        name: 'type',
+        name: 'itemTemplate.type',
     });
 
     const selectedType = options.find((option) => option.label === value);

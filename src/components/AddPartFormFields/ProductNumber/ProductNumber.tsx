@@ -12,14 +12,6 @@ export const ProductNumber = () => {
     const { watch, register } = useFormContext<PartSchema>();
     const selectedTemplate = watch('itemTemplateId');
 
-    // useEffect(() => {
-    //     if (selectedTemplate) {
-    //         if (selectedTemplate.productNumber) {
-    //             setValue('productNumber', selectedTemplate.productNumber);
-    //         }
-    //     }
-    // }, [selectedTemplate?.productNumber]);
-
     return (
         <StyledDiv>
             <StyledInputWrap>
@@ -42,7 +34,7 @@ export const ProductNumber = () => {
                 label=""
                 placeholder="E.g BV 113 EU"
                 variant="filled"
-                {...register('productNumber')}
+                {...register('itemTemplate.productNumber')}
             />
         </StyledDiv>
     );

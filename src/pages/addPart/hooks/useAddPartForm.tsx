@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
 
+import { useAddItemTemplate } from '../../../services/hooks/itemTemplates/useAddItemTemplate.tsx';
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
 import { PartSchema, TemplateSchema, partSchema } from './partValidator';
 
@@ -14,26 +15,21 @@ const defaultTemplate: TemplateSchema = {
     name: '',
     inputValue: '',
     type: '',
-    category: {
-        id: '',
-        name: '',
-        createdById: '',
-        createdDate: '',
-        updatedDate: '',
-    },
+    // category: {
+    //     id: '',
+    //     name: '',
+    //     createdById: '',
+    // },
     productNumber: '',
     description: '',
+    createdById: '',
 };
 
 const defaultValues: PartSchema = {
     wpId: '',
-    type: '',
-    categoryId: '',
     serialNumber: '',
-    productNumber: '',
     vendorId: '',
     locationId: '',
-    description: '',
     itemTemplateId: '',
     comment: '',
     createdById: '',
@@ -41,15 +37,25 @@ const defaultValues: PartSchema = {
     isBatch: false,
     preCheck: { check: false, comment: '' },
     documentation: false,
-    documents: {
-        id: '',
+    // documents: {
+    //     id: '',
 
-        name: '',
-        blobRef: '',
-        contentType: '',
-        bytes: '',
-    },
-    templateData: defaultTemplate,
+    //     name: '',
+    //     blobRef: '',
+    //     contentType: '',
+    //     bytes: '',
+    // },
+    itemTemplate: defaultTemplate,
+};
+
+export type AddTemplate = {
+    name: string;
+    type: string;
+    categoryId: string;
+    description: string;
+    createdById: string;
+    revision: string;
+    productNumber: string;
 };
 
 export const useAddPartForm = () => {
@@ -75,32 +81,60 @@ export const useAddPartForm = () => {
         setValue,
         watch,
     } = methods;
-
-    const selectedTemplate = watch('templateData');
+    const { mutate: templateMutate } = useAddItemTemplate();
+    const selectedTemplate = watch('itemTemplate');
 
     useEffect(() => {
-        register('templateData');
+        register('itemTemplate');
     }, [register]);
 
     useEffect(() => {
         if (selectedTemplate) {
-            setValue('templateData', selectedTemplate);
+            setValue('itemTemplate', selectedTemplate);
+            setValue('itemTemplateId', selectedTemplate?.id);
         }
     }, []);
+    console.log(selectedTemplate, 'dtttsefs');
+    console.log(watch());
 
-    const onSubmit = handleSubmit((data) => {
-        console.log(errors);
-        if (data.files) {
-            const files = [...data.files];
-            delete data.files;
-            console.log(errors);
-            mutate({ items: [data], files: files }, {});
-        } else {
-            mutate({ items: [data], files: undefined }, {});
-        }
+    const templateSubmit = (data: TemplateSchema) => {
+        templateMutate({
+            categoryId: data.categoryId || '',
+            createdById: currentUser?.id ?? '',
+            description: data.description || '',
+            name: selectedTemplate?.name || '',
+            productNumber: selectedTemplate?.productNumber || '',
+            revision: '1.06',
+            type: selectedTemplate?.type || '',
+        });
+    };
 
-        console.log(data, defaultValues, 'fsdf');
-    });
+    const onSubmit = handleSubmit(
+        (data) => {
+            if (!selectedTemplate.id) {
+                templateMutate({
+                    categoryId: selectedTemplate.categoryId || '',
+                    createdById: currentUser?.id ?? '',
+                    description: selectedTemplate.description || '',
+                    name: selectedTemplate?.name || '',
+                    productNumber: selectedTemplate?.productNumber || '',
+                    revision: '1.06',
+                    type: selectedTemplate?.type || '',
+                });
+                console.log('template');
+            }
+
+            if (data.files) {
+                const files = [...data.files];
+                delete data.files;
+                console.log(errors);
+                mutate({ items: [data], files: files }, {});
+            } else {
+                mutate({ items: [data], files: undefined }, {});
+            }
+        },
+        (errors) => console.log(errors)
+    );
 
     return {
         methods,
@@ -114,6 +148,7 @@ export const useAddPartForm = () => {
         trigger,
         setValue,
         resetField,
+        templateSubmit,
         watch,
     };
 };

@@ -1,5 +1,4 @@
 import { Button } from '../../../components/Button/Button.tsx';
-
 import { ButtonWrapper, FormContainer } from '../styles.ts';
 
 import { FormContent } from './FormContent.tsx';
@@ -14,6 +13,13 @@ export const AddPartForm = () => {
                     FINISH
                 </Button>
             </ButtonWrapper>
+            {/* <button
+                onClick={() => {
+                    templateSubmit();
+                }}
+            >
+                template
+            </button> */}
         </FormContainer>
     );
 };

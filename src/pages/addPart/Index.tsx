@@ -25,11 +25,11 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
         slug: 'upload',
     },
     {
-        fields: ['templateData'],
+        fields: ['itemTemplate'],
         slug: 'template',
     },
     {
-        fields: ['serialNumber', 'categoryId', 'productNumber', 'type', 'wpId', 'vendorId'],
+        fields: ['serialNumber', 'wpId', 'vendorId'],
         slug: 'add-form',
     },
 ];

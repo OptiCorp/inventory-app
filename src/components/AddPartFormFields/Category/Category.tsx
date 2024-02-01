@@ -5,15 +5,16 @@ import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 
 import { ErrorMessage } from '@hookform/error-message';
 import { Autocomplete, TextField } from '@mui/material';
+import { useEffect } from 'react';
 import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Category = () => {
-    const { control, watch } = useFormContext<PartSchema>();
+    const { control, watch, setValue } = useFormContext<PartSchema>();
     const {
         field: { onChange, value },
     } = useController({
-        name: 'categoryId',
+        name: 'itemTemplate.categoryId',
         control,
     });
     const selectedTemplate = watch('itemTemplateId');
@@ -24,6 +25,14 @@ export const Category = () => {
         value: category.id,
         label: category.name,
     }));
+
+    useEffect(() => {
+        if (selectedCategory) {
+            setValue('itemTemplate.categoryId', selectedCategory?.id);
+        }
+    }, [selectedCategory]);
+
+    console.log(selectedCategory);
 
     return (
         <StyledDiv>
