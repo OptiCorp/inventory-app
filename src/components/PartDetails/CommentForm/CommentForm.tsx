@@ -64,6 +64,7 @@ export const Comments = ({ item }: { item: Item }) => {
                                     fullWidth
                                     onChange={onChange}
                                     variant="filled"
+                                    InputProps={{ sx: { borderRadius: 0 } }}
                                     sx={{
                                         '&::before': {
                                             display: 'none',
