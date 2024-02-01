@@ -1,6 +1,12 @@
 import { grey } from '@mui/material/colors';
-import createTheme, { ThemeOptions } from '@mui/material/styles/createTheme';
+import { ThemeOptions, createTheme } from '@mui/material/styles';
 import { createGlobalStyle } from 'styled-components';
+
+declare module '@mui/material/Button' {
+    interface ButtonPropsVariantOverrides {
+        navigation: true;
+    }
+}
 
 export const TEXT_SHADOW = '2px 1px 1px rgba(0, 0, 0, 0.5)';
 
@@ -31,7 +37,18 @@ const themeOptions: ThemeOptions = {
         fontFamily: 'Archivo',
     },
     spacing: 4,
-    components: {},
+    components: {
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: 'navigation' },
+                    style: {
+                        textTransform: 'capitalize',
+                    },
+                },
+            ],
+        },
+    },
 };
 
 // TODO: move global theme to wrap around all components
@@ -47,7 +64,7 @@ const GlobalStyles = createGlobalStyle<Props>`
         background-color: ${COLORS.white};
     }
     .wrapper {
-    padding: ${({ width }) => (width < 500 ? 0 : '8px')};
+    padding: ${({ width }) => (width < 500 ? 0 : '0px')};
     grid-template-columns: 1fr ;
     grid-template-rows: auto 1fr auto;
     overflow-x: hidden;

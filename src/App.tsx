@@ -23,6 +23,7 @@ import PartDetails from './pages/partDetails/Index';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 
+import { Navigate } from 'react-router-dom';
 import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
 import { useSnackBar } from './hooks/useSnackbar.tsx';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
@@ -33,7 +34,7 @@ import AddVendor from './pages/admin/vendor/AddVendor.tsx';
 import Index from './pages/listDetails/phone/Tabs.tsx';
 
 import { ThemeProvider } from '@mui/material';
-import TopBar from './components/TopBar/TopBar.tsx';
+import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -43,8 +44,9 @@ function App() {
 
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route element={<TopBar />}>
-                <Route path="/" element={<Search />} />
+            <Route element={<ResponsiveAppBar />}>
+                <Route path="/" element={<Navigate to="/find-parts" />} />
+                <Route path="/find-parts" element={<Search />} />
                 <Route path="search/:searchParam?" element={<Search />} />
 
                 <Route path=":id" element={<PartDetails />} />
@@ -55,9 +57,9 @@ function App() {
                     <Route path="upload" element={<Upload />} />
                     <Route path="add-form" element={<AddPartForm />} />
                 </Route>
-                <Route path="makelist" element={<MakeList />} />
+                <Route path="make-list" element={<MakeList />} />
                 <Route
-                    path={`makelist/:listId?`}
+                    path={`make-list/:listId?`}
                     element={
                         <ResponsiveRoute
                             desktopElement={<ListDetails />}
