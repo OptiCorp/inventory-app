@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Location, Vendor } from '../../services/apiTypes';
+import { ItemTemplate, Location, Vendor } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
 import { StyledPartCardContainer, StyledSearchCard } from './styles';
 
@@ -8,12 +8,11 @@ export type PartCardProps = {
         id: string;
         wpId: string;
         serialNumber: string;
-        productNumber: string;
-        description: string;
         location?: Location;
         vendor?: Vendor;
         createdDate: string;
         updatedDate?: string | null;
+        itemTemplate: ItemTemplate;
     };
     icon?: string;
 };

@@ -98,11 +98,13 @@ export const SearchInfo = ({ part, icon }: PartCardProps) => {
                 </StyledInfoP>
                 <StyledInfoP>
                     <StyledKeyWords> P/N</StyledKeyWords>
-                    {part.productNumber}
+                    {part.itemTemplate.productNumber}
                 </StyledInfoP>
             </StyledBox>
             <StyledSecondInfoBox>
-                <StyledDescriptionParagraph>{part.description}</StyledDescriptionParagraph>
+                <StyledDescriptionParagraph>
+                    {part.itemTemplate.description}
+                </StyledDescriptionParagraph>
             </StyledSecondInfoBox>
             <StyledBox>
                 {' '}

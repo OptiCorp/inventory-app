@@ -38,7 +38,7 @@ const MakeList = () => {
                     item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     item.wpId.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     item.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    item.description.toLowerCase().includes(searchTerm.toLowerCase())
+                    item.itemTemplate.description.toLowerCase().includes(searchTerm.toLowerCase())
             )
     );
 

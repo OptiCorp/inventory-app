@@ -101,13 +101,13 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                         </StyledCompactInfoP>
                         <StyledCompactInfoP>
                             <StyledKeyWords>Category</StyledKeyWords>{' '}
-                            {part.category?.name || 'Category'}
+                            {part.itemTemplate.category?.name || 'Category'}
                         </StyledCompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>
                         <StyledDescriptionWrap>
                             <StyledKeyWords>Description</StyledKeyWords>{' '}
-                            <Typography>{part.description}</Typography>
+                            <Typography>{part.itemTemplate.description}</Typography>
                         </StyledDescriptionWrap>
                         <Button variant="white" onClick={() => navigate(`/${part.id}`)}>
                             More info
