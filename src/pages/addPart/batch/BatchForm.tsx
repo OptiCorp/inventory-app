@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { Button } from '../../../components/Button/SubmitButton.tsx'
-import ProgressBar from '../../../components/progressBar/ProgressBar.tsx'
-import { COLORS } from '../../../style/GlobalStyles.ts'
-import { FormContainer } from '../styles.ts'
-import { FormBatchRadio, RadioWrapper, StyledInput } from './styles.ts'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { Button } from '../../../components/Button/Button.tsx';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar.tsx';
+import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+import { ButtonWrapper, FormContainer } from '../styles.ts';
+import { RadioWrapper, StyledInput } from './styles.ts';
 
 enum Batch {
     yes = 'yes',
@@ -14,24 +13,24 @@ enum Batch {
 }
 
 const BatchForm = () => {
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
-    const [batchType, setBatchType] = useState<string>(
-        getLocalStorageWithExpiry('batch-data') || Batch.undefined
-    )
-    const [error, setError] = useState<string>()
-    const navigate = useNavigate()
+    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage();
+    const [batchType, setBatchType] = useState<Batch>(
+        (getLocalStorageWithExpiry('batch-data') as Batch) ?? Batch.undefined
+    );
+    const [error, setError] = useState<string>();
+    const navigate = useNavigate();
 
     const handleClick = () => {
         if (batchType === Batch.undefined) {
-            setError('One option must be picked')
-            return
+            setError('One option must be picked');
+            return;
         }
-        navigate('/add-part/checks')
-    }
+        navigate('/add-part/checks');
+    };
 
     useEffect(() => {
-        setLocalStorageWithExpiry('batch-data', batchType, 5)
-    }, [batchType])
+        setLocalStorageWithExpiry('batch-data', batchType, 5);
+    }, [batchType]);
 
     return (
         <FormContainer>
@@ -39,43 +38,38 @@ const BatchForm = () => {
             <h3>Add as a batch?</h3>
             <span style={{ color: 'red' }}>{error}</span>
 
-            <FormBatchRadio>
-                <label>
-                    <RadioWrapper>
-                        <StyledInput
-                            checked={batchType === Batch.no ? true : false}
-                            type="radio"
-                            name="batchCheck"
-                            onChange={() => setBatchType(Batch.no)}
-                        />{' '}
-                        I want to add one unique part
-                    </RadioWrapper>
-                </label>
-                <label>
-                    <RadioWrapper>
-                        <StyledInput
-                            checked={batchType === Batch.yes ? true : false}
-                            type="radio"
-                            name="batchCheck"
-                            onChange={() => setBatchType(Batch.yes)}
-                        />{' '}
-                        <div>
-                            I want to add a batch of several identical parts, assigning a unique
-                            WellPartner serial number to each of them
-                        </div>
-                    </RadioWrapper>
-                </label>
-            </FormBatchRadio>
-
-            <Button
-                backgroundColor={` ${COLORS.primary}`}
-                color={` ${COLORS.secondary}`}
-                onClick={handleClick}
-            >
-                NEXT
-            </Button>
+            <label>
+                <RadioWrapper>
+                    <StyledInput
+                        checked={batchType === Batch.no ? true : false}
+                        type="radio"
+                        name="batchCheck"
+                        onChange={() => setBatchType(Batch.no)}
+                    />{' '}
+                    <p>I want to add one unique part</p>
+                </RadioWrapper>
+            </label>
+            <label>
+                <RadioWrapper>
+                    <StyledInput
+                        checked={batchType === Batch.yes ? true : false}
+                        type="radio"
+                        name="batchCheck"
+                        onChange={() => setBatchType(Batch.yes)}
+                    />{' '}
+                    <p>
+                        I want to add a batch of several identical parts, assigning a unique
+                        WellPartner serial number to each of them
+                    </p>
+                </RadioWrapper>
+            </label>
+            <ButtonWrapper>
+                <Button variant="black" onClick={handleClick}>
+                    NEXT
+                </Button>
+            </ButtonWrapper>
         </FormContainer>
-    )
-}
+    );
+};
 
-export default BatchForm
+export default BatchForm;

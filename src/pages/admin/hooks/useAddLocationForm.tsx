@@ -1,41 +1,34 @@
-import { useContext } from 'react'
-import { LocationSchema, locationSchema } from './locationValidator'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddLocation } from '../../../services/hooks/Locations/useAddLocation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import UmAppContext from '../../../contexts/UmAppContext';
+import { useAddLocation } from '../../../services/hooks/locations/useAddLocation';
+import { LocationSchema, locationSchema } from './locationValidator';
 
 const defaultValues: LocationSchema = {
     name: '',
     addedById: '',
-}
+};
 
 export const useAddLocationForm = () => {
-    const { currentUser } = useContext(UmAppContext)
-    const { mutate } = useAddLocation()
-    const navigate = useNavigate()
+    const { currentUser } = useContext(UmAppContext);
+    const { mutate } = useAddLocation();
+    const navigate = useNavigate();
 
     const methods = useForm<LocationSchema>({
         resolver: zodResolver(locationSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id || '',
+            addedById: currentUser?.id ?? '',
         },
-    })
-    const {
-        handleSubmit,
-        control,
-        reset,
-        resetField,
-        formState: { errors },
-        register,
-    } = methods
+    });
+    const { handleSubmit, control, reset, resetField, register } = methods;
 
     const onSubmit = handleSubmit((data) => {
-        mutate(data)
-        navigate('/admin/locations')
-    })
+        mutate(data);
+        navigate('/admin/locations');
+    });
 
     return {
         methods,
@@ -44,5 +37,5 @@ export const useAddLocationForm = () => {
         reset,
         resetField,
         register,
-    }
-}
+    };
+};

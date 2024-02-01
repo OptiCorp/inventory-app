@@ -1,12 +1,12 @@
-import { useForm } from 'react-hook-form'
-import { useLocation } from 'react-router'
+import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router';
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext } from 'react'
-import UmAppContext from '../../../contexts/UmAppContext'
-import { useAddItems } from '../../../services/hooks/Items/useAddItem'
-import { PartSchema, partSchema } from './partValidator'
-import useLocalStorage from '../../../hooks/useLocalStorage.ts'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useContext } from 'react';
+import UmAppContext from '../../../contexts/UmAppContext';
+import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
+import { PartSchema, partSchema } from './partValidator';
 
 const defaultValues: PartSchema = {
     wpId: '',
@@ -20,28 +20,23 @@ const defaultValues: PartSchema = {
     comment: '',
     addedById: '',
     uniqueWpId: false,
-}
+    files: [],
+};
 
-enum Batch {
-    yes,
-    no,
-    undefined,
-}
+export const useAddPartForm = () => {
+    const { currentUser } = useContext(UmAppContext);
+    const { mutate } = useAddItems();
+    const { deleteLocalStorage } = useLocalStorage();
 
-export const usePartsForm = () => {
-    const { currentUser } = useContext(UmAppContext)
-    const { mutate } = useAddItems()
-    const { setLocalStorageWithExpiry, getLocalStorageWithExpiry } = useLocalStorage()
-
-    const appLocation = useLocation()
+    const appLocation = useLocation();
 
     const methods = useForm<PartSchema>({
         resolver: zodResolver(partSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id || '',
+            addedById: currentUser?.id ?? '',
         },
-    })
+    });
     const {
         handleSubmit,
         control,
@@ -49,18 +44,39 @@ export const usePartsForm = () => {
         resetField,
         formState: { errors },
         register,
-    } = methods
+    } = methods;
 
     const onSubmit = handleSubmit((data) => {
-        mutate([data], {
-            onSuccess: () => {
-                setLocalStorageWithExpiry('batch-data', '', 0)
-                setLocalStorageWithExpiry('checks-check', '', 0)
-                setLocalStorageWithExpiry('checks-description', '', 0)
-                setLocalStorageWithExpiry('upload-check', '', 0)
-            },
-        })
-    })
+        if (data.files) {
+            delete data.files;
+
+            mutate(
+                { items: [data] },
+                {
+                    onSuccess: () => {
+                        deleteLocalStorage('batch-data');
+                        deleteLocalStorage('checks-check');
+                        deleteLocalStorage('checks-description');
+                        deleteLocalStorage('upload-check');
+                        reset();
+                    },
+                }
+            );
+        } else {
+            mutate(
+                { items: [data] },
+                {
+                    onSuccess: () => {
+                        deleteLocalStorage('batch-data');
+                        deleteLocalStorage('checks-check');
+                        deleteLocalStorage('checks-description');
+                        deleteLocalStorage('upload-check');
+                        reset();
+                    },
+                }
+            );
+        }
+    });
 
     return {
         methods,
@@ -72,5 +88,5 @@ export const usePartsForm = () => {
         reset,
         formState: { errors },
         resetField,
-    }
-}
+    };
+};

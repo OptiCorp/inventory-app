@@ -1,34 +1,21 @@
-import { styled } from 'styled-components'
+import { styled } from 'styled-components';
+import { COLORS } from '../../../style/GlobalStyles.ts';
 
 interface StyledInputProps {
-    isUnique?: string | undefined
+    $isUnique?: boolean;
 }
-export const InputWrap = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
 
-    flex-wrap: wrap;
-`
-
-export const ErrorP = styled.span`
-    color: red;
-    margin-right: auto;
-    margin-left: 20px;
-    font-weight: 600;
-`
 export const StyledInput = styled.input<StyledInputProps>`
     &&& {
-        background-color: #f2f2f2;
+        background-color: ${COLORS.lightGray};
         border: none;
         border-radius: 0;
         border-bottom: 1px solid #000;
-        border: ${(props) => (props.isUnique === 'false' ? '1px solid red' : null)};
+        border: ${(props) => (props.$isUnique === false ? `1px solid ${COLORS.red}` : null)};
     }
-`
+`;
 
-export const IconContainer = styled.div`
-    display: flex;
-    gap: 4px;
-`
+export const StyledParagraph = styled.p<StyledInputProps>`
+    color: ${(props) => (props.$isUnique === false ? COLORS.red : COLORS.green)};
+    margin-top: 0px;
+`;

@@ -1,24 +1,30 @@
-import { FormProvider } from 'react-hook-form'
-import { useAddCategoryForm } from '../hooks/useAddCategoryForm'
-import { Button } from '../../../components/Button/SubmitButton'
-import { COLORS } from '../../../style/GlobalStyles'
+import { ErrorMessage } from '@hookform/error-message';
+import { FormProvider } from 'react-hook-form';
+import { Button } from '../../../components/Button/Button';
+import { useAddCategoryForm } from '../hooks/useAddCategoryForm';
 import {
     AdminInput,
-    ButtonContainer,
     ErrorP,
     FormContainer,
     InputWrap,
     StyledForm,
     SubmitButtonContainer,
-} from '../styles'
-import { ErrorMessage } from '@hookform/error-message'
+} from '../styles';
 
 const AddCategory = () => {
-    const { methods, onSubmit, register } = useAddCategoryForm()
+    const { methods, onSubmit, register } = useAddCategoryForm();
     return (
         <FormProvider {...methods}>
             <FormContainer>
-                <StyledForm onSubmit={onSubmit} id="addCategory">
+                <StyledForm
+                    onSubmit={(e) => {
+                        e && e.preventDefault(); // Prevent the default form submission behavior
+                        onSubmit(e).catch((error) => {
+                            console.error('An error occurred:', error);
+                        });
+                    }}
+                    id="addCategory"
+                >
                     <InputWrap>
                         <label htmlFor="categoryName">Category name</label>
                         <AdminInput type="text" {...register('name')} />
@@ -27,12 +33,7 @@ const AddCategory = () => {
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
                         <SubmitButtonContainer>
-                            <Button
-                                id="addCategory"
-                                type="submit"
-                                backgroundColor={COLORS.primary}
-                                color={COLORS.secondary}
-                            >
+                            <Button id="addCategory" type="submit" variant="black">
                                 Add category
                             </Button>
                         </SubmitButtonContainer>
@@ -40,7 +41,7 @@ const AddCategory = () => {
                 </StyledForm>
             </FormContainer>
         </FormProvider>
-    )
-}
+    );
+};
 
-export default AddCategory
+export default AddCategory;

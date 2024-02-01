@@ -1,5 +1,5 @@
-import { Form } from 'react-router-dom'
-import { styled } from 'styled-components'
+import { Form } from 'react-router-dom';
+import { styled } from 'styled-components';
 
 export const PartForm = styled(Form)`
     input,
@@ -13,17 +13,24 @@ export const PartForm = styled(Form)`
         border-radius: 4px;
         box-sizing: border-box;
     }
-`
+`;
 
 export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 16px;
-`
+`;
 
 export const ButtonContainer = styled.div`
     display: flex;
+
     justify-content: end;
     width: 100%;
     margin: 8px 0;
-`
+`;
+
+export const ButtonWrapper = styled.div`
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+`;

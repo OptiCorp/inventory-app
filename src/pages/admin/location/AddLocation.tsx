@@ -1,24 +1,30 @@
-import { FormProvider } from 'react-hook-form'
-import { useAddLocationForm } from '../hooks/useAddLocationForm'
+import { ErrorMessage } from '@hookform/error-message';
+import { FormProvider } from 'react-hook-form';
+import { Button } from '../../../components/Button/Button';
+import { useAddLocationForm } from '../hooks/useAddLocationForm';
 import {
     AdminInput,
-    ButtonContainer,
     ErrorP,
     FormContainer,
     InputWrap,
     StyledForm,
     SubmitButtonContainer,
-} from '../styles'
-import { ErrorMessage } from '@hookform/error-message'
-import { Button } from '../../../components/Button/SubmitButton'
-import { COLORS } from '../../../style/GlobalStyles'
+} from '../styles';
 
 const AddLocation = () => {
-    const { methods, onSubmit, register } = useAddLocationForm()
+    const { methods, onSubmit, register } = useAddLocationForm();
     return (
         <FormProvider {...methods}>
             <FormContainer>
-                <StyledForm onSubmit={onSubmit} id="addLocation">
+                <StyledForm
+                    onSubmit={(e) => {
+                        e && e.preventDefault(); // Prevent the default form submission behavior
+                        onSubmit(e).catch((error) => {
+                            console.error('An error occurred:', error);
+                        });
+                    }}
+                    id="addLocation"
+                >
                     <InputWrap>
                         <label htmlFor="locationName">Location name</label>
                         <AdminInput type="text" {...register('name')} />
@@ -27,12 +33,7 @@ const AddLocation = () => {
                             render={({ message }) => <ErrorP>{message}</ErrorP>}
                         />
                         <SubmitButtonContainer>
-                            <Button
-                                id="addLocation"
-                                type="submit"
-                                backgroundColor={COLORS.primary}
-                                color={COLORS.secondary}
-                            >
+                            <Button id="addLocation" type="submit" variant="black">
                                 Add location
                             </Button>
                         </SubmitButtonContainer>
@@ -40,7 +41,7 @@ const AddLocation = () => {
                 </StyledForm>
             </FormContainer>
         </FormProvider>
-    )
-}
+    );
+};
 
-export default AddLocation
+export default AddLocation;

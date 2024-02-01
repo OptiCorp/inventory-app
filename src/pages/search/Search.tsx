@@ -1,63 +1,74 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useDebounce, useLocalStorage } from 'usehooks-ts'
-import SearchBar from '../../components/searchBar/SearchBar'
-import { useWindowDimensions } from '../../hooks'
+import { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { useDebounce, useLocalStorage } from 'usehooks-ts';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import { useWindowDimensions } from '../../hooks';
 
-import SearchResultCardCompact from '../../components/searchResultCard/SearchInfoCompact'
-import SearchResultCard from '../../components/searchResultCard/SearchResultCard'
-import { useGetItemsInfinite } from '../../services/hooks/Items/useGetItemsInfinite'
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
+
+import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact';
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
     Container,
-    GlobalSpinnerContainer,
     RecentSearchContainer,
     RecentTitle,
     SearchContainer,
     SpanMargin,
-    Spinner,
     StyledSearchedLink,
-} from './styles'
+} from './styles';
+import PartCard from '../../components/PartCard/PartCard';
+
+type StateType = {
+    resetInputField?: boolean;
+};
 
 const Search = () => {
-    const { searchParam } = useParams<{ searchParam: string }>()
-    const [searchTerm, setSearchTerm] = useState('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm)
-    const { width } = useWindowDimensions()
-    const [searches, setSearches] = useLocalStorage<string[]>('recent_searches', [])
-
+    const { searchParam } = useParams<{ searchParam: string }>();
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { data, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
+    const { width } = useWindowDimensions();
+    const [searches, setSearches] = useLocalStorage<string[]>('recent_searches', []);
+    const location = useLocation();
+    const state: StateType = location.state as StateType;
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
-            fetchNextPage()
+            fetchNextPage().catch((error) => {
+                console.error('Failed to fetch next page: ', error);
+            });
         }
-    }
+    };
 
     const observer = new IntersectionObserver(handleScroll, {
         threshold: 1,
         rootMargin: '100px',
-    })
+    });
 
     useEffect(() => {
-        const lastItem = document.getElementById('lastItem')
+        const lastItem = document.getElementById('lastItem');
         if (lastItem) {
-            observer.observe(lastItem)
+            observer.observe(lastItem);
         }
         return () => {
             if (lastItem) {
-                observer.unobserve(lastItem)
+                observer.unobserve(lastItem);
             }
-        }
-    }, [data])
+        };
+    }, [data]);
 
     useEffect(() => {
-        setSearchTerm((prev) => searchParam || prev)
-    }, [searchParam])
+        setSearchTerm((prev) => searchParam ?? prev);
+    }, [searchParam]);
 
     useEffect(() => {
-        if (searchTerm !== '') {
-            setSearches((prev) => [searchTerm, ...prev.slice(0, 9)])
+        if (searchTerm !== '' && !searches.includes(searchTerm)) {
+            setSearches((prev) => [searchTerm, ...prev.slice(0, 9)]);
+        } else if (state?.resetInputField) {
+            setSearchTerm('');
         }
-    }, [debouncedSearchTerm])
+    }, [debouncedSearchTerm, state]);
+
+    console.log('search param', searchParam);
 
     return (
         <>
@@ -68,27 +79,27 @@ const Search = () => {
                     placeholder={'Search for ID, description, PO number or S/N'}
                 />
 
-                {isLoading && (
-                    <GlobalSpinnerContainer>
-                        <Spinner />
-                    </GlobalSpinnerContainer>
-                )}
+                {isLoading && <GlobalSpinner />}
 
                 <Container>
                     {data?.pages.map((page, i) =>
                         page.map((item, index) =>
                             width > 800 ? (
                                 <div
+                                    key={index}
                                     id={
-                                        i === data.pages.length - 1 && index === page.length - 1
+                                        i === data.pages.length - 1 &&
+                                        index === page.length - 1 &&
+                                        page.length >= 10
                                             ? 'lastItem'
                                             : ''
                                     }
                                 >
-                                    <SearchResultCard part={item} />
+                                    <PartCard part={item} />
                                 </div>
                             ) : (
                                 <div
+                                    key={index}
                                     id={
                                         i === data.pages.length - 1 && index === page.length - 1
                                             ? 'lastItem'
@@ -107,8 +118,8 @@ const Search = () => {
                         <RecentTitle>Recent Searches</RecentTitle>
 
                         {searches.map((search, index) => (
-                            <SpanMargin>
-                                <StyledSearchedLink key={index} to={`/search/${search}`}>
+                            <SpanMargin key={index}>
+                                <StyledSearchedLink to={`/search/${search}`}>
                                     {search}
                                 </StyledSearchedLink>
                             </SpanMargin>
@@ -117,7 +128,7 @@ const Search = () => {
                 ) : null}
             </SearchContainer>
         </>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;

@@ -1,22 +1,15 @@
-import { styled } from 'styled-components'
-import { COLORS } from '../../style/GlobalStyles'
+import { styled } from 'styled-components';
+import { COLORS } from '../../style/GlobalStyles';
 
 export const AdminContainer = styled.div`
     display: flex;
     flex-direction: column;
-`
+`;
 
 export const SearchResultContainer = styled.div`
     display: flex;
     flex-direction: column;
-`
-
-// export const ButtonContainer = styled.div`
-//     display: flex;
-//     justify-content: end;
-//     max-width: 700px;
-//     margin: 16px;
-// `
+`;
 
 export const AdminInput = styled.input`
     &&& {
@@ -28,14 +21,14 @@ export const AdminInput = styled.input`
         border-top: none;
         border-left: none;
         border-right: none;
-        background: #f2f2f2;
+        background: ${COLORS.lightGray};
     }
-`
+`;
 
 export const ErrorP = styled.span`
-    color: ${COLORS.dangerRed};
+    color: ${COLORS.red};
     font-weight: 600;
-`
+`;
 
 export const InputWrap = styled.div`
     display: flex;
@@ -43,13 +36,13 @@ export const InputWrap = styled.div`
     justify-content: space-between;
     align-items: start;
     flex-wrap: wrap;
-`
+`;
 
 export const FormContainer = styled.div`
     padding: 16px;
     display: flex;
     flex-direction: column;
-`
+`;
 
 export const StyledForm = styled.form`
     input,
@@ -61,17 +54,17 @@ export const StyledForm = styled.form`
         border-radius: 4px;
         box-sizing: border-box;
     }
-`
+`;
 
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: end;
     padding: 8px;
-`
+`;
 
 export const SubmitButtonContainer = styled.div`
     display: flex;
     justify-content: end;
     width: 100%;
     margin: 8px 0;
-`
+`;

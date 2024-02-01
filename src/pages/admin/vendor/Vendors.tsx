@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
-import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles'
-import { useDebounce } from 'usehooks-ts'
-import { useGetVendorsInfinite } from '../../../services/hooks/Vendor/useGetVendorInfinite'
-import SearchBar from '../../../components/searchBar/SearchBar'
-import AdminSearchCard, { SearchType } from '../../../components/admin/AdminSearchCard'
-import { Button } from '../../../components/Button/SubmitButton'
-import { useNavigate } from 'react-router-dom'
-import { useGetVendors } from '../../../services/hooks/Vendor/useGetVendors'
-import { Vendor } from '../../../services/apiTypes'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDebounce } from 'usehooks-ts';
+import AdminSearchCard from '../../../components/AdminSearchCard/AdminSearchCard';
+import { Button } from '../../../components/Button/Button';
+import SearchBar from '../../../components/SearchBar/SearchBar';
+import { Vendor } from '../../../services/apiTypes';
+import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
+import { SearchType } from '../../../utils/constant';
+import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles';
 
 const Vendors = () => {
-    const [searchTerm, setSearchTerm] = useState<string>('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
-    const { data: initialData } = useGetVendors()
-    const [filteredData, setFilteredData] = useState<Vendor[]>([])
-    const navigate = useNavigate()
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const { data: initialData } = useGetVendors();
+    const [filteredData, setFilteredData] = useState<Vendor[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (initialData) {
@@ -22,9 +22,9 @@ const Vendors = () => {
                 initialData.filter((vendor) =>
                     vendor.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
                 )
-            )
+            );
         }
-    }, [initialData, debouncedSearchTerm])
+    }, [initialData, debouncedSearchTerm]);
 
     return (
         <AdminContainer>
@@ -41,15 +41,12 @@ const Vendors = () => {
                 ))}
             </SearchResultContainer>
             <ButtonContainer>
-                <Button
-                    onClick={() => navigate('/admin/add-vendor')}
-                    children={'Add new vendor'}
-                    backgroundColor={'black'}
-                    color={'white'}
-                />
+                <Button onClick={() => navigate('/admin/add-vendor')} variant="black">
+                    Add new vendor
+                </Button>
             </ButtonContainer>
         </AdminContainer>
-    )
-}
+    );
+};
 
-export default Vendors
+export default Vendors;
