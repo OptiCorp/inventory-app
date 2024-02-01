@@ -13,13 +13,6 @@ export const AddPartForm = () => {
                     FINISH
                 </Button>
             </ButtonWrapper>
-            {/* <button
-                onClick={() => {
-                    templateSubmit();
-                }}
-            >
-                template
-            </button> */}
         </FormContainer>
     );
 };

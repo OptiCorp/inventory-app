@@ -1,18 +1,17 @@
 import { API_URL } from '../config';
 import { pca } from '../msalConfig';
-import { TemplateSchema } from '../pages/addPart/hooks/partValidator';
+import { PartSchema, TemplateSchema } from '../pages/addPart/hooks/partValidator';
+import { AddTemplate } from '../pages/addPart/hooks/useAddPartForm';
 
 import {
     AddCategory,
     AddDocument,
-    AddItem,
     AddList,
     AddLocation,
     AddVendor,
     Category,
     Document,
     Item,
-    ItemTemplate,
     List,
     Location,
     UpdateCategory,
@@ -317,7 +316,10 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`);
     };
 
-    const addItem = async (items: AddItem[], files?: File[]): Promise<Response | Response[][]> => {
+    const addItem = async (
+        items: PartSchema[],
+        files?: File[]
+    ): Promise<Response | Response[][]> => {
         const res = await postByFetch(`Item`, items);
         if (!files) {
             return res;
@@ -469,7 +471,7 @@ const apiService = () => {
         return await getByFetch('ItemTemplate');
     };
 
-    const addItemTemplate = async (itemTemplateBody: ItemTemplate): Promise<Response> => {
+    const addItemTemplate = async (itemTemplateBody: AddTemplate): Promise<Response> => {
         return postByFetch('ItemTemplate', itemTemplateBody);
     };
 

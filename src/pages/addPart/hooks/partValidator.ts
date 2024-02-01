@@ -4,30 +4,20 @@ const templateSchema = z.object({
     id: z.string(),
     name: z.string(),
     inputValue: z.string().nullish(),
-    type: z.string(),
+    type: z.string().min(1, 'type is required'),
+    categoryId: z.string().min(1, 'Category is required'),
 
-    category: z.object({
-        id: z.string(),
-        name: z.string(),
-        updatedDate: z.string(),
-        createdDate: z.string(),
-        createdById: z.string(),
-    }),
-    categoryId: z.string(),
-    productNumber: z.string(),
-    description: z.string().optional(),
+    productNumber: z.string().min(1, 'Product number is required'),
+    description: z.string(),
+    createdById: z.string(),
 });
 
 export const partSchema = z.object({
-    templateData: templateSchema.nullish(),
+    itemTemplate: templateSchema,
     itemTemplateId: z.string(),
     wpId: z.string().min(1, 'WellPartner ID is required'),
-    categoryId: z.string().min(1, 'Category is required'),
-    description: z.string().min(1, 'Description is required'),
     serialNumber: z.string().min(1, 'Serial number is required'),
-    productNumber: z.string().min(1, 'Product number is required'),
     vendorId: z.string().min(1, 'Vendor is required'),
-    type: z.string().min(1, 'Type is required'),
     comment: z.string().nullish(),
     isBatch: z.boolean(),
     preCheck: z.object({
@@ -36,13 +26,15 @@ export const partSchema = z.object({
     }),
     documentation: z.boolean().refine((value) => value),
     documents: z
-        .object({
-            id: z.string(),
-            name: z.string(),
-            blobRef: z.string(),
-            contentType: z.string(),
-            bytes: z.string(),
-        })
+        .array(
+            z.object({
+                id: z.string(),
+                name: z.string(),
+                blobRef: z.string(),
+                contentType: z.string(),
+                bytes: z.string(),
+            })
+        )
         .optional(),
     locationId: z.string().nullish(),
     parentId: z.string().nullish(),

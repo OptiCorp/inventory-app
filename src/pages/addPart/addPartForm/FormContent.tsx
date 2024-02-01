@@ -1,3 +1,5 @@
+import { TextField } from '@mui/material';
+import { Box } from '@mui/system';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Category } from '../../../components/AddPartFormFields/Category/Category';
@@ -10,13 +12,28 @@ import { Type } from '../../../components/AddPartFormFields/Type/Type';
 import { Vendor } from '../../../components/AddPartFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddPartFormFields/WpId/WpId';
 import UmAppContext from '../../../contexts/UmAppContext';
+import { PartSchema } from '../hooks/partValidator';
 
 export const FormContent = () => {
     const { currentUser } = useContext(UmAppContext);
-    const { register } = useFormContext();
+    const { register, watch } = useFormContext<PartSchema>();
+    const selectedTemplate = watch('itemTemplateId');
 
     return (
         <>
+            {!selectedTemplate && (
+                <Box>
+                    <h4> Template name</h4>
+                    <TextField
+                        id="filled-disabled"
+                        sx={{ width: '500px' }}
+                        label=""
+                        placeholder="name of template"
+                        variant="standard"
+                        {...register('itemTemplate.name')}
+                    />
+                </Box>
+            )}
             <Type />
             <Category />
             <WpId />

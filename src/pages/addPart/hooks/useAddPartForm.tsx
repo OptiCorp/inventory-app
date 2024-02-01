@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
 
+import { ItemTemplate } from '../../../services/apiTypes.ts';
 import { useAddItemTemplate } from '../../../services/hooks/itemTemplates/useAddItemTemplate.tsx';
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
 import { PartSchema, TemplateSchema, partSchema } from './partValidator';
@@ -81,7 +82,7 @@ export const useAddPartForm = () => {
         setValue,
         watch,
     } = methods;
-    const { mutate: templateMutate } = useAddItemTemplate();
+    const { mutateAsync: templateMutate } = useAddItemTemplate();
     const selectedTemplate = watch('itemTemplate');
 
     useEffect(() => {
@@ -94,43 +95,60 @@ export const useAddPartForm = () => {
             setValue('itemTemplateId', selectedTemplate?.id);
         }
     }, []);
-    console.log(selectedTemplate, 'dtttsefs');
+
     console.log(watch());
 
-    const templateSubmit = (data: TemplateSchema) => {
-        templateMutate({
-            categoryId: data.categoryId || '',
+    const templateSubmit = async () => {
+        const data = await templateMutate({
+            categoryId: selectedTemplate.categoryId || '',
             createdById: currentUser?.id ?? '',
-            description: data.description || '',
+            description: selectedTemplate.description || '',
             name: selectedTemplate?.name || '',
             productNumber: selectedTemplate?.productNumber || '',
             revision: '1.06',
             type: selectedTemplate?.type || '',
         });
+        return data.json() as Promise<ItemTemplate>;
     };
 
     const onSubmit = handleSubmit(
-        (data) => {
+        async (data) => {
             if (!selectedTemplate.id) {
-                templateMutate({
-                    categoryId: selectedTemplate.categoryId || '',
-                    createdById: currentUser?.id ?? '',
-                    description: selectedTemplate.description || '',
-                    name: selectedTemplate?.name || '',
-                    productNumber: selectedTemplate?.productNumber || '',
-                    revision: '1.06',
-                    type: selectedTemplate?.type || '',
+                const {
+                    id: itemTemplateId,
+                    name,
+                    categoryId,
+                    productNumber,
+                    type,
+                    description,
+                } = await templateSubmit();
+                setValue('itemTemplate.id', itemTemplateId);
+                mutate({
+                    items: [
+                        {
+                            ...data,
+                            itemTemplate: {
+                                id: itemTemplateId,
+                                name: name,
+                                type: type,
+                                categoryId: categoryId,
+                                productNumber: productNumber,
+                                description: description,
+                                createdById: currentUser?.id ?? '',
+                            },
+                            itemTemplateId,
+                        },
+                    ],
+                    files: undefined,
                 });
-                console.log('template');
             }
-
+            console.log(watch('itemTemplate.id'));
             if (data.files) {
                 const files = [...data.files];
                 delete data.files;
-                console.log(errors);
-                mutate({ items: [data], files: files }, {});
+                mutate({ items: [data], files: files });
             } else {
-                mutate({ items: [data], files: undefined }, {});
+                mutate({ items: [data], files: undefined });
             }
         },
         (errors) => console.log(errors)

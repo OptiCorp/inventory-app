@@ -62,7 +62,7 @@ export type LogEntry = {
 export type Category = {
     id: string;
     name: string;
-    userId: string;
+    createdById: string;
 };
 
 export type Location = {
@@ -97,16 +97,14 @@ export type MutateItemList = {
 
 export type AddItem = {
     wpId: string;
-    categoryId: string;
-    serialNumber: string;
-    productNumber: string;
 
+    serialNumber: string;
+
+    itemTemplate: ItemTemplate[];
     itemTemplateId: string;
     preCheck: PreCheck;
-    type: string;
     locationId?: string | null;
     documents?: Document;
-    description: string;
     parentId?: string | null;
     vendorId: string;
     createdById: string | null;
@@ -116,13 +114,10 @@ export type AddItem = {
 export type UpdateItem = {
     id: string;
     wpId: string;
-
     serialNumber: string;
-    productNumber: string;
     children: Item[] | null;
     categoryId: string | null | undefined;
     locationId?: string | null;
-    description: string;
     parentId?: string | null;
     vendorId: string;
     addedById: string | null;
@@ -198,6 +193,8 @@ export type ItemTemplate = {
     name: string;
     id: string;
     category: { id: string; name: string; userId: string };
+    categoryId: string;
+    createdById: string;
     type: string;
     productNumber: string;
     description: string;
