@@ -16,8 +16,6 @@ export const Primary: Story = {
             id: '1',
             wpId: 'AWpId: 1870',
             serialNumber: 'AQ11 54C7J',
-            productNumber: '1129 AB345',
-            description: 'supplanted spoilsmen portress automatists biuniqueness faithfully',
             location: {
                 id: '1',
                 name: 'Stavanger',
@@ -30,6 +28,18 @@ export const Primary: Story = {
                 email: 'email@example.com',
                 phoneNumber: '123456789',
                 addedById: '1',
+            },
+            itemTemplate: {
+                id: '1',
+                type: 'Unit',
+                description: 'supplanted spoilsmen portress automatists biuniqueness faithfully',
+                productNumber: '1129 AB345',
+                categoryId: '1',
+                category: {
+                    id: '1',
+                    name: 'Screws',
+                    userId: '1',
+                },
             },
             createdDate: '2023-12-27 10:13:26',
             updatedDate: '2023-12-27 10:13:26',
