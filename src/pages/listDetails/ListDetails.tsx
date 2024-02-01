@@ -25,6 +25,7 @@ import {
     SearchResultsContainer,
 } from './styles.ts';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
+import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
 
 const ListDetails = () => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
@@ -36,6 +37,7 @@ const ListDetails = () => {
     const { data: list, isFetching } = useGetListById(listId!);
     const { snackbar } = useSnackBar();
     const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
+    const { exportToExcel } = useExportToExcel();
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
@@ -134,7 +136,9 @@ const ListDetails = () => {
                                 <Button variant="white" onClick={handleSave}>
                                     Save list
                                 </Button>
-                                <Button variant="black">Export</Button>
+                                <Button onClick={() => exportToExcel(list.items)} variant="black">
+                                    Export
+                                </Button>
                             </ButtonWrap>
                         </FlexWrapper>
                     </>

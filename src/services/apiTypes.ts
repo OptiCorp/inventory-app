@@ -28,11 +28,8 @@ export type Item = {
     itemTemplateId: string;
     wpId: string;
     serialNumber: string;
-    productNumber: string;
-    categoryId: string;
     vendorId: string;
     locationId: string;
-    description: string;
     parentId: string | null;
     addedById: string | null;
     comment: string | null;
@@ -41,14 +38,23 @@ export type Item = {
     children: Item[] | null;
     createdDate: string;
     updatedDate: string | null;
-    category: Category;
     vendor: Vendor;
     location: Location;
     createdBy: User;
     logEntries: LogEntry[];
     itemTemplate: ItemTemplate;
+
     documents?: Document;
-};
+
+
+export type ItemTemplate = {
+    id: string;
+    type: string;
+    productNumber: string;
+    categoryId: string;
+    category: Category;
+    description: string;
+
 
 export type LogEntry = {
     createdBy: User;
@@ -117,7 +123,6 @@ export type UpdateItem = {
     wpId: string;
     serialNumber: string;
     children: Item[] | null;
-    categoryId: string | null | undefined;
     locationId?: string | null;
     parentId?: string | null;
     vendorId: string;
