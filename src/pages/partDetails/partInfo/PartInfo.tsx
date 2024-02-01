@@ -17,6 +17,13 @@ import { SelectField } from './SelectField';
 import { PartInfoSchema } from './hooks';
 import { Container, CreatedByContainer, PartInfoForm } from './styles';
 import { Types } from './types';
+import { PartInfoSchema } from './hooks';
+import { useUpdateItemTemplate } from '../../../services/hooks/itemTemplates/useUpdateItemTemplate';
+import { useGetItemTemplateById } from '../../../services/hooks/itemTemplates/useGetItemTemplateById';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
+import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
+import { useDebounce } from 'usehooks-ts';
+import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 
 type PartInfoProps = {
     item: Item;
@@ -110,34 +117,75 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
         fieldName: keyof PartInfoSchema
     ) => {
         const fieldValue: Field = watch(fieldName) as Field;
-        if (dirtyFields[fieldName] && fieldValue) {
-            const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
-            mutate(
-                {
-                    ...item,
-                    [fieldId]: mutableValue,
+        // TODO: fix if field is changed, temp fix remove check..
+        /* if (dirtyFields[fieldName] && fieldValue) { */
+        const mutableValue = typeof fieldValue === 'string' ? fieldValue : fieldValue.value;
+        mutate(
+            {
+                ...item,
+                [fieldId]: mutableValue,
+            },
+            {
+                onSuccess: (data) => {
+                    handleApiRequestSnackbar(
+                        data,
+                        `${fieldName} was updated`,
+                        setSnackbarSeverity,
+                        setSnackbarText
+                    );
                 },
-                {
-                    onSuccess: (data) => {
-                        handleApiRequestSnackbar(
-                            data,
-                            `${fieldName} was updated`,
-                            setSnackbarSeverity,
-                            setSnackbarText
-                        );
-                    },
-                }
-            );
-        }
+            }
+        );
+        /* } */
     };
 
     if (isLoading || isLoadingCategories || isLoadingLocations || isLoadingVendors) {
-        return <p>Loading.. </p>;
+        return <GlobalSpinner />;
     }
 
     return (
         <PartInfoForm>
             <Container>
+                <SelectField
+                    placeholder="Select location..."
+                    fieldName="LOCATION"
+                    label="location"
+                    options={convertOptionsToSelectFormat(locations)}
+                    onBlur={() => handleBlurItemProperties('locationId', 'location')}
+                />
+
+                <SelectField
+                    placeholder="Select vendor..."
+                    fieldName="VENDOR"
+                    label="vendor"
+                    options={convertOptionsToSelectFormat(vendors)}
+                    onBlur={() => handleBlurItemProperties('vendorId', 'vendor')}
+                />
+
+                <EditableField
+                    fieldName="S/N"
+                    label="serialNumber"
+                    onBlur={() => handleBlurItemProperties('serialNumber', 'serialNumber')}
+                />
+
+                <EditableField
+                    fieldName="WPID"
+                    label="wpId"
+                    onBlur={() => {
+                        if (isUniqueWpId === true) {
+                            setValue('wpId', debouncedWpId);
+
+                            handleBlurItemProperties('wpId', 'wpId');
+                        }
+                    }}
+                    isUnique={isUniqueWpId}
+                    loading={isLoadingUniqueWpId}
+                    onChange={(event) => {
+                        setNewWpId(event.target.value);
+                    }}
+                    value={wpId}
+                />
+
                 <SelectField
                     placeholder="Select type..."
                     fieldName="TYPE"
@@ -163,12 +211,15 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                     }
                 />
 
-                <SelectField
-                    placeholder="Select location..."
-                    fieldName="LOCATION"
-                    label="location"
-                    options={convertOptionsToSelectFormat(locations)}
-                    onBlur={() => handleBlurItemProperties('locationId', 'location')}
+                <EditableField
+                    fieldName="P/N"
+                    label="itemTemplate.productNumber"
+                    onBlur={() =>
+                        handleBlurItemTemplateProperties(
+                            'productNumber',
+                            'itemTemplate.productNumber' as keyof PartInfoSchema
+                        )
+                    }
                 />
 
                 <CreatedByContainer>
@@ -181,47 +232,6 @@ const PartInfo = ({ item, isLoading }: PartInfoProps) => {
                             : `${item.createdBy.firstName} ${item.createdBy.lastName}`}
                     </p>
                 </CreatedByContainer>
-                <EditableField
-                    fieldName="S/N"
-                    label="serialNumber"
-                    onBlur={() => handleBlurItemProperties('serialNumber', 'serialNumber')}
-                />
-                <EditableField
-                    fieldName="P/N"
-                    label="itemTemplate.productNumber"
-                    onBlur={() =>
-                        handleBlurItemTemplateProperties(
-                            'productNumber',
-                            'itemTemplate.productNumber' as keyof PartInfoSchema
-                        )
-                    }
-                />
-
-                <SelectField
-                    placeholder="Select vendor..."
-                    fieldName="VENDOR"
-                    label="vendor"
-                    options={convertOptionsToSelectFormat(vendors)}
-                    onBlur={() => handleBlurItemProperties('vendorId', 'vendor')}
-                />
-
-                <EditableField
-                    fieldName="WPID"
-                    label="wpId"
-                    onBlur={() => {
-                        if (isUniqueWpId === true) {
-                            setValue('wpId', debouncedWpId);
-
-                            handleBlurItemProperties('wpId', 'wpId');
-                        }
-                    }}
-                    isUnique={isUniqueWpId}
-                    loading={isLoadingUniqueWpId}
-                    onChange={(event) => {
-                        setNewWpId(event.target.value);
-                    }}
-                    value={wpId}
-                />
             </Container>
             <EditableField
                 fieldName="DESCRIPTION"

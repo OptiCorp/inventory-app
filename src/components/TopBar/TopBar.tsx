@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 
-import { HamburgerMenu } from './HamburgerMenu';
+import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
 import useNavigationControl from './hooks/useNavigation';
 import {
     CompactContainer,

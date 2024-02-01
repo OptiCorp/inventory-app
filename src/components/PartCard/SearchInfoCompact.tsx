@@ -51,7 +51,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                 }
             },
         });
-        handleClose(e);
+        handleClose();
     };
     const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
         e.stopPropagation();
@@ -65,14 +65,13 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                 }
             },
         });
-        handleClose(e);
+        handleClose();
     };
     const handleClickOpen = (e: React.MouseEvent) => {
         e.stopPropagation();
         setOpen(true);
     };
-    const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation();
+    const handleClose = () => {
         setOpen(false);
     };
 
@@ -140,7 +139,7 @@ const SearchResultCardCompact = ({ part, icon }: Props) => {
                 title="Remove item from list?"
                 open={open}
                 onClose={handleClose}
-                CancelButtonOnClick={() => handleClose}
+                CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={(e) =>
                     handleDelete(e, {
                         itemId: part.id,

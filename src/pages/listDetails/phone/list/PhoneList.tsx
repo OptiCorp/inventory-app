@@ -9,11 +9,11 @@ import SearchResultCardCompact from '../../../../components/PartCard/SearchInfoC
 import UmAppContext from '../../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../../hooks';
 import { Item, List, UpdateList } from '../../../../services/apiTypes';
-import { useGetItemsNotInListInfinite } from '../../../../services/hooks/items/useGetItemsNotInListInfinite';
 import { useGetListById } from '../../../../services/hooks/list/useGetListById';
 import { useUpdateList } from '../../../../services/hooks/list/useUpdateList';
 import { ListHeader } from '../../ListHeader';
 import { ButtonWrapCompact, FlexWrapperCompact, ListContainerCompact } from './styles';
+import { useGetItemsInfinite } from '../../../../services/hooks/items/useGetItemsInfinite';
 type Props = {
     list: List;
 };
@@ -25,7 +25,7 @@ export const PhoneList = ({ list }: Props) => {
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
     const { mutate: updateList } = useUpdateList(listId!);
 
-    const { isLoading } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
+    const { isLoading } = useGetItemsInfinite(debouncedSearchTerm);
 
     const { isFetching } = useGetListById(listId!);
 

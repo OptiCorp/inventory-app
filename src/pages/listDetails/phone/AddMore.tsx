@@ -7,9 +7,8 @@ import SearchResultCardCompact from '../../../components/PartCard/SearchInfoComp
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import { useSnackBar } from '../../../hooks';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
-
-import { useGetItemsNotInListInfinite } from '../../../services/hooks/items/useGetItemsNotInListInfinite';
 import { PhoneContainer, PhoneListTitle } from './styles';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 
 export const AddMoreCompact = () => {
     const { snackbar } = useSnackBar();
@@ -17,11 +16,7 @@ export const AddMoreCompact = () => {
 
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
     const { listId } = useParams();
-    const {
-        data: items,
-        isLoading,
-        fetchNextPage,
-    } = useGetItemsNotInListInfinite(debouncedSearchTerm, listId!);
+    const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
