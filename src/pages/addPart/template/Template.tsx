@@ -20,7 +20,7 @@ export default function Template() {
     });
 
     const selectedTemplate = templates.find((option) => option.id === value?.id);
-    console.log(selectedTemplate?.id);
+
     return (
         <>
             <Container>

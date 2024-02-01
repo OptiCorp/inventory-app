@@ -32,8 +32,6 @@ export const Category = () => {
         }
     }, [selectedCategory]);
 
-    console.log(selectedCategory);
-
     return (
         <StyledDiv>
             <StyledInputWrap>
