@@ -1,28 +1,32 @@
 import { ErrorMessage } from '@hookform/error-message';
-import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+
+import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
-import { FormOption, Location as LocationType } from '../../../services/apiTypes.ts';
+import { Location as LocationType } from '../../../services/apiTypes.ts';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 
-import { FormSelect } from '../FormSelect/FormSelect.tsx';
+import { Autocomplete, TextField } from '@mui/material';
+import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Location = () => {
-    const { setValue } = useFormContext();
-
-    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null);
     const { data: categories = [] } = useGetLocations();
+    const { control } = useFormContext<PartSchema>();
 
     const locationOptions = categories.map((location: LocationType) => ({
         value: location.id,
         label: location.name,
     }));
+    const {
+        field: { onChange, value },
+    } = useController({
+        control,
 
-    useEffect(() => {
-        setValue('locationId', selectedOption?.value ?? '');
-    }, [selectedOption, setValue]);
+        name: 'locationId',
+    });
+
+    const selectedLocation = locationOptions.find((option) => option.label === value);
 
     return (
         <StyledDiv>
@@ -38,11 +42,16 @@ export const Location = () => {
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>
-            <FormSelect
+            <Autocomplete
                 options={locationOptions}
-                setState={setSelectedOption}
-                state={selectedOption}
-            ></FormSelect>
+                sx={{ width: 500 }}
+                value={selectedLocation}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+                onChange={(_event, newValue) => {
+                    onChange(newValue?.value);
+                }}
+                renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
+            />
         </StyledDiv>
     );
 };

@@ -24,6 +24,7 @@
         "@tanstack/react-query": "^5.8.4",
         "@tanstack/react-query-devtools": "^5.8.6",
         "@types/node": "^20.9.0",
+        "@uidotdev/usehooks": "^2.4.1",
         "date-fns": "^2.30.0",
         "init": "^0.1.2",
         "jwt-decode": "^3.1.2",

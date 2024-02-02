@@ -29,7 +29,7 @@ export const FormRadio = styled.form`
         padding: 8px;
         margin-right: 1rem;
         cursor: pointer;
-        width: fit-content;
+        width: 20px;
     }
     input {
         transform: scale(1.5);
@@ -41,7 +41,6 @@ export const FormRadio = styled.form`
 export const StyledLabelText = styled.p`
     font-weight: 600;
     display: inline;
-    margin: 0;
+    margin: 20px 0;
     margin-left: 10px;
-    font-size: 0.8rem;
 `;
