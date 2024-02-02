@@ -2,39 +2,63 @@ import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import UmAppContext from '../../../contexts/UmAppContext';
-import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+
+import { ItemTemplate } from '../../../services/apiTypes.ts';
+
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
-import { PartSchema, partSchema } from './partValidator';
+import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.tsx';
+import { PartSchema, TemplateSchema, partSchema } from './partValidator';
+
+const defaultTemplate: TemplateSchema = {
+    categoryId: '',
+    id: '',
+    name: '',
+    inputValue: '',
+    type: '',
+
+    productNumber: '',
+    description: '',
+    createdById: '',
+};
 
 const defaultValues: PartSchema = {
     wpId: '',
-    type: '',
-    categoryId: '',
     serialNumber: '',
-    productNumber: '',
     vendorId: '',
     locationId: '',
-    description: '',
+    itemTemplateId: '',
     comment: '',
-    addedById: '',
+    createdById: '',
     uniqueWpId: false,
-    files: [],
+    isBatch: false,
+    preCheck: { check: false, comment: '' },
+    documentation: false,
+
+    itemTemplate: defaultTemplate,
+};
+
+export type AddTemplate = {
+    name: string;
+    type: string;
+    categoryId: string;
+    description: string;
+    createdById: string;
+    revision: string;
+    productNumber: string;
 };
 
 export const useAddPartForm = () => {
     const { currentUser } = useContext(UmAppContext);
     const { mutate } = useAddItems();
-    const { deleteLocalStorage } = useLocalStorage();
-
     const appLocation = useLocation();
 
     const methods = useForm<PartSchema>({
         resolver: zodResolver(partSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id ?? '',
+            createdById: currentUser?.id ?? '',
         },
     });
     const {
@@ -44,39 +68,87 @@ export const useAddPartForm = () => {
         resetField,
         formState: { errors },
         register,
+        trigger,
+        setValue,
+        watch,
     } = methods;
+    const { mutateAsync: templateMutate } = useAddItemTemplate();
+    const selectedTemplate = watch('itemTemplate');
 
-    const onSubmit = handleSubmit((data) => {
-        if (data.files) {
-            delete data.files;
+    useEffect(() => {
+        register('itemTemplate');
+    }, [register]);
 
-            mutate(
-                { items: [data] },
-                {
-                    onSuccess: () => {
-                        deleteLocalStorage('batch-data');
-                        deleteLocalStorage('checks-check');
-                        deleteLocalStorage('checks-description');
-                        deleteLocalStorage('upload-check');
-                        reset();
-                    },
-                }
-            );
-        } else {
-            mutate(
-                { items: [data] },
-                {
-                    onSuccess: () => {
-                        deleteLocalStorage('batch-data');
-                        deleteLocalStorage('checks-check');
-                        deleteLocalStorage('checks-description');
-                        deleteLocalStorage('upload-check');
-                        reset();
-                    },
-                }
-            );
+    useEffect(() => {
+        if (selectedTemplate) {
+            setValue('itemTemplate', selectedTemplate);
+            setValue('itemTemplateId', selectedTemplate?.id);
         }
-    });
+    }, []);
+
+    const templateSubmit = async () => {
+        const data = await templateMutate({
+            categoryId: selectedTemplate.categoryId || '',
+            createdById: currentUser?.id ?? '',
+            description: selectedTemplate.description || '',
+            name: selectedTemplate?.name || '',
+            productNumber: selectedTemplate?.productNumber || '',
+            revision: '1.06',
+            type: selectedTemplate?.type || '',
+        });
+        return data.json() as Promise<ItemTemplate>;
+    };
+
+    const onSubmit = handleSubmit(
+        async (data) => {
+            if (!selectedTemplate.id) {
+                const {
+                    id: itemTemplateId,
+                    name,
+                    categoryId,
+                    productNumber,
+                    type,
+                    description,
+                } = await templateSubmit();
+
+                mutate({
+                    items: [
+                        {
+                            ...data,
+                            itemTemplate: {
+                                id: itemTemplateId,
+
+                                type: type,
+                                categoryId: categoryId,
+                                productNumber: productNumber,
+
+                                description: description,
+                                createdById: currentUser?.id ?? '',
+                                name: name ?? '',
+                            },
+                            itemTemplateId,
+                        },
+                    ],
+                    files: undefined,
+                });
+            }
+
+            if (data.files) {
+                const files = [...data.files];
+                delete data.files;
+                mutate({
+                    items: [{ ...data, itemTemplateId: selectedTemplate?.id }],
+                    files: files,
+                });
+            } else {
+                mutate({
+                    items: [{ ...data, itemTemplateId: selectedTemplate?.id }],
+                    files: undefined,
+                });
+            }
+        },
+        (errors) => console.log(errors)
+    );
 
     return {
         methods,
@@ -87,6 +159,10 @@ export const useAddPartForm = () => {
         register,
         reset,
         formState: { errors },
+        trigger,
+        setValue,
         resetField,
+        templateSubmit,
+        watch,
     };
 };

@@ -1,26 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AddTemplate } from '../../../pages/addPart/hooks/useAddPartForm';
 import apiService from '../../api';
-import { ItemTemplate } from '../../apiTypes';
-export type UpdateItemTemplate = {
-    id: string;
-    itemTemplate: ItemTemplate;
-};
-/**
- *
- * @param id The item template id
- */
-export const useUpdateItemTemplate = (id: string) => {
+
+export const useAddItemTemplate = () => {
     const api = apiService();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (itemTemplate: ItemTemplate) => api.updateItemTemplateById(id, itemTemplate),
+        mutationFn: (itemTemplateBody: AddTemplate) => api.addItemTemplate(itemTemplateBody),
         onSuccess: () => {
             queryClient
                 .invalidateQueries({
                     queryKey: ['itemTemplate'],
                 })
                 .catch((error) => {
-                    console.error(console.error('Failed to invalidate queries: ', error));
+                    console.error('Failed to invalidate queries: ', error);
                 });
         },
     });

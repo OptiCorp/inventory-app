@@ -1,28 +1,33 @@
 import { ErrorMessage } from '@hookform/error-message';
-import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { FC } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 
+import { Autocomplete, TextField } from '@mui/material';
+import { PartSchema } from '../../../pages/addPart/hooks/partValidator.ts';
 import { FormOption } from '../../../services/apiTypes.ts';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { FormSelect } from '../FormSelect/FormSelect.tsx';
 import { StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
-export const Type = () => {
-    const { setValue } = useFormContext();
-
-    const [selectedOption, setSelectedOption] = useState<FormOption | null>(null);
-
-    const options = [
+export const Type: FC = () => {
+    const { control, watch } = useFormContext<PartSchema>();
+    const selectedTemplate = watch('itemTemplate.id');
+    const options: FormOption[] = [
         { value: 'unit', label: 'Unit' },
         { value: 'assembly', label: 'Assembly' },
         { value: 'subassembly', label: 'Subassembly' },
         { value: 'part', label: 'Part' },
     ];
 
-    useEffect(() => {
-        setValue('type', selectedOption?.value ?? '');
-    }, [selectedOption, setValue]);
+    const {
+        field: { onChange, value },
+    } = useController({
+        control,
+
+        name: 'itemTemplate.type',
+    });
+
+    const selectedType = options.find((option) => option.label === value);
 
     return (
         <>
@@ -38,11 +43,20 @@ export const Type = () => {
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>
-            <FormSelect
+            <Autocomplete
                 options={options}
-                setState={setSelectedOption}
-                state={selectedOption}
-            ></FormSelect>
+                selectOnFocus
+                clearOnBlur
+                id="controlled-demo"
+                sx={{ width: 500 }}
+                value={selectedType}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+                disabled={!!selectedTemplate}
+                onChange={(_event, newValue) => {
+                    onChange(newValue?.value);
+                }}
+                renderInput={(params) => <TextField {...params} label="Types" variant="outlined" />}
+            />
         </>
     );
 };
