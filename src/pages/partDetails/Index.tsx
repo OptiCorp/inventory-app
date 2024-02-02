@@ -80,10 +80,7 @@ const PartDetails = () => {
                 open={isOpen}
                 SubmitButtonOnClick={handleDelete}
                 CancelButtonOnClick={handleClose}
-                cancelButtonColor="error"
-                submitButtonColor="error"
-                submitButtonVariant="contained"
-                cancelButtonVariant="text"
+                isWarning
                 title="Delete item"
             >
                 Are you sure you want to permanently delete &apos;{item.wpId}&apos;?

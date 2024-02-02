@@ -1,14 +1,4 @@
-import {
-    Button,
-    ButtonPropsColorOverrides,
-    ButtonPropsVariantOverrides,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-} from '@mui/material';
-
-import { OverridableStringUnion } from '@mui/types';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 interface DialogProps {
     title: string;
@@ -17,24 +7,9 @@ interface DialogProps {
     SubmitButtonOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     CancelButtonOnClick: () => void;
     open: boolean;
-    cancelButtonColor?: OverridableStringUnion<
-        'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
-        ButtonPropsColorOverrides
-    >;
-    submitButtonColor?: OverridableStringUnion<
-        'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
-        ButtonPropsColorOverrides
-    >;
+    isWarning: boolean;
     onClose?: (e: React.MouseEvent) => void;
     children?: React.ReactNode;
-    cancelButtonVariant?: OverridableStringUnion<
-        'text' | 'outlined' | 'contained',
-        ButtonPropsVariantOverrides
-    >;
-    submitButtonVariant?: OverridableStringUnion<
-        'text' | 'outlined' | 'contained',
-        ButtonPropsVariantOverrides
-    >;
     type?: 'submit' | 'reset' | 'button' | undefined;
 }
 
@@ -47,11 +22,8 @@ const CustomDialog: React.FC<DialogProps> = ({
     open,
     children,
     onClose,
-    cancelButtonVariant,
-    submitButtonVariant,
-    cancelButtonColor,
-    submitButtonColor,
     type,
+    isWarning,
 }) => {
     return (
         <>
@@ -60,8 +32,7 @@ const CustomDialog: React.FC<DialogProps> = ({
                 {children ? <DialogContent>{children}</DialogContent> : null}
                 <DialogActions>
                     <Button
-                        variant={cancelButtonVariant}
-                        color={cancelButtonColor}
+                        variant="text"
                         onClick={CancelButtonOnClick}
                         type={type}
                         sx={{ borderRadius: '0' }}
@@ -70,8 +41,8 @@ const CustomDialog: React.FC<DialogProps> = ({
                     </Button>
 
                     <Button
-                        variant={submitButtonVariant}
-                        color={submitButtonColor}
+                        variant="contained"
+                        color={isWarning ? 'error' : 'primary'}
                         onClick={SubmitButtonOnClick}
                         type={type}
                         sx={{ borderRadius: '0' }}
