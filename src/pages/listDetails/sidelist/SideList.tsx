@@ -37,7 +37,6 @@ export const SideList = ({ item }: Props) => {
     };
 
     const handleAdd = (ids: MutateItemList) => {
-        console.log('add');
         mutateAddItemToList(ids, {});
     };
 

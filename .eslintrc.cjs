@@ -25,6 +25,7 @@ module.exports = {
         'react/prop-types': 'off',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': ['error'],
+        'no-console': ['warn', { allow: ['warn', 'error', 'info', 'debug'] }],
     },
     settings: {
         react: { version: 'detect' },

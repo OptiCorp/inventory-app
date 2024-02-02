@@ -68,8 +68,6 @@ const Search = () => {
         }
     }, [debouncedSearchTerm, state]);
 
-    console.log('search param', searchParam);
-
     return (
         <>
             <SearchContainer>

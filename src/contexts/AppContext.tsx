@@ -72,7 +72,7 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
         if (idToken) {
             fetchUserAndUpdateContext(idToken)
                 .then(() => {
-                    console.log('User fetched and context updated');
+                    console.info('User fetched and context updated');
                 })
                 .catch((error) => {
                     console.error('Error fetching and updating user:', error);
