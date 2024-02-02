@@ -1,5 +1,14 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { StyledDialogCancelButton, StyledDialogSubmitButton } from './styles';
+import {
+    Button,
+    ButtonPropsColorOverrides,
+    ButtonPropsVariantOverrides,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+} from '@mui/material';
+
+import { OverridableStringUnion } from '@mui/types';
 
 interface DialogProps {
     title: string;
@@ -8,13 +17,25 @@ interface DialogProps {
     SubmitButtonOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     CancelButtonOnClick: () => void;
     open: boolean;
-
+    cancelButtonColor?: OverridableStringUnion<
+        'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
+        ButtonPropsColorOverrides
+    >;
+    submitButtonColor?: OverridableStringUnion<
+        'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
+        ButtonPropsColorOverrides
+    >;
     onClose?: (e: React.MouseEvent) => void;
     children?: React.ReactNode;
-
-    type?: 'submit' | 'reset' | 'button';
-    PrimaryType?: 'submit' | 'reset' | 'button';
-    form?: string;
+    cancelButtonVariant?: OverridableStringUnion<
+        'text' | 'outlined' | 'contained',
+        ButtonPropsVariantOverrides
+    >;
+    submitButtonVariant?: OverridableStringUnion<
+        'text' | 'outlined' | 'contained',
+        ButtonPropsVariantOverrides
+    >;
+    type?: 'submit' | 'reset' | 'button' | undefined;
 }
 
 const CustomDialog: React.FC<DialogProps> = ({
@@ -26,10 +47,11 @@ const CustomDialog: React.FC<DialogProps> = ({
     open,
     children,
     onClose,
-
+    cancelButtonVariant,
+    submitButtonVariant,
+    cancelButtonColor: cancelButtoncolor,
+    submitButtonColor,
     type,
-    PrimaryType,
-    form,
 }) => {
     return (
         <>
@@ -37,12 +59,25 @@ const CustomDialog: React.FC<DialogProps> = ({
                 <DialogTitle>{title}</DialogTitle>
                 {children ? <DialogContent>{children}</DialogContent> : null}
                 <DialogActions>
-                    <StyledDialogCancelButton onClick={CancelButtonOnClick} type={PrimaryType}>
+                    <Button
+                        variant={cancelButtonVariant}
+                        color={cancelButtoncolor}
+                        onClick={CancelButtonOnClick}
+                        type={type}
+                        sx={{ borderRadius: '0' }}
+                    >
                         {cancelButtonText ?? 'CANCEL'}
-                    </StyledDialogCancelButton>
-                    <StyledDialogSubmitButton onClick={SubmitButtonOnClick} type={type} form={form}>
+                    </Button>
+
+                    <Button
+                        variant={submitButtonVariant}
+                        color={submitButtonColor}
+                        onClick={SubmitButtonOnClick}
+                        type={type}
+                        sx={{ borderRadius: '0' }}
+                    >
                         {submitButtonText ?? 'CONFIRM'}
-                    </StyledDialogSubmitButton>
+                    </Button>
                 </DialogActions>
             </Dialog>
         </>
