@@ -51,7 +51,7 @@ export default function Template() {
                             );
                         }}
                     />
-                </Box>{' '}
+                </Box>
             </Container>
         </>
     );

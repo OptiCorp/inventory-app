@@ -33,7 +33,7 @@ export const Vendor = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="vendor">Choose a vendor</label>{' '}
+                    <label htmlFor="vendor">Choose a vendor</label>
                     <ToolTip content="Specify a vendor">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>

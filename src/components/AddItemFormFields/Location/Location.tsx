@@ -31,7 +31,7 @@ export const Location = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="location">Choose a location</label>{' '}
+                    <label htmlFor="location">Choose a location</label>
                     <ToolTip content="Specify a location">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>

@@ -7,7 +7,7 @@ export const Comment = () => {
     return (
         <StyledDiv>
             <StyledInputWrap>
-                <label htmlFor="Comment">Comment</label>{' '}
+                <label htmlFor="Comment">Comment</label>
             </StyledInputWrap>
             <TextField
                 multiline

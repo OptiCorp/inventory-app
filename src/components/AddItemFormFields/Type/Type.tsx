@@ -31,11 +31,10 @@ export const Type: FC = () => {
 
     return (
         <>
-            {' '}
             <StyledDiv>
                 <StyledInputWrap>
                     <StyledIconContainer>
-                        <label htmlFor="type">Choose an item type</label>{' '}
+                        <label htmlFor="type">Choose an item type</label>
                         <ToolTip content="Specify Unit, or Item (lowest tier)">
                             <FaRegQuestionCircleIcon />
                         </ToolTip>

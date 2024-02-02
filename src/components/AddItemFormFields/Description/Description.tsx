@@ -11,7 +11,7 @@ export const Description = () => {
     return (
         <StyledDiv>
             <StyledInputWrap>
-                <label htmlFor="description">Description </label>{' '}
+                <label htmlFor="description">Description </label>
                 <ErrorMessage
                     name="description"
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}

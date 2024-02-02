@@ -37,7 +37,7 @@ export const Category = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="category">Choose a category</label>{' '}
+                    <label htmlFor="category">Choose a category</label>
                     <ToolTip content="Specify a category">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>

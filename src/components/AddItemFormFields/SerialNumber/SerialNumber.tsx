@@ -11,7 +11,7 @@ export const SerialNumber = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="Serial number">Serial number </label>{' '}
+                    <label htmlFor="Serial number">Serial number </label>
                     <ToolTip content="If left empty, a unique WP S/N will be generated">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
@@ -19,7 +19,7 @@ export const SerialNumber = () => {
                 <ErrorMessage
                     name="serialNumber"
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
-                />{' '}
+                />
             </StyledInputWrap>
             <TextField
                 id="filled-disabled"

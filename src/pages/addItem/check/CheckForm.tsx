@@ -25,7 +25,7 @@ const CheckForm = () => {
                         type="checkbox"
                         name="checks"
                         onChange={() => onChange(!value)}
-                    />{' '}
+                    />
                     <p>
                         I have performed all necessary checks before adding this item to the system
                     </p>

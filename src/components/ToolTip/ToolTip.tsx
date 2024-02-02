@@ -17,7 +17,6 @@ export const ToolTip = ({ content, children }: Props) => {
                 onClick={() => setIsVisble(true)}
                 onBlur={() => setIsVisble(true)}
             >
-                {' '}
                 {children}
             </span>
 

@@ -89,14 +89,12 @@ export const ListHeader = ({ list }: Props) => {
 
     return (
         <>
-            {' '}
             {width > 800 ? (
                 <Header>
                     <Wrapper>
                         <StyledDate>
-                            {' '}
                             {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
-                        </StyledDate>{' '}
+                        </StyledDate>
                         <ListTitle>{list.title}</ListTitle>
                     </Wrapper>
                     <FlexContainer>
@@ -104,7 +102,7 @@ export const ListHeader = ({ list }: Props) => {
                             <Chip
                                 style={{ marginRight: '20px' }}
                                 label={`${list?.items?.length} Items`}
-                            />{' '}
+                            />
                         </IconContainer>
                         <IconContainer onClick={(e) => handleOpenEdit(e)}>
                             <EditIcon />
@@ -119,18 +117,17 @@ export const ListHeader = ({ list }: Props) => {
                     <WrapperCompact>
                         <Wrapper>
                             <StyledDate>
-                                {' '}
                                 {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
-                            </StyledDate>{' '}
-                            <ListTitle>{list.title}</ListTitle>{' '}
-                        </Wrapper>{' '}
+                            </StyledDate>
+                            <ListTitle>{list.title}</ListTitle>
+                        </Wrapper>
                         <IconContainerCompact>
                             <IconContainer onClick={(e) => handleOpenEdit(e)}>
                                 <EditIcon />
                             </IconContainer>
                             <IconContainer onClick={(e) => handleOpen(e)}>
                                 <DeleteIcon />
-                            </IconContainer>{' '}
+                            </IconContainer>
                         </IconContainerCompact>
                     </WrapperCompact>
                 </>

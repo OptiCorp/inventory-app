@@ -20,7 +20,6 @@ import {
     StyledKeyWords,
     StyledSecondInfoBox,
 } from './styles';
-import { ItemCardProps } from '../ItemCard';
 
 export const SearchInfo = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
@@ -108,7 +107,6 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                 </StyledDescriptionParagraph>
             </StyledSecondInfoBox>
             <StyledBox>
-                {' '}
                 <>
                     {icon === 'add' ? (
                         <StyledAddIcon

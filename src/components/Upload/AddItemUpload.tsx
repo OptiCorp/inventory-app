@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import { ChangeEvent, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { COLORS } from '../../style/GlobalStyles';
 import { Button as SubmitButton } from '../Button/Button';
 import File from '../File/File';
-import { COLORS } from '../../style/GlobalStyles';
 
 const AddItemUpload = () => {
     const { setValue, getValues } = useFormContext();
@@ -45,7 +45,6 @@ const AddItemUpload = () => {
 
             <Box sx={{ display: 'flex', justifyContent: 'end' }}>
                 <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
-                    {' '}
                     <input
                         type="file"
                         multiple

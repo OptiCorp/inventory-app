@@ -15,7 +15,7 @@ export const ProductNumber = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="productNumber">Product number</label>{' '}
+                    <label htmlFor="productNumber">Product number</label>
                     <ToolTip content="Specify a product number">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
