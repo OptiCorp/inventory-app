@@ -26,6 +26,12 @@ module.exports = {
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': ['error'],
         'no-console': ['warn', { allow: ['warn', 'error', 'info', 'debug'] }],
+        'prettier/prettier': [
+            'error',
+            {
+                endOfLine: 'auto',
+            },
+        ],
     },
     settings: {
         react: { version: 'detect' },
