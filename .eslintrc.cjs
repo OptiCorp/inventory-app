@@ -32,6 +32,7 @@ module.exports = {
                 endOfLine: 'auto',
             },
         ],
+        'no-console': ['warn', { allow: ['warn', 'error', 'info', 'debug'] }],
     },
     settings: {
         react: { version: 'detect' },
