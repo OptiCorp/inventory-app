@@ -39,7 +39,7 @@ const BatchForm = () => {
                     />
                     <p>
                         I want to add a batch of several identical items, assigning a unique
-                        WellItemner serial number to each of them
+                        WellPartner serial number to each of them
                     </p>
                 </RadioWrapper>
             </label>
