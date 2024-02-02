@@ -21,7 +21,7 @@ export const Category = () => {
     const { data: categories = [] } = useGetCategories();
     const selectedCategory = categories.find((option) => option.id === value);
 
-    const testOptions = categories.map((category) => ({
+    const categoryOptions = categories.map((category) => ({
         value: category.id,
         label: category.name,
     }));
@@ -47,7 +47,7 @@ export const Category = () => {
                 />
             </StyledInputWrap>
             <Autocomplete
-                options={testOptions}
+                options={categoryOptions}
                 disabled={!!selectedTemplate}
                 sx={{ width: 500, margin: '10px 0' }}
                 value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}

@@ -17,11 +17,7 @@ const defaultTemplate: TemplateSchema = {
     name: '',
     inputValue: '',
     type: '',
-    // category: {
-    //     id: '',
-    //     name: '',
-    //     createdById: '',
-    // },
+
     productNumber: '',
     description: '',
     createdById: '',
@@ -39,14 +35,7 @@ const defaultValues: PartSchema = {
     isBatch: false,
     preCheck: { check: false, comment: '' },
     documentation: false,
-    // documents: {
-    //     id: '',
 
-    //     name: '',
-    //     blobRef: '',
-    //     contentType: '',
-    //     bytes: '',
-    // },
     itemTemplate: defaultTemplate,
 };
 
