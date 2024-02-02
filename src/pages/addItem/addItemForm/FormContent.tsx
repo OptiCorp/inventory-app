@@ -15,7 +15,7 @@ import { ItemSchema } from '../hooks/itemValidator';
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
-    const { register, watch } = useFormContext<ItemSchema>();
+    const { register } = useFormContext<ItemSchema>();
 
     return (
         <>
