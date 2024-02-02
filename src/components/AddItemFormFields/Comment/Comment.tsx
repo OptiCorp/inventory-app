@@ -1,6 +1,6 @@
+import { TextField } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
-import { StyledDiv } from '../styles';
-import { StyledInputWrap, StyledTextArea } from './styles';
+import { StyledDiv, StyledInputWrap } from '../styles';
 
 export const Comment = () => {
     const { register } = useFormContext();
@@ -9,7 +9,16 @@ export const Comment = () => {
             <StyledInputWrap>
                 <label htmlFor="Comment">Comment</label>{' '}
             </StyledInputWrap>
-            <StyledTextArea {...register('comment')} rows={5} cols={40} maxLength={450} />
+            <TextField
+                multiline
+                rows={5}
+                id="filled-disabled"
+                sx={{ width: '100%' }}
+                label="comment"
+                placeholder=""
+                variant="filled"
+                {...register('comment')}
+            />
         </StyledDiv>
     );
 };

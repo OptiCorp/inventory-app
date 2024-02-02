@@ -1,7 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
-import { useFormContext } from 'react-hook-form';
-
 import { TextField } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { StyledDiv, StyledErrorP } from '../styles';
 import { StyledInputWrap } from './styles';
@@ -24,7 +23,7 @@ export const Description = () => {
                 multiline
                 rows={4}
                 id="filled-disabled"
-                sx={{ width: '500px', height: '100px' }}
+                sx={{ width: '100%' }}
                 label="Description"
                 placeholder="E.g. Hydraulic cylinders can be purchased in a range of ISO standard measurement bore"
                 variant="filled"
