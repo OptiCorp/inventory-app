@@ -109,7 +109,7 @@ export const ParentItemSelector = ({
                 <Box>
                     <LabelContainer>
                         <label>
-                            <strong>{`This ${item.itemTemplate.type.toLowerCase()} is a part of:`}</strong>
+                            <strong>{`This item is a part of:`}</strong>
                         </label>
                         <Edit
                             onClick={() =>
@@ -121,39 +121,6 @@ export const ParentItemSelector = ({
                         />
                     </LabelContainer>
 
-                    <Controller
-                        control={control}
-                        name="parentId"
-                        render={(controllerProps) => {
-                            const {
-                                field: { onChange },
-                            } = controllerProps;
-                            return (
-                                <Select
-                                    {...register('parentId')}
-                                    styles={{
-                                        control: (provided) => ({
-                                            ...provided,
-                                            maxWidth: '300px',
-                                            borderRadius: '0',
-                                        }),
-                                    }}
-                                    onInputChange={(value) => setSearchTerm(value)}
-                                    onMenuScrollToBottom={() => {
-                                        fetchNextPage().catch((error) => {
-                                            console.error('An error occurred:', error);
-                                        });
-                                    }}
-                                    options={filterChildIds(filteredWpIds!)}
-                                    isLoading={isLoading}
-                                    placeholder="Search by wpid..."
-                                    onChange={onChange}
-                                    onBlur={() => handleBlur('parentId', 'parentId')}
-                                />
-                            );
-                        }}
-                    />
-
                     <StyledContainer>
                         <StyledLinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
                             {item.parent?.wpId}
@@ -164,6 +131,40 @@ export const ParentItemSelector = ({
                             </AccessibleButtonWrapper>
                         )}
                     </StyledContainer>
+                    {isOpen.parent && (
+                        <Controller
+                            control={control}
+                            name="parentId"
+                            render={(controllerProps) => {
+                                const {
+                                    field: { onChange },
+                                } = controllerProps;
+                                return (
+                                    <Select
+                                        {...register('parentId')}
+                                        styles={{
+                                            control: (provided) => ({
+                                                ...provided,
+                                                maxWidth: '300px',
+                                                borderRadius: '0',
+                                            }),
+                                        }}
+                                        onInputChange={(value) => setSearchTerm(value)}
+                                        onMenuScrollToBottom={() => {
+                                            fetchNextPage().catch((error) => {
+                                                console.error('An error occurred:', error);
+                                            });
+                                        }}
+                                        options={filterChildIds(filteredWpIds!)}
+                                        isLoading={isLoading}
+                                        placeholder="Search by wpid..."
+                                        onChange={onChange}
+                                        onBlur={() => handleBlur('parentId', 'parentId')}
+                                    />
+                                );
+                            }}
+                        />
+                    )}
                 </Box>
             </ClickAwayListener>
         </ParentContainer>

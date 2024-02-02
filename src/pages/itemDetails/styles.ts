@@ -8,6 +8,7 @@ export const StyledContainerDiv = styled.div`
     margin-inline: auto;
     padding: 16px;
     background: #fff;
+    gap: 16px;
 `;
 
 export const SecondList = styled.ul`

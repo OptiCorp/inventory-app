@@ -1,6 +1,5 @@
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { FormEvent, useContext } from 'react';
-import { Button } from '../../Button/Button';
 import { Item } from '../../../services/apiTypes';
 import { Wrapper } from './styles';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -80,7 +79,11 @@ export const Comments = ({ item }: { item: Item }) => {
                     />
                 </div>
                 <Wrapper>
-                    <Button type="submit" variant="white">
+                    <Button
+                        type="submit"
+                        variant="outlined"
+                        sx={{ borderRadius: '0', height: '40px', width: '200px' }}
+                    >
                         Sumbit
                     </Button>
                 </Wrapper>

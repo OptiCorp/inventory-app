@@ -18,7 +18,6 @@ import { AddDocument } from '../../services/apiTypes';
 import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
-import { Button as SubmitButton } from '../Button/Button';
 import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocumentTypes';
 import File from '../File/File';
 import { COLORS } from '../../style/GlobalStyles';
@@ -128,7 +127,11 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                 )}
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
+                <Button
+                    variant="outlined"
+                    onClick={() => inputFile.current?.click()}
+                    sx={{ borderRadius: '0', height: '40px', width: '200px' }}
+                >
                     <input
                         type="file"
                         accept=".pdf,.png,.docx,.jpg"
@@ -140,7 +143,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         ref={inputFile}
                     />
                     ADD DOCUMENT
-                </SubmitButton>
+                </Button>
             </Box>
         </Box>
     );

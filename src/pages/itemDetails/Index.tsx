@@ -69,17 +69,18 @@ const ItemDetails = () => {
             <ButtonContainer>
                 <Button
                     variant="outlined"
-                    color="inherit"
+                    color="error"
                     sx={{ borderRadius: '0', height: '40px', width: '200px' }}
                     onClick={() => setIsOpen(true)}
                 >
-                    Delete
+                    Delete item
                 </Button>
             </ButtonContainer>
             <CustomDialog
                 open={isOpen}
                 SubmitButtonOnClick={handleDelete}
                 CancelButtonOnClick={handleClose}
+                isWarning
                 title="Delete item"
             >
                 Are you sure you want to permanently delete &apos;{item.wpId}&apos;?
