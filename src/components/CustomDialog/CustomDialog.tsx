@@ -7,7 +7,7 @@ interface DialogProps {
     SubmitButtonOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     CancelButtonOnClick: () => void;
     open: boolean;
-    isWarning: boolean;
+    isWarning?: boolean;
     onClose?: (e: React.MouseEvent) => void;
     children?: React.ReactNode;
     type?: 'submit' | 'reset' | 'button' | undefined;
