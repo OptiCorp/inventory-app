@@ -55,12 +55,6 @@ export type LogEntry = {
     createdDate: string;
 };
 
-export type Category = {
-    id: string;
-    name: string;
-    createdById: string;
-};
-
 export type Location = {
     id: string;
     name: string;
@@ -94,9 +88,7 @@ export type MutateItemList = {
 
 export type AddItem = {
     wpId: string;
-
     serialNumber: string;
-
     itemTemplate: ItemTemplate[];
     itemTemplateId: string;
     preCheck: PreCheck;
@@ -155,6 +147,11 @@ export type UpdateLocation = {
     id: string;
     name: string;
 };
+export type Category = {
+    id: string;
+    name: string;
+    createdById: string;
+};
 
 export type AddCategory = {
     name: string;
@@ -186,7 +183,7 @@ export type Document = {
 
 export type ItemTemplate = {
     inputValue?: string;
-    name: string;
+
     description: string;
     id: string;
     category: { id: string; name: string; userId: string };
@@ -195,8 +192,18 @@ export type ItemTemplate = {
     type: string;
     productNumber: string;
 };
+
 export type DocumentType = {
     id: string;
     name: string;
     description: string;
+};
+
+export type AddTemplate = {
+    type: string;
+    categoryId: string;
+    description: string;
+    createdById: string;
+    revision: string;
+    productNumber: string;
 };
