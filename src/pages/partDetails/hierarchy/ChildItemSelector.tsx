@@ -83,8 +83,20 @@ export const ChildItemSelector = ({
             <Box>
                 <LabelContainer>
                     <label>
-                        <strong>{`This ${item.itemTemplate.type.toLowerCase()} consists of:`}</strong>
+                        <strong>{`This item consists of:`}</strong>
                     </label>
+                    {!isOpen.child && (
+                        <AccessibleButtonWrapper
+                            onClick={() =>
+                                setIsOpen((prev) => ({
+                                    ...prev,
+                                    child: true,
+                                }))
+                            }
+                        >
+                            <EditIcon />
+                        </AccessibleButtonWrapper>
+                    )}
                 </LabelContainer>
                 <FlexContainer>
                     {item.children?.map((childItem) => {
@@ -104,72 +116,61 @@ export const ChildItemSelector = ({
                             </ChildItemContainer>
                         );
                     })}
-                    {!isOpen.child && !!item.children?.length && (
-                        <AccessibleButtonWrapper
-                            onClick={() =>
-                                setIsOpen((prev) => ({
-                                    ...prev,
-                                    child: true,
-                                }))
-                            }
-                        >
-                            <EditIcon />
-                        </AccessibleButtonWrapper>
-                    )}
                 </FlexContainer>
+                {isOpen.child && (
+                    <ChildItemSearchContainer>
+                        <Select
+                            styles={{
+                                control: (provided) => ({
+                                    ...provided,
+                                    minWidth: '300px',
+                                    borderRadius: '0',
+                                }),
+                            }}
+                            options={filteredWpIds}
+                            onInputChange={(value) => setSearchTerm(value)}
+                            isLoading={isLoading}
+                            onMenuScrollToBottom={() => {
+                                fetchNextPage().catch((error) => {
+                                    console.error('An error occurred:', error);
+                                });
+                            }}
+                            placeholder="Search for item to add.."
+                            onChange={(value) =>
+                                setSelectedChildItem({
+                                    childItemId: value!.value.id,
+                                    childItemWpId: value!.value.wpId,
+                                })
+                            }
+                            value={
+                                selectedChildItem.childItemWpId.length > 0
+                                    ? {
+                                          value: {
+                                              id: selectedChildItem.childItemId,
+                                              wpId: selectedChildItem.childItemWpId,
+                                          },
+                                          label: `${selectedChildItem.childItemWpId}`,
+                                      }
+                                    : null
+                            }
+                        />
 
-                <ChildItemSearchContainer>
-                    <Select
-                        styles={{
-                            control: (provided) => ({
-                                ...provided,
-                                minWidth: '300px',
-                                borderRadius: '0',
-                            }),
-                        }}
-                        options={filteredWpIds}
-                        onInputChange={(value) => setSearchTerm(value)}
-                        isLoading={isLoading}
-                        onMenuScrollToBottom={() => {
-                            fetchNextPage().catch((error) => {
-                                console.error('An error occurred:', error);
-                            });
-                        }}
-                        placeholder="Search for item to add.."
-                        onChange={(value) =>
-                            setSelectedChildItem({
-                                childItemId: value!.value.id,
-                                childItemWpId: value!.value.wpId,
-                            })
-                        }
-                        value={
-                            selectedChildItem.childItemWpId.length > 0
-                                ? {
-                                      value: {
-                                          id: selectedChildItem.childItemId,
-                                          wpId: selectedChildItem.childItemWpId,
-                                      },
-                                      label: `${selectedChildItem.childItemWpId}`,
-                                  }
-                                : null
-                        }
-                    />
-
-                    <AddIcon
-                        disabled={selectedChildItem.childItemWpId.length <= 0}
-                        onClick={() => {
-                            if (selectedChildItem.childItemWpId.length <= 0) return;
-                            handleAddChildToParent({
-                                itemId: item.id,
-                                childItemId: selectedChildItem.childItemId,
-                            });
-                            setSelectedChildItem({
-                                childItemId: '',
-                                childItemWpId: '',
-                            });
-                        }}
-                    />
-                </ChildItemSearchContainer>
+                        <AddIcon
+                            disabled={selectedChildItem.childItemWpId.length <= 0}
+                            onClick={() => {
+                                if (selectedChildItem.childItemWpId.length <= 0) return;
+                                handleAddChildToParent({
+                                    itemId: item.id,
+                                    childItemId: selectedChildItem.childItemId,
+                                });
+                                setSelectedChildItem({
+                                    childItemId: '',
+                                    childItemWpId: '',
+                                });
+                            }}
+                        />
+                    </ChildItemSearchContainer>
+                )}
             </Box>
         </ClickAwayListener>
     );
