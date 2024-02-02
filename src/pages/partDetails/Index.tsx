@@ -70,7 +70,7 @@ const PartDetails = () => {
                 <Button
                     variant="outlined"
                     color="error"
-                    sx={{ borderRadius: '0', height: '40px', width: '200px', marginTop: '22px' }}
+                    sx={{ borderRadius: '0', height: '40px', width: '200px' }}
                     onClick={() => setIsOpen(true)}
                 >
                     Delete item
