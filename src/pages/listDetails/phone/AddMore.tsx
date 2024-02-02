@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
-import SearchResultCardCompact from '../../../components/PartCard/SearchInfoCompact';
+import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact';
 
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import { useSnackBar } from '../../../hooks';
@@ -50,7 +50,7 @@ export const AddMoreCompact = () => {
             <SearchBar
                 setSearchTerm={setSearchTerm}
                 searchTerm={searchTerm}
-                placeholder={'Search for ID, description, PO number or S/N'}
+                placeholder={'Search for ID, serial number or description'}
             />
             <PhoneContainer>
                 {items?.pages.map((page, i) =>
@@ -63,7 +63,7 @@ export const AddMoreCompact = () => {
                                     : ''
                             }
                         >
-                            <SearchResultCardCompact part={item} icon={'add'} />
+                            <SearchResultCardCompact item={item} icon={'add'} />
                         </div>
                     ))
                 )}

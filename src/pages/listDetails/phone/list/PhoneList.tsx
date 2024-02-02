@@ -4,7 +4,7 @@ import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../../../components/Button/Button';
 import { GlobalSpinner } from '../../../../components/GlobalSpinner/GlobalSpinner';
 
-import SearchResultCardCompact from '../../../../components/PartCard/SearchInfoCompact';
+import SearchResultCardCompact from '../../../../components/ItemCard/SearchInfoCompact';
 
 import UmAppContext from '../../../../contexts/UmAppContext';
 import { useSnackBar } from '../../../../hooks';
@@ -56,10 +56,10 @@ export const PhoneList = ({ list }: Props) => {
                                 {list.items.map((item: Item) => (
                                     <SearchResultCardCompact
                                         key={item.id}
-                                        part={item}
+                                        item={item}
                                         icon={'remove'}
                                     />
-                                    // <SideList part={item} key={item.id} />
+                                    // <SideList item={item} key={item.id} />
                                 ))}
                             </ListContainerCompact>
                         ) : null}

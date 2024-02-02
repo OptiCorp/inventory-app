@@ -11,10 +11,10 @@ import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
 
 type Props = {
-    part: Item;
+    item: Item;
 };
 
-export const SideList = ({ part }: Props) => {
+export const SideList = ({ item }: Props) => {
     const { listId } = useParams();
     const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
     const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ export const SideList = ({ part }: Props) => {
         mutateRemoveItemFromList(ids, {
             onSuccess: (data) => {
                 setSnackbarSeverity('success');
-                setSnackbarText(`${part.wpId} was deleted`);
+                setSnackbarText(`${item.wpId} was deleted`);
 
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
@@ -55,13 +55,13 @@ export const SideList = ({ part }: Props) => {
                 <Wrapper>
                     <KeyWord>
                         <b>WP ID</b>
-                        {part.wpId}
+                        {item.wpId}
                     </KeyWord>
                     <KeyWord>
-                        <b>Location</b> {part.location?.name || 'Location'}
+                        <b>Location</b> {item.location?.name || 'Location'}
                     </KeyWord>
                     <KeyWord>
-                        <b>Vendor</b> {part.vendor?.name || 'Vendor'}
+                        <b>Vendor</b> {item.vendor?.name || 'Vendor'}
                     </KeyWord>
 
                     <RemoveIcon onClick={handleClickOpen} />
@@ -69,7 +69,7 @@ export const SideList = ({ part }: Props) => {
                         onClick={() =>
                             handleAdd({
                                 listId: listId ?? 'N/A',
-                                itemId: part.id,
+                                itemId: item.id,
                                 addSubItems: true,
                             })
                         }
@@ -86,7 +86,7 @@ export const SideList = ({ part }: Props) => {
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={() =>
                     handleDelete({
-                        itemId: part.id,
+                        itemId: item.id,
                         listId: listId!,
                     })
                 }

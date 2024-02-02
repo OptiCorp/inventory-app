@@ -1,7 +1,7 @@
 import { Step, StepLabel, Stepper } from '@mui/material';
 import React from 'react';
-import { PartSchema } from '../../pages/addPart/hooks/partValidator';
-type stepsSchema = keyof PartSchema;
+import { ItemSchema } from '../../pages/addItem/hooks/itemValidator';
+type stepsSchema = keyof ItemSchema;
 type ProgressBarProps = {
     activeStep: number;
     steps: { fields: stepsSchema[]; slug: string }[];

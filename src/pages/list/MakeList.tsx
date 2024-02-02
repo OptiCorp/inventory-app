@@ -91,7 +91,7 @@ const MakeList = () => {
 
                 <FlexWrapper>
                     {filteredData.map((list: List) => (
-                        <ListCard key={list.id} part={list} />
+                        <ListCard key={list.id} item={list} />
                     ))}
                 </FlexWrapper>
             </SearchContainer>

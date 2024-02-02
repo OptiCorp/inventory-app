@@ -19,9 +19,9 @@ This section contains information about the app pages.
 
 -   View and edit an item's information
 
-### /add-part
+### /add-item
 
--   Add a new part
+-   Add a new item
 
 ### /makelist
 
@@ -60,8 +60,8 @@ Clone and Run the application:
 
 -   Apply camelCase for folder names, such as `userProfilePage`, with the exception of component folder names that should be capitalized, i.e `UserProfile`.
 -   Choose descriptive names for component files. For instance, use `UserProfile.tsx` instead of generic names like `Component1.tsx` or `Index.tsx`.
--   Organize folder structure hierarchically, considering trees and pages. Fro example, use `src/pages/add-part/.../batch`, where the batch directory is a subdirectory of its parent, and so forth.
--   Ensure page folders align with their corresponding URL segments. For example, name the page folder as `add-part-form` in `src/pages/add-part/add-part-form`, resulting in the URL `https://.../add-part/add-part-form`.
+-   Organize folder structure hierarchically, considering trees and pages. Fro example, use `src/pages/add-item/.../batch`, where the batch directory is a subdirectory of its parent, and so forth.
+-   Ensure page folders align with their corresponding URL segments. For example, name the page folder as `add-item-form` in `src/pages/add-item/add-item-form`, resulting in the URL `https://.../add-item/add-item-form`.
 
 ### Issues
 
