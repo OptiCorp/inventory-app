@@ -49,7 +49,7 @@ const CustomDialog: React.FC<DialogProps> = ({
     onClose,
     cancelButtonVariant,
     submitButtonVariant,
-    cancelButtonColor: cancelButtoncolor,
+    cancelButtonColor,
     submitButtonColor,
     type,
 }) => {
@@ -61,7 +61,7 @@ const CustomDialog: React.FC<DialogProps> = ({
                 <DialogActions>
                     <Button
                         variant={cancelButtonVariant}
-                        color={cancelButtoncolor}
+                        color={cancelButtonColor}
                         onClick={CancelButtonOnClick}
                         type={type}
                         sx={{ borderRadius: '0' }}
