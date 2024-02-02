@@ -45,12 +45,12 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route element={<ResponsiveAppBar />}>
-                <Route path="/" element={<Navigate to="/find-parts" />} />
-                <Route path="/find-parts" element={<Search />} />
+                <Route path="/" element={<Navigate to="/find-items" />} />
+                <Route path="/find-items" element={<Search />} />
                 <Route path="search/:searchParam?" element={<Search />} />
 
                 <Route path=":id" element={<PartDetails />} />
-                <Route path="add-part" element={<AddPart />}>
+                <Route path="add-item" element={<AddPart />}>
                     <Route index element={<RecentlyAdded />} />
                     <Route path="batch" element={<BatchForm />} />
                     <Route path="checks" element={<CheckForm />} />
