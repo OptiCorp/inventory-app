@@ -20,6 +20,7 @@ import {
     StyledKeyWords,
     StyledSecondInfoBox,
 } from './styles';
+import { ItemCardProps } from '../ItemCard';
 
 export const SearchInfo = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
@@ -115,7 +116,7 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                             active={addItemSuccess}
                             onClick={(e) =>
                                 handleAdd(e, {
-                                    itemId: item.id,
+                                    itemId: item?.id,
                                     listId: listId!,
                                 })
                             }

@@ -34,16 +34,7 @@ const defaultValues: ItemSchema = {
     itemTemplate: defaultTemplate,
 };
 
-export type AddTemplate = {
-    type: string;
-    categoryId: string;
-    description: string;
-    createdById: string;
-    revision: string;
-    productNumber: string;
-};
-
-export const useAddItemForm = () => {
+export const useAddPartForm = () => {
     const { currentUser } = useContext(AppContext);
     const { mutate } = useAddItems();
     const appLocation = useLocation();

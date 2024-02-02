@@ -10,6 +10,7 @@ import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber
 import { Type } from '../../../components/AddItemFormFields/Type/Type';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
+
 import AppContext from '../../../contexts/AppContext';
 import { ItemSchema } from '../hooks/itemValidator';
 
@@ -33,7 +34,7 @@ export const FormContent = () => {
                 id="filled-disabled"
                 sx={{ display: 'none' }}
                 label=""
-                {...register('createdById', { value: currentUser?.id })}
+                {...register('createdById', {value: currentUser?.id })}
             />
         </>
     );
