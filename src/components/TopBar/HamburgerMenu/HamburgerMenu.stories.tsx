@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args: {
         setHamburgerIsOpen: () => {
-            console.log('Hamburger menu clicked');
+            console.info('Hamburger menu clicked');
         },
     },
 };

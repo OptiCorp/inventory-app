@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args: {
         setSearchTerm: () => {
-            console.log('Search query changed');
+            console.info('Search query changed');
         },
         placeholder: 'Search for items',
     },
@@ -22,7 +22,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
     args: {
         setSearchTerm: () => {
-            console.log('Search query changed');
+            console.info('Search query changed');
         },
         placeholder: 'Search for items',
         searchTerm: 'Item 1',
