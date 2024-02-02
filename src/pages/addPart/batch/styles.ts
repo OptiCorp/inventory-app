@@ -10,7 +10,7 @@ export const FormBatchRadio = styled.form`
         padding: 8px;
         margin-right: 1rem;
         cursor: pointer;
-        width: fit-content;
+        width: 100px;
     }
     input {
         transform: scale(1.5);
@@ -22,11 +22,14 @@ export const FormBatchRadio = styled.form`
 
 export const StyledInput = styled.input`
     && {
-        width: auto;
+        width: 30px;
+        padding: 1rem;
+        cursor: pointer;
         margin: 13px;
     }
 `;
 
 export const RadioWrapper = styled.div`
     display: flex;
+    width: fit-content;
 `;

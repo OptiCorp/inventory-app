@@ -15,6 +15,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
     args: {
-        progressLevel: 3,
+        activeStep: 4,
     },
 };

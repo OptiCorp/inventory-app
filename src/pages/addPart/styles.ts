@@ -33,4 +33,5 @@ export const ButtonWrapper = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: end;
+    padding: 16px;
 `;

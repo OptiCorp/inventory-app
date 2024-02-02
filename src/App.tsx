@@ -28,6 +28,7 @@ import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
 import { useSnackBar } from './hooks/useSnackbar.tsx';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
 import { AddPartForm } from './pages/addPart/addPartForm/AddPartForm.tsx';
+import Template from './pages/addPart/template/Template.tsx';
 import AddCategory from './pages/admin/category/AddCategory.tsx';
 import AddLocation from './pages/admin/location/AddLocation.tsx';
 import AddVendor from './pages/admin/vendor/AddVendor.tsx';
@@ -53,8 +54,10 @@ function App() {
                 <Route path="add-part" element={<AddPart />}>
                     <Route index element={<RecentlyAdded />} />
                     <Route path="batch" element={<BatchForm />} />
+
                     <Route path="checks" element={<CheckForm />} />
                     <Route path="upload" element={<Upload />} />
+                    <Route path="template" element={<Template />} />
                     <Route path="add-form" element={<AddPartForm />} />
                 </Route>
                 <Route path="make-list" element={<MakeList />} />

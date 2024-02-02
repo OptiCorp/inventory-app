@@ -40,6 +40,8 @@ export const Primary: Story = {
                     name: 'Screws',
                     userId: '1',
                 },
+                name: '',
+                createdById: '',
             },
             createdDate: '2023-12-27 10:13:26',
             updatedDate: '2023-12-27 10:13:26',

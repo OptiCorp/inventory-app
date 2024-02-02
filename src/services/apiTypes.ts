@@ -24,6 +24,8 @@ export type UserRole = {
 
 export type Item = {
     id: string;
+    preCheck: PreCheck;
+    itemTemplateId: string;
     wpId: string;
     serialNumber: string;
     vendorId: string;
@@ -41,15 +43,7 @@ export type Item = {
     createdBy: User;
     logEntries: LogEntry[];
     itemTemplate: ItemTemplate;
-};
-
-export type ItemTemplate = {
-    id: string;
-    type: string;
-    productNumber: string;
-    categoryId: string;
-    category: Category;
-    description: string;
+    documents?: Document;
 };
 
 export type LogEntry = {
@@ -64,7 +58,7 @@ export type LogEntry = {
 export type Category = {
     id: string;
     name: string;
-    userId: string;
+    createdById: string;
 };
 
 export type Location = {
@@ -100,15 +94,17 @@ export type MutateItemList = {
 
 export type AddItem = {
     wpId: string;
-    categoryId: string;
+
     serialNumber: string;
-    productNumber: string;
-    type: string;
+
+    itemTemplate: ItemTemplate[];
+    itemTemplateId: string;
+    preCheck: PreCheck;
     locationId?: string | null;
-    description: string;
+    documents?: Document;
     parentId?: string | null;
     vendorId: string;
-    addedById: string | null;
+    createdById: string | null;
     comment?: string | null;
 };
 
@@ -124,6 +120,11 @@ export type UpdateItem = {
     comment?: string | null;
     listId: string | null;
     itemTemplate: ItemTemplate;
+};
+
+export type PreCheck = {
+    check: boolean;
+    comment: string;
 };
 
 export type Vendor = {
@@ -183,6 +184,17 @@ export type Document = {
     bytes: string;
 };
 
+export type ItemTemplate = {
+    inputValue?: string;
+    name: string;
+    description: string;
+    id: string;
+    category: { id: string; name: string; userId: string };
+    categoryId: string;
+    createdById: string;
+    type: string;
+    productNumber: string;
+};
 export type DocumentType = {
     id: string;
     name: string;

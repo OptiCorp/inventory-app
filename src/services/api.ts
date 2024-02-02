@@ -1,17 +1,18 @@
 import { API_URL } from '../config';
 import { pca } from '../msalConfig';
+import { PartSchema, TemplateSchema } from '../pages/addPart/hooks/partValidator';
+import { AddTemplate } from '../pages/addPart/hooks/useAddPartForm';
 
 import {
     AddCategory,
     AddDocument,
-    AddItem,
     AddList,
     AddLocation,
     AddVendor,
     Category,
     Document,
+    DocumentType,
     Item,
-    ItemTemplate,
     List,
     Location,
     UpdateCategory,
@@ -22,7 +23,6 @@ import {
     User,
     UserRole,
     Vendor,
-    DocumentType,
 } from './apiTypes';
 
 const request = {
@@ -321,7 +321,7 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`);
     };
 
-    const addItem = async (items: AddItem[]): Promise<Response> => {
+    const addItem = async (items: PartSchema[]): Promise<Response | Response[][]> => {
         const res = await postByFetch(`Item`, items);
         return res;
     };
@@ -401,23 +401,6 @@ const apiService = () => {
         return await deleteByFetch(`Vendor/${id}`);
     };
 
-    // ItemTemplate
-
-    const getItemTemplates = async (): Promise<ItemTemplate[]> => {
-        return await getByFetch('ItemTemplate');
-    };
-
-    const getItemTemplateById = async (id: string): Promise<ItemTemplate> => {
-        return await getByFetch(`ItemTemplate/${id}`);
-    };
-
-    const updateItemTemplateById = async (
-        id: string,
-        itemTemplate: ItemTemplate
-    ): Promise<Response> => {
-        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
-    };
-
     // Category
 
     const getCategory = async (): Promise<Category[]> => {
@@ -464,6 +447,27 @@ const apiService = () => {
 
     const getDocumentTypes = async (): Promise<DocumentType[]> => {
         return await getByFetch(`DocumentType`);
+    };
+
+    // ItemTemplate
+
+    const getItemTemplateById = async (id: string): Promise<TemplateSchema> => {
+        return await getByFetch(`ItemTemplate/${id}`);
+    };
+
+    const updateItemTemplateById = async (
+        id: string,
+        itemTemplate: TemplateSchema
+    ): Promise<Response> => {
+        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
+    };
+
+    const getItemTemplates = async (): Promise<TemplateSchema[]> => {
+        return await getByFetch('ItemTemplate');
+    };
+
+    const addItemTemplate = async (itemTemplateBody: AddTemplate): Promise<Response> => {
+        return postByFetch('ItemTemplate', itemTemplateBody);
     };
 
     return {
@@ -523,6 +527,8 @@ const apiService = () => {
         getItemTemplates,
         getItemTemplateById,
         updateItemTemplateById,
+
+        addItemTemplate,
     };
 };
 
