@@ -147,7 +147,7 @@ export const useAddItemForm = () => {
                 });
             }
         },
-        (errors) => console.log(errors)
+        (errors) => console.error(errors)
     );
 
     return {
