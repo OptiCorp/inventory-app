@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { useAddVendor } from '../../../services/hooks/vendor/useAddVendor';
 import { VendorSchema, vendorSchema } from './vendorValidator';
 
@@ -12,7 +12,7 @@ const defaultValues: VendorSchema = {
 };
 
 export const useAddVendorForm = () => {
-    const { currentUser } = useContext(UmAppContext);
+    const { currentUser } = useContext(AppContext);
     const { mutate } = useAddVendor();
     const navigate = useNavigate();
 

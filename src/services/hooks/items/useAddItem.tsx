@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { PartSchema } from '../../../pages/addPart/hooks/partValidator';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import apiService from '../../api';
 
 type MutationObject = {
-    items: PartSchema[];
+    items: ItemSchema[];
     files?: File[];
 };
 
@@ -22,7 +22,7 @@ export const useAddItems = () => {
                 .catch((error) => {
                     console.error('Failed to invalidate queries: ', error);
                 });
-            navigate('/add-part');
+            navigate('/add-item');
         },
     });
 };

@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from '@mui/material';
 import { useContext } from 'react';
-import UmAppContext from '../contexts/UmAppContext';
+import AppContext from '../contexts/AppContext';
 
 export const useSnackBar = () => {
     const {
@@ -10,7 +10,7 @@ export const useSnackBar = () => {
         setShowSnackbar,
         snackbarSeverity,
         setSnackbarSeverity,
-    } = useContext(UmAppContext);
+    } = useContext(AppContext);
 
     const snackbar = (
         <Snackbar

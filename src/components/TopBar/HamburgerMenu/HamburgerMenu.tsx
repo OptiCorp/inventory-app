@@ -22,8 +22,8 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
     };
 
     const menuItems = [
-        { location: 'search', icon: <SearchIcon fontSize="large" />, text: 'Find parts' },
-        { location: 'add-part', icon: <AddIcon fontSize="large" />, text: 'Add part' },
+        { location: 'search', icon: <SearchIcon fontSize="large" />, text: 'Find items' },
+        { location: 'add-item', icon: <AddIcon fontSize="large" />, text: 'Add item' },
         { location: 'makelist', icon: <ListAltIcon fontSize="large" />, text: 'Make lists' },
         {
             location: 'admin',

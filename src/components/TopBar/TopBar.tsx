@@ -30,7 +30,7 @@ export const TopBar = () => {
         const excludedRoutes = [
             '/',
             '/search',
-            '/add-part',
+            '/add-item',
             '/makelist',
             '/admin/categories',
             '/admin/vendors',
@@ -58,10 +58,10 @@ export const TopBar = () => {
                 {width > 800 ? (
                     <StyledHeaderWrapper>
                         <StyledNavLink to="search">
-                            <StyledLink>Find parts</StyledLink>
+                            <StyledLink>Find items</StyledLink>
                         </StyledNavLink>
-                        <StyledNavLink to="add-part">
-                            <StyledLink>Add part</StyledLink>
+                        <StyledNavLink to="add-item">
+                            <StyledLink>Add item</StyledLink>
                         </StyledNavLink>
                         <StyledNavLink to="makelist">
                             <StyledLink>Make list</StyledLink>
