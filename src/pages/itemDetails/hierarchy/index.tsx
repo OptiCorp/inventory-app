@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useDebounce } from 'usehooks-ts';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { Item } from '../../../services/apiTypes';
 import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 import { useRemoveParentIdFromItem } from '../../../services/hooks/items/useRemoveParentIdFromItem';
@@ -9,7 +9,7 @@ import { ParentItemSelector } from './ParentItemSelector';
 import { ChildItemSelector } from './ChildItemSelector';
 
 export const Hierarchy = ({ item }: { item: Item }) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [isOpen, setIsOpen] = useState({
         parent: false,

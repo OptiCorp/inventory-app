@@ -8,7 +8,7 @@ import {
 import { Login } from './pages/login/Login.tsx';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { UmAppContextProvider } from './contexts/UmAppContext';
+import { AppContextProvider } from './contexts/AppContext';
 import AddItem from './pages/addItem/Index';
 import BatchForm from './pages/addItem/batch/BatchForm';
 import CheckForm from './pages/addItem/check/CheckForm';
@@ -87,11 +87,11 @@ function App() {
             <ThemeProvider theme={globalTheme}>
                 <div className="wrapper">
                     {isAuthenticated && (
-                        <UmAppContextProvider>
+                        <AppContextProvider>
                             <GlobalStyles width={width} />
                             {snackbar}
                             <RouterProvider router={router} />
-                        </UmAppContextProvider>
+                        </AppContextProvider>
                     )}
                     {!isAuthenticated && <Login />}
                 </div>

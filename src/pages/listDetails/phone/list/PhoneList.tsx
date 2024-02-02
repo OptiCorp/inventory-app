@@ -6,7 +6,7 @@ import { GlobalSpinner } from '../../../../components/GlobalSpinner/GlobalSpinne
 
 import SearchResultCardCompact from '../../../../components/ItemCard/SearchInfoCompact';
 
-import UmAppContext from '../../../../contexts/UmAppContext';
+import AppContext from '../../../../contexts/AppContext';
 import { useSnackBar } from '../../../../hooks';
 import { Item, List, UpdateList } from '../../../../services/apiTypes';
 import { useGetListById } from '../../../../services/hooks/list/useGetListById';
@@ -18,7 +18,7 @@ type Props = {
     list: List;
 };
 export const PhoneList = ({ list }: Props) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
 
     const [searchTerm] = useState('');
     const { listId } = useParams();

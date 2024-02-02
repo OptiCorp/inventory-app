@@ -3,7 +3,7 @@ import { IMsalContext } from '@azure/msal-react';
 import { AlertColor } from '@mui/material';
 import { SetState } from '../pages/itemDetails/itemInfo/types';
 import { User } from '../services/apiTypes';
-export interface UmAppContextType {
+export interface AppContextType {
     snackbarText: string;
     // setSnackbarText: (snackbarText: string) => void
     setSnackbarText: SetState<string>;

@@ -11,11 +11,11 @@ import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber
 import { Type } from '../../../components/AddItemFormFields/Type/Type';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { ItemSchema } from '../hooks/itemValidator';
 
 export const FormContent = () => {
-    const { currentUser } = useContext(UmAppContext);
+    const { currentUser } = useContext(AppContext);
     const { register, watch } = useFormContext<ItemSchema>();
     const selectedTemplate = watch('itemTemplate.id');
 

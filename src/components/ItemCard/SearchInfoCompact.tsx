@@ -2,7 +2,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import UmAppContext from '../../contexts/UmAppContext.tsx';
+import AppContext from '../../contexts/AppContext.tsx';
 import { Item, MutateItemList } from '../../services/apiTypes.ts';
 import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
 import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
@@ -21,7 +21,7 @@ type Props = {
     icon?: string;
 };
 const SearchResultCardCompact = ({ item, icon }: Props) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [alreadyAdded, setAlreadyAdded] = useState(false);

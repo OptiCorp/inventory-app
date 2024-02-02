@@ -7,7 +7,7 @@ import { MutateItemList } from '../../../services/apiTypes';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
 
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import CustomDialog from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
@@ -22,7 +22,7 @@ import {
 import { ItemCardProps } from '../ItemCard';
 
 export const SearchInfo = ({ item, icon }: ItemCardProps) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
 
     const [open, setOpen] = useState(false);
     const [alreadyAdded, setAlreadyAdded] = useState(false);

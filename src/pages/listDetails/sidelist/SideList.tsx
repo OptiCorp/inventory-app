@@ -6,7 +6,7 @@ import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRig
 import IconButton from '@mui/material/IconButton';
 
 import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx';
-import UmAppContext from '../../../contexts/UmAppContext.tsx';
+import AppContext from '../../../contexts/AppContext.tsx';
 import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
 
@@ -16,7 +16,7 @@ type Props = {
 
 export const SideList = ({ item }: Props) => {
     const { listId } = useParams();
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
     const { mutate: mutateAddItemToList } = useAddItemsToList();

@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { Open, Options, SetState } from '../itemInfo/types';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { useContext } from 'react';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 
 type Field =
@@ -55,7 +55,7 @@ export const ParentItemSelector = ({
     setSnackbarText,
     setSnackbarSeverity,
 }: ParentItemSelectorProps) => {
-    const { currentUser } = useContext(UmAppContext);
+    const { currentUser } = useContext(AppContext);
     const navigate = useNavigate();
     const {
         register,

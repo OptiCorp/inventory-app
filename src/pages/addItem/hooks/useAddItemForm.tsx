@@ -3,7 +3,7 @@ import { useLocation } from 'react-router';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 
 import { ItemTemplate } from '../../../services/apiTypes.ts';
 
@@ -50,7 +50,7 @@ export type AddTemplate = {
 };
 
 export const useAddItemForm = () => {
-    const { currentUser } = useContext(UmAppContext);
+    const { currentUser } = useContext(AppContext);
     const { mutate } = useAddItems();
     const appLocation = useLocation();
 

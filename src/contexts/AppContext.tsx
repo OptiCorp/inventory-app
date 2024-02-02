@@ -6,11 +6,11 @@ import { createContext, useEffect, useState } from 'react';
 import { GlobalSpinner } from '../components/GlobalSpinner/GlobalSpinner';
 import apiService from '../services/api';
 import { ApiStatus, User } from '../services/apiTypes';
-import { AzureUserInfo, UmAppContextType } from './types';
+import { AzureUserInfo, AppContextType } from './types';
 
-const UmAppContext = createContext<UmAppContextType>({} as UmAppContextType);
+const AppContext = createContext<AppContextType>({} as AppContextType);
 
-export function UmAppContextProvider({ children }: { children: React.ReactNode }) {
+export function AppContextProvider({ children }: { children: React.ReactNode }) {
     // snackbar
 
     const [showSnackbar, setShowSnackbar] = useState(false);
@@ -110,7 +110,7 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
 
     if (accounts.length > 0) {
         return (
-            <UmAppContext.Provider
+            <AppContext.Provider
                 value={{
                     showSnackbar,
                     setShowSnackbar,
@@ -128,9 +128,9 @@ export function UmAppContextProvider({ children }: { children: React.ReactNode }
                 }}
             >
                 {children}
-            </UmAppContext.Provider>
+            </AppContext.Provider>
         );
     }
 }
 
-export default UmAppContext;
+export default AppContext;

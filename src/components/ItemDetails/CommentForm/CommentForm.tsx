@@ -6,7 +6,7 @@ import { Wrapper } from './styles';
 import { Controller, useFormContext } from 'react-hook-form';
 import { ItemInfoSchema } from '../../../pages/itemDetails/itemInfo/hooks';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 
 export const Comments = ({ item }: { item: Item }) => {
@@ -16,7 +16,7 @@ export const Comments = ({ item }: { item: Item }) => {
         formState: { dirtyFields },
         control,
     } = useFormContext<ItemInfoSchema>();
-    const { currentUser, setSnackbarSeverity, setSnackbarText } = useContext(UmAppContext);
+    const { currentUser, setSnackbarSeverity, setSnackbarText } = useContext(AppContext);
     const { mutate } = useUpdateItem(item?.id, currentUser!.id);
 
     const commentValue = watch('comment');

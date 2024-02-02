@@ -5,7 +5,7 @@ import { Button } from '../../components/Button/Button.tsx';
 import ItemCard from '../../components/ItemCard/ItemCard.tsx';
 import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import UmAppContext from '../../contexts/UmAppContext.tsx';
+import AppContext from '../../contexts/AppContext.tsx';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes.ts';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
@@ -28,7 +28,7 @@ import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfin
 import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
 
 const ListDetails = () => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const { listId } = useParams();
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);

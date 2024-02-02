@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { useSnackBar } from '../../../hooks';
 import type { Item } from '../../../services/apiTypes';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
@@ -39,7 +39,7 @@ const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
         setValue,
         formState: { dirtyFields },
     } = useFormContext<ItemInfoSchema>();
-    const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(AppContext);
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors();
     const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations();
     const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories();
