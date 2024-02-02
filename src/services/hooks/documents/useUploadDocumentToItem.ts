@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import apiService from '../../api';
 import { AddDocument } from '../../apiTypes';
 
 export const useUploadDocumentToItem = (itemId: string) => {
     const api = apiService();
     const queryClient = useQueryClient();
-    const { setSnackbarText } = useContext(UmAppContext);
+    const { setSnackbarText } = useContext(AppContext);
     return useMutation({
         mutationFn: async (document: AddDocument) => await api.addDocument(document, itemId),
         onSettled: (_data, errors, document) => {

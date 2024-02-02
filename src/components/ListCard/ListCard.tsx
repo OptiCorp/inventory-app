@@ -8,10 +8,10 @@ import CustomDialog from '../CustomDialog/CustomDialog.tsx';
 import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles.ts';
 
 type Props = {
-    part: List;
+    item: List;
 };
 
-const ListCard = ({ part }: Props) => {
+const ListCard = ({ item }: Props) => {
     const navigate = useNavigate();
     const { mutate } = useDeleteList();
     const [open, setOpen] = useState(false);
@@ -27,26 +27,26 @@ const ListCard = ({ part }: Props) => {
 
     const handleDelete = () => {
         setOpen(true);
-        mutate(part.id);
+        mutate(item.id);
         handleClose();
     };
 
     return (
         <>
-            <StyledListWrapper onClick={() => navigate(`${part.id}`)}>
+            <StyledListWrapper onClick={() => navigate(`${item.id}`)}>
                 <div onClick={(e) => handleOpen(e)}>
                     <StyledDeleteIcon style={{ fontSize: '30px' }}></StyledDeleteIcon>
                 </div>
-                <StyledTitle>{part.title}</StyledTitle>
-                {part.updatedDate ? (
+                <StyledTitle>{item.title}</StyledTitle>
+                {item.updatedDate ? (
                     <h4>
                         Last updated:{' '}
-                        {format(new Date(part.updatedDate), 'dd-MM-yyyy HH:mm:ss').toString()}
+                        {format(new Date(item.updatedDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 ) : (
                     <h4>
                         Created:{' '}
-                        {format(new Date(part.createdDate), 'dd-MM-yyyy HH:mm:ss').toString()}
+                        {format(new Date(item.createdDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 )}
             </StyledListWrapper>

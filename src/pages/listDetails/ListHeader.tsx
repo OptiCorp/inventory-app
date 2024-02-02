@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { Chip, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CustomDialog from '../../components/CustomDialog/CustomDialog';
-import UmAppContext from '../../contexts/UmAppContext';
+import AppContext from '../../contexts/AppContext';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
 import { List, UpdateList } from '../../services/apiTypes';
 import { useDeleteList } from '../../services/hooks/list/useDeleteList';
@@ -28,7 +28,7 @@ type Props = {
 export const ListHeader = ({ list }: Props) => {
     const { width } = useWindowDimensions();
 
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [title, setTitle] = useState(list.title);
     const [open, setOpen] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);

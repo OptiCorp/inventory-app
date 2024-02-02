@@ -5,7 +5,7 @@ import { Button } from '../../components/Button/Button.tsx';
 import CustomDialog from '../../components/CustomDialog/CustomDialog.tsx';
 import ListCard from '../../components/ListCard/ListCard.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import UmAppContext from '../../contexts/UmAppContext.tsx';
+import AppContext from '../../contexts/AppContext.tsx';
 import { useSnackBar } from '../../hooks/useSnackbar.tsx';
 import { Item, List } from '../../services/apiTypes.ts';
 
@@ -16,7 +16,7 @@ import { SearchContainer } from '../search/styles.ts';
 import { FlexWrapper, SearchAndButton } from './styles.ts';
 
 const MakeList = () => {
-    const { currentUser } = useContext(UmAppContext);
+    const { currentUser } = useContext(AppContext);
     const { searchParam } = useParams<{ searchParam: string }>();
     const [searchTerm, setSearchTerm] = useState('');
     const [title, setTitle] = useState('');
@@ -91,7 +91,7 @@ const MakeList = () => {
 
                 <FlexWrapper>
                     {filteredData.map((list: List) => (
-                        <ListCard key={list.id} part={list} />
+                        <ListCard key={list.id} item={list} />
                     ))}
                 </FlexWrapper>
             </SearchContainer>

@@ -1,5 +1,5 @@
 import { AlertColor } from '@mui/material';
-import { SetState } from '../pages/partDetails/partInfo/types';
+import { SetState } from '../pages/itemDetails/itemInfo/types';
 
 /**
  * Handles the logic for displaying snackbar messages based on API response

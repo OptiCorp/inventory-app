@@ -1,31 +1,31 @@
 import { useNavigate } from 'react-router-dom';
 import { Item } from '../../services/apiTypes';
 
-import { SearchInfo } from '../PartCard/SearchInfo/SearchInfo';
-import { StyledPartCardContainer, StyledSearchCard } from '../PartCard/styles';
+import { SearchInfo } from '../ItemCard/SearchInfo/SearchInfo';
+import { StyledItemCardContainer, StyledSearchCard } from '../ItemCard/styles';
 
 type Props = {
-    part: Item;
+    item: Item;
     icon?: string;
 };
 
-const SearchResultCard = ({ part, icon }: Props) => {
+const SearchResultCard = ({ item, icon }: Props) => {
     const navigate = useNavigate();
 
     return (
         <>
-            <StyledPartCardContainer
+            <StyledItemCardContainer
                 style={{
                     cursor: `${location.pathname.includes(`/makelist`) ? null : `pointer`}`,
                 }}
                 onClick={() => {
-                    location.pathname.includes('/makelist') ? null : navigate(`/${part.id}`);
+                    location.pathname.includes('/makelist') ? null : navigate(`/${item.id}`);
                 }}
             >
                 <StyledSearchCard title="">
-                    <SearchInfo part={part} icon={icon} />
+                    <SearchInfo item={item} icon={icon} />
                 </StyledSearchCard>
-            </StyledPartCardContainer>
+            </StyledItemCardContainer>
         </>
     );
 };

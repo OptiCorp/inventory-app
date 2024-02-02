@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { TemplateSchema } from '../../../pages/addPart/hooks/partValidator';
+import { TemplateSchema } from '../../../pages/addItem/hooks/itemValidator';
 import apiService from '../../api';
 export type UpdateItemTemplate = {
     id: string;

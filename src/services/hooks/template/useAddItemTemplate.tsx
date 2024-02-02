@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AddTemplate } from '../../../pages/addPart/hooks/useAddPartForm';
+import { AddTemplate } from '../../../pages/addItem/hooks/useAddItemForm';
 import apiService from '../../api';
 
 export const useAddItemTemplate = () => {

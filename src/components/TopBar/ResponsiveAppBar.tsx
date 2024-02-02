@@ -14,7 +14,7 @@ import * as React from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import useNavigationControl from './hooks/useNavigation';
 
-const pages = ['Find parts', 'Add part', 'Make list'];
+const pages = ['Find items', 'Add item', 'Make list'];
 const settings = ['Profile', 'Account', 'Admin', 'Logout'];
 
 function ResponsiveAppBar() {

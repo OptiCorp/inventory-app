@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../components/Button/Button.tsx';
-import PartCard from '../../components/PartCard/PartCard.tsx';
-import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact.tsx';
+import ItemCard from '../../components/ItemCard/ItemCard.tsx';
+import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import UmAppContext from '../../contexts/UmAppContext.tsx';
+import AppContext from '../../contexts/AppContext.tsx';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes.ts';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
@@ -28,7 +28,7 @@ import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfin
 import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
 
 const ListDetails = () => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const { listId } = useParams();
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -86,7 +86,7 @@ const ListDetails = () => {
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        placeholder={'Search for ID, description, PO number or S/N'}
+                        placeholder={'Search for ID, serial number or description'}
                     />
                     <Container>
                         {items?.pages.map((page, i) =>
@@ -101,7 +101,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <PartCard part={item} icon={'add'} />
+                                        <ItemCard item={item} icon={'add'} />
                                     </div>
                                 ) : (
                                     <div
@@ -113,7 +113,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCardCompact part={item} icon={'add'} />
+                                        <SearchResultCardCompact item={item} icon={'add'} />
                                     </div>
                                 )
                             )
@@ -128,7 +128,7 @@ const ListDetails = () => {
                             {list.items ? (
                                 <ListContainer>
                                     {list.items.map((item: Item) => (
-                                        <SideList part={item} key={item.id} />
+                                        <SideList item={item} key={item.id} />
                                     ))}
                                 </ListContainer>
                             ) : null}

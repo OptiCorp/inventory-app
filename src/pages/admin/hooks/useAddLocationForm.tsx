@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { useAddLocation } from '../../../services/hooks/locations/useAddLocation';
 import { LocationSchema, locationSchema } from './locationValidator';
 
@@ -12,7 +12,7 @@ const defaultValues: LocationSchema = {
 };
 
 export const useAddLocationForm = () => {
-    const { currentUser } = useContext(UmAppContext);
+    const { currentUser } = useContext(AppContext);
     const { mutate } = useAddLocation();
     const navigate = useNavigate();
 

@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import { useAddCategory } from '../../../services/hooks/category/useAddCategory';
 import { CategorySchema, categorySchema } from './categoryValidator';
 
@@ -13,7 +13,7 @@ const defaultValues: CategorySchema = {
 
 export const useAddCategoryForm = () => {
     const navigate = useNavigate();
-    const { currentUser } = useContext(UmAppContext);
+    const { currentUser } = useContext(AppContext);
     const { mutate } = useAddCategory();
 
     const methods = useForm<CategorySchema>({

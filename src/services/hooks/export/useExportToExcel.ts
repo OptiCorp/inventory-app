@@ -41,7 +41,6 @@ const useExportToExcel = (): ExportToExcelHook => {
 
         return processedDatas;
     };
-
     return { exportToExcel };
 };
 

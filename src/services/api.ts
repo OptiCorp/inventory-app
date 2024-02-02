@@ -1,7 +1,7 @@
 import { API_URL } from '../config';
 import { pca } from '../msalConfig';
-import { PartSchema, TemplateSchema } from '../pages/addPart/hooks/partValidator';
-import { AddTemplate } from '../pages/addPart/hooks/useAddPartForm';
+import { ItemSchema, TemplateSchema } from '../pages/addItem/hooks/itemValidator';
+import { AddTemplate } from '../pages/addItem/hooks/useAddItemForm';
 
 import {
     AddCategory,
@@ -321,7 +321,7 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`);
     };
 
-    const addItem = async (items: PartSchema[]): Promise<Response | Response[][]> => {
+    const addItem = async (items: ItemSchema[]): Promise<Response | Response[][]> => {
         const res = await postByFetch(`Item`, items);
         return res;
     };
