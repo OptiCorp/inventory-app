@@ -13,8 +13,8 @@ import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
 import {
     StyledCompactInfoP,
     StyledDescriptionWrap,
-    StyledKeyWords,
     StyledItemCardCompactContainer,
+    StyledKeyWords,
 } from './styles.ts';
 type Props = {
     item: Item;

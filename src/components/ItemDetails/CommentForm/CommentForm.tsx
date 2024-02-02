@@ -1,12 +1,12 @@
 import { Button, TextField } from '@mui/material';
 import { FormEvent, useContext } from 'react';
-import { Item } from '../../../services/apiTypes';
-import { Wrapper } from './styles';
 import { Controller, useFormContext } from 'react-hook-form';
-import { ItemInfoSchema } from '../../../pages/itemDetails/itemInfo/hooks';
-import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import AppContext from '../../../contexts/AppContext';
+import { ItemInfoSchema } from '../../../pages/itemDetails/itemInfo/hooks';
+import { Item } from '../../../services/apiTypes';
+import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
+import { Wrapper } from './styles';
 
 export const Comments = ({ item }: { item: Item }) => {
     const {

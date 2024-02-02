@@ -2,10 +2,11 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Autocomplete, TextField } from '@mui/material';
 import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
 import { Location as LocationType } from '../../../services/apiTypes.ts';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
+
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Location = () => {
