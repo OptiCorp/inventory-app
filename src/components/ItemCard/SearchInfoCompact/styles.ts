@@ -14,3 +14,13 @@ export const StyledItemCardCompactContainer = styled.div`
 export const StyledCompactInfoP = styled.div`
     width: 100%;
 `;
+
+export const StyledDescriptionWrap = styled.div`
+    padding-bottom: 5px;
+`;
+
+export const StyledKeyWords = styled.p`
+    font-weight: 600;
+    margin: 0px;
+    width: 100%;
+`;
