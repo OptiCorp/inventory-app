@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ItemTemplate, Location, Vendor } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
-import { StyledItemCardContainer, StyledSearchCard } from './styles';
+import { StyledItemCardContainer, StyledSearchCard } from './SearchInfoCompact/styles';
 
 export type ItemCardProps = {
     item: {
@@ -27,7 +27,7 @@ const ItemCard = ({ item, icon }: ItemCardProps) => {
     };
 
     const cursorStyle =
-        location.pathname.includes('/search') || location.pathname.includes('/add-item')
+        location.pathname.includes('/search') || location.pathname.includes('/add-Item')
             ? 'pointer'
             : undefined;
 
