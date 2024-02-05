@@ -11,16 +11,16 @@ import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import CustomDialog from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
 
+import { ItemCardProps } from '../ItemCard';
 import {
     StyledBox,
-    StyledContainer,
-    StyledDescriptionParagraph,
-    StyledContent,
-    StyledCardTitle,
-    StyledSecondInfoBox,
     StyledCardText,
+    StyledCardTitle,
+    StyledContainer,
+    StyledContent,
+    StyledDescriptionParagraph,
+    StyledSecondInfoBox,
 } from './styles';
-import { ItemCardProps } from '../ItemCard';
 
 export const SearchInfo = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);

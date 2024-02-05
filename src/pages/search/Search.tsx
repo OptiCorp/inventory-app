@@ -6,7 +6,7 @@ import { useWindowDimensions } from '../../hooks';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
 
-import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact';
+import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
     Container,

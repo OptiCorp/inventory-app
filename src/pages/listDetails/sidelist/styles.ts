@@ -1,15 +1,9 @@
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { styled } from 'styled-components';
 import { COLORS } from '../../../style/GlobalStyles.ts';
 
-export const InfoIcon = styled(InfoOutlinedIcon)`
-    color: black;
-
-    cursor: pointer;
-`;
 export const EditIcon = styled(CreateOutlinedIcon)`
     color: black;
 
@@ -47,12 +41,4 @@ export const RemoveIcon = styled(RemoveCircleIcon)`
         color: ${COLORS.red};
     }
     cursor: pointer;
-`;
-
-export const KeyWord = styled.div`
-    display: flex;
-    padding: 10px;
-    gap: 10px;
-    flex-wrap: wrap;
-    width: 100%;
 `;

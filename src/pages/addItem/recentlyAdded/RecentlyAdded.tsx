@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Button/Button.tsx';
 import ItemCard from '../../../components/ItemCard/ItemCard.tsx';
-import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact.tsx';
+import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact.tsx';
 import { useWindowDimensions } from '../../../hooks/index.ts';
 import { Item } from '../../../services/apiTypes.ts';
 import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser.tsx';

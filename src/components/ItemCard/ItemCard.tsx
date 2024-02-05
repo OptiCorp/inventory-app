@@ -27,7 +27,7 @@ const ItemCard = ({ item, icon }: ItemCardProps) => {
     };
 
     const cursorStyle =
-        location.pathname.includes('/search') || location.pathname.includes('/add-Item')
+        location.pathname.includes('/search') || location.pathname.includes('/add-item')
             ? 'pointer'
             : undefined;
 

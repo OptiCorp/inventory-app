@@ -2,21 +2,21 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import AppContext from '../../../contexts/AppContext.tsx';
+import { MutateItemList } from '../../../services/apiTypes.ts';
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
+import { useGetListById } from '../../../services/hooks/list/useGetListById.tsx';
+import { Button } from '../../Button/Button.tsx';
+import CustomDialog from '../../CustomDialog/CustomDialog.tsx';
+import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles.ts';
+import { ItemCardProps } from '../ItemCard.tsx';
 import {
     StyledCompactInfoP,
     StyledDescriptionWrap,
-    StyledKeyWords,
     StyledItemCardCompactContainer,
+    StyledKeyWords,
 } from './styles.ts';
-import { ItemCardProps } from './ItemCard.tsx';
-import AppContext from '../../contexts/AppContext.tsx';
-import { MutateItemList } from '../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-import CustomDialog from '../CustomDialog/CustomDialog.tsx';
-import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
-import { Button } from '../Button/Button.tsx';
 
 const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);

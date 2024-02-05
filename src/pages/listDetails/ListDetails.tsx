@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../components/Button/Button.tsx';
 import ItemCard from '../../components/ItemCard/ItemCard.tsx';
-import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact.tsx';
+import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import AppContext from '../../contexts/AppContext.tsx';
 import { useSnackBar, useWindowDimensions } from '../../hooks';
@@ -12,6 +12,8 @@ import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
 
+import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx';
 import { Container } from '../search/styles.ts';
 import { ListHeader } from './ListHeader.tsx';
@@ -24,8 +26,6 @@ import {
     SearchContainerList,
     SearchResultsContainer,
 } from './styles.ts';
-import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
-import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
 
 const ListDetails = () => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
