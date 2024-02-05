@@ -75,8 +75,7 @@ const AddItem = () => {
             location.pathname === '/add-item/add-form' ? null : (
                 <ButtonWrapper>
                     <Button
-                            variant="contained"
-                            
+                        variant="contained"
                         onClick={() => {
                             void handleNext();
                         }}
