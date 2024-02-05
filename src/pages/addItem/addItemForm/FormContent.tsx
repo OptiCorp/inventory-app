@@ -34,7 +34,7 @@ export const FormContent = () => {
                 id="filled-disabled"
                 sx={{ display: 'none' }}
                 label=""
-                {...register('createdById', {value: currentUser?.id })}
+                {...register('createdById', { value: currentUser?.id })}
             />
         </>
     );
