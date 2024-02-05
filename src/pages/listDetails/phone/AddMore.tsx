@@ -5,13 +5,11 @@ import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 
 import SearchBar from '../../../components/SearchBar/SearchBar';
-import { useSnackBar } from '../../../hooks';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import { PhoneContainer, PhoneListTitle } from './styles';
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 
 export const AddMoreCompact = () => {
-    const { snackbar } = useSnackBar();
     const [searchTerm, setSearchTerm] = useState('');
 
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -68,7 +66,7 @@ export const AddMoreCompact = () => {
                     ))
                 )}
             </PhoneContainer>
-            {snackbar}
+
             {(isLoading || isFetching) && <GlobalSpinner />}
         </>
     );

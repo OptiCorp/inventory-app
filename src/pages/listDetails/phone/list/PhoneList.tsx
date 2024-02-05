@@ -7,7 +7,6 @@ import { GlobalSpinner } from '../../../../components/GlobalSpinner/GlobalSpinne
 import SearchResultCardCompact from '../../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 
 import AppContext from '../../../../contexts/AppContext';
-import { useSnackBar } from '../../../../hooks';
 import { Item, List, UpdateList } from '../../../../services/apiTypes';
 import { useGetItemsInfinite } from '../../../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../../../services/hooks/list/useGetListById';
@@ -24,12 +23,8 @@ export const PhoneList = ({ list }: Props) => {
     const { listId } = useParams();
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
     const { mutate: updateList } = useUpdateList(listId!);
-
     const { isLoading } = useGetItemsInfinite(debouncedSearchTerm);
-
     const { isFetching } = useGetListById(listId!);
-
-    const { snackbar } = useSnackBar();
     const navigate = useNavigate();
     const handleSave = () => {
         const save: UpdateList = { id: list.id, title: list.title };
@@ -71,7 +66,7 @@ export const PhoneList = ({ list }: Props) => {
                             </Button>
                         </ButtonWrapCompact>
                     </FlexWrapperCompact>
-                    {snackbar}
+
                     {(isLoading || isFetching) && <GlobalSpinner />}
                 </>
             )}
