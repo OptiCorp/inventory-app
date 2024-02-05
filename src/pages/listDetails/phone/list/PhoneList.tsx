@@ -9,11 +9,11 @@ import SearchResultCardCompact from '../../../../components/ItemCard/SearchInfoC
 import AppContext from '../../../../contexts/AppContext';
 import { useSnackBar } from '../../../../hooks';
 import { Item, List, UpdateList } from '../../../../services/apiTypes';
+import { useGetItemsInfinite } from '../../../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../../../services/hooks/list/useGetListById';
 import { useUpdateList } from '../../../../services/hooks/list/useUpdateList';
 import { ListHeader } from '../../ListHeader';
 import { ButtonWrapCompact, FlexWrapperCompact, ListContainerCompact } from './styles';
-import { useGetItemsInfinite } from '../../../../services/hooks/items/useGetItemsInfinite';
 type Props = {
     list: List;
 };
@@ -36,7 +36,7 @@ export const PhoneList = ({ list }: Props) => {
         updateList(save, {
             onSuccess: (data) => {
                 setSnackbarText(`${list.title} was saved`);
-                navigate('/makelist');
+                navigate('/make-list');
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
                     setSnackbarText(`${data.statusText}, please try again.`);

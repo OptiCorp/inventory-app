@@ -12,6 +12,8 @@ import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
 
+import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx';
 import { Container } from '../search/styles.ts';
 import { ListHeader } from './ListHeader.tsx';
@@ -24,8 +26,6 @@ import {
     SearchContainerList,
     SearchResultsContainer,
 } from './styles.ts';
-import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
-import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
 
 const ListDetails = () => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
@@ -69,7 +69,7 @@ const ListDetails = () => {
         updateList(save, {
             onSuccess: (data) => {
                 setSnackbarText(`${list!.title} was saved`);
-                navigate('/makelist');
+                navigate('/make-list');
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
                     setSnackbarText(`${data.statusText}, please try again.`);

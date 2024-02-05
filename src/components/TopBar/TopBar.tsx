@@ -31,7 +31,7 @@ export const TopBar = () => {
             '/',
             '/search',
             '/add-item',
-            '/makelist',
+            '/make-list',
             '/admin/categories',
             '/admin/vendors',
             '/admin/locations',

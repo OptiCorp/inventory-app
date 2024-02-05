@@ -13,8 +13,8 @@ const useNavigationControl = () => {
             navigate('/add-item/checks');
         } else if (location.pathname === '/add-item/add-form') {
             navigate('/add-item/upload');
-        } else if (location.pathname === `/makelist/${listId}`) {
-            navigate('/makelist');
+        } else if (location.pathname === `/make-list/${listId}`) {
+            navigate('/make-list');
         } else if (location.pathname === '/add-item/batch') {
             navigate('/add-item');
         } else {

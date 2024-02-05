@@ -128,7 +128,7 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                         )
                     )}
                 </>
-                {location.pathname.includes('/makelist') && (
+                {location.pathname.includes('/make-list') && (
                     <StyledInfoIcon
                         onClick={() => {
                             navigate(`/${item.id}`);

@@ -24,7 +24,7 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
     const menuItems = [
         { location: 'search', icon: <SearchIcon fontSize="large" />, text: 'Find items' },
         { location: 'add-item', icon: <AddIcon fontSize="large" />, text: 'Add item' },
-        { location: 'makelist', icon: <ListAltIcon fontSize="large" />, text: 'Make lists' },
+        { location: 'make-list', icon: <ListAltIcon fontSize="large" />, text: 'Make lists' },
         {
             location: 'admin',
             icon: <AdminPanelSettingsIcon fontSize="large" />,
