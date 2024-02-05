@@ -2,10 +2,10 @@ import type { Preview } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { GlobalStyles } from '../src/style/GlobalStyles';
+import GlobalStyles, { globalTheme } from '../src/style/GlobalStyles';
+import { ThemeProvider } from '@mui/material/styles';
 
 const queryClient = new QueryClient();
-
 const preview: Preview = {
     parameters: {
         actions: { argTypesRegex: '^on[A-Z].*' },
@@ -22,7 +22,9 @@ const preview: Preview = {
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <GlobalStyles width={window.innerWidth} />
-                    <Story />
+                    <ThemeProvider theme={globalTheme}>
+                        <Story />
+                    </ThemeProvider>
                 </MemoryRouter>
             </QueryClientProvider>
         ),

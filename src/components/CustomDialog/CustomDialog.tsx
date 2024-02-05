@@ -13,7 +13,7 @@ interface DialogProps {
     type?: 'submit' | 'reset' | 'button' | undefined;
 }
 
-const CustomDialog: React.FC<DialogProps> = ({
+const CustomDialog = ({
     title,
     submitButtonText,
     cancelButtonText,
@@ -24,7 +24,7 @@ const CustomDialog: React.FC<DialogProps> = ({
     onClose,
     type,
     isWarning,
-}) => {
+}: DialogProps) => {
     return (
         <>
             <Dialog open={open} onClose={onClose}>
