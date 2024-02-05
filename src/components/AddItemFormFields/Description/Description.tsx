@@ -2,8 +2,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { TextField } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
-import { StyledDiv, StyledErrorP } from '../styles';
-import { StyledInputWrap } from './styles';
+import { StyledDiv, StyledErrorP, StyledInputWrap } from '../styles';
 
 export const Description = () => {
     const { watch, register } = useFormContext<ItemSchema>();
