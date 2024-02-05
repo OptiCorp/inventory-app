@@ -1,5 +1,11 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
+import {
+    Accordion,
+    AccordionActions,
+    AccordionDetails,
+    AccordionSummary,
+    Button,
+} from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import AppContext from '../../../contexts/AppContext.tsx';
@@ -7,21 +13,18 @@ import { MutateItemList } from '../../../services/apiTypes.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
 import { useGetListById } from '../../../services/hooks/list/useGetListById.tsx';
-import { Button as ButtonOld } from '../../Button/Button.tsx';
 import CustomDialog from '../../CustomDialog/CustomDialog.tsx';
 import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles.ts';
 import { ItemCardProps } from '../ItemCard.tsx';
 import {
     StyledCompactBox,
     StyledCompactContent,
-    StyledCompactInfoP,
+    StyledCompactDescriptionParagraph,
+    StyledCompactDescriptionWrap,
     StyledCompactText,
     StyledCompactTitle,
-    StyledCompactDescriptionWrap,
     StyledItemCardCompactContainer,
-    StyledKeyWords,
 } from './styles.ts';
-import { Button } from '@mui/material';
 
 const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
@@ -84,8 +87,6 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                 <Accordion
                     style={{
                         boxShadow: 'none',
-                        backgroundColor: 'lightcyan',
-                        // padding: '5px',
                         borderRadius: '0px',
                     }}
                 >
@@ -93,7 +94,6 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                         style={{
                             display: 'flex',
                             minWidth: '300px',
-                            backgroundColor: 'lightblue',
                             gap: '16px',
                         }}
                         expandIcon={<ExpandMoreIcon />}
@@ -107,9 +107,7 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Location</StyledCompactTitle>
-                                <StyledCompactText>
-                                    {item.location?.name ?? 'Location'}
-                                </StyledCompactText>
+                                <StyledCompactText>{item.location?.name ?? ''}</StyledCompactText>
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Category</StyledCompactTitle>
@@ -119,20 +117,23 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                             </StyledCompactContent>
                         </StyledCompactBox>
                     </AccordionSummary>
-                    <AccordionDetails style={{}}>
+                    <AccordionDetails>
                         <StyledCompactDescriptionWrap>
                             <StyledCompactTitle>Description</StyledCompactTitle>
-                            <Typography>{item.itemTemplate.description}</Typography>
+                            <StyledCompactDescriptionParagraph>
+                                {item.itemTemplate.description}
+                            </StyledCompactDescriptionParagraph>
                         </StyledCompactDescriptionWrap>
+                    </AccordionDetails>
+                    <AccordionActions>
                         <Button
                             component={NavLink}
                             to={`/${item.id}`}
                             onClick={() => navigate(`/${item.id}`)}
-                            variant="contained"
                         >
-                            More info
+                            Show more
                         </Button>
-                    </AccordionDetails>
+                    </AccordionActions>
                 </Accordion>
                 {icon === 'add' ? (
                     <StyledAddIcon
@@ -154,7 +155,6 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                     ></StyledRemoveIcon>
                 ) : null}
             </StyledItemCardCompactContainer>
-
             <CustomDialog
                 title="Remove item from list?"
                 open={open}

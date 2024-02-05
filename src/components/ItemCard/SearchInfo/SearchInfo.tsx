@@ -14,12 +14,12 @@ import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/
 import { ItemCardProps } from '../ItemCard';
 import {
     StyledBox,
-    StyledText,
-    StyledTitle,
     StyledContainer,
     StyledContent,
     StyledDescriptionParagraph,
     StyledSecondInfoBox,
+    StyledText,
+    StyledTitle,
 } from './styles';
 
 export const SearchInfo = ({ item, icon }: ItemCardProps) => {
