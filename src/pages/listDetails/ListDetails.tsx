@@ -6,7 +6,7 @@ import ItemCard from '../../components/ItemCard/ItemCard.tsx';
 import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import AppContext from '../../contexts/AppContext.tsx';
-import { useSnackBar, useWindowDimensions } from '../../hooks';
+import { useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes.ts';
 import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
 
@@ -35,7 +35,7 @@ const ListDetails = () => {
     const { width } = useWindowDimensions();
     const navigate = useNavigate();
     const { data: list, isFetching } = useGetListById(listId!);
-    const { snackbar } = useSnackBar();
+
     const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
     const { exportToExcel } = useExportToExcel();
 
@@ -143,7 +143,7 @@ const ListDetails = () => {
                         </FlexWrapper>
                     </>
                 ) : null}
-                {snackbar}
+
                 {(isLoading || isFetching) && <GlobalSpinner />}
             </SearchContainerList>
         </>

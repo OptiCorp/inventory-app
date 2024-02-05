@@ -2,7 +2,7 @@ import { Alert, Snackbar } from '@mui/material';
 import { useContext } from 'react';
 import AppContext from '../../contexts/AppContext';
 
-export const SnackBar = () => {
+const SnackBar = () => {
     const {
         showSnackbar,
         snackbarText,
@@ -26,3 +26,5 @@ export const SnackBar = () => {
         </Snackbar>
     );
 };
+
+export default SnackBar;

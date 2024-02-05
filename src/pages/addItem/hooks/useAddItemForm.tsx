@@ -35,7 +35,7 @@ const defaultValues: ItemSchema = {
 };
 
 export const useAddItemForm = () => {
-    const { currentUser } = useContext(AppContext);
+    const { currentUser, setSnackbarText } = useContext(AppContext);
     const { mutate } = useAddItems();
     const appLocation = useLocation();
 
@@ -95,25 +95,32 @@ export const useAddItemForm = () => {
                     description,
                 } = await templateSubmit();
 
-                mutate({
-                    items: [
-                        {
-                            ...data,
-                            itemTemplate: {
-                                id: itemTemplateId,
+                mutate(
+                    {
+                        items: [
+                            {
+                                ...data,
+                                itemTemplate: {
+                                    id: itemTemplateId,
 
-                                type: type,
-                                categoryId: categoryId,
-                                productNumber: productNumber,
+                                    type: type,
+                                    categoryId: categoryId,
+                                    productNumber: productNumber,
 
-                                description: description,
-                                createdById: currentUser?.id ?? '',
+                                    description: description,
+                                    createdById: currentUser?.id ?? '',
+                                },
+                                itemTemplateId,
                             },
-                            itemTemplateId,
+                        ],
+                        files: undefined,
+                    },
+                    {
+                        onSuccess: () => {
+                            setSnackbarText(`Item: ${data.wpId} was added`);
                         },
-                    ],
-                    files: undefined,
-                });
+                    }
+                );
             }
         },
 

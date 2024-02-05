@@ -1,18 +1,19 @@
 import { useIsAuthenticated } from '@azure/msal-react';
+import { ThemeProvider } from '@mui/material';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
+    Navigate,
     Route,
     RouterProvider,
     createBrowserRouter,
     createRoutesFromElements,
 } from 'react-router-dom';
-import { Login } from './pages/login/Login.tsx';
-import { ThemeProvider } from '@mui/material';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Navigate } from 'react-router-dom';
 import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
 import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 import { AppContextProvider } from './contexts/AppContext';
-import { SnackBar } from './hooks/index.ts';
+import { Login } from './pages/login/Login.tsx';
+
+import SnackBar from './components/Snackbar/Snackbar.tsx';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
 import AddItem from './pages/addItem/Index';
 import { AddItemForm } from './pages/addItem/addItemForm/AddItemForm.tsx';

@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 import AppContext from '../../../contexts/AppContext';
-import { useSnackBar } from '../../../hooks';
+
 import type { Item } from '../../../services/apiTypes';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
 
@@ -43,7 +43,6 @@ const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors();
     const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations();
     const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories();
-    const { snackbar } = useSnackBar();
     const { mutate } = useUpdateItem(item?.id, currentUser!.id);
     const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
     const { mutate: mutateItemTemplate } = useUpdateItemTemplate(item.itemTemplate.id);
@@ -241,8 +240,6 @@ const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
                     )
                 }
             />
-
-            {snackbar}
         </ItemInfoForm>
     );
 };
