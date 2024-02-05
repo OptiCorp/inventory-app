@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -68,13 +67,23 @@ const AddItem = () => {
                 <ProgressBar activeStep={activeStep} steps={steps} />
             )}
 
-            <StyledForm onSubmit={onSubmit} id="addItem">
+            <StyledForm
+                onSubmit={() => {
+                    onSubmit;
+                }}
+                id="addItem"
+            >
                 <Outlet />
             </StyledForm>
             {location.pathname === `/add-item` ||
             location.pathname === '/add-item/add-form' ? null : (
                 <ButtonWrapper>
-                    <Button variant="black" onClick={handleNext}>
+                    <Button
+                        variant="black"
+                        onClick={() => {
+                            handleNext;
+                        }}
+                    >
                         NEXT
                     </Button>
                 </ButtonWrapper>

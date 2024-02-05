@@ -34,7 +34,7 @@ const defaultValues: ItemSchema = {
     itemTemplate: defaultTemplate,
 };
 
-export const useAddPartForm = () => {
+export const useAddItemForm = () => {
     const { currentUser } = useContext(AppContext);
     const { mutate } = useAddItems();
     const appLocation = useLocation();
