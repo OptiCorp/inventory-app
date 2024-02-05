@@ -17,9 +17,9 @@ import RecentlyAdded from './pages/addItem/recentlyAdded/RecentlyAdded';
 import Categories from './pages/admin/category/Categories.tsx';
 import Locations from './pages/admin/location/Locations.tsx';
 import Vendors from './pages/admin/vendor/Vendors.tsx';
+import ItemDetails from './pages/itemDetails/Index';
 import MakeList from './pages/list/MakeList';
 import ListDetails from './pages/listDetails/ListDetails.tsx';
-import ItemDetails from './pages/itemDetails/Index';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 

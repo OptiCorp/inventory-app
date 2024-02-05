@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Button } from '../../components/Button/Button';
+
+import { Button } from '@mui/material';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { StyledForm } from './addItemForm/styles';
 import { ItemSchema } from './hooks/itemValidator';
@@ -74,7 +74,12 @@ const AddItem = () => {
             {location.pathname === `/add-item` ||
             location.pathname === '/add-item/add-form' ? null : (
                 <ButtonWrapper>
-                    <Button variant="black" onClick={handleNext}>
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            void handleNext();
+                        }}
+                    >
                         NEXT
                     </Button>
                 </ButtonWrapper>

@@ -1,26 +1,27 @@
 import styled from 'styled-components';
 
 export const StyledInputWrap = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    flex-wrap: wrap;
+    display: grid;
+    margin: 4px 0;
+    grid-template-columns: 1fr 1fr;
 `;
 
 export const StyledErrorP = styled.span`
     color: red;
-    margin-right: auto;
-    margin-left: 20px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
     font-weight: 600;
 `;
 
 export const StyledIconContainer = styled.div`
-    display: flex;
-    gap: 4px;
+    display: inline-flex;
+    justify-content: baseline;
+    gap: 10px;
+    white-space: nowrap;
 `;
 
 export const StyledDiv = styled.div`
-    margin: 10px 0 10px 0;
+    max-width: 500px;
+    padding-right: 5px;
 `;

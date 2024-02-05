@@ -1,9 +1,7 @@
+import { Box } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-
 import { useController, useFormContext } from 'react-hook-form';
-
-import { Box } from '@mui/material';
 import { useGetItemTemplates } from '../../../services/hooks/template/useGetItemTemplates.tsx';
 import { ItemSchema } from '../hooks/itemValidator.ts';
 import { Container } from './styles.ts';
@@ -15,7 +13,6 @@ export default function Template() {
         field: { onChange, value },
     } = useController({
         control,
-
         name: 'itemTemplate',
     });
 
@@ -38,7 +35,7 @@ export default function Template() {
                         }}
                         id="free-solo-dialog-demo"
                         selectOnFocus
-                        getOptionLabel={(option) => option.name}
+                        getOptionLabel={(option) => option?.id}
                         clearOnBlur
                         handleHomeEndKeys
                         sx={{ width: 300 }}
@@ -49,12 +46,12 @@ export default function Template() {
                         renderOption={(props, option) => {
                             return (
                                 <Box component="li" {...props} key={option?.id}>
-                                    {option?.name}
+                                    {option?.id}
                                 </Box>
                             );
                         }}
                     />
-                </Box>{' '}
+                </Box>
             </Container>
         </>
     );

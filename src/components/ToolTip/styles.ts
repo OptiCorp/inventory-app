@@ -7,8 +7,9 @@ export const ToolTipContent = styled.div`
     left: 20px;
     line-height: 20px;
     top: -10px;
-    width: 190px;
-    color: ${COLORS.white};
+    width: fit-content;
+
+    color: ${COLORS.black};
     padding: 4px 8px;
     border-radius: 4px;
 `;

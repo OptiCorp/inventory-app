@@ -33,7 +33,7 @@ export default function TabComponent({ tabs }: TabBarProps) {
                         onClick={() => setActiveTab(index)}
                     >
                         <StyledTitle active={activeTab === index}>{tab.title}</StyledTitle>
-                        <StyledIndicator active={activeTab === index} />{' '}
+                        <StyledIndicator active={activeTab === index} />
                         {tab.title === 'List' && (
                             <StyledNumberofItems active={activeTab === index}>
                                 {`[${list?.items?.length}]`}

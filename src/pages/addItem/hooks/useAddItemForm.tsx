@@ -1,12 +1,10 @@
-import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import AppContext from '../../../contexts/AppContext';
 
+import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 import { ItemTemplate } from '../../../services/apiTypes.ts';
-
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
 import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.tsx';
 import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator';
@@ -14,10 +12,8 @@ import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator';
 const defaultTemplate: TemplateSchema = {
     categoryId: '',
     id: '',
-    name: '',
     inputValue: '',
     type: '',
-
     productNumber: '',
     description: '',
     createdById: '',
@@ -35,18 +31,7 @@ const defaultValues: ItemSchema = {
     isBatch: false,
     preCheck: { check: false, comment: '' },
     documentation: false,
-
     itemTemplate: defaultTemplate,
-};
-
-export type AddTemplate = {
-    name: string;
-    type: string;
-    categoryId: string;
-    description: string;
-    createdById: string;
-    revision: string;
-    productNumber: string;
 };
 
 export const useAddItemForm = () => {
@@ -91,7 +76,6 @@ export const useAddItemForm = () => {
             categoryId: selectedTemplate.categoryId || '',
             createdById: currentUser?.id ?? '',
             description: selectedTemplate.description || '',
-            name: selectedTemplate?.name || '',
             productNumber: selectedTemplate?.productNumber || '',
             revision: '1.06',
             type: selectedTemplate?.type || '',
@@ -104,7 +88,7 @@ export const useAddItemForm = () => {
             if (!selectedTemplate.id) {
                 const {
                     id: itemTemplateId,
-                    name,
+
                     categoryId,
                     productNumber,
                     type,
@@ -124,7 +108,6 @@ export const useAddItemForm = () => {
 
                                 description: description,
                                 createdById: currentUser?.id ?? '',
-                                name: name ?? '',
                             },
                             itemTemplateId,
                         },
@@ -150,8 +133,12 @@ export const useAddItemForm = () => {
         (errors) => console.error(errors)
     );
 
+    const onSubmitTyped: (e?: React.BaseSyntheticEvent<object> | undefined) => Promise<void> =
+        onSubmit;
+
     return {
         methods,
+        onSubmitTyped,
         onSubmit,
         control,
         handleSubmit,

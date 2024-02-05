@@ -1,12 +1,11 @@
 import { ErrorMessage } from '@hookform/error-message';
-
+import { Autocomplete, TextField } from '@mui/material';
 import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { Location as LocationType } from '../../../services/apiTypes.ts';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 
-import { Autocomplete, TextField } from '@mui/material';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
@@ -32,7 +31,7 @@ export const Location = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="location">Choose a location</label>{' '}
+                    <label htmlFor="location">Choose a location</label>
                     <ToolTip content="Specify a location">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
@@ -44,13 +43,16 @@ export const Location = () => {
             </StyledInputWrap>
             <Autocomplete
                 options={locationOptions}
-                sx={{ width: 500 }}
+                size="small"
+                sx={{ width: '100%' }}
                 value={selectedLocation}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 onChange={(_event, newValue) => {
                     onChange(newValue?.value);
                 }}
-                renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
+                renderInput={(params) => (
+                    <TextField {...params} label="Location" variant="outlined" />
+                )}
             />
         </StyledDiv>
     );

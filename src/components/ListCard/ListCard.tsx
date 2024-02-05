@@ -40,12 +40,12 @@ const ListCard = ({ item }: Props) => {
                 <StyledTitle>{item.title}</StyledTitle>
                 {item.updatedDate ? (
                     <h4>
-                        Last updated:{' '}
+                        Last updated:
                         {format(new Date(item.updatedDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 ) : (
                     <h4>
-                        Created:{' '}
+                        Created:
                         {format(new Date(item.createdDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 )}

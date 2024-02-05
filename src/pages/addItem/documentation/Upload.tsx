@@ -26,7 +26,7 @@ const Upload = () => {
             <ul style={{ marginLeft: '-25px' }}>
                 <li> Accepted formats: PDF, DOCX and JPG. </li>
                 <li> Maximum file size: 20MB </li>
-            </ul>{' '}
+            </ul>
             {width > 500 ? <AddItemUpload /> : <AddItemUploadMobile />}
             <span style={{ color: 'red' }}>{error?.message}</span>
             <label>
@@ -36,7 +36,7 @@ const Upload = () => {
                         type="checkbox"
                         name="checks"
                         onChange={() => onChange(!value)}
-                    />{' '}
+                    />
                     <p>I have uploaded all necessary documentation for this item. E.g: </p>
                 </RadioWrapper>
             </label>

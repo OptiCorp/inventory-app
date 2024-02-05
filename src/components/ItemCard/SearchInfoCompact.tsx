@@ -13,8 +13,8 @@ import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
 import {
     StyledCompactInfoP,
     StyledDescriptionWrap,
-    StyledKeyWords,
     StyledItemCardCompactContainer,
+    StyledKeyWords,
 } from './styles.ts';
 type Props = {
     item: Item;
@@ -94,19 +94,19 @@ const SearchResultCardCompact = ({ item, icon }: Props) => {
                         <StyledCompactInfoP>
                             <StyledKeyWords>ID:</StyledKeyWords>
                             {item.wpId}
-                        </StyledCompactInfoP>{' '}
+                        </StyledCompactInfoP>
                         <StyledCompactInfoP>
-                            <StyledKeyWords>Location</StyledKeyWords>{' '}
+                            <StyledKeyWords>Location</StyledKeyWords>
                             {item.location?.name || 'Location'}
                         </StyledCompactInfoP>
                         <StyledCompactInfoP>
-                            <StyledKeyWords>Category</StyledKeyWords>{' '}
+                            <StyledKeyWords>Category</StyledKeyWords>
                             {item.itemTemplate.category?.name || 'Category'}
                         </StyledCompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>
                         <StyledDescriptionWrap>
-                            <StyledKeyWords>Description</StyledKeyWords>{' '}
+                            <StyledKeyWords>Description</StyledKeyWords>
                             <Typography>{item.itemTemplate.description}</Typography>
                         </StyledDescriptionWrap>
                         <Button variant="white" onClick={() => navigate(`/${item.id}`)}>
