@@ -7,7 +7,7 @@ import { Description } from '../../../components/AddItemFormFields/Description/D
 import { Location } from '../../../components/AddItemFormFields/Location/Location';
 import { ProductNumber } from '../../../components/AddItemFormFields/ProductNumber/ProductNumber';
 import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber/SerialNumber';
-import { Type } from '../../../components/AddItemFormFields/Type/Type';
+import { Type } from '../../../components/AddItemFormFields/TemplateTypes/TemplateTypes';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
 

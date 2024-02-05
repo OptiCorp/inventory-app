@@ -67,12 +67,7 @@ const AddItem = () => {
                 <ProgressBar activeStep={activeStep} steps={steps} />
             )}
 
-            <StyledForm
-                onSubmit={() => {
-                    onSubmit;
-                }}
-                id="addItem"
-            >
+            <StyledForm onSubmit={onSubmit} id="addItem">
                 <Outlet />
             </StyledForm>
             {location.pathname === `/add-item` ||
@@ -81,7 +76,7 @@ const AddItem = () => {
                     <Button
                         variant="black"
                         onClick={() => {
-                            handleNext;
+                            void handleNext();
                         }}
                     >
                         NEXT
