@@ -47,6 +47,12 @@ const themeOptions: ThemeOptions = {
                     },
                 },
             ],
+            styleOverrides: {
+                root: {
+                    borderRadius: '0px',
+                    boxShadow: 'none',
+                },
+            },
         },
     },
 };
