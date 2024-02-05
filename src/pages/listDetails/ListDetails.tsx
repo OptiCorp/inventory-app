@@ -69,7 +69,7 @@ const ListDetails = () => {
         updateList(save, {
             onSuccess: (data) => {
                 setSnackbarText(`${list!.title} was saved`);
-                navigate('/makelist');
+                navigate('/make-list');
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
                     setSnackbarText(`${data.statusText}, please try again.`);

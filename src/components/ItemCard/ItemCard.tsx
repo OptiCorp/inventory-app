@@ -22,7 +22,7 @@ const ItemCard = ({ item, icon }: ItemCardProps) => {
     const location = useLocation();
 
     const handleClick = () => {
-        if (location.pathname.includes('makelist')) return;
+        if (location.pathname.includes('make-list')) return;
         navigate(`/${item.id}`);
     };
 

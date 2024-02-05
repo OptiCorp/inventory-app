@@ -1,14 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import apiService from '../../api';
 
-/**
- *
- * @param listId
- * @returns
- */
 export const useGetListById = (listId: string) => {
+    const api = apiService();
     return useQuery({
         queryKey: ['list', listId],
-        queryFn: () => apiService().getListById(listId),
+        queryFn: () => api.getListById(listId),
+
+        enabled: !!listId,
     });
 };
