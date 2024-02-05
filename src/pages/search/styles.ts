@@ -21,6 +21,13 @@ export const LoadMoreButton = styled.button`
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 32px;
+    gap: 16px;
+
+    @media (max-width: 800px) {
+        gap: 0px;
+        margin: 0px;
+    }
 `;
 
 export const RecentSearchContainer = styled.div`

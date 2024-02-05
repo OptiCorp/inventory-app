@@ -74,7 +74,7 @@ const Search = () => {
                 <SearchBar
                     setSearchTerm={setSearchTerm}
                     searchTerm={searchTerm}
-                    placeholder={'Search for ID, serial number or description'}
+                    placeholder={'Search for ID, description, PO number or S/N'}
                 />
 
                 {isLoading && <GlobalSpinner />}

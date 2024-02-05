@@ -36,7 +36,7 @@ export const ListContainer = styled.div`
     padding-bottom: 100px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 16px;
 `;
 export const SubmitButton = styled.button`
     width: 150px;

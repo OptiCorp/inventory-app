@@ -17,10 +17,10 @@ import {
 } from '../../../components/ItemCard/SearchInfo/styles.ts';
 
 type Props = {
-    part: Item;
+    item: Item;
 };
 
-export const SideList = ({ part }: Props) => {
+export const SideList = ({ item }: Props) => {
     const { listId } = useParams();
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ export const SideList = ({ part }: Props) => {
         mutateRemoveItemFromList(ids, {
             onSuccess: (data) => {
                 setSnackbarSeverity('success');
-                setSnackbarText(`${part.wpId} was deleted`);
+                setSnackbarText(`${item.wpId} was deleted`);
 
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
@@ -62,15 +62,15 @@ export const SideList = ({ part }: Props) => {
                 <Wrapper>
                     <StyledContent>
                         <StyledCardTitle>S/N</StyledCardTitle>
-                        <StyledCardText>{part.serialNumber}</StyledCardText>
+                        <StyledCardText>{item.serialNumber}</StyledCardText>
                     </StyledContent>
                     <StyledContent>
                         <StyledCardTitle>Location</StyledCardTitle>
-                        <StyledCardText>{part.location?.name || 'Stavanger'}</StyledCardText>
+                        <StyledCardText>{item.location?.name || 'Stavanger'}</StyledCardText>
                     </StyledContent>
                     <StyledContent>
                         <StyledCardTitle>Vendor</StyledCardTitle>
-                        <StyledCardText>{part.vendor?.name || 'Vendor'}</StyledCardText>
+                        <StyledCardText>{item.vendor?.name || 'Vendor'}</StyledCardText>
                     </StyledContent>
                     <StyleIcons>
                         <RemoveIcon onClick={handleClickOpen} />
@@ -78,7 +78,7 @@ export const SideList = ({ part }: Props) => {
                             onClick={() =>
                                 handleAdd({
                                     listId: listId ?? 'N/A',
-                                    itemId: part.id,
+                                    itemId: item.id,
                                     addSubItems: true,
                                 })
                             }
@@ -98,7 +98,7 @@ export const SideList = ({ part }: Props) => {
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={() =>
                     handleDelete({
-                        itemId: part.id,
+                        itemId: item.id,
                         listId: listId!,
                     })
                 }
