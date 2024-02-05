@@ -6,7 +6,7 @@ import { createContext, useEffect, useState } from 'react';
 import { GlobalSpinner } from '../components/GlobalSpinner/GlobalSpinner';
 import apiService from '../services/api';
 import { ApiStatus, User } from '../services/apiTypes';
-import { AzureUserInfo, AppContextType } from './types';
+import { AppContextType, AzureUserInfo } from './types';
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
 
@@ -114,7 +114,6 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
                 value={{
                     showSnackbar,
                     setShowSnackbar,
-
                     snackbarText,
                     setSnackbarText,
                     snackbarSeverity,

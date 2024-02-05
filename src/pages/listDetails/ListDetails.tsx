@@ -2,18 +2,16 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../components/Button/Button.tsx';
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
 import ItemCard from '../../components/ItemCard/ItemCard.tsx';
 import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import AppContext from '../../contexts/AppContext.tsx';
-import { useSnackBar, useWindowDimensions } from '../../hooks';
+import { useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes.ts';
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-
-import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
-
 import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx';
 import { Container } from '../search/styles.ts';
 import { ListHeader } from './ListHeader.tsx';
@@ -35,7 +33,6 @@ const ListDetails = () => {
     const { width } = useWindowDimensions();
     const navigate = useNavigate();
     const { data: list, isFetching } = useGetListById(listId!);
-    const { snackbar } = useSnackBar();
     const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
     const { exportToExcel } = useExportToExcel();
 
@@ -143,7 +140,7 @@ const ListDetails = () => {
                         </FlexWrapper>
                     </>
                 ) : null}
-                {snackbar}
+
                 {(isLoading || isFetching) && <GlobalSpinner />}
             </SearchContainerList>
         </>
