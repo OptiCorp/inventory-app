@@ -34,7 +34,7 @@ const themeOptions: ThemeOptions = {
         },
     },
     typography: {
-        fontFamily: 'Archivo',
+        fontFamily: 'Archivo, sans-serif',
     },
     spacing: 4,
     components: {
