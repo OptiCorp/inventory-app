@@ -6,42 +6,38 @@ import {
     createRoutesFromElements,
 } from 'react-router-dom';
 import { Login } from './pages/login/Login.tsx';
-
+import { ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Navigate } from 'react-router-dom';
+import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
+import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 import { AppContextProvider } from './contexts/AppContext';
+import { SnackBar } from './hooks/index.ts';
+import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
 import AddItem from './pages/addItem/Index';
+import { AddItemForm } from './pages/addItem/addItemForm/AddItemForm.tsx';
 import BatchForm from './pages/addItem/batch/BatchForm';
 import CheckForm from './pages/addItem/check/CheckForm';
 import Upload from './pages/addItem/documentation/Upload';
 import RecentlyAdded from './pages/addItem/recentlyAdded/RecentlyAdded';
+import Template from './pages/addItem/template/Template.tsx';
+import AddCategory from './pages/admin/category/AddCategory.tsx';
 import Categories from './pages/admin/category/Categories.tsx';
+import AddLocation from './pages/admin/location/AddLocation.tsx';
 import Locations from './pages/admin/location/Locations.tsx';
+import AddVendor from './pages/admin/vendor/AddVendor.tsx';
 import Vendors from './pages/admin/vendor/Vendors.tsx';
 import ItemDetails from './pages/itemDetails/Index';
 import MakeList from './pages/list/MakeList';
 import ListDetails from './pages/listDetails/ListDetails.tsx';
+import Index from './pages/listDetails/phone/Tabs.tsx';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
-
-import { Navigate } from 'react-router-dom';
-import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
-import { useSnackBar } from './hooks/useSnackbar.tsx';
-import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
-import { AddItemForm } from './pages/addItem/addItemForm/AddItemForm.tsx';
-import Template from './pages/addItem/template/Template.tsx';
-import AddCategory from './pages/admin/category/AddCategory.tsx';
-import AddLocation from './pages/admin/location/AddLocation.tsx';
-import AddVendor from './pages/admin/vendor/AddVendor.tsx';
-import Index from './pages/listDetails/phone/Tabs.tsx';
-
-import { ThemeProvider } from '@mui/material';
-import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
     const queryClient = new QueryClient();
     const { width } = useWindowDimensions();
-    const { snackbar } = useSnackBar();
 
     const router = createBrowserRouter(
         createRoutesFromElements(
@@ -89,7 +85,7 @@ function App() {
                     {isAuthenticated && (
                         <AppContextProvider>
                             <GlobalStyles width={width} />
-                            {snackbar}
+                            <SnackBar />
                             <RouterProvider router={router} />
                         </AppContextProvider>
                     )}

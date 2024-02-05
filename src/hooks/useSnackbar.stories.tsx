@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { useSnackBar } from './useSnackbar';
+import { useSnackBar } from '../components/Snackbar/Snackbar';
 
 const meta = {
     title: 'hooks/useSnackbar',

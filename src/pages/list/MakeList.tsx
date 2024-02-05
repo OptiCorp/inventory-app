@@ -5,8 +5,8 @@ import { Button } from '../../components/Button/Button.tsx';
 import CustomDialog from '../../components/CustomDialog/CustomDialog.tsx';
 import ListCard from '../../components/ListCard/ListCard.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
+import { useSnackBar } from '../../components/Snackbar/Snackbar.tsx';
 import AppContext from '../../contexts/AppContext.tsx';
-import { useSnackBar } from '../../hooks/useSnackbar.tsx';
 import { Item, List } from '../../services/apiTypes.ts';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
