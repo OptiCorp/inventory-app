@@ -71,6 +71,8 @@ export const useAddItemForm = () => {
         }
     }, []);
 
+    console.log('test');
+
     const templateSubmit = async () => {
         const data = await templateMutate({
             categoryId: selectedTemplate.categoryId || '',
