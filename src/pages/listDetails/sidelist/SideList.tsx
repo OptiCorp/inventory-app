@@ -83,6 +83,7 @@ export const SideList = ({ item }: Props) => {
                                 })
                             }
                             // TODO: save the state between reloads. currently it resets on reload
+                            color="primary"
                             disabled={isClicked}
                         >
                             <SubdirectoryArrowRightIcon />
