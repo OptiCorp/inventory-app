@@ -91,12 +91,12 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>P/N</StyledTitle>
-                        <StyledText>{item.itemTemplate.productNumber}</StyledText>
+                        <StyledText>{item.itemTemplate?.productNumber}</StyledText>
                     </StyledContent>
                 </StyledBox>
                 <StyledSecondInfoBox>
                     <StyledDescriptionParagraph>
-                        {item.itemTemplate.description}
+                        {item.itemTemplate?.description}
                     </StyledDescriptionParagraph>
                 </StyledSecondInfoBox>
                 <StyledBox>
@@ -134,7 +134,7 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>Category</StyledTitle>
-                        <StyledText>{item.itemTemplate.category.name}</StyledText>
+                        <StyledText>{item.itemTemplate?.category.name}</StyledText>
                     </StyledContent>
                 </StyledBox>
             </StyledContainer>

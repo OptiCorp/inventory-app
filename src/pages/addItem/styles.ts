@@ -17,8 +17,9 @@ export const ItemForm = styled(Form)`
 
 export const FormContainer = styled.div`
     display: flex;
-    flex-direction: column;
     padding: 16px;
+    flex-direction: column;
+    gap: 10px;
 `;
 
 export const ButtonContainer = styled.div`
@@ -33,4 +34,10 @@ export const ButtonWrapper = styled.div`
     align-items: flex-end;
     justify-content: end;
     padding: 16px;
+    @media screen and (max-width: 800px) {
+        display: flex;
+        justify-content: end;
+        padding: 16px;
+        height: 2rem;
+    }
 `;

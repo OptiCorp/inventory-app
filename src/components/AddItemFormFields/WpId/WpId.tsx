@@ -1,4 +1,5 @@
 import { ErrorMessage } from '@hookform/error-message';
+import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
@@ -7,7 +8,7 @@ import { v4 as uuid } from 'uuid';
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
-import { StyledInput, StyledParagraph } from './styles.ts';
+import { StyledParagraph } from './styles.ts';
 
 export const WpId = () => {
     const { register, setValue } = useFormContext();
@@ -35,15 +36,19 @@ export const WpId = () => {
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>
-            <StyledInput
-                type="text"
+
+            <TextField
+                id="filled-disabled"
+                sx={{ width: '100%' }}
+                label=""
                 placeholder="E.g 5321-1"
+                variant="filled"
                 {...register('wpId')}
-                autoComplete="off"
                 value={wpId}
                 onChange={(e) => setWpId(e.target.value)}
-                $isUnique={isUnique}
+                inputProps={{ name: 'isUnique', 'data-isunique': isUnique }}
             />
+
             {isLoading && <p>Checking...</p>}
             {wpId && (
                 <>

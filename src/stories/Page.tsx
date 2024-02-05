@@ -23,10 +23,10 @@ export const Page: React.FC = () => {
             <section className="storybook-page">
                 <h2>Pages in Storybook</h2>
                 <p>
-                    We recommend building UIs with a{' '}
+                    We recommend building UIs with a
                     <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
                         <strong>component-driven</strong>
-                    </a>{' '}
+                    </a>
                     process starting with atomic components and ending with pages.
                 </p>
                 <p>
@@ -45,7 +45,7 @@ export const Page: React.FC = () => {
                     </li>
                 </ul>
                 <p>
-                    Get a guided tutorial on component-driven development at{' '}
+                    Get a guided tutorial on component-driven development at
                     <a
                         href="https://storybook.js.org/tutorials/"
                         target="_blank"
@@ -53,7 +53,7 @@ export const Page: React.FC = () => {
                     >
                         Storybook tutorials
                     </a>
-                    . Read more in the{' '}
+                    . Read more in the
                     <a
                         href="https://storybook.js.org/docs"
                         target="_blank"
@@ -64,7 +64,7 @@ export const Page: React.FC = () => {
                     .
                 </p>
                 <div className="tip-wrapper">
-                    <span className="tip">Tip</span> Adjust the width of the canvas with the{' '}
+                    <span className="tip">Tip</span> Adjust the width of the canvas with the
                     <svg
                         width="10"
                         height="10"

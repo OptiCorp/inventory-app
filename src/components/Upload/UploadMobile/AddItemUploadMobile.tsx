@@ -1,10 +1,10 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import { Box } from '@mui/material';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Wrapper } from './styles';
-import File from '../../File/File.tsx';
-import { Box } from '@mui/material';
 import { Button as SubmitButton } from '../../Button/Button';
+import File from '../../File/File.tsx';
+import { Wrapper } from './styles';
 
 const AddItemUploadMobile = () => {
     const { setValue, getValues } = useFormContext();
@@ -74,7 +74,6 @@ const AddItemUploadMobile = () => {
             </Wrapper>
             <Box sx={{ display: 'flex', justifyContent: 'end' }}>
                 <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
-                    {' '}
                     <input
                         type="file"
                         multiple

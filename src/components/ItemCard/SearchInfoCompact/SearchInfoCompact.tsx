@@ -24,6 +24,7 @@ import {
     StyledCompactText,
     StyledCompactTitle,
     StyledItemCardCompactContainer,
+    StyledKeyWords,
 } from './styles.ts';
 
 const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {

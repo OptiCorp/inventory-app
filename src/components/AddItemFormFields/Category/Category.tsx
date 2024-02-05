@@ -15,6 +15,7 @@ export const Category = () => {
         field: { onChange, value },
     } = useController({
         name: 'itemTemplate.categoryId',
+
         control,
     });
     const selectedTemplate = watch('itemTemplate.id');
@@ -36,20 +37,21 @@ export const Category = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="category">Choose a category</label>{' '}
+                    <label htmlFor="category">Choose a category</label>
                     <ToolTip content="Specify a category">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
                 </StyledIconContainer>
                 <ErrorMessage
-                    name="categoryId"
+                    name="itemTemplate.categoryId"
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>
             <Autocomplete
                 options={categoryOptions}
                 disabled={!!selectedTemplate}
-                sx={{ width: 500, margin: '10px 0' }}
+                size="small"
+                sx={{ width: '100%' }}
                 value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}
                 renderInput={(params) => (
                     <TextField {...params} label="Categories" variant="outlined" />

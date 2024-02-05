@@ -1,13 +1,13 @@
 import { API_URL } from '../config';
 import { pca } from '../msalConfig';
 import { ItemSchema, TemplateSchema } from '../pages/addItem/hooks/itemValidator';
-import { AddTemplate } from '../pages/addItem/hooks/useAddItemForm';
 
 import {
     AddCategory,
     AddDocument,
     AddList,
     AddLocation,
+    AddTemplate,
     AddVendor,
     Category,
     Document,

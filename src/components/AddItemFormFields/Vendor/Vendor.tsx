@@ -24,7 +24,6 @@ export const Vendor = () => {
         field: { onChange, value },
     } = useController({
         control,
-
         name: 'vendorId',
     });
 
@@ -34,7 +33,7 @@ export const Vendor = () => {
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="vendor">Choose a vendor</label>{' '}
+                    <label htmlFor="vendor">Choose a vendor</label>
                     <ToolTip content="Specify a vendor">
                         <FaRegQuestionCircleIcon />
                     </ToolTip>
@@ -47,13 +46,16 @@ export const Vendor = () => {
 
             <Autocomplete
                 options={vendorOptions}
-                sx={{ width: 500 }}
+                size="small"
+                sx={{ width: '100%' }}
                 value={selectedVendor}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 onChange={(_event, newValue) => {
                     onChange(newValue?.value);
                 }}
-                renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
+                renderInput={(params) => (
+                    <TextField {...params} label="Vendor" variant="outlined" />
+                )}
             />
         </StyledDiv>
     );
