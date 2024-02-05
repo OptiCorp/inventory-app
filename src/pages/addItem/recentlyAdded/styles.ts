@@ -14,3 +14,15 @@ export const Container = styled.div`
     align-items: center;
     margin: 16px;
 `;
+
+export const CardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 32px;
+    gap: 16px;
+
+    @media (max-width: 800px) {
+        gap: 0px;
+        margin: 0px;
+    }
+`;
