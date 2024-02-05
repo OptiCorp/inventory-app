@@ -14,8 +14,8 @@ import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/
 import { ItemCardProps } from '../ItemCard';
 import {
     StyledBox,
-    StyledCardText,
-    StyledCardTitle,
+    StyledText,
+    StyledTitle,
     StyledContainer,
     StyledContent,
     StyledDescriptionParagraph,
@@ -86,12 +86,12 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
             <StyledContainer>
                 <StyledBox>
                     <StyledContent>
-                        <StyledCardTitle>S/N</StyledCardTitle>
-                        <StyledCardText>{item.serialNumber}</StyledCardText>
+                        <StyledTitle>S/N</StyledTitle>
+                        <StyledText>{item.serialNumber}</StyledText>
                     </StyledContent>
                     <StyledContent>
-                        <StyledCardTitle>P/N</StyledCardTitle>
-                        <StyledCardText>{item.itemTemplate.productNumber}</StyledCardText>
+                        <StyledTitle>P/N</StyledTitle>
+                        <StyledText>{item.itemTemplate.productNumber}</StyledText>
                     </StyledContent>
                 </StyledBox>
                 <StyledSecondInfoBox>
@@ -129,12 +129,12 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                         ></StyledInfoIcon>
                     )}
                     <StyledContent>
-                        <StyledCardTitle>Location</StyledCardTitle>
-                        <StyledCardText>{item.location?.name ?? 'Location'}</StyledCardText>
+                        <StyledTitle>Location</StyledTitle>
+                        <StyledText>{item.location?.name ?? 'Location'}</StyledText>
                     </StyledContent>
                     <StyledContent>
-                        <StyledCardTitle>Category</StyledCardTitle>
-                        <StyledCardText>{item.itemTemplate.category.name}</StyledCardText>
+                        <StyledTitle>Category</StyledTitle>
+                        <StyledText>{item.itemTemplate.category.name}</StyledText>
                     </StyledContent>
                 </StyledBox>
             </StyledContainer>

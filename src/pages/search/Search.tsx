@@ -6,6 +6,7 @@ import { useWindowDimensions } from '../../hooks';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
 
+import ItemCard from '../../components/ItemCard/ItemCard';
 import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
@@ -16,7 +17,6 @@ import {
     SpanMargin,
     StyledSearchedLink,
 } from './styles';
-import ItemCard from '../../components/ItemCard/ItemCard';
 
 type StateType = {
     resetInputField?: boolean;

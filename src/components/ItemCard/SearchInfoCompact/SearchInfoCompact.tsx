@@ -1,22 +1,27 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import AppContext from '../../../contexts/AppContext.tsx';
 import { MutateItemList } from '../../../services/apiTypes.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
 import { useGetListById } from '../../../services/hooks/list/useGetListById.tsx';
-import { Button } from '../../Button/Button.tsx';
+import { Button as ButtonOld } from '../../Button/Button.tsx';
 import CustomDialog from '../../CustomDialog/CustomDialog.tsx';
 import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles.ts';
 import { ItemCardProps } from '../ItemCard.tsx';
 import {
+    StyledCompactBox,
+    StyledCompactContent,
     StyledCompactInfoP,
-    StyledDescriptionWrap,
+    StyledCompactText,
+    StyledCompactTitle,
+    StyledCompactDescriptionWrap,
     StyledItemCardCompactContainer,
     StyledKeyWords,
 } from './styles.ts';
+import { Button } from '@mui/material';
 
 const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
@@ -79,35 +84,52 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                 <Accordion
                     style={{
                         boxShadow: 'none',
-                        backgroundColor: 'white',
-                        padding: '5px',
+                        backgroundColor: 'lightcyan',
+                        // padding: '5px',
+                        borderRadius: '0px',
                     }}
                 >
                     <AccordionSummary
-                        style={{ alignItems: 'flex-end' }}
+                        style={{
+                            display: 'flex',
+                            minWidth: '300px',
+                            backgroundColor: 'lightblue',
+                            gap: '16px',
+                        }}
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <StyledCompactInfoP>
-                            <StyledKeyWords>ID:</StyledKeyWords>
-                            {item.wpId}
-                        </StyledCompactInfoP>{' '}
-                        <StyledCompactInfoP>
-                            <StyledKeyWords>Location</StyledKeyWords>{' '}
-                            {item.location?.name ?? 'Location'}
-                        </StyledCompactInfoP>
-                        <StyledCompactInfoP>
-                            <StyledKeyWords>Category</StyledKeyWords>{' '}
-                            {item.itemTemplate.category?.name ?? 'Category'}
-                        </StyledCompactInfoP>
+                        <StyledCompactBox>
+                            <StyledCompactContent>
+                                <StyledCompactTitle>ID:</StyledCompactTitle>
+                                <StyledCompactText>{item.wpId}</StyledCompactText>
+                            </StyledCompactContent>
+                            <StyledCompactContent>
+                                <StyledCompactTitle>Location</StyledCompactTitle>
+                                <StyledCompactText>
+                                    {item.location?.name ?? 'Location'}
+                                </StyledCompactText>
+                            </StyledCompactContent>
+                            <StyledCompactContent>
+                                <StyledCompactTitle>Category</StyledCompactTitle>
+                                <StyledCompactText>
+                                    {item.itemTemplate.category?.name ?? 'Category'}
+                                </StyledCompactText>
+                            </StyledCompactContent>
+                        </StyledCompactBox>
                     </AccordionSummary>
-                    <AccordionDetails style={{ alignItems: 'flex-end' }}>
-                        <StyledDescriptionWrap>
-                            <StyledKeyWords>Description</StyledKeyWords>{' '}
+                    <AccordionDetails style={{}}>
+                        <StyledCompactDescriptionWrap>
+                            <StyledCompactTitle>Description</StyledCompactTitle>
                             <Typography>{item.itemTemplate.description}</Typography>
-                        </StyledDescriptionWrap>
-                        <Button variant="white" onClick={() => navigate(`/${item.id}`)}>
+                        </StyledCompactDescriptionWrap>
+                        <Button
+                            component={NavLink}
+                            to={`/${item.id}`}
+                            onClick={() => navigate(`/${item.id}`)}
+                            variant="contained"
+                        >
                             More info
                         </Button>
                     </AccordionDetails>

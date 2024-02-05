@@ -28,22 +28,22 @@ export const StyledBox = styled.div`
     justify-content: space-between;
     margin: 16px;
     gap: 16px;
-    width: 400px;
+    width: 400px; //TODO: this is not a good solution
 `;
 
 export const StyledContent = styled.div`
     display: flex;
-    gap: 4px;
     flex-direction: column;
+    gap: 4px;
 `;
 
-export const StyledCardTitle = styled.p`
+export const StyledTitle = styled.p`
     margin: 0px;
     display: flex;
     font-weight: 600;
 `;
 
-export const StyledCardText = styled.p`
+export const StyledText = styled.p`
     margin: 0px;
     display: flex;
 `;

@@ -11,8 +11,8 @@ import { RemoveIcon, Wrapper } from './styles.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
 import {
     StyledContent,
-    StyledCardTitle,
-    StyledCardText,
+    StyledTitle,
+    StyledText,
     StyleIcons,
 } from '../../../components/ItemCard/SearchInfo/styles.ts';
 
@@ -61,16 +61,16 @@ export const SideList = ({ item }: Props) => {
             <>
                 <Wrapper>
                     <StyledContent>
-                        <StyledCardTitle>S/N</StyledCardTitle>
-                        <StyledCardText>{item.serialNumber}</StyledCardText>
+                        <StyledTitle>S/N</StyledTitle>
+                        <StyledText>{item.serialNumber}</StyledText>
                     </StyledContent>
                     <StyledContent>
-                        <StyledCardTitle>Location</StyledCardTitle>
-                        <StyledCardText>{item.location?.name || 'Stavanger'}</StyledCardText>
+                        <StyledTitle>Location</StyledTitle>
+                        <StyledText>{item.location?.name || 'Stavanger'}</StyledText>
                     </StyledContent>
                     <StyledContent>
-                        <StyledCardTitle>Vendor</StyledCardTitle>
-                        <StyledCardText>{item.vendor?.name || 'Vendor'}</StyledCardText>
+                        <StyledTitle>Vendor</StyledTitle>
+                        <StyledText>{item.vendor?.name || 'Vendor'}</StyledText>
                     </StyledContent>
                     <StyleIcons>
                         <RemoveIcon onClick={handleClickOpen} />
