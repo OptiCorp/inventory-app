@@ -9,7 +9,7 @@ import {
     createRoutesFromElements,
 } from 'react-router-dom';
 import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
-import SnackBar from './components/Snackbar/Snackbar.tsx';
+import { Snackbar } from './components/Snackbar/Snackbar.tsx';
 import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 import { AppContextProvider } from './contexts/AppContext';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
@@ -85,7 +85,7 @@ function App() {
                     {isAuthenticated && (
                         <AppContextProvider>
                             <GlobalStyles width={width} />
-                            <SnackBar />
+                            <Snackbar />
                             <RouterProvider router={router} />
                         </AppContextProvider>
                     )}

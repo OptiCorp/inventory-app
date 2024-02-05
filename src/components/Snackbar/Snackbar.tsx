@@ -1,8 +1,8 @@
-import { Alert, Snackbar, SnackbarProps } from '@mui/material';
+import { Alert, Snackbar as MuiSnackbar, SnackbarProps } from '@mui/material';
 import { useContext } from 'react';
 import AppContext from '../../contexts/AppContext';
 
-const SnackBar: React.FC<SnackbarProps> = () => {
+export const Snackbar: React.FC<SnackbarProps> = () => {
     const {
         showSnackbar,
         snackbarText,
@@ -13,7 +13,7 @@ const SnackBar: React.FC<SnackbarProps> = () => {
     } = useContext(AppContext);
 
     return (
-        <Snackbar
+        <MuiSnackbar
             autoHideDuration={3000}
             onClose={() => {
                 setShowSnackbar(false);
@@ -23,8 +23,6 @@ const SnackBar: React.FC<SnackbarProps> = () => {
             open={showSnackbar}
         >
             <Alert severity={snackbarSeverity}>{snackbarText}</Alert>
-        </Snackbar>
+        </MuiSnackbar>
     );
 };
-
-export default SnackBar;
