@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ItemTemplate, Location, Vendor } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
-import { StyledItemCardContainer, StyledSearchCard } from './SearchInfoCompact/styles';
+import { StyledItemCardContainer, StyledSearchCard } from './styles';
 
 export type ItemCardProps = {
     item: {

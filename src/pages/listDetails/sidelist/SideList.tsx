@@ -7,25 +7,32 @@ import IconButton from '@mui/material/IconButton';
 
 import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx';
 import AppContext from '../../../contexts/AppContext.tsx';
-import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
+import { RemoveIcon, Wrapper } from './styles.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
+import {
+    StyledContent,
+    StyledCardTitle,
+    StyledCardText,
+    StyleIcons,
+} from '../../../components/ItemCard/SearchInfo/styles.ts';
 
 type Props = {
-    item: Item;
+    part: Item;
 };
 
-export const SideList = ({ item }: Props) => {
+export const SideList = ({ part }: Props) => {
     const { listId } = useParams();
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
     const { mutate: mutateAddItemToList } = useAddItemsToList();
+    const [isClicked, setIsClicked] = useState(false);
 
     const handleDelete = (ids: MutateItemList) => {
         mutateRemoveItemFromList(ids, {
             onSuccess: (data) => {
                 setSnackbarSeverity('success');
-                setSnackbarText(`${item.wpId} was deleted`);
+                setSnackbarText(`${part.wpId} was deleted`);
 
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
@@ -37,6 +44,7 @@ export const SideList = ({ item }: Props) => {
     };
 
     const handleAdd = (ids: MutateItemList) => {
+        setIsClicked(true);
         mutateAddItemToList(ids, {});
     };
 
@@ -52,29 +60,34 @@ export const SideList = ({ item }: Props) => {
         <>
             <>
                 <Wrapper>
-                    <KeyWord>
-                        <b>WP ID</b>
-                        {item.wpId}
-                    </KeyWord>
-                    <KeyWord>
-                        <b>Location</b> {item.location?.name || 'Location'}
-                    </KeyWord>
-                    <KeyWord>
-                        <b>Vendor</b> {item.vendor?.name || 'Vendor'}
-                    </KeyWord>
-
-                    <RemoveIcon onClick={handleClickOpen} />
-                    <IconButton
-                        onClick={() =>
-                            handleAdd({
-                                listId: listId ?? 'N/A',
-                                itemId: item.id,
-                                addSubItems: true,
-                            })
-                        }
-                    >
-                        <SubdirectoryArrowRightIcon />
-                    </IconButton>
+                    <StyledContent>
+                        <StyledCardTitle>S/N</StyledCardTitle>
+                        <StyledCardText>{part.serialNumber}</StyledCardText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledCardTitle>Location</StyledCardTitle>
+                        <StyledCardText>{part.location?.name || 'Stavanger'}</StyledCardText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledCardTitle>Vendor</StyledCardTitle>
+                        <StyledCardText>{part.vendor?.name || 'Vendor'}</StyledCardText>
+                    </StyledContent>
+                    <StyleIcons>
+                        <RemoveIcon onClick={handleClickOpen} />
+                        <IconButton
+                            onClick={() =>
+                                handleAdd({
+                                    listId: listId ?? 'N/A',
+                                    itemId: part.id,
+                                    addSubItems: true,
+                                })
+                            }
+                            // TODO: save the state between reloads. currently it resets on reload
+                            disabled={isClicked}
+                        >
+                            <SubdirectoryArrowRightIcon />
+                        </IconButton>
+                    </StyleIcons>
                 </Wrapper>
             </>
 
@@ -85,7 +98,7 @@ export const SideList = ({ item }: Props) => {
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={() =>
                     handleDelete({
-                        itemId: item.id,
+                        itemId: part.id,
                         listId: listId!,
                     })
                 }

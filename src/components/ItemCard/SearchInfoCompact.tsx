@@ -2,25 +2,23 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import AppContext from '../../contexts/AppContext.tsx';
-import { Item, MutateItemList } from '../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-import { Button } from '../Button/Button.tsx';
-import CustomDialog from '../CustomDialog/CustomDialog.tsx';
-import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
 import {
     StyledCompactInfoP,
     StyledDescriptionWrap,
     StyledKeyWords,
     StyledItemCardCompactContainer,
 } from './styles.ts';
-type Props = {
-    item: Item;
-    icon?: string;
-};
-const SearchResultCardCompact = ({ item, icon }: Props) => {
+import { ItemCardProps } from './ItemCard.tsx';
+import AppContext from '../../contexts/AppContext.tsx';
+import { MutateItemList } from '../../services/apiTypes.ts';
+import { useAddItemsToList } from '../../services/hooks/items/useAddItemsToList.tsx';
+import { useRemoveItemsFromList } from '../../services/hooks/items/useRemoveItemsFromList.tsx';
+import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
+import CustomDialog from '../CustomDialog/CustomDialog.tsx';
+import { StyledAddIcon, StyledRemoveIcon } from '../ListCard/styles.ts';
+import { Button } from '../Button/Button.tsx';
+
+const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -97,11 +95,11 @@ const SearchResultCardCompact = ({ item, icon }: Props) => {
                         </StyledCompactInfoP>{' '}
                         <StyledCompactInfoP>
                             <StyledKeyWords>Location</StyledKeyWords>{' '}
-                            {item.location?.name || 'Location'}
+                            {item.location?.name ?? 'Location'}
                         </StyledCompactInfoP>
                         <StyledCompactInfoP>
                             <StyledKeyWords>Category</StyledKeyWords>{' '}
-                            {item.itemTemplate.category?.name || 'Category'}
+                            {item.itemTemplate.category?.name ?? 'Category'}
                         </StyledCompactInfoP>
                     </AccordionSummary>
                     <AccordionDetails style={{ alignItems: 'flex-end' }}>

@@ -2,9 +2,9 @@ import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
 export const StyledItemCardContainer = styled.div`
-    margin: 16px;
-    padding: 4px;
-    max-width: 700px;
+    /* margin: 16px;
+    padding: 4px; */
+    width: 550px;
     margin-inline: auto;
 `;
 
@@ -31,10 +31,10 @@ export const StyledCompactDesriptionParagraph = styled.p`
 `;
 
 export const StyledItemCardCompactContainer = styled.div`
+    display: flex;
     background-color: ${COLORS.lightGray};
     margin: 16px;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
-    display: flex;
     flex-direction: column;
     max-width: 500px;
     position: relative;
@@ -47,15 +47,11 @@ export const StyledCompactCardWrapper = styled.div`
 
 export const StyledSearchCard = styled.div`
     position: relative;
-    line-height: 25px;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     background: ${COLORS.lightestGray};
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
 `;
 
-export const StyledItemCardSkeleton = styled.div`
+export const StyledPartCardSkeleton = styled.div`
     position: relative;
     line-height: 25px;
     padding: 1rem;
@@ -93,12 +89,15 @@ export const StyledInfoP = styled.div`
 
 export const StyledKeyWords = styled.p`
     font-weight: 600;
+    margin: 0px;
     width: 100%;
+    /* background-color: purple; */
 `;
 
 export const StyledCompactInfoP = styled.div`
-    line-height: 1.5rem;
+    /* line-height: 1.5rem; */
     width: 100%;
+    /* background-color: green; */
 `;
 
 export const StyledDescriptionWrap = styled.div`

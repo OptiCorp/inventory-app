@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -14,10 +13,12 @@ import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/
 
 import {
     StyledBox,
+    StyledContainer,
     StyledDescriptionParagraph,
-    StyledInfoP,
-    StyledKeyWords,
+    StyledContent,
+    StyledCardTitle,
     StyledSecondInfoBox,
+    StyledCardText,
 } from './styles';
 import { ItemCardProps } from '../ItemCard';
 
@@ -80,77 +81,63 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
         setOpen(false);
     };
 
-    const date = format(
-        new Date(item.updatedDate ?? item.createdDate),
-        'yyyy-MM-dd HH:mm:ss'
-    ).toString();
-
     return (
         <>
-            <StyledBox>
-                <StyledInfoP>
-                    <StyledKeyWords>WP ID</StyledKeyWords>
-                    {item.wpId}
-                </StyledInfoP>
-                <StyledInfoP>
-                    <StyledKeyWords> S/N</StyledKeyWords>
-                    {item.serialNumber}
-                </StyledInfoP>
-                <StyledInfoP>
-                    <StyledKeyWords> P/N</StyledKeyWords>
-                    {item.itemTemplate.productNumber}
-                </StyledInfoP>
-            </StyledBox>
-            <StyledSecondInfoBox>
-                <StyledDescriptionParagraph>
-                    {item.itemTemplate.description}
-                </StyledDescriptionParagraph>
-            </StyledSecondInfoBox>
-            <StyledBox>
-                {' '}
-                <>
-                    {icon === 'add' ? (
-                        <StyledAddIcon
-                            alreadyAdded={alreadyAdded}
-                            active={addItemSuccess}
-                            onClick={(e) =>
-                                handleAdd(e, {
-                                    itemId: item.id,
-                                    listId: listId!,
-                                })
-                            }
-                        ></StyledAddIcon>
-                    ) : (
-                        icon === 'remove' && (
-                            <StyledRemoveIcon
-                                style={{ fontSize: '25px' }}
-                                onClick={handleClickOpen}
-                            ></StyledRemoveIcon>
-                        )
+            <StyledContainer>
+                <StyledBox>
+                    <StyledContent>
+                        <StyledCardTitle>S/N</StyledCardTitle>
+                        <StyledCardText>{item.serialNumber}</StyledCardText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledCardTitle>P/N</StyledCardTitle>
+                        <StyledCardText>{item.itemTemplate.productNumber}</StyledCardText>
+                    </StyledContent>
+                </StyledBox>
+                <StyledSecondInfoBox>
+                    <StyledDescriptionParagraph>
+                        {item.itemTemplate.description}
+                    </StyledDescriptionParagraph>
+                </StyledSecondInfoBox>
+                <StyledBox>
+                    <>
+                        {icon === 'add' ? (
+                            <StyledAddIcon
+                                alreadyAdded={alreadyAdded}
+                                active={addItemSuccess}
+                                onClick={(e) =>
+                                    handleAdd(e, {
+                                        itemId: item.id,
+                                        listId: listId!,
+                                    })
+                                }
+                            ></StyledAddIcon>
+                        ) : (
+                            icon === 'remove' && (
+                                <StyledRemoveIcon
+                                    style={{ fontSize: '25px' }}
+                                    onClick={handleClickOpen}
+                                ></StyledRemoveIcon>
+                            )
+                        )}
+                    </>
+                    {location.pathname.includes('/makelist') && (
+                        <StyledInfoIcon
+                            onClick={() => {
+                                navigate(`/${item.id}`);
+                            }}
+                        ></StyledInfoIcon>
                     )}
-                </>
-                {location.pathname.includes('/makelist') && (
-                    <StyledInfoIcon
-                        onClick={() => {
-                            navigate(`/${item.id}`);
-                        }}
-                    ></StyledInfoIcon>
-                )}
-                <StyledInfoP>
-                    <StyledKeyWords>Location</StyledKeyWords>
-                    {item.location?.name ?? 'Location'}
-                </StyledInfoP>
-                <StyledInfoP>
-                    <StyledKeyWords>Vendor</StyledKeyWords>
-                    {item.vendor?.name ?? ''}
-                </StyledInfoP>
-                <StyledInfoP>
-                    <StyledKeyWords>
-                        {item.updatedDate ? 'Last updated' : 'Created on'}
-                    </StyledKeyWords>
-                    {date}
-                </StyledInfoP>
-            </StyledBox>
+                    <StyledContent>
+                        <StyledCardTitle>Location</StyledCardTitle>
+                        <StyledCardText>{item.location?.name ?? 'Location'}</StyledCardText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledCardTitle>Category</StyledCardTitle>
+                        <StyledCardText>{item.itemTemplate.category.name}</StyledCardText>
+                    </StyledContent>
+                </StyledBox>
+            </StyledContainer>
             <CustomDialog
                 title="Remove item from list?"
                 open={open}
