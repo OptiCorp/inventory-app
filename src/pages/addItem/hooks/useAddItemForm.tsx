@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import AppContext from '../../../contexts/AppContext';
-
+import { v4 as uuid } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { ItemTemplate } from '../../../services/apiTypes.ts';
@@ -32,6 +32,7 @@ const defaultValues: ItemSchema = {
     preCheck: { check: false, comment: '' },
     documentation: false,
     itemTemplate: defaultTemplate,
+    numberOfItems: '',
 };
 
 export const useAddItemForm = () => {
@@ -85,6 +86,24 @@ export const useAddItemForm = () => {
 
     const onSubmit = handleSubmit(
         async (data) => {
+            if (data.isBatch) {
+                const numberOfItems = parseInt(data.numberOfItems);
+                const items = [];
+                for (let i = 0; i < numberOfItems; i++) {
+                    const uniqueWpId = uuid().slice(0, 8);
+                    console.log('wp id: ', uniqueWpId);
+                    items.push({
+                        ...data,
+                        wpId: uniqueWpId,
+                        createdById: currentUser!.id,
+                    });
+                    console.log('items: ', items);
+                }
+                mutate({
+                    items,
+                    files: undefined,
+                });
+            }
             if (!selectedTemplate.id) {
                 const {
                     id: itemTemplateId,
