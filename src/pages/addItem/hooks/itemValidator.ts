@@ -22,23 +22,19 @@ export const itemSchema = z.object({
         check: z.boolean().refine((value) => value, 'Required '),
         comment: z.string(),
     }),
-    documentation: z.boolean().refine((value) => value, 'Required'),
-    documents: z
-        .array(
-            z.object({
-                id: z.string(),
-                name: z.string(),
-                blobRef: z.string(),
-                contentType: z.string(),
-                bytes: z.string(),
-            })
-        )
-        .optional(),
+    documentation: z.boolean().refine((value) => value),
     locationId: z.string().nullish(),
     parentId: z.string().nullish(),
     createdById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
-    files: z.array(z.instanceof(File)).nullish(),
+    files: z
+        .array(
+            z.object({
+                document: z.instanceof(File),
+                documentTypeId: z.string(),
+            })
+        )
+        .nullish(),
 });
 
 export type ItemSchema = z.infer<typeof itemSchema>;

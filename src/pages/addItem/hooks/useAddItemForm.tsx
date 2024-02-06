@@ -1,13 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import AppContext from '../../../contexts/AppContext';
-
+import { AddDocument, Item, ItemTemplate } from '../../../services/apiTypes.ts';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
-import { ItemTemplate } from '../../../services/apiTypes.ts';
 import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
 import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.tsx';
 import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator';
+import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem.ts';
 
 const defaultTemplate: TemplateSchema = {
     categoryId: '',
@@ -31,12 +31,24 @@ const defaultValues: ItemSchema = {
     isBatch: false,
     preCheck: { check: false, comment: '' },
     documentation: false,
+    files: null,
     itemTemplate: defaultTemplate,
+};
+
+export type AddTemplate = {
+    name: string;
+    type: string;
+    categoryId: string;
+    description: string;
+    createdById: string;
+    revision: string;
+    productNumber: string;
 };
 
 export const useAddItemForm = () => {
     const { currentUser } = useContext(AppContext);
-    const { mutate } = useAddItems();
+    const { mutate, data: newItem } = useAddItems();
+    const { mutate: uploadFile } = useUploadDocumentToItem();
     const appLocation = useLocation();
 
     const methods = useForm<ItemSchema>({
@@ -112,8 +124,18 @@ export const useAddItemForm = () => {
                             itemTemplateId,
                         },
                     ],
-                    files: undefined,
                 });
+
+                if (data.files) {
+                    const item = (await newItem?.json()) as Item;
+                    data.files.forEach((file) => {
+                        const document: AddDocument = {
+                            file: file.document,
+                            documentTypeId: file.documentTypeId,
+                        };
+                        uploadFile({ document, itemId: item.id });
+                    });
+                }
             }
         },
 

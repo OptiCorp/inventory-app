@@ -321,7 +321,7 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`);
     };
 
-    const addItem = async (items: ItemSchema[]): Promise<Response | Response[][]> => {
+    const addItem = async (items: ItemSchema[]): Promise<Response> => {
         const res = await postByFetch(`Item`, items);
         return res;
     };
@@ -433,11 +433,19 @@ const apiService = () => {
         return await getByFetch(`Document/ByItemId/${itemId}`);
     };
 
-    const addDocument = async (document: AddDocument, itemId: string): Promise<Response> => {
+    const addDocumentToItem = async (document: AddDocument, itemId: string): Promise<Response> => {
         const formData = new FormData();
         formData.append('File', document.file);
         formData.append('DocumentTypeId', document.documentTypeId);
         const res = await postFileByFetch(`Document/AddDocToItem/${itemId}`, formData);
+        return res;
+    };
+
+    const addDocumentToItemTemplate = async (document: AddDocument, templateId: string) => {
+        const formData = new FormData();
+        formData.append('File', document.file);
+        formData.append('DocumentTypeId', document.documentTypeId);
+        const res = await postFileByFetch(`Document/AddDocToItemTemplate/${templateId}`, formData);
         return res;
     };
 
@@ -520,7 +528,8 @@ const apiService = () => {
         updateCategoryById,
         deleteCategory,
         isWpIdUnique,
-        addDocument,
+        addDocumentToItem,
+        addDocumentToItemTemplate,
         getDocumentsByItemId,
         deleteDocument,
         getDocumentTypes,

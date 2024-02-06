@@ -21,84 +21,156 @@ import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploa
 import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocumentTypes';
 import File from '../File/File';
 import { COLORS } from '../../style/GlobalStyles';
+import { useUploadDocumentToItemTemplate } from '../../services/hooks/documents/useUploadDocumentToItemTemplate';
+import { CustomDialog } from '../CustomDialog/CustomDialog';
 
 type UploadProps = {
     itemId: string;
+    templateId: string;
 };
 
-export const ExampleUpload = ({ itemId }: UploadProps) => {
+export const ExampleUpload = ({ itemId, templateId }: UploadProps) => {
     const { data: documents, isLoading } = useGetDocumentsByItemId(itemId);
-    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem(itemId);
+    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem();
+    const { mutate: uploadDocumentToItemTemplate } = useUploadDocumentToItemTemplate(
+        templateId,
+        itemId
+    );
     const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const { data: documentTypes } = useGetDocumentTypes();
     const inputFile = useRef<HTMLInputElement | null>(null);
-    const [openDocumentTypeDialog, setOpenDocumentTypeDialog] = useState(false);
+    const [openDocumentTypeDialog, setOpenDocumentDialog] = useState<boolean>(false);
+    const [openDocumentDeleteDialog, setOpenDocumentDeleteDialog] = useState<boolean>(false);
     const [chosenDocumentType, setChosenDocumentType] = useState<string | null>(null);
+    const [addToTemplate, setAddToTemplate] = useState<boolean | null>(null);
     const [file, setFile] = useState<File | null>(null);
+    const [isOnFirstStep, setIsOnFirstStep] = useState<boolean>(true);
+    const [documentToDelete, setDocumentToDelete] = useState<string>('');
 
     const handleFileUpload = () => {
-        setOpenDocumentTypeDialog(false);
+        setOpenDocumentDialog(false);
         if (file) {
             const document: AddDocument = {
                 file: file,
                 documentTypeId: chosenDocumentType!,
             };
-            uploadDocumentToItem(document);
+            if (addToTemplate) {
+                uploadDocumentToItemTemplate(document);
+            } else {
+                uploadDocumentToItem({ document, itemId });
+            }
         }
         setFile(null);
         setChosenDocumentType(null);
+        setIsOnFirstStep(true);
+        setAddToTemplate(null);
     };
 
-    const handleFileDelete = (documentId: string) => {
-        deleteDocument(documentId);
+    const handleFileDelete = () => {
+        deleteDocument(documentToDelete);
+        setOpenDocumentDeleteDialog(false);
     };
 
     const handleCancel = () => {
-        setOpenDocumentTypeDialog(false);
+        setOpenDocumentDialog(false);
         setFile(null);
         setChosenDocumentType(null);
+        setIsOnFirstStep(true);
+        setAddToTemplate(null);
     };
 
     return (
         <Box sx={{ margin: '8px 0' }}>
+            <CustomDialog
+                title="Are you sure you want to delete?"
+                submitButtonText="DELETE"
+                cancelButtonText="CANCEL"
+                CancelButtonOnClick={() => setOpenDocumentDeleteDialog(false)}
+                open={openDocumentDeleteDialog}
+                SubmitButtonOnClick={handleFileDelete}
+            />
             <Dialog open={openDocumentTypeDialog}>
-                <DialogTitle>What kind of document is this?</DialogTitle>
+                <DialogTitle>
+                    {isOnFirstStep ? (
+                        <>What kind of document is this?</>
+                    ) : (
+                        <>
+                            Would you like to add this <br />
+                            document to the template?
+                        </>
+                    )}
+                </DialogTitle>
+
                 <DialogContent>
-                    <RadioGroup onChange={(e) => setChosenDocumentType(e.target.value)}>
+                    <RadioGroup
+                        onChange={
+                            isOnFirstStep
+                                ? (e) => setChosenDocumentType(e.target.value)
+                                : (e) =>
+                                      setAddToTemplate(e.target.value === 'template' ? true : false)
+                        }
+                    >
                         <List>
-                            {documentTypes?.map((type) => (
-                                <ListItem key={type.id}>
-                                    <FormControlLabel
-                                        value={type.id}
-                                        control={<Radio />}
-                                        label={type.name}
-                                    />
-                                </ListItem>
-                            ))}
+                            {isOnFirstStep ? (
+                                documentTypes?.map((type) => (
+                                    <ListItem key={type.id}>
+                                        <FormControlLabel
+                                            value={type.id}
+                                            control={<Radio />}
+                                            label={type.name}
+                                            checked={chosenDocumentType === type.id}
+                                        />
+                                    </ListItem>
+                                ))
+                            ) : (
+                                <>
+                                    <ListItem>
+                                        <FormControlLabel
+                                            value={'template'}
+                                            control={<Radio />}
+                                            label={'Yes'}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <FormControlLabel
+                                            value={'item'}
+                                            control={<Radio />}
+                                            label={'No'}
+                                        />
+                                    </ListItem>
+                                </>
+                            )}
                         </List>
                     </RadioGroup>
+
                     <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Button
                             variant="contained"
-                            onClick={handleCancel}
+                            onClick={isOnFirstStep ? handleCancel : () => setIsOnFirstStep(true)}
                             sx={{
                                 color: '#000000',
                                 backgroundColor: '#ffffff',
                                 border: '1px solid black',
                                 borderRadius: '0',
                             }}
-                            startIcon={<CloseIcon />}
+                            startIcon={isOnFirstStep && <CloseIcon />}
                         >
-                            CANCEL
+                            {isOnFirstStep ? 'CANCEL' : 'BACK'}
                         </Button>
                         <Button
                             variant="contained"
-                            disabled={chosenDocumentType ? false : true}
-                            onClick={handleFileUpload}
-                            sx={{ color: '#ffffff', backgroundColor: '#000000', borderRadius: '0' }}
-                            startIcon={<FileUploadIcon />}
+                            disabled={isOnFirstStep ? !chosenDocumentType : addToTemplate === null}
+                            onClick={
+                                isOnFirstStep ? () => setIsOnFirstStep(false) : handleFileUpload
+                            }
+                            sx={{
+                                color: '#ffffff',
+                                backgroundColor: '#000000',
+                                borderRadius: '0',
+                            }}
+                            startIcon={!isOnFirstStep && <FileUploadIcon />}
                         >
-                            UPLOAD
+                            {isOnFirstStep ? 'NEXT' : 'UPLOAD'}
                         </Button>
                     </Box>
                 </DialogContent>
@@ -121,7 +193,10 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         <File
                             key={document.id}
                             doc={document}
-                            handleFileRemoval={() => handleFileDelete(document.id)}
+                            handleFileRemoval={() => {
+                                setDocumentToDelete(document.id);
+                                setOpenDocumentDeleteDialog(true);
+                            }}
                         />
                     ))
                 )}
@@ -138,7 +213,8 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         style={{ display: 'none' }}
                         onChange={(e) => {
                             setFile([...e.target.files!][0]);
-                            setOpenDocumentTypeDialog(true);
+                            setOpenDocumentDialog(true);
+                            e.target.files = null;
                         }}
                         ref={inputFile}
                     />

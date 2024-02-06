@@ -5,7 +5,6 @@ import apiService from '../../api';
 
 type MutationObject = {
     items: ItemSchema[];
-    files?: File[];
 };
 
 export const useAddItems = () => {

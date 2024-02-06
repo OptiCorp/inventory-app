@@ -58,7 +58,7 @@ const ItemDetails = () => {
                 <ItemInfo item={item} isLoading={isLoading} />
                 <Hierarchy item={item} />
                 {width > 500 ? (
-                    <ExampleUpload itemId={item.id} />
+                    <ExampleUpload itemId={item.id} templateId={item.itemTemplate.id} />
                 ) : (
                     <UploadMobile itemId={item.id} />
                 )}

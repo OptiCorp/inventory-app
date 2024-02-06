@@ -21,7 +21,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
         slug: 'checks',
     },
     {
-        fields: ['documentation'],
+        fields: ['documentation', 'files'],
         slug: 'upload',
     },
     {

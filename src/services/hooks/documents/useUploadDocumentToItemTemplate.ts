@@ -1,27 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useContext } from 'react';
-import AppContext from '../../../contexts/AppContext';
 import apiService from '../../api';
+import { useContext } from 'react';
+import UmAppContext from '../../../contexts/AppContext';
 import { AddDocument } from '../../apiTypes';
 
-type UploadObject = {
-    document: AddDocument;
-    itemId: string;
-};
-
-export const useUploadDocumentToItem = () => {
+export const useUploadDocumentToItemTemplate = (templateId: string, itemId: string) => {
     const api = apiService();
     const queryClient = useQueryClient();
-    const { setSnackbarText } = useContext(AppContext);
+    const { setSnackbarText } = useContext(UmAppContext);
     return useMutation({
-        mutationFn: async (upload: UploadObject) =>
-            await api.addDocumentToItem(upload.document, upload.itemId),
-        onSettled: (_data, errors, upload) => {
+        mutationFn: async (document: AddDocument) =>
+            await api.addDocumentToItemTemplate(document, templateId),
+        onSettled: (_data, errors, document) => {
             if (!errors) {
-                setSnackbarText(`${upload.document.file.name} was uploaded.`);
+                setSnackbarText(`${document.file.name} was uploaded.`);
                 queryClient
                     .invalidateQueries({
-                        queryKey: [upload.itemId],
+                        queryKey: [itemId],
                     })
                     .catch((error) => {
                         console.error('Failed to invalidate queries.', error);
