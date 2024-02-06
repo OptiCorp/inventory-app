@@ -60,5 +60,3 @@ export const ListCard = ({ item }: Props) => {
         </>
     );
 };
-
-// export default ListCard;
