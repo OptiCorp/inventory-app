@@ -37,7 +37,7 @@ const CustomDialog = ({
                         type={type}
                         sx={{ borderRadius: '0' }}
                     >
-                        {cancelButtonText ?? 'CANCEL'}
+                        {cancelButtonText ?? 'Cancel'}
                     </Button>
 
                     <Button
@@ -47,7 +47,7 @@ const CustomDialog = ({
                         type={type}
                         sx={{ borderRadius: '0' }}
                     >
-                        {submitButtonText ?? 'CONFIRM'}
+                        {submitButtonText ?? 'Confirm'}
                     </Button>
                 </DialogActions>
             </Dialog>
