@@ -4,7 +4,7 @@ import { FormContainer } from '../styles.ts';
 import { RadioWrapper, StyledInput } from './styles.ts';
 
 const BatchForm = () => {
-    const { control } = useFormContext<ItemSchema>();
+    const { control, register, watch } = useFormContext<ItemSchema>();
     const {
         field: { onChange, value },
         fieldState: { error },
@@ -13,6 +13,7 @@ const BatchForm = () => {
         name: 'isBatch',
     });
 
+    console.log('number of items in batch: ', watch('numberOfItems'));
     return (
         <FormContainer>
             <h3>Add as a batch?</h3>
@@ -43,6 +44,7 @@ const BatchForm = () => {
                     </p>
                 </RadioWrapper>
             </label>
+            {value && <input {...register('numberOfItems')} type="number" />}
         </FormContainer>
     );
 };
