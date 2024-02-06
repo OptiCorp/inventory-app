@@ -7,8 +7,14 @@ import IconButton from '@mui/material/IconButton';
 
 import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx';
 import AppContext from '../../../contexts/AppContext.tsx';
-import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
+import { RemoveIcon, Wrapper } from './styles.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
+import {
+    StyledContent,
+    StyledTitle,
+    StyledText,
+    StyleIcons,
+} from '../../../components/ItemCard/SearchInfo/styles.ts';
 
 type Props = {
     item: Item;
@@ -20,6 +26,7 @@ export const SideList = ({ item }: Props) => {
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
     const { mutate: mutateAddItemToList } = useAddItemsToList();
+    const [isClicked, setIsClicked] = useState(false);
 
     const handleDelete = (ids: MutateItemList) => {
         mutateRemoveItemFromList(ids, {
@@ -37,6 +44,7 @@ export const SideList = ({ item }: Props) => {
     };
 
     const handleAdd = (ids: MutateItemList) => {
+        setIsClicked(true);
         mutateAddItemToList(ids, {});
     };
 
@@ -52,29 +60,35 @@ export const SideList = ({ item }: Props) => {
         <>
             <>
                 <Wrapper>
-                    <KeyWord>
-                        <b>WP ID</b>
-                        {item.wpId}
-                    </KeyWord>
-                    <KeyWord>
-                        <b>Location</b> {item.location?.name || 'Location'}
-                    </KeyWord>
-                    <KeyWord>
-                        <b>Vendor</b> {item.vendor?.name || 'Vendor'}
-                    </KeyWord>
-
-                    <RemoveIcon onClick={handleClickOpen} />
-                    <IconButton
-                        onClick={() =>
-                            handleAdd({
-                                listId: listId ?? 'N/A',
-                                itemId: item.id,
-                                addSubItems: true,
-                            })
-                        }
-                    >
-                        <SubdirectoryArrowRightIcon />
-                    </IconButton>
+                    <StyledContent>
+                        <StyledTitle>S/N</StyledTitle>
+                        <StyledText>{item.serialNumber}</StyledText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledTitle>Location</StyledTitle>
+                        <StyledText>{item.location?.name || 'Stavanger'}</StyledText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledTitle>Vendor</StyledTitle>
+                        <StyledText>{item.vendor?.name || 'Vendor'}</StyledText>
+                    </StyledContent>
+                    <StyleIcons>
+                        <RemoveIcon onClick={handleClickOpen} />
+                        <IconButton
+                            onClick={() =>
+                                handleAdd({
+                                    listId: listId ?? 'N/A',
+                                    itemId: item.id,
+                                    addSubItems: true,
+                                })
+                            }
+                            // TODO: save the state between reloads. currently it resets on reload
+                            color="primary"
+                            disabled={isClicked}
+                        >
+                            <SubdirectoryArrowRightIcon />
+                        </IconButton>
+                    </StyleIcons>
                 </Wrapper>
             </>
 

@@ -6,7 +6,8 @@ import { useWindowDimensions } from '../../hooks';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
 
-import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact';
+import ItemCard from '../../components/ItemCard/ItemCard';
+import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
     Container,
@@ -16,7 +17,6 @@ import {
     SpanMargin,
     StyledSearchedLink,
 } from './styles';
-import ItemCard from '../../components/ItemCard/ItemCard';
 
 type StateType = {
     resetInputField?: boolean;
@@ -74,7 +74,7 @@ const Search = () => {
                 <SearchBar
                     setSearchTerm={setSearchTerm}
                     searchTerm={searchTerm}
-                    placeholder={'Search for ID, serial number or description'}
+                    placeholder={'Search for ID, description, PO number or S/N'}
                 />
 
                 {isLoading && <GlobalSpinner />}

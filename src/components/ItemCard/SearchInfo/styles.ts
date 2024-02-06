@@ -1,40 +1,60 @@
 import { styled } from 'styled-components';
 
 export const StyledDescriptionParagraph = styled.p`
+    display: flex;
+    margin: 0px;
     width: 100%;
     display: -webkit-box;
-    border-radius: 3px;
-    width: 90%;
     overflow: hidden;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    margin: 8px 0px;
+    -webkit-line-clamp: 5;
 `;
 
 export const StyledSecondInfoBox = styled.div`
-    padding: 8px;
-    line-height: 25px;
-    grid-column: 2/2;
+    /* margin: 16px; */
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: max;
+    width: 100%;
     border-right: 1px solid rgba(208, 208, 208);
     border-left: 1px solid rgba(208, 208, 208);
 `;
 
 export const StyledBox = styled.div`
-    margin: 1rem 0;
-    line-height: 25px;
-    padding-left: 30px;
-    padding-right: 30px;
-`;
-
-export const StyledInfoP = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    flex-direction: row;
+    margin: 16px;
+    gap: 16px;
+    width: 400px; //TODO: this is not a good solution
 `;
 
-export const StyledKeyWords = styled.p`
+export const StyledContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+`;
+
+export const StyledTitle = styled.p`
+    margin: 0px;
+    display: flex;
     font-weight: 600;
-    width: 100%;
+`;
+
+export const StyledText = styled.p`
+    margin: 0px;
+    display: flex;
+`;
+
+export const StyledContainer = styled.div`
+    display: flex;
+`;
+
+export const StyleIcons = styled.div`
+    display: flex;
+    gap: 0px;
+    justify-content: space-between;
+    align-items: center;
 `;

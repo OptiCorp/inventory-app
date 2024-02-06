@@ -4,7 +4,7 @@ import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../../../components/Button/Button';
 import { GlobalSpinner } from '../../../../components/GlobalSpinner/GlobalSpinner';
 
-import SearchResultCardCompact from '../../../../components/ItemCard/SearchInfoCompact';
+import SearchResultCardCompact from '../../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 
 import AppContext from '../../../../contexts/AppContext';
 import { useSnackBar } from '../../../../hooks';
