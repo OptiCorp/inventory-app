@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { List } from '../../services/apiTypes.ts';
 
 import { useDeleteList } from '../../services/hooks/list/useDeleteList.tsx';
-import CustomDialog from '../CustomDialog/CustomDialog.tsx';
+import { CustomDialog } from '../CustomDialog/CustomDialog.tsx';
 import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles.ts';
 
 type Props = {
     item: List;
 };
 
-const ListCard = ({ item }: Props) => {
+export const ListCard = ({ item }: Props) => {
     const navigate = useNavigate();
     const { mutate } = useDeleteList();
     const [open, setOpen] = useState(false);
@@ -61,4 +61,4 @@ const ListCard = ({ item }: Props) => {
     );
 };
 
-export default ListCard;
+// export default ListCard;

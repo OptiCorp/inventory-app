@@ -1,20 +1,20 @@
 import { Breadcrumbs, Button } from '@mui/material';
+import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
+import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
+import { Comments } from '../../components/ItemDetails/CommentForm/CommentForm';
 import { ExampleUpload } from '../../components/Upload/Upload';
 import UploadMobile from '../../components/Upload/UploadMobile/UploadMobile';
 import { useWindowDimensions } from '../../hooks';
+import { useDeleteItemById } from '../../services/hooks/items/useDeleteItemById';
 import { useGetItemById } from '../../services/hooks/items/useGetItemById';
+import { ButtonContainer } from '../addItem/styles';
 import { Log } from './Log';
-import { Comments } from '../../components/ItemDetails/CommentForm/CommentForm';
 import { Hierarchy } from './hierarchy';
 import ItemInfo from './itemInfo/ItemInfo';
 import { useUpdateItemForm } from './itemInfo/hooks/useUpdateItemForm';
 import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles';
-import { ButtonContainer } from '../addItem/styles';
-import { useDeleteItemById } from '../../services/hooks/items/useDeleteItemById';
-import { useState } from 'react';
-import CustomDialog from '../../components/CustomDialog/CustomDialog';
 
 const ItemDetails = () => {
     const { id } = useParams() as { id: string };

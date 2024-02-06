@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CustomDialog from './CustomDialog';
+import { CustomDialog } from './CustomDialog';
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { COLORS } from '../../style/GlobalStyles';

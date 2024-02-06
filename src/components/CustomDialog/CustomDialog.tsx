@@ -12,7 +12,7 @@ interface DialogProps {
     children?: React.ReactNode;
 }
 
-const CustomDialog = ({
+export const CustomDialog = ({
     title,
     submitButtonText,
     cancelButtonText,
@@ -46,5 +46,3 @@ const CustomDialog = ({
         </>
     );
 };
-
-export default CustomDialog;
