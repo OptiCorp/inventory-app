@@ -26,5 +26,3 @@ export const Snackbar: React.FC<SnackbarProps> = () => {
         </MuiSnackbar>
     );
 };
-
-export default SnackBar;
