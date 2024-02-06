@@ -1,16 +1,12 @@
 import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import AppContext from '../../../contexts/AppContext';
 import { MutateItemList } from '../../../services/apiTypes';
-
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
-
-import AppContext from '../../../contexts/AppContext';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
-import CustomDialog from '../../CustomDialog/CustomDialog';
+import { CustomDialog } from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
-
 import { ItemCardProps } from '../ItemCard';
 import {
     StyledBox,

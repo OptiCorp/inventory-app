@@ -10,10 +10,9 @@ interface DialogProps {
     isWarning?: boolean;
     onClose?: (e: React.MouseEvent) => void;
     children?: React.ReactNode;
-    type?: 'submit' | 'reset' | 'button' | undefined;
 }
 
-const CustomDialog = ({
+export const CustomDialog = ({
     title,
     submitButtonText,
     cancelButtonText,
@@ -22,7 +21,6 @@ const CustomDialog = ({
     open,
     children,
     onClose,
-    type,
     isWarning,
 }: DialogProps) => {
     return (
@@ -31,28 +29,20 @@ const CustomDialog = ({
                 <DialogTitle>{title}</DialogTitle>
                 {children ? <DialogContent>{children}</DialogContent> : null}
                 <DialogActions>
-                    <Button
-                        variant="text"
-                        onClick={CancelButtonOnClick}
-                        type={type}
-                        sx={{ borderRadius: '0' }}
-                    >
-                        {cancelButtonText ?? 'CANCEL'}
+                    <Button variant="text" onClick={CancelButtonOnClick} sx={{ borderRadius: '0' }}>
+                        {cancelButtonText ?? 'Cancel'}
                     </Button>
 
                     <Button
                         variant="contained"
                         color={isWarning ? 'error' : 'primary'}
                         onClick={SubmitButtonOnClick}
-                        type={type}
                         sx={{ borderRadius: '0' }}
                     >
-                        {submitButtonText ?? 'CONFIRM'}
+                        {submitButtonText ?? 'Confirm'}
                     </Button>
                 </DialogActions>
             </Dialog>
         </>
     );
 };
-
-export default CustomDialog;

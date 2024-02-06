@@ -13,7 +13,7 @@ import { MutateItemList } from '../../../services/apiTypes.ts';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
 import { useGetListById } from '../../../services/hooks/list/useGetListById.tsx';
-import CustomDialog from '../../CustomDialog/CustomDialog.tsx';
+import { CustomDialog } from '../../CustomDialog/CustomDialog.tsx';
 import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles.ts';
 import { ItemCardProps } from '../ItemCard.tsx';
 import {
