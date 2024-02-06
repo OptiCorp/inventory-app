@@ -9,9 +9,9 @@ import {
     createRoutesFromElements,
 } from 'react-router-dom';
 import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute.tsx';
+import { Snackbar } from './components/Snackbar/Snackbar.tsx';
 import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar.tsx';
 import { AppContextProvider } from './contexts/AppContext';
-import { useSnackBar } from './hooks/useSnackbar.tsx';
 import { useWindowDimensions } from './hooks/useWindowDimensions.ts';
 import AddItem from './pages/addItem/Index';
 import { AddItemForm } from './pages/addItem/addItemForm/AddItemForm.tsx';
@@ -38,7 +38,6 @@ function App() {
     const isAuthenticated = useIsAuthenticated();
     const queryClient = new QueryClient();
     const { width } = useWindowDimensions();
-    const { snackbar } = useSnackBar();
 
     const router = createBrowserRouter(
         createRoutesFromElements(
@@ -86,7 +85,7 @@ function App() {
                     {isAuthenticated && (
                         <AppContextProvider>
                             <GlobalStyles width={width} />
-                            {snackbar}
+                            <Snackbar />
                             <RouterProvider router={router} />
                         </AppContextProvider>
                     )}

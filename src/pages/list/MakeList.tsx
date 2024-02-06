@@ -7,7 +7,6 @@ import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx'
 import { ListCard } from '../../components/ListCard/ListCard.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import AppContext from '../../contexts/AppContext.tsx';
-import { useSnackBar } from '../../hooks/useSnackbar.tsx';
 import { Item, List } from '../../services/apiTypes.ts';
 import { useAddList } from '../../services/hooks/list/useAddList.tsx';
 import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId.tsx';
@@ -24,7 +23,7 @@ const MakeList = () => {
     const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id);
 
     const { mutate } = useAddList();
-    const { snackbar } = useSnackBar();
+
     useEffect(() => {
         setSearchTerm((prev) => searchParam ?? prev);
     }, [searchParam]);
@@ -94,7 +93,6 @@ const MakeList = () => {
                     ))}
                 </FlexWrapper>
             </SearchContainer>
-            {snackbar}
         </>
     );
 };
