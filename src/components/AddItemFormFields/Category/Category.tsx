@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
+import { Category as CategoryType } from '../../../services/apiTypes.ts';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
@@ -19,16 +20,16 @@ export const Category = () => {
     const selectedTemplate = watch('itemTemplate.id');
     const { data: categories = [] } = useGetCategories();
 
-    const categoryOptions = categories.map((category) => ({
+    const categoryOptions = categories.map((category: CategoryType) => ({
         value: category.id,
         label: category.name,
     }));
 
-    const selectedCategory = categoryOptions.find((option) => option.label === value);
+    const selectedCategory = categories.find((option) => option.id === value);
 
     useEffect(() => {
         if (selectedCategory) {
-            setValue('itemTemplate.categoryId', selectedCategory?.value);
+            setValue('itemTemplate.categoryId', selectedCategory?.id);
         }
     }, [selectedCategory]);
 
@@ -52,7 +53,7 @@ export const Category = () => {
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 size="small"
                 sx={{ width: '100%' }}
-                value={selectedCategory}
+                value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}
                 renderInput={(params) => (
                     <TextField {...params} label="Categories" variant="outlined" />
                 )}
