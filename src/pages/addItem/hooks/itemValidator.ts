@@ -39,6 +39,7 @@ export const itemSchema = z.object({
     createdById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),
+    numberOfItems: z.string(),
 });
 
 export type ItemSchema = z.infer<typeof itemSchema>;
