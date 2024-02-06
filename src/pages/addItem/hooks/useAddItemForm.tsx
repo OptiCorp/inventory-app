@@ -83,28 +83,13 @@ export const useAddItemForm = () => {
         });
         return data.json() as Promise<ItemTemplate>;
     };
-
+    console.log('selected template: ', selectedTemplate);
     const onSubmit = handleSubmit(
         async (data) => {
-            if (data.isBatch) {
-                const numberOfItems = parseInt(data.numberOfItems);
-                const items = [];
-                for (let i = 0; i < numberOfItems; i++) {
-                    const uniqueWpId = uuid().slice(0, 8);
-                    console.log('wp id: ', uniqueWpId);
-                    items.push({
-                        ...data,
-                        wpId: uniqueWpId,
-                        createdById: currentUser!.id,
-                    });
-                    console.log('items: ', items);
-                }
-                mutate({
-                    items,
-                    files: undefined,
-                });
-            }
+            console.log('data template id: ', data.itemTemplateId);
+
             if (!selectedTemplate.id) {
+                console.log('no selected template');
                 const {
                     id: itemTemplateId,
 
@@ -131,6 +116,25 @@ export const useAddItemForm = () => {
                             itemTemplateId,
                         },
                     ],
+                    files: undefined,
+                });
+            } else if (data.isBatch) {
+                console.log('data: ', data);
+                const numberOfItems = parseInt(data.numberOfItems);
+                const items = [];
+                for (let i = 0; i < numberOfItems; i++) {
+                    const uniqueWpId = uuid().slice(0, 8);
+                    console.log('wp id: ', uniqueWpId);
+                    items.push({
+                        ...data,
+                        itemTemplateId: data.itemTemplate.id,
+                        wpId: uniqueWpId,
+                        createdById: currentUser!.id,
+                    });
+                    console.log('items: ', items);
+                }
+                mutate({
+                    items,
                     files: undefined,
                 });
             }
