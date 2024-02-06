@@ -33,6 +33,10 @@ export const Category = () => {
         }
     }, [selectedCategory]);
 
+    const initialValue = selectedCategory
+        ? { value: selectedCategory.id, label: selectedCategory.name ?? '' }
+        : null;
+
     return (
         <StyledDiv>
             <StyledInputWrap>
@@ -53,7 +57,7 @@ export const Category = () => {
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 size="small"
                 sx={{ width: '100%' }}
-                value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}
+                value={initialValue}
                 renderInput={(params) => (
                     <TextField {...params} label="Categories" variant="outlined" />
                 )}
