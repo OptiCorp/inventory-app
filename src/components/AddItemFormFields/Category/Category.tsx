@@ -1,12 +1,11 @@
-import { useController, useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
-import { useGetCategories } from '../../../services/hooks/category/useGetCategories.tsx';
-import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-
 import { ErrorMessage } from '@hookform/error-message';
 import { Autocomplete, TextField } from '@mui/material';
 import { useEffect } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
+import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
+import { useGetCategories } from '../../../services/hooks/category/useGetCategories.tsx';
+import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
 
 export const Category = () => {
@@ -15,7 +14,6 @@ export const Category = () => {
         field: { onChange, value },
     } = useController({
         name: 'itemTemplate.categoryId',
-
         control,
     });
     const selectedTemplate = watch('itemTemplate.id');
@@ -50,6 +48,7 @@ export const Category = () => {
             <Autocomplete
                 options={categoryOptions}
                 disabled={!!selectedTemplate}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
                 size="small"
                 sx={{ width: '100%' }}
                 value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}
