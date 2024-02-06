@@ -18,16 +18,17 @@ export const Category = () => {
     });
     const selectedTemplate = watch('itemTemplate.id');
     const { data: categories = [] } = useGetCategories();
-    const selectedCategory = categories.find((option) => option.id === value);
 
     const categoryOptions = categories.map((category) => ({
         value: category.id,
         label: category.name,
     }));
 
+    const selectedCategory = categoryOptions.find((option) => option.label === value);
+
     useEffect(() => {
         if (selectedCategory) {
-            setValue('itemTemplate.categoryId', selectedCategory?.id);
+            setValue('itemTemplate.categoryId', selectedCategory?.value);
         }
     }, [selectedCategory]);
 
@@ -51,7 +52,7 @@ export const Category = () => {
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 size="small"
                 sx={{ width: '100%' }}
-                value={{ value: selectedCategory?.id, label: selectedCategory?.name ?? '' }}
+                value={selectedCategory}
                 renderInput={(params) => (
                     <TextField {...params} label="Categories" variant="outlined" />
                 )}
