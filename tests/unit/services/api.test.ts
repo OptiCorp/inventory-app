@@ -1,6 +1,6 @@
 import { it, expect, describe, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import apiService from '../../../src/services/api.ts';
+import apiService from '../../../src/services/api';
 
 // TODO: Implement tests for the response of the API service using Mock Service Worker.
 
