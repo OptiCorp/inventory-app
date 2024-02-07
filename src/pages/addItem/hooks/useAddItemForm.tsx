@@ -83,22 +83,41 @@ export const useAddItemForm = () => {
         });
         return data.json() as Promise<ItemTemplate>;
     };
-    console.log('selected template: ', selectedTemplate);
+
     const onSubmit = handleSubmit(
         async (data) => {
-            console.log('data template id: ', data.itemTemplateId);
-
             if (!selectedTemplate.id) {
-                console.log('no selected template');
                 const {
                     id: itemTemplateId,
-
                     categoryId,
                     productNumber,
                     type,
                     description,
                 } = await templateSubmit();
-
+                if (data.isBatch) {
+                    const numberOfItems = parseInt(data.numberOfItems);
+                    const items = [];
+                    for (let i = 0; i < numberOfItems; i++) {
+                        const uniqueWpId = uuid().slice(0, 8);
+                        items.push({
+                            ...data,
+                            itemTemplateId,
+                            wpId: uniqueWpId,
+                            itemTemplate: {
+                                id: itemTemplateId,
+                                type,
+                                categoryId,
+                                productNumber,
+                                description,
+                                createdById: currentUser!.id,
+                            },
+                        });
+                    }
+                    mutate({
+                        items,
+                        files: undefined,
+                    });
+                }
                 mutate({
                     items: [
                         {
@@ -119,19 +138,16 @@ export const useAddItemForm = () => {
                     files: undefined,
                 });
             } else if (data.isBatch) {
-                console.log('data: ', data);
                 const numberOfItems = parseInt(data.numberOfItems);
                 const items = [];
                 for (let i = 0; i < numberOfItems; i++) {
                     const uniqueWpId = uuid().slice(0, 8);
-                    console.log('wp id: ', uniqueWpId);
                     items.push({
                         ...data,
                         itemTemplateId: data.itemTemplate.id,
                         wpId: uniqueWpId,
                         createdById: currentUser!.id,
                     });
-                    console.log('items: ', items);
                 }
                 mutate({
                     items,
