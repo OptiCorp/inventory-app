@@ -8,11 +8,11 @@ import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import AppContext from '../../contexts/AppContext.tsx';
 import { useWindowDimensions } from '../../hooks';
-import { Item, UpdateList } from '../../services/apiTypes.ts';
-import useExportToExcel from '../../services/hooks/export/useExportToExcel.ts';
-import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx';
+import { Item, UpdateList } from '../../services/apiTypes';
+import useExportToExcel from '../../services/hooks/export/useExportToExcel';
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
+import { useGetListById } from '../../services/hooks/list/useGetListById';
+import { useUpdateList } from '../../services/hooks/list/useUpdateList';
 import { Container } from '../search/styles.ts';
 import { ListHeader } from './ListHeader.tsx';
 import { SideList } from './sidelist/SideList.tsx';

@@ -8,8 +8,8 @@ import { ListCard } from '../../components/ListCard/ListCard.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import AppContext from '../../contexts/AppContext.tsx';
 import { Item, List } from '../../services/apiTypes.ts';
-import { useAddList } from '../../services/hooks/list/useAddList.tsx';
-import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId.tsx';
+import { useAddList } from '../../services/hooks/list/useAddList';
+import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId';
 import { SearchContainer } from '../search/styles.ts';
 import { FlexWrapper, SearchAndButton } from './styles.ts';
 

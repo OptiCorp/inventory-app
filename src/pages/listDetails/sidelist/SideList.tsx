@@ -11,9 +11,9 @@ import {
 } from '../../../components/ItemCard/SearchInfo/styles.ts';
 import AppContext from '../../../contexts/AppContext.tsx';
 import { Item, MutateItemList } from '../../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { RemoveIcon, Wrapper } from './styles.ts';
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
+import { RemoveIcon, Wrapper } from './styles';
 
 type Props = {
     item: Item;
