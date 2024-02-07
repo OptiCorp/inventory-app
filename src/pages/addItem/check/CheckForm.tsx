@@ -1,6 +1,6 @@
 import { useController, useFormContext } from 'react-hook-form';
-import { RadioWrapper, StyledInput } from '../batch/styles.ts';
-import { ItemSchema } from '../hooks/itemValidator.ts';
+import { RadioWrapper, StyledInput } from '../batch/styles';
+import { ItemSchema } from '../hooks/itemValidator';
 import { FormContainer } from '../styles';
 import { StyledLabelText, StyledTextArea } from './styles';
 

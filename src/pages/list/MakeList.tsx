@@ -1,17 +1,17 @@
 import TextField from '@mui/material/TextField';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button } from '../../components/Button/Button.tsx';
-import { CustomDialog } from '../../components/CustomDialog/CustomDialog.tsx';
-import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
-import { ListCard } from '../../components/ListCard/ListCard.tsx';
-import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import AppContext from '../../contexts/AppContext.tsx';
-import { Item, List } from '../../services/apiTypes.ts';
+import { Button } from '../../components/Button/Button';
+import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
+import { ListCard } from '../../components/ListCard/ListCard';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import AppContext from '../../contexts/AppContext';
+import { Item, List } from '../../services/apiTypes';
 import { useAddList } from '../../services/hooks/list/useAddList';
 import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId';
-import { SearchContainer } from '../search/styles.ts';
-import { FlexWrapper, SearchAndButton } from './styles.ts';
+import { SearchContainer } from '../search/styles';
+import { FlexWrapper, SearchAndButton } from './styles';
 
 const MakeList = () => {
     const { currentUser } = useContext(AppContext);

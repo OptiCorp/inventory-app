@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { COLORS } from '../../../style/GlobalStyles.ts';
+import { COLORS } from '../../../style/GlobalStyles';
 
 interface StyledInputProps {
     $isUnique?: boolean;

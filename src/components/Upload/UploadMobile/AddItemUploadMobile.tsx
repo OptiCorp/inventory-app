@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Button as SubmitButton } from '../../Button/Button';
-import File from '../../File/File.tsx';
+import File from '../../File/File';
 import { Wrapper } from './styles';
 
 const AddItemUploadMobile = () => {

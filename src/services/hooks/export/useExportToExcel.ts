@@ -1,5 +1,5 @@
 import * as XLSX from 'xlsx';
-import { Item } from '../../apiTypes.ts';
+import { Item } from '../../apiTypes';
 
 type ExportToExcelHook = {
     exportToExcel: (items: Item[]) => void;

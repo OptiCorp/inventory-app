@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import apiService from '../../api.ts';
-import { MutateItemList } from '../../apiTypes.ts';
+import apiService from '../../api';
+import { MutateItemList } from '../../apiTypes';
 
 export const useRemoveItemsFromList = () => {
     const api = apiService();

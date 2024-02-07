@@ -1,21 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
-import { Button } from '../../components/Button/Button.tsx';
-import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
-import ItemCard from '../../components/ItemCard/ItemCard.tsx';
-import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact.tsx';
-import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import AppContext from '../../contexts/AppContext.tsx';
+import { Button } from '../../components/Button/Button';
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
+import ItemCard from '../../components/ItemCard/ItemCard';
+import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import AppContext from '../../contexts/AppContext';
 import { useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes';
 import useExportToExcel from '../../services/hooks/export/useExportToExcel';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../services/hooks/list/useGetListById';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList';
-import { Container } from '../search/styles.ts';
-import { ListHeader } from './ListHeader.tsx';
-import { SideList } from './sidelist/SideList.tsx';
+import { Container } from '../search/styles';
+import { ListHeader } from './ListHeader';
+import { SideList } from './sidelist/SideList';
 import {
     ButtonWrap,
     FlexWrapper,
@@ -23,7 +23,7 @@ import {
     ListTitle,
     SearchContainerList,
     SearchResultsContainer,
-} from './styles.ts';
+} from './styles';
 
 const ListDetails = () => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
