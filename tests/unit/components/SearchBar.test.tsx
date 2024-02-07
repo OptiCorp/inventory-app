@@ -2,7 +2,7 @@ import { it, expect, describe, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import SearchBar from '../../src/components/SearchBar/SearchBar';
+import SearchBar from '../../../src/components/SearchBar/SearchBar';
 
 describe('SearchBar Component', () => {
     it('renders the SearchBar component with the correct placeholder', () => {
@@ -18,9 +18,7 @@ describe('SearchBar Component', () => {
     });
     it('updates the searchTerm when a user types into the SearchBar', () => {
         const setSearchTerm = vi.fn();
-        render(
-            <SearchBar searchTerm="product" placeholder="Search" setSearchTerm={setSearchTerm} />
-        );
+        render(<SearchBar searchTerm="" placeholder="Search" setSearchTerm={setSearchTerm} />);
 
         const searchTermInput = screen.getByPlaceholderText('Search');
         fireEvent.change(searchTermInput, { target: { value: 'new search term' } });
