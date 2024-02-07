@@ -1,13 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
-import AppContext from '../../../contexts/AppContext';
+import AppContext from '../../../contexts/AppContext.tsx';
 
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { ItemTemplate } from '../../../services/apiTypes.ts';
-import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
-import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.tsx';
-import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator';
+import { useAddItems } from '../../../services/hooks/items/useAddItem.ts';
+import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.ts';
+import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator.ts';
 
 const defaultTemplate: TemplateSchema = {
     categoryId: '',
