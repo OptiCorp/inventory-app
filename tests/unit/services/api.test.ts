@@ -4,7 +4,7 @@ import apiService from '../../../src/services/api';
 
 // TODO: Implement tests for the response of the API service using Mock Service Worker.
 
-vi.mock('../../../src/services/api.ts', () => {
+vi.mock('../../../src/services/api', () => {
     return {
         default: () => ({
             addItemsToList: vi.fn(),

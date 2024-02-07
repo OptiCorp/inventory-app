@@ -19,17 +19,20 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args: {
         variant: 'black',
+        children: 'Primary Button',
     },
 };
 
 export const Secondary: Story = {
     args: {
         variant: 'white',
+        children: 'Secondary Button',
     },
 };
 
 export const Danger: Story = {
     args: {
         variant: 'red',
+        children: 'Danger Button',
     },
 };
