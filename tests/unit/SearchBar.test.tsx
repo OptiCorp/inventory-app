@@ -1,6 +1,5 @@
-// Import necessary modules and utilities
 import { it, expect, describe, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import SearchBar from '../../src/components/SearchBar/SearchBar';
@@ -16,5 +15,16 @@ describe('SearchBar Component', () => {
 
         expect(searchBarInput).toBeInTheDocument();
         expect(searchBarInput).toHaveAttribute('placeholder', placeholderText);
+    });
+    it('updates the searchTerm when a user types into the SearchBar', () => {
+        const setSearchTerm = vi.fn();
+        render(
+            <SearchBar searchTerm="product" placeholder="Search" setSearchTerm={setSearchTerm} />
+        );
+
+        const searchTermInput = screen.getByPlaceholderText('Search');
+        fireEvent.change(searchTermInput, { target: { value: 'new search term' } });
+
+        expect(setSearchTerm).toHaveBeenCalledWith('new search term');
     });
 });
