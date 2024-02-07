@@ -5,10 +5,10 @@ import { useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { useDebounce } from 'usehooks-ts';
 import { v4 as uuid } from 'uuid';
-import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique.tsx';
-import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
-import { StyledParagraph } from './styles.ts';
+import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
+import { ToolTip } from '../../ToolTip/ToolTip';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
+import { StyledParagraph } from './styles';
 
 export const WpId = () => {
     const { register, setValue } = useFormContext();

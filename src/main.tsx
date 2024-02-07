@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 import { MsalProvider } from '@azure/msal-react';
-import { pca } from './msalConfig.ts';
+import { pca } from './msalConfig';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { AppContainer, BodyWrapper } from './styles.ts';
+import { AppContainer, BodyWrapper } from './styles';
 
 const queryClient = new QueryClient();
 

@@ -1,11 +1,11 @@
 import { useController, useFormContext } from 'react-hook-form';
-import AddItemUpload from '../../../components/Upload/AddItemUpload.tsx';
-import AddItemUploadMobile from '../../../components/Upload/UploadMobile/AddItemUploadMobile.tsx';
+import AddItemUpload from '../../../components/Upload/AddItemUpload';
+import AddItemUploadMobile from '../../../components/Upload/UploadMobile/AddItemUploadMobile';
 
-import { useWindowDimensions } from '../../../hooks/useWindowDimensions.ts';
-import { RadioWrapper, StyledInput } from '../batch/styles.ts';
-import { ItemSchema } from '../hooks/itemValidator.ts';
-import { FormContainer } from '../styles.ts';
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
+import { RadioWrapper, StyledInput } from '../batch/styles';
+import { ItemSchema } from '../hooks/itemValidator';
+import { FormContainer } from '../styles';
 
 const Upload = () => {
     const { width } = useWindowDimensions();

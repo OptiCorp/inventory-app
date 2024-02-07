@@ -2,9 +2,9 @@ import { Box } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useController, useFormContext } from 'react-hook-form';
-import { useGetItemTemplates } from '../../../services/hooks/template/useGetItemTemplates.tsx';
-import { ItemSchema } from '../hooks/itemValidator.ts';
-import { Container } from './styles.ts';
+import { useGetItemTemplates } from '../../../services/hooks/template/useGetItemTemplates';
+import { ItemSchema } from '../hooks/itemValidator';
+import { Container } from './styles';
 
 export default function Template() {
     const { data: templates = [] } = useGetItemTemplates();

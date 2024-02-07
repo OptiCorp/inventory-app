@@ -4,10 +4,10 @@ import { FC } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
-import { FormOption } from '../../../services/apiTypes.ts';
-import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
+import { FormOption } from '../../../services/apiTypes';
+import { ToolTip } from '../../ToolTip/ToolTip';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
 
 export const Type: FC = () => {
     const { control, watch } = useFormContext<ItemSchema>();
