@@ -2,18 +2,18 @@ import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRig
 import { IconButton } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CustomDialog } from '../../../components/CustomDialog/CustomDialog.tsx';
+import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
 import {
     StyleIcons,
     StyledContent,
     StyledText,
     StyledTitle,
-} from '../../../components/ItemCard/SearchInfo/styles.ts';
-import AppContext from '../../../contexts/AppContext.tsx';
-import { Item, MutateItemList } from '../../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { RemoveIcon, Wrapper } from './styles.ts';
+} from '../../../components/ItemCard/SearchInfo/styles';
+import AppContext from '../../../contexts/AppContext';
+import { Item, MutateItemList } from '../../../services/apiTypes';
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
+import { RemoveIcon, Wrapper } from './styles';
 
 type Props = {
     item: Item;

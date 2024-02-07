@@ -2,7 +2,7 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { styled } from 'styled-components';
-import { COLORS } from '../../../style/GlobalStyles.ts';
+import { COLORS } from '../../../style/GlobalStyles';
 
 export const EditIcon = styled(CreateOutlinedIcon)`
     color: black;

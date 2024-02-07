@@ -3,9 +3,9 @@ import { TextField } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
-import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
+import { ToolTip } from '../../ToolTip/ToolTip';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
 
 export const ProductNumber = () => {
     const { watch, register } = useFormContext<ItemSchema>();

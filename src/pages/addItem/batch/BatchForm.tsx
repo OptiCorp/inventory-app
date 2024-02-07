@@ -1,7 +1,7 @@
 import { useController, useFormContext } from 'react-hook-form';
-import { ItemSchema } from '../hooks/itemValidator.ts';
-import { FormContainer } from '../styles.ts';
-import { RadioWrapper, StyledInput } from './styles.ts';
+import { ItemSchema } from '../hooks/itemValidator';
+import { FormContainer } from '../styles';
+import { RadioWrapper, StyledInput } from './styles';
 
 const BatchForm = () => {
     const { control } = useFormContext<ItemSchema>();

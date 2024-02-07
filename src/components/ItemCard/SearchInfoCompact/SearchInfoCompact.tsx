@@ -8,14 +8,14 @@ import {
 } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
-import AppContext from '../../../contexts/AppContext.tsx';
-import { MutateItemList } from '../../../services/apiTypes.ts';
-import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
-import { useGetListById } from '../../../services/hooks/list/useGetListById.tsx';
-import { CustomDialog } from '../../CustomDialog/CustomDialog.tsx';
-import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles.ts';
-import { ItemCardProps } from '../ItemCard.tsx';
+import AppContext from '../../../contexts/AppContext';
+import { MutateItemList } from '../../../services/apiTypes';
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
+import { useGetListById } from '../../../services/hooks/list/useGetListById';
+import { CustomDialog } from '../../CustomDialog/CustomDialog';
+import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles';
+import { ItemCardProps } from '../ItemCard';
 import {
     StyledCompactBox,
     StyledCompactContent,
@@ -24,7 +24,7 @@ import {
     StyledCompactText,
     StyledCompactTitle,
     StyledItemCardCompactContainer,
-} from './styles.ts';
+} from './styles';
 
 const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);

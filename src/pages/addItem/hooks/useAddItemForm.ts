@@ -4,9 +4,9 @@ import AppContext from '../../../contexts/AppContext';
 
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
-import { ItemTemplate } from '../../../services/apiTypes.ts';
-import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
-import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.tsx';
+import { ItemTemplate } from '../../../services/apiTypes';
+import { useAddItems } from '../../../services/hooks/items/useAddItem';
+import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate';
 import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator';
 
 const defaultTemplate: TemplateSchema = {
