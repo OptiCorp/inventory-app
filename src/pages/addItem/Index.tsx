@@ -35,7 +35,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
 ];
 
 const AddItem = () => {
-    const { methods, onSubmit, trigger } = useAddItemForm();
+    const { methods, onSubmit, trigger, watch } = useAddItemForm();
 
     const navigate = useNavigate();
 
@@ -54,13 +54,20 @@ const AddItem = () => {
 
     useEffect(() => {
         steps.some((step) => {
-            if (!location.pathname.includes(`/add-item/${step.slug}`)) {
+            if (!location.pathname.includes(`${step.slug}`)) {
                 setActiveStep(0);
             } else if (location.pathname === '/add-item/') {
                 setActiveStep(0);
             }
         });
     }, [!location.pathname.includes('/add-item/')]);
+
+    useEffect(() => {
+        const currentStep = steps.findIndex((step) => location.pathname.includes(`${step.slug}`));
+        setActiveStep(currentStep !== -1 ? currentStep : 0);
+    }, [location.pathname]);
+
+    console.log(watch());
 
     return (
         <FormProvider {...methods}>

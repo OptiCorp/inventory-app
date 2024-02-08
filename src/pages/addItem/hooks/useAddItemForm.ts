@@ -52,6 +52,7 @@ export const useAddItemForm = () => {
         reset,
         resetField,
         formState: { errors },
+
         register,
         trigger,
         setValue,
@@ -87,7 +88,7 @@ export const useAddItemForm = () => {
         async (data) => {
             if (!selectedTemplate.id) {
                 const {
-                    id: itemTemplateId,
+                    id: itemtemplateId,
 
                     categoryId,
                     productNumber,
@@ -95,25 +96,44 @@ export const useAddItemForm = () => {
                     description,
                 } = await templateSubmit();
 
-                mutate({
-                    items: [
-                        {
-                            ...data,
-                            itemTemplate: {
-                                id: itemTemplateId,
-
-                                type: type,
-                                categoryId: categoryId,
-                                productNumber: productNumber,
-
-                                description: description,
-                                createdById: currentUser?.id ?? '',
+                mutate(
+                    {
+                        items: [
+                            {
+                                ...data,
+                                itemTemplateId: itemtemplateId,
+                                itemTemplate: {
+                                    id: itemtemplateId,
+                                    type: type,
+                                    categoryId: categoryId,
+                                    productNumber: productNumber,
+                                    description: description,
+                                    createdById: currentUser?.id ?? '',
+                                },
                             },
-                            itemTemplateId,
-                        },
-                    ],
-                    files: undefined,
-                });
+                        ],
+                        files: undefined,
+                    },
+
+                    {
+                        onSuccess: () => reset(defaultValues),
+                    }
+                );
+            } else {
+                mutate(
+                    {
+                        items: [
+                            {
+                                ...data,
+                                itemTemplateId: selectedTemplate.id,
+                            },
+                        ],
+                        files: undefined,
+                    },
+                    {
+                        onSuccess: () => reset(defaultValues),
+                    }
+                );
             }
         },
 
@@ -122,7 +142,6 @@ export const useAddItemForm = () => {
 
     const onSubmitTyped: (e?: React.BaseSyntheticEvent<object> | undefined) => Promise<void> =
         onSubmit;
-
     return {
         methods,
         onSubmitTyped,
