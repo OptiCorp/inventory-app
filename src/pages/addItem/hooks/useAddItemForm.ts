@@ -35,7 +35,7 @@ const defaultValues: ItemSchema = {
 };
 
 export const useAddItemForm = () => {
-    const { currentUser } = useContext(AppContext);
+    const { currentUser, setSnackbarText } = useContext(AppContext);
     const { mutate } = useAddItems();
     const appLocation = useLocation();
 
@@ -52,6 +52,7 @@ export const useAddItemForm = () => {
         reset,
         resetField,
         formState: { errors },
+
         register,
         trigger,
         setValue,
@@ -87,33 +88,69 @@ export const useAddItemForm = () => {
         async (data) => {
             if (!selectedTemplate.id) {
                 const {
-                    id: itemTemplateId,
-
+                    id: itemtemplateId,
+                    category,
                     categoryId,
                     productNumber,
                     type,
                     description,
                 } = await templateSubmit();
 
-                mutate({
-                    items: [
-                        {
-                            ...data,
-                            itemTemplate: {
-                                id: itemTemplateId,
-
-                                type: type,
-                                categoryId: categoryId,
-                                productNumber: productNumber,
-
-                                description: description,
+                mutate(
+                    {
+                        items: [
+                            {
+                                ...data,
                                 createdById: currentUser?.id ?? '',
+                                itemTemplateId: itemtemplateId,
+                                itemTemplate: {
+                                    id: itemtemplateId,
+                                    type: type,
+                                    categoryId: categoryId,
+                                    productNumber: productNumber,
+                                    description: description,
+                                    createdById: currentUser?.id ?? '',
+                                },
                             },
-                            itemTemplateId,
+                        ],
+                        files: undefined,
+                    },
+
+                    {
+                        onSuccess: () => {
+                            reset({
+                                ...defaultValues,
+                                createdById: data.createdById,
+                            });
+                            setSnackbarText(
+                                `Template ${category.name}: ${productNumber}  and item ${data.wpId} added`
+                            );
                         },
-                    ],
-                    files: undefined,
-                });
+                    }
+                );
+            } else {
+                mutate(
+                    {
+                        items: [
+                            {
+                                ...data,
+                                createdById: currentUser?.id ?? '',
+                                itemTemplateId: selectedTemplate.id,
+                            },
+                        ],
+                        files: undefined,
+                    },
+                    {
+                        onSuccess: () => {
+                            reset({
+                                ...defaultValues,
+                                createdById: data.createdById,
+                            });
+
+                            setSnackbarText(`item ${data.wpId} added`);
+                        },
+                    }
+                );
             }
         },
 
@@ -122,7 +159,6 @@ export const useAddItemForm = () => {
 
     const onSubmitTyped: (e?: React.BaseSyntheticEvent<object> | undefined) => Promise<void> =
         onSubmit;
-
     return {
         methods,
         onSubmitTyped,
