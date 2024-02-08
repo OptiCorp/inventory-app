@@ -1,8 +1,7 @@
+import { Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
-
-import { Button } from '@mui/material';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { StyledForm } from './addItemForm/styles';
 import { ItemSchema } from './hooks/itemValidator';
@@ -35,10 +34,8 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
 ];
 
 const AddItem = () => {
-    const { methods, onSubmit, trigger, watch } = useAddItemForm();
-
+    const { methods, onSubmit, trigger } = useAddItemForm();
     const navigate = useNavigate();
-
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleNext = async () => {
@@ -66,8 +63,6 @@ const AddItem = () => {
         const currentStep = steps.findIndex((step) => location.pathname.includes(`${step.slug}`));
         setActiveStep(currentStep !== -1 ? currentStep : 0);
     }, [location.pathname]);
-
-    console.log(watch());
 
     return (
         <FormProvider {...methods}>
