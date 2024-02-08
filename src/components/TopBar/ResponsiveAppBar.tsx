@@ -1,3 +1,5 @@
+import MenuIcon from '@mui/icons-material/Menu';
+import { Drawer } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -11,9 +13,11 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
+import { useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useWindowDimensions } from '../../hooks';
+import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
 import useNavigationControl from './hooks/useNavigation';
-
 const pages = ['Find items', 'Add item', 'Make list'];
 const settings = ['Profile', 'Account', 'Admin', 'Logout'];
 
@@ -28,8 +32,9 @@ function ResponsiveAppBar() {
     };
     const theme = useTheme();
     const { handleSignOut } = useNavigationControl();
+    const { width } = useWindowDimensions();
     const location = useLocation();
-
+    const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
     return (
         <>
             <AppBar color="transparent" position="static" elevation={0}>
@@ -39,35 +44,57 @@ function ResponsiveAppBar() {
                             <img
                                 alt="logo"
                                 src={'/WP 1.svg'}
-                                // onClick={handleSearchIconClick}
                                 width="48"
                                 style={{ cursor: 'pointer' }}
                             />
                         </Button>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {pages.map((page) => (
-                                // TODO instead of overriding styles, create new mui button
-                                <Button
-                                    component={NavLink}
-                                    to={`/${page.toLowerCase().replace(' ', '-')}`}
-                                    sx={{
-                                        textTransform: 'capitalize',
-                                        fontSize: '1.2rem',
-                                        ':hover': { backgroundColor: 'transparent' },
-                                        marginLeft: '48px',
-                                        color: location.pathname.includes(
-                                            page.toLowerCase().replace(' ', '-')
-                                        )
-                                            ? 'primary.main'
-                                            : theme.palette.grey[600],
-                                    }}
-                                    key={page}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
-                        </Box>
-
+                        {width > 900 ? (
+                            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                                {pages.map((page) => (
+                                    // TODO instead of overriding styles, create new mui button
+                                    <Button
+                                        component={NavLink}
+                                        to={`/${page.toLowerCase().replace(' ', '-')}`}
+                                        sx={{
+                                            textTransform: 'capitalize',
+                                            fontSize: '1.2rem',
+                                            ':hover': { backgroundColor: 'transparent' },
+                                            marginLeft: '48px',
+                                            color: location.pathname.includes(
+                                                page.toLowerCase().replace(' ', '-')
+                                            )
+                                                ? 'primary.main'
+                                                : theme.palette.grey[600],
+                                        }}
+                                        key={page}
+                                    >
+                                        {page}
+                                    </Button>
+                                ))}
+                            </Box>
+                        ) : (
+                            <>
+                                <Box sx={{ flexGrow: 1 }}>
+                                    <Button
+                                        style={{
+                                            color: 'black',
+                                            padding: 0,
+                                            minWidth: 0,
+                                        }}
+                                        onClick={() => setHamburgerIsOpen(true)}
+                                    >
+                                        <MenuIcon sx={{ fontSize: 40 }} />
+                                    </Button>
+                                    <Drawer
+                                        anchor="right"
+                                        open={hamburgerIsOpen}
+                                        onClose={() => setHamburgerIsOpen(false)}
+                                    >
+                                        <HamburgerMenu setHamburgerIsOpen={setHamburgerIsOpen} />
+                                    </Drawer>
+                                </Box>
+                            </>
+                        )}
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
