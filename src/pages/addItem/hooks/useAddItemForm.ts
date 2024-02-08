@@ -35,7 +35,7 @@ const defaultValues: ItemSchema = {
 };
 
 export const useAddItemForm = () => {
-    const { currentUser } = useContext(AppContext);
+    const { currentUser, setSnackbarText } = useContext(AppContext);
     const { mutate } = useAddItems();
     const appLocation = useLocation();
 
@@ -89,7 +89,7 @@ export const useAddItemForm = () => {
             if (!selectedTemplate.id) {
                 const {
                     id: itemtemplateId,
-
+                    category,
                     categoryId,
                     productNumber,
                     type,
@@ -101,6 +101,7 @@ export const useAddItemForm = () => {
                         items: [
                             {
                                 ...data,
+                                createdById: currentUser?.id ?? '',
                                 itemTemplateId: itemtemplateId,
                                 itemTemplate: {
                                     id: itemtemplateId,
@@ -116,7 +117,15 @@ export const useAddItemForm = () => {
                     },
 
                     {
-                        onSuccess: () => reset(defaultValues),
+                        onSuccess: () => {
+                            reset({
+                                ...defaultValues,
+                                createdById: data.createdById,
+                            });
+                            setSnackbarText(
+                                `Template ${category.name}: ${productNumber}  and item ${data.wpId} added`
+                            );
+                        },
                     }
                 );
             } else {
@@ -125,13 +134,21 @@ export const useAddItemForm = () => {
                         items: [
                             {
                                 ...data,
+                                createdById: currentUser?.id ?? '',
                                 itemTemplateId: selectedTemplate.id,
                             },
                         ],
                         files: undefined,
                     },
                     {
-                        onSuccess: () => reset(defaultValues),
+                        onSuccess: () => {
+                            reset({
+                                ...defaultValues,
+                                createdById: data.createdById,
+                            });
+
+                            setSnackbarText(`item ${data.wpId} added`);
+                        },
                     }
                 );
             }
