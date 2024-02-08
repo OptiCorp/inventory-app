@@ -1,11 +1,11 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Drawer } from '@mui/material';
+import { Divider, Drawer } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import Avatar from '@mui/material/Avatar';
+
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,8 +18,14 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
 import useNavigationControl from './hooks/useNavigation';
+
 const pages = ['Find items', 'Add item', 'Make list'];
-const settings = ['Profile', 'Account', 'Admin', 'Logout'];
+
+const settings = [
+    { text: 'Categories', location: 'admin/categories' },
+    { text: 'Vendors', location: 'admin/vendors' },
+    { text: 'Locations', location: 'admin/locations' },
+];
 
 function ResponsiveAppBar() {
     const navigate = useNavigate();
@@ -35,11 +41,17 @@ function ResponsiveAppBar() {
     const { width } = useWindowDimensions();
     const location = useLocation();
     const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
+
+    const adminLink = (location: string) => {
+        navigate(location);
+        setAnchorElUser(null);
+    };
+
     return (
         <>
             <AppBar color="transparent" position="static" elevation={0}>
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters>
+                    <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
                         <Button component={NavLink} to="/">
                             <img
                                 alt="logo"
@@ -49,32 +61,100 @@ function ResponsiveAppBar() {
                             />
                         </Button>
                         {width > 900 ? (
-                            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                                {pages.map((page) => (
-                                    // TODO instead of overriding styles, create new mui button
-                                    <Button
-                                        component={NavLink}
-                                        to={`/${page.toLowerCase().replace(' ', '-')}`}
-                                        sx={{
-                                            textTransform: 'capitalize',
-                                            fontSize: '1.2rem',
-                                            ':hover': { backgroundColor: 'transparent' },
-                                            marginLeft: '48px',
-                                            color: location.pathname.includes(
-                                                page.toLowerCase().replace(' ', '-')
-                                            )
-                                                ? 'primary.main'
-                                                : theme.palette.grey[600],
+                            <>
+                                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                                    {pages.map((page) => (
+                                        // TODO instead of overriding styles, create new mui button
+                                        <Button
+                                            component={NavLink}
+                                            to={`/${page.toLowerCase().replace(' ', '-')}`}
+                                            sx={{
+                                                textTransform: 'capitalize',
+                                                fontSize: '1.2rem',
+                                                ':hover': { backgroundColor: 'transparent' },
+                                                marginLeft: '48px',
+                                                color: location.pathname.includes(
+                                                    page.toLowerCase().replace(' ', '-')
+                                                )
+                                                    ? 'primary.main'
+                                                    : theme.palette.grey[600],
+                                            }}
+                                            key={page}
+                                        >
+                                            {page}
+                                        </Button>
+                                    ))}
+                                </Box>
+                                <Box sx={{ flexGrow: 0 }}>
+                                    <Tooltip title="Open admin settings">
+                                        <Button
+                                            onClick={handleOpenUserMenu}
+                                            sx={{
+                                                textTransform: 'capitalize',
+                                                fontSize: '1.2rem',
+                                                ':hover': { backgroundColor: 'transparent' },
+                                                marginLeft: '48px',
+                                                cursor: 'pointer',
+                                                color: anchorElUser
+                                                    ? 'primary.main'
+                                                    : theme.palette.grey[600],
+                                            }}
+                                        >
+                                            {' '}
+                                            Admin
+                                            <AdminPanelSettingsIcon fontSize="large" />
+                                        </Button>
+                                    </Tooltip>
+                                    <Menu
+                                        sx={{ mt: '45px' }}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
                                         }}
-                                        key={page}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
                                     >
-                                        {page}
-                                    </Button>
-                                ))}
-                            </Box>
+                                        {settings.map((setting) => (
+                                            <>
+                                                <MenuItem
+                                                    key={setting.location}
+                                                    onClick={() => {
+                                                        if (setting.text === 'Logout') {
+                                                            handleSignOut();
+                                                        } else {
+                                                            adminLink(setting.location);
+                                                        }
+                                                    }}
+                                                >
+                                                    <Typography textAlign="center" marginTop="5px">
+                                                        {setting.text}
+                                                    </Typography>
+                                                </MenuItem>
+                                            </>
+                                        ))}
+                                        <Divider />
+                                        <MenuItem
+                                            onClick={() => {
+                                                handleSignOut();
+                                            }}
+                                        >
+                                            <Typography textAlign="center" margin="10px 10px 0">
+                                                Log out
+                                            </Typography>
+                                        </MenuItem>
+                                    </Menu>
+                                </Box>
+                            </>
                         ) : (
                             <>
-                                <Box sx={{ flexGrow: 1 }}>
+                                <Box sx={{ flexGrow: 1, alignSelf: 'right' }}>
                                     <Button
                                         style={{
                                             color: 'black',
@@ -95,44 +175,6 @@ function ResponsiveAppBar() {
                                 </Box>
                             </>
                         )}
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Admin" />
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px' }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {settings.map((setting) => (
-                                    <MenuItem
-                                        key={setting}
-                                        onClick={() => {
-                                            if (setting === 'Logout') {
-                                                handleSignOut();
-                                            } else if (setting === 'Admin') {
-                                                navigate('/admin');
-                                            }
-                                        }}
-                                    >
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
