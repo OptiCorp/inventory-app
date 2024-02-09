@@ -2,11 +2,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Divider, Drawer } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
@@ -18,7 +17,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
 import useNavigationControl from './hooks/useNavigation';
-
+import { AdminMenu } from './styles';
 const pages = ['Find items', 'Add item', 'Make list'];
 
 const settings = [
@@ -30,6 +29,7 @@ const settings = [
 function ResponsiveAppBar() {
     const navigate = useNavigate();
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [adminDropdownIsOpen, setAdminDropdownIsOpen] = useState(false);
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
@@ -85,71 +85,88 @@ function ResponsiveAppBar() {
                                         </Button>
                                     ))}
                                 </Box>
-                                <Box sx={{ flexGrow: 0 }}>
-                                    <Tooltip title="Open admin settings">
+                                <Box sx={{ flexGrow: 0, marginRight: '20px' }}>
+                                    <Tooltip title="Open User settings">
                                         <Button
                                             onClick={handleOpenUserMenu}
                                             sx={{
                                                 textTransform: 'capitalize',
-                                                fontSize: '1.2rem',
+                                                fontSize: '1.0rem',
                                                 ':hover': { backgroundColor: 'transparent' },
-                                                marginLeft: '48px',
+
                                                 cursor: 'pointer',
                                                 color: anchorElUser
                                                     ? 'primary.main'
                                                     : theme.palette.grey[600],
                                             }}
                                         >
-                                            {' '}
-                                            Admin
-                                            <AdminPanelSettingsIcon fontSize="large" />
+                                            <AccountCircleIcon fontSize="large" />
                                         </Button>
                                     </Tooltip>
-                                    <Menu
-                                        sx={{ mt: '45px' }}
-                                        id="menu-appbar"
-                                        anchorEl={anchorElUser}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        keepMounted
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}
-                                    >
-                                        {settings.map((setting) => (
-                                            <>
-                                                <MenuItem
-                                                    key={setting.location}
-                                                    onClick={() => {
-                                                        if (setting.text === 'Logout') {
-                                                            handleSignOut();
-                                                        } else {
-                                                            adminLink(setting.location);
-                                                        }
-                                                    }}
-                                                >
-                                                    <Typography textAlign="center" marginTop="5px">
-                                                        {setting.text}
-                                                    </Typography>
-                                                </MenuItem>
-                                            </>
-                                        ))}
-                                        <Divider />
-                                        <MenuItem
-                                            onClick={() => {
-                                                handleSignOut();
+                                    {settings.map((setting) => (
+                                        <AdminMenu
+                                            sx={{
+                                                mt: '45px',
+                                                height: '300px',
+
+                                                ml: '20px',
                                             }}
+                                            key={setting.location}
+                                            id="menu-appbar"
+                                            anchorEl={anchorElUser}
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            keepMounted
+                                            transformOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            open={Boolean(anchorElUser)}
+                                            onClose={handleCloseUserMenu}
                                         >
-                                            <Typography textAlign="center" margin="10px 10px 0">
-                                                Log out
-                                            </Typography>
-                                        </MenuItem>
-                                    </Menu>
+                                            <MenuItem
+                                                onClick={() => {
+                                                    setAdminDropdownIsOpen(!adminDropdownIsOpen);
+                                                }}
+                                            >
+                                                <Typography textAlign="center" fontWeight="600">
+                                                    Admin
+                                                </Typography>
+                                            </MenuItem>
+                                            {adminDropdownIsOpen && (
+                                                <>
+                                                    {settings.map((setting) => (
+                                                        <MenuItem
+                                                            key={setting.location}
+                                                            onClick={() => {
+                                                                adminLink(setting.location);
+                                                            }}
+                                                        >
+                                                            <Typography
+                                                                sx={{ marginInline: '20px' }}
+                                                            >
+                                                                {setting.text}
+                                                            </Typography>
+                                                        </MenuItem>
+                                                    ))}
+                                                </>
+                                            )}
+                                            <Divider />
+                                            <MenuItem
+                                                sx={{
+                                                    pt: '10px',
+                                                    width: '100%',
+                                                }}
+                                                onClick={() => {
+                                                    handleSignOut();
+                                                }}
+                                            >
+                                                <Typography>Log out</Typography>
+                                            </MenuItem>
+                                        </AdminMenu>
+                                    ))}
                                 </Box>
                             </>
                         ) : (
