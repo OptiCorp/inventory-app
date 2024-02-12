@@ -1,8 +1,7 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Divider, Drawer } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -51,7 +50,7 @@ function ResponsiveAppBar() {
         <>
             <AppBar color="transparent" position="static" elevation={0}>
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+                    <Toolbar disableGutters>
                         <Button component={NavLink} to="/">
                             <img
                                 alt="logo"
@@ -171,7 +170,13 @@ function ResponsiveAppBar() {
                             </>
                         ) : (
                             <>
-                                <Box sx={{ flexGrow: 1, alignSelf: 'right' }}>
+                                <Box
+                                    sx={{
+                                        flexGrow: 1,
+                                        position: 'absolute',
+                                        right: '0',
+                                    }}
+                                >
                                     <Button
                                         style={{
                                             color: 'black',
