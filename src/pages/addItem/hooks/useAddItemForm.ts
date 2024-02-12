@@ -53,7 +53,6 @@ export const useAddItemForm = () => {
         reset,
         resetField,
         formState: { errors },
-
         register,
         trigger,
         setValue,
@@ -114,10 +113,21 @@ export const useAddItemForm = () => {
                         },
                     });
                 }
-                mutate({
-                    items,
-                    files: undefined,
-                });
+                mutate(
+                    {
+                        items,
+                        files: undefined,
+                    },
+                    {
+                        onSuccess: () => {
+                            reset({
+                                ...defaultValues,
+                                createdById: data.createdById,
+                            });
+                            setSnackbarText(`Template and item(s) added`);
+                        },
+                    }
+                );
             } else {
                 const numberOfItems = parseInt(data.numberOfItems);
                 const items: ItemSchema[] = [];
@@ -130,10 +140,21 @@ export const useAddItemForm = () => {
                         createdById: currentUser!.id,
                     });
                 }
-                mutate({
-                    items,
-                    files: undefined,
-                });
+                mutate(
+                    {
+                        items,
+                        files: undefined,
+                    },
+                    {
+                        onSuccess: () => {
+                            reset({
+                                ...defaultValues,
+                                createdById: data.createdById,
+                            });
+                            setSnackbarText(`Item(s) added`);
+                        },
+                    }
+                );
             }
         },
 
