@@ -52,6 +52,6 @@ export const SearchContainer = styled.div<Props>`
 export const SearchAndButton = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 32px;
     align-items: center;
-    margin: 16px;
 `;
