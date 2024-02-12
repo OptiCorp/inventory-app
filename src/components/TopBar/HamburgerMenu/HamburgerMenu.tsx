@@ -3,11 +3,13 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BusinessIcon from '@mui/icons-material/Business';
 import CategoryIcon from '@mui/icons-material/Category';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import LogoutIcon from '@mui/icons-material/Logout';
 import PlaceIcon from '@mui/icons-material/Place';
 import SearchIcon from '@mui/icons-material/Search';
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useNavigationControl from '../hooks/useNavigation';
 import { DropdownItem, HamburgerContainer } from './styles';
 
 type Props = {
@@ -20,7 +22,7 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
     const hamburgerLink = (location: string) => {
         navigate(location);
     };
-
+    const { handleSignOut } = useNavigationControl();
     const menuItems = [
         { location: 'search', icon: <SearchIcon fontSize="large" />, text: 'Find items' },
         { location: 'add-item', icon: <AddIcon fontSize="large" />, text: 'Add item' },
@@ -50,11 +52,11 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
     ];
 
     return (
-        <HamburgerContainer>
+        <HamburgerContainer sx={{ width: '200px' }}>
             <List>
                 {menuItems.map((item) => (
                     <React.Fragment key={item.location}>
-                        <ListItem>
+                        <ListItem sx={{ p: '0', marginTop: '1rem' }}>
                             <ListItemButton
                                 onClick={() => {
                                     if (item.location === 'admin') {
@@ -92,6 +94,19 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
                         )}
                     </React.Fragment>
                 ))}
+                <Divider />
+                <ListItem sx={{ height: '100px', width: '100%', p: '0' }}>
+                    <ListItemButton
+                        onClick={() => {
+                            handleSignOut();
+                        }}
+                    >
+                        <ListItemIcon>
+                            <LogoutIcon fontSize="large" />
+                        </ListItemIcon>
+                        <ListItemText>Log out</ListItemText>
+                    </ListItemButton>
+                </ListItem>
             </List>
         </HamburgerContainer>
     );
