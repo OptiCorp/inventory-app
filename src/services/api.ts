@@ -309,6 +309,10 @@ const apiService = () => {
         return await getByFetch(`Item/IsWpIdUnique/${id}`);
     };
 
+    const isSerialNumberUnique = async (serialNumber: string): Promise<boolean> => {
+        return await getByFetch(`Item/IsSerialNumberUnique/${serialNumber}`);
+    };
+
     const addList = async (list: AddList): Promise<Response> => {
         return await postByFetch(`List`, list);
     };
@@ -520,6 +524,7 @@ const apiService = () => {
         updateCategoryById,
         deleteCategory,
         isWpIdUnique,
+        isSerialNumberUnique,
         addDocument,
         getDocumentsByItemId,
         deleteDocument,
@@ -527,7 +532,6 @@ const apiService = () => {
         getItemTemplates,
         getItemTemplateById,
         updateItemTemplateById,
-
         addItemTemplate,
     };
 };

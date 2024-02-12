@@ -1,5 +1,5 @@
 import { useIsAuthenticated } from '@azure/msal-react';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
     Navigate,
@@ -33,6 +33,7 @@ import Index from './pages/listDetails/phone/Tabs';
 import { Login } from './pages/login/Login';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
+import React from 'react';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();

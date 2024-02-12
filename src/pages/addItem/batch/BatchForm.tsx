@@ -1,10 +1,15 @@
 import { useController, useFormContext } from 'react-hook-form';
-import { ItemSchema } from '../hooks/itemValidator';
-import { FormContainer } from '../styles';
-import { RadioWrapper, StyledInput } from './styles';
+import { ItemSchema } from '../hooks/itemValidator.ts';
+import { FormContainer } from '../styles.ts';
+import { RadioWrapper, StyledInput } from './styles.ts';
+import { TextField } from '@mui/material';
+import { useEffect } from 'react';
+import { ErrorMessage } from '@hookform/error-message';
+import { StyledErrorP } from '../../../components/AddItemFormFields/styles.ts';
+import React from 'react';
 
 const BatchForm = () => {
-    const { control } = useFormContext<ItemSchema>();
+    const { control, register, setValue } = useFormContext<ItemSchema>();
     const {
         field: { onChange, value },
         fieldState: { error },
@@ -12,6 +17,12 @@ const BatchForm = () => {
         control,
         name: 'isBatch',
     });
+
+    useEffect(() => {
+        if (!value) {
+            setValue('numberOfItems', '1');
+        }
+    }, []);
 
     return (
         <FormContainer>
@@ -43,6 +54,26 @@ const BatchForm = () => {
                     </p>
                 </RadioWrapper>
             </label>
+            {value && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <label>
+                        <strong>Number of items:</strong>
+                    </label>
+                    <ErrorMessage
+                        name="emptyAmount"
+                        render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                    />
+                    <TextField
+                        {...register('numberOfItems')}
+                        type="number"
+                        label="Amount"
+                        style={{ width: '80px' }}
+                        InputProps={{ sx: { borderRadius: 0 } }}
+                        inputProps={{ min: 1 }}
+                        placeholder="number of items"
+                    />
+                </div>
+            )}
         </FormContainer>
     );
 };

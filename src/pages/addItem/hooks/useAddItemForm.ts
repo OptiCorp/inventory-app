@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import AppContext from '../../../contexts/AppContext';
-
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { ItemTemplate } from '../../../services/apiTypes';
@@ -20,18 +19,20 @@ const defaultTemplate: TemplateSchema = {
 };
 
 const defaultValues: ItemSchema = {
-    wpId: '',
-    serialNumber: '',
+    wpId: [],
+    serialNumber: [],
     vendorId: '',
     locationId: '',
     itemTemplateId: '',
     comment: '',
     createdById: '',
     uniqueWpId: false,
+    uniqueSerialNumber: false,
     isBatch: false,
     preCheck: { check: false, comment: '' },
     documentation: false,
     itemTemplate: defaultTemplate,
+    numberOfItems: '',
 };
 
 export const useAddItemForm = () => {
@@ -52,7 +53,6 @@ export const useAddItemForm = () => {
         reset,
         resetField,
         formState: { errors },
-
         register,
         trigger,
         setValue,
@@ -88,56 +88,61 @@ export const useAddItemForm = () => {
         async (data) => {
             if (!selectedTemplate.id) {
                 const {
-                    id: itemtemplateId,
-                    category,
+                    id: itemTemplateId,
                     categoryId,
                     productNumber,
                     type,
                     description,
                 } = await templateSubmit();
 
+                const numberOfItems = parseInt(data.numberOfItems);
+                const items: ItemSchema[] = [];
+                for (let i = 0; i < numberOfItems; i++) {
+                    items.push({
+                        ...data,
+                        itemTemplateId,
+                        wpId: data.wpId[i] as unknown as string[],
+                        serialNumber: data.serialNumber[i] as unknown as string[],
+                        itemTemplate: {
+                            id: itemTemplateId,
+                            type,
+                            categoryId,
+                            productNumber,
+                            description,
+                            createdById: currentUser!.id,
+                        },
+                    });
+                }
                 mutate(
                     {
-                        items: [
-                            {
-                                ...data,
-                                createdById: currentUser?.id ?? '',
-                                itemTemplateId: itemtemplateId,
-                                itemTemplate: {
-                                    id: itemtemplateId,
-                                    type: type,
-                                    categoryId: categoryId,
-                                    productNumber: productNumber,
-                                    description: description,
-                                    createdById: currentUser?.id ?? '',
-                                },
-                            },
-                        ],
+                        items,
                         files: undefined,
                     },
-
                     {
                         onSuccess: () => {
                             reset({
                                 ...defaultValues,
                                 createdById: data.createdById,
                             });
-                            setSnackbarText(
-                                `Template ${category.name}: ${productNumber}  and item ${data.wpId} added`
-                            );
+                            setSnackbarText(`Template and item(s) added`);
                         },
                     }
                 );
             } else {
+                const numberOfItems = parseInt(data.numberOfItems);
+                const items: ItemSchema[] = [];
+                for (let i = 0; i < numberOfItems; i++) {
+                    items.push({
+                        ...data,
+                        itemTemplateId: data.itemTemplate.id,
+                        wpId: data.wpId[i] as unknown as string[],
+                        serialNumber: data.serialNumber[i] as unknown as string[],
+                        createdById: currentUser!.id,
+                    });
+                }
                 mutate(
                     {
-                        items: [
-                            {
-                                ...data,
-                                createdById: currentUser?.id ?? '',
-                                itemTemplateId: selectedTemplate.id,
-                            },
-                        ],
+                        items,
                         files: undefined,
                     },
                     {
@@ -146,8 +151,7 @@ export const useAddItemForm = () => {
                                 ...defaultValues,
                                 createdById: data.createdById,
                             });
-
-                            setSnackbarText(`item ${data.wpId} added`);
+                            setSnackbarText(`Item(s) added`);
                         },
                     }
                 );

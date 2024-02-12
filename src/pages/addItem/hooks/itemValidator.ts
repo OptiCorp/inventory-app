@@ -13,8 +13,8 @@ const templateSchema = z.object({
 export const itemSchema = z.object({
     itemTemplate: templateSchema,
     itemTemplateId: z.string(),
-    wpId: z.string().min(1, 'WellPartner ID is required'),
-    serialNumber: z.string().min(1, 'Serial number is required'),
+    wpId: z.array(z.string()),
+    serialNumber: z.array(z.string()),
     vendorId: z.string().min(1, 'Vendor is required'),
     comment: z.string().nullish(),
     isBatch: z.boolean(),
@@ -38,7 +38,9 @@ export const itemSchema = z.object({
     parentId: z.string().nullish(),
     createdById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
+    uniqueSerialNumber: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),
+    numberOfItems: z.string(),
 });
 
 export type ItemSchema = z.infer<typeof itemSchema>;
