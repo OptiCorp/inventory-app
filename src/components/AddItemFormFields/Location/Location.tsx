@@ -2,12 +2,12 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Autocomplete, TextField } from '@mui/material';
 import { useController, useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
-import { Location as LocationType } from '../../../services/apiTypes.ts';
-import { useGetLocations } from '../../../services/hooks/locations/useGetLocations.tsx';
-import { ToolTip } from '../../ToolTip/ToolTip.tsx';
+import { Location as LocationType } from '../../../services/apiTypes';
+import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
+import { ToolTip } from '../../ToolTip/ToolTip';
 
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
 
 export const Location = () => {
     const { data: categories = [] } = useGetLocations();

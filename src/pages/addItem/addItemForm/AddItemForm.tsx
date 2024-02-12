@@ -1,7 +1,7 @@
-import { Button } from '../../../components/Button/Button.tsx';
-import { ButtonWrapper, FormContainer } from '../styles.ts';
+import { Button } from '../../../components/Button/Button';
+import { ButtonWrapper, FormContainer } from '../styles';
 
-import { FormContent } from './FormContent.tsx';
+import { FormContent } from './FormContent';
 
 export const AddItemForm = () => {
     return (

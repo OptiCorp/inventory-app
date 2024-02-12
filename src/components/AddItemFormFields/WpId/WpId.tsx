@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { useDebounce } from 'usehooks-ts';
-import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique.tsx';
-import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
-import { StyledParagraph } from './styles.ts';
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
+import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
+import { ToolTip } from '../../ToolTip/ToolTip';
+import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
+import { StyledParagraph } from './styles';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
+import React from 'react';
 
 type WpIdProps = {
     index?: number;

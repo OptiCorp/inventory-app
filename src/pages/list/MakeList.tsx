@@ -1,19 +1,17 @@
 import TextField from '@mui/material/TextField';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button } from '../../components/Button/Button.tsx';
-import CustomDialog from '../../components/CustomDialog/CustomDialog.tsx';
-import ListCard from '../../components/ListCard/ListCard.tsx';
-import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import AppContext from '../../contexts/AppContext.tsx';
-import { useSnackBar } from '../../hooks/useSnackbar.tsx';
-import { Item, List } from '../../services/apiTypes.ts';
-
-import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
-import { useAddList } from '../../services/hooks/list/useAddList.tsx';
-import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId.tsx';
-import { SearchContainer } from '../search/styles.ts';
-import { FlexWrapper, SearchAndButton } from './styles.ts';
+import { Button } from '../../components/Button/Button';
+import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
+import { ListCard } from '../../components/ListCard/ListCard';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import AppContext from '../../contexts/AppContext';
+import { Item, List } from '../../services/apiTypes';
+import { useAddList } from '../../services/hooks/list/useAddList';
+import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId';
+import { SearchContainer } from '../search/styles';
+import { FlexWrapper, SearchAndButton } from './styles';
 
 const MakeList = () => {
     const { currentUser } = useContext(AppContext);
@@ -25,7 +23,7 @@ const MakeList = () => {
     const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id);
 
     const { mutate } = useAddList();
-    const { snackbar } = useSnackBar();
+
     useEffect(() => {
         setSearchTerm((prev) => searchParam ?? prev);
     }, [searchParam]);
@@ -95,7 +93,6 @@ const MakeList = () => {
                     ))}
                 </FlexWrapper>
             </SearchContainer>
-            {snackbar}
         </>
     );
 };

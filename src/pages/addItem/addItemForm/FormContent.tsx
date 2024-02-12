@@ -13,8 +13,9 @@ import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
 import { v4 as uuid } from 'uuid';
 import AppContext from '../../../contexts/AppContext';
 import { ItemSchema } from '../hooks/itemValidator';
-import CustomDialog from '../../../components/CustomDialog/CustomDialog';
+import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
 import { Edit, LabelContainer } from '../../itemDetails/itemInfo/styles';
+import React from 'react';
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);

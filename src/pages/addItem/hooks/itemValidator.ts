@@ -19,10 +19,10 @@ export const itemSchema = z.object({
     comment: z.string().nullish(),
     isBatch: z.boolean(),
     preCheck: z.object({
-        check: z.boolean().refine((value) => value),
+        check: z.boolean().refine((value) => value, 'Required '),
         comment: z.string(),
     }),
-    documentation: z.boolean().refine((value) => value),
+    documentation: z.boolean().refine((value) => value, 'Required'),
     documents: z
         .array(
             z.object({

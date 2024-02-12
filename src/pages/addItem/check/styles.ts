@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '../../../style/GlobalStyles.ts';
+import { COLORS } from '../../../style/GlobalStyles';
 
 export const ButtonWrap = styled.div`
     display: flex;

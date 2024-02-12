@@ -6,6 +6,7 @@ import { TextField } from '@mui/material';
 import { useEffect } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
 import { StyledErrorP } from '../../../components/AddItemFormFields/styles.ts';
+import React from 'react';
 
 const BatchForm = () => {
     const { control, register, setValue } = useFormContext<ItemSchema>();

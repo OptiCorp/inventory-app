@@ -1,17 +1,17 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { List } from '../../services/apiTypes.ts';
+import { List } from '../../services/apiTypes';
 
-import { useDeleteList } from '../../services/hooks/list/useDeleteList.tsx';
-import CustomDialog from '../CustomDialog/CustomDialog.tsx';
-import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles.ts';
+import { useDeleteList } from '../../services/hooks/list/useDeleteList';
+import { CustomDialog } from '../CustomDialog/CustomDialog';
+import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles';
 
 type Props = {
     item: List;
 };
 
-const ListCard = ({ item }: Props) => {
+export const ListCard = ({ item }: Props) => {
     const navigate = useNavigate();
     const { mutate } = useDeleteList();
     const [open, setOpen] = useState(false);
@@ -60,5 +60,3 @@ const ListCard = ({ item }: Props) => {
         </>
     );
 };
-
-export default ListCard;

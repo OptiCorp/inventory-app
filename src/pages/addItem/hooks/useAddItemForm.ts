@@ -3,9 +3,9 @@ import { useContext, useEffect } from 'react';
 import AppContext from '../../../contexts/AppContext';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
-import { ItemTemplate } from '../../../services/apiTypes.ts';
-import { useAddItems } from '../../../services/hooks/items/useAddItem.tsx';
-import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate.tsx';
+import { ItemTemplate } from '../../../services/apiTypes';
+import { useAddItems } from '../../../services/hooks/items/useAddItem';
+import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate';
 import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator';
 
 const defaultTemplate: TemplateSchema = {
@@ -36,7 +36,7 @@ const defaultValues: ItemSchema = {
 };
 
 export const useAddItemForm = () => {
-    const { currentUser } = useContext(AppContext);
+    const { currentUser, setSnackbarText } = useContext(AppContext);
     const { mutate } = useAddItems();
     const appLocation = useLocation();
 
@@ -53,6 +53,7 @@ export const useAddItemForm = () => {
         reset,
         resetField,
         formState: { errors },
+
         register,
         trigger,
         setValue,
@@ -96,7 +97,7 @@ export const useAddItemForm = () => {
                 } = await templateSubmit();
 
                 const numberOfItems = parseInt(data.numberOfItems);
-                const items = [];
+                const items: ItemSchema[] = [];
                 for (let i = 0; i < numberOfItems; i++) {
                     items.push({
                         ...data,
@@ -119,7 +120,7 @@ export const useAddItemForm = () => {
                 });
             } else {
                 const numberOfItems = parseInt(data.numberOfItems);
-                const items = [];
+                const items: ItemSchema[] = [];
                 for (let i = 0; i < numberOfItems; i++) {
                     items.push({
                         ...data,
@@ -141,7 +142,6 @@ export const useAddItemForm = () => {
 
     const onSubmitTyped: (e?: React.BaseSyntheticEvent<object> | undefined) => Promise<void> =
         onSubmit;
-
     return {
         methods,
         onSubmitTyped,

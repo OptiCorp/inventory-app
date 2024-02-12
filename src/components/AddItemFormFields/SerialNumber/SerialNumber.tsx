@@ -9,6 +9,7 @@ import { useIsSerialNumberUnique } from '../../../services/hooks/items/useIsSeri
 import { useDebounce } from 'usehooks-ts';
 import { useEffect, useState } from 'react';
 import { StyledParagraph } from '../WpId/styles.ts';
+import React from 'react';
 
 type SerialNumberProps = {
     serialNumber?: string;

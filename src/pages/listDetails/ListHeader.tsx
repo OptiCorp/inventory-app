@@ -3,9 +3,9 @@ import { useContext, useState } from 'react';
 
 import { Chip, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import CustomDialog from '../../components/CustomDialog/CustomDialog';
+import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import AppContext from '../../contexts/AppContext';
-import { useSnackBar, useWindowDimensions } from '../../hooks';
+import { useWindowDimensions } from '../../hooks';
 import { List, UpdateList } from '../../services/apiTypes';
 import { useDeleteList } from '../../services/hooks/list/useDeleteList';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList';
@@ -34,7 +34,6 @@ export const ListHeader = ({ list }: Props) => {
     const [openEdit, setOpenEdit] = useState(false);
     const { mutate } = useDeleteList();
     const { mutate: updateList } = useUpdateList(list.id);
-    const { snackbar } = useSnackBar();
 
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
@@ -157,7 +156,6 @@ export const ListHeader = ({ list }: Props) => {
                     variant="standard"
                 />
             </CustomDialog>
-            {snackbar}
         </>
     );
 };
