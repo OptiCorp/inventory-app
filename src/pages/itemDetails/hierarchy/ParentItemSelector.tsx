@@ -122,7 +122,7 @@ export const ParentItemSelector = ({
                     </LabelContainer>
 
                     <StyledContainer>
-                        <StyledLinkElement onClick={() => navigate(`/${item.parent?.id}`)}>
+                        <StyledLinkElement onClick={() => navigate(`/item/${item.parent?.id}`)}>
                             {item.parent?.wpId}
                         </StyledLinkElement>
                         {isOpen.parent && item.parent?.id && (
