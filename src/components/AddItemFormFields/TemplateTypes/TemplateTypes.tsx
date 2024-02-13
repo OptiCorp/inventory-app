@@ -27,7 +27,9 @@ export const Type: FC = () => {
         name: 'itemTemplate.type',
     });
 
-    const selectedType = options.find((option) => option.label === value);
+    const selectedType = options.find(
+        (option) => option.label.toLowerCase() === value.toLowerCase()
+    );
 
     return (
         <>
