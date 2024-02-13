@@ -23,7 +23,7 @@ const ItemCard = ({ item, icon }: ItemCardProps) => {
 
     const handleClick = () => {
         if (location.pathname.includes('make-list')) return;
-        navigate(`/${item.id}`);
+        navigate(`/item/${item.id}`);
     };
 
     const cursorStyle =

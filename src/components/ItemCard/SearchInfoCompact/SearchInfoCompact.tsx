@@ -36,8 +36,8 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
 
-    const handleAdd = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation();
+    const handleAdd = (event: React.MouseEvent, ids: MutateItemList) => {
+        event.stopPropagation();
         const alreadyAdded = list?.items.some((item) => item.id === item.id);
         if (alreadyAdded) {
             {
@@ -59,8 +59,8 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
         });
         handleClose();
     };
-    const handleDelete = (e: React.MouseEvent, ids: MutateItemList) => {
-        e.stopPropagation();
+    const handleDelete = (event: React.MouseEvent, ids: MutateItemList) => {
+        event.stopPropagation();
         mutateRemoveItemFromList(ids, {
             onSuccess: (removeData) => {
                 setSnackbarText(`${item.wpId} was removed`);
@@ -73,8 +73,8 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
         });
         handleClose();
     };
-    const handleClickOpen = (e: React.MouseEvent) => {
-        e.stopPropagation();
+    const handleClickOpen = (event: React.MouseEvent) => {
+        event.stopPropagation();
         setOpen(true);
     };
     const handleClose = () => {
@@ -129,7 +129,7 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                         <Button
                             component={NavLink}
                             to={`/${item.id}`}
-                            onClick={() => navigate(`/${item.id}`)}
+                            onClick={() => navigate(`/item/${item.id}`)}
                         >
                             Show more
                         </Button>
@@ -160,8 +160,8 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                 open={open}
                 onClose={handleClose}
                 CancelButtonOnClick={handleClose}
-                SubmitButtonOnClick={(e) =>
-                    handleDelete(e, {
+                SubmitButtonOnClick={(event: React.MouseEvent) =>
+                    handleDelete(event, {
                         itemId: item.id,
                         listId: listId!,
                     })
