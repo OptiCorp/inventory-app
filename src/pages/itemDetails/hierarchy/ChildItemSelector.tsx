@@ -102,7 +102,9 @@ export const ChildItemSelector = ({
                     {item.children?.map((childItem) => {
                         return (
                             <ChildItemContainer key={childItem.wpId}>
-                                <StyledLinkElement onClick={() => navigate(`/${childItem.id}`)}>
+                                <StyledLinkElement
+                                    onClick={() => navigate(`/item/${childItem.id}`)}
+                                >
                                     {childItem.wpId}
                                 </StyledLinkElement>
 

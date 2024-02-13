@@ -43,12 +43,15 @@ const ItemDetails = () => {
                 <BreadcrumbsMargin>
                     <Breadcrumbs>
                         <BreadcrumbLink
-                            onClick={() => navigate(`/${item.parentId}`)}
+                            onClick={() => navigate(`/item/${item.parentId}`)}
                             underline="none"
                         >
                             {parentItem?.itemTemplate?.type}: {item.parent?.wpId}
                         </BreadcrumbLink>
-                        <BreadcrumbLink onClick={() => navigate(`/${item.id}`)} underline="none">
+                        <BreadcrumbLink
+                            onClick={() => navigate(`/item/${item.id}`)}
+                            underline="none"
+                        >
                             {item.itemTemplate.type}: {item.wpId}
                         </BreadcrumbLink>
                     </Breadcrumbs>

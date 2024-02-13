@@ -51,8 +51,8 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                             <StyledAddIcon
                                 alreadyAdded={alreadyAdded}
                                 active={addItemSuccess}
-                                onClick={(e) =>
-                                    handleAdd(e, {
+                                onClick={(event) =>
+                                    handleAdd(event, {
                                         itemId: item.id,
                                         listId: listId!,
                                     })
@@ -70,7 +70,7 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                     {location.pathname.includes('/make-list') && (
                         <StyledInfoIcon
                             onClick={() => {
-                                navigate(`/${item.id}`);
+                                navigate(`/item/${item.id}`);
                             }}
                         ></StyledInfoIcon>
                     )}
@@ -89,8 +89,8 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                 open={open}
                 onClose={handleClose}
                 CancelButtonOnClick={handleClose}
-                SubmitButtonOnClick={(e) =>
-                    handleDelete(e, {
+                SubmitButtonOnClick={(event: React.MouseEvent) =>
+                    handleDelete(event, {
                         itemId: item.id,
                         listId: listId!,
                     })

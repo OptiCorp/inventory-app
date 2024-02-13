@@ -82,7 +82,7 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                         <Button
                             component={NavLink}
                             to={`/${item.id}`}
-                            onClick={() => navigate(`/${item.id}`)}
+                            onClick={() => navigate(`/item/${item.id}`)}
                         >
                             Show more
                         </Button>
@@ -113,8 +113,8 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                 open={open}
                 onClose={handleClose}
                 CancelButtonOnClick={handleClose}
-                SubmitButtonOnClick={(e) =>
-                    handleDelete(e, {
+                SubmitButtonOnClick={(event: React.MouseEvent) =>
+                    handleDelete(event, {
                         itemId: item.id,
                         listId: listId!,
                     })

@@ -47,7 +47,7 @@ function App() {
                 <Route path="/find-items" element={<Search />} />
                 <Route path="search/:searchParam?" element={<Search />} />
 
-                <Route path=":id" element={<ItemDetails />} />
+                <Route path="item/:id" element={<ItemDetails />} />
                 <Route path="add-item" element={<AddItem />}>
                     <Route index element={<RecentlyAdded />} />
                     <Route path="batch" element={<BatchForm />} />

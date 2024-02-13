@@ -19,7 +19,7 @@ const SearchResultCard = ({ item, icon }: Props) => {
                     cursor: `${location.pathname.includes(`/makelist`) ? null : `pointer`}`,
                 }}
                 onClick={() => {
-                    location.pathname.includes('/makelist') ? null : navigate(`/${item.id}`);
+                    location.pathname.includes('/makelist') ? null : navigate(`/item/${item.id}`);
                 }}
             >
                 <StyledSearchCard title="">

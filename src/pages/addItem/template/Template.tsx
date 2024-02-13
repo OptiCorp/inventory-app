@@ -42,7 +42,11 @@ export default function Template() {
                         }}
                         id="free-solo-dialog-demo"
                         selectOnFocus
-                        getOptionLabel={(option) => option?.id}
+                        getOptionLabel={(option) =>
+                            `${
+                                option?.revision ? `${option.revision}-` : ''
+                            }${option?.productNumber}`
+                        }
                         clearOnBlur
                         handleHomeEndKeys
                         sx={{ width: '100%' }}
@@ -53,7 +57,9 @@ export default function Template() {
                         renderOption={(props, option) => {
                             return (
                                 <Box component="li" {...props} key={option?.id}>
-                                    {option?.id}
+                                    {`${
+                                        option?.revision ? `${option.revision}-` : ''
+                                    }${option?.productNumber}`}
                                 </Box>
                             );
                         }}
