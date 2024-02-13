@@ -68,7 +68,7 @@ export const SideList = ({ item }: Props) => {
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>Category</StyledTitle>
-                        <StyledText>{itemTemplateData?.category.name} </StyledText>
+                        <StyledText>{itemTemplateData?.category?.name ?? ''} </StyledText>
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>Vendor</StyledTitle>
