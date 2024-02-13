@@ -46,8 +46,9 @@ export const StyledTitle = styled.p`
 `;
 
 export const StyledText = styled.p`
-    margin: 0px;
+    margin: 0;
     display: flex;
+    width: max-content;
 `;
 
 export const StyledContainer = styled.div`

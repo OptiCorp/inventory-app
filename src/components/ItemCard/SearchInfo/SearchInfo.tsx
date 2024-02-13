@@ -75,8 +75,8 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                         ></StyledInfoIcon>
                     )}
                     <StyledContent>
-                        <StyledTitle>Location</StyledTitle>
-                        <StyledText>{item.location?.name ?? 'Location'}</StyledText>
+                        <StyledTitle>Vendor</StyledTitle>
+                        <StyledText>{item.vendor?.name}</StyledText>
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>Category</StyledTitle>
