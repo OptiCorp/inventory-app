@@ -34,6 +34,9 @@ export const StyledContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4px;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
 `;
 
 export const StyledTitle = styled.p`

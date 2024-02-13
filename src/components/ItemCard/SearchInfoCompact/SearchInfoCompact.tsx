@@ -38,7 +38,7 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
 
     const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
     const { data: itemm } = useGetItemById(item.id);
-    console.log(itemm);
+
     return (
         <>
             <StyledItemCardCompactContainer>
@@ -49,23 +49,18 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                     }}
                 >
                     <AccordionSummary
-                        style={{
-                            display: 'flex',
-                            minWidth: '300px',
-                            gap: '16px',
-                        }}
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
                         <StyledCompactBox>
                             <StyledCompactContent>
-                                <StyledCompactTitle>ID:</StyledCompactTitle>
+                                <StyledCompactTitle>ID</StyledCompactTitle>
                                 <StyledCompactText>{item.wpId}</StyledCompactText>
                             </StyledCompactContent>
                             <StyledCompactContent>
-                                <StyledCompactTitle>Location</StyledCompactTitle>
-                                <StyledCompactText>{itemm?.location?.name ?? ''}</StyledCompactText>
+                                <StyledCompactTitle>Vendor</StyledCompactTitle>
+                                <StyledCompactText>{itemm?.vendor?.name ?? ''}</StyledCompactText>
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Category</StyledCompactTitle>
