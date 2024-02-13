@@ -3,6 +3,10 @@ import { z } from 'zod';
 const templateSchema = z.object({
     id: z.string(),
     inputValue: z.string().nullish(),
+    category: z.object({
+        id: z.string(),
+        name: z.string(),
+    }),
     type: z.string().min(1, 'type is required'),
     categoryId: z.string().min(1, 'category is required'),
     productNumber: z.string().min(1, 'Product number is required'),

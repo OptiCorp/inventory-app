@@ -12,7 +12,9 @@ import {
 import AppContext from '../../../contexts/AppContext';
 import { Item, MutateItemList } from '../../../services/apiTypes';
 import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
+import { useGetItemById } from '../../../services/hooks/items/useGetItemById';
 import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
+import { useGetItemTemplateById } from '../../../services/hooks/template/useGetItemTemplateById';
 import { RemoveIcon, Wrapper } from './styles';
 
 type Props = {
@@ -54,7 +56,8 @@ export const SideList = ({ item }: Props) => {
     const handleClickOpen = () => {
         setOpen(true);
     };
-
+    const { data: itemTemplateData } = useGetItemTemplateById(item?.itemTemplate?.id);
+    const { data: itemm } = useGetItemById(item.id);
     return (
         <>
             <>
@@ -64,12 +67,12 @@ export const SideList = ({ item }: Props) => {
                         <StyledText>{item.serialNumber}</StyledText>
                     </StyledContent>
                     <StyledContent>
-                        <StyledTitle>Location</StyledTitle>
-                        <StyledText>{item.location?.name || 'Stavanger'}</StyledText>
+                        <StyledTitle>Category</StyledTitle>
+                        <StyledText>{itemTemplateData?.category.name} </StyledText>
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>Vendor</StyledTitle>
-                        <StyledText>{item.vendor?.name || 'Vendor'}</StyledText>
+                        <StyledText>{itemm?.vendor.name ?? ''}</StyledText>
                     </StyledContent>
                     <StyleIcons>
                         <RemoveIcon onClick={handleClickOpen} />
