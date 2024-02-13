@@ -10,7 +10,7 @@ export const StyledDescriptionParagraph = styled.p`
     -webkit-line-clamp: 5;
 `;
 
-export const StyledSecondInfoBox = styled.div`
+export const StyledInfoBox = styled.div`
     margin-top: 16px;
     margin-bottom: 16px;
     padding-left: 16px;

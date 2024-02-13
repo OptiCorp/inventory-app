@@ -9,7 +9,7 @@ import {
     StyledContainer,
     StyledContent,
     StyledDescriptionParagraph,
-    StyledSecondInfoBox,
+    StyledInfoBox,
     StyledText,
     StyledTitle,
 } from './styles';
@@ -40,11 +40,11 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                         <StyledText>{item.itemTemplate?.productNumber}</StyledText>
                     </StyledContent>
                 </StyledBox>
-                <StyledSecondInfoBox>
+                <StyledInfoBox>
                     <StyledDescriptionParagraph>
                         {item.itemTemplate?.description}
                     </StyledDescriptionParagraph>
-                </StyledSecondInfoBox>
+                </StyledInfoBox>
                 <StyledBox>
                     <>
                         {icon === 'add' ? (
