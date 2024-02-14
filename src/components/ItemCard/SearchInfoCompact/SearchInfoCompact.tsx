@@ -76,7 +76,7 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                     <AccordionActions>
                         <Button
                             component={NavLink}
-                            to={`/${item.id}`}
+                            to={`/item/${item.id}`}
                             onClick={() => navigate(`/item/${item.id}`)}
                         >
                             Show more
