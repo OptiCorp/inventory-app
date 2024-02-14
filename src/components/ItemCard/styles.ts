@@ -2,8 +2,6 @@ import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
 
 export const StyledItemCardContainer = styled.div`
-    /* margin: 16px;
-    padding: 4px; */
     width: 550px;
     margin-inline: auto;
 `;

@@ -64,12 +64,12 @@ export const SideList = ({ item }: Props) => {
                         <StyledText>{item.serialNumber}</StyledText>
                     </StyledContent>
                     <StyledContent>
-                        <StyledTitle>Location</StyledTitle>
-                        <StyledText>{item.location?.name || 'Stavanger'}</StyledText>
+                        <StyledTitle>Category</StyledTitle>
+                        <StyledText>{item.itemTemplate.category.name ?? ''} </StyledText>
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>Vendor</StyledTitle>
-                        <StyledText>{item.vendor?.name || 'Vendor'}</StyledText>
+                        <StyledText>{item?.vendor?.name ?? ''}</StyledText>
                     </StyledContent>
                     <StyleIcons>
                         <RemoveIcon onClick={handleClickOpen} />

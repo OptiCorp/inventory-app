@@ -54,7 +54,6 @@ export const PhoneList = ({ list }: Props) => {
                                         item={item}
                                         icon={'remove'}
                                     />
-                                    // <SideList item={item} key={item.id} />
                                 ))}
                             </ListContainerCompact>
                         ) : null}

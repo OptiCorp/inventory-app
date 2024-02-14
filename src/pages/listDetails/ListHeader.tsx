@@ -90,11 +90,11 @@ export const ListHeader = ({ list }: Props) => {
         <>
             {width > 800 ? (
                 <Header>
+                    <ListTitle>{list.title}</ListTitle>
                     <Wrapper>
                         <StyledDate>
                             {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
                         </StyledDate>
-                        <ListTitle>{list.title}</ListTitle>
                     </Wrapper>
                     <FlexContainer>
                         <IconContainer>
@@ -114,11 +114,11 @@ export const ListHeader = ({ list }: Props) => {
             ) : (
                 <>
                     <WrapperCompact>
+                        <ListTitle>{list.title}</ListTitle>
                         <Wrapper>
                             <StyledDate>
                                 {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
                             </StyledDate>
-                            <ListTitle>{list.title}</ListTitle>
                         </Wrapper>
                         <IconContainerCompact>
                             <IconContainer onClick={(e) => handleOpenEdit(e)}>

@@ -87,6 +87,7 @@ export const IconContainer = styled.div``;
 
 export const ListTitle = styled.h3`
     font-weight: 600;
+    display: inline-flex;
 
     width: 100%;
     font-size: 1.2rem;
