@@ -134,24 +134,19 @@ function ResponsiveAppBar() {
                                                     Admin
                                                 </Typography>
                                             </MenuItem>
-                                            {adminDropdownIsOpen && (
-                                                <>
-                                                    {settings.map((setting) => (
-                                                        <MenuItem
-                                                            key={setting.location}
-                                                            onClick={() => {
-                                                                adminLink(setting.location);
-                                                            }}
-                                                        >
-                                                            <Typography
-                                                                sx={{ marginInline: '20px' }}
-                                                            >
-                                                                {setting.text}
-                                                            </Typography>
-                                                        </MenuItem>
-                                                    ))}
-                                                </>
-                                            )}
+                                            {adminDropdownIsOpen &&
+                                                settings.map((setting) => (
+                                                    <MenuItem
+                                                        key={setting.location}
+                                                        onClick={() => {
+                                                            adminLink(setting.location);
+                                                        }}
+                                                    >
+                                                        <Typography sx={{ marginInline: '20px' }}>
+                                                            {setting.text}
+                                                        </Typography>
+                                                    </MenuItem>
+                                                ))}
                                             <Divider />
                                             <MenuItem
                                                 sx={{

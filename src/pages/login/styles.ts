@@ -19,7 +19,6 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const BackgroundContainer = styled.div`
-    background-image: url('/phoneBackground.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
