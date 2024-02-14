@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../../components/Button/Button';
 import ItemCard from '../../../components/ItemCard/ItemCard';
 import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 import { Item } from '../../../services/apiTypes';
 import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser';
 import { Container, CardContainer, RecentlyAddedContainer } from './styles';
+import { Button } from '@mui/material';
 
 const RecentlyAdded = () => {
     const { width } = useWindowDimensions();
@@ -18,7 +18,7 @@ const RecentlyAdded = () => {
         <RecentlyAddedContainer>
             <Container>
                 <h3>Recently added by you</h3>
-                <Button onClick={() => navigate('batch')} variant="black">
+                <Button onClick={() => navigate('batch')} variant="contained">
                     Add new item
                 </Button>
             </Container>

@@ -70,16 +70,15 @@ export const FormContent = () => {
                     {wpIds.map((wpId, index) => {
                         const fieldName = `wpId[${index}]`;
                         return (
-                            <>
-                                <WpId
-                                    wpId={wpId}
-                                    fieldName={fieldName}
-                                    isPlainText
-                                    onChange={(value: string) =>
-                                        handleChange(wpIds, index, value, setWpIds)
-                                    }
-                                />
-                            </>
+                            <WpId
+                                key={index}
+                                wpId={wpId}
+                                fieldName={fieldName}
+                                isPlainText
+                                onChange={(value: string) =>
+                                    handleChange(wpIds, index, value, setWpIds)
+                                }
+                            />
                         );
                     })}
                 </div>
