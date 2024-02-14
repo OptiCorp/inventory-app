@@ -461,9 +461,10 @@ const apiService = () => {
 
     const updateItemTemplateById = async (
         id: string,
-        itemTemplate: TemplateSchema
+        itemTemplate: TemplateSchema,
+        updatedById: string
     ): Promise<Response> => {
-        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
+        return await putByFetch(`ItemTemplate/${id}?updatedById=${updatedById}`, itemTemplate);
     };
 
     const getItemTemplates = async (): Promise<TemplateSchema[]> => {

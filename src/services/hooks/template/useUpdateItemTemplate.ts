@@ -6,15 +6,16 @@ export type UpdateItemTemplate = {
     itemTemplate: TemplateSchema;
 };
 
-export const useUpdateItemTemplate = (id: string) => {
+export const useUpdateItemTemplate = (id: string, updatedById: string) => {
     const api = apiService();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (itemTemplate: TemplateSchema) => api.updateItemTemplateById(id, itemTemplate),
+        mutationFn: (itemTemplate: TemplateSchema) =>
+            api.updateItemTemplateById(id, itemTemplate, updatedById),
         onSuccess: () => {
             queryClient
                 .invalidateQueries({
-                    queryKey: ['itemTemplate'],
+                    queryKey: ['itemTemplate', id],
                 })
                 .catch((error) => {
                     console.error(console.error('Failed to invalidate queries: ', error));
