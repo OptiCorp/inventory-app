@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CustomDialog } from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
 import { ItemCardProps } from '../ItemCard';
-
 import { useCardActions } from '../hooks/useCardActions';
 import {
     StyledBox,

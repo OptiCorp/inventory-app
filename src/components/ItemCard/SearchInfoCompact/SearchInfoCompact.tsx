@@ -7,8 +7,6 @@ import {
     Button,
 } from '@mui/material';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
-import { useGetItemById } from '../../../services/hooks/items/useGetItemById';
-import { useGetItemTemplateById } from '../../../services/hooks/template/useGetItemTemplateById';
 import { CustomDialog } from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles';
 import { ItemCardProps } from '../ItemCard';
@@ -36,9 +34,6 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
         open,
     } = useCardActions({ item: item });
 
-    const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
-    const { data: itemById } = useGetItemById(item.id);
-
     return (
         <>
             <StyledItemCardCompactContainer>
@@ -60,14 +55,12 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Vendor</StyledCompactTitle>
-                                <StyledCompactText>
-                                    {itemById?.vendor?.name ?? ''}
-                                </StyledCompactText>
+                                <StyledCompactText>{item?.vendor?.name ?? ''}</StyledCompactText>
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Category</StyledCompactTitle>
                                 <StyledCompactText>
-                                    {itemTemplateData?.category?.name}
+                                    {item?.itemTemplate?.category?.name}
                                 </StyledCompactText>
                             </StyledCompactContent>
                         </StyledCompactBox>
