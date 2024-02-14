@@ -4,6 +4,7 @@ import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 
+import { Box } from '@mui/material';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
@@ -44,12 +45,13 @@ export const AddMoreCompact = () => {
     return (
         <>
             <PhoneListTitle>Add items</PhoneListTitle>
-
-            <SearchBar
-                setSearchTerm={setSearchTerm}
-                searchTerm={searchTerm}
-                placeholder={'Search for ID, serial number or description'}
-            />
+            <Box padding="0 16px">
+                <SearchBar
+                    setSearchTerm={setSearchTerm}
+                    searchTerm={searchTerm}
+                    placeholder={'Search for ID, serial number or description'}
+                />
+            </Box>
             <PhoneContainer>
                 {items?.pages.map((page, i) =>
                     page.map((item, index) => (
@@ -64,7 +66,7 @@ export const AddMoreCompact = () => {
                             <SearchResultCardCompact item={item} icon={'add'} />
                         </div>
                     ))
-                )}
+                )}{' '}
             </PhoneContainer>
 
             {(isLoading || isFetching) && <GlobalSpinner />}

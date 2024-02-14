@@ -1,11 +1,12 @@
 import { Breadcrumbs, Button } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import { Comments } from '../../components/ItemDetails/CommentForm/CommentForm';
 import { ExampleUpload } from '../../components/Upload/Upload';
 import UploadMobile from '../../components/Upload/UploadMobile/UploadMobile';
+import AppContext from '../../contexts/AppContext';
 import { useWindowDimensions } from '../../hooks';
 import { useDeleteItemById } from '../../services/hooks/items/useDeleteItemById';
 import { useGetItemById } from '../../services/hooks/items/useGetItemById';
@@ -25,7 +26,7 @@ const ItemDetails = () => {
     const { data: parentItem } = useGetItemById(item?.parentId ?? '');
     const { mutate: deleteItem } = useDeleteItemById(item?.id ?? '');
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     if (!item) return null;
 
     const handleClose = () => {
@@ -33,8 +34,18 @@ const ItemDetails = () => {
     };
     const handleDelete = () => {
         setIsOpen(false);
-        deleteItem();
-        navigate('/');
+
+        deleteItem(item.id, {
+            onSuccess: (removeData) => {
+                setSnackbarText(`${item.wpId} was deleted`);
+
+                if (removeData.status >= 400) {
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${removeData.statusText}, please try again.`);
+                }
+                navigate('/');
+            },
+        });
     };
 
     return (

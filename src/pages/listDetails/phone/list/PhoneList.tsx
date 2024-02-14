@@ -57,7 +57,7 @@ export const PhoneList = ({ list }: Props) => {
                                 ))}
                             </ListContainerCompact>
                         ) : null}
-                        »
+
                         <ButtonWrapCompact>
                             <Button variant="white">Export</Button>
                             <Button variant="black" onClick={handleSave}>
