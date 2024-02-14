@@ -1,7 +1,6 @@
 import TextField from '@mui/material/TextField';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button } from '../../components/Button/Button';
 import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
 import { ListCard } from '../../components/ListCard/ListCard';
@@ -12,6 +11,7 @@ import { useAddList } from '../../services/hooks/list/useAddList';
 import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId';
 import { SearchContainer } from '../search/styles';
 import { FlexWrapper, SearchAndButton } from './styles';
+import { Button } from '@mui/material';
 
 const MakeList = () => {
     const { currentUser } = useContext(AppContext);
@@ -63,7 +63,11 @@ const MakeList = () => {
                         placeholder={'Search for title or items'}
                     />
 
-                    <Button variant="black" onClick={handleClickOpen}>
+                    <Button
+                        variant="contained"
+                        sx={{ minWidth: '170px' }}
+                        onClick={handleClickOpen}
+                    >
                         NEW LIST
                     </Button>
                 </SearchAndButton>
