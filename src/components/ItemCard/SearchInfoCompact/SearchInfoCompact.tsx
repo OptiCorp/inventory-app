@@ -37,7 +37,7 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     } = useCardActions({ item: item });
 
     const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
-    const { data: itemm } = useGetItemById(item.id);
+    const { data: itemById } = useGetItemById(item.id);
 
     return (
         <>
@@ -60,7 +60,9 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Vendor</StyledCompactTitle>
-                                <StyledCompactText>{itemm?.vendor?.name ?? ''}</StyledCompactText>
+                                <StyledCompactText>
+                                    {itemById?.vendor?.name ?? ''}
+                                </StyledCompactText>
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Category</StyledCompactTitle>
