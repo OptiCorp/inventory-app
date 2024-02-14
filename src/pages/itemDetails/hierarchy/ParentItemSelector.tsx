@@ -1,4 +1,16 @@
 import { AlertColor, Box, ClickAwayListener } from '@mui/material';
+import { useContext } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import AppContext from '../../../contexts/AppContext';
+import { Item } from '../../../services/apiTypes';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
+import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
+import { ItemInfoSchema } from '../itemInfo/hooks';
+import { Edit, LabelContainer } from '../itemInfo/styles';
+import { Open, Options, SetState } from '../itemInfo/types';
 import {
     AccessibleButtonWrapper,
     CustomRemoveIcon,
@@ -6,18 +18,6 @@ import {
     StyledContainer,
     StyledLinkElement,
 } from './styles';
-import { Edit, LabelContainer } from '../itemInfo/styles';
-import { Controller, useFormContext } from 'react-hook-form';
-import { ItemInfoSchema } from '../itemInfo/hooks';
-import Select from 'react-select';
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
-import { Item } from '../../../services/apiTypes';
-import { useNavigate } from 'react-router-dom';
-import { Open, Options, SetState } from '../itemInfo/types';
-import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
-import { useContext } from 'react';
-import AppContext from '../../../contexts/AppContext';
-import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 
 type Field =
     | {
@@ -127,7 +127,7 @@ export const ParentItemSelector = ({
                         </StyledLinkElement>
                         {isOpen.parent && item.parent?.id && (
                             <AccessibleButtonWrapper onClick={() => handleRemoveItem(item?.id)}>
-                                <CustomRemoveIcon />
+                                <CustomRemoveIcon fontSize="small" />
                             </AccessibleButtonWrapper>
                         )}
                     </StyledContainer>
@@ -148,6 +148,11 @@ export const ParentItemSelector = ({
                                                 maxWidth: '300px',
                                                 borderRadius: '0',
                                             }),
+                                            option: (base) => ({
+                                                ...base,
+                                                width: '300px',
+                                            }),
+                                            container: (base) => ({ ...base, width: '300px' }),
                                         }}
                                         onInputChange={(value) => setSearchTerm(value)}
                                         onMenuScrollToBottom={() => {

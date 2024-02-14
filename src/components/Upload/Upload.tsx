@@ -1,6 +1,7 @@
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 import CloseIcon from '@mui/icons-material/Close';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {
+    Box,
     Button,
     CircularProgress,
     Dialog,
@@ -11,16 +12,15 @@ import {
     ListItem,
     Radio,
     RadioGroup,
-    Box,
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import { AddDocument } from '../../services/apiTypes';
 import { useDeleteDocument } from '../../services/hooks/documents/useDeleteDocument';
+import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocumentTypes';
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
-import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocumentTypes';
-import File from '../File/File';
 import { COLORS } from '../../style/GlobalStyles';
+import File from '../File/File';
 
 type UploadProps = {
     itemId: string;
@@ -142,7 +142,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                         }}
                         ref={inputFile}
                     />
-                    ADD DOCUMENT
+                    Add document
                 </Button>
             </Box>
         </Box>
