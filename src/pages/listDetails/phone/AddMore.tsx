@@ -66,7 +66,7 @@ export const AddMoreCompact = () => {
                             <SearchResultCardCompact item={item} icon={'add'} />
                         </div>
                     ))
-                )}{' '}
+                )}
             </PhoneContainer>
 
             {(isLoading || isFetching) && <GlobalSpinner />}

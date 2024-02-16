@@ -31,7 +31,6 @@ export const CustomDialog = ({
                 <DialogTitle>{title}</DialogTitle>
                 {children ? (
                     <DialogContent>
-                        {' '}
                         <div>{children}</div>
                     </DialogContent>
                 ) : null}

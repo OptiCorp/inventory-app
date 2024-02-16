@@ -18,7 +18,7 @@ export const ProductNumber = () => {
                     <label htmlFor="productNumber">Product number</label>
                     <ToolTip content="Specify a product number">
                         <HelpOutlineIcon fontSize="small" />
-                    </ToolTip>{' '}
+                    </ToolTip>
                 </StyledIconContainer>
                 <ErrorMessage
                     name="itemTemplate.productNumber"
