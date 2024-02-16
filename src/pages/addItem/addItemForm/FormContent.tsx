@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { v4 as uuid } from 'uuid';
 import { Category } from '../../../components/AddItemFormFields/Category/Category';
 import { Comment } from '../../../components/AddItemFormFields/Comment/Comment';
 import { Description } from '../../../components/AddItemFormFields/Description/Description';
@@ -10,12 +11,10 @@ import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber
 import { Type } from '../../../components/AddItemFormFields/TemplateTypes/TemplateTypes';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
-import { v4 as uuid } from 'uuid';
-import AppContext from '../../../contexts/AppContext';
-import { ItemSchema } from '../hooks/itemValidator';
 import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
+import AppContext from '../../../contexts/AppContext';
 import { Edit, LabelContainer } from '../../itemDetails/itemInfo/styles';
-import React from 'react';
+import { ItemSchema } from '../hooks/itemValidator';
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
@@ -86,6 +85,7 @@ export const FormContent = () => {
 
             <CustomDialog
                 open={isOpen.wpId}
+                fullWidth={true}
                 onClose={() => setIsOpen((prev) => ({ ...prev, wpId: false }))}
                 title="Edit WpIds"
                 CancelButtonOnClick={() => setIsOpen((prev) => ({ ...prev, wpId: false }))}
@@ -144,6 +144,7 @@ export const FormContent = () => {
             />
             <CustomDialog
                 open={isOpen.serialNumber}
+                fullWidth={true}
                 title="Edit serial numbers"
                 onClose={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}
                 CancelButtonOnClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}

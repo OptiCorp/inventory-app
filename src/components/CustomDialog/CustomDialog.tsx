@@ -8,6 +8,7 @@ interface DialogProps {
     CancelButtonOnClick: () => void;
     open: boolean;
     isWarning?: boolean;
+    fullWidth?: boolean;
     onClose?: (e: React.MouseEvent) => void;
     children?: React.ReactNode;
 }
@@ -21,13 +22,19 @@ export const CustomDialog = ({
     open,
     children,
     onClose,
+    fullWidth,
     isWarning,
 }: DialogProps) => {
     return (
         <>
-            <Dialog open={open} onClose={onClose}>
+            <Dialog open={open} onClose={onClose} fullWidth={fullWidth}>
                 <DialogTitle>{title}</DialogTitle>
-                {children ? <DialogContent>{children}</DialogContent> : null}
+                {children ? (
+                    <DialogContent>
+                        {' '}
+                        <div>{children}</div>
+                    </DialogContent>
+                ) : null}
                 <DialogActions>
                     <Button variant="text" onClick={CancelButtonOnClick} sx={{ borderRadius: '0' }}>
                         {cancelButtonText ?? 'Cancel'}
