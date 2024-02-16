@@ -1,15 +1,13 @@
 import { ErrorMessage } from '@hookform/error-message';
 
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import { Autocomplete, TextField } from '@mui/material';
 import { useController, useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { Vendor as VendorType } from '../../../services/apiTypes';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import { ToolTip } from '../../ToolTip/ToolTip';
-
-import { Autocomplete, TextField } from '@mui/material';
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
-
 export const Vendor = () => {
     const { control } = useFormContext<ItemSchema>();
 
@@ -35,7 +33,7 @@ export const Vendor = () => {
                 <StyledIconContainer>
                     <label htmlFor="vendor">Choose a vendor</label>
                     <ToolTip content="Specify a vendor">
-                        <FaRegQuestionCircleIcon />
+                        <HelpOutlineIcon fontSize="small" />
                     </ToolTip>
                 </StyledIconContainer>
                 <ErrorMessage
