@@ -2,10 +2,10 @@ import { Box, ClickAwayListener } from '@mui/material';
 import { ComponentProps, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import Select, { CSSObjectWithLabel } from 'react-select';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
+import { ItemInfoSchema } from './hooks';
 import { Edit, LabelContainer } from './styles';
 import { FieldNames, ItemFields } from './types';
-import { ItemInfoSchema } from './hooks';
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 
 type Options = {
     value: string;
@@ -59,6 +59,7 @@ export const SelectField = ({ label, onBlur, options, placeholder, fieldName }: 
                 const stateValue = state.data.value;
                 return {
                     ...provided,
+
                     color: stateValue === value ? '#fff' : 'inherit',
                     background: stateValue === value ? '#007bff' : 'inherit',
                     cursor: stateValue === value ? 'default' : 'pointer',

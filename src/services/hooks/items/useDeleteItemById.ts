@@ -5,7 +5,7 @@ export const useDeleteItemById = (itemId: string) => {
     const api = apiService();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: () => api.deleteItemById(itemId),
+        mutationFn: (itemId: string) => api.deleteItemById(itemId),
         onSuccess: () => {
             queryClient
                 .invalidateQueries({

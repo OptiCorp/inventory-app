@@ -1,12 +1,11 @@
+import { ErrorMessage } from '@hookform/error-message';
+import { TextField } from '@mui/material';
+import { useEffect } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
+import { StyledErrorP } from '../../../components/AddItemFormFields/styles.ts';
 import { ItemSchema } from '../hooks/itemValidator.ts';
 import { FormContainer } from '../styles.ts';
 import { RadioWrapper, StyledInput } from './styles.ts';
-import { TextField } from '@mui/material';
-import { useEffect } from 'react';
-import { ErrorMessage } from '@hookform/error-message';
-import { StyledErrorP } from '../../../components/AddItemFormFields/styles.ts';
-import React from 'react';
 
 const BatchForm = () => {
     const { control, register, setValue } = useFormContext<ItemSchema>();
@@ -67,6 +66,7 @@ const BatchForm = () => {
                         {...register('numberOfItems')}
                         type="number"
                         label="Amount"
+                        size="small"
                         style={{ width: '80px' }}
                         InputProps={{ sx: { borderRadius: 0 } }}
                         inputProps={{ min: 1 }}

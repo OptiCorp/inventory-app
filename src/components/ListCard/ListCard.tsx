@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AppContext from '../../contexts/AppContext';
 import { List } from '../../services/apiTypes';
-
 import { useDeleteList } from '../../services/hooks/list/useDeleteList';
 import { CustomDialog } from '../CustomDialog/CustomDialog';
 import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles';
@@ -15,7 +15,7 @@ export const ListCard = ({ item }: Props) => {
     const navigate = useNavigate();
     const { mutate } = useDeleteList();
     const [open, setOpen] = useState(false);
-
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
         setOpen(true);
@@ -27,7 +27,16 @@ export const ListCard = ({ item }: Props) => {
 
     const handleDelete = () => {
         setOpen(true);
-        mutate(item.id);
+        mutate(item.id, {
+            onSuccess: (removeData) => {
+                setSnackbarText(`${item.title} was deleted`);
+
+                if (removeData.status >= 400) {
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${removeData.statusText}, please try again.`);
+                }
+            },
+        });
         handleClose();
     };
 

@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const StyledInputWrap = styled.div`
-    display: grid;
+    display: flex;
+    align-items: center;
     margin: 4px 0;
-    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    white-space: nowrap;
 `;
 
 export const StyledErrorP = styled.span`
@@ -18,6 +20,7 @@ export const StyledIconContainer = styled.div`
     display: inline-flex;
     justify-content: baseline;
     gap: 10px;
+    word-break: keep-all;
     white-space: nowrap;
 `;
 

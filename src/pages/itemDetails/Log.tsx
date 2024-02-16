@@ -1,8 +1,15 @@
-import { Item } from '../../services/apiTypes';
 import { format } from 'date-fns';
+import { Item } from '../../services/apiTypes';
 import { ScrollTextField } from './styles';
 
 export const Log = ({ item }: { item: Item }) => {
+    if (!item?.logEntries) {
+        return (
+            <div>
+                <h4>Log</h4>No log entries
+            </div>
+        );
+    }
     const sortedLogEntries = item.logEntries.sort((a, b) => {
         const sortedA = new Date(a.createdDate).valueOf();
         const sortedB = new Date(b.createdDate).valueOf();
@@ -22,7 +29,7 @@ export const Log = ({ item }: { item: Item }) => {
             <h4>Log</h4>
             <ScrollTextField
                 InputProps={{ sx: { borderRadius: 0 } }}
-                value={formattedLogEntries.length < 1 ? 'No log entries' : formattedLogEntries}
+                value={formattedLogEntries}
                 multiline
                 variant="filled"
                 disabled

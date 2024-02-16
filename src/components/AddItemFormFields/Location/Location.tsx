@@ -1,11 +1,11 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { Autocomplete, TextField } from '@mui/material';
 import { useController, useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { Location as LocationType } from '../../../services/apiTypes';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
 import { ToolTip } from '../../ToolTip/ToolTip';
 
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
 
@@ -33,7 +33,7 @@ export const Location = () => {
                 <StyledIconContainer>
                     <label htmlFor="location">Choose a location</label>
                     <ToolTip content="Specify a location">
-                        <FaRegQuestionCircleIcon />
+                        <HelpOutlineIcon fontSize="small" />
                     </ToolTip>
                 </StyledIconContainer>
                 <ErrorMessage

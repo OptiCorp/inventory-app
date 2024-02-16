@@ -1,8 +1,8 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { TextField } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { ToolTip } from '../../ToolTip/ToolTip';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
@@ -17,7 +17,7 @@ export const ProductNumber = () => {
                 <StyledIconContainer>
                     <label htmlFor="productNumber">Product number</label>
                     <ToolTip content="Specify a product number">
-                        <FaRegQuestionCircleIcon />
+                        <HelpOutlineIcon fontSize="small" />
                     </ToolTip>
                 </StyledIconContainer>
                 <ErrorMessage
