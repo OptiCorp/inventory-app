@@ -7,6 +7,7 @@ import { Comment } from '../../../components/AddItemFormFields/Comment/Comment';
 import { Description } from '../../../components/AddItemFormFields/Description/Description';
 import { Location } from '../../../components/AddItemFormFields/Location/Location';
 import { ProductNumber } from '../../../components/AddItemFormFields/ProductNumber/ProductNumber';
+import { Revision } from '../../../components/AddItemFormFields/Revision/Revision';
 import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber/SerialNumber';
 import { Type } from '../../../components/AddItemFormFields/TemplateTypes/TemplateTypes';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
@@ -132,6 +133,7 @@ export const FormContent = () => {
             </div>
 
             <ProductNumber />
+            <Revision />
             <Vendor />
             <Location />
             <Description />
