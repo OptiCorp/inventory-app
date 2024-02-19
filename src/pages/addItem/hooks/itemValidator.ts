@@ -14,7 +14,7 @@ const templateSchema = z.object({
     productNumber: z.string().min(1, 'Product number is required'),
     description: z.string().min(1, 'Description is required'),
     createdById: z.string(),
-    revision: z.string().nullish(),
+    revision: z.string().min(1, 'Revision is required'),
 });
 
 export const itemSchema = z.object({

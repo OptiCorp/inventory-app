@@ -16,6 +16,7 @@ const defaultTemplate: TemplateSchema = {
     productNumber: '',
     description: '',
     createdById: '',
+    revision: '',
 };
 
 const defaultValues: ItemSchema = {
@@ -78,7 +79,7 @@ export const useAddItemForm = () => {
             createdById: currentUser?.id ?? '',
             description: selectedTemplate.description || '',
             productNumber: selectedTemplate?.productNumber || '',
-            revision: '1.06',
+            revision: selectedTemplate.revision || '',
             type: selectedTemplate?.type || '',
         });
         return data.json() as Promise<ItemTemplate>;
@@ -92,6 +93,7 @@ export const useAddItemForm = () => {
                     categoryId,
                     productNumber,
                     type,
+                    revision,
                     description,
                 } = await templateSubmit();
 
@@ -109,6 +111,7 @@ export const useAddItemForm = () => {
                             categoryId,
                             productNumber,
                             description,
+                            revision,
                             createdById: currentUser!.id,
                         },
                     });
