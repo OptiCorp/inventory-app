@@ -1,39 +1,70 @@
-import { format } from 'date-fns';
+import { useEffect, useRef } from 'react';
 import { Item } from '../../services/apiTypes';
-import { ScrollTextField } from './styles';
+import { useGetLogEntriesByItemId } from '../../services/hooks/logEntry/useGetLogEntriesByItemId';
+import { StyledScrollContainer } from './styles';
+import { Entry } from '../../components/ItemDetails/Entry';
 
 export const Log = ({ item }: { item: Item }) => {
-    if (!item?.logEntries) {
-        return (
-            <div>
-                <h4>Log</h4>No log entries
-            </div>
-        );
-    }
-    const sortedLogEntries = item.logEntries.sort((a, b) => {
-        const sortedA = new Date(a.createdDate).valueOf();
-        const sortedB = new Date(b.createdDate).valueOf();
-        return sortedB - sortedA;
-    });
-    const formattedLogEntries = sortedLogEntries
-        .map((entry) => {
-            const fullName = `${entry.createdBy.firstName} ${entry.createdBy.lastName}`;
-            return `${format(new Date(entry.createdDate), 'dd.MM.yyyy').toString()}: ${
-                entry.message
-            } by user ${fullName}`;
-        })
-        .join('\n');
+    const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetLogEntriesByItemId(
+        item.id
+    );
+
+    const lastItemRef = useRef(null);
+
+    const handleScroll = (entries: IntersectionObserverEntry[]) => {
+        const lastItem = entries[0];
+
+        if (
+            lastItem.isIntersecting &&
+            lastItem.boundingClientRect.bottom <= window.innerHeight &&
+            hasNextPage &&
+            !isFetchingNextPage
+        ) {
+            fetchNextPage().catch((error) => {
+                console.error('Failed to fetch next page: ', error);
+            });
+        }
+    };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(handleScroll, {
+            threshold: 1,
+            rootMargin: '100px',
+        });
+
+        const lastItem = lastItemRef.current;
+        if (lastItem) {
+            observer.observe(lastItem);
+        }
+
+        return () => {
+            if (lastItem) {
+                observer.unobserve(lastItem);
+            }
+        };
+    }, [data, hasNextPage, isFetchingNextPage]);
 
     return (
-        <>
+        <div>
             <h4>Log</h4>
-            <ScrollTextField
-                InputProps={{ sx: { borderRadius: 0 } }}
-                value={formattedLogEntries}
-                multiline
-                variant="filled"
-                disabled
-            />
-        </>
+            <StyledScrollContainer>
+                {data?.pages.map((page, i) =>
+                    page.map((entry, index) => (
+                        <div
+                            key={index}
+                            ref={
+                                i === data.pages.length - 1 &&
+                                index === page.length - 1 &&
+                                page.length >= 10
+                                    ? lastItemRef
+                                    : undefined
+                            }
+                        >
+                            <Entry entry={entry} />
+                        </div>
+                    ))
+                )}
+            </StyledScrollContainer>
+        </div>
     );
 };

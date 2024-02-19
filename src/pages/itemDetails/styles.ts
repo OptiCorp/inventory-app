@@ -57,3 +57,10 @@ export const BreadcrumbLink = styled(Link)`
         font-weight: bolder;
     }
 `;
+
+export const StyledScrollContainer = styled.div`
+    max-height: 148px;
+    overflow: scroll;
+    background: ${COLORS.lightGray};
+    padding: 25px 12px 8px;
+`;

@@ -15,6 +15,13 @@ export const useUpdateItem = (id: string, updatedById: string) => {
                 .catch((error) => {
                     console.error('Failed to invalidate queries: ', error);
                 });
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['logEntry'],
+                })
+                .catch((error) => {
+                    console.error(console.error('Failed to invalidate queries: ', error));
+                });
         },
     });
 };
