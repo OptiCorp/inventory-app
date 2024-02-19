@@ -55,8 +55,9 @@ export const SerialNumber = ({
                 </StyledInputWrap>
                 <TextField
                     id="filled-disabled"
-                    sx={{ width: '100%' }}
-                    label=""
+                    sx={{ width: '100%', padding: '0' }}
+                    hiddenLabel
+                    size="small"
                     {...register(fieldName as keyof ItemSchema)}
                     variant="filled"
                     placeholder="E.g 1-12-2023.1.2"

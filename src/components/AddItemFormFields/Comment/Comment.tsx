@@ -14,7 +14,7 @@ export const Comment = () => {
                 rows={5}
                 id="filled-disabled"
                 sx={{ width: '100%' }}
-                label="comment"
+                label="Comment"
                 placeholder=""
                 variant="filled"
                 {...register('comment')}

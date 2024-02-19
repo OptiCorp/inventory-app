@@ -53,7 +53,7 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
                     id="filled-disabled"
                     sx={{ width: '100%' }}
                     error={!isUnique}
-                    label="wellpartner id"
+                    hiddenLabel
                     placeholder="E.g 5321-1"
                     // helperText="Specify a unique WellPartner ID"
                     variant="filled"
