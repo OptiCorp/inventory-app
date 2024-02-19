@@ -41,6 +41,7 @@ export const Primary: Story = {
                     userId: '1',
                 },
                 createdById: '',
+                revision: '',
             },
             createdDate: '2023-12-27 10:13:26',
             updatedDate: '2023-12-27 10:13:26',
