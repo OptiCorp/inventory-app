@@ -55,7 +55,6 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
                     error={!isUnique}
                     hiddenLabel
                     placeholder="E.g 5321-1"
-                    // helperText="Specify a unique WellPartner ID"
                     variant="filled"
                     size="small"
                     {...register(fieldName as keyof ItemSchema)}
