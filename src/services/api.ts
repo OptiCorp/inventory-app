@@ -15,6 +15,7 @@ import {
     Item,
     List,
     Location,
+    LogEntry,
     UpdateCategory,
     UpdateItem,
     UpdateList,
@@ -475,6 +476,27 @@ const apiService = () => {
         return postByFetch('ItemTemplate', itemTemplateBody);
     };
 
+    // LogEntry
+
+    const getLogEntriesByItemId = async (
+        id: string,
+        pageNumber: number,
+        includeTemplateEntries: boolean
+    ): Promise<LogEntry[]> => {
+        return await getByFetch(
+            `LogEntry/GetLogEntriesByItemId/${id}?page=${pageNumber}&includeTemplateEntries=${includeTemplateEntries}`
+        );
+    };
+
+    const getLogEntriesByItemTemplateId = async (
+        templateId: string,
+        pageNumber: number
+    ): Promise<Response> => {
+        return await getByFetch(
+            `/LogEntry/GetLogEntriesByItemTemplateId/${templateId}?page=${pageNumber}`
+        );
+    };
+
     return {
         getAllUsers,
         getUser,
@@ -534,6 +556,8 @@ const apiService = () => {
         getItemTemplateById,
         updateItemTemplateById,
         addItemTemplate,
+        getLogEntriesByItemId,
+        getLogEntriesByItemTemplateId,
     };
 };
 
