@@ -18,12 +18,15 @@ import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
 import AppContext from '../../../contexts/AppContext';
 import { Edit } from '../../itemDetails/itemInfo/styles';
 import { ItemSchema } from '../hooks/itemValidator';
+
 import { StyledFieldBox, StyledIconContainer, StyledLabelContainer } from './styles';
+
+import { ScrollWrapContainer } from '../../../components/AddItemFormFields/styles';
+
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
     const { register, getValues } = useFormContext<ItemSchema>();
-
     const [wpIds, setWpIds] = useState<string[]>([]);
     const [serialNumbers, setSerialNumbers] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState({
@@ -36,7 +39,6 @@ export const FormContent = () => {
         const uniqueWpIds = Array.from({ length: numberOfItems }, () => uuid().slice(0, 8));
         const uniqueSerialNumbers = Array.from({ length: numberOfItems }, () => uuid().slice(0, 8));
         setWpIds(uniqueWpIds);
-
         setSerialNumbers(uniqueSerialNumbers);
     }, [numberOfItems]);
 
@@ -63,6 +65,7 @@ export const FormContent = () => {
             <Type />
             <Category />
             <div>
+
                 <StyledLabelContainer>
                     <StyledIconContainer>
                         <label>
@@ -78,6 +81,15 @@ export const FormContent = () => {
                     />
                 </StyledLabelContainer>
                 <StyledFieldBox>
+
+                <LabelContainer>
+                    <label>
+                        <strong>WP ids</strong>
+                    </label>
+                    <Edit onClick={() => setIsOpen((prev) => ({ ...prev, wpId: true }))} />
+                </LabelContainer>
+                <ScrollWrapContainer>
+
                     {wpIds.map((wpId, index) => {
                         const fieldName = `wpId[${index}]`;
                         return (
@@ -93,7 +105,11 @@ export const FormContent = () => {
                             </div>
                         );
                     })}
+
                 </StyledFieldBox>
+
+                </ScrollWrapContainer>
+
             </div>
             <CustomDialog
                 open={isOpen.wpId}
@@ -126,6 +142,7 @@ export const FormContent = () => {
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: true }))} />
                 </StyledIconContainer>
 
+
                 <ErrorMessage
                     name={`serialNumber[${0}]`}
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
@@ -136,6 +153,12 @@ export const FormContent = () => {
                     const fieldName = `serialNumber[${index}]`;
                     return (
                         <div key={index}>
+
+                <ScrollWrapContainer>
+                    {serialNumbers.map((serialNumber, index) => {
+                        const fieldName = `serialNumber[${index}]`;
+                        return (
+
                             <SerialNumber
                                 serialNumber={serialNumber}
                                 fieldName={fieldName}
@@ -144,10 +167,17 @@ export const FormContent = () => {
                                     handleChange(serialNumbers, index, value, setSerialNumbers)
                                 }
                             />
+
                         </div>
                     );
                 })}
             </StyledFieldBox>
+
+                        );
+                    })}
+                </ScrollWrapContainer>
+            </div>
+
 
             <ProductNumber />
             <Revision />

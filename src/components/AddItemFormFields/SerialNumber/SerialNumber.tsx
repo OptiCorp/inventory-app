@@ -6,7 +6,13 @@ import { useDebounce } from 'usehooks-ts';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
 import { useIsSerialNumberUnique } from '../../../services/hooks/items/useIsSerialNumberUnique.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import {
+    EllipsisText,
+    StyledDiv,
+    StyledErrorP,
+    StyledIconContainer,
+    StyledInputWrap,
+} from '../styles.ts';
 
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { StyledParagraph } from '../WpId/styles.ts';
@@ -35,7 +41,7 @@ export const SerialNumber = ({
     }, [setValue, inputValue, isUnique]);
 
     if (isPlainText) {
-        return <p>{serialNumber}</p>;
+        return <EllipsisText>{serialNumber}</EllipsisText>;
     }
 
     return (
