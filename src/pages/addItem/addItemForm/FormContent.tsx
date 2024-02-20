@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@hookform/error-message';
 import { TextField } from '@mui/material';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -12,10 +13,12 @@ import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber
 import { Type } from '../../../components/AddItemFormFields/TemplateTypes/TemplateTypes';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
+import { StyledErrorP } from '../../../components/AddItemFormFields/styles';
 import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
 import AppContext from '../../../contexts/AppContext';
-import { Edit, LabelContainer } from '../../itemDetails/itemInfo/styles';
+import { Edit } from '../../itemDetails/itemInfo/styles';
 import { ItemSchema } from '../hooks/itemValidator';
+import { StyledFieldBox, StyledIconContainer, StyledLabelContainer } from './styles';
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
@@ -60,30 +63,38 @@ export const FormContent = () => {
             <Type />
             <Category />
             <div>
-                <LabelContainer>
-                    <label>
-                        <strong>WP ids</strong>
-                    </label>
-                    <Edit onClick={() => setIsOpen((prev) => ({ ...prev, wpId: true }))} />
-                </LabelContainer>
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <StyledLabelContainer>
+                    <StyledIconContainer>
+                        <label>
+                            <strong>WP ids</strong>
+                        </label>
+                        <Edit onClick={() => setIsOpen((prev) => ({ ...prev, wpId: true }))} />
+                    </StyledIconContainer>
+
+                    <ErrorMessage
+                        name={`wpId[${0}]`}
+                        as="span"
+                        render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                    />
+                </StyledLabelContainer>
+                <StyledFieldBox>
                     {wpIds.map((wpId, index) => {
                         const fieldName = `wpId[${index}]`;
                         return (
-                            <WpId
-                                key={index}
-                                wpId={wpId}
-                                fieldName={fieldName}
-                                isPlainText
-                                onChange={(value: string) =>
-                                    handleChange(wpIds, index, value, setWpIds)
-                                }
-                            />
+                            <div key={index}>
+                                <WpId
+                                    wpId={wpId}
+                                    fieldName={fieldName}
+                                    isPlainText
+                                    onChange={(value: string) =>
+                                        handleChange(wpIds, index, value, setWpIds)
+                                    }
+                                />
+                            </div>
                         );
                     })}
-                </div>
+                </StyledFieldBox>
             </div>
-
             <CustomDialog
                 open={isOpen.wpId}
                 fullWidth={true}
@@ -95,31 +106,37 @@ export const FormContent = () => {
                 {wpIds.map((wpId, index) => {
                     const fieldName = `wpId[${index}]`;
                     return (
-                        <WpId
-                            key={index}
-                            wpId={wpId}
-                            fieldName={fieldName}
-                            onChange={(value: string) =>
-                                handleChange(wpIds, index, value, setWpIds)
-                            }
-                        />
+                        <div key={index}>
+                            <WpId
+                                wpId={wpId}
+                                fieldName={fieldName}
+                                onChange={(value: string) =>
+                                    handleChange(wpIds, index, value, setWpIds)
+                                }
+                            />
+                        </div>
                     );
                 })}
             </CustomDialog>
-            <div>
-                <LabelContainer>
+            <StyledLabelContainer>
+                <StyledIconContainer>
                     <label>
                         <strong>Serial numbers</strong>
                     </label>
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: true }))} />
-                </LabelContainer>
+                </StyledIconContainer>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
-                    {serialNumbers.map((serialNumber, index) => {
-                        const fieldName = `serialNumber[${index}]`;
-                        return (
+                <ErrorMessage
+                    name={`serialNumber[${0}]`}
+                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                />
+            </StyledLabelContainer>
+            <StyledFieldBox>
+                {serialNumbers.map((serialNumber, index) => {
+                    const fieldName = `serialNumber[${index}]`;
+                    return (
+                        <div key={index}>
                             <SerialNumber
-                                key={index}
                                 serialNumber={serialNumber}
                                 fieldName={fieldName}
                                 isPlainText
@@ -127,10 +144,10 @@ export const FormContent = () => {
                                     handleChange(serialNumbers, index, value, setSerialNumbers)
                                 }
                             />
-                        );
-                    })}
-                </div>
-            </div>
+                        </div>
+                    );
+                })}
+            </StyledFieldBox>
 
             <ProductNumber />
             <Revision />
@@ -152,18 +169,20 @@ export const FormContent = () => {
                 CancelButtonOnClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}
                 SubmitButtonOnClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}
             >
+                {' '}
                 {serialNumbers.map((serialNumber, index) => {
                     const fieldName = `serialNumber[${index}]`;
                     return (
-                        <SerialNumber
-                            key={index}
-                            serialNumber={serialNumber}
-                            fieldName={fieldName}
-                            isPlainText={false}
-                            onChange={(value: string) =>
-                                handleChange(serialNumbers, index, value, setSerialNumbers)
-                            }
-                        />
+                        <div key={index}>
+                            <SerialNumber
+                                serialNumber={serialNumber}
+                                fieldName={fieldName}
+                                isPlainText={false}
+                                onChange={(value: string) =>
+                                    handleChange(serialNumbers, index, value, setSerialNumbers)
+                                }
+                            />{' '}
+                        </div>
                     );
                 })}
             </CustomDialog>

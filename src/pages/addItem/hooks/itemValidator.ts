@@ -9,8 +9,8 @@ const templateSchema = z.object({
             name: z.string(),
         })
         .nullish(),
-    type: z.string().min(1, 'type is required'),
-    categoryId: z.string().min(1, 'category is required'),
+    type: z.string().min(1, 'Type is required'),
+    categoryId: z.string().min(1, 'Category is required'),
     productNumber: z.string().min(1, 'Product number is required'),
     description: z.string().min(1, 'Description is required'),
     createdById: z.string(),
@@ -20,8 +20,8 @@ const templateSchema = z.object({
 export const itemSchema = z.object({
     itemTemplate: templateSchema,
     itemTemplateId: z.string(),
-    wpId: z.array(z.string()),
-    serialNumber: z.array(z.string()),
+    wpId: z.array(z.string().min(1, 'WpId is required')),
+    serialNumber: z.array(z.string().min(1, 'Serial number is required')),
     vendorId: z.string().min(1, 'Vendor is required'),
     comment: z.string().nullish(),
     isBatch: z.boolean(),
@@ -44,6 +44,7 @@ export const itemSchema = z.object({
     locationId: z.string().min(1, 'Location is required'),
     parentId: z.string().nullish(),
     createdById: z.string().min(1),
+
     uniqueWpId: z.boolean().refine((data) => data, {}),
     uniqueSerialNumber: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),

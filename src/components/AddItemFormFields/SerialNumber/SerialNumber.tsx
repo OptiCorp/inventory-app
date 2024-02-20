@@ -49,7 +49,7 @@ export const SerialNumber = ({
                         </ToolTip>
                     </StyledIconContainer>
                     <ErrorMessage
-                        name="serialNumber"
+                        name={`serialNumber[${0}]`}
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />
                 </StyledInputWrap>

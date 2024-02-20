@@ -33,6 +33,7 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
     if (isPlainText) {
         return <p>{wpId}</p>;
     }
+
     return (
         <>
             <StyledDiv>
@@ -44,7 +45,7 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
                     </ToolTip>
 
                     <ErrorMessage
-                        name="wpId"
+                        name={`wpId[${0}]`}
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />
                 </StyledInputWrap>
@@ -57,7 +58,10 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
                     placeholder="E.g 5321-1"
                     variant="filled"
                     size="small"
-                    {...register(fieldName as keyof ItemSchema)}
+                    {...(register(fieldName as keyof ItemSchema),
+                    {
+                        required: true,
+                    })}
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     inputProps={{ name: 'isUnique', 'data-isunique': isUnique }}
