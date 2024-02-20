@@ -19,10 +19,9 @@ import AppContext from '../../../contexts/AppContext';
 import { Edit } from '../../itemDetails/itemInfo/styles';
 import { ItemSchema } from '../hooks/itemValidator';
 
-import { StyledFieldBox, StyledIconContainer, StyledLabelContainer } from './styles';
+import { StyledIconContainer, StyledLabelContainer } from './styles';
 
 import { ScrollWrapContainer } from '../../../components/AddItemFormFields/styles';
-
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
@@ -65,7 +64,6 @@ export const FormContent = () => {
             <Type />
             <Category />
             <div>
-
                 <StyledLabelContainer>
                     <StyledIconContainer>
                         <label>
@@ -80,37 +78,25 @@ export const FormContent = () => {
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />
                 </StyledLabelContainer>
-                <StyledFieldBox>
 
-                <LabelContainer>
-                    <label>
-                        <strong>WP ids</strong>
-                    </label>
-                    <Edit onClick={() => setIsOpen((prev) => ({ ...prev, wpId: true }))} />
-                </LabelContainer>
                 <ScrollWrapContainer>
-
                     {wpIds.map((wpId, index) => {
                         const fieldName = `wpId[${index}]`;
                         return (
-                            <div key={index}>
-                                <WpId
-                                    wpId={wpId}
-                                    fieldName={fieldName}
-                                    isPlainText
-                                    onChange={(value: string) =>
-                                        handleChange(wpIds, index, value, setWpIds)
-                                    }
-                                />
-                            </div>
+                            <WpId
+                                key={index}
+                                wpId={wpId}
+                                fieldName={fieldName}
+                                isPlainText
+                                onChange={(value: string) =>
+                                    handleChange(wpIds, index, value, setWpIds)
+                                }
+                            />
                         );
                     })}
-
-                </StyledFieldBox>
-
                 </ScrollWrapContainer>
-
             </div>
+
             <CustomDialog
                 open={isOpen.wpId}
                 fullWidth={true}
@@ -142,42 +128,28 @@ export const FormContent = () => {
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: true }))} />
                 </StyledIconContainer>
 
-
                 <ErrorMessage
                     name={`serialNumber[${0}]`}
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledLabelContainer>
-            <StyledFieldBox>
+
+            <ScrollWrapContainer>
                 {serialNumbers.map((serialNumber, index) => {
                     const fieldName = `serialNumber[${index}]`;
                     return (
-                        <div key={index}>
-
-                <ScrollWrapContainer>
-                    {serialNumbers.map((serialNumber, index) => {
-                        const fieldName = `serialNumber[${index}]`;
-                        return (
-
-                            <SerialNumber
-                                serialNumber={serialNumber}
-                                fieldName={fieldName}
-                                isPlainText
-                                onChange={(value: string) =>
-                                    handleChange(serialNumbers, index, value, setSerialNumbers)
-                                }
-                            />
-
-                        </div>
+                        <SerialNumber
+                            key={index}
+                            serialNumber={serialNumber}
+                            fieldName={fieldName}
+                            isPlainText
+                            onChange={(value: string) =>
+                                handleChange(serialNumbers, index, value, setSerialNumbers)
+                            }
+                        />
                     );
                 })}
-            </StyledFieldBox>
-
-                        );
-                    })}
-                </ScrollWrapContainer>
-            </div>
-
+            </ScrollWrapContainer>
 
             <ProductNumber />
             <Revision />

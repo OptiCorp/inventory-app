@@ -29,7 +29,7 @@ export const Type: FC = () => {
     });
 
     const selectedType = options.find(
-        (option) => option.label.toLowerCase() === value.toLowerCase()
+        (option) => option?.label.toLowerCase() === value.toLowerCase()
     );
 
     return (
