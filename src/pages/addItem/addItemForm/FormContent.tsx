@@ -16,11 +16,11 @@ import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
 import AppContext from '../../../contexts/AppContext';
 import { Edit, LabelContainer } from '../../itemDetails/itemInfo/styles';
 import { ItemSchema } from '../hooks/itemValidator';
+import { ScrollWrapContainer } from '../../../components/AddItemFormFields/styles';
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
     const { register, getValues } = useFormContext<ItemSchema>();
-
     const [wpIds, setWpIds] = useState<string[]>([]);
     const [serialNumbers, setSerialNumbers] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState({
@@ -33,7 +33,6 @@ export const FormContent = () => {
         const uniqueWpIds = Array.from({ length: numberOfItems }, () => uuid().slice(0, 8));
         const uniqueSerialNumbers = Array.from({ length: numberOfItems }, () => uuid().slice(0, 8));
         setWpIds(uniqueWpIds);
-
         setSerialNumbers(uniqueSerialNumbers);
     }, [numberOfItems]);
 
@@ -66,7 +65,7 @@ export const FormContent = () => {
                     </label>
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, wpId: true }))} />
                 </LabelContainer>
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <ScrollWrapContainer>
                     {wpIds.map((wpId, index) => {
                         const fieldName = `wpId[${index}]`;
                         return (
@@ -81,7 +80,7 @@ export const FormContent = () => {
                             />
                         );
                     })}
-                </div>
+                </ScrollWrapContainer>
             </div>
 
             <CustomDialog
@@ -114,7 +113,7 @@ export const FormContent = () => {
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: true }))} />
                 </LabelContainer>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <ScrollWrapContainer>
                     {serialNumbers.map((serialNumber, index) => {
                         const fieldName = `serialNumber[${index}]`;
                         return (
@@ -129,7 +128,7 @@ export const FormContent = () => {
                             />
                         );
                     })}
-                </div>
+                </ScrollWrapContainer>
             </div>
 
             <ProductNumber />

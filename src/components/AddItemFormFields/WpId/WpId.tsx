@@ -7,7 +7,7 @@ import { useDebounce } from 'usehooks-ts';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { ToolTip } from '../../ToolTip/ToolTip';
-import { StyledDiv, StyledErrorP, StyledInputWrap } from '../styles';
+import { EllipsisText, StyledDiv, StyledErrorP, StyledInputWrap } from '../styles';
 import { StyledParagraph } from './styles';
 
 type WpIdProps = {
@@ -23,7 +23,6 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
     const [inputValue, setInputValue] = useState(wpId);
     const debouncedWpId = useDebounce(wpId, 500);
     const { data: isUnique, isLoading } = useIsWpIdUnique(debouncedWpId);
-
     useEffect(() => {
         setValue(fieldName as keyof ItemSchema, inputValue);
         setValue('uniqueWpId', isUnique!);
@@ -31,7 +30,7 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
     }, [setValue, inputValue, isUnique]);
 
     if (isPlainText) {
-        return <p>{wpId}</p>;
+        return <EllipsisText>{wpId}</EllipsisText>;
     }
     return (
         <>
