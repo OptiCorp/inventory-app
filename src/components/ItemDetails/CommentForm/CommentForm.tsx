@@ -84,7 +84,7 @@ export const Comments = ({ item }: { item: Item }) => {
                         variant="outlined"
                         sx={{ borderRadius: '0', height: '40px', width: '200px' }}
                     >
-                        Sumbit
+                        Submit
                     </Button>
                 </Wrapper>
             </form>
