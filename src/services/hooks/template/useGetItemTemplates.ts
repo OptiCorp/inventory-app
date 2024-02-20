@@ -3,7 +3,7 @@ import apiService from '../../api';
 
 export const useGetItemTemplates = () => {
     return useQuery({
-        queryKey: ['itemTemplates'],
+        queryKey: ['itemTemplate'],
         queryFn: () => apiService().getItemTemplates(),
     });
 };

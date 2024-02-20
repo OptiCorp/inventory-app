@@ -1,81 +1,30 @@
-import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import AppContext from '../../../contexts/AppContext';
-import { MutateItemList } from '../../../services/apiTypes';
-import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
-import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import { CustomDialog } from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledInfoIcon, StyledRemoveIcon } from '../../ListCard/styles';
 import { ItemCardProps } from '../ItemCard';
+import { useCardActions } from '../hooks/useCardActions';
 import {
     StyledBox,
     StyledContainer,
     StyledContent,
     StyledDescriptionParagraph,
-    StyledSecondInfoBox,
+    StyledInfoBox,
     StyledText,
     StyledTitle,
 } from './styles';
 
 export const SearchInfo = ({ item, icon }: ItemCardProps) => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
-
-    const [open, setOpen] = useState(false);
-    const [alreadyAdded, setAlreadyAdded] = useState(false);
     const { listId } = useParams();
     const navigate = useNavigate();
-    const { data: list } = useGetListById(listId!);
-    const { mutate: mutateAddItemToList, isSuccess: addItemSuccess } = useAddItemsToList();
-    const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
-
-    const handleAdd = (event: React.MouseEvent, ids: MutateItemList) => {
-        event.stopPropagation();
-        const alreadyAdded = list?.items.some((item) => item.id === item.id);
-        if (alreadyAdded) {
-            {
-                setAlreadyAdded(true);
-            }
-            setSnackbarSeverity('error');
-            setSnackbarText('already in list');
-        }
-        mutateAddItemToList(ids, {
-            onSuccess: (data) => {
-                if (alreadyAdded) return;
-                setSnackbarText(`${item.wpId} was added`);
-
-                if (data.status >= 400) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(`${data.statusText}, please try again.`);
-                }
-            },
-        });
-        handleClose();
-    };
-
-    const handleDelete = (event: React.MouseEvent, ids: MutateItemList) => {
-        event.stopPropagation();
-        mutateRemoveItemFromList(ids, {
-            onSuccess: (removeData) => {
-                setSnackbarText(`${item.wpId} was removed`);
-
-                if (removeData.status >= 400) {
-                    setSnackbarSeverity('error');
-                    setSnackbarText(`${removeData.statusText}, please try again.`);
-                }
-            },
-        });
-        handleClose();
-    };
-
-    const handleClickOpen = (event: React.MouseEvent) => {
-        event.stopPropagation();
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const {
+        handleAdd,
+        handleDelete,
+        handleClickOpen,
+        handleClose,
+        addItemSuccess,
+        alreadyAdded,
+        open,
+    } = useCardActions({ item: item });
 
     return (
         <>
@@ -90,11 +39,11 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                         <StyledText>{item.itemTemplate?.productNumber}</StyledText>
                     </StyledContent>
                 </StyledBox>
-                <StyledSecondInfoBox>
+                <StyledInfoBox>
                     <StyledDescriptionParagraph>
                         {item.itemTemplate?.description}
                     </StyledDescriptionParagraph>
-                </StyledSecondInfoBox>
+                </StyledInfoBox>
                 <StyledBox>
                     <>
                         {icon === 'add' ? (
@@ -125,8 +74,8 @@ export const SearchInfo = ({ item, icon }: ItemCardProps) => {
                         ></StyledInfoIcon>
                     )}
                     <StyledContent>
-                        <StyledTitle>Location</StyledTitle>
-                        <StyledText>{item.location?.name ?? 'Location'}</StyledText>
+                        <StyledTitle>Vendor</StyledTitle>
+                        <StyledText>{item.vendor?.name}</StyledText>
                     </StyledContent>
                     <StyledContent>
                         <StyledTitle>Category</StyledTitle>

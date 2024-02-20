@@ -3,12 +3,18 @@ import { z } from 'zod';
 const templateSchema = z.object({
     id: z.string(),
     inputValue: z.string().nullish(),
+    category: z
+        .object({
+            id: z.string(),
+            name: z.string(),
+        })
+        .nullish(),
     type: z.string().min(1, 'type is required'),
     categoryId: z.string().min(1, 'category is required'),
     productNumber: z.string().min(1, 'Product number is required'),
-    description: z.string(),
+    description: z.string().min(1, 'Description is required'),
     createdById: z.string(),
-    revision: z.string().nullish(),
+    revision: z.string().min(1, 'Revision is required'),
 });
 
 export const itemSchema = z.object({
@@ -35,7 +41,7 @@ export const itemSchema = z.object({
             })
         )
         .optional(),
-    locationId: z.string().nullish(),
+    locationId: z.string().min(1, 'Location is required'),
     parentId: z.string().nullish(),
     createdById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),

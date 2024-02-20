@@ -1,12 +1,13 @@
+import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button } from '../../components/Button/Button';
 import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
 import { ListCard } from '../../components/ListCard/ListCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import AppContext from '../../contexts/AppContext';
+import { useWindowDimensions } from '../../hooks';
 import { Item, List } from '../../services/apiTypes';
 import { useAddList } from '../../services/hooks/list/useAddList';
 import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId';
@@ -19,9 +20,8 @@ const MakeList = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [title, setTitle] = useState('');
     const [open, setOpen] = useState(false);
-
+    const { width } = useWindowDimensions();
     const { data: lists = [], isLoading } = useGetListsByUserId(currentUser!.id);
-
     const { mutate } = useAddList();
 
     useEffect(() => {
@@ -56,14 +56,23 @@ const MakeList = () => {
     return (
         <>
             <SearchContainer>
-                <SearchAndButton>
+                <SearchAndButton width={width}>
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
                         placeholder={'Search for title or items'}
                     />
 
-                    <Button variant="black" onClick={handleClickOpen}>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            borderRadius: '0',
+                            height: '40px',
+                            width: '200px',
+                            alignSelf: 'flex-end',
+                        }}
+                        onClick={handleClickOpen}
+                    >
                         NEW LIST
                     </Button>
                 </SearchAndButton>

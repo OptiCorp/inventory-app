@@ -2,8 +2,8 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Autocomplete, TextField } from '@mui/material';
 import { FC } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { FormOption } from '../../../services/apiTypes';
 import { ToolTip } from '../../ToolTip/ToolTip';
@@ -38,7 +38,7 @@ export const Type: FC = () => {
                     <StyledIconContainer>
                         <label htmlFor="type">Choose an item type</label>
                         <ToolTip content="Specify Unit, or Item (lowest tier)">
-                            <FaRegQuestionCircleIcon />
+                            <HelpOutlineIcon fontSize="small" />
                         </ToolTip>
                     </StyledIconContainer>
                     <ErrorMessage

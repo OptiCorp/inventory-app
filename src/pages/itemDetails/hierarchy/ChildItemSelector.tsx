@@ -1,4 +1,17 @@
+import EditIcon from '@mui/icons-material/Edit';
 import { AlertColor, Box, ClickAwayListener } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import { Item } from '../../../services/apiTypes';
+import {
+    AddChildItemIds,
+    useAddChildItemToParent,
+} from '../../../services/hooks/items/useAddChildItemToParent';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
+import { LabelContainer } from '../itemInfo/styles';
+import { Open, SetState } from '../itemInfo/types';
 import {
     AccessibleButtonWrapper,
     AddIcon,
@@ -8,19 +21,6 @@ import {
     FlexContainer,
     StyledLinkElement,
 } from './styles';
-import { Open, SetState } from '../itemInfo/types';
-import Select from 'react-select';
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
-import { Item } from '../../../services/apiTypes';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import {
-    AddChildItemIds,
-    useAddChildItemToParent,
-} from '../../../services/hooks/items/useAddChildItemToParent';
-import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
-import EditIcon from '@mui/icons-material/Edit';
-import { LabelContainer } from '../itemInfo/styles';
 
 type ChildItemSelector = {
     item: Item;

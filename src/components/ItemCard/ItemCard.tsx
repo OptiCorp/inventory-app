@@ -6,6 +6,7 @@ import { StyledItemCardContainer, StyledSearchCard } from './styles';
 export type ItemCardProps = {
     item: {
         id: string;
+
         wpId: string;
         serialNumber: string;
         location?: Location;

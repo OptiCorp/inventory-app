@@ -1,7 +1,6 @@
+import { Chip, TextField } from '@mui/material';
 import { format } from 'date-fns';
 import { useContext, useState } from 'react';
-
-import { Chip, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import AppContext from '../../contexts/AppContext';
@@ -13,10 +12,8 @@ import { DeleteIcon, EditIcon } from './sidelist/styles';
 import {
     FlexContainer,
     Header,
-    IconContainer,
     IconContainerCompact,
     ListTitle,
-    StyledDate,
     Wrapper,
     WrapperCompact,
 } from './styles';
@@ -90,43 +87,37 @@ export const ListHeader = ({ list }: Props) => {
         <>
             {width > 800 ? (
                 <Header>
-                    <Wrapper>
-                        <StyledDate>
-                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
-                        </StyledDate>
-                        <ListTitle>{list.title}</ListTitle>
-                    </Wrapper>
+                    <ListTitle>{list.title}</ListTitle>
+                    <Wrapper>{format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}</Wrapper>
                     <FlexContainer>
-                        <IconContainer>
+                        <div>
                             <Chip
                                 style={{ marginRight: '20px' }}
                                 label={`${list?.items?.length} Items`}
                             />
-                        </IconContainer>
-                        <IconContainer onClick={(e) => handleOpenEdit(e)}>
+                        </div>
+                        <div onClick={(e) => handleOpenEdit(e)}>
                             <EditIcon />
-                        </IconContainer>
-                        <IconContainer onClick={(e) => handleOpen(e)}>
+                        </div>
+                        <div onClick={(e) => handleOpen(e)}>
                             <DeleteIcon />
-                        </IconContainer>
+                        </div>
                     </FlexContainer>
                 </Header>
             ) : (
                 <>
                     <WrapperCompact>
+                        <ListTitle>{list.title}</ListTitle>
                         <Wrapper>
-                            <StyledDate>
-                                {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
-                            </StyledDate>
-                            <ListTitle>{list.title}</ListTitle>
+                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
                         </Wrapper>
                         <IconContainerCompact>
-                            <IconContainer onClick={(e) => handleOpenEdit(e)}>
+                            <div onClick={(e) => handleOpenEdit(e)}>
                                 <EditIcon />
-                            </IconContainer>
-                            <IconContainer onClick={(e) => handleOpen(e)}>
+                            </div>
+                            <div onClick={(e) => handleOpen(e)}>
                                 <DeleteIcon />
-                            </IconContainer>
+                            </div>
                         </IconContainerCompact>
                     </WrapperCompact>
                 </>

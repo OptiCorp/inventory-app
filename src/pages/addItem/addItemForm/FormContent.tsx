@@ -1,26 +1,26 @@
 import { TextField } from '@mui/material';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { v4 as uuid } from 'uuid';
 import { Category } from '../../../components/AddItemFormFields/Category/Category';
 import { Comment } from '../../../components/AddItemFormFields/Comment/Comment';
 import { Description } from '../../../components/AddItemFormFields/Description/Description';
 import { Location } from '../../../components/AddItemFormFields/Location/Location';
 import { ProductNumber } from '../../../components/AddItemFormFields/ProductNumber/ProductNumber';
+import { Revision } from '../../../components/AddItemFormFields/Revision/Revision';
 import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber/SerialNumber';
 import { Type } from '../../../components/AddItemFormFields/TemplateTypes/TemplateTypes';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
-import { v4 as uuid } from 'uuid';
-import AppContext from '../../../contexts/AppContext';
-import { ItemSchema } from '../hooks/itemValidator';
 import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
+import AppContext from '../../../contexts/AppContext';
 import { Edit, LabelContainer } from '../../itemDetails/itemInfo/styles';
-import React from 'react';
+import { ItemSchema } from '../hooks/itemValidator';
+import { ScrollWrapContainer } from '../../../components/AddItemFormFields/styles';
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
     const { register, getValues } = useFormContext<ItemSchema>();
-
     const [wpIds, setWpIds] = useState<string[]>([]);
     const [serialNumbers, setSerialNumbers] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState({
@@ -33,7 +33,6 @@ export const FormContent = () => {
         const uniqueWpIds = Array.from({ length: numberOfItems }, () => uuid().slice(0, 8));
         const uniqueSerialNumbers = Array.from({ length: numberOfItems }, () => uuid().slice(0, 8));
         setWpIds(uniqueWpIds);
-
         setSerialNumbers(uniqueSerialNumbers);
     }, [numberOfItems]);
 
@@ -66,27 +65,27 @@ export const FormContent = () => {
                     </label>
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, wpId: true }))} />
                 </LabelContainer>
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <ScrollWrapContainer>
                     {wpIds.map((wpId, index) => {
                         const fieldName = `wpId[${index}]`;
                         return (
-                            <>
-                                <WpId
-                                    wpId={wpId}
-                                    fieldName={fieldName}
-                                    isPlainText
-                                    onChange={(value: string) =>
-                                        handleChange(wpIds, index, value, setWpIds)
-                                    }
-                                />
-                            </>
+                            <WpId
+                                key={index}
+                                wpId={wpId}
+                                fieldName={fieldName}
+                                isPlainText
+                                onChange={(value: string) =>
+                                    handleChange(wpIds, index, value, setWpIds)
+                                }
+                            />
                         );
                     })}
-                </div>
+                </ScrollWrapContainer>
             </div>
 
             <CustomDialog
                 open={isOpen.wpId}
+                fullWidth={true}
                 onClose={() => setIsOpen((prev) => ({ ...prev, wpId: false }))}
                 title="Edit WpIds"
                 CancelButtonOnClick={() => setIsOpen((prev) => ({ ...prev, wpId: false }))}
@@ -114,7 +113,7 @@ export const FormContent = () => {
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: true }))} />
                 </LabelContainer>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <ScrollWrapContainer>
                     {serialNumbers.map((serialNumber, index) => {
                         const fieldName = `serialNumber[${index}]`;
                         return (
@@ -129,10 +128,11 @@ export const FormContent = () => {
                             />
                         );
                     })}
-                </div>
+                </ScrollWrapContainer>
             </div>
 
             <ProductNumber />
+            <Revision />
             <Vendor />
             <Location />
             <Description />
@@ -145,6 +145,7 @@ export const FormContent = () => {
             />
             <CustomDialog
                 open={isOpen.serialNumber}
+                fullWidth={true}
                 title="Edit serial numbers"
                 onClose={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}
                 CancelButtonOnClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}

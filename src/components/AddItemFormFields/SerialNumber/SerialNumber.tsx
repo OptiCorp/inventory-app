@@ -1,15 +1,21 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
-import { ToolTip } from '../../ToolTip/ToolTip.tsx';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles.ts';
+import { useDebounce } from 'usehooks-ts';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
 import { useIsSerialNumberUnique } from '../../../services/hooks/items/useIsSerialNumberUnique.tsx';
-import { useDebounce } from 'usehooks-ts';
-import { useEffect, useState } from 'react';
+import { ToolTip } from '../../ToolTip/ToolTip.tsx';
+import {
+    EllipsisText,
+    StyledDiv,
+    StyledErrorP,
+    StyledIconContainer,
+    StyledInputWrap,
+} from '../styles.ts';
+
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { StyledParagraph } from '../WpId/styles.ts';
-import React from 'react';
 
 type SerialNumberProps = {
     serialNumber?: string;
@@ -35,7 +41,7 @@ export const SerialNumber = ({
     }, [setValue, inputValue, isUnique]);
 
     if (isPlainText) {
-        return <p>{serialNumber}</p>;
+        return <EllipsisText>{serialNumber}</EllipsisText>;
     }
 
     return (
@@ -45,7 +51,7 @@ export const SerialNumber = ({
                     <StyledIconContainer>
                         <label htmlFor="Serial number">Serial number </label>
                         <ToolTip content="If left empty, a unique WP S/N will be generated">
-                            <FaRegQuestionCircleIcon />
+                            <HelpOutlineIcon fontSize="small" />
                         </ToolTip>
                     </StyledIconContainer>
                     <ErrorMessage
@@ -55,8 +61,9 @@ export const SerialNumber = ({
                 </StyledInputWrap>
                 <TextField
                     id="filled-disabled"
-                    sx={{ width: '100%' }}
-                    label=""
+                    sx={{ width: '100%', padding: '0' }}
+                    hiddenLabel
+                    size="small"
                     {...register(fieldName as keyof ItemSchema)}
                     variant="filled"
                     placeholder="E.g 1-12-2023.1.2"

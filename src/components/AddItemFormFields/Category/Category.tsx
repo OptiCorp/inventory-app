@@ -1,8 +1,9 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { Autocomplete, TextField } from '@mui/material';
 import { useEffect } from 'react';
+
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useController, useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { Category as CategoryType } from '../../../services/apiTypes';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
@@ -43,7 +44,7 @@ export const Category = () => {
                 <StyledIconContainer>
                     <label htmlFor="category">Choose a category</label>
                     <ToolTip content="Specify a category">
-                        <FaRegQuestionCircleIcon />
+                        <HelpOutlineIcon fontSize="small" />
                     </ToolTip>
                 </StyledIconContainer>
                 <ErrorMessage

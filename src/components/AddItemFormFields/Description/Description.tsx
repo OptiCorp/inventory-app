@@ -12,7 +12,7 @@ export const Description = () => {
             <StyledInputWrap>
                 <label htmlFor="description">Description </label>
                 <ErrorMessage
-                    name="description"
+                    name="itemTemplate.description"
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>

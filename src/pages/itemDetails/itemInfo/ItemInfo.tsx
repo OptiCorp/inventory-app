@@ -43,7 +43,10 @@ const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
     const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories();
     const { mutate } = useUpdateItem(item?.id, currentUser!.id);
     const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
-    const { mutate: mutateItemTemplate } = useUpdateItemTemplate(item.itemTemplate.id);
+    const { mutate: mutateItemTemplate } = useUpdateItemTemplate(
+        item.itemTemplate.id,
+        currentUser!.id
+    );
     const [newWpId, setNewWpId] = useState('');
     const debouncedWpId = useDebounce(newWpId, 300);
     const {
@@ -88,6 +91,7 @@ const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
                         {
                             ...itemTemplateData,
                             [field]: mutableValue,
+                            revision: 'test',
                         },
                         {
                             onSuccess: (data) => {

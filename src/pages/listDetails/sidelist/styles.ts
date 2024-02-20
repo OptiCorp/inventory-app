@@ -25,6 +25,9 @@ export const DeleteIcon = styled(DeleteForeverIcon)`
 export const Wrapper = styled.div`
     display: flex;
     align-items: center;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    column-gap: 10px; */
     box-shadow:
         rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
         rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;

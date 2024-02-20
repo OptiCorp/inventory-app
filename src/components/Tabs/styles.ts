@@ -5,7 +5,7 @@ export const StyledTabContainer = styled.section`
     display: flex;
     flex-direction: row;
     width: 100%;
-    border-bottom: 2px solid black;
+    border-bottom: 2px ${COLORS.black};
     height: 60px;
 `;
 export const StyledTabButton = styled.button<{ active: boolean }>`
@@ -23,7 +23,6 @@ export const StyledTabButton = styled.button<{ active: boolean }>`
 `;
 
 export const StyledNumberofItems = styled.span<{ active: boolean }>`
-    color: white;
     position: absolute;
     right: 0;
     padding: 1rem;
@@ -34,7 +33,7 @@ export const StyledTitle = styled.span<{ active: boolean }>`
     display: flex;
     text-transform: uppercase;
 
-    color: ${(props) => (props.active ? `${COLORS.black}` : ` ${COLORS.white}`)};
+    color: ${(props) => (props.active ? `${COLORS.white}` : ` ${COLORS.black}`)};
     transition: 0.6s;
 `;
 export const StyledIndicator = styled.span<{ active: boolean }>`

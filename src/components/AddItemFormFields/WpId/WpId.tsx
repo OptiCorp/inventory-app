@@ -1,15 +1,14 @@
 import { ErrorMessage } from '@hookform/error-message';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FaRegQuestionCircle as FaRegQuestionCircleIcon } from 'react-icons/fa';
 import { useDebounce } from 'usehooks-ts';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { ToolTip } from '../../ToolTip/ToolTip';
-import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
+import { EllipsisText, StyledDiv, StyledErrorP, StyledInputWrap } from '../styles';
 import { StyledParagraph } from './styles';
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
-import React from 'react';
 
 type WpIdProps = {
     index?: number;
@@ -24,7 +23,6 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
     const [inputValue, setInputValue] = useState(wpId);
     const debouncedWpId = useDebounce(wpId, 500);
     const { data: isUnique, isLoading } = useIsWpIdUnique(debouncedWpId);
-
     useEffect(() => {
         setValue(fieldName as keyof ItemSchema, inputValue);
         setValue('uniqueWpId', isUnique!);
@@ -32,18 +30,18 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
     }, [setValue, inputValue, isUnique]);
 
     if (isPlainText) {
-        return <p>{wpId}</p>;
+        return <EllipsisText>{wpId}</EllipsisText>;
     }
     return (
         <>
             <StyledDiv>
                 <StyledInputWrap>
-                    <StyledIconContainer>
-                        <label htmlFor="WellPartner Id">WellPartner ID</label>
-                        <ToolTip content="Specify a unique WellPartner ID">
-                            <FaRegQuestionCircleIcon />
-                        </ToolTip>
-                    </StyledIconContainer>
+                    <label htmlFor="WellPartner Id">WellPartner ID</label>
+
+                    <ToolTip content="Specify a unique WellPartner ID">
+                        <HelpOutlineIcon fontSize="small" />
+                    </ToolTip>
+
                     <ErrorMessage
                         name="wpId"
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
@@ -53,16 +51,18 @@ export const WpId = ({ fieldName, wpId, onChange, isPlainText }: WpIdProps) => {
                 <TextField
                     id="filled-disabled"
                     sx={{ width: '100%' }}
-                    label=""
+                    error={!isUnique}
+                    hiddenLabel
                     placeholder="E.g 5321-1"
                     variant="filled"
+                    size="small"
                     {...register(fieldName as keyof ItemSchema)}
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     inputProps={{ name: 'isUnique', 'data-isunique': isUnique }}
                 />
 
-                {isLoading && <p>Checking...</p>}
+                {isLoading && <span>Checking...</span>}
                 {wpId && (
                     <>
                         {isUnique === true && (

@@ -22,13 +22,15 @@ export const StyledCompactInfoP = styled.div`
 export const StyledCompactContent = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    width: 100%;
+    gap: 10px;
 `;
 
 export const StyledCompactDescriptionWrap = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2px;
+    width: 100%;
 `;
 
 export const StyledCompactDescriptionParagraph = styled.p`
@@ -61,4 +63,5 @@ export const StyledCompactBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin: 10px 0;
 `;

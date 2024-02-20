@@ -9,7 +9,6 @@ export const FlexWrapper = styled.div`
     gap: 16px;
     height: 90vh;
     padding-bottom: 20px;
-
     grid-column: 2/2;
     justify-content: space-between;
     background-color: ${COLORS.gray};
@@ -18,6 +17,7 @@ export const FlexWrapper = styled.div`
 export const SearchResultsContainer = styled.div`
     grid-column: 1/1;
     max-width: 900px;
+    padding: 0 16px;
 `;
 
 type Props = {
@@ -38,33 +38,12 @@ export const ListContainer = styled.div`
     flex-direction: column;
     gap: 16px;
 `;
-export const SubmitButton = styled.button`
-    width: 150px;
-    background-color: ${COLORS.black};
-    color: ${COLORS.white};
-    height: 30px;
-    cursor: pointer;
-    &:hover {
-        background-color: ${COLORS.gray};
-    }
-`;
 
-export const CancelButton = styled.button`
-    width: 150px;
-    background-color: ${COLORS.white};
-    color: ${COLORS.black};
-    height: 30px;
-    cursor: pointer;
-    &:hover {
-        background-color: ${COLORS.white};
-    }
-`;
 export const ButtonWrap = styled.div`
     display: flex;
     flex-direction: row;
     gap: 100px;
-
-    margin-inline: auto;
+    padding: 16px;
 `;
 export const FlexContainer = styled.div`
     display: flex;
@@ -75,44 +54,28 @@ export const FlexContainer = styled.div`
 `;
 export const Header = styled.div`
     display: flex;
+    align-items: center;
     flex-direction: row;
-    align-items: baseline;
+    justify-content: space-evenly;
 `;
-export const NumberofItems = styled.span`
-    width: 100%;
-
-    padding: 5px 10px;
-`;
-export const IconContainer = styled.div``;
 
 export const ListTitle = styled.h3`
     font-weight: 600;
-
-    width: 100%;
-    font-size: 1.2rem;
-    margin-inline: 20px;
-`;
-export const StyledDate = styled.span`
-    font-weight: 600;
-    width: 100%;
-    font-size: 0.9rem;
-
-    margin-inline: 20px;
 `;
 
 export const Wrapper = styled.div`
     display: flex;
-    width: 100%;
-    margin-inline: 20px;
-    align-items: center;
-    align-items: baseline;
+    font-weight: 600;
     margin: 1rem 0;
     flex-direction: column;
 `;
 export const WrapperCompact = styled.div`
     display: flex;
-    align-items: baseline;
+    gap: 30px;
+    margin-inline: 10px;
+    align-items: center;
     height: 60px;
+    max-width: 500px;
     flex-direction: row;
 `;
 export const IconContainerCompact = styled.div`

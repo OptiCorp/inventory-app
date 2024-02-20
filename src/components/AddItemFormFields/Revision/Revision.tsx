@@ -7,33 +7,31 @@ import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { ToolTip } from '../../ToolTip/ToolTip';
 import { StyledDiv, StyledErrorP, StyledIconContainer, StyledInputWrap } from '../styles';
 
-export const ProductNumber = () => {
-    const { watch, register } = useFormContext<ItemSchema>();
-    const selectedTemplate = watch('itemTemplate.id');
+export const Revision = () => {
+    const { register } = useFormContext<ItemSchema>();
 
     return (
         <StyledDiv>
             <StyledInputWrap>
                 <StyledIconContainer>
-                    <label htmlFor="productNumber">Product number</label>
-                    <ToolTip content="Specify a product number">
+                    <label htmlFor="revision">Revision</label>
+                    <ToolTip content="Specify a revision code">
                         <HelpOutlineIcon fontSize="small" />
                     </ToolTip>
                 </StyledIconContainer>
                 <ErrorMessage
-                    name="itemTemplate.productNumber"
+                    name="itemTemplate.revision"
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledInputWrap>
 
             <TextField
-                disabled={!!selectedTemplate}
-                id="filled-disabled"
+                id="filled"
                 sx={{ width: '100%' }}
                 label=""
-                placeholder="E.g BV 113 EU"
+                placeholder="E.g 1.06"
                 variant="filled"
-                {...register('itemTemplate.productNumber')}
+                {...register('itemTemplate.revision')}
             />
         </StyledDiv>
     );

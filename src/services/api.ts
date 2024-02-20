@@ -15,6 +15,7 @@ import {
     Item,
     List,
     Location,
+    LogEntry,
     UpdateCategory,
     UpdateItem,
     UpdateList,
@@ -461,9 +462,10 @@ const apiService = () => {
 
     const updateItemTemplateById = async (
         id: string,
-        itemTemplate: TemplateSchema
+        itemTemplate: TemplateSchema,
+        updatedById: string
     ): Promise<Response> => {
-        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
+        return await putByFetch(`ItemTemplate/${id}?updatedById=${updatedById}`, itemTemplate);
     };
 
     const getItemTemplates = async (): Promise<TemplateSchema[]> => {
@@ -472,6 +474,27 @@ const apiService = () => {
 
     const addItemTemplate = async (itemTemplateBody: AddTemplate): Promise<Response> => {
         return postByFetch('ItemTemplate', itemTemplateBody);
+    };
+
+    // LogEntry
+
+    const getLogEntriesByItemId = async (
+        id: string,
+        pageNumber: number,
+        includeTemplateEntries: boolean
+    ): Promise<LogEntry[]> => {
+        return await getByFetch(
+            `LogEntry/GetLogEntriesByItemId/${id}?page=${pageNumber}&includeTemplateEntries=${includeTemplateEntries}`
+        );
+    };
+
+    const getLogEntriesByItemTemplateId = async (
+        templateId: string,
+        pageNumber: number
+    ): Promise<Response> => {
+        return await getByFetch(
+            `/LogEntry/GetLogEntriesByItemTemplateId/${templateId}?page=${pageNumber}`
+        );
     };
 
     return {
@@ -533,6 +556,8 @@ const apiService = () => {
         getItemTemplateById,
         updateItemTemplateById,
         addItemTemplate,
+        getLogEntriesByItemId,
+        getLogEntriesByItemTemplateId,
     };
 };
 
