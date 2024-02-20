@@ -34,7 +34,7 @@ const themeOptions: ThemeOptions = {
         },
     },
     typography: {
-        fontFamily: 'Archivo',
+        fontFamily: 'Archivo, sans-serif',
     },
     spacing: 4,
     components: {
@@ -47,6 +47,12 @@ const themeOptions: ThemeOptions = {
                     },
                 },
             ],
+            styleOverrides: {
+                root: {
+                    borderRadius: '0px',
+                    boxShadow: 'none',
+                },
+            },
         },
     },
 };

@@ -1,19 +1,21 @@
 import { API_URL } from '../config';
 import { pca } from '../msalConfig';
+import { ItemSchema, TemplateSchema } from '../pages/addItem/hooks/itemValidator';
 
 import {
     AddCategory,
     AddDocument,
-    AddItem,
     AddList,
     AddLocation,
+    AddTemplate,
     AddVendor,
     Category,
     Document,
+    DocumentType,
     Item,
-    ItemTemplate,
     List,
     Location,
+    LogEntry,
     UpdateCategory,
     UpdateItem,
     UpdateList,
@@ -22,7 +24,6 @@ import {
     User,
     UserRole,
     Vendor,
-    DocumentType,
 } from './apiTypes';
 
 const request = {
@@ -309,6 +310,10 @@ const apiService = () => {
         return await getByFetch(`Item/IsWpIdUnique/${id}`);
     };
 
+    const isSerialNumberUnique = async (serialNumber: string): Promise<boolean> => {
+        return await getByFetch(`Item/IsSerialNumberUnique/${serialNumber}`);
+    };
+
     const addList = async (list: AddList): Promise<Response> => {
         return await postByFetch(`List`, list);
     };
@@ -321,7 +326,7 @@ const apiService = () => {
         return await deleteByFetch(`List/${listId}`);
     };
 
-    const addItem = async (items: AddItem[]): Promise<Response> => {
+    const addItem = async (items: ItemSchema[]): Promise<Response | Response[][]> => {
         const res = await postByFetch(`Item`, items);
         return res;
     };
@@ -401,23 +406,6 @@ const apiService = () => {
         return await deleteByFetch(`Vendor/${id}`);
     };
 
-    // ItemTemplate
-
-    const getItemTemplates = async (): Promise<ItemTemplate[]> => {
-        return await getByFetch('ItemTemplate');
-    };
-
-    const getItemTemplateById = async (id: string): Promise<ItemTemplate> => {
-        return await getByFetch(`ItemTemplate/${id}`);
-    };
-
-    const updateItemTemplateById = async (
-        id: string,
-        itemTemplate: ItemTemplate
-    ): Promise<Response> => {
-        return await putByFetch(`ItemTemplate/${id}`, itemTemplate);
-    };
-
     // Category
 
     const getCategory = async (): Promise<Category[]> => {
@@ -464,6 +452,49 @@ const apiService = () => {
 
     const getDocumentTypes = async (): Promise<DocumentType[]> => {
         return await getByFetch(`DocumentType`);
+    };
+
+    // ItemTemplate
+
+    const getItemTemplateById = async (id: string): Promise<TemplateSchema> => {
+        return await getByFetch(`ItemTemplate/${id}`);
+    };
+
+    const updateItemTemplateById = async (
+        id: string,
+        itemTemplate: TemplateSchema,
+        updatedById: string
+    ): Promise<Response> => {
+        return await putByFetch(`ItemTemplate/${id}?updatedById=${updatedById}`, itemTemplate);
+    };
+
+    const getItemTemplates = async (): Promise<TemplateSchema[]> => {
+        return await getByFetch('ItemTemplate');
+    };
+
+    const addItemTemplate = async (itemTemplateBody: AddTemplate): Promise<Response> => {
+        return postByFetch('ItemTemplate', itemTemplateBody);
+    };
+
+    // LogEntry
+
+    const getLogEntriesByItemId = async (
+        id: string,
+        pageNumber: number,
+        includeTemplateEntries: boolean
+    ): Promise<LogEntry[]> => {
+        return await getByFetch(
+            `LogEntry/GetLogEntriesByItemId/${id}?page=${pageNumber}&includeTemplateEntries=${includeTemplateEntries}`
+        );
+    };
+
+    const getLogEntriesByItemTemplateId = async (
+        templateId: string,
+        pageNumber: number
+    ): Promise<Response> => {
+        return await getByFetch(
+            `/LogEntry/GetLogEntriesByItemTemplateId/${templateId}?page=${pageNumber}`
+        );
     };
 
     return {
@@ -516,6 +547,7 @@ const apiService = () => {
         updateCategoryById,
         deleteCategory,
         isWpIdUnique,
+        isSerialNumberUnique,
         addDocument,
         getDocumentsByItemId,
         deleteDocument,
@@ -523,6 +555,9 @@ const apiService = () => {
         getItemTemplates,
         getItemTemplateById,
         updateItemTemplateById,
+        addItemTemplate,
+        getLogEntriesByItemId,
+        getLogEntriesByItemTemplateId,
     };
 };
 

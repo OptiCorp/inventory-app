@@ -1,21 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
-import { Button } from '../../components/Button/Button.tsx';
-import PartCard from '../../components/PartCard/PartCard.tsx';
-import SearchResultCardCompact from '../../components/PartCard/SearchInfoCompact.tsx';
-import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import UmAppContext from '../../contexts/UmAppContext.tsx';
-import { useSnackBar, useWindowDimensions } from '../../hooks';
-import { Item, UpdateList } from '../../services/apiTypes.ts';
-import { useGetListById } from '../../services/hooks/list/useGetListById.tsx';
-
-import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner.tsx';
-
-import { useUpdateList } from '../../services/hooks/list/useUpdateList.tsx';
-import { Container } from '../search/styles.ts';
-import { ListHeader } from './ListHeader.tsx';
-import { SideList } from './sidelist/SideList.tsx';
+import { Button } from '../../components/Button/Button';
+import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
+import ItemCard from '../../components/ItemCard/ItemCard';
+import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import AppContext from '../../contexts/AppContext';
+import { useWindowDimensions } from '../../hooks';
+import { Item, UpdateList } from '../../services/apiTypes';
+import useExportToExcel from '../../services/hooks/export/useExportToExcel';
+import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
+import { useGetListById } from '../../services/hooks/list/useGetListById';
+import { useUpdateList } from '../../services/hooks/list/useUpdateList';
+import { Container } from '../search/styles';
+import { ListHeader } from './ListHeader';
+import { SideList } from './sidelist/SideList';
 import {
     ButtonWrap,
     FlexWrapper,
@@ -23,19 +23,18 @@ import {
     ListTitle,
     SearchContainerList,
     SearchResultsContainer,
-} from './styles.ts';
-import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite.tsx';
+} from './styles';
 
 const ListDetails = () => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const { listId } = useParams();
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
     const { width } = useWindowDimensions();
     const navigate = useNavigate();
     const { data: list, isFetching } = useGetListById(listId!);
-    const { snackbar } = useSnackBar();
     const { data: items, isLoading, fetchNextPage } = useGetItemsInfinite(debouncedSearchTerm);
+    const { exportToExcel } = useExportToExcel();
 
     const handleScroll = (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
@@ -67,7 +66,7 @@ const ListDetails = () => {
         updateList(save, {
             onSuccess: (data) => {
                 setSnackbarText(`${list!.title} was saved`);
-                navigate('/makelist');
+                navigate('/make-list');
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
                     setSnackbarText(`${data.statusText}, please try again.`);
@@ -84,7 +83,7 @@ const ListDetails = () => {
                     <SearchBar
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        placeholder={'Search for ID, description, PO number or S/N'}
+                        placeholder={'Search for ID, serial number or description'}
                     />
                     <Container>
                         {items?.pages.map((page, i) =>
@@ -99,7 +98,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <PartCard part={item} icon={'add'} />
+                                        <ItemCard item={item} icon={'add'} />
                                     </div>
                                 ) : (
                                     <div
@@ -111,7 +110,7 @@ const ListDetails = () => {
                                                 : ''
                                         }
                                     >
-                                        <SearchResultCardCompact part={item} icon={'add'} />
+                                        <SearchResultCardCompact item={item} icon={'add'} />
                                     </div>
                                 )
                             )
@@ -126,7 +125,7 @@ const ListDetails = () => {
                             {list.items ? (
                                 <ListContainer>
                                     {list.items.map((item: Item) => (
-                                        <SideList part={item} key={item.id} />
+                                        <SideList item={item} key={item.id} />
                                     ))}
                                 </ListContainer>
                             ) : null}
@@ -134,12 +133,14 @@ const ListDetails = () => {
                                 <Button variant="white" onClick={handleSave}>
                                     Save list
                                 </Button>
-                                <Button variant="black">Export</Button>
+                                <Button onClick={() => exportToExcel(list.items)} variant="black">
+                                    Export
+                                </Button>
                             </ButtonWrap>
                         </FlexWrapper>
                     </>
                 ) : null}
-                {snackbar}
+
                 {(isLoading || isFetching) && <GlobalSpinner />}
             </SearchContainerList>
         </>

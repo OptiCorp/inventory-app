@@ -10,11 +10,11 @@ interface ButtonProps {
     id?: string;
 }
 
-type ButtonVariant = 'black' | 'white' | 'red';
+type ButtonVariant = 'black' | 'white' | 'red' | 'disabled';
 
 const buttonStyles: Record<
     ButtonVariant,
-    { backgroundColor: string; color: string; height: string }
+    { backgroundColor: string; color: string; height: string; cursor?: string }
 > = {
     black: {
         backgroundColor: COLORS.black,
@@ -30,6 +30,12 @@ const buttonStyles: Record<
         backgroundColor: COLORS.white,
         color: COLORS.red,
         height: '40px',
+    },
+    disabled: {
+        backgroundColor: COLORS.gray,
+        color: COLORS.darkGray,
+        height: '40px',
+        cursor: 'not-allowed',
     },
 };
 

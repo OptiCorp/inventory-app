@@ -1,4 +1,4 @@
-import { Box, ListItem } from '@mui/material';
+import { Box, ListItem, Menu } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
@@ -88,4 +88,18 @@ export const StyledLogOutWrapper = styled.div`
         color: ${COLORS.black};
     }
     cursor: pointer;
+`;
+
+export const AdminMenu = styled(Menu)`
+    width: 100%;
+
+    & .MuiMenu-paper {
+        max-height: 210px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+        width: 130px;
+        padding: 0;
+        & .MuiMenu-list {
+            padding-top: 10px;
+        }
+    }
 `;

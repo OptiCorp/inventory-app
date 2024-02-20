@@ -2,16 +2,15 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
-import SearchResultCardCompact from '../../../components/PartCard/SearchInfoCompact';
+import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 
+import { Box } from '@mui/material';
 import SearchBar from '../../../components/SearchBar/SearchBar';
-import { useSnackBar } from '../../../hooks';
+import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import { PhoneContainer, PhoneListTitle } from './styles';
-import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 
 export const AddMoreCompact = () => {
-    const { snackbar } = useSnackBar();
     const [searchTerm, setSearchTerm] = useState('');
 
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -46,12 +45,13 @@ export const AddMoreCompact = () => {
     return (
         <>
             <PhoneListTitle>Add items</PhoneListTitle>
-
-            <SearchBar
-                setSearchTerm={setSearchTerm}
-                searchTerm={searchTerm}
-                placeholder={'Search for ID, description, PO number or S/N'}
-            />
+            <Box padding="0 16px">
+                <SearchBar
+                    setSearchTerm={setSearchTerm}
+                    searchTerm={searchTerm}
+                    placeholder={'Search for ID, serial number or description'}
+                />
+            </Box>
             <PhoneContainer>
                 {items?.pages.map((page, i) =>
                     page.map((item, index) => (
@@ -63,12 +63,12 @@ export const AddMoreCompact = () => {
                                     : ''
                             }
                         >
-                            <SearchResultCardCompact part={item} icon={'add'} />
+                            <SearchResultCardCompact item={item} icon={'add'} />
                         </div>
                     ))
                 )}
             </PhoneContainer>
-            {snackbar}
+
             {(isLoading || isFetching) && <GlobalSpinner />}
         </>
     );

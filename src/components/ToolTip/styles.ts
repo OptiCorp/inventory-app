@@ -3,12 +3,16 @@ import { COLORS } from '../../style/GlobalStyles';
 
 export const ToolTipContent = styled.div`
     position: absolute;
+    word-break: break-all;
+    text-align: center;
     background-color: ${COLORS.gray};
     left: 20px;
     line-height: 20px;
+    margin: 0;
+
     top: -10px;
-    width: 190px;
-    color: ${COLORS.white};
+
+    color: ${COLORS.black};
     padding: 4px 8px;
     border-radius: 4px;
 `;

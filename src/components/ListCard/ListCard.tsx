@@ -1,21 +1,21 @@
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { List } from '../../services/apiTypes.ts';
-
-import { useDeleteList } from '../../services/hooks/list/useDeleteList.tsx';
-import CustomDialog from '../CustomDialog/CustomDialog.tsx';
-import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles.ts';
+import AppContext from '../../contexts/AppContext';
+import { List } from '../../services/apiTypes';
+import { useDeleteList } from '../../services/hooks/list/useDeleteList';
+import { CustomDialog } from '../CustomDialog/CustomDialog';
+import { StyledDeleteIcon, StyledListWrapper, StyledTitle } from './styles';
 
 type Props = {
-    part: List;
+    item: List;
 };
 
-const ListCard = ({ part }: Props) => {
+export const ListCard = ({ item }: Props) => {
     const navigate = useNavigate();
     const { mutate } = useDeleteList();
     const [open, setOpen] = useState(false);
-
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
         setOpen(true);
@@ -27,26 +27,35 @@ const ListCard = ({ part }: Props) => {
 
     const handleDelete = () => {
         setOpen(true);
-        mutate(part.id);
+        mutate(item.id, {
+            onSuccess: (removeData) => {
+                setSnackbarText(`${item.title} was deleted`);
+
+                if (removeData.status >= 400) {
+                    setSnackbarSeverity('error');
+                    setSnackbarText(`${removeData.statusText}, please try again.`);
+                }
+            },
+        });
         handleClose();
     };
 
     return (
         <>
-            <StyledListWrapper onClick={() => navigate(`${part.id}`)}>
+            <StyledListWrapper onClick={() => navigate(`${item.id}`)}>
                 <div onClick={(e) => handleOpen(e)}>
                     <StyledDeleteIcon style={{ fontSize: '30px' }}></StyledDeleteIcon>
                 </div>
-                <StyledTitle>{part.title}</StyledTitle>
-                {part.updatedDate ? (
+                <StyledTitle>{item.title}</StyledTitle>
+                {item.updatedDate ? (
                     <h4>
-                        Last updated:{' '}
-                        {format(new Date(part.updatedDate), 'dd-MM-yyyy HH:mm:ss').toString()}
+                        Last updated:
+                        {format(new Date(item.updatedDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 ) : (
                     <h4>
-                        Created:{' '}
-                        {format(new Date(part.createdDate), 'dd-MM-yyyy HH:mm:ss').toString()}
+                        Created:
+                        {format(new Date(item.createdDate), 'dd-MM-yyyy HH:mm:ss').toString()}
                     </h4>
                 )}
             </StyledListWrapper>
@@ -60,5 +69,3 @@ const ListCard = ({ part }: Props) => {
         </>
     );
 };
-
-export default ListCard;

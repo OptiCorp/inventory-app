@@ -24,13 +24,12 @@ export type UserRole = {
 
 export type Item = {
     id: string;
+    preCheck: PreCheck;
+    itemTemplateId: string;
     wpId: string;
     serialNumber: string;
-    productNumber: string;
-    categoryId: string;
     vendorId: string;
     locationId: string;
-    description: string;
     parentId: string | null;
     addedById: string | null;
     comment: string | null;
@@ -39,17 +38,12 @@ export type Item = {
     children: Item[] | null;
     createdDate: string;
     updatedDate: string | null;
-    category: Category;
     vendor: Vendor;
     location: Location;
     createdBy: User;
     logEntries: LogEntry[];
     itemTemplate: ItemTemplate;
-};
-
-export type ItemTemplate = {
-    id: string;
-    type: string;
+    documents?: Document;
 };
 
 export type LogEntry = {
@@ -59,12 +53,6 @@ export type LogEntry = {
     userId: string;
     message: string;
     createdDate: string;
-};
-
-export type Category = {
-    id: string;
-    name: string;
-    userId: string;
 };
 
 export type Location = {
@@ -100,15 +88,15 @@ export type MutateItemList = {
 
 export type AddItem = {
     wpId: string;
-    categoryId: string;
     serialNumber: string;
-    productNumber: string;
-    type: string;
+    itemTemplate: ItemTemplate[];
+    itemTemplateId: string;
+    preCheck: PreCheck;
     locationId?: string | null;
-    description: string;
+    documents?: Document;
     parentId?: string | null;
     vendorId: string;
-    addedById: string | null;
+    createdById: string | null;
     comment?: string | null;
 };
 
@@ -116,17 +104,19 @@ export type UpdateItem = {
     id: string;
     wpId: string;
     serialNumber: string;
-    productNumber: string;
     children: Item[] | null;
-    categoryId: string | null | undefined;
     locationId?: string | null;
-    description: string;
     parentId?: string | null;
     vendorId: string;
     addedById: string | null;
     comment?: string | null;
     listId: string | null;
     itemTemplate: ItemTemplate;
+};
+
+export type PreCheck = {
+    check: boolean;
+    comment: string;
 };
 
 export type Vendor = {
@@ -157,6 +147,11 @@ export type UpdateLocation = {
     id: string;
     name: string;
 };
+export type Category = {
+    id: string;
+    name: string;
+    createdById: string;
+};
 
 export type AddCategory = {
     name: string;
@@ -186,8 +181,29 @@ export type Document = {
     bytes: string;
 };
 
+export type ItemTemplate = {
+    inputValue?: string;
+    revision: string;
+    description: string;
+    id: string;
+    category: { id: string; name: string; userId: string };
+    categoryId: string;
+    createdById: string;
+    type: string;
+    productNumber: string;
+};
+
 export type DocumentType = {
     id: string;
     name: string;
     description: string;
+};
+
+export type AddTemplate = {
+    type: string;
+    categoryId: string;
+    description: string;
+    createdById: string;
+    revision: string;
+    productNumber: string;
 };

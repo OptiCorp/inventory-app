@@ -1,11 +1,10 @@
+import { Chip, TextField } from '@mui/material';
 import { format } from 'date-fns';
 import { useContext, useState } from 'react';
-
-import { Chip, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import CustomDialog from '../../components/CustomDialog/CustomDialog';
-import UmAppContext from '../../contexts/UmAppContext';
-import { useSnackBar, useWindowDimensions } from '../../hooks';
+import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
+import AppContext from '../../contexts/AppContext';
+import { useWindowDimensions } from '../../hooks';
 import { List, UpdateList } from '../../services/apiTypes';
 import { useDeleteList } from '../../services/hooks/list/useDeleteList';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList';
@@ -13,10 +12,8 @@ import { DeleteIcon, EditIcon } from './sidelist/styles';
 import {
     FlexContainer,
     Header,
-    IconContainer,
     IconContainerCompact,
     ListTitle,
-    StyledDate,
     Wrapper,
     WrapperCompact,
 } from './styles';
@@ -28,13 +25,12 @@ type Props = {
 export const ListHeader = ({ list }: Props) => {
     const { width } = useWindowDimensions();
 
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [title, setTitle] = useState(list.title);
     const [open, setOpen] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
     const { mutate } = useDeleteList();
     const { mutate: updateList } = useUpdateList(list.id);
-    const { snackbar } = useSnackBar();
 
     const handleOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
@@ -89,48 +85,39 @@ export const ListHeader = ({ list }: Props) => {
 
     return (
         <>
-            {' '}
             {width > 800 ? (
                 <Header>
-                    <Wrapper>
-                        <StyledDate>
-                            {' '}
-                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
-                        </StyledDate>{' '}
-                        <ListTitle>{list.title}</ListTitle>
-                    </Wrapper>
+                    <ListTitle>{list.title}</ListTitle>
+                    <Wrapper>{format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}</Wrapper>
                     <FlexContainer>
-                        <IconContainer>
+                        <div>
                             <Chip
                                 style={{ marginRight: '20px' }}
                                 label={`${list?.items?.length} Items`}
-                            />{' '}
-                        </IconContainer>
-                        <IconContainer onClick={(e) => handleOpenEdit(e)}>
+                            />
+                        </div>
+                        <div onClick={(e) => handleOpenEdit(e)}>
                             <EditIcon />
-                        </IconContainer>
-                        <IconContainer onClick={(e) => handleOpen(e)}>
+                        </div>
+                        <div onClick={(e) => handleOpen(e)}>
                             <DeleteIcon />
-                        </IconContainer>
+                        </div>
                     </FlexContainer>
                 </Header>
             ) : (
                 <>
                     <WrapperCompact>
+                        <ListTitle>{list.title}</ListTitle>
                         <Wrapper>
-                            <StyledDate>
-                                {' '}
-                                {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
-                            </StyledDate>{' '}
-                            <ListTitle>{list.title}</ListTitle>{' '}
-                        </Wrapper>{' '}
+                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
+                        </Wrapper>
                         <IconContainerCompact>
-                            <IconContainer onClick={(e) => handleOpenEdit(e)}>
+                            <div onClick={(e) => handleOpenEdit(e)}>
                                 <EditIcon />
-                            </IconContainer>
-                            <IconContainer onClick={(e) => handleOpen(e)}>
+                            </div>
+                            <div onClick={(e) => handleOpen(e)}>
                                 <DeleteIcon />
-                            </IconContainer>{' '}
+                            </div>
                         </IconContainerCompact>
                     </WrapperCompact>
                 </>
@@ -160,7 +147,6 @@ export const ListHeader = ({ list }: Props) => {
                     variant="standard"
                 />
             </CustomDialog>
-            {snackbar}
         </>
     );
 };

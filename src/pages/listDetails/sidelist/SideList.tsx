@@ -1,31 +1,37 @@
+import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
+import { IconButton } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Item, MutateItemList } from '../../../services/apiTypes.ts';
-import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList.tsx';
-import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
-import IconButton from '@mui/material/IconButton';
-
-import CustomDialog from '../../../components/CustomDialog/CustomDialog.tsx';
-import UmAppContext from '../../../contexts/UmAppContext.tsx';
-import { KeyWord, RemoveIcon, Wrapper } from './styles.ts';
-import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList.tsx';
+import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
+import {
+    StyleIcons,
+    StyledContent,
+    StyledText,
+    StyledTitle,
+} from '../../../components/ItemCard/SearchInfo/styles';
+import AppContext from '../../../contexts/AppContext';
+import { Item, MutateItemList } from '../../../services/apiTypes';
+import { useAddItemsToList } from '../../../services/hooks/items/useAddItemsToList';
+import { useRemoveItemsFromList } from '../../../services/hooks/items/useRemoveItemsFromList';
+import { RemoveIcon, Wrapper } from './styles';
 
 type Props = {
-    part: Item;
+    item: Item;
 };
 
-export const SideList = ({ part }: Props) => {
+export const SideList = ({ item }: Props) => {
     const { listId } = useParams();
-    const { setSnackbarText, setSnackbarSeverity } = useContext(UmAppContext);
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
     const { mutate: mutateAddItemToList } = useAddItemsToList();
+    const [isClicked, setIsClicked] = useState(false);
 
     const handleDelete = (ids: MutateItemList) => {
         mutateRemoveItemFromList(ids, {
             onSuccess: (data) => {
                 setSnackbarSeverity('success');
-                setSnackbarText(`${part.wpId} was deleted`);
+                setSnackbarText(`${item.wpId} was deleted`);
 
                 if (data.status >= 400) {
                     setSnackbarSeverity('error');
@@ -37,7 +43,7 @@ export const SideList = ({ part }: Props) => {
     };
 
     const handleAdd = (ids: MutateItemList) => {
-        console.log('add');
+        setIsClicked(true);
         mutateAddItemToList(ids, {});
     };
 
@@ -53,29 +59,35 @@ export const SideList = ({ part }: Props) => {
         <>
             <>
                 <Wrapper>
-                    <KeyWord>
-                        <b>WP ID</b>
-                        {part.wpId}
-                    </KeyWord>
-                    <KeyWord>
-                        <b>Location</b> {part.location?.name || 'Location'}
-                    </KeyWord>
-                    <KeyWord>
-                        <b>Vendor</b> {part.vendor?.name || 'Vendor'}
-                    </KeyWord>
-
-                    <RemoveIcon onClick={handleClickOpen} />
-                    <IconButton
-                        onClick={() =>
-                            handleAdd({
-                                listId: listId ?? 'N/A',
-                                itemId: part.id,
-                                addSubItems: true,
-                            })
-                        }
-                    >
-                        <SubdirectoryArrowRightIcon />
-                    </IconButton>
+                    <StyledContent>
+                        <StyledTitle>S/N</StyledTitle>
+                        <StyledText>{item.serialNumber}</StyledText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledTitle>Category</StyledTitle>
+                        <StyledText>{item.itemTemplate.category.name ?? ''} </StyledText>
+                    </StyledContent>
+                    <StyledContent>
+                        <StyledTitle>Vendor</StyledTitle>
+                        <StyledText>{item?.vendor?.name ?? ''}</StyledText>
+                    </StyledContent>
+                    <StyleIcons>
+                        <RemoveIcon onClick={handleClickOpen} />
+                        <IconButton
+                            onClick={() =>
+                                handleAdd({
+                                    listId: listId ?? 'N/A',
+                                    itemId: item.id,
+                                    addSubItems: true,
+                                })
+                            }
+                            // TODO: save the state between reloads. currently it resets on reload
+                            color="primary"
+                            disabled={isClicked}
+                        >
+                            <SubdirectoryArrowRightIcon />
+                        </IconButton>
+                    </StyleIcons>
                 </Wrapper>
             </>
 
@@ -86,7 +98,7 @@ export const SideList = ({ part }: Props) => {
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={() =>
                     handleDelete({
-                        itemId: part.id,
+                        itemId: item.id,
                         listId: listId!,
                     })
                 }

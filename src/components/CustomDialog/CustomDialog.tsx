@@ -1,5 +1,4 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { StyledDialogCancelButton, StyledDialogSubmitButton } from './styles';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 interface DialogProps {
     title: string;
@@ -8,16 +7,13 @@ interface DialogProps {
     SubmitButtonOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     CancelButtonOnClick: () => void;
     open: boolean;
-
+    isWarning?: boolean;
+    fullWidth?: boolean;
     onClose?: (e: React.MouseEvent) => void;
     children?: React.ReactNode;
-
-    type?: 'submit' | 'reset' | 'button';
-    PrimaryType?: 'submit' | 'reset' | 'button';
-    form?: string;
 }
 
-const CustomDialog: React.FC<DialogProps> = ({
+export const CustomDialog = ({
     title,
     submitButtonText,
     cancelButtonText,
@@ -26,27 +22,33 @@ const CustomDialog: React.FC<DialogProps> = ({
     open,
     children,
     onClose,
-
-    type,
-    PrimaryType,
-    form,
-}) => {
+    fullWidth,
+    isWarning,
+}: DialogProps) => {
     return (
         <>
-            <Dialog open={open} onClose={onClose}>
+            <Dialog open={open} onClose={onClose} fullWidth={fullWidth}>
                 <DialogTitle>{title}</DialogTitle>
-                {children ? <DialogContent>{children}</DialogContent> : null}
+                {children ? (
+                    <DialogContent>
+                        <div>{children}</div>
+                    </DialogContent>
+                ) : null}
                 <DialogActions>
-                    <StyledDialogCancelButton onClick={CancelButtonOnClick} type={PrimaryType}>
-                        {cancelButtonText ?? 'CANCEL'}
-                    </StyledDialogCancelButton>
-                    <StyledDialogSubmitButton onClick={SubmitButtonOnClick} type={type} form={form}>
-                        {submitButtonText ?? 'CONFIRM'}
-                    </StyledDialogSubmitButton>
+                    <Button variant="text" onClick={CancelButtonOnClick} sx={{ borderRadius: '0' }}>
+                        {cancelButtonText ?? 'Cancel'}
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color={isWarning ? 'error' : 'primary'}
+                        onClick={SubmitButtonOnClick}
+                        sx={{ borderRadius: '0' }}
+                    >
+                        {submitButtonText ?? 'Confirm'}
+                    </Button>
                 </DialogActions>
             </Dialog>
         </>
     );
 };
-
-export default CustomDialog;

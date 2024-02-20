@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
-import UmAppContext from '../../../contexts/UmAppContext';
+import AppContext from '../../../contexts/AppContext';
 import apiService from '../../api';
 export const useDeleteDocument = (itemId: string) => {
     const api = apiService();
     const queryClient = useQueryClient();
-    const { setSnackbarText } = useContext(UmAppContext);
+    const { setSnackbarText } = useContext(AppContext);
     return useMutation({
         mutationFn: (documentId: string) => api.deleteDocument(documentId),
         onSettled(_data, error) {
