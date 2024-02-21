@@ -42,6 +42,7 @@ export const useAddItemForm = () => {
     const appLocation = useLocation();
 
     const methods = useForm<ItemSchema>({
+        mode: 'onChange',
         resolver: zodResolver(itemSchema),
         defaultValues: {
             ...defaultValues,
@@ -180,6 +181,7 @@ export const useAddItemForm = () => {
         setValue,
         resetField,
         templateSubmit,
+        onchange,
         watch,
     };
 };

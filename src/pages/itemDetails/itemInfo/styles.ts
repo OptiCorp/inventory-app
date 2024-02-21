@@ -1,7 +1,7 @@
 import EditIcon from '@mui/icons-material/Edit';
+import { TextField } from '@mui/material';
 import styled from 'styled-components';
 import { COLORS } from '../../../style/GlobalStyles';
-import { TextField } from '@mui/material';
 
 export const ItemInfoForm = styled.form`
     display: flex;

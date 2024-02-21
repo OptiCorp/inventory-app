@@ -31,7 +31,6 @@ export const StyledDiv = styled.div`
 `;
 
 export const EllipsisText = styled.span`
-    flex: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -43,6 +42,7 @@ export const ScrollWrapContainer = styled.div`
     flex-wrap: wrap;
     gap: 10px;
     max-width: 480px;
+    min-height: 20px;
     max-height: 50px;
     overflow-y: auto;
     border: 1px dotted ${COLORS.darkGray};
