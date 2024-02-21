@@ -44,7 +44,6 @@ export const itemSchema = z.object({
     locationId: z.string().min(1, 'Location is required'),
     parentId: z.string().nullish(),
     createdById: z.string().min(1),
-
     uniqueWpId: z.boolean().refine((data) => data, {}),
     uniqueSerialNumber: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),

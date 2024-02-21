@@ -13,15 +13,12 @@ import { SerialNumber } from '../../../components/AddItemFormFields/SerialNumber
 import { Type } from '../../../components/AddItemFormFields/TemplateTypes/TemplateTypes';
 import { Vendor } from '../../../components/AddItemFormFields/Vendor/Vendor';
 import { WpId } from '../../../components/AddItemFormFields/WpId/WpId';
-import { StyledErrorP } from '../../../components/AddItemFormFields/styles';
+import { ScrollWrapContainer, StyledErrorP } from '../../../components/AddItemFormFields/styles';
 import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
 import AppContext from '../../../contexts/AppContext';
 import { Edit } from '../../itemDetails/itemInfo/styles';
 import { ItemSchema } from '../hooks/itemValidator';
-
 import { StyledIconContainer, StyledLabelContainer } from './styles';
-
-import { ScrollWrapContainer } from '../../../components/AddItemFormFields/styles';
 
 export const FormContent = () => {
     const { currentUser } = useContext(AppContext);
@@ -71,7 +68,6 @@ export const FormContent = () => {
                         </label>
                         <Edit onClick={() => setIsOpen((prev) => ({ ...prev, wpId: true }))} />
                     </StyledIconContainer>
-
                     <ErrorMessage
                         name={`wpId[${0}]`}
                         as="span"
@@ -127,13 +123,11 @@ export const FormContent = () => {
                     </label>
                     <Edit onClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: true }))} />
                 </StyledIconContainer>
-
                 <ErrorMessage
                     name={`serialNumber[${0}]`}
                     render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                 />
             </StyledLabelContainer>
-
             <ScrollWrapContainer>
                 {serialNumbers.map((serialNumber, index) => {
                     const fieldName = `serialNumber[${index}]`;
@@ -150,7 +144,6 @@ export const FormContent = () => {
                     );
                 })}
             </ScrollWrapContainer>
-
             <ProductNumber />
             <Revision />
             <Vendor />
@@ -171,7 +164,6 @@ export const FormContent = () => {
                 CancelButtonOnClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}
                 SubmitButtonOnClick={() => setIsOpen((prev) => ({ ...prev, serialNumber: false }))}
             >
-                {' '}
                 {serialNumbers.map((serialNumber, index) => {
                     const fieldName = `serialNumber[${index}]`;
                     return (
@@ -183,7 +175,7 @@ export const FormContent = () => {
                                 onChange={(value: string) =>
                                     handleChange(serialNumbers, index, value, setSerialNumbers)
                                 }
-                            />{' '}
+                            />
                         </div>
                     );
                 })}

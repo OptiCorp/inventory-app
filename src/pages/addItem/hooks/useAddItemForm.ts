@@ -46,7 +46,6 @@ export const useAddItemForm = () => {
         resolver: zodResolver(itemSchema),
         defaultValues: {
             ...defaultValues,
-
             createdById: currentUser?.id ?? '',
         },
     });
@@ -183,7 +182,6 @@ export const useAddItemForm = () => {
         resetField,
         templateSubmit,
         onchange,
-
         watch,
     };
 };

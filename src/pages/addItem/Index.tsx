@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
-
 import { StyledForm } from './addItemForm/styles';
 import { ItemSchema } from './hooks/itemValidator';
 import { useAddItemForm } from './hooks/useAddItemForm';
