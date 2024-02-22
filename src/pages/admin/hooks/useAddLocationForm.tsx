@@ -8,7 +8,7 @@ import { LocationSchema, locationSchema } from './locationValidator';
 
 const defaultValues: LocationSchema = {
     name: '',
-    addedById: '',
+    createdById: '',
 };
 
 export const useAddLocationForm = () => {
@@ -20,7 +20,7 @@ export const useAddLocationForm = () => {
         resolver: zodResolver(locationSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id ?? '',
+            createdById: currentUser?.id ?? '',
         },
     });
     const { handleSubmit, control, reset, resetField, register } = methods;
