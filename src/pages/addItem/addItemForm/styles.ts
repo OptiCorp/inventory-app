@@ -10,3 +10,24 @@ export const StyledForm = styled.form`
         box-sizing: border-box;
     }
 `;
+
+export const StyledLabelContainer = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    gap: 10px;
+    white-space: nowrap;
+`;
+export const StyledIconContainer = styled.div`
+    display: inline-flex;
+    justify-content: baseline;
+    gap: 10px;
+    word-break: keep-all;
+    white-space: nowrap;
+`;
+
+export const StyledFieldBox = styled.div`
+    display: flex;
+    gap: 10px;
+`;
