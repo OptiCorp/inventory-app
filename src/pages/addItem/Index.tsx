@@ -53,6 +53,7 @@ const AddItem = () => {
         steps.some((step) => {
             if (!location.pathname.includes(`${step.slug}`)) {
                 setActiveStep(0);
+                reset();
             } else if (location.pathname === '/add-item/') {
                 setActiveStep(0);
             }

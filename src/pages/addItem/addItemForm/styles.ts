@@ -15,7 +15,6 @@ export const StyledLabelContainer = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-
     gap: 10px;
     white-space: nowrap;
 `;
