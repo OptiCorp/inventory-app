@@ -48,7 +48,7 @@ export const AutocompleteSelect = <T extends FieldValues, K extends Path<T>>({
     return (
         <>
             <StyledIconContainer>
-                <label htmlFor="category">{label}</label>
+                <label htmlFor={name}>{label}</label>
                 {toolTip && (
                     <ToolTip content={toolTip}>
                         <HelpOutlineIcon fontSize="small" />
@@ -59,22 +59,12 @@ export const AutocompleteSelect = <T extends FieldValues, K extends Path<T>>({
             <Autocomplete
                 options={options}
                 fullWidth
+                id={name}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 size="small"
                 value={initialValue ?? null}
                 renderInput={(params) => {
-                    return (
-                        <StyledTextField
-                            {...params}
-                            /* InputProps={{
-                            sx: {
-                                borderRadius: '0',
-                            },
-                        }} */
-                            label={fieldLabel}
-                            variant="outlined"
-                        />
-                    );
+                    return <StyledTextField {...params} label={fieldLabel} variant="outlined" />;
                 }}
                 onChange={(_event, element) => onChange(element ? element?.value : null)}
             />
