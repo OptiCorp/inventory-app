@@ -8,7 +8,7 @@ import { VendorSchema, vendorSchema } from './vendorValidator';
 
 const defaultValues: VendorSchema = {
     name: '',
-    addedById: '',
+    createdById: '',
 };
 
 export const useAddVendorForm = () => {
@@ -20,7 +20,7 @@ export const useAddVendorForm = () => {
         resolver: zodResolver(vendorSchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id ?? '',
+            createdById: currentUser?.id ?? '',
         },
     });
     const { handleSubmit, control, reset, resetField, register } = methods;

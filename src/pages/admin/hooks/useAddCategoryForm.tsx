@@ -8,7 +8,7 @@ import { CategorySchema, categorySchema } from './categoryValidator';
 
 const defaultValues: CategorySchema = {
     name: '',
-    addedById: '',
+    createdById: '',
 };
 
 export const useAddCategoryForm = () => {
@@ -20,7 +20,7 @@ export const useAddCategoryForm = () => {
         resolver: zodResolver(categorySchema),
         defaultValues: {
             ...defaultValues,
-            addedById: currentUser?.id ?? '',
+            createdById: currentUser?.id ?? '',
         },
     });
     const { handleSubmit, control, reset, resetField, register } = methods;
