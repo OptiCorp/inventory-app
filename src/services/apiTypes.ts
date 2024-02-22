@@ -130,7 +130,7 @@ export type Vendor = {
 
 export type AddVendor = {
     name: string;
-    addedById: string;
+    createdById: string;
 };
 
 export type UpdateVendor = {
@@ -140,7 +140,7 @@ export type UpdateVendor = {
 
 export type AddLocation = {
     name: string;
-    addedById: string;
+    createdById: string;
 };
 
 export type UpdateLocation = {
@@ -155,7 +155,7 @@ export type Category = {
 
 export type AddCategory = {
     name: string;
-    addedById: string;
+    createdById: string;
 };
 
 export type UpdateCategory = {
