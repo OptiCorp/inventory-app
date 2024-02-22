@@ -73,5 +73,9 @@ export const TemplateFormContainer = styled.div`
     padding: 16px;
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 500px;
+`;
+
+export const StyledTemplateForm = styled.form`
+    padding-right: 16px;
 `;
