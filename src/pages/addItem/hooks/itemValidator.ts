@@ -20,8 +20,8 @@ const templateSchema = z.object({
 export const itemSchema = z.object({
     itemTemplate: templateSchema,
     itemTemplateId: z.string(),
-    wpId: z.array(z.string().min(1, 'WpId is required')),
-    serialNumber: z.array(z.string().min(1, 'Serial number is required')),
+    wpId: z.array(z.string().min(1, 'WpId is required')).min(1),
+    serialNumber: z.array(z.string().min(1, 'Serial number is required')).min(1),
     vendorId: z.string().min(1, 'Vendor is required'),
     comment: z.string().nullish(),
     isBatch: z.boolean(),

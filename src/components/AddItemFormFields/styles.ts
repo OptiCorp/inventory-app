@@ -9,6 +9,14 @@ export const StyledInputWrap = styled.div`
     white-space: nowrap;
 `;
 
+export const StyledLabelContainer = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    white-space: nowrap;
+`;
+
 export const StyledErrorP = styled.span`
     color: red;
     width: 100%;
@@ -47,4 +55,8 @@ export const ScrollWrapContainer = styled.div`
     overflow-y: auto;
     border: 1px dotted ${COLORS.darkGray};
     padding: 10px;
+`;
+export const StyledFieldBox = styled.div`
+    display: flex;
+    gap: 10px;
 `;
