@@ -68,3 +68,10 @@ export const SubmitButtonContainer = styled.div`
     width: 100%;
     margin: 8px 0;
 `;
+
+export const TemplateFormContainer = styled.div`
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+`;

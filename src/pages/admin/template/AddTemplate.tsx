@@ -1,25 +1,39 @@
 import { FormProvider } from 'react-hook-form';
 import { useAddTemplateForm } from '../hooks/useAddTemplateForm';
-import { AdminInput, FormContainer, InputWrap, StyledForm, SubmitButtonContainer } from '../styles';
-import { Button, MenuItem, Select } from '@mui/material';
-import { FormOption } from '../../../services/apiTypes';
+import { InputWrap, SubmitButtonContainer, TemplateFormContainer } from '../styles';
+import { Button } from '@mui/material';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
+import { FormInput } from '../../../components/FormInput';
+import { AutocompleteSelect } from '../../../components/AutocompleteSelect';
 
 export const AddTemplate = () => {
-    const { methods, onSubmit, register } = useAddTemplateForm();
+    const {
+        methods,
+        onSubmit,
+        formState: { errors },
+    } = useAddTemplateForm();
+
     const { data: categories } = useGetCategories();
 
-    const options: FormOption[] = [
+    /* const options: FormOption[] = [
         { value: 'unit', label: 'Unit' },
         { value: 'assembly', label: 'Assembly' },
         { value: 'subassembly', label: 'Subassembly' },
         { value: 'part', label: 'Part' },
+    ]; */
+
+    const options = [
+        { id: 'unit', name: 'Unit' },
+        { id: 'assembly', name: 'Assembly' },
+        { id: 'subassembly', name: 'Subassembly' },
+        { id: 'part', name: 'Part' },
     ];
 
+    console.log(errors);
     return (
         <FormProvider {...methods}>
-            <FormContainer>
-                <StyledForm
+            <TemplateFormContainer>
+                <form
                     onSubmit={(event) => {
                         event.preventDefault();
                         onSubmit(event).catch((error) => {
@@ -29,34 +43,38 @@ export const AddTemplate = () => {
                     id="addTemplate"
                 >
                     <InputWrap>
-                        <label>Type</label>
-                        <Select sx={{ borderRadius: '0', minWidth: '143px' }} {...register('type')}>
-                            {options.map((opt, index) => (
-                                <MenuItem key={index} value={opt.value}>
-                                    {opt.label}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        <label>Category</label>
+                        <AutocompleteSelect
+                            name="type"
+                            label="Choose a type"
+                            providedOptions={options}
+                            toolTip="Specify a type"
+                        />
+                        <AutocompleteSelect
+                            name="categoryId"
+                            label="Choose a category"
+                            providedOptions={categories as { id: string; name: string }[]}
+                            toolTip="Specify a category"
+                        />
 
-                        <Select
-                            sx={{ borderRadius: '0', minWidth: '143px' }}
-                            {...register('categoryId')}
-                        >
-                            {categories?.map((category, index) => {
-                                return (
-                                    <MenuItem key={index} value={category.id}>
-                                        {category.name}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                        <label>Product number</label>
-                        <AdminInput type="text" {...register('productNumber')} />
-                        <label>Description</label>
-                        <AdminInput type="text" {...register('description')} />
-                        <label>Revision</label>
-                        <AdminInput type="text" {...register('revision')} />
+                        <FormInput
+                            label="Product number"
+                            toolTip="Specify a product number"
+                            placeholder="E.g BV 113 EU"
+                            name="productNumber"
+                        />
+                        <FormInput
+                            label="Revision"
+                            name="revision"
+                            toolTip="Specify a revision number"
+                            placeholder="E.g 1.06"
+                        />
+                        <FormInput
+                            label="Description"
+                            name="description"
+                            placeholder="Description"
+                            isMultiLine
+                            rows={4}
+                        />
                     </InputWrap>
 
                     <SubmitButtonContainer>
@@ -64,8 +82,8 @@ export const AddTemplate = () => {
                             Add template
                         </Button>
                     </SubmitButtonContainer>
-                </StyledForm>
-            </FormContainer>
+                </form>
+            </TemplateFormContainer>
         </FormProvider>
     );
 };

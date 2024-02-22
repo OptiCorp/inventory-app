@@ -25,16 +25,16 @@ export const useAddTemplateForm = () => {
             createdById: currentUser?.id,
         },
     });
-    const { handleSubmit, control, reset, resetField, register, watch } = methods;
+    const { handleSubmit, control, reset, resetField, register, watch, formState } = methods;
     const onSubmit = handleSubmit((data) => {
-        /* console.table(data); */
+        console.table(data);
         mutate(data, {
             onSuccess: () => {
                 /* TODO: Add snackbar if status code 400/500 etc */
-                /* reset({
+                reset({
                     ...defaultValues,
                     createdById: data.createdById,
-                }); */
+                });
                 setSnackbarText(`Template: ${data.revision}-${data.productNumber} created`);
             },
         });
@@ -48,5 +48,6 @@ export const useAddTemplateForm = () => {
         resetField,
         register,
         watch,
+        formState,
     };
 };
