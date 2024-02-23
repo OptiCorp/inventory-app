@@ -34,7 +34,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
 ];
 
 const AddItem = () => {
-    const { methods, onSubmit, trigger } = useAddItemForm();
+    const { methods, onSubmit, trigger, reset } = useAddItemForm();
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -53,6 +53,7 @@ const AddItem = () => {
         steps.some((step) => {
             if (!location.pathname.includes(`${step.slug}`)) {
                 setActiveStep(0);
+                reset();
             } else if (location.pathname === '/add-item/') {
                 setActiveStep(0);
             }
@@ -64,6 +65,26 @@ const AddItem = () => {
         setActiveStep(currentStep !== -1 ? currentStep : 0);
     }, [location.pathname]);
 
+    useEffect(() => {
+        const entries = performance.getEntriesByType('navigation');
+        if (entries && entries.length > 0 && 'type' in entries[0]) {
+            const navigationEntry: PerformanceNavigationTiming =
+                entries[0] as PerformanceNavigationTiming;
+            if (navigationEntry.type === 'reload') {
+                reset();
+                setActiveStep(0);
+                navigate(`/add-item/`);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        window.onbeforeunload = () => true;
+
+        return () => {
+            window.onbeforeunload = null;
+        };
+    }, []);
     return (
         <FormProvider {...methods}>
             {steps.some((step) => location.pathname.includes(`/add-item/${step.slug}`)) && (

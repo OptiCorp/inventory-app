@@ -9,6 +9,14 @@ export const StyledInputWrap = styled.div`
     white-space: nowrap;
 `;
 
+export const StyledLabelContainer = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    white-space: nowrap;
+`;
+
 export const StyledErrorP = styled.span`
     color: red;
     width: 100%;
@@ -31,7 +39,6 @@ export const StyledDiv = styled.div`
 `;
 
 export const EllipsisText = styled.span`
-    flex: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -43,8 +50,13 @@ export const ScrollWrapContainer = styled.div`
     flex-wrap: wrap;
     gap: 10px;
     max-width: 480px;
+    min-height: 20px;
     max-height: 50px;
     overflow-y: auto;
     border: 1px dotted ${COLORS.darkGray};
     padding: 10px;
+`;
+export const StyledFieldBox = styled.div`
+    display: flex;
+    gap: 10px;
 `;

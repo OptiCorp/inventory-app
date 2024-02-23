@@ -1,9 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 import { useDebounce } from 'usehooks-ts';
-import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
 import { useIsSerialNumberUnique } from '../../../services/hooks/items/useIsSerialNumberUnique.tsx';
 import { ToolTip } from '../../ToolTip/ToolTip.tsx';
 import {
@@ -19,26 +16,12 @@ import { StyledParagraph } from '../WpId/styles.ts';
 
 type SerialNumberProps = {
     serialNumber?: string;
-    fieldName: string;
     isPlainText?: boolean;
     onChange: (value: string) => void;
 };
-export const SerialNumber = ({
-    serialNumber,
-    fieldName,
-    onChange,
-    isPlainText,
-}: SerialNumberProps) => {
-    const { register, setValue } = useFormContext<ItemSchema>();
-    const [inputValue, setInputValue] = useState(serialNumber!);
+export const SerialNumber = ({ serialNumber, onChange, isPlainText }: SerialNumberProps) => {
     const debouncedSerialNumber = useDebounce(serialNumber, 500);
     const { data: isUnique, isLoading } = useIsSerialNumberUnique(debouncedSerialNumber!);
-
-    useEffect(() => {
-        setValue(fieldName as keyof ItemSchema, inputValue);
-        setValue('uniqueSerialNumber', isUnique!);
-        onChange(inputValue);
-    }, [setValue, inputValue, isUnique]);
 
     if (isPlainText) {
         return <EllipsisText>{serialNumber}</EllipsisText>;
@@ -55,7 +38,7 @@ export const SerialNumber = ({
                         </ToolTip>
                     </StyledIconContainer>
                     <ErrorMessage
-                        name="serialNumber"
+                        name={`serialNumber[${0}]`}
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />
                 </StyledInputWrap>
@@ -64,11 +47,10 @@ export const SerialNumber = ({
                     sx={{ width: '100%', padding: '0' }}
                     hiddenLabel
                     size="small"
-                    {...register(fieldName as keyof ItemSchema)}
                     variant="filled"
                     placeholder="E.g 1-12-2023.1.2"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
+                    value={serialNumber}
+                    onChange={(e) => onChange(e.target.value)}
                 />
                 {isLoading && <p>Checking...</p>}
                 <>

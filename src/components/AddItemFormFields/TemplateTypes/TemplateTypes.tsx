@@ -25,10 +25,11 @@ export const Type: FC = () => {
         control,
 
         name: 'itemTemplate.type',
+        defaultValue: '',
     });
 
     const selectedType = options.find(
-        (option) => option.label.toLowerCase() === value.toLowerCase()
+        (option) => option?.label.toLowerCase() === value.toLowerCase()
     );
 
     return (
@@ -41,10 +42,12 @@ export const Type: FC = () => {
                             <HelpOutlineIcon fontSize="small" />
                         </ToolTip>
                     </StyledIconContainer>
-                    <ErrorMessage
-                        name="itemTemplate.type"
-                        render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
-                    />
+                    {!watch('itemTemplate.type') && (
+                        <ErrorMessage
+                            name="itemTemplate.type"
+                            render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                        />
+                    )}
                 </StyledInputWrap>
                 <Autocomplete
                     options={options}
@@ -53,7 +56,7 @@ export const Type: FC = () => {
                     id="controlled-demo"
                     sx={{ width: '100%' }}
                     size="small"
-                    value={selectedType}
+                    value={selectedType ?? null}
                     isOptionEqualToValue={(option, value) => option.value === value.value}
                     disabled={!!selectedTemplate}
                     onChange={(_event, newValue) => {

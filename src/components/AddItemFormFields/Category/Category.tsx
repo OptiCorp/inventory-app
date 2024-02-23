@@ -16,6 +16,7 @@ export const Category = () => {
         field: { onChange, value },
     } = useController({
         name: 'itemTemplate.categoryId',
+        defaultValue: '',
         control,
     });
     const selectedTemplate = watch('itemTemplate.id');
@@ -47,10 +48,12 @@ export const Category = () => {
                         <HelpOutlineIcon fontSize="small" />
                     </ToolTip>
                 </StyledIconContainer>
-                <ErrorMessage
-                    name="itemTemplate.categoryId"
-                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
-                />
+                {!watch('itemTemplate.categoryId') && (
+                    <ErrorMessage
+                        name="itemTemplate.categoryId"
+                        render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                    />
+                )}
             </StyledInputWrap>
             <Autocomplete
                 options={categoryOptions}
@@ -58,7 +61,7 @@ export const Category = () => {
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 size="small"
                 sx={{ width: '100%' }}
-                value={initialValue}
+                value={initialValue ?? null}
                 renderInput={(params) => (
                     <TextField {...params} label="Categories" variant="outlined" />
                 )}
