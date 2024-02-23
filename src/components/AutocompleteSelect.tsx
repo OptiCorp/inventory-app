@@ -45,6 +45,10 @@ export const AutocompleteSelect = <T extends FieldValues, K extends Path<T>>({
         ? { value: selectedValue.id, label: selectedValue.name ?? '' }
         : null;
 
+    if (!options) {
+        return null;
+    }
+
     return (
         <>
             <StyledIconContainer>
