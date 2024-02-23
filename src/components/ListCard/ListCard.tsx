@@ -65,6 +65,7 @@ export const ListCard = ({ item }: Props) => {
                 title="Delete list?"
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={handleDelete}
+                isWarning
             />
         </>
     );

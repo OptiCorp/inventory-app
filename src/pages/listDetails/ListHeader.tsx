@@ -126,6 +126,7 @@ export const ListHeader = ({ list }: Props) => {
                 open={open}
                 onClose={handleClose}
                 title="Delete list?"
+                isWarning
                 CancelButtonOnClick={handleClose}
                 SubmitButtonOnClick={handleDelete}
             />
