@@ -4,6 +4,7 @@ import { TemplateSchema, templateSchema } from './templateValidator';
 import { useContext } from 'react';
 import AppContext from '../../../contexts/AppContext';
 import { useForm } from 'react-hook-form';
+import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 
 const defaultValues: TemplateSchema = {
     productNumber: '',
@@ -16,7 +17,7 @@ const defaultValues: TemplateSchema = {
 
 export const useAddTemplateForm = () => {
     const { mutate } = useAddItemTemplate();
-    const { currentUser, setSnackbarText } = useContext(AppContext);
+    const { currentUser, setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
 
     const methods = useForm<TemplateSchema>({
         resolver: zodResolver(templateSchema),
@@ -28,13 +29,17 @@ export const useAddTemplateForm = () => {
     const { handleSubmit, control, reset, resetField, register, watch, formState } = methods;
     const onSubmit = handleSubmit((data) => {
         mutate(data, {
-            onSuccess: () => {
-                /* TODO: Add snackbar if status code 400/500 etc */
+            onSuccess: (responseData) => {
+                handleApiRequestSnackbar(
+                    responseData,
+                    `Template: ${data.revision}-${data.productNumber} created`,
+                    setSnackbarSeverity,
+                    setSnackbarText
+                );
                 reset({
                     ...defaultValues,
                     createdById: data.createdById,
                 });
-                setSnackbarText(`Template: ${data.revision}-${data.productNumber} created`);
             },
         });
     });
