@@ -5,54 +5,7 @@ import { ToolTip } from './ToolTip/ToolTip';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { StyledIconContainer, StyledInputWrap } from './AddItemFormFields/styles';
 import { ErrorMessage } from '@hookform/error-message';
-import { ErrorP } from '../pages/itemDetails/itemInfo/styles'; /*
-
-type FormInputProps<TMultiLine = boolean> = {
-    label: string;
-    id: string;
-    toolTip?: string;
-    placeholder?: ComponentProps<'input'>['placeholder'];
-    onChange?: React.ChangeEventHandler<HTMLInputElement>;
-    onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    ref?: React.Ref<HTMLInputElement>;
-    name?: string;
-    disabled?: boolean;
-    isMultiLine?: TMultiLine extends true ? true : never;
-    rows?: TMultiLine extends true ? number : never;
-};
-
-export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
-    ({ label, id, toolTip, placeholder, isMultiLine, rows, ...props }, ref) => (
-        <StyledDiv>
-            <StyledInputWrap>
-                <StyledIconContainer>
-                    <label htmlFor={id}>{label}</label>
-                    {toolTip && (
-                        <ToolTip content={toolTip}>
-                            <HelpOutlineIcon fontSize="small" />
-                        </ToolTip>
-                    )}
-                </StyledIconContainer>
-            </StyledInputWrap>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <TextField
-                    placeholder={placeholder}
-                    multiline={isMultiLine}
-                    rows={rows}
-                    id={id}
-                    variant="filled"
-                    ref={ref}
-                    {...props}
-                    fullWidth
-                />
-                <ErrorMessage name={id} render={({ message }) => <ErrorP>{message}</ErrorP>} />
-            </div>
-        </StyledDiv>
-    )
-);
-
-FormInput.displayName = 'FormInput';
- */
+import { ErrorP } from '../pages/itemDetails/itemInfo/styles';
 type FormInputProps<T extends FieldValues, K extends Path<T>, TMultiLine = boolean> = {
     label: string;
     toolTip?: string;
