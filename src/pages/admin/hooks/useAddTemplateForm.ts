@@ -27,7 +27,6 @@ export const useAddTemplateForm = () => {
     });
     const { handleSubmit, control, reset, resetField, register, watch, formState } = methods;
     const onSubmit = handleSubmit((data) => {
-        console.table(data);
         mutate(data, {
             onSuccess: () => {
                 /* TODO: Add snackbar if status code 400/500 etc */
