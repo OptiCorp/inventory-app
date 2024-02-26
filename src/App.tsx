@@ -34,6 +34,7 @@ import { Login } from './pages/login/Login';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 import React from 'react';
+import { AddTemplate } from './pages/admin/template/AddTemplate';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -74,6 +75,7 @@ function App() {
                     <Route path="add-vendor" element={<AddVendor />} />
                     <Route path="locations" element={<Locations />} />
                     <Route path="add-location" element={<AddLocation />} />
+                    <Route path="add-template" element={<AddTemplate />} />
                 </Route>
             </Route>
         )
