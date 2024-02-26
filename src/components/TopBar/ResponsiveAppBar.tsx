@@ -23,6 +23,7 @@ const settings = [
     { text: 'Categories', location: 'admin/categories' },
     { text: 'Vendors', location: 'admin/vendors' },
     { text: 'Locations', location: 'admin/locations' },
+    { text: 'Templates', location: 'admin/add-template' },
 ];
 
 function ResponsiveAppBar() {

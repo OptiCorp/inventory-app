@@ -2,7 +2,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import DoneIcon from '@mui/icons-material/Done';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import {
     Category,
     Location,
@@ -19,6 +19,9 @@ import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor';
 import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor';
 import { SearchType } from '../../utils/constant';
 import { StyledAdminActions, StyledAdminSearchCardContainer, StyledTitleContainer } from './styles';
+import { CustomDialog } from '../CustomDialog/CustomDialog';
+import AppContext from '../../contexts/AppContext';
+import { handleApiRequestSnackbar } from '../../utils/handleApiRequestSnackbar';
 
 type Props = {
     data: Category | Vendor | Location;
@@ -26,7 +29,10 @@ type Props = {
 };
 
 const AdminSearchCard = ({ data, searchType }: Props) => {
+    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [clickedElement, setClickedElement] = useState<typeof data.name | null>(null);
     const { mutate: updateCategory } = useUpdateCategory(data.id);
     const { mutate: updateVendor } = useUpdateVendor(data.id);
     const { mutate: updateLocation } = useUpdateLocation(data.id);
@@ -76,14 +82,47 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
     const handleDelete = () => {
         switch (searchType) {
             case SearchType.Category:
-                deleteCategory();
+                deleteCategory(undefined, {
+                    onSuccess: (data) => {
+                        handleApiRequestSnackbar(
+                            data,
+                            `Category: ${clickedElement} deleted`,
+                            setSnackbarSeverity,
+                            setSnackbarText
+                        );
+                    },
+                });
                 break;
             case SearchType.Vendor:
-                deleteVendor();
+                deleteVendor(undefined, {
+                    onSuccess: (data) => {
+                        handleApiRequestSnackbar(
+                            data,
+                            `Vendor: ${clickedElement} deleted`,
+                            setSnackbarSeverity,
+                            setSnackbarText
+                        );
+                    },
+                });
                 break;
             case SearchType.Location:
-                deleteLocation();
+                deleteLocation(undefined, {
+                    onSuccess: (data) => {
+                        handleApiRequestSnackbar(
+                            data,
+                            `Location: ${clickedElement} deleted`,
+                            setSnackbarSeverity,
+                            setSnackbarText
+                        );
+                    },
+                });
+                break;
         }
+    };
+
+    const handleSelected = () => {
+        setClickedElement(data.name);
+        setIsOpen(true);
     };
 
     return (
@@ -113,13 +152,30 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
                     )}
                 </Button>
                 <Button
-                    onClick={() => handleDelete()}
+                    onClick={() => handleSelected()}
                     color="error"
                     sx={{ color: 'black', margin: '0 4px' }}
                 >
                     <DeleteIcon sx={{ fontSize: 36 }} />
                 </Button>
             </StyledAdminActions>
+            <CustomDialog
+                title={`Delete ${clickedElement}?`}
+                SubmitButtonOnClick={() => {
+                    handleDelete();
+                    setIsOpen(false);
+                }}
+                CancelButtonOnClick={() => setIsOpen(false)}
+                isWarning
+                open={isOpen}
+            >
+                <div>
+                    <p>
+                        Are you sure you want to delete <strong>{clickedElement}</strong>?
+                    </p>
+                    <p>This will be permanently deleted.</p>
+                </div>
+            </CustomDialog>
         </StyledAdminSearchCardContainer>
     );
 };

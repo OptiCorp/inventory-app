@@ -34,6 +34,7 @@ import { Login } from './pages/login/Login';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 import React from 'react';
+import { AddTemplate } from './pages/admin/template/AddTemplate';
 import { FindTemplates } from './pages/admin/template/FindTemplates';
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
                     <Route path="find-templates" element={<FindTemplates />} />
                     <Route path="find-templates/search/:searchParam?" element={<FindTemplates />} />
                     <Route path="add-location" element={<AddLocation />} />
+                    <Route path="add-template" element={<AddTemplate />} />
                 </Route>
             </Route>
         )

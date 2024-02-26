@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS } from '../../style/GlobalStyles';
+import { TextField } from '@mui/material';
 
 export const StyledInputWrap = styled.div`
     display: flex;
@@ -55,6 +56,12 @@ export const ScrollWrapContainer = styled.div`
     overflow-y: auto;
     border: 1px dotted ${COLORS.darkGray};
     padding: 10px;
+`;
+
+export const StyledTextField = styled(TextField)`
+    fieldset {
+        border-radius: 0;
+    }
 `;
 export const StyledFieldBox = styled.div`
     display: flex;
