@@ -34,6 +34,7 @@ import { Login } from './pages/login/Login';
 import Search from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 import React from 'react';
+import { FindTemplates } from './pages/admin/template/FindTemplates';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -73,6 +74,8 @@ function App() {
                     <Route path="vendors" element={<Vendors />} />
                     <Route path="add-vendor" element={<AddVendor />} />
                     <Route path="locations" element={<Locations />} />
+                    <Route path="find-templates" element={<FindTemplates />} />
+                    <Route path="find-templates/search/:searchParam?" element={<FindTemplates />} />
                     <Route path="add-location" element={<AddLocation />} />
                 </Route>
             </Route>
