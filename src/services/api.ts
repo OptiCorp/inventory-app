@@ -13,6 +13,7 @@ import {
     Document,
     DocumentType,
     Item,
+    ItemTemplate,
     List,
     Location,
     LogEntry,
@@ -460,6 +461,13 @@ const apiService = () => {
         return await getByFetch(`ItemTemplate/${id}`);
     };
 
+    const getItemTemplatesBySearchString = async (
+        searchString: string,
+        pageNumber: number
+    ): Promise<ItemTemplate[]> => {
+        return await getByFetch(`ItemTemplate/BySearchString/${searchString}?page=${pageNumber}`);
+    };
+
     const updateItemTemplateById = async (
         id: string,
         itemTemplate: TemplateSchema,
@@ -554,6 +562,7 @@ const apiService = () => {
         getDocumentTypes,
         getItemTemplates,
         getItemTemplateById,
+        getItemTemplatesBySearchString,
         updateItemTemplateById,
         addItemTemplate,
         getLogEntriesByItemId,
