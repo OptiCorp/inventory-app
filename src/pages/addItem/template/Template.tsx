@@ -7,7 +7,7 @@ import { useGetItemTemplates } from '../../../services/hooks/template/useGetItem
 import { ItemSchema } from '../hooks/itemValidator';
 import { Container } from './styles';
 
-export default function Template() {
+export function Template() {
     const { data: templates = [] } = useGetItemTemplates();
     const { control, reset, watch, setValue } = useFormContext<ItemSchema>();
     const {

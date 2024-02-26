@@ -3,13 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../components/Button/Button';
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
-import ItemCard from '../../components/ItemCard/ItemCard';
-import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import { ItemCard } from '../../components/ItemCard/ItemCard';
+import { SearchResultCardCompact } from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
 import AppContext from '../../contexts/AppContext';
 import { useWindowDimensions } from '../../hooks';
 import { Item, UpdateList } from '../../services/apiTypes';
-import useExportToExcel from '../../services/hooks/export/useExportToExcel';
+import { useExportToExcel } from '../../services/hooks/export/useExportToExcel';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../services/hooks/list/useGetListById';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList';
@@ -25,7 +25,7 @@ import {
     SearchResultsContainer,
 } from './styles';
 
-const ListDetails = () => {
+export const ListDetails = () => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const { listId } = useParams();
     const [searchTerm, setSearchTerm] = useState('');
@@ -146,5 +146,3 @@ const ListDetails = () => {
         </>
     );
 };
-
-export default ListDetails;

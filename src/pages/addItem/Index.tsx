@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
-import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
 import { StyledForm } from './addItemForm/styles';
 import { ItemSchema } from './hooks/itemValidator';
 import { useAddItemForm } from './hooks/useAddItemForm';
@@ -33,7 +33,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
     },
 ];
 
-const AddItem = () => {
+export const AddItem = () => {
     const { methods, onSubmit, trigger, reset } = useAddItemForm();
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -110,5 +110,3 @@ const AddItem = () => {
         </FormProvider>
     );
 };
-
-export default AddItem;

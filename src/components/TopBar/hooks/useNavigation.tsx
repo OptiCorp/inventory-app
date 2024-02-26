@@ -1,7 +1,7 @@
 import { useMsal } from '@azure/msal-react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-const useNavigationControl = () => {
+export const useNavigationControl = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { listId } = useParams();
@@ -45,5 +45,3 @@ const useNavigationControl = () => {
         handleSignOut,
     };
 };
-
-export default useNavigationControl;

@@ -3,10 +3,10 @@ import { Box } from '@mui/material';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Button as SubmitButton } from '../../Button/Button';
-import File from '../../File/File';
+import { File } from '../../File/File';
 import { Wrapper } from './styles';
 
-const AddItemUploadMobile = () => {
+export const AddItemUploadMobile = () => {
     const { setValue, getValues } = useFormContext();
     const [files, setFiles] = useState<File[]>();
     const inputFile = useRef<HTMLInputElement | null>(null);
@@ -88,4 +88,3 @@ const AddItemUploadMobile = () => {
         </>
     );
 };
-export default AddItemUploadMobile;

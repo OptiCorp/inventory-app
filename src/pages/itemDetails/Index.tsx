@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import { Comments } from '../../components/ItemDetails/CommentForm/CommentForm';
 import { ExampleUpload } from '../../components/Upload/Upload';
-import UploadMobile from '../../components/Upload/UploadMobile/UploadMobile';
+import { UploadMobile } from '../../components/Upload/UploadMobile/UploadMobile';
 import AppContext from '../../contexts/AppContext';
 import { useWindowDimensions } from '../../hooks';
 import { useDeleteItemById } from '../../services/hooks/items/useDeleteItemById';
@@ -13,11 +13,11 @@ import { useGetItemById } from '../../services/hooks/items/useGetItemById';
 import { ButtonContainer } from '../addItem/styles';
 import { Log } from './Log';
 import { Hierarchy } from './hierarchy';
-import ItemInfo from './itemInfo/ItemInfo';
+import { ItemInfo } from './itemInfo/ItemInfo';
 import { useUpdateItemForm } from './itemInfo/hooks/useUpdateItemForm';
 import { BreadcrumbLink, BreadcrumbsMargin, StyledContainerDiv } from './styles';
 
-const ItemDetails = () => {
+export const ItemDetails = () => {
     const { id } = useParams() as { id: string };
     const { data: item, isLoading } = useGetItemById(id);
     const { methods } = useUpdateItemForm(item!);
@@ -102,5 +102,3 @@ const ItemDetails = () => {
         </StyledContainerDiv>
     );
 };
-
-export default ItemDetails;

@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 
 import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
-import useNavigationControl from './hooks/useNavigation';
+import { useNavigationControl } from './hooks/useNavigation';
 import {
     CompactContainer,
     StyledBackButton,
@@ -142,5 +142,3 @@ export const TopBar = () => {
         </>
     );
 };
-
-export default TopBar;

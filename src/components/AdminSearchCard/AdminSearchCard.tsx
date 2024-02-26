@@ -28,7 +28,7 @@ type Props = {
     searchType: SearchType;
 };
 
-const AdminSearchCard = ({ data, searchType }: Props) => {
+export const AdminSearchCard = ({ data, searchType }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -179,5 +179,3 @@ const AdminSearchCard = ({ data, searchType }: Props) => {
         </StyledAdminSearchCardContainer>
     );
 };
-
-export default AdminSearchCard;

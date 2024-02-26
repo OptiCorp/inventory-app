@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
-import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
+import { SearchResultCardCompact } from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 
 import { Box } from '@mui/material';
-import SearchBar from '../../../components/SearchBar/SearchBar';
+import { SearchBar } from '../../../components/SearchBar/SearchBar';
 import { useGetItemsInfinite } from '../../../services/hooks/items/useGetItemsInfinite';
 import { useGetListById } from '../../../services/hooks/list/useGetListById';
 import { PhoneContainer, PhoneListTitle } from './styles';

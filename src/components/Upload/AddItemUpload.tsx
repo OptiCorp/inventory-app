@@ -3,9 +3,9 @@ import { ChangeEvent, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { COLORS } from '../../style/GlobalStyles';
 import { Button as SubmitButton } from '../Button/Button';
-import File from '../File/File';
+import { File } from '../File/File';
 
-const AddItemUpload = () => {
+export const AddItemUpload = () => {
     const { setValue, getValues } = useFormContext();
     const [files, setFiles] = useState<File[]>();
     const inputFile = useRef<HTMLInputElement | null>(null);
@@ -59,4 +59,3 @@ const AddItemUpload = () => {
         </Box>
     );
 };
-export default AddItemUpload;

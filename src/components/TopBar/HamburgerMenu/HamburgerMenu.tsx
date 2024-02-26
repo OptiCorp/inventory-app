@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useNavigationControl from '../hooks/useNavigation';
+import { useNavigationControl } from '../hooks/useNavigation';
 import { DropdownItem, HamburgerContainer } from './styles';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 type Props = {
