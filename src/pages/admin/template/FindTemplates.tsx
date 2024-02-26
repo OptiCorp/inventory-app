@@ -3,9 +3,12 @@ import { useGetItemTemplatesInfinite } from '../../../services/hooks/template/us
 import { useEffect, useRef, useState } from 'react';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Button, Typography } from '@mui/material';
+import { COLORS } from '../../../style/GlobalStyles';
 
 export const FindTemplates = () => {
+    const navigate = useNavigate();
     const { searchParam } = useParams<{ searchParam: string }>();
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -52,20 +55,46 @@ export const FindTemplates = () => {
     }, [data, hasNextPage, isFetchingNextPage]);
 
     return (
-        <>
-            <SearchBar
-                setSearchTerm={setSearchTerm}
-                searchTerm={searchTerm}
-                placeholder="Search for type or description"
-            />
+        <div style={{ padding: '16px' }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    /* button: {
+                        flex: 'none',
+                    }, */
+                }}
+            >
+                <SearchBar
+                    setSearchTerm={setSearchTerm}
+                    searchTerm={searchTerm}
+                    placeholder="Search for type or description"
+                />
+
+                <Button
+                    sx={{
+                        whiteSpace: 'nowrap',
+                        minWidth: 'max-content',
+                    }}
+                    onClick={() => navigate('/admin/add-template')}
+                    variant="contained"
+                >
+                    Add Template
+                </Button>
+            </Box>
 
             {isLoading && <GlobalSpinner />}
 
-            <div style={{ maxHeight: '100px', overflowY: 'scroll' }}>
+            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
                 {data?.pages.map((page, i) =>
                     page.map((template, index) => (
                         <div
                             key={index}
+                            style={{
+                                display: 'flex',
+                                gap: '16px',
+                                flexDirection: 'column',
+                                margin: '32px',
+                            }}
                             ref={
                                 i === data.pages.length - 1 &&
                                 index === page.length - 1 &&
@@ -74,16 +103,42 @@ export const FindTemplates = () => {
                                     : undefined
                             }
                         >
-                            <div style={{ display: 'flex', gap: '10px', border: '1px solid red' }}>
-                                <p>{template.category.name}</p>
-                                <p>{template.type}</p>
-                                <p>{template.description}</p>
-                            </div>
+                            <Template template={template} />
                         </div>
                     ))
                 )}
             </div>
-            <button onClick={() => fetchNextPage()}>Next</button>
-        </>
+        </div>
+    );
+};
+
+type TemplateProps = {
+    template: {
+        type: string;
+        description: string;
+        category: {
+            name: string;
+        };
+    };
+};
+
+export const Template = ({ template }: TemplateProps) => {
+    return (
+        <div
+            style={{
+                display: 'flex',
+                background: COLORS.lightestGray,
+                boxShadow: '2px 4px 4px 0 rgba(0, 0, 0, 0.2)',
+                width: '550px',
+            }}
+        >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="body2">TYPE</Typography>
+                <Typography>{template.type}</Typography>
+                <Typography variant="body2">CATEGORY</Typography>
+                <Typography>{template.category?.name}</Typography>
+            </div>
+            <Typography>{template.description}</Typography>
+        </div>
     );
 };
