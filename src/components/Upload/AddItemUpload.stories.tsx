@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import AddItemUpload from './AddItemUpload';
+import { AddItemUpload } from './AddItemUpload';
 
 const meta = {
     title: 'components/AddItemUpload',
