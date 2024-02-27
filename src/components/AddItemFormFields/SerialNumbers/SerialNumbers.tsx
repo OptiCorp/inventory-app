@@ -18,6 +18,24 @@ export const SerialNumbers = () => {
     const {
         field: { value, onChange },
     } = useController({ name: 'serialNumber', control });
+    const [oldSerialNumber, setOldSerialNumber] = useState(value);
+    const [serialNumbers, setSerialNumber] = useState(value);
+
+    const handleCancel = () => {
+        setIsOpen((prev) => !prev);
+        setSerialNumber(oldSerialNumber);
+    };
+    const handleChange = (newValue: string, index: number) => {
+        const newValues = [...value];
+        newValues[index] = newValue;
+        setSerialNumber(newValues);
+    };
+
+    const handleSave = () => {
+        onChange(serialNumbers);
+        setOldSerialNumber(serialNumbers);
+        setIsOpen((prev) => !prev);
+    };
     return (
         <>
             <div>
@@ -36,17 +54,13 @@ export const SerialNumbers = () => {
                 </StyledLabelContainer>
 
                 <ScrollWrapContainer>
-                    {value.map((serialNumber, index) => {
+                    {serialNumbers.map((serialNumber, index) => {
                         return (
                             <SerialNumber
                                 key={index}
                                 serialNumber={serialNumber}
                                 isPlainText
-                                onChange={(newValue: string) => {
-                                    const newValues = [...value];
-                                    newValues[index] = newValue;
-                                    onChange(newValues);
-                                }}
+                                onChange={(value) => handleChange(value, index)}
                             />
                         );
                     })}
@@ -57,19 +71,15 @@ export const SerialNumbers = () => {
                 fullWidth={true}
                 onClose={() => setIsOpen((prev) => !prev)}
                 title="Edit Serial number"
-                CancelButtonOnClick={() => setIsOpen((prev) => !prev)}
-                SubmitButtonOnClick={() => setIsOpen((prev) => !prev)}
+                CancelButtonOnClick={handleCancel}
+                SubmitButtonOnClick={handleSave}
             >
-                {value.map((serialNumber, index) => {
+                {serialNumbers.map((serialNumber, index) => {
                     return (
                         <div key={index}>
                             <SerialNumber
                                 serialNumber={serialNumber}
-                                onChange={(newValue: string) => {
-                                    const newValues = [...value];
-                                    newValues[index] = newValue;
-                                    onChange(newValues);
-                                }}
+                                onChange={(value) => handleChange(value, index)}
                             />
                         </div>
                     );
