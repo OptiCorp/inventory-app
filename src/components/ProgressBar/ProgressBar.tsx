@@ -7,7 +7,7 @@ type ProgressBarProps = {
     steps: { fields: stepsSchema[]; slug: string }[];
 };
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ activeStep, steps }) => {
+export const ProgressBar: React.FC<ProgressBarProps> = ({ activeStep, steps }) => {
     return (
         <>
             <Stepper activeStep={activeStep} alternativeLabel>
@@ -20,5 +20,3 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ activeStep, steps }) => {
         </>
     );
 };
-
-export default ProgressBar;

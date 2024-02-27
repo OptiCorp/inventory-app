@@ -18,7 +18,7 @@ export type ItemCardProps = {
     icon?: string;
 };
 
-const ItemCard = ({ item, icon }: ItemCardProps) => {
+export const ItemCard = ({ item, icon }: ItemCardProps) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -40,5 +40,3 @@ const ItemCard = ({ item, icon }: ItemCardProps) => {
         </StyledItemCardContainer>
     );
 };
-
-export default ItemCard;

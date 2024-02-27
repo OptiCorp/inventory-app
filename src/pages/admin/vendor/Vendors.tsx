@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
-import AdminSearchCard from '../../../components/AdminSearchCard/AdminSearchCard';
+import { AdminSearchCard } from '../../../components/AdminSearchCard/AdminSearchCard';
 import { Button } from '../../../components/Button/Button';
-import SearchBar from '../../../components/SearchBar/SearchBar';
+import { SearchBar } from '../../../components/SearchBar/SearchBar';
 import { Vendor } from '../../../services/apiTypes';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import { SearchType } from '../../../utils/constant';
 import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles';
 
-const Vendors = () => {
+export const Vendors = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
     const { data: initialData } = useGetVendors();
@@ -48,5 +48,3 @@ const Vendors = () => {
         </AdminContainer>
     );
 };
-
-export default Vendors;

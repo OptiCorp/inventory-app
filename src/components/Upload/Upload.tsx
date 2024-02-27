@@ -20,7 +20,7 @@ import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocume
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
 import { COLORS } from '../../style/GlobalStyles';
-import File from '../File/File';
+import { File } from '../File/File';
 
 type UploadProps = {
     itemId: string;

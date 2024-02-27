@@ -13,7 +13,7 @@ import { useGetItemTemplateById } from '../../../services/hooks/template/useGetI
 import { useUpdateItemTemplate } from '../../../services/hooks/template/useUpdateItemTemplate';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
-import EditableField from './EditableField';
+import { EditableField } from './EditableField';
 import { SelectField } from './SelectField';
 import { ItemInfoSchema } from './hooks';
 import { Container, CreatedByContainer, ItemInfoForm } from './styles';
@@ -31,7 +31,7 @@ type Field =
       }
     | string;
 
-const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
+export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
     const {
         watch,
         setValue,
@@ -245,5 +245,3 @@ const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
         </ItemInfoForm>
     );
 };
-
-export default ItemInfo;

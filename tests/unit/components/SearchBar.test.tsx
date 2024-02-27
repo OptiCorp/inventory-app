@@ -2,7 +2,7 @@ import { it, expect, describe, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import SearchBar from '../../../src/components/SearchBar/SearchBar';
+import { SearchBar } from '../../../src/components/SearchBar/SearchBar';
 
 describe('SearchBar Component', () => {
     it('renders the SearchBar component with the correct placeholder', () => {

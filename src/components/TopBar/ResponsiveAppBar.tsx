@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useWindowDimensions } from '../../hooks';
 import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
-import useNavigationControl from './hooks/useNavigation';
+import { useNavigationControl } from './hooks/useNavigation';
 import { AdminMenu } from './styles';
 const pages = ['Find items', 'Add item', 'Make list'];
 
@@ -23,9 +23,10 @@ const settings = [
     { text: 'Categories', location: 'admin/categories' },
     { text: 'Vendors', location: 'admin/vendors' },
     { text: 'Locations', location: 'admin/locations' },
+    { text: 'Templates', location: 'admin/add-template' },
 ];
 
-function ResponsiveAppBar() {
+export function ResponsiveAppBar() {
     const navigate = useNavigate();
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const [adminDropdownIsOpen, setAdminDropdownIsOpen] = useState(false);
@@ -199,4 +200,3 @@ function ResponsiveAppBar() {
         </>
     );
 }
-export default ResponsiveAppBar;

@@ -8,7 +8,7 @@ type Props = {
     placeholder: string;
 };
 
-const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
+export const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
     const { width } = useWindowDimensions();
 
     return (
@@ -28,5 +28,3 @@ const SearchBar = ({ setSearchTerm, searchTerm, placeholder }: Props) => {
         </>
     );
 };
-
-export default SearchBar;

@@ -11,7 +11,7 @@ import {
     SubmitButtonContainer,
 } from '../styles';
 
-const AddLocation = () => {
+export const AddLocation = () => {
     const { methods, onSubmit, register } = useAddLocationForm();
     return (
         <FormProvider {...methods}>
@@ -43,5 +43,3 @@ const AddLocation = () => {
         </FormProvider>
     );
 };
-
-export default AddLocation;

@@ -9,9 +9,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useNavigationControl from '../hooks/useNavigation';
+import { useNavigationControl } from '../hooks/useNavigation';
 import { DropdownItem, HamburgerContainer } from './styles';
-
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 type Props = {
     setHamburgerIsOpen: (hamburgerOpen: boolean) => void;
 };
@@ -46,6 +46,11 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
                     location: 'admin/locations',
                     icon: <PlaceIcon fontSize="large" />,
                     text: 'Locations',
+                },
+                {
+                    location: 'admin/add-template',
+                    icon: <NoteAddIcon fontSize="large" />,
+                    text: 'Template',
                 },
             ],
         },

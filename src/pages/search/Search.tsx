@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDebounce, useLocalStorage } from 'usehooks-ts';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { useWindowDimensions } from '../../hooks';
 
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
 
-import ItemCard from '../../components/ItemCard/ItemCard';
-import SearchResultCardCompact from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
+import { ItemCard } from '../../components/ItemCard/ItemCard';
+import { SearchResultCardCompact } from '../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 import { useGetItemsInfinite } from '../../services/hooks/items/useGetItemsInfinite';
 import {
     Container,
@@ -22,7 +22,7 @@ type StateType = {
     resetInputField?: boolean;
 };
 
-const Search = () => {
+export const Search = () => {
     const { searchParam } = useParams<{ searchParam: string }>();
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -128,5 +128,3 @@ const Search = () => {
         </>
     );
 };
-
-export default Search;

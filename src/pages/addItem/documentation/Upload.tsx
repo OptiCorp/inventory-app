@@ -1,13 +1,13 @@
 import { useController, useFormContext } from 'react-hook-form';
-import AddItemUpload from '../../../components/Upload/AddItemUpload';
-import AddItemUploadMobile from '../../../components/Upload/UploadMobile/AddItemUploadMobile';
+import { AddItemUpload } from '../../../components/Upload/AddItemUpload';
+import { AddItemUploadMobile } from '../../../components/Upload/UploadMobile/AddItemUploadMobile';
 
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 import { RadioWrapper, StyledInput } from '../batch/styles';
 import { ItemSchema } from '../hooks/itemValidator';
 import { FormContainer } from '../styles';
 
-const Upload = () => {
+export const Upload = () => {
     const { width } = useWindowDimensions();
 
     const { control } = useFormContext<ItemSchema>();
@@ -49,5 +49,3 @@ const Upload = () => {
         </FormContainer>
     );
 };
-
-export default Upload;

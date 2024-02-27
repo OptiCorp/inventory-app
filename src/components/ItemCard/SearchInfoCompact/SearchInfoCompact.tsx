@@ -21,7 +21,7 @@ import {
     StyledItemCardCompactContainer,
 } from './styles';
 
-const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
+export const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const navigate = useNavigate();
     const { listId } = useParams();
     const {
@@ -118,5 +118,3 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
         </>
     );
 };
-
-export default SearchResultCardCompact;

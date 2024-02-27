@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import ItemCard from '../../../components/ItemCard/ItemCard';
-import SearchResultCardCompact from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
+import { ItemCard } from '../../../components/ItemCard/ItemCard';
+import { SearchResultCardCompact } from '../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 import { Item } from '../../../services/apiTypes';
 import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser';
 import { Container, CardContainer, RecentlyAddedContainer } from './styles';
 import { Button } from '@mui/material';
 
-const RecentlyAdded = () => {
+export const RecentlyAdded = () => {
     const { width } = useWindowDimensions();
 
     const { data: myItems = [] } = useGetItemsByUser();
@@ -34,5 +34,3 @@ const RecentlyAdded = () => {
         </RecentlyAddedContainer>
     );
 };
-
-export default RecentlyAdded;
