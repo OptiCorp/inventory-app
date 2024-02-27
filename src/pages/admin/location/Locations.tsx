@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
-import AdminSearchCard from '../../../components/AdminSearchCard/AdminSearchCard';
+import { AdminSearchCard } from '../../../components/AdminSearchCard/AdminSearchCard';
 import { Button } from '../../../components/Button/Button';
-import SearchBar from '../../../components/SearchBar/SearchBar';
+import { SearchBar } from '../../../components/SearchBar/SearchBar';
 import { Location } from '../../../services/apiTypes';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
 import { SearchType } from '../../../utils/constant';
 import { AdminContainer, ButtonContainer, SearchResultContainer } from '../styles';
-const Locations = () => {
+export const Locations = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
     const { data: initialData } = useGetLocations();
@@ -47,5 +47,3 @@ const Locations = () => {
         </AdminContainer>
     );
 };
-
-export default Locations;

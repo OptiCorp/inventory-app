@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SearchInfoCompact from './SearchInfoCompact';
+import { SearchResultCardCompact } from './SearchInfoCompact';
 
 const meta = {
     title: 'Components/SearchInfoCompact',
-    component: SearchInfoCompact,
+    component: SearchResultCardCompact,
     tags: ['autodocs'],
-} as Meta<typeof SearchInfoCompact>;
+} as Meta<typeof SearchResultCardCompact>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

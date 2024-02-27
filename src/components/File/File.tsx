@@ -16,7 +16,7 @@ type FileProps = {
     handleFileRemoval: () => void;
 };
 
-const File = ({ doc, file, handleFileRemoval }: FileProps) => {
+export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
     const handleFileDownload = (doc?: Document, file?: File) => {
         if (file) {
             const downloadLink = document.createElement('a');
@@ -77,5 +77,3 @@ const File = ({ doc, file, handleFileRemoval }: FileProps) => {
         </StyledFileWrapper>
     );
 };
-
-export default File;

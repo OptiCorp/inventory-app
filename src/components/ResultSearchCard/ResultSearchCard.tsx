@@ -9,7 +9,7 @@ type Props = {
     icon?: string;
 };
 
-const SearchResultCard = ({ item, icon }: Props) => {
+export const SearchResultCard = ({ item, icon }: Props) => {
     const navigate = useNavigate();
 
     return (
@@ -29,5 +29,3 @@ const SearchResultCard = ({ item, icon }: Props) => {
         </>
     );
 };
-
-export default SearchResultCard;

@@ -11,7 +11,7 @@ import {
     SubmitButtonContainer,
 } from '../styles';
 
-const AddVendor = () => {
+export const AddVendor = () => {
     const { methods, onSubmit, register } = useAddVendorForm();
     return (
         <FormProvider {...methods}>
@@ -43,5 +43,3 @@ const AddVendor = () => {
         </FormProvider>
     );
 };
-
-export default AddVendor;

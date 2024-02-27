@@ -8,32 +8,31 @@ import {
     createBrowserRouter,
     createRoutesFromElements,
 } from 'react-router-dom';
-import ResponsiveRoute from './components/ResponsiveRoute/ResponsiveRoute';
+import { ResponsiveRoute } from './components/ResponsiveRoute/ResponsiveRoute';
 import { Snackbar } from './components/Snackbar/Snackbar';
-import ResponsiveAppBar from './components/TopBar/ResponsiveAppBar';
+import { ResponsiveAppBar } from './components/TopBar/ResponsiveAppBar';
 import { AppContextProvider } from './contexts/AppContext';
 import { useWindowDimensions } from './hooks/useWindowDimensions';
-import AddItem from './pages/addItem/Index';
+import { AddItem } from './pages/addItem/Index';
 import { AddItemForm } from './pages/addItem/addItemForm/AddItemForm';
-import BatchForm from './pages/addItem/batch/BatchForm';
-import CheckForm from './pages/addItem/check/CheckForm';
-import Upload from './pages/addItem/documentation/Upload';
-import RecentlyAdded from './pages/addItem/recentlyAdded/RecentlyAdded';
-import Template from './pages/addItem/template/Template';
-import AddCategory from './pages/admin/category/AddCategory';
-import Categories from './pages/admin/category/Categories';
-import AddLocation from './pages/admin/location/AddLocation';
-import Locations from './pages/admin/location/Locations';
-import AddVendor from './pages/admin/vendor/AddVendor';
-import Vendors from './pages/admin/vendor/Vendors';
-import ItemDetails from './pages/itemDetails/Index';
-import MakeList from './pages/list/MakeList';
-import ListDetails from './pages/listDetails/ListDetails';
-import Index from './pages/listDetails/phone/Tabs';
+import { BatchForm } from './pages/addItem/batch/BatchForm';
+import { CheckForm } from './pages/addItem/check/CheckForm';
+import { Upload } from './pages/addItem/documentation/Upload';
+import { RecentlyAdded } from './pages/addItem/recentlyAdded/RecentlyAdded';
+import { Template } from './pages/addItem/template/Template';
+import { AddCategory } from './pages/admin/category/AddCategory';
+import { Categories } from './pages/admin/category/Categories';
+import { AddLocation } from './pages/admin/location/AddLocation';
+import { Locations } from './pages/admin/location/Locations';
+import { AddVendor } from './pages/admin/vendor/AddVendor';
+import { Vendors } from './pages/admin/vendor/Vendors';
+import { ItemDetails } from './pages/itemDetails/Index';
+import { MakeList } from './pages/list/MakeList';
+import { ListDetails } from './pages/listDetails/ListDetails';
+import { Tabs } from './pages/listDetails/phone/Tabs';
 import { Login } from './pages/login/Login';
-import Search from './pages/search/Search';
+import { Search } from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
-import React from 'react';
 import { AddTemplate } from './pages/admin/template/AddTemplate';
 
 function App() {
@@ -64,7 +63,7 @@ function App() {
                     element={
                         <ResponsiveRoute
                             desktopElement={<ListDetails />}
-                            mobileElement={<Index />}
+                            mobileElement={<Tabs />}
                         />
                     }
                 />

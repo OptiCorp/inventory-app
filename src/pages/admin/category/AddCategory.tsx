@@ -11,7 +11,7 @@ import {
     SubmitButtonContainer,
 } from '../styles';
 
-const AddCategory = () => {
+export const AddCategory = () => {
     const { methods, onSubmit, register } = useAddCategoryForm();
     return (
         <FormProvider {...methods}>
@@ -43,5 +43,3 @@ const AddCategory = () => {
         </FormProvider>
     );
 };
-
-export default AddCategory;

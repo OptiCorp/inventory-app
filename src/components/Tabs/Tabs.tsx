@@ -18,7 +18,7 @@ interface Tab {
 interface TabBarProps {
     tabs: Tab[];
 }
-export default function TabComponent({ tabs }: TabBarProps) {
+export function TabComponent({ tabs }: TabBarProps) {
     const [activeTab, setActiveTab] = useState<number>(0);
     const { listId } = useParams();
 

@@ -20,13 +20,13 @@ import { Container, Wrapper } from './styles';
 import { Button as SubmitButton } from '../../Button/Button';
 import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
 import { useGetDocumentTypes } from '../../../services/hooks/documents/useGetDocumentTypes';
-import File from '../../File/File';
+import { File } from '../../File/File';
 
 type UploadProps = {
     itemId: string;
 };
 
-const UploadMobile = ({ itemId }: UploadProps) => {
+export const UploadMobile = ({ itemId }: UploadProps) => {
     const { data: documents } = useGetDocumentsByItemId(itemId);
     const { data: documentTypes } = useGetDocumentTypes();
     const { mutate: uploadDocumentToItem } = useUploadDocumentToItem(itemId);
@@ -170,4 +170,3 @@ const UploadMobile = ({ itemId }: UploadProps) => {
         </>
     );
 };
-export default UploadMobile;

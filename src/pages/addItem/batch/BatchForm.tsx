@@ -7,7 +7,7 @@ import { ItemSchema } from '../hooks/itemValidator.ts';
 import { FormContainer } from '../styles.ts';
 import { RadioWrapper, StyledInput } from './styles.ts';
 
-const BatchForm = () => {
+export const BatchForm = () => {
     const { control, register, setValue } = useFormContext<ItemSchema>();
     const {
         field: { onChange, value },
@@ -77,5 +77,3 @@ const BatchForm = () => {
         </FormContainer>
     );
 };
-
-export default BatchForm;
