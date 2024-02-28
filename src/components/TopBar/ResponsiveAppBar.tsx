@@ -24,6 +24,7 @@ const settings = [
     { text: 'Vendors', location: 'admin/vendors' },
     { text: 'Locations', location: 'admin/locations' },
     { text: 'Templates', location: 'admin/add-template' },
+    { text: 'Document types', location: 'admin/document-types' },
 ];
 
 export function ResponsiveAppBar() {
