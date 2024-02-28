@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 import { ItemSchema } from '../../hooks/itemValidator';
 
 export const useBatchForm = () => {
-    const { control, register, watch, setValue } = useFormContext<ItemSchema>();
+    const { control, setValue } = useFormContext<ItemSchema>();
     const {
         field: { onChange, value },
         fieldState: { error },
