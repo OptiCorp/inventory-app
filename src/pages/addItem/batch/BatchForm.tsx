@@ -1,28 +1,12 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { TextField } from '@mui/material';
-import { useEffect } from 'react';
-import { useController, useFormContext } from 'react-hook-form';
 import { StyledErrorP } from '../../../components/AddItemFormFields/styles.ts';
-import { ItemSchema } from '../hooks/itemValidator.ts';
 import { FormContainer } from '../styles.ts';
+import { useBatchForm } from './hooks/useBatchForm.tsx';
 import { RadioWrapper, StyledInput } from './styles.ts';
 
 export const BatchForm = () => {
-    const { control, register, setValue } = useFormContext<ItemSchema>();
-    const {
-        field: { onChange, value },
-        fieldState: { error },
-    } = useController({
-        control,
-        name: 'isBatch',
-    });
-
-    useEffect(() => {
-        if (!value) {
-            setValue('numberOfItems', '1');
-        }
-    }, []);
-
+    const { isBatch, onChangeIsBatch, numberOfItemsField, error } = useBatchForm();
     return (
         <FormContainer>
             <h3>Add as a batch?</h3>
@@ -31,10 +15,10 @@ export const BatchForm = () => {
             <label>
                 <RadioWrapper>
                     <StyledInput
-                        checked={!value}
+                        checked={!isBatch}
                         type="radio"
                         name="batchCheck"
-                        onChange={() => onChange(false)}
+                        onChange={() => onChangeIsBatch(false)}
                     />
                     <p>I want to add one unique item</p>
                 </RadioWrapper>
@@ -42,10 +26,10 @@ export const BatchForm = () => {
             <label>
                 <RadioWrapper>
                     <StyledInput
-                        checked={value}
+                        checked={isBatch}
                         type="radio"
                         name="batchCheck"
-                        onChange={() => onChange(true)}
+                        onChange={() => onChangeIsBatch(true)}
                     />
                     <p>
                         I want to add a batch of several identical items, assigning a unique
@@ -53,7 +37,7 @@ export const BatchForm = () => {
                     </p>
                 </RadioWrapper>
             </label>
-            {value && (
+            {numberOfItemsField.value && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <label>
                         <strong>Number of items:</strong>
@@ -63,7 +47,7 @@ export const BatchForm = () => {
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />
                     <TextField
-                        {...register('numberOfItems')}
+                        {...numberOfItemsField}
                         type="number"
                         label="Amount"
                         size="small"

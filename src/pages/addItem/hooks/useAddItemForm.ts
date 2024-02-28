@@ -33,7 +33,7 @@ const defaultValues: ItemSchema = {
     preCheck: { check: false, comment: '' },
     documentation: false,
     itemTemplate: defaultTemplate,
-    numberOfItems: '',
+    numberOfItems: '1',
 };
 
 export const useAddItemForm = () => {
@@ -72,6 +72,7 @@ export const useAddItemForm = () => {
         if (selectedTemplate) {
             setValue('itemTemplate', selectedTemplate);
             setValue('itemTemplateId', selectedTemplate?.id);
+            setValue('itemTemplate.revision', selectedTemplate.revision || '');
         }
     }, []);
 
