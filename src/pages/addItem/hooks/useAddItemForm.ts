@@ -167,9 +167,6 @@ export const useAddItemForm = () => {
         (errors) => console.error(errors)
     );
 
-
-    
-
     const onSubmitTyped: (e?: React.BaseSyntheticEvent<object> | undefined) => Promise<void> =
         onSubmit;
     return {
