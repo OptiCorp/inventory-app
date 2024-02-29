@@ -6,7 +6,7 @@ export const Entry = ({ entry }: { entry: LogEntry }) => {
     const date = format(new Date(entry.createdDate), 'dd.MM.yyyy').toString();
     return (
         <Typography>
-            {date}: {entry.message}
+            {`${date}: ${entry.message} by ${entry.createdBy.firstName} ${entry.createdBy.lastName}`}
         </Typography>
     );
 };
