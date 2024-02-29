@@ -44,7 +44,11 @@ export const AddItemUpload = () => {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                <SubmitButton variant="white" onClick={() => inputFile.current?.click()}>
+                <SubmitButton
+                    variant="white"
+                    type="button"
+                    onClick={() => inputFile.current?.click()}
+                >
                     <input
                         type="file"
                         multiple
