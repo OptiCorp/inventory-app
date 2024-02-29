@@ -91,6 +91,7 @@ export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
                         {
                             ...itemTemplateData,
                             [field]: mutableValue,
+                            revision: '1.0',
                         },
                         {
                             onSuccess: (data) => {

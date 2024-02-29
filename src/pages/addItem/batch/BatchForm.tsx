@@ -6,10 +6,10 @@ import { useBatchForm } from './hooks/useBatchForm.tsx';
 import { RadioWrapper, StyledInput } from './styles.ts';
 
 export const BatchForm = () => {
-    const { isBatch, onChangeIsBatch, numberOfItemsField, error } = useBatchForm();
+    const { isBatch, onChangeIsBatch, numberOfItemsField } = useBatchForm();
     return (
         <FormContainer>
-            <h3>Add as a batch?</h3>
+            {/* <h3>Add as a batch?</h3>
             <span style={{ color: 'red' }}>{error?.message}</span>
 
             <label>
@@ -22,7 +22,7 @@ export const BatchForm = () => {
                     />
                     <p>I want to add one unique item</p>
                 </RadioWrapper>
-            </label>
+            </label> */}
             <label>
                 <RadioWrapper>
                     <StyledInput
@@ -53,7 +53,7 @@ export const BatchForm = () => {
                         size="small"
                         style={{ width: '80px' }}
                         InputProps={{ sx: { borderRadius: 0 } }}
-                        inputProps={{ min: 1 }}
+                        inputProps={{ min: 0 }}
                         placeholder="number of items"
                     />
                 </div>

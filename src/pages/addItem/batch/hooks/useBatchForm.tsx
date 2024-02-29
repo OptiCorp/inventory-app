@@ -20,10 +20,12 @@ export const useBatchForm = () => {
     });
     const handleOnNumberOfChangeItems = (e: ChangeEvent<HTMLTextAreaElement>) => {
         onChangeNumberOfItems(e.target.value);
+
         const uniqueWpIds = Array.from({ length: +e.target.value }, () => uuid().slice(0, 8));
         const uniqueSerialNumbers = Array.from({ length: +e.target.value }, () =>
             uuid().slice(0, 8)
         );
+
         setValue('wpId', uniqueWpIds);
         setValue('serialNumber', uniqueSerialNumbers);
     };
