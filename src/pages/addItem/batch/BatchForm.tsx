@@ -6,7 +6,7 @@ import { useBatchForm } from './hooks/useBatchForm.tsx';
 import { RadioWrapper, StyledInput } from './styles.ts';
 
 export const BatchForm = () => {
-    const { isBatch, onChangeIsBatch, numberOfItemsField, error } = useBatchForm();
+    const { isBatch, onChangeIsBatch, numberOfItemsField } = useBatchForm();
     return (
         <FormContainer>
             {/* <h3>Add as a batch?</h3>

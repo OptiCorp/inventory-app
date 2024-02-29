@@ -15,7 +15,7 @@ import {
 
 export const WpIds = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { control, setValue } = useFormContext<ItemSchema>();
+    const { control } = useFormContext<ItemSchema>();
     const {
         field: { value, onChange },
     } = useController({ name: 'wpId', control });

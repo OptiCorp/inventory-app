@@ -28,7 +28,6 @@ export const SerialNumber = ({ serialNumber, onChange, isPlainText }: SerialNumb
     const { setValue, watch } = useFormContext<ItemSchema>();
     useEffect(() => {
         const currentIsUnique = watch('uniqueSerialNumber');
-        console.log(currentIsUnique);
         setValue('uniqueSerialNumber', currentIsUnique ? !!isUnique : false);
     }, [isUnique]);
 

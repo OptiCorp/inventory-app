@@ -21,14 +21,14 @@ export const WpId = ({ wpId, onChange, isPlainText }: WpIdProps) => {
     const { data: isUnique = true, isLoading } = useIsWpIdUnique(debouncedWpId);
     const { setValue, watch } = useFormContext<ItemSchema>();
 
-    if (isPlainText) {
-        return <EllipsisText>{wpId}</EllipsisText>;
-    }
-
     useEffect(() => {
         const currentIsUnique = watch('uniqueWpId');
         setValue('uniqueWpId', currentIsUnique ? !!isUnique : false);
     }, [isUnique]);
+
+    if (isPlainText) {
+        return <EllipsisText>{wpId}</EllipsisText>;
+    }
 
     return (
         <>
