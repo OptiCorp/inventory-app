@@ -15,7 +15,7 @@ import {
 
 export const WpIds = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { control } = useFormContext<ItemSchema>();
+    const { control, setValue } = useFormContext<ItemSchema>();
     const {
         field: { value, onChange },
     } = useController({ name: 'wpId', control });
@@ -26,10 +26,13 @@ export const WpIds = () => {
         setIsOpen((prev) => !prev);
         setWpIds(oldWpIds);
     };
+
     const handleChange = (newValue: string, index: number) => {
-        const newValues = [...value];
-        newValues[index] = newValue;
-        setWpIds(newValues);
+        setWpIds((prev) => {
+            const newValues = [...prev];
+            newValues[index] = newValue;
+            return newValues;
+        });
     };
 
     const handleSave = () => {
@@ -37,6 +40,7 @@ export const WpIds = () => {
         setOldWpIds(wpIds);
         setIsOpen((prev) => !prev);
     };
+
     return (
         <>
             <div>
@@ -48,7 +52,7 @@ export const WpIds = () => {
                         <Edit onClick={() => setIsOpen((prev) => !prev)} />
                     </StyledIconContainer>
                     <ErrorMessage
-                        name={`wpId[0]`}
+                        name={`wpId`}
                         as="span"
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />
@@ -58,7 +62,7 @@ export const WpIds = () => {
                     {wpIds.map((wpId, index) => {
                         return (
                             <WpId
-                                key={wpId}
+                                key={index}
                                 wpId={wpId}
                                 isPlainText
                                 onChange={(value) => handleChange(value, index)}

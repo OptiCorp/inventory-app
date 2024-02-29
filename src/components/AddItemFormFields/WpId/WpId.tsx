@@ -1,7 +1,10 @@
 import { ErrorMessage } from '@hookform/error-message';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { TextField } from '@mui/material';
+import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { useDebounce } from 'usehooks-ts';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator';
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { ToolTip } from '../../ToolTip/ToolTip';
 import { EllipsisText, StyledDiv, StyledErrorP, StyledInputWrap } from '../styles';
@@ -15,11 +18,17 @@ type WpIdProps = {
 
 export const WpId = ({ wpId, onChange, isPlainText }: WpIdProps) => {
     const debouncedWpId = useDebounce(wpId, 500);
-    const { data: isUnique, isLoading } = useIsWpIdUnique(debouncedWpId);
+    const { data: isUnique = true, isLoading } = useIsWpIdUnique(debouncedWpId);
+    const { setValue, watch } = useFormContext<ItemSchema>();
 
     if (isPlainText) {
         return <EllipsisText>{wpId}</EllipsisText>;
     }
+
+    useEffect(() => {
+        const currentIsUnique = watch('uniqueWpId');
+        setValue('uniqueWpId', currentIsUnique ? !!isUnique : false);
+    }, [isUnique]);
 
     return (
         <>

@@ -18,6 +18,7 @@ export const SerialNumbers = () => {
     const {
         field: { value, onChange },
     } = useController({ name: 'serialNumber', control });
+
     const [oldSerialNumber, setOldSerialNumber] = useState(value);
     const [serialNumbers, setSerialNumber] = useState(value);
 
@@ -26,9 +27,11 @@ export const SerialNumbers = () => {
         setSerialNumber(oldSerialNumber);
     };
     const handleChange = (newValue: string, index: number) => {
-        const newValues = [...value];
-        newValues[index] = newValue;
-        setSerialNumber(newValues);
+        setSerialNumber((prev) => {
+            const newValues = [...prev];
+            newValues[index] = newValue;
+            return newValues;
+        });
     };
 
     const handleSave = () => {
@@ -36,6 +39,7 @@ export const SerialNumbers = () => {
         setOldSerialNumber(serialNumbers);
         setIsOpen((prev) => !prev);
     };
+
     return (
         <>
             <div>
@@ -47,7 +51,7 @@ export const SerialNumbers = () => {
                         <Edit onClick={() => setIsOpen((prev) => !prev)} />
                     </StyledIconContainer>
                     <ErrorMessage
-                        name={`serialNumber[0]`}
+                        name={`serialNumber`}
                         as="span"
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />

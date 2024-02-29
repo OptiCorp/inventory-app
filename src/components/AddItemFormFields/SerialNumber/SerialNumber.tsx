@@ -12,6 +12,9 @@ import {
 } from '../styles.ts';
 
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { ItemSchema } from '../../../pages/addItem/hooks/itemValidator.ts';
 import { StyledParagraph } from '../WpId/styles.ts';
 
 type SerialNumberProps = {
@@ -21,7 +24,13 @@ type SerialNumberProps = {
 };
 export const SerialNumber = ({ serialNumber, onChange, isPlainText }: SerialNumberProps) => {
     const debouncedSerialNumber = useDebounce(serialNumber, 500);
-    const { data: isUnique, isLoading } = useIsSerialNumberUnique(debouncedSerialNumber!);
+    const { data: isUnique = true, isLoading } = useIsSerialNumberUnique(debouncedSerialNumber!);
+    const { setValue, watch } = useFormContext<ItemSchema>();
+    useEffect(() => {
+        const currentIsUnique = watch('uniqueSerialNumber');
+        console.log(currentIsUnique);
+        setValue('uniqueSerialNumber', currentIsUnique ? !!isUnique : false);
+    }, [isUnique]);
 
     if (isPlainText) {
         return <EllipsisText>{serialNumber}</EllipsisText>;
