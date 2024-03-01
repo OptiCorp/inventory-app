@@ -5,6 +5,7 @@ export const AdminContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 16px;
+    gap: 16px;
 `;
 
 export const SearchResultContainer = styled.div`
