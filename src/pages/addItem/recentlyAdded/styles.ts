@@ -18,7 +18,7 @@ export const Container = styled.div`
 export const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 32px;
+    padding: 16px;
     gap: 16px;
 
     @media (max-width: 800px) {
