@@ -30,15 +30,15 @@ export const StyledEllipsisContainer = styled.div`
     }
 
     @media screen and (max-width: 700px) {
-        width: 400px;
+        width: 380px;
     }
 
     @media screen and (max-width: 570px) {
-        width: 250px;
+        width: 210px;
     }
 
     @media screen and (max-width: 400px) {
-        width: 200px;
+        width: 175px;
     }
 `;
 
