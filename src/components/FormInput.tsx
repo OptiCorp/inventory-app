@@ -1,55 +1,59 @@
-import { FieldValues, Path, useController, useFormContext } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import { TextField, TextFieldVariants } from '@mui/material';
 import { ComponentProps } from 'react';
 import { ToolTip } from './ToolTip/ToolTip';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { StyledIconContainer, StyledInputWrap } from './AddItemFormFields/styles';
 import { ErrorMessage } from '@hookform/error-message';
 import { ErrorP } from '../pages/itemDetails/itemInfo/styles';
-type FormInputProps<T extends FieldValues, K extends Path<T>, TMultiLine = boolean> = {
-    label: string;
+
+type FormInputProps<TMultiLine = boolean> = {
+    label?: string;
     toolTip?: string;
     placeholder?: ComponentProps<'input'>['placeholder'];
-    name: K;
+    name?: string;
+    value?: string;
     isMultiLine?: TMultiLine extends true ? true : never;
     rows?: TMultiLine extends true ? number : never;
+    onChange: ComponentProps<'input'>['onChange'];
+    variant?: TextFieldVariants;
 };
-export const FormInput = <T extends FieldValues, K extends Path<T>>({
+export const FormInput = ({
     name,
     label,
     toolTip,
     isMultiLine,
     rows,
     placeholder,
-}: FormInputProps<T, K>) => {
-    const { control } = useFormContext<T>();
-    const {
-        field: { onChange, value },
-    } = useController({
-        name: name,
-        control,
-    });
+    value,
+    onChange,
+    variant,
+}: FormInputProps) => {
     return (
         <>
-            <StyledInputWrap>
-                <StyledIconContainer>
-                    <label htmlFor={name}>{label}</label>
-                    {toolTip && (
-                        <ToolTip content={toolTip}>
-                            <HelpOutlineIcon fontSize="small" />
-                        </ToolTip>
-                    )}
-                    <ErrorMessage
-                        name={name}
-                        render={({ message }) => <ErrorP>{message}</ErrorP>}
-                    />
-                </StyledIconContainer>
-            </StyledInputWrap>
+            {label && (
+                <StyledInputWrap>
+                    <StyledIconContainer>
+                        <label htmlFor={name}>{label}</label>
+                        {toolTip && (
+                            <ToolTip content={toolTip}>
+                                <HelpOutlineIcon fontSize="small" />
+                            </ToolTip>
+                        )}
+                        <ErrorMessage
+                            name={name ?? ''}
+                            render={({ message }) => <ErrorP>{message}</ErrorP>}
+                        />
+                    </StyledIconContainer>
+                </StyledInputWrap>
+            )}
 
             <TextField
                 value={value}
-                variant="filled"
+                variant={variant}
                 fullWidth
+                sx={{
+                    width: { sm: 400, md: 700 },
+                }}
                 size="small"
                 onChange={onChange}
                 multiline={isMultiLine}
