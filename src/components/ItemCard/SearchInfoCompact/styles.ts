@@ -1,14 +1,10 @@
 import { styled } from 'styled-components';
-import { COLORS } from '../../../style/GlobalStyles';
 
 export const StyledItemCardCompactContainer = styled.div`
     display: flex;
-    /* background-color: ${COLORS.lightGray}; */
-    background-color: orange;
     margin: 16px;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
     flex-direction: column;
-    max-width: 400px;
     position: relative;
 `;
 
