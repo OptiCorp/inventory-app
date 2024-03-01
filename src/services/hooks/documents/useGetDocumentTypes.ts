@@ -3,7 +3,7 @@ import apiService from '../../api';
 
 export const useGetDocumentTypes = () => {
     return useQuery({
-        queryKey: ['docuementTypes'],
+        queryKey: ['documentType'],
         queryFn: () => apiService().getDocumentTypes(),
     });
 };

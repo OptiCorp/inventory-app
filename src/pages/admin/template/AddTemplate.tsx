@@ -10,9 +10,13 @@ import { Button } from '@mui/material';
 import { useGetCategories } from '../../../services/hooks/category/useGetCategories';
 import { FormInput } from '../../../components/FormInput';
 import { AutocompleteSelect } from '../../../components/AutocompleteSelect';
+import { useFieldNameController } from '../../../hooks/useFieldNameController';
 
 export const AddTemplate = () => {
-    const { methods, onSubmit } = useAddTemplateForm();
+    const { methods, onSubmit, control } = useAddTemplateForm();
+    const { onChange: productNumberOnChange } = useFieldNameController('productNumber', control);
+    const { onChange: revisionOnChange } = useFieldNameController('revision', control);
+    const { onChange: descriptionOnChange } = useFieldNameController('description', control);
 
     const { data: categories } = useGetCategories();
 
@@ -56,18 +60,21 @@ export const AddTemplate = () => {
                             toolTip="Specify a product number"
                             placeholder="E.g BV 113 EU"
                             name="productNumber"
+                            onChange={productNumberOnChange}
                         />
                         <FormInput
                             label="Revision"
                             name="revision"
                             toolTip="Specify a revision number"
                             placeholder="E.g 1.06"
+                            onChange={revisionOnChange}
                         />
                         <FormInput
                             label="Description"
                             name="description"
                             placeholder="Description"
                             isMultiLine
+                            onChange={descriptionOnChange}
                             rows={4}
                         />
                     </InputWrap>
