@@ -22,9 +22,9 @@ export const useAddDocumentTypeForm = () => {
     const { handleSubmit, control, reset, resetField, register } = methods;
 
     const onSubmit = handleSubmit((data) => {
-        mutate(data);
         navigate('/admin/document-types');
-    }, console.log);
+        mutate(data);
+    });
 
     return {
         methods,
