@@ -20,6 +20,7 @@ import {
     StyledCompactTitle,
     StyledItemCardCompactContainer,
 } from './styles';
+import { COLORS } from '../../../style/GlobalStyles';
 
 export const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const navigate = useNavigate();
@@ -41,6 +42,7 @@ export const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                     style={{
                         boxShadow: 'none',
                         borderRadius: '0px',
+                        background: COLORS.lightestGray,
                     }}
                 >
                     <AccordionSummary
