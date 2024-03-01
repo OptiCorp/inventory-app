@@ -1,33 +1,33 @@
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Category, DocumentType, Location, Vendor } from '../../services/apiTypes';
+import { SearchType } from '../../utils/constant';
+import { FormProvider } from 'react-hook-form';
+import { useUpdateAdminForm } from './useUpdateAdminForm';
+import { Button, Typography } from '@mui/material';
+import { useUpdateDocumentType } from '../../services/hooks/documents/useUpdateDocumentType';
+import { useContext, useState } from 'react';
+import {
+    StyledAdminActions,
+    StyledAdminSearchCardContainer,
+    StyledEllipsisContainer,
+    StyledInputContainer,
+    StyledTitleContainer,
+} from './styles';
 import DoneIcon from '@mui/icons-material/Done';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button, TextField, Typography } from '@mui/material';
-import { FormEvent, useContext, useState } from 'react';
-import {
-    Category,
-    DocumentType,
-    Location,
-    UpdateCategory,
-    UpdateLocation,
-    UpdateVendor,
-    Vendor,
-} from '../../services/apiTypes';
-import { useDeleteCategory } from '../../services/hooks/category/useDeleteCategory';
-import { useUpdateCategory } from '../../services/hooks/category/useUpdateCategory';
-import { useDeleteLocation } from '../../services/hooks/locations/useDeleteLocation';
-import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocation';
-import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor';
-import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor';
-import { SearchType } from '../../utils/constant';
-import { StyledAdminActions, StyledAdminSearchCardContainer, StyledTitleContainer } from './styles';
-import { CustomDialog } from '../CustomDialog/CustomDialog';
-import AppContext from '../../contexts/AppContext';
-import { handleApiRequestSnackbar } from '../../utils/handleApiRequestSnackbar';
-import { COLORS } from '../../style/GlobalStyles';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useDeleteDocumentType } from '../../services/hooks/documents/useDeleteDocumentType';
-import { useUpdateDocumentType } from '../../services/hooks/documents/useUpdateDocumentType';
-import styled from 'styled-components';
-import { FormProvider, useController, useForm } from 'react-hook-form';
+import { handleApiRequestSnackbar } from '../../utils/handleApiRequestSnackbar';
+import AppContext from '../../contexts/AppContext';
+import { CustomDialog } from '../CustomDialog/CustomDialog';
+import { useUpdateLocation } from '../../services/hooks/locations/useUpdateLocation';
+import { useUpdateVendor } from '../../services/hooks/vendor/useUpdateVendor';
+import { useUpdateCategory } from '../../services/hooks/category/useUpdateCategory';
+import { useDeleteCategory } from '../../services/hooks/category/useDeleteCategory';
+import { useDeleteVendor } from '../../services/hooks/vendor/useDeleteVendor';
+import { useDeleteLocation } from '../../services/hooks/locations/useDeleteLocation';
+import { FormInput } from '../FormInput';
+import { useFieldNameController } from '../../hooks/useFieldNameController';
+
 type DataUnion = Category | Vendor | Location | DocumentType;
 type Props = {
     data: DataUnion;
@@ -36,28 +36,11 @@ type Props = {
 
 export const AdminSearchCard = ({ data, searchType }: Props) => {
     const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
-    const methods = useForm();
-    console.log(methods.watch());
     const {
-        field: {
-            value: descriptionValue,
-            onChange: descriptionOnChange,
-            onBlur: descriptionOnBlur,
-        },
-    } = useController({
-        control: methods.control,
-        name: 'description',
-    });
-    const {
-        field: { value: nameValue, onChange: nameOnChange, onBlur: nameOnBlur },
-    } = useController({
-        control: methods.control,
-        name: 'name',
-    });
-    const [isEditing, setIsEditing] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [clickedElement, setClickedElement] = useState<typeof data.name | null>(null);
-    console.log('data id', data.id);
+        methods,
+        control,
+        formState: { isDirty },
+    } = useUpdateAdminForm();
     const { mutate: updateCategory } = useUpdateCategory(data.id);
     const { mutate: updateVendor } = useUpdateVendor(data.id);
     const { mutate: updateLocation } = useUpdateLocation(data.id);
@@ -66,56 +49,85 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
     const { mutate: deleteVendor } = useDeleteVendor(data.id);
     const { mutate: deleteLocation } = useDeleteLocation(data.id);
     const { mutate: deleteDocumentType } = useDeleteDocumentType(data.id);
+    const [isEditing, setIsEditing] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [clickedElement, setClickedElement] = useState<typeof data.name | null>(null);
+    const { onChange: nameOnChange, value: nameValue } = useFieldNameController('name', control);
+    const { onChange: descriptionOnChange, value: descriptionValue } = useFieldNameController(
+        'description',
+        control
+    );
 
-    function isDocumentType(data: DataUnion): data is DocumentType {
+    const isDocumentType = (data: DataUnion): data is DocumentType => {
         return (data as DocumentType).description !== undefined;
-    }
+    };
 
-    const handleEdit = (
-        isEditing: boolean,
-        nameEvent?: FormEvent<HTMLInputElement>,
-        descriptionEvent?: FormEvent<HTMLInputElement>
-    ) => {
+    const handleEdit = (isEditing: boolean) => {
+        const updateObject = {
+            ...data,
+            id: data.id,
+            name: nameValue ? nameValue : data.name,
+        };
         if (isEditing) {
-            if (nameEvent) {
+            if (isDirty) {
                 switch (searchType) {
                     case SearchType.Category: {
-                        data.name = nameEvent?.currentTarget.value;
-                        const newCategory: UpdateCategory = {
-                            id: data.id,
-                            name: nameEvent?.currentTarget.value,
-                        };
-                        updateCategory(newCategory);
+                        updateCategory(updateObject, {
+                            onSuccess: (data) => {
+                                handleApiRequestSnackbar(
+                                    data,
+                                    `Updated category: ${clickedElement}`,
+                                    setSnackbarSeverity,
+                                    setSnackbarText
+                                );
+                            },
+                        });
                         break;
                     }
                     case SearchType.Vendor: {
-                        data.name = nameEvent?.currentTarget.value;
-                        const newVendor: UpdateVendor = {
-                            id: data.id,
-                            name: nameEvent?.currentTarget.value,
-                        };
-                        updateVendor(newVendor);
+                        updateVendor(updateObject, {
+                            onSuccess: (data) => {
+                                handleApiRequestSnackbar(
+                                    data,
+                                    `Updated vendor: ${clickedElement}`,
+                                    setSnackbarSeverity,
+                                    setSnackbarText
+                                );
+                            },
+                        });
                         break;
                     }
                     case SearchType.Location: {
-                        data.name = nameEvent?.currentTarget.value;
-                        const newLocation: UpdateLocation = {
-                            id: data.id,
-                            name: nameEvent?.currentTarget.value,
-                        };
-                        updateLocation(newLocation);
+                        updateLocation(updateObject, {
+                            onSuccess: (data) => {
+                                handleApiRequestSnackbar(
+                                    data,
+                                    `Updated location: ${clickedElement}`,
+                                    setSnackbarSeverity,
+                                    setSnackbarText
+                                );
+                            },
+                        });
                         break;
                     }
                     case SearchType.DocumentType: {
-                        console.log(nameEvent.currentTarget.value);
-                        data.description = descriptionEvent?.currentTarget.value;
-                        const newDocumentType: DocumentType = {
-                            ...data,
-                            id: data.id,
-                            name: nameValue ? nameValue : nameEvent.currentTarget.value,
-                            description: descriptionValue ? descriptionValue : data.description,
-                        };
-                        updateDocumentType(newDocumentType);
+                        if (isDocumentType(data)) {
+                            const documentTypeUpdateObject = {
+                                ...updateObject,
+                                description: descriptionValue ? descriptionValue : data.description,
+                            };
+
+                            updateDocumentType(documentTypeUpdateObject, {
+                                onSuccess: (data) => {
+                                    handleApiRequestSnackbar(
+                                        data,
+                                        `Document type: ${clickedElement} updated`,
+                                        setSnackbarSeverity,
+                                        setSnackbarText
+                                    );
+                                },
+                            });
+                        }
                     }
                 }
             }
@@ -132,7 +144,7 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
                     onSuccess: (data) => {
                         handleApiRequestSnackbar(
                             data,
-                            `Category: ${clickedElement} deleted`,
+                            `Deleted category: ${clickedElement}`,
                             setSnackbarSeverity,
                             setSnackbarText
                         );
@@ -144,7 +156,7 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
                     onSuccess: (data) => {
                         handleApiRequestSnackbar(
                             data,
-                            `Vendor: ${clickedElement} deleted`,
+                            `Deleted vendor: ${clickedElement}`,
                             setSnackbarSeverity,
                             setSnackbarText
                         );
@@ -156,7 +168,7 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
                     onSuccess: (data) => {
                         handleApiRequestSnackbar(
                             data,
-                            `Location: ${clickedElement} deleted`,
+                            `Deleted location: ${clickedElement}`,
                             setSnackbarSeverity,
                             setSnackbarText
                         );
@@ -168,7 +180,7 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
                     onSuccess: (data) => {
                         handleApiRequestSnackbar(
                             data,
-                            `Document type: ${clickedElement} deleted`,
+                            `Deleted document type: ${clickedElement}`,
                             setSnackbarSeverity,
                             setSnackbarText
                         );
@@ -177,51 +189,43 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
         }
     };
 
-    const handleSelected = () => {
+    const handleSelected = (isDeleting = false) => {
         setClickedElement(data.name);
-        setIsOpen(true);
+        if (isDeleting) {
+            setIsOpen(true);
+        }
     };
 
     return (
         <FormProvider {...methods}>
             <StyledAdminSearchCardContainer>
                 <StyledTitleContainer>
-                    {isEditing ? (
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <input
-                                type="text"
-                                placeholder={data.name}
-                                defaultValue={data.name}
-                                style={{ fontSize: '20px', width: '150px' }}
-                                value={nameValue}
-                                onBlur={nameOnBlur}
-                                onChange={nameOnChange}
-                                /* onBlur={() => onBlur()} */
+                    {isEditing && (
+                        <StyledInputContainer>
+                            <FormInput
+                                variant="outlined"
+                                value={nameValue ? nameValue : data.name}
+                                onChange={(newValue) => nameOnChange(newValue)}
                             />
                             {isDocumentType(data) && (
-                                <input
-                                    type="text"
-                                    style={{ fontSize: '20px', width: '150px' }}
-                                    value={descriptionValue}
-                                    /* onBlur={(e) => handleEdit(isEditing, e)} */
-                                    onBlur={descriptionOnBlur}
-                                    onChange={descriptionOnChange}
+                                <FormInput
+                                    value={descriptionValue ? descriptionValue : data.description}
+                                    onChange={(newValue) => {
+                                        descriptionOnChange(newValue);
+                                    }}
+                                    isMultiLine
                                 />
                             )}
-                        </div>
-                    ) : (
+                        </StyledInputContainer>
+                    )}
+                    {!isEditing && (
                         <div>
                             <Typography variant="h5" fontWeight={'bold'}>
                                 {data.name}
                             </Typography>
                             <StyledEllipsisContainer>
                                 {isDocumentType(data) && (
-                                    <Typography
-                                        variant="caption"
-                                        color={COLORS.black}
-                                        fontSize={'1rem'}
-                                        noWrap
-                                    >
+                                    <Typography variant="caption" fontSize={'1rem'} noWrap>
                                         {data.description}
                                     </Typography>
                                 )}
@@ -233,7 +237,10 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
                     <Button
                         color={isEditing ? 'success' : 'primary'}
                         sx={{ color: 'black', margin: '0 4px' }}
-                        onClick={() => handleEdit(isEditing)}
+                        onClick={() => {
+                            handleSelected();
+                            handleEdit(isEditing);
+                        }}
                     >
                         {isEditing ? (
                             <DoneIcon sx={{ fontSize: 36 }} />
@@ -242,7 +249,7 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
                         )}
                     </Button>
                     <Button
-                        onClick={() => handleSelected()}
+                        onClick={() => handleSelected(true)}
                         color="error"
                         sx={{ color: 'black', margin: '0 4px' }}
                     >
@@ -271,24 +278,3 @@ export const AdminSearchCard = ({ data, searchType }: Props) => {
         </FormProvider>
     );
 };
-
-const StyledEllipsisContainer = styled.div`
-    text-overflow: ellipsis;
-    overflow: hidden;
-
-    @media screen and (max-width: 900px) {
-        width: 500px;
-    }
-
-    @media screen and (max-width: 700px) {
-        width: 400px;
-    }
-
-    @media screen and (max-width: 570px) {
-        width: 250px;
-    }
-
-    @media screen and (max-width: 400px) {
-        width: 200px;
-    }
-`;
