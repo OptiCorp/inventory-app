@@ -1,14 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { TestSchema, testSchema } from './testValidator';
+
+import {
+    DocumentTypeSchema,
+    documentTypeSchema,
+} from '../../pages/admin/hooks/documentTypeValidator';
 
 const defaultValues = {
     name: '',
     description: '',
 };
 export const useUpdateAdminForm = () => {
-    const methods = useForm<TestSchema>({
-        resolver: zodResolver(testSchema),
+    const methods = useForm<DocumentTypeSchema>({
+        resolver: zodResolver(documentTypeSchema),
         defaultValues: {
             ...defaultValues,
         },
