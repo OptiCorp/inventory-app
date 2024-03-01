@@ -27,13 +27,13 @@ const defaultValues: ItemSchema = {
     itemTemplateId: '',
     comment: '',
     createdById: '',
-    uniqueWpId: false,
-    uniqueSerialNumber: false,
+    uniqueWpId: true,
+    uniqueSerialNumber: true,
     isBatch: false,
     preCheck: { check: false, comment: '' },
     documentation: false,
     itemTemplate: defaultTemplate,
-    numberOfItems: '',
+    numberOfItems: '1',
 };
 
 export const useAddItemForm = () => {
@@ -72,6 +72,7 @@ export const useAddItemForm = () => {
         if (selectedTemplate) {
             setValue('itemTemplate', selectedTemplate);
             setValue('itemTemplateId', selectedTemplate?.id);
+            setValue('itemTemplate.revision', selectedTemplate.revision || '');
         }
     }, []);
 
@@ -86,7 +87,6 @@ export const useAddItemForm = () => {
         });
         return data.json() as Promise<ItemTemplate>;
     };
-
     const onSubmit = handleSubmit(
         async (data) => {
             if (!selectedTemplate.id) {

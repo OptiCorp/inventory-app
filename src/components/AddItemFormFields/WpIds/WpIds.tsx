@@ -19,6 +19,28 @@ export const WpIds = () => {
     const {
         field: { value, onChange },
     } = useController({ name: 'wpId', control });
+    const [oldWpIds, setOldWpIds] = useState(value);
+    const [wpIds, setWpIds] = useState(value);
+
+    const handleCancel = () => {
+        setIsOpen((prev) => !prev);
+        setWpIds(oldWpIds);
+    };
+
+    const handleChange = (newValue: string, index: number) => {
+        setWpIds((prev) => {
+            const newValues = [...prev];
+            newValues[index] = newValue;
+            return newValues;
+        });
+    };
+
+    const handleSave = () => {
+        onChange(wpIds);
+        setOldWpIds(wpIds);
+        setIsOpen((prev) => !prev);
+    };
+
     return (
         <>
             <div>
@@ -30,24 +52,20 @@ export const WpIds = () => {
                         <Edit onClick={() => setIsOpen((prev) => !prev)} />
                     </StyledIconContainer>
                     <ErrorMessage
-                        name={`wpId[0]`}
+                        name={`wpId`}
                         as="span"
                         render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
                     />
                 </StyledLabelContainer>
 
                 <ScrollWrapContainer>
-                    {value.map((wpId, index) => {
+                    {wpIds.map((wpId, index) => {
                         return (
                             <WpId
                                 key={index}
                                 wpId={wpId}
                                 isPlainText
-                                onChange={(newValue: string) => {
-                                    const newValues = [...value];
-                                    newValues[index] = newValue;
-                                    onChange(newValues);
-                                }}
+                                onChange={(value) => handleChange(value, index)}
                             />
                         );
                     })}
@@ -58,20 +76,13 @@ export const WpIds = () => {
                 fullWidth={true}
                 onClose={() => setIsOpen((prev) => !prev)}
                 title="Edit WpIds"
-                CancelButtonOnClick={() => setIsOpen((prev) => !prev)}
-                SubmitButtonOnClick={() => setIsOpen((prev) => !prev)}
+                CancelButtonOnClick={handleCancel}
+                SubmitButtonOnClick={handleSave}
             >
-                {value.map((wpId, index) => {
+                {wpIds.map((wpId, index) => {
                     return (
                         <div key={index}>
-                            <WpId
-                                wpId={wpId}
-                                onChange={(newValue: string) => {
-                                    const newValues = [...value];
-                                    newValues[index] = newValue;
-                                    onChange(newValues);
-                                }}
-                            />
+                            <WpId wpId={wpId} onChange={(value) => handleChange(value, index)} />
                         </div>
                     );
                 })}
