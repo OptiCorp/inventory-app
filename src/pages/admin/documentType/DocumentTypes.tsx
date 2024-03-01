@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { SearchType } from '../../../utils/constant';
 import { useGetDocumentTypes } from '../../../services/hooks/documents/useGetDocumentTypes';
 import { useDebounce } from 'usehooks-ts';
-import { Test } from '../../../components/AdminSearchCard/Test';
 
 export const DocumentTypes = () => {
     const { data: initialData } = useGetDocumentTypes();
@@ -37,8 +36,7 @@ export const DocumentTypes = () => {
             <SearchResultContainer>
                 {filteredData?.map((type, i) => (
                     <div id={i === filteredData.length - 1 ? 'lastItem' : ''} key={type.id}>
-                        {/* <AdminSearchCard searchType={SearchType.DocumentType} data={type} /> */}
-                        <Test searchType={SearchType.DocumentType} data={type} />
+                        <AdminSearchCard searchType={SearchType.DocumentType} data={type} />
                     </div>
                 ))}
             </SearchResultContainer>
