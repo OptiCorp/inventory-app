@@ -1,6 +1,6 @@
 import { Control, FieldValues, Path, useController } from 'react-hook-form';
 
-// TODO: BAD? if not make the hook a separate file
+// TODO: Maybe not needed? remove and refactor where it is used?
 export const useFieldNameController = <T extends FieldValues>(
     name: Path<T>,
     control: Control<T>
