@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 import { ItemSchema } from '../../hooks/itemValidator';
