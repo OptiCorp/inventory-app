@@ -33,3 +33,12 @@ export const RadioWrapper = styled.div`
     display: flex;
     width: fit-content;
 `;
+
+export const StyledBatchWrapper = styled.div`
+    display: flex;
+
+    flex-direction: column;
+    gap: 10px;
+    align-items: first baseline;
+    justify-content: baseline;
+`;

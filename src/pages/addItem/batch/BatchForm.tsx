@@ -1,63 +1,27 @@
 import { ErrorMessage } from '@hookform/error-message';
-import { TextField } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
 import { StyledErrorP } from '../../../components/AddItemFormFields/styles.ts';
-import { FormContainer } from '../styles.ts';
-import { useBatchForm } from './hooks/useBatchForm.tsx';
-import { RadioWrapper, StyledInput } from './styles.ts';
+import CustomNumberInput from '../../../components/CustomNumberInput/CustomNumberInput.tsx';
+import { ItemSchema } from '../hooks/itemValidator.ts';
+import { FormContainer, StyledLabelText } from '../styles.ts';
+import { StyledBatchWrapper } from './styles.ts';
 
 export const BatchForm = () => {
-    const { isBatch, onChangeIsBatch, numberOfItemsField } = useBatchForm();
+    const { watch } = useFormContext<ItemSchema>();
+
     return (
         <FormContainer>
-            {/* <h3>Add as a batch?</h3>
-            <span style={{ color: 'red' }}>{error?.message}</span>
+            <StyledBatchWrapper>
+                <h3>Batch</h3>
+                <StyledLabelText> number of items</StyledLabelText>
 
-            <label>
-                <RadioWrapper>
-                    <StyledInput
-                        checked={!isBatch}
-                        type="radio"
-                        name="batchCheck"
-                        onChange={() => onChangeIsBatch(false)}
-                    />
-                    <p>I want to add one unique item</p>
-                </RadioWrapper>
-            </label> */}
-            <label>
-                <RadioWrapper>
-                    <StyledInput
-                        checked={isBatch}
-                        type="radio"
-                        name="batchCheck"
-                        onChange={() => onChangeIsBatch(true)}
-                    />
-                    <p>
-                        I want to add a batch of several identical items, assigning a unique
-                        WellPartner serial number to each of them
-                    </p>
-                </RadioWrapper>
-            </label>
-            {numberOfItemsField.value && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <label>
-                        <strong>Number of items:</strong>
-                    </label>
-                    <ErrorMessage
-                        name="emptyAmount"
-                        render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
-                    />
-                    <TextField
-                        {...numberOfItemsField}
-                        type="number"
-                        label="Amount"
-                        size="small"
-                        style={{ width: '80px' }}
-                        InputProps={{ sx: { borderRadius: 0 } }}
-                        inputProps={{ min: 0 }}
-                        placeholder="number of items"
-                    />
-                </div>
-            )}
+                <CustomNumberInput />
+
+                <ErrorMessage
+                    name="numberOfItems"
+                    render={({ message }) => <StyledErrorP>{message}</StyledErrorP>}
+                />
+            </StyledBatchWrapper>
         </FormContainer>
     );
 };

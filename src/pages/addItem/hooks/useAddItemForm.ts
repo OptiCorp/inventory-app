@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 import AppContext from '../../../contexts/AppContext';
 import { ItemTemplate } from '../../../services/apiTypes';
 import { useAddItems } from '../../../services/hooks/items/useAddItem';
@@ -20,8 +21,8 @@ const defaultTemplate: TemplateSchema = {
 };
 
 const defaultValues: ItemSchema = {
-    wpId: [],
-    serialNumber: [],
+    wpId: [uuid().slice(0, 8)],
+    serialNumber: [uuid().slice(0, 8)],
     vendorId: '',
     locationId: '',
     itemTemplateId: '',
@@ -33,7 +34,7 @@ const defaultValues: ItemSchema = {
     preCheck: { check: false, comment: '' },
     documentation: false,
     itemTemplate: defaultTemplate,
-    numberOfItems: '1',
+    numberOfItems: 1,
 };
 
 export const useAddItemForm = () => {
@@ -75,7 +76,7 @@ export const useAddItemForm = () => {
             setValue('itemTemplate.revision', selectedTemplate.revision || '');
         }
     }, []);
-
+    console.log(watch());
     const templateSubmit = async () => {
         const data = await templateMutate({
             categoryId: selectedTemplate.categoryId || '',
@@ -99,7 +100,7 @@ export const useAddItemForm = () => {
                     description,
                 } = await templateSubmit();
 
-                const numberOfItems = parseInt(data.numberOfItems);
+                const numberOfItems = data.numberOfItems;
                 const items: ItemSchema[] = [];
                 for (let i = 0; i < numberOfItems; i++) {
                     items.push({
@@ -134,7 +135,7 @@ export const useAddItemForm = () => {
                     }
                 );
             } else {
-                const numberOfItems = parseInt(data.numberOfItems);
+                const numberOfItems = data.numberOfItems;
                 const items: ItemSchema[] = [];
                 for (let i = 0; i < numberOfItems; i++) {
                     items.push({
