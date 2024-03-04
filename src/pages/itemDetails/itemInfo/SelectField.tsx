@@ -19,7 +19,7 @@ type SelectProps = {
     fieldName: FieldNames;
     options: Options[];
     value?: string | { value: string };
-    onBlur: ComponentProps<'input'>['onBlur'];
+    onBlur?: ComponentProps<'input'>['onBlur'];
 };
 
 export const SelectField = ({ label, onBlur, options, placeholder, fieldName }: SelectProps) => {
@@ -80,11 +80,13 @@ export const SelectField = ({ label, onBlur, options, placeholder, fieldName }: 
                         <label>
                             <strong>{fieldName}</strong>
                         </label>
-                        <Edit
-                            onClick={() => {
-                                handleEditClick();
-                            }}
-                        />
+                        {onBlur && (
+                            <Edit
+                                onClick={() => {
+                                    handleEditClick();
+                                }}
+                            />
+                        )}
                     </LabelContainer>
 
                     <Controller
