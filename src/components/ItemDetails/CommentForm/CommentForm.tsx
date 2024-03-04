@@ -7,6 +7,7 @@ import { Item } from '../../../services/apiTypes';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import { Wrapper } from './styles';
+import { COLORS } from '../../../style/GlobalStyles';
 
 export const Comments = ({ item }: { item: Item }) => {
     const {
@@ -63,8 +64,11 @@ export const Comments = ({ item }: { item: Item }) => {
                                     fullWidth
                                     onChange={onChange}
                                     variant="filled"
-                                    InputProps={{ sx: { borderRadius: 0 } }}
+                                    InputProps={{
+                                        sx: { borderRadius: 0, background: 'transparent' },
+                                    }}
                                     sx={{
+                                        background: COLORS.lightGray,
                                         '&::before': {
                                             display: 'none',
                                         },

@@ -461,8 +461,38 @@ const apiService = () => {
         return await deleteByFetch(`Document/${documentId}`);
     };
 
+    // DocumentType
+
     const getDocumentTypes = async (): Promise<DocumentType[]> => {
         return await getByFetch(`DocumentType`);
+    };
+
+    const getDocumentTypeById = async (id: string): Promise<DocumentType> => {
+        return await getByFetch(`DocumentType/${id}`);
+    };
+
+    const addDocumentType = async ({
+        name,
+        description,
+    }: {
+        name: string;
+        description: string;
+    }): Promise<Response> => {
+        return await postByFetch('DocumentType', {
+            name,
+            description,
+        });
+    };
+
+    const updateDocumentTypeById = async (
+        id: string,
+        documentType: Pick<DocumentType, 'id' | 'name'>
+    ) => {
+        return await putByFetch(`DocumentType/${id}`, documentType);
+    };
+
+    const deleteDocumentTypeById = async (id: string) => {
+        return await deleteByFetch(`DocumentType/${id}`);
     };
 
     // ItemTemplate
@@ -564,6 +594,10 @@ const apiService = () => {
         getDocumentsByItemId,
         deleteDocument,
         getDocumentTypes,
+        getDocumentTypeById,
+        addDocumentType,
+        updateDocumentTypeById,
+        deleteDocumentTypeById,
         getItemTemplates,
         getItemTemplateById,
         updateItemTemplateById,
