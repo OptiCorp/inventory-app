@@ -1,5 +1,5 @@
+import { styled } from '@mui/material';
 import { blue, grey } from '@mui/material/colors';
-import styled from 'styled-components';
 
 type InputProps = {
     theme: string | undefined;
@@ -8,7 +8,7 @@ export const StyledInputRoot = styled('div')<InputProps>(
     ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
-  color: ${theme?.palette?.mode === 'dark' ? grey[300] : grey[500]};
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[500]};
   display: flex;
 gap: 20px;
   flex-flow: row nowrap;
