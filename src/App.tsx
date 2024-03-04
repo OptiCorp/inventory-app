@@ -36,6 +36,7 @@ import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 import { AddTemplate } from './pages/admin/template/AddTemplate';
 import { DocumentTypes } from './pages/admin/documentType/DocumentTypes';
 import { AddDocumentType } from './pages/admin/documentType/AddDocumentType';
+import { TemplateDetails } from './pages/itemDetails/TemplateDetails';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -50,6 +51,7 @@ function App() {
                 <Route path="search/:searchParam?" element={<Search />} />
 
                 <Route path="item/:id" element={<ItemDetails />} />
+                <Route path="item/:itemId/template/:templateId" element={<TemplateDetails />} />
                 <Route path="add-item" element={<AddItem />}>
                     <Route index element={<RecentlyAdded />} />
                     <Route path="batch" element={<BatchForm />} />
