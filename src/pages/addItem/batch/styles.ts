@@ -36,7 +36,6 @@ export const RadioWrapper = styled.div`
 
 export const StyledBatchWrapper = styled.div`
     display: flex;
-
     flex-direction: column;
     gap: 10px;
     align-items: first baseline;
