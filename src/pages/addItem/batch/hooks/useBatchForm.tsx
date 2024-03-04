@@ -5,7 +5,7 @@ import { ItemSchema } from '../../hooks/itemValidator';
 export const useBatchForm = () => {
     const { control, setValue } = useFormContext<ItemSchema>();
     const {
-        field: { onChange, value },
+        field: { value },
         fieldState: { error },
     } = useController({
         control,

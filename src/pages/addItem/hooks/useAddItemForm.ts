@@ -76,7 +76,7 @@ export const useAddItemForm = () => {
             setValue('itemTemplate.revision', selectedTemplate.revision || '');
         }
     }, []);
-    console.log(watch());
+
     const templateSubmit = async () => {
         const data = await templateMutate({
             categoryId: selectedTemplate.categoryId || '',
