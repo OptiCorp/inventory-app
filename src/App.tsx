@@ -34,6 +34,8 @@ import { Login } from './pages/login/Login';
 import { Search } from './pages/search/Search';
 import GlobalStyles, { globalTheme } from './style/GlobalStyles';
 import { AddTemplate } from './pages/admin/template/AddTemplate';
+import { DocumentTypes } from './pages/admin/documentType/DocumentTypes';
+import { AddDocumentType } from './pages/admin/documentType/AddDocumentType';
 
 function App() {
     const isAuthenticated = useIsAuthenticated();
@@ -75,6 +77,8 @@ function App() {
                     <Route path="locations" element={<Locations />} />
                     <Route path="add-location" element={<AddLocation />} />
                     <Route path="add-template" element={<AddTemplate />} />
+                    <Route path="document-types" element={<DocumentTypes />} />
+                    <Route path="add-document-type" element={<AddDocumentType />} />
                 </Route>
             </Route>
         )
