@@ -28,7 +28,7 @@ type UploadProps = {
 
 export const ExampleUpload = ({ itemId }: UploadProps) => {
     const { data: documents, isLoading } = useGetDocumentsByItemId(itemId);
-    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem(itemId);
+    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem();
     const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const { data: documentTypes } = useGetDocumentTypes();
     const inputFile = useRef<HTMLInputElement | null>(null);
@@ -43,7 +43,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                 file: file,
                 documentTypeId: chosenDocumentType!,
             };
-            uploadDocumentToItem(document);
+            uploadDocumentToItem({ document: document, itemId: itemId });
         }
         setFile(null);
         setChosenDocumentType(null);
