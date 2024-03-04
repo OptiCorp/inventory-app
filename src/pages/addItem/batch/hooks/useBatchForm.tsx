@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 import { ItemSchema } from '../../hooks/itemValidator';
@@ -29,6 +29,11 @@ export const useBatchForm = () => {
         setValue('wpId', uniqueWpIds);
         setValue('serialNumber', uniqueSerialNumbers);
     };
+
+    useEffect(() => {
+        setValue('wpId', [uuid().slice(0, 8)]);
+        setValue('serialNumber', [uuid().slice(0, 8)]);
+    }, []);
 
     return {
         isBatch: value,
