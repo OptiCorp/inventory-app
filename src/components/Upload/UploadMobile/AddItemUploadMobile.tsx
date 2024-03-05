@@ -86,7 +86,7 @@ export const AddItemUploadMobile = () => {
                         onChange={handleFileUpload}
                         ref={inputFile}
                     />
-                    UPLOAD NEW
+                    ADD DOCUMENT
                 </SubmitButton>
             </Box>
         </>
