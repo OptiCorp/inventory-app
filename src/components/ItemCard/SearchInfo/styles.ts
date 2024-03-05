@@ -27,7 +27,7 @@ export const StyledBox = styled.div`
     justify-content: space-between;
     margin: 16px;
     gap: 16px;
-    width: 100%;
+    width: 30%;
 `;
 
 export const StyledContent = styled.div`

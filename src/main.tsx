@@ -1,10 +1,9 @@
+import { MsalProvider } from '@azure/msal-react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { MsalProvider } from '@azure/msal-react';
 import { pca } from './msalConfig';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AppContainer, BodyWrapper } from './styles';
 
 const queryClient = new QueryClient();
@@ -19,7 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     </AppContainer>
                 </BodyWrapper>
             </MsalProvider>
-            <ReactQueryDevtools />
         </QueryClientProvider>
     </React.StrictMode>
 );

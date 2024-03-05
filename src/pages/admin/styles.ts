@@ -4,6 +4,8 @@ import { COLORS } from '../../style/GlobalStyles';
 export const AdminContainer = styled.div`
     display: flex;
     flex-direction: column;
+    padding: 16px;
+    gap: 16px;
 `;
 
 export const SearchResultContainer = styled.div`
@@ -67,4 +69,15 @@ export const SubmitButtonContainer = styled.div`
     justify-content: end;
     width: 100%;
     margin: 8px 0;
+`;
+
+export const TemplateFormContainer = styled.div`
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+`;
+
+export const StyledTemplateForm = styled.form`
+    padding-right: 16px;
 `;

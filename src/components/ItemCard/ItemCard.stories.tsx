@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import ItemCard from './ItemCard';
+import { ItemCard } from './ItemCard';
 
 const meta = {
     title: 'Components/ItemCard',

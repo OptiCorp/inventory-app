@@ -61,6 +61,7 @@ export const BreadcrumbLink = styled(Link)`
 export const StyledScrollContainer = styled.div`
     max-height: 148px;
     overflow: scroll;
+    overflow-x: hidden;
     background: ${COLORS.lightGray};
     padding: 25px 12px 8px;
 `;

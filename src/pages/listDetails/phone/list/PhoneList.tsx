@@ -3,9 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { Button } from '../../../../components/Button/Button';
 import { GlobalSpinner } from '../../../../components/GlobalSpinner/GlobalSpinner';
-
-import SearchResultCardCompact from '../../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
-
+import { SearchResultCardCompact } from '../../../../components/ItemCard/SearchInfoCompact/SearchInfoCompact';
 import AppContext from '../../../../contexts/AppContext';
 import { Item, List, UpdateList } from '../../../../services/apiTypes';
 import { useGetItemsInfinite } from '../../../../services/hooks/items/useGetItemsInfinite';

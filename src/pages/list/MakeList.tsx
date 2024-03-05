@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import { GlobalSpinner } from '../../components/GlobalSpinner/GlobalSpinner';
 import { ListCard } from '../../components/ListCard/ListCard';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
 import AppContext from '../../contexts/AppContext';
 import { useWindowDimensions } from '../../hooks';
 import { Item, List } from '../../services/apiTypes';
@@ -14,7 +14,7 @@ import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUser
 import { SearchContainer } from '../search/styles';
 import { FlexWrapper, SearchAndButton } from './styles';
 
-const MakeList = () => {
+export const MakeList = () => {
     const { currentUser } = useContext(AppContext);
     const { searchParam } = useParams<{ searchParam: string }>();
     const [searchTerm, setSearchTerm] = useState('');
@@ -105,5 +105,3 @@ const MakeList = () => {
         </>
     );
 };
-
-export default MakeList;

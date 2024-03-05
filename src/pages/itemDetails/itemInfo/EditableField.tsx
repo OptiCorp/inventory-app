@@ -29,7 +29,7 @@ type EditableFieldProps<TMultiLine = boolean> = {
       }
     : { isMultiLine?: false; rows?: never });
 
-const EditableField = ({
+export const EditableField = ({
     isMultiLine,
     label,
     onBlur,
@@ -113,5 +113,3 @@ const EditableField = ({
         </TextBoxWrap>
     );
 };
-
-export default EditableField;

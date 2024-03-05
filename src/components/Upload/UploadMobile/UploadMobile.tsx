@@ -20,16 +20,16 @@ import { Container, Wrapper } from './styles';
 import { Button as SubmitButton } from '../../Button/Button';
 import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
 import { useGetDocumentTypes } from '../../../services/hooks/documents/useGetDocumentTypes';
-import File from '../../File/File';
+import { File } from '../../File/File';
 
 type UploadProps = {
     itemId: string;
 };
 
-const UploadMobile = ({ itemId }: UploadProps) => {
+export const UploadMobile = ({ itemId }: UploadProps) => {
     const { data: documents } = useGetDocumentsByItemId(itemId);
     const { data: documentTypes } = useGetDocumentTypes();
-    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem(itemId);
+    const { mutate: uploadDocumentToItem } = useUploadDocumentToItem();
     const { mutate: deleteDocument } = useDeleteDocument(itemId);
     const inputFile = useRef<HTMLInputElement | null>(null);
     const [showArrow, setShowArrow] = useState(true);
@@ -44,7 +44,7 @@ const UploadMobile = ({ itemId }: UploadProps) => {
                 file: file,
                 documentTypeId: chosenDocumentType!,
             };
-            uploadDocumentToItem(document);
+            uploadDocumentToItem({ document: document, itemId: itemId });
         }
         setFile(null);
         setChosenDocumentType(null);
@@ -170,4 +170,3 @@ const UploadMobile = ({ itemId }: UploadProps) => {
         </>
     );
 };
-export default UploadMobile;

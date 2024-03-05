@@ -94,9 +94,9 @@ export const AdminMenu = styled(Menu)`
     width: 100%;
 
     & .MuiMenu-paper {
-        max-height: 210px;
+        max-height: 310px;
         box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-        width: 130px;
+        width: 170px;
         padding: 0;
         & .MuiMenu-list {
             padding-top: 10px;

@@ -1,12 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ItemTemplate, Location, Vendor } from '../../services/apiTypes';
 import { SearchInfo } from './SearchInfo/SearchInfo';
-import { StyledItemCardContainer, StyledSearchCard } from './styles';
+import { StyledSearchCard } from './styles';
 
 export type ItemCardProps = {
     item: {
         id: string;
-
         wpId: string;
         serialNumber: string;
         location?: Location;
@@ -18,7 +17,7 @@ export type ItemCardProps = {
     icon?: string;
 };
 
-const ItemCard = ({ item, icon }: ItemCardProps) => {
+export const ItemCard = ({ item, icon }: ItemCardProps) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -33,12 +32,8 @@ const ItemCard = ({ item, icon }: ItemCardProps) => {
             : undefined;
 
     return (
-        <StyledItemCardContainer style={{ cursor: cursorStyle }} onClick={handleClick}>
-            <StyledSearchCard title="">
-                <SearchInfo item={item} icon={icon} />
-            </StyledSearchCard>
-        </StyledItemCardContainer>
+        <StyledSearchCard title="" onClick={handleClick} style={{ cursor: cursorStyle }}>
+            <SearchInfo item={item} icon={icon} />
+        </StyledSearchCard>
     );
 };
-
-export default ItemCard;

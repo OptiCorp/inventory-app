@@ -4,18 +4,19 @@ import AppContext from '../../../contexts/AppContext';
 import apiService from '../../api';
 import { AddDocument } from '../../apiTypes';
 
-export const useUploadDocumentToItem = (itemId: string) => {
+export const useUploadDocumentToItem = () => {
     const api = apiService();
     const queryClient = useQueryClient();
     const { setSnackbarText } = useContext(AppContext);
     return useMutation({
-        mutationFn: async (document: AddDocument) => await api.addDocument(document, itemId),
-        onSettled: (_data, errors, document) => {
+        mutationFn: async (variables: { document: AddDocument; itemId: string }) =>
+            await api.addDocumentToItem(variables.document, variables.itemId),
+        onSettled: (_data, errors, variables) => {
             if (!errors) {
-                setSnackbarText(`${document.file.name} was uploaded.`);
+                setSnackbarText(`${variables.document.file.name} was uploaded.`);
                 queryClient
                     .invalidateQueries({
-                        queryKey: [itemId],
+                        queryKey: [variables.itemId],
                     })
                     .catch((error) => {
                         console.error('Failed to invalidate queries.', error);

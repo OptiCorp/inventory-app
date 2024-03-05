@@ -18,5 +18,32 @@ export const StyledAdminActions = styled.div`
 export const StyledTitleContainer = styled.div`
     display: flex;
     align-items: center;
-    height: 56px;
+    min-height: 56px;
+`;
+
+export const StyledEllipsisContainer = styled.div`
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @media screen and (max-width: 900px) {
+        width: 500px;
+    }
+
+    @media screen and (max-width: 700px) {
+        width: 380px;
+    }
+
+    @media screen and (max-width: 570px) {
+        width: 210px;
+    }
+
+    @media screen and (max-width: 400px) {
+        width: 175px;
+    }
+`;
+
+export const StyledInputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 `;

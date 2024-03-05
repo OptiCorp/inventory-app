@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
-import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
 import { StyledForm } from './addItemForm/styles';
 import { ItemSchema } from './hooks/itemValidator';
 import { useAddItemForm } from './hooks/useAddItemForm';
@@ -33,7 +33,7 @@ const steps: { fields: stepsSchema[]; slug: string }[] = [
     },
 ];
 
-const AddItem = () => {
+export const AddItem = () => {
     const { methods, onSubmit, trigger, reset } = useAddItemForm();
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -51,18 +51,26 @@ const AddItem = () => {
 
     useEffect(() => {
         steps.some((step) => {
-            if (!location.pathname.includes(`${step.slug}`)) {
+            if (!location.pathname.includes(`${step.slug}`) || location.pathname === '/add-item/') {
                 setActiveStep(0);
                 reset();
-            } else if (location.pathname === '/add-item/') {
-                setActiveStep(0);
             }
         });
     }, [!location.pathname.includes('/add-item/')]);
 
     useEffect(() => {
+        if (location.pathname === '/add-item/') {
+            setActiveStep(0);
+            reset();
+        }
+    }, [location.pathname]);
+
+    useEffect(() => {
         const currentStep = steps.findIndex((step) => location.pathname.includes(`${step.slug}`));
         setActiveStep(currentStep !== -1 ? currentStep : 0);
+        if (activeStep === 0) {
+            reset();
+        }
     }, [location.pathname]);
 
     useEffect(() => {
@@ -110,5 +118,3 @@ const AddItem = () => {
         </FormProvider>
     );
 };
-
-export default AddItem;

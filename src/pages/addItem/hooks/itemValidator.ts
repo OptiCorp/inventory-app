@@ -20,8 +20,28 @@ const templateSchema = z.object({
 export const itemSchema = z.object({
     itemTemplate: templateSchema,
     itemTemplateId: z.string(),
-    wpId: z.array(z.string().min(1, 'WpId is required')).min(1),
-    serialNumber: z.array(z.string().min(1, 'Serial number is required')).min(1),
+    wpId: z
+        .array(z.string().min(1, 'WpId is required'))
+        .min(1)
+        .refine(
+            (data) => {
+                return new Set(data).size === data.length;
+            },
+            {
+                message: 'All ids must be unique',
+            }
+        ),
+    serialNumber: z
+        .array(z.string().min(1, 'Serial number is required'))
+        .min(1)
+        .refine(
+            (data) => {
+                return new Set(data).size === data.length;
+            },
+            {
+                message: 'All ids must be unique',
+            }
+        ),
     vendorId: z.string().min(1, 'Vendor is required'),
     comment: z.string().nullish(),
     isBatch: z.boolean(),
@@ -30,24 +50,15 @@ export const itemSchema = z.object({
         comment: z.string(),
     }),
     documentation: z.boolean().refine((value) => value, 'Required'),
-    documents: z
-        .array(
-            z.object({
-                id: z.string(),
-                name: z.string(),
-                blobRef: z.string(),
-                contentType: z.string(),
-                bytes: z.string(),
-            })
-        )
-        .optional(),
     locationId: z.string().min(1, 'Location is required'),
     parentId: z.string().nullish(),
     createdById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
     uniqueSerialNumber: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),
-    numberOfItems: z.string(),
+    documentTypes: z.array(z.string().nullish()),
+    uploadToTemplate: z.array(z.boolean().nullish()),
+    numberOfItems: z.number().min(1, 'minimum one item').max(200, 'max 200 items'),
 });
 
 export type ItemSchema = z.infer<typeof itemSchema>;

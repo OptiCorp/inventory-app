@@ -20,8 +20,9 @@ import {
     StyledCompactTitle,
     StyledItemCardCompactContainer,
 } from './styles';
+import { COLORS } from '../../../style/GlobalStyles';
 
-const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
+export const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const navigate = useNavigate();
     const { listId } = useParams();
     const {
@@ -41,6 +42,7 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                     style={{
                         boxShadow: 'none',
                         borderRadius: '0px',
+                        background: COLORS.lightestGray,
                     }}
                 >
                     <AccordionSummary
@@ -118,5 +120,3 @@ const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
         </>
     );
 };
-
-export default SearchResultCardCompact;

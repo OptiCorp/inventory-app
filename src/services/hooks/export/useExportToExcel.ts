@@ -17,7 +17,7 @@ type ExcelData = {
     location?: string;
 };
 
-const useExportToExcel = (): ExportToExcelHook => {
+export const useExportToExcel = (): ExportToExcelHook => {
     const exportToExcel = (items: Item[]) => {
         const data = processAndSetData(items);
         const wb = XLSX.utils.book_new();
@@ -43,5 +43,3 @@ const useExportToExcel = (): ExportToExcelHook => {
     };
     return { exportToExcel };
 };
-
-export default useExportToExcel;
