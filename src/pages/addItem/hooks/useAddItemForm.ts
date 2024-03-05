@@ -4,10 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import AppContext from '../../../contexts/AppContext';
-import { ItemTemplate } from '../../../services/apiTypes';
+import { ItemTemplate, Item } from '../../../services/apiTypes';
 import { useAddItems } from '../../../services/hooks/items/useAddItem';
 import { useAddItemTemplate } from '../../../services/hooks/template/useAddItemTemplate';
 import { ItemSchema, TemplateSchema, itemSchema } from './itemValidator';
+import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem.ts';
+import { useUploadDocumentToTemplate } from '../../../services/hooks/documents/useUploadDocumentToTemplate.ts';
 
 const defaultTemplate: TemplateSchema = {
     categoryId: '',
@@ -34,13 +36,18 @@ const defaultValues: ItemSchema = {
     preCheck: { check: false, comment: '' },
     documentation: false,
     itemTemplate: defaultTemplate,
+    documentTypes: [],
+    uploadToTemplate: [],
+    files: [],
     numberOfItems: 1,
 };
 
 export const useAddItemForm = () => {
     const { currentUser, setSnackbarText } = useContext(AppContext);
-    const { mutate } = useAddItems();
+    const { mutateAsync: mutateItemsAsync } = useAddItems();
     const appLocation = useLocation();
+    const { mutateAsync: mutateUploadToItemAsync } = useUploadDocumentToItem();
+    const { mutateAsync: mutateUploadToTemplateAsync } = useUploadDocumentToTemplate();
 
     const methods = useForm<ItemSchema>({
         mode: 'onChange',
@@ -60,10 +67,15 @@ export const useAddItemForm = () => {
         register,
         trigger,
         setValue,
+        getValues,
         watch,
     } = methods;
     const { mutateAsync: templateMutate } = useAddItemTemplate();
     const selectedTemplate = watch('itemTemplate');
+    const files = getValues('files');
+    const documentTypes = getValues('documentTypes');
+    const uploadToTemplate = getValues('uploadToTemplate');
+    let createdItems: Item[] = [];
 
     useEffect(() => {
         register('itemTemplate');
@@ -119,7 +131,7 @@ export const useAddItemForm = () => {
                         },
                     });
                 }
-                mutate(
+                createdItems = await mutateItemsAsync(
                     {
                         items,
                         files: undefined,
@@ -146,7 +158,7 @@ export const useAddItemForm = () => {
                         createdById: currentUser!.id,
                     });
                 }
-                mutate(
+                createdItems = await mutateItemsAsync(
                     {
                         items,
                         files: undefined,
@@ -162,8 +174,34 @@ export const useAddItemForm = () => {
                     }
                 );
             }
+            if (files!.length > 0) {
+                await Promise.all(
+                    files!.map(async (file, index) => {
+                        if (uploadToTemplate[index]) {
+                            await mutateUploadToTemplateAsync({
+                                document: {
+                                    file: file,
+                                    documentTypeId: documentTypes[index]!,
+                                },
+                                templateId: selectedTemplate.id,
+                            });
+                        } else {
+                            await Promise.all(
+                                createdItems.map(async (item) => {
+                                    await mutateUploadToItemAsync({
+                                        document: {
+                                            file: file,
+                                            documentTypeId: documentTypes[index]!,
+                                        },
+                                        itemId: item.id,
+                                    });
+                                })
+                            );
+                        }
+                    })
+                );
+            }
         },
-
         (errors) => console.error(errors)
     );
 

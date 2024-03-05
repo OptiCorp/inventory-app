@@ -50,23 +50,14 @@ export const itemSchema = z.object({
         comment: z.string(),
     }),
     documentation: z.boolean().refine((value) => value, 'Required'),
-    documents: z
-        .array(
-            z.object({
-                id: z.string(),
-                name: z.string(),
-                blobRef: z.string(),
-                contentType: z.string(),
-                bytes: z.string(),
-            })
-        )
-        .optional(),
     locationId: z.string().min(1, 'Location is required'),
     parentId: z.string().nullish(),
     createdById: z.string().min(1),
     uniqueWpId: z.boolean().refine((data) => data, {}),
     uniqueSerialNumber: z.boolean().refine((data) => data, {}),
     files: z.array(z.instanceof(File)).nullish(),
+    documentTypes: z.array(z.string().nullish()),
+    uploadToTemplate: z.array(z.boolean().nullish()),
     numberOfItems: z.number().min(1, 'minimum one item').max(200, 'max 200 items'),
 });
 
