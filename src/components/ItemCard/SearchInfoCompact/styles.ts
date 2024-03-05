@@ -18,7 +18,7 @@ export const StyledCompactContent = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
+    gap: 5px;
 `;
 
 export const StyledCompactDescriptionWrap = styled.div`
@@ -47,7 +47,7 @@ export const StyledKeyWords = styled.p`
 export const StyledCompactTitle = styled.p`
     margin: 0px;
     display: flex;
-    font-weight: 600;
+    font-weight: 800;
 `;
 export const StyledCompactText = styled.p`
     margin: 0px;
