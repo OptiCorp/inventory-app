@@ -21,6 +21,7 @@ import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDo
 import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
 import { COLORS } from '../../style/GlobalStyles';
 import { File } from '../File/File';
+import { CustomDialog } from '../CustomDialog/CustomDialog';
 
 type UploadProps = {
     itemId: string;
@@ -35,7 +36,9 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
     const [openDocumentTypeDialog, setOpenDocumentTypeDialog] = useState(false);
     const [chosenDocumentType, setChosenDocumentType] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
-
+    const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+    const [documentIdToDelete, setDocumentIdToDelete] = useState('');
+    const [documentNameToDelete, setDocumentNameToDelete] = useState('');
     const handleFileUpload = () => {
         setOpenDocumentTypeDialog(false);
         if (file) {
@@ -49,14 +52,30 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
         setChosenDocumentType(null);
     };
 
-    const handleFileDelete = (documentId: string) => {
-        deleteDocument(documentId);
-    };
-
     const handleCancel = () => {
         setOpenDocumentTypeDialog(false);
         setFile(null);
         setChosenDocumentType(null);
+    };
+
+    const handleClose = () => {
+        setIsDeleteConfirmationOpen(false);
+        setDocumentNameToDelete('');
+    };
+
+    const handleFileDeleteConfirmation = (documentId: string, documentName?: string) => {
+        setDocumentIdToDelete(documentId);
+        if (documentName) {
+            setDocumentNameToDelete(documentName);
+        }
+        setIsDeleteConfirmationOpen(true);
+    };
+
+    const handleFileToDelete = () => {
+        if (documentIdToDelete) {
+            deleteDocument(documentIdToDelete);
+        }
+        setIsDeleteConfirmationOpen(false);
     };
 
     return (
@@ -103,6 +122,18 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                     </Box>
                 </DialogContent>
             </Dialog>
+            <CustomDialog
+                open={isDeleteConfirmationOpen}
+                SubmitButtonOnClick={handleFileToDelete}
+                CancelButtonOnClick={handleClose}
+                onClose={handleClose}
+                isWarning
+                title="Delete upload"
+            >
+                Are you sure you want to permanently delete &quot;
+                {documentNameToDelete ? documentNameToDelete : 'No file name'}
+                &quot;?
+            </CustomDialog>
 
             <Box
                 sx={{
@@ -112,18 +143,27 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                     border: `1px dashed ${COLORS.black}`,
                     boxSizing: 'border-box',
                     minHeight: '200px',
+                    overflowX: 'auto',
                 }}
             >
                 {isLoading ? (
                     <CircularProgress />
                 ) : (
-                    documents?.map((document) => (
-                        <File
-                            key={document.id}
-                            doc={document}
-                            handleFileRemoval={() => handleFileDelete(document.id)}
-                        />
-                    ))
+                    documents?.map((document) => {
+                        return (
+                            <File
+                                key={document.id}
+                                doc={document}
+                                handleFileRemoval={() =>
+                                    handleFileDeleteConfirmation(
+                                        document.id,
+                                        document?.fileName ? document.fileName : document.name
+                                    )
+                                }
+                                downloadButton={true}
+                            />
+                        );
+                    })
                 )}
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'end' }}>

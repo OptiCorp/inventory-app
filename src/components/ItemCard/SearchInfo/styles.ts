@@ -33,7 +33,7 @@ export const StyledBox = styled.div`
 export const StyledContent = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     width: 100%;
     padding-left: 5px;
     padding-right: 5px;
@@ -42,7 +42,7 @@ export const StyledContent = styled.div`
 export const StyledTitle = styled.p`
     margin: 0px;
     display: flex;
-    font-weight: 600;
+    font-weight: 800;
 `;
 
 export const StyledText = styled.p`

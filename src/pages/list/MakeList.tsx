@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -13,6 +12,7 @@ import { useAddList } from '../../services/hooks/list/useAddList';
 import { useGetListsByUserId } from '../../services/hooks/list/useGetListsByUserId';
 import { SearchContainer } from '../search/styles';
 import { FlexWrapper, SearchAndButton } from './styles';
+import { Button } from '../../components/Button/Button.tsx';
 
 export const MakeList = () => {
     const { currentUser } = useContext(AppContext);
@@ -62,19 +62,11 @@ export const MakeList = () => {
                         searchTerm={searchTerm}
                         placeholder={'Search for title or items'}
                     />
-
-                    <Button
-                        variant="contained"
-                        sx={{
-                            borderRadius: '0',
-                            height: '40px',
-                            width: '200px',
-                            alignSelf: 'flex-end',
-                        }}
-                        onClick={handleClickOpen}
-                    >
-                        NEW LIST
-                    </Button>
+                    <div style={{ marginTop: '19px' }}>
+                        <Button onClick={handleClickOpen} variant="black">
+                            New list
+                        </Button>
+                    </div>
                 </SearchAndButton>
                 <CustomDialog
                     title="New list"
