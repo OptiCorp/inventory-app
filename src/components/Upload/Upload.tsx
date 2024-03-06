@@ -131,7 +131,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                 title="Delete upload"
             >
                 Are you sure you want to permanently delete &quot;
-                {documentNameToDelete ? documentNameToDelete : 'No fil name'}
+                {documentNameToDelete ? documentNameToDelete : 'No file name'}
                 &quot;?
             </CustomDialog>
 
