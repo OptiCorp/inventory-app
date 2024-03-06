@@ -143,6 +143,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                     border: `1px dashed ${COLORS.black}`,
                     boxSizing: 'border-box',
                     minHeight: '200px',
+                    overflowX: 'auto',
                 }}
             >
                 {isLoading ? (
@@ -154,7 +155,10 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                                 key={document.id}
                                 doc={document}
                                 handleFileRemoval={() =>
-                                    handleFileDeleteConfirmation(document.id, document?.fileName)
+                                    handleFileDeleteConfirmation(
+                                        document.id,
+                                        document?.fileName ? document.fileName : document.name
+                                    )
                                 }
                                 downloadButton={true}
                             />
