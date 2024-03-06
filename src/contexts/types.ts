@@ -2,7 +2,7 @@ import { AccountInfo } from '@azure/msal-browser';
 import { IMsalContext } from '@azure/msal-react';
 import { AlertColor } from '@mui/material';
 import { SetState } from '../pages/itemDetails/itemInfo/types';
-import { User } from '../services/apiTypes';
+import { Item, User } from '../services/apiTypes';
 export interface AppContextType {
     snackbarText: string;
     // setSnackbarText: (snackbarText: string) => void
@@ -21,6 +21,8 @@ export interface AppContextType {
     accounts: AccountInfo[];
     instance: IMsalContext['instance'];
     currentUser: User | null;
+    currentItem: Item | null;
+    setCurrentItem: (item: Item | null) => void;
 }
 
 export type AzureUserInfo = {
