@@ -3,35 +3,10 @@ import React, { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
+import { steps } from '../../components/ProgressBar/Steps';
 import { StyledForm } from './addItemForm/styles';
-import { ItemSchema } from './hooks/itemValidator';
 import { useAddItemForm } from './hooks/useAddItemForm';
 import { ButtonWrapper } from './styles';
-
-type stepsSchema = keyof ItemSchema;
-
-const steps: { fields: stepsSchema[]; slug: string }[] = [
-    {
-        fields: ['isBatch'],
-        slug: 'batch',
-    },
-    {
-        fields: ['preCheck'],
-        slug: 'checks',
-    },
-    {
-        fields: ['documentation'],
-        slug: 'upload',
-    },
-    {
-        fields: ['itemTemplate'],
-        slug: 'template',
-    },
-    {
-        fields: ['serialNumber', 'wpId', 'vendorId'],
-        slug: 'add-form',
-    },
-];
 
 export const AddItem = () => {
     const { methods, onSubmit, trigger, reset } = useAddItemForm();

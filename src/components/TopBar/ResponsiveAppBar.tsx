@@ -17,6 +17,7 @@ import { useWindowDimensions } from '../../hooks';
 import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu';
 import { useNavigationControl } from './hooks/useNavigation';
 import { AdminMenu } from './styles';
+
 const pages = ['Find items', 'Add item', 'Make list'];
 
 const settings = [
