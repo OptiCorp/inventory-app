@@ -179,6 +179,7 @@ export type Document = {
     blobRef: string;
     contentType: string;
     bytes: string;
+    fileName: string;
 };
 
 export type ItemTemplate = {
