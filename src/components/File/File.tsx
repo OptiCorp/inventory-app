@@ -27,7 +27,7 @@ export const File = ({ doc, file, handleFileRemoval, downloadButton }: FileProps
         }
         if (doc) {
             const downloadLink = document.createElement('a');
-            downloadLink.download = `${doc.name}`;
+            downloadLink.download = `${fileName}`;
             downloadLink.href = `data:${doc.contentType};base64,${doc.bytes}`;
             downloadLink.click();
         }
