@@ -35,6 +35,9 @@ export const Wrapper = styled.div`
     padding: 8px;
     justify-content: space-between;
     background-color: ${COLORS.white};
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const RemoveIcon = styled(RemoveCircleIcon)`
