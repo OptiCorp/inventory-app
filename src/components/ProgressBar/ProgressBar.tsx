@@ -11,7 +11,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ activeStep, steps }) =
     return (
         <>
             <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((stepLabel, index) => (
+                {steps?.map((stepLabel, index) => (
                     <Step key={stepLabel.slug}>
                         <StepLabel>{index + 1}</StepLabel>
                     </Step>
