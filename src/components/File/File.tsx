@@ -20,20 +20,16 @@ type FileProps = {
 export const File = ({ doc, file, handleFileRemoval, downloadButton }: FileProps) => {
     const handleFileDownload = (doc?: Document, file?: File) => {
         if (file) {
-            if (confirm('Download?')) {
-                const downloadLink = document.createElement('a');
-                downloadLink.download = `${file.name}`;
-                downloadLink.href = `data:${file.type};base64,${URL.createObjectURL(file)}`;
-                downloadLink.click();
-            }
+            const downloadLink = document.createElement('a');
+            downloadLink.download = `${file.name}`;
+            downloadLink.href = `data:${file.type};base64,${URL.createObjectURL(file)}`;
+            downloadLink.click();
         }
         if (doc) {
-            if (confirm(`Download ${fileName}?`)) {
-                const downloadLink = document.createElement('a');
-                downloadLink.download = `${doc.name}`;
-                downloadLink.href = `data:${doc.contentType};base64,${doc.bytes}`;
-                downloadLink.click();
-            }
+            const downloadLink = document.createElement('a');
+            downloadLink.download = `${doc.name}`;
+            downloadLink.href = `data:${doc.contentType};base64,${doc.bytes}`;
+            downloadLink.click();
         }
     };
 
