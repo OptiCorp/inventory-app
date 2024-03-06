@@ -7,7 +7,6 @@ import { StyledContainerDiv } from './styles';
 
 export const TemplateDetails = () => {
     const { itemId } = useParams();
-    console.log('itemId', itemId);
     const { data: item } = useGetItemById(itemId!);
     const { methods } = useUpdateItemForm(item!);
 

@@ -26,9 +26,8 @@ type Field =
       }
     | string;
 export const TemplateInfo = () => {
-    const { templateId, itemId } = useParams();
+    const { itemId } = useParams();
     const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(AppContext);
-    const { data: template } = useGetItemTemplateById(templateId!);
     const { data: item } = useGetItemById(itemId!);
     const { data: categories = [], isLoading: loadingCategories } = useGetCategories();
     const { data: itemTemplateData } = useGetItemTemplateById(item?.itemTemplate.id ?? '');
@@ -40,7 +39,6 @@ export const TemplateInfo = () => {
         watch,
         formState: { dirtyFields },
     } = useFormContext<ItemInfoSchema>();
-    console.log(template);
 
     const convertOptionsToSelectFormat = <T extends { id: string; name: string }>(
         optionsArray: T[]
@@ -64,7 +62,7 @@ export const TemplateInfo = () => {
                         {
                             ...itemTemplateData,
                             [field]: mutableValue,
-                            revision: '1.0',
+                            /* revision: '1.0', */ // TODO: hard coded, remove?
                         },
                         {
                             onSuccess: (data) => {
@@ -81,7 +79,7 @@ export const TemplateInfo = () => {
             }
         }
     };
-    console.log(convertOptionsToSelectFormat(categories));
+
     if (loadingCategories) {
         return <>Loading</>;
     }
