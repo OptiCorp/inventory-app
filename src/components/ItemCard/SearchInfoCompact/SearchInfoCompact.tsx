@@ -52,8 +52,8 @@ export const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
                     >
                         <StyledCompactBox>
                             <StyledCompactContent>
-                                <StyledCompactTitle>ID</StyledCompactTitle>
-                                <StyledCompactText>{item.wpId}</StyledCompactText>
+                                <StyledCompactTitle>S/N</StyledCompactTitle>
+                                <StyledCompactText>{item.serialNumber}</StyledCompactText>
                             </StyledCompactContent>
                             <StyledCompactContent>
                                 <StyledCompactTitle>Vendor</StyledCompactTitle>

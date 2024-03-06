@@ -122,6 +122,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                             key={document.id}
                             doc={document}
                             handleFileRemoval={() => handleFileDelete(document.id)}
+                            downloadButton={true}
                         />
                     ))
                 )}

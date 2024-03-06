@@ -21,10 +21,10 @@ const pages = ['Find items', 'Add item', 'Make list'];
 
 const settings = [
     { text: 'Categories', location: 'admin/categories' },
-    { text: 'Vendors', location: 'admin/vendors' },
+    { text: 'Document types', location: 'admin/document-types' },
     { text: 'Locations', location: 'admin/locations' },
     { text: 'Templates', location: 'admin/add-template' },
-    { text: 'Document types', location: 'admin/document-types' },
+    { text: 'Vendors', location: 'admin/vendors' },
 ];
 
 export function ResponsiveAppBar() {
@@ -86,7 +86,7 @@ export function ResponsiveAppBar() {
                                         </Button>
                                     ))}
                                 </Box>
-                                <Box sx={{ flexGrow: 0, marginRight: '20px' }}>
+                                <Box sx={{ flexGrow: 0, marginRight: '15px' }}>
                                     <Tooltip title="Open User settings">
                                         <Button
                                             onClick={handleOpenUserMenu}

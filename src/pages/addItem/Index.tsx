@@ -42,11 +42,17 @@ export const AddItem = () => {
         if (steps[activeStep].slug === 'template') {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
             navigate(`/add-item/${steps[activeStep + 1].slug}`);
+            return;
         }
         const isValid = await trigger(steps[activeStep].fields);
         if (!isValid) return;
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         navigate(`/add-item/${steps[activeStep + 1].slug}`);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        navigate(`/add-item/${steps[activeStep - 1].slug}`);
     };
 
     useEffect(() => {
@@ -102,9 +108,38 @@ export const AddItem = () => {
             <StyledForm onSubmit={onSubmit} id="addItem">
                 <Outlet />
             </StyledForm>
-            {location.pathname === `/add-item` ||
-            location.pathname === '/add-item/add-form' ? null : (
-                <ButtonWrapper>
+            <ButtonWrapper>
+                {location.pathname === `/add-item/checks` ||
+                location.pathname === `/add-item/upload` ||
+                location.pathname === `/add-item/template` ? (
+                    <Button
+                        variant="outlined"
+                        onClick={() => {
+                            void handleBack();
+                        }}
+                        sx={{ marginRight: 'auto' }}
+                    >
+                        BACK
+                    </Button>
+                ) : null}
+                {location.pathname === `/add-item/add-form` ? (
+                    <Button
+                        variant="outlined"
+                        onClick={() => {
+                            void handleBack();
+                        }}
+                        sx={{
+                            marginRight: 'auto',
+                            position: 'relative',
+                            marginTop: '-300px',
+                            marginBottom: '50px',
+                        }}
+                    >
+                        BACK
+                    </Button>
+                ) : null}
+                {location.pathname === `/add-item/` ||
+                location.pathname === '/add-item/add-form' ? null : (
                     <Button
                         variant="contained"
                         onClick={() => {
@@ -113,8 +148,8 @@ export const AddItem = () => {
                     >
                         NEXT
                     </Button>
-                </ButtonWrapper>
-            )}
+                )}
+            </ButtonWrapper>
         </FormProvider>
     );
 };
