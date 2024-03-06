@@ -5,7 +5,7 @@ import decode from 'jwt-decode';
 import { createContext, useEffect, useState } from 'react';
 import { GlobalSpinner } from '../components/GlobalSpinner/GlobalSpinner';
 import apiService from '../services/api';
-import { ApiStatus, User } from '../services/apiTypes';
+import { ApiStatus, Item, User } from '../services/apiTypes';
 import { AppContextType, AzureUserInfo } from './types';
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -32,6 +32,7 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     const [idToken, setIdToken] = useState('');
     const [status, setStatus] = useState<ApiStatus>(ApiStatus.LOADING);
     const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const [currentItem, setCurrentItem] = useState<Item | null>(null);
 
     function getUserInfoFromIdToken(token: string): {
         preferredUserName: string;
@@ -124,6 +125,8 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
                     accounts,
                     instance,
                     currentUser,
+                    currentItem,
+                    setCurrentItem,
                 }}
             >
                 {children}
