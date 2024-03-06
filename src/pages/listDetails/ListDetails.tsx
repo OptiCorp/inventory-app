@@ -26,7 +26,7 @@ import {
 } from './styles';
 
 export const ListDetails = () => {
-    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
+    const { setSnackbarText, setSnackbarSeverity, currentItem } = useContext(AppContext);
     const { listId } = useParams();
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -124,9 +124,12 @@ export const ListDetails = () => {
 
                             {list.items ? (
                                 <ListContainer>
-                                    {list.items.map((item: Item) => (
-                                        <SideList item={item} key={item.id} />
-                                    ))}
+                                    {list.items.map((item: Item) =>
+                                        (currentItem && item.parentId === currentItem.id) ||
+                                        (!currentItem && !item.parentId) ? (
+                                            <SideList item={item} key={item.id} />
+                                        ) : null
+                                    )}
                                 </ListContainer>
                             ) : null}
                             <ButtonWrap>

@@ -1,6 +1,6 @@
 import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
 import { IconButton } from '@mui/material';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CustomDialog } from '../../../components/CustomDialog/CustomDialog';
 import {
@@ -21,7 +21,7 @@ type Props = {
 
 export const SideList = ({ item }: Props) => {
     const { listId } = useParams();
-    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
+    const { setSnackbarText, setSnackbarSeverity, setCurrentItem } = useContext(AppContext);
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
     const { mutate: mutateAddItemToList } = useAddItemsToList();
@@ -55,10 +55,14 @@ export const SideList = ({ item }: Props) => {
         setOpen(true);
     };
 
+    const handleSetCurrentItem = (item: Item) => {
+        setCurrentItem(item);
+    };
+
     return (
         <>
             <>
-                <Wrapper>
+                <Wrapper onClick={() => handleSetCurrentItem(item)}>
                     <StyledContent>
                         <StyledTitle>S/N</StyledTitle>
                         <StyledText>{item.serialNumber}</StyledText>
@@ -71,7 +75,7 @@ export const SideList = ({ item }: Props) => {
                         <StyledTitle>Vendor</StyledTitle>
                         <StyledText>{item?.vendor?.name ?? ''}</StyledText>
                     </StyledContent>
-                    <StyleIcons>
+                    <StyleIcons onClick={(e: React.MouseEvent) => e.stopPropagation()}>
                         <RemoveIcon onClick={handleClickOpen} />
                         <IconButton
                             onClick={() =>

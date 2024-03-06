@@ -1,6 +1,6 @@
-import { Chip, TextField } from '@mui/material';
+import { Chip, IconButton, TextField } from '@mui/material';
 import { format } from 'date-fns';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CustomDialog } from '../../components/CustomDialog/CustomDialog';
 import AppContext from '../../contexts/AppContext';
@@ -9,6 +9,7 @@ import { List, UpdateList } from '../../services/apiTypes';
 import { useDeleteList } from '../../services/hooks/list/useDeleteList';
 import { useUpdateList } from '../../services/hooks/list/useUpdateList';
 import { DeleteIcon, EditIcon } from './sidelist/styles';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {
     FlexContainer,
     Header,
@@ -17,6 +18,7 @@ import {
     Wrapper,
     WrapperCompact,
 } from './styles';
+import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
 
 type Props = {
     list: List;
@@ -25,7 +27,8 @@ type Props = {
 export const ListHeader = ({ list }: Props) => {
     const { width } = useWindowDimensions();
 
-    const { setSnackbarText, setSnackbarSeverity } = useContext(AppContext);
+    const { setSnackbarText, setSnackbarSeverity, currentItem, setCurrentItem } =
+        useContext(AppContext);
     const [title, setTitle] = useState(list.title);
     const [open, setOpen] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
@@ -67,6 +70,14 @@ export const ListHeader = ({ list }: Props) => {
         setOpen(false);
     };
 
+    const handleBack = () => {
+        if (!currentItem?.parentId) {
+            setCurrentItem(null);
+        } else {
+            setCurrentItem(currentItem?.parent);
+        }
+    };
+
     const handleDelete = () => {
         setOpen(true);
         mutate(list.id, {
@@ -86,24 +97,31 @@ export const ListHeader = ({ list }: Props) => {
     return (
         <>
             {width > 800 ? (
-                <Header>
-                    <ListTitle>{list.title}</ListTitle>
-                    <Wrapper>{format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}</Wrapper>
-                    <FlexContainer>
-                        <div>
-                            <Chip
-                                style={{ marginRight: '20px' }}
-                                label={`${list?.items?.length} Items`}
-                            />
-                        </div>
-                        <div onClick={(e) => handleOpenEdit(e)}>
-                            <EditIcon />
-                        </div>
-                        <div onClick={(e) => handleOpen(e)}>
-                            <DeleteIcon />
-                        </div>
-                    </FlexContainer>
-                </Header>
+                <div>
+                    <Header>
+                        <ListTitle>{list.title}</ListTitle>
+                        <Wrapper>
+                            {format(new Date(list.createdDate), 'dd-MM-yyyy').toString()}
+                        </Wrapper>
+                        <FlexContainer>
+                            <div>
+                                <Chip
+                                    style={{ marginRight: '20px' }}
+                                    label={`${list?.items?.length} Items`}
+                                />
+                            </div>
+                            <div onClick={(e) => handleOpenEdit(e)}>
+                                <EditIcon />
+                            </div>
+                            <div onClick={(e) => handleOpen(e)}>
+                                <DeleteIcon />
+                            </div>
+                        </FlexContainer>
+                    </Header>
+                    <IconButton onClick={handleBack}>
+                        <ArrowBackIcon />
+                    </IconButton>
+                </div>
             ) : (
                 <>
                     <WrapperCompact>
