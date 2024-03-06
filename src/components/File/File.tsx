@@ -9,6 +9,7 @@ import { Button as MuiButton } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import { Document } from '../../services/apiTypes';
+import { useState } from 'react';
 
 type FileProps = {
     doc?: Document;
@@ -31,6 +32,7 @@ export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
             downloadLink.click();
         }
     };
+    const [show, setShow] = useState(false);
 
     return (
         <StyledFileWrapper className="files">
@@ -73,7 +75,22 @@ export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
                     stroke="black"
                 />
             </svg>
-            <StyledDocumentName>{doc ? doc.name.split('.')[0] : file?.name}</StyledDocumentName>
+            <StyledDocumentName>
+                {show && <span>{doc?.fileName}</span>}
+
+                <p
+                    onMouseEnter={() => setShow(true)}
+                    onMouseLeave={() => setShow(false)}
+                    style={{
+                        maxWidth: '150px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                    }}
+                >
+                    {doc?.fileName ? doc?.fileName : 'No file name'}
+                </p>
+            </StyledDocumentName>
         </StyledFileWrapper>
     );
 };
