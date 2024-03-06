@@ -8,10 +8,9 @@ type InputProps = {
 export const StyledInput = styled.input<InputProps>`
     border-style: none;
     border-bottom: 1px solid ${COLORS.black};
-    flex-basis: 90%;
+    flex-basis: 100%;
     padding: 1rem;
     text-indent: 50px;
-    max-width: 1000px;
     font-size: ${({ width }) => (width >= 600 ? '1.3rem' : '1rem')};
     outline: none;
 `;

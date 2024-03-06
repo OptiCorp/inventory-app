@@ -1,8 +1,8 @@
 import { useController, useFormContext } from 'react-hook-form';
 import { RadioWrapper, StyledInput } from '../batch/styles';
 import { ItemSchema } from '../hooks/itemValidator';
-import { FormContainer } from '../styles';
-import { StyledLabelText, StyledTextArea } from './styles';
+import { FormContainer, StyledLabelText } from '../styles';
+import { StyledTextArea } from './styles';
 
 export const CheckForm = () => {
     const { control, register } = useFormContext<ItemSchema>();

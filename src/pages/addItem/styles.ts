@@ -42,3 +42,9 @@ export const ButtonWrapper = styled.div`
         height: 2rem;
     }
 `;
+export const StyledLabelText = styled.p`
+    font-weight: 600;
+    display: inline;
+    margin: 20px 0;
+    margin-left: 10px;
+`;
