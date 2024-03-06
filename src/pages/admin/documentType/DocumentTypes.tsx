@@ -41,7 +41,7 @@ export const DocumentTypes = () => {
                 ))}
             </SearchResultContainer>
             <ButtonContainer>
-                <Button onClick={() => navigate('/admin/add-document-type')} variant="outlined">
+                <Button onClick={() => navigate('/admin/add-document-type')} variant="contained">
                     Add new document type
                 </Button>
             </ButtonContainer>

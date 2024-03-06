@@ -189,7 +189,7 @@ export const AddItemUpload = () => {
                             }}
                             ref={inputFile}
                         />
-                        UPLOAD NEW
+                        ADD DOCUMENT
                     </SubmitButton>
                 </Box>
             </Box>

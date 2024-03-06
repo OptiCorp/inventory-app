@@ -143,6 +143,7 @@ export const UploadMobile = ({ itemId }: UploadProps) => {
                         key={document.id}
                         doc={document}
                         handleFileRemoval={() => handleFileDelete(document.id)}
+                        downloadButton={true}
                     />
                 ))}
                 {showArrow === true && (documents?.length ?? 0) > 2 && (

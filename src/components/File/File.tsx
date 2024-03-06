@@ -15,9 +15,10 @@ type FileProps = {
     doc?: Document;
     file?: File;
     handleFileRemoval: () => void;
+    downloadButton?: boolean;
 };
 
-export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
+export const File = ({ doc, file, handleFileRemoval, downloadButton }: FileProps) => {
     const handleFileDownload = (doc?: Document, file?: File) => {
         if (file) {
             const downloadLink = document.createElement('a');
@@ -32,7 +33,8 @@ export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
             downloadLink.click();
         }
     };
-    const [show, setShow] = useState(false);
+
+    const maxLength = 14;
 
     return (
         <StyledFileWrapper className="files">
@@ -54,17 +56,22 @@ export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
                             </h3>
                         </StyledFileTypeWrapper>
                         <StyledIconWrapper>
+                            {downloadButton && (
+                                <MuiButton
+                                    onClick={
+                                        doc
+                                            ? () => handleFileDownload(doc)
+                                            : () => handleFileDownload(undefined, file)
+                                    }
+                                    sx={{ color: 'black' }}
+                                >
+                                    <FileDownloadOutlinedIcon fontSize="large" />
+                                </MuiButton>
+                            )}
                             <MuiButton
-                                onClick={
-                                    doc
-                                        ? () => handleFileDownload(doc)
-                                        : () => handleFileDownload(undefined, file)
-                                }
-                                sx={{ color: 'black' }}
+                                onClick={handleFileRemoval}
+                                sx={{ color: 'black', marginLeft: 'auto' }}
                             >
-                                <FileDownloadOutlinedIcon fontSize="large" />
-                            </MuiButton>
-                            <MuiButton onClick={handleFileRemoval} sx={{ color: 'black' }}>
                                 <DeleteOutlineOutlinedIcon fontSize="large" />
                             </MuiButton>
                         </StyledIconWrapper>
@@ -76,20 +83,11 @@ export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
                 />
             </svg>
             <StyledDocumentName>
-                {show && <span>{doc?.fileName}</span>}
-
-                <p
-                    onMouseEnter={() => setShow(true)}
-                    onMouseLeave={() => setShow(false)}
-                    style={{
-                        maxWidth: '150px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                    }}
-                >
-                    {doc?.fileName ? doc?.fileName : 'No file name'}
-                </p>
+                {doc?.fileName
+                    ? doc.fileName.length > maxLength
+                        ? `${doc.fileName.substring(0, maxLength)}...`
+                        : doc.fileName
+                    : doc?.name}
             </StyledDocumentName>
         </StyledFileWrapper>
     );

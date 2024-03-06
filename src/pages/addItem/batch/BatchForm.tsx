@@ -9,7 +9,7 @@ export const BatchForm = () => {
         <FormContainer>
             <StyledBatchWrapper>
                 <h3>Batch</h3>
-                <StyledLabelText> number of items</StyledLabelText>
+                <StyledLabelText>Number of items to add</StyledLabelText>
 
                 <CustomNumberInput />
 

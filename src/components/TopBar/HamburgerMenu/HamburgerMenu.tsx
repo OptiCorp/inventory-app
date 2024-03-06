@@ -6,6 +6,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PlaceIcon from '@mui/icons-material/Place';
 import SearchIcon from '@mui/icons-material/Search';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +27,7 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
     const menuItems = [
         { location: 'search', icon: <SearchIcon fontSize="large" />, text: 'Find items' },
         { location: 'add-item', icon: <AddIcon fontSize="large" />, text: 'Add item' },
-        { location: 'make-list', icon: <ListAltIcon fontSize="large" />, text: 'Make lists' },
+        { location: 'make-list', icon: <ListAltIcon fontSize="large" />, text: 'Make list' },
         {
             location: 'admin',
             icon: <AdminPanelSettingsIcon fontSize="large" />,
@@ -38,9 +39,9 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
                     text: 'Categories',
                 },
                 {
-                    location: 'admin/vendors',
-                    icon: <BusinessIcon fontSize="large" />,
-                    text: 'Vendors',
+                    location: 'admin/document-types',
+                    icon: <PictureAsPdfIcon fontSize="large" />,
+                    text: 'Document types',
                 },
                 {
                     location: 'admin/locations',
@@ -50,7 +51,12 @@ export const HamburgerMenu = ({ setHamburgerIsOpen }: Props) => {
                 {
                     location: 'admin/add-template',
                     icon: <NoteAddIcon fontSize="large" />,
-                    text: 'Template',
+                    text: 'Templates',
+                },
+                {
+                    location: 'admin/vendors',
+                    icon: <BusinessIcon fontSize="large" />,
+                    text: 'Vendors',
                 },
             ],
         },

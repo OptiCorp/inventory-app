@@ -156,6 +156,7 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                                 handleFileRemoval={() =>
                                     handleFileDeleteConfirmation(document.id, document?.fileName)
                                 }
+                                downloadButton={true}
                             />
                         );
                     })
