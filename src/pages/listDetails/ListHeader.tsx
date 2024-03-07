@@ -18,7 +18,6 @@ import {
     Wrapper,
     WrapperCompact,
 } from './styles';
-import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
 
 type Props = {
     list: List;
@@ -118,9 +117,7 @@ export const ListHeader = ({ list }: Props) => {
                             </div>
                         </FlexContainer>
                     </Header>
-                    <IconButton onClick={handleBack}>
-                        <ArrowBackIcon />
-                    </IconButton>
+                    <IconButton onClick={handleBack}>{currentItem && <ArrowBackIcon />}</IconButton>
                 </div>
             ) : (
                 <>

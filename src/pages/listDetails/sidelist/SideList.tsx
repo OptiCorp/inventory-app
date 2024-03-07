@@ -21,7 +21,8 @@ type Props = {
 
 export const SideList = ({ item }: Props) => {
     const { listId } = useParams();
-    const { setSnackbarText, setSnackbarSeverity, setCurrentItem } = useContext(AppContext);
+    const { setSnackbarText, setSnackbarSeverity, setCurrentItem, currentItem } =
+        useContext(AppContext);
     const [open, setOpen] = useState(false);
     const { mutate: mutateRemoveItemFromList } = useRemoveItemsFromList();
     const { mutate: mutateAddItemToList } = useAddItemsToList();
@@ -58,6 +59,8 @@ export const SideList = ({ item }: Props) => {
     const handleSetCurrentItem = (item: Item) => {
         setCurrentItem(item);
     };
+
+    console.log(currentItem);
 
     return (
         <>
