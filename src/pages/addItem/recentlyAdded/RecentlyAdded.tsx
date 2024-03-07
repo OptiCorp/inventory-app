@@ -6,11 +6,12 @@ import { Item } from '../../../services/apiTypes';
 import { useGetItemsByUser } from '../../../services/hooks/items/useGetItemByUser';
 import { Container, CardContainer, RecentlyAddedContainer } from './styles';
 import { Button } from '@mui/material';
+import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 
 export const RecentlyAdded = () => {
     const { width } = useWindowDimensions();
 
-    const { data: myItems = [] } = useGetItemsByUser();
+    const { data: myItems = [], isLoading } = useGetItemsByUser();
 
     const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ export const RecentlyAdded = () => {
                 </Button>
             </Container>
             <CardContainer>
+                {isLoading && <GlobalSpinner />}
                 {myItems?.map((item: Item) =>
                     width > 800 ? (
                         <ItemCard key={item.id} item={item} />

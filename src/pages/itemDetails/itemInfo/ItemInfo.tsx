@@ -9,8 +9,6 @@ import { useGetCategories } from '../../../services/hooks/category/useGetCategor
 import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
-import { useGetItemTemplateById } from '../../../services/hooks/template/useGetItemTemplateById';
-import { useUpdateItemTemplate } from '../../../services/hooks/template/useUpdateItemTemplate';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import { EditableField } from './EditableField';
@@ -18,6 +16,10 @@ import { SelectField } from './SelectField';
 import { ItemInfoSchema } from './hooks';
 import { Container, CreatedByContainer, ItemInfoForm } from './styles';
 import { Types } from './types';
+import { useNavigate } from 'react-router-dom';
+import { Edit, LabelContainer } from './styles';
+import { Tooltip } from '@mui/material';
+import { FlexColumn } from '../../../style/GlobalStyles';
 
 type ItemInfoProps = {
     item: Item;
@@ -32,21 +34,14 @@ type Field =
     | string;
 
 export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
-    const {
-        watch,
-        setValue,
-        formState: { dirtyFields },
-    } = useFormContext<ItemInfoSchema>();
+    const navigate = useNavigate();
+    const { watch, setValue } = useFormContext<ItemInfoSchema>();
     const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(AppContext);
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors();
     const { data: locations = [], isLoading: isLoadingLocations } = useGetLocations();
     const { data: categories = [], isLoading: isLoadingCategories } = useGetCategories();
     const { mutate } = useUpdateItem(item?.id, currentUser!.id);
-    const { data: itemTemplateData } = useGetItemTemplateById(item.itemTemplate.id);
-    const { mutate: mutateItemTemplate } = useUpdateItemTemplate(
-        item.itemTemplate.id,
-        currentUser!.id
-    );
+
     const [newWpId, setNewWpId] = useState('');
     const debouncedWpId = useDebounce(newWpId, 300);
     const {
@@ -75,38 +70,6 @@ export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
             value: option?.id,
             label: option.name,
         }));
-    };
-
-    const handleBlurItemTemplateProperties = (field: string, fieldName: keyof ItemInfoSchema) => {
-        const fieldValue: Field = watch(fieldName) as Field;
-        const cleanFieldName = fieldName.replace('itemTemplate.', '');
-        const { itemTemplate } = dirtyFields;
-
-        if (itemTemplate && typeof itemTemplate === 'object') {
-            if (fieldValue) {
-                const mutableValue =
-                    typeof fieldValue === 'string' ? fieldValue : fieldValue?.value;
-                if (itemTemplateData) {
-                    mutateItemTemplate(
-                        {
-                            ...itemTemplateData,
-                            [field]: mutableValue,
-                            revision: '1.0',
-                        },
-                        {
-                            onSuccess: (data) => {
-                                handleApiRequestSnackbar(
-                                    data,
-                                    `${cleanFieldName} was updated`,
-                                    setSnackbarSeverity,
-                                    setSnackbarText
-                                );
-                            },
-                        }
-                    );
-                }
-            }
-        }
     };
 
     const handleBlurItemProperties = (
@@ -188,37 +151,30 @@ export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
                     fieldName="TYPE"
                     label="itemTemplate.type"
                     options={convertOptionsToSelectFormat(typesOptions)}
-                    onBlur={() =>
-                        handleBlurItemTemplateProperties(
-                            'type',
-                            'itemTemplate.type' as keyof ItemInfoSchema
-                        )
-                    }
                 />
                 <SelectField
                     placeholder="Select category..."
                     fieldName="CATEGORY"
                     label="itemTemplate.category"
                     options={convertOptionsToSelectFormat(categories)}
-                    onBlur={() =>
-                        handleBlurItemTemplateProperties(
-                            'categoryId',
-                            'itemTemplate.category' as keyof ItemInfoSchema
-                        )
-                    }
                 />
 
-                <EditableField
-                    fieldName="P/N"
-                    label="itemTemplate.productNumber"
-                    onBlur={() =>
-                        handleBlurItemTemplateProperties(
-                            'productNumber',
-                            'itemTemplate.productNumber' as keyof ItemInfoSchema
-                        )
-                    }
-                />
-
+                <EditableField fieldName="P/N" label="itemTemplate.productNumber" />
+                <FlexColumn>
+                    <LabelContainer>
+                        <strong>TEMPLATE</strong>
+                        {/* TODO: Edit button should only be an option for an Admin? 
+                        Same for the "Edit Template" button on the buttom of the page */}
+                        <Tooltip title="Redirects to edit template page" placement="right">
+                            <Edit
+                                onClick={() =>
+                                    navigate(`/item/${item.id}/template/${item.itemTemplate.id}`)
+                                }
+                            />
+                        </Tooltip>
+                    </LabelContainer>
+                    {item.itemTemplate.revision}-{item.itemTemplate.productNumber}
+                </FlexColumn>
                 <CreatedByContainer>
                     <label>
                         <strong>ADDED BY</strong>
@@ -235,12 +191,6 @@ export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
                 label="itemTemplate.description"
                 isMultiLine
                 rows={3}
-                onBlur={() =>
-                    handleBlurItemTemplateProperties(
-                        'description',
-                        'itemTemplate.description' as keyof ItemInfoSchema
-                    )
-                }
             />
         </ItemInfoForm>
     );

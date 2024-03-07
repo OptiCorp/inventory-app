@@ -55,6 +55,7 @@ export type ItemInfoSchema = z.infer<typeof itemInfoSchema> & {
     'itemTemplate.description': string;
     'itemTemplate.category': string;
     'itemTemplate.type': string;
+    'itemTemplate.revision': string;
 };
 
 export const useUpdateItemForm = (item: Item) => {

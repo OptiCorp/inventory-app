@@ -15,7 +15,7 @@ import { ItemInfoSchema } from './hooks';
 type EditableFieldProps<TMultiLine = boolean> = {
     fieldName: FieldNames;
     label: keyof ItemInfoSchema;
-    onBlur: ComponentProps<'input'>['onBlur'];
+    onBlur?: ComponentProps<'input'>['onBlur'];
     onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     value?: string;
     isUnique?: boolean;
@@ -59,11 +59,13 @@ export const EditableField = ({
                         <label>
                             <strong>{fieldName}</strong>
                         </label>
-                        <Edit
-                            onClick={() => {
-                                handleEditClick();
-                            }}
-                        />
+                        {onBlur && (
+                            <Edit
+                                onClick={() => {
+                                    handleEditClick();
+                                }}
+                            />
+                        )}
                     </LabelContainer>
                     <Controller
                         control={control}
@@ -99,7 +101,10 @@ export const EditableField = ({
                                     </InfoContainer>
                                     {loading && <p>Checking...</p>}
                                     {isEmpty && (
-                                        <ErrorP>{name.toLowerCase()} can not be empty.</ErrorP>
+                                        <ErrorP>
+                                            {name.replace('itemTemplate.', '').toLowerCase()} can
+                                            not be empty.
+                                        </ErrorP>
                                     )}
                                     {isUnique === false && (
                                         <ErrorP>{name.toLowerCase()} must be unique</ErrorP>

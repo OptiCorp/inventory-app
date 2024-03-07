@@ -1,6 +1,6 @@
 import { grey } from '@mui/material/colors';
 import { ThemeOptions, createTheme } from '@mui/material/styles';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 declare module '@mui/material/Button' {
     interface ButtonPropsVariantOverrides {
@@ -92,6 +92,11 @@ body::-webkit-scrollbar {
 `;
 
 export default GlobalStyles;
+
+export const FlexColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 
 type ColorsType = typeof COLORS;
 

@@ -36,4 +36,5 @@ export type FieldNames =
     | 'P/N'
     | 'VENDOR'
     | 'DESCRIPTION'
-    | 'WPID';
+    | 'WPID'
+    | 'REVISION';
