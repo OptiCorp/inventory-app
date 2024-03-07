@@ -19,7 +19,7 @@ export const TemplateDetails = () => {
                 <TemplateInfo />
             </FormProvider>
             <ButtonContainer>
-                <Button onClick={() => navigate(-1)} variant="contained">
+                <Button onClick={() => navigate(-1)} variant="outlined">
                     Back
                 </Button>
             </ButtonContainer>
