@@ -16,6 +16,10 @@ import { SelectField } from './SelectField';
 import { ItemInfoSchema } from './hooks';
 import { Container, CreatedByContainer, ItemInfoForm } from './styles';
 import { Types } from './types';
+import { useNavigate } from 'react-router-dom';
+import { Edit, LabelContainer } from './styles';
+import { Tooltip } from '@mui/material';
+import { FlexColumn } from '../../../style/GlobalStyles';
 
 type ItemInfoProps = {
     item: Item;
@@ -30,6 +34,7 @@ type Field =
     | string;
 
 export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
+    const navigate = useNavigate();
     const { watch, setValue } = useFormContext<ItemInfoSchema>();
     const { setSnackbarText, setSnackbarSeverity, currentUser } = useContext(AppContext);
     const { data: vendors = [], isLoading: isLoadingVendors } = useGetVendors();
@@ -155,7 +160,21 @@ export const ItemInfo = ({ item, isLoading }: ItemInfoProps) => {
                 />
 
                 <EditableField fieldName="P/N" label="itemTemplate.productNumber" />
-
+                <FlexColumn>
+                    <LabelContainer>
+                        <strong>TEMPLATE</strong>
+                        {/* TODO: Edit button should only be an option for an Admin? 
+                        Same for the "Edit Template" button on the buttom of the page */}
+                        <Tooltip title="Redirects to edit template page" placement="right">
+                            <Edit
+                                onClick={() =>
+                                    navigate(`/item/${item.id}/template/${item.itemTemplate.id}`)
+                                }
+                            />
+                        </Tooltip>
+                    </LabelContainer>
+                    {item.itemTemplate.revision}-{item.itemTemplate.productNumber}
+                </FlexColumn>
                 <CreatedByContainer>
                     <label>
                         <strong>ADDED BY</strong>
