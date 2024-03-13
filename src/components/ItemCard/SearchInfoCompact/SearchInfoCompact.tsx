@@ -7,6 +7,7 @@ import {
     Button,
 } from '@mui/material';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { COLORS } from '../../../style/GlobalStyles';
 import { CustomDialog } from '../../CustomDialog/CustomDialog';
 import { StyledAddIcon, StyledRemoveIcon } from '../../ListCard/styles';
 import { ItemCardProps } from '../ItemCard';
@@ -20,7 +21,6 @@ import {
     StyledCompactTitle,
     StyledItemCardCompactContainer,
 } from './styles';
-import { COLORS } from '../../../style/GlobalStyles';
 
 export const SearchResultCardCompact = ({ item, icon }: ItemCardProps) => {
     const navigate = useNavigate();

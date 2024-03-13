@@ -15,5 +15,9 @@ export const ListContainerCompact = styled.div`
     overflow: auto;
     padding-bottom: 100px;
     display: flex;
+
+    gap: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
     flex-direction: column;
 `;
