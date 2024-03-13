@@ -1,3 +1,7 @@
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { Button as MuiButton } from '@mui/material';
+import { Document } from '../../services/apiTypes';
 import {
     StyledDocumentName,
     StyledFileShapeWrapper,
@@ -5,10 +9,6 @@ import {
     StyledFileWrapper,
     StyledIconWrapper,
 } from './style';
-import { Button as MuiButton } from '@mui/material';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import { Document } from '../../services/apiTypes';
 
 type FileProps = {
     doc?: Document;
@@ -62,7 +62,11 @@ export const File = ({ doc, file, handleFileRemoval }: FileProps) => {
                             >
                                 <FileDownloadOutlinedIcon fontSize="large" />
                             </MuiButton>
-                            <MuiButton onClick={handleFileRemoval} sx={{ color: 'black' }}>
+
+                            <MuiButton
+                                onClick={handleFileRemoval}
+                                sx={{ color: 'black', marginLeft: 'auto' }}
+                            >
                                 <DeleteOutlineOutlinedIcon fontSize="large" />
                             </MuiButton>
                         </StyledIconWrapper>
