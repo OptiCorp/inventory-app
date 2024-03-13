@@ -49,7 +49,7 @@ export const SelectField = ({ label, onBlur, options, placeholder, fieldName }: 
             }),
             menu: (provided: CSSObjectWithLabel) => ({
                 ...provided,
-                width: '70%',
+                width: '100%',
                 maxWidth: '500px',
             }),
             option: (

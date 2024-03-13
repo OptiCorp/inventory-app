@@ -1,7 +1,8 @@
 import { Box, ClickAwayListener } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
 import { ChangeEvent, ComponentProps, useState } from 'react';
-import { FieldNames } from './types';
+import { Controller, useFormContext } from 'react-hook-form';
+import { COLORS } from '../../../style/GlobalStyles';
+import { ItemInfoSchema } from './hooks';
 import {
     Edit,
     ErrorP,
@@ -10,7 +11,7 @@ import {
     StyledTextField,
     TextBoxWrap,
 } from './styles';
-import { ItemInfoSchema } from './hooks';
+import { FieldNames } from './types';
 
 type EditableFieldProps<TMultiLine = boolean> = {
     fieldName: FieldNames;
@@ -91,21 +92,34 @@ export const EditableField = ({
                                             InputProps={{
                                                 disableUnderline: !open,
                                                 readOnly: !open,
+                                                style: {
+                                                    color:
+                                                        isEmpty && !open ? COLORS.red : undefined,
+                                                    fontWeight:
+                                                        isEmpty && !open ? '600' : undefined,
+                                                },
                                             }}
                                             onBlur={onBlur}
                                             onChange={fieldOnChange}
                                             multiline={isMultiLine}
                                             fullWidth
+                                            value={
+                                                isEmpty && !open
+                                                    ? `${name
+                                                          .replace('itemTemplate.', '')
+                                                          .toLowerCase()} can not be empty`
+                                                    : value
+                                            }
                                             rows={rows}
                                         />
                                     </InfoContainer>
                                     {loading && <p>Checking...</p>}
-                                    {isEmpty && (
+                                    {/* {isEmpty && (
                                         <ErrorP>
                                             {name.replace('itemTemplate.', '').toLowerCase()} can
                                             not be empty.
                                         </ErrorP>
-                                    )}
+                                    )} */}
                                     {isUnique === false && (
                                         <ErrorP>{name.toLowerCase()} must be unique</ErrorP>
                                     )}

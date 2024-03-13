@@ -2,7 +2,8 @@ import { styled } from 'styled-components';
 
 export const StyledItemCardCompactContainer = styled.div`
     display: flex;
-    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.2);
+
     flex-direction: column;
     position: relative;
 `;
@@ -58,5 +59,6 @@ export const StyledCompactBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    box-shadow: none;
     margin: 10px 0;
 `;

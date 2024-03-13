@@ -1,26 +1,26 @@
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 import CloseIcon from '@mui/icons-material/Close';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {
+    Button,
     Dialog,
     DialogContent,
     DialogTitle,
     FormControlLabel,
     List,
     ListItem,
-    Button,
     Radio,
     RadioGroup,
 } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { AddDocument } from '../../../services/apiTypes';
 import { useDeleteDocument } from '../../../services/hooks/documents/useDeleteDocument';
-import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
-import { Container, Wrapper } from './styles';
-import { Button as SubmitButton } from '../../Button/Button';
-import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
 import { useGetDocumentTypes } from '../../../services/hooks/documents/useGetDocumentTypes';
+import { useGetDocumentsByItemId } from '../../../services/hooks/documents/useGetDocumentsByItemId';
+import { useUploadDocumentToItem } from '../../../services/hooks/documents/useUploadDocumentToItem';
+import { Button as SubmitButton } from '../../Button/Button';
 import { File } from '../../File/File';
+import { Container, Wrapper } from './styles';
 
 type UploadProps = {
     itemId: string;
@@ -143,7 +143,6 @@ export const UploadMobile = ({ itemId }: UploadProps) => {
                         key={document.id}
                         doc={document}
                         handleFileRemoval={() => handleFileDelete(document.id)}
-                        downloadButton={true}
                     />
                 ))}
                 {showArrow === true && (documents?.length ?? 0) > 2 && (

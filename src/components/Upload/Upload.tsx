@@ -20,8 +20,8 @@ import { useGetDocumentTypes } from '../../services/hooks/documents/useGetDocume
 import { useGetDocumentsByItemId } from '../../services/hooks/documents/useGetDocumentsByItemId';
 import { useUploadDocumentToItem } from '../../services/hooks/documents/useUploadDocumentToItem';
 import { COLORS } from '../../style/GlobalStyles';
-import { File } from '../File/File';
 import { CustomDialog } from '../CustomDialog/CustomDialog';
+import { File } from '../File/File';
 
 type UploadProps = {
     itemId: string;
@@ -160,7 +160,6 @@ export const ExampleUpload = ({ itemId }: UploadProps) => {
                                         document?.fileName ? document.fileName : document.name
                                     )
                                 }
-                                downloadButton={true}
                             />
                         );
                     })

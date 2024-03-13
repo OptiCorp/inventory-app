@@ -1,18 +1,18 @@
-import { useParams } from 'react-router-dom';
-import { useGetItemTemplateById } from '../../services/hooks/template/useGetItemTemplateById';
-import { SelectField } from './itemInfo/SelectField';
-import { useGetCategories } from '../../services/hooks/category/useGetCategories';
-import { useFormContext } from 'react-hook-form';
-import { ItemInfoSchema } from './itemInfo/hooks';
-import { useGetItemById } from '../../services/hooks/items/useGetItemById';
-import { handleApiRequestSnackbar } from '../../utils/handleApiRequestSnackbar';
-import { useUpdateItemTemplate } from '../../services/hooks/template/useUpdateItemTemplate';
 import { useContext } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import AppContext from '../../contexts/AppContext';
-import { Container, CreatedByContainer, ItemInfoForm } from './itemInfo/styles';
-import { EditableField } from './itemInfo/EditableField';
-import { Types } from './itemInfo/types';
 import { Item } from '../../services/apiTypes';
+import { useGetCategories } from '../../services/hooks/category/useGetCategories';
+import { useGetItemById } from '../../services/hooks/items/useGetItemById';
+import { useGetItemTemplateById } from '../../services/hooks/template/useGetItemTemplateById';
+import { useUpdateItemTemplate } from '../../services/hooks/template/useUpdateItemTemplate';
+import { handleApiRequestSnackbar } from '../../utils/handleApiRequestSnackbar';
+import { EditableField } from './itemInfo/EditableField';
+import { SelectField } from './itemInfo/SelectField';
+import { ItemInfoSchema } from './itemInfo/hooks';
+import { Container, CreatedByContainer, ItemInfoForm } from './itemInfo/styles';
+import { Types } from './itemInfo/types';
 const typesOptions: Types[] = [
     { id: 'Unit', name: 'Unit' },
     { id: 'Assembly', name: 'Assembly' },
@@ -72,6 +72,21 @@ export const TemplateInfo = () => {
                                     setSnackbarSeverity,
                                     setSnackbarText
                                 );
+
+                                if (itemTemplateData.revision.length === 0) {
+                                    setSnackbarSeverity('error');
+                                    setSnackbarText(
+                                        `${data.statusText}, revision can not be empty.`
+                                    );
+                                }
+                                if (data.status >= 400) {
+                                    setSnackbarSeverity('error');
+                                    setSnackbarText(
+                                        itemTemplateData.revision.length >= 2
+                                            ? 'revision must be at least 3 characters.'
+                                            : `${data.statusText}, please try again.`
+                                    );
+                                }
                             },
                         }
                     );
@@ -118,7 +133,7 @@ export const TemplateInfo = () => {
                 />
                 <EditableField
                     fieldName="REVISION"
-                    label="itemTemplate.revision"
+                    label={'itemTemplate.revision'}
                     onBlur={() =>
                         handleBlurItemTemplateProperties(
                             'revision',
