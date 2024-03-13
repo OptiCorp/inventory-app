@@ -95,6 +95,7 @@ export default GlobalStyles;
 
 export const FlexColumn = styled.div`
     display: flex;
+    gap: 10px;
     flex-direction: column;
 `;
 

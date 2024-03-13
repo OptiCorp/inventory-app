@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
+import { Tooltip } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 import { GlobalSpinner } from '../../../components/GlobalSpinner/GlobalSpinner';
 import AppContext from '../../../contexts/AppContext';
@@ -10,16 +12,13 @@ import { useIsWpIdUnique } from '../../../services/hooks/items/useIsWpIdUnique';
 import { useUpdateItem } from '../../../services/hooks/items/useUpdateItem';
 import { useGetLocations } from '../../../services/hooks/locations/useGetLocations';
 import { useGetVendors } from '../../../services/hooks/vendor/useGetVendors';
+import { FlexColumn } from '../../../style/GlobalStyles';
 import { handleApiRequestSnackbar } from '../../../utils/handleApiRequestSnackbar';
 import { EditableField } from './EditableField';
 import { SelectField } from './SelectField';
 import { ItemInfoSchema } from './hooks';
-import { Container, CreatedByContainer, ItemInfoForm } from './styles';
+import { Container, CreatedByContainer, Edit, ItemInfoForm, LabelContainer } from './styles';
 import { Types } from './types';
-import { useNavigate } from 'react-router-dom';
-import { Edit, LabelContainer } from './styles';
-import { Tooltip } from '@mui/material';
-import { FlexColumn } from '../../../style/GlobalStyles';
 
 type ItemInfoProps = {
     item: Item;
